@@ -1,0 +1,23 @@
+{
+  "_meta": {
+    "run_id": "20261103T014500Z_main_a1b2c3d",
+    "config_name": "main",
+    "seed": 0,
+    "split": "test",
+    "n": 1000,
+    "n_seeds": 5
+  },
+  "baseline": {
+    "accuracy": 0.812,
+    "f1_macro": 0.79,
+    "std_accuracy": 0.0075
+  },
+  "ours": {
+    "accuracy": 0.91,
+    "f1_macro": 0.903,
+    "speedup": 3.5
+  },
+  "paired": {
+    "p_value": 0.0312
+  }
+}

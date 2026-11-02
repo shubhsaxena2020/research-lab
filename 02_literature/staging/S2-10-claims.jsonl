@@ -1,0 +1,60 @@
+{"title": "Sufficient Context: A New Lens on Retrieval Augmented Generation Systems", "year": "2024", "doi_or_arxiv": "arXiv:2411.06037"}
+{"title": "Answerability in Retrieval-Augmented Open-Domain Question Answering", "year": "2024", "doi_or_arxiv": "arXiv:2403.01461"}
+{"title": "Unanswerability Evaluation for Retrieval Augmented Generation", "year": "2024", "doi_or_arxiv": "arXiv:2412.12300"}
+{"title": "Do Retrieval Augmented Language Models Know When They Don't Know?", "year": "2025", "doi_or_arxiv": "arXiv:2509.01476"}
+{"title": "AbstentionBench: Reasoning LLMs Fail on Unanswerable Questions", "year": "2025", "doi_or_arxiv": "arXiv:2506.09038"}
+{"title": "Corrective Retrieval Augmented Generation", "year": "2024", "doi_or_arxiv": "arXiv:2401.15884"}
+{"title": "Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection", "year": "2023", "doi_or_arxiv": "arXiv:2310.11511"}
+{"title": "When Not to Trust Language Models: Investigating Effectiveness of Parametric and Non-Parametric Memories", "year": "2022", "doi_or_arxiv": "arXiv:2212.10511"}
+{"title": "Selective Question Answering under Domain Shift", "year": "2020", "doi_or_arxiv": "arXiv:2006.09462"}
+{"title": "Learning Evidence Sufficiency Boundaries for Selective Answering in Grounded Multi-Hop QA", "year": "2026", "doi_or_arxiv": "arXiv:2609.01687"}
+{"title": "Relevance Is Not Sufficient Evidence: Detecting Evidence Gaps Before Generation in RAG", "year": "2026", "doi_or_arxiv": "arXiv:2609.37469"}
+{"title": "Twin Worlds: Equivariance-Based Abstention for Evidence-Grounded Reasoning", "year": "2026", "doi_or_arxiv": "arXiv:2608.28018"}
+{"title": "Two Axes of LLM Abstention: Answer Correctness and Question Answerability", "year": "2026", "doi_or_arxiv": "arXiv:2607.08456"}
+{"title": "Do LLMs Know When to NOT Answer? Investigating Abstention Abilities of Large Language Models", "year": "2024", "doi_or_arxiv": "arXiv:2407.16221"}
+{"title": "Know Your Limits: A Survey of Abstention in Large Language Models", "year": "2024", "doi_or_arxiv": "arXiv:2407.18418"}
+{"title": "Answering the Unanswerable Is to Err Knowingly: Analyzing and Mitigating Abstention Failures in Large Reasoning Models", "year": "2025", "doi_or_arxiv": "arXiv:2508.18760"}
+{"title": "Assessing the Answerability of Queries in Retrieval-Augmented Code Generation", "year": "2024", "doi_or_arxiv": "arXiv:2411.05547"}
+{"title": "Measuring Retrieval Complexity in Question Answering Systems", "year": "2024", "doi_or_arxiv": "arXiv:2406.03592"}
+{"title": "Temporal Validity in Retrieval Memory: Eliminating Stale-Fact Errors for AI Agents over Evolving Knowledge", "year": "2026", "doi_or_arxiv": "arXiv:2606.26511"}
+{"title": "When Retrieval Is Not Enough: Obsolete Facts in Agent Memory", "year": "2026", "doi_or_arxiv": "arXiv:2610.36308"}
+{"title": "STALE: Can LLM Agents Know When Their Memories Are No Longer Valid?", "year": "2026", "doi_or_arxiv": "arXiv:2605.06527"}
+{"title": "Stale, Misattributed, or Late: Where Personal Memory Fails Before Generation", "year": "2026", "doi_or_arxiv": "arXiv:2610.10265"}
+{"title": "DreamBench-SWE: A Multi-Session Memory-Hygiene Benchmark for Software Agents", "year": "2026", "doi_or_arxiv": "arXiv:2608.20664"}
+{"title": "ConflictBank: A Benchmark for Evaluating the Influence of Knowledge Conflicts in LLM", "year": "2024", "doi_or_arxiv": "arXiv:2408.12076"}
+{"title": "Zep: A Temporal Knowledge Graph Architecture for Agent Memory", "year": "2025", "doi_or_arxiv": "arXiv:2501.13956"}
+{"title": "LongMemEval: Benchmarking Chat Assistants on Long-Term Interactive Memory", "year": "2024", "doi_or_arxiv": "arXiv:2410.10813"}
+{"title": "Evaluating Memory in LLM Agents via Incremental Multi-Turn Interactions", "year": "2025", "doi_or_arxiv": "arXiv:2507.05257"}
+{"title": "Evaluating Very Long-Term Conversational Memory of LLM Agents", "year": "2024", "doi_or_arxiv": "arXiv:2402.17753"}
+{"title": "MemBench: Towards More Comprehensive Evaluation on the Memory of LLM-based Agents", "year": "2025", "doi_or_arxiv": "arXiv:2506.21605"}
+{"title": "AgentPoison: Red-teaming LLM Agents via Poisoning Memory or Knowledge Bases", "year": "2024", "doi_or_arxiv": "arXiv:2407.12784"}
+{"title": "LatticeMind: A Conflict-Aware Memory Primitive for Multi-Agent Systems", "year": "2026", "doi_or_arxiv": "arXiv:2608.08236"}
+{"title": "MoM: Memory of Memory", "year": "2026", "doi_or_arxiv": "arXiv:2609.25054"}
+{"title": "Teaching LLMs to Abstain across Languages via Multilingual Feedback", "year": "2024", "doi_or_arxiv": "arXiv:2406.15948"}
+{"title": "MKA: Leveraging Cross-Lingual Consensus for Model Abstention", "year": "2025", "doi_or_arxiv": "arXiv:2503.23687"}
+{"title": "On the Calibration of Multilingual Question Answering LLMs", "year": "2023", "doi_or_arxiv": "arXiv:2311.08669"}
+{"title": "Cross-lingual Calibration of Pre-Generation Success Probes for Multilingual LLM Routing", "year": "2026", "doi_or_arxiv": "arXiv:2610.06216"}
+{"title": "XTRUST: On the Multilingual Trustworthiness of Large Language Models", "year": "2024", "doi_or_arxiv": "arXiv:2409.15762"}
+{"title": "INCLUDE: Evaluating Multilingual Language Understanding with Regional Knowledge", "year": "2024", "doi_or_arxiv": "arXiv:2411.19799"}
+{"title": "Estimating Uncertainty from Reasoning: A Large-Scale Study of Multi- and Crosslingual MCQA Performance in LLMs", "year": "2026", "doi_or_arxiv": "arXiv:2607.06327"}
+{"title": "TyDi QA: A Benchmark for Information-Seeking Question Answering in Typologically Diverse Languages", "year": "2020", "doi_or_arxiv": "arXiv:2003.05002"}
+{"title": "Johnny Still Receives Spam SMS: Assessing the Robustness of SMS Spam Detection", "year": "2026", "doi_or_arxiv": "arXiv:2609.01171"}
+{"title": "An Empirical Analysis of SMS Scam Detection Systems", "year": "2022", "doi_or_arxiv": "arXiv:2210.10451"}
+{"title": "SpaLLM-Guard: Pairing SMS Spam Detection Using Open-source and Commercial LLMs", "year": "2025", "doi_or_arxiv": "arXiv:2501.04985"}
+{"title": "SpamDam: Towards Privacy-Preserving and Adversary-Resistant SMS Spam Detection", "year": "2024", "doi_or_arxiv": "arXiv:2404.09481"}
+{"title": "POSTER: A Multi-Signal Model for Detecting Evasive Smishing", "year": "2025", "doi_or_arxiv": "arXiv:2505.18233"}
+{"title": "SoK: Systematizing Generation, Characteristics, and Defenses in LLM-Generated Phishing", "year": "2025", "doi_or_arxiv": "arXiv:2508.21457"}
+{"title": "Fraud-R1 : A Multi-Round Benchmark for Assessing the Robustness of LLM Against Augmented Fraud and Phishing Inducements", "year": "2025", "doi_or_arxiv": "arXiv:2502.12904"}
+{"title": "A Lightweight Defense Mechanism against Next Generation of Phishing Emails using Distilled Attention-Augmented BiLSTM", "year": "2026", "doi_or_arxiv": "arXiv:2602.22250"}
+{"title": "Attacking Only Half the Data: Two-Sided Evaluation of AI-Text Detector Robustness", "year": "2026", "doi_or_arxiv": "arXiv:2610.18151"}
+{"title": "Machine Learning-Based Detection of Mobile Money Scan Messages in Ghana: A Comparative Evaluation of Naive Bayes, Support Vector Machine, and Randon Forest Classifiers", "year": "2026", "doi_or_arxiv": "arXiv:2610.40544"}
+{"title": "ExplainableDetector: Exploring Transformer-based Language Modeling Approach for SMS Spam Detection with Explainability Analysis", "year": "2024", "doi_or_arxiv": "arXiv:2405.08026"}
+{"title": "A High-Recall Cost-Sensitive Machine Learning Framework for Real-Time Online Banking Transaction Fraud Detection", "year": "2026", "doi_or_arxiv": "arXiv:2601.07276"}
+{"title": "Know When to Abstain: Optimal Selective Classification with Likelihood Ratios", "year": "2025", "doi_or_arxiv": "arXiv:2505.15008"}
+{"title": "RefusalBench: Generative Evaluation of Selective Refusal in Grounded Language Models", "year": "2025", "doi_or_arxiv": "arXiv:2510.10390"}
+{"title": "What Does It Take to Build a Performant Selective Classifier?", "year": "2025", "doi_or_arxiv": "arXiv:2510.20242"}
+{"title": "Short Message Service (SMS) Phishing Attacks and Defenses: A Systematic Review", "year": "2026", "doi_or_arxiv": "arXiv:2604.11429"}
+{"title": "FraudSMSWalker: Benchmarking Agentic Large Language Models for SMS-to-Webpage Fraud Detection", "year": "2026", "doi_or_arxiv": "arXiv:2606.16659"}
+{"title": "What Standard Evaluations Hide About Detectors of Hijacked LLM Agents: Rare Attacks, Unseen Tools and Benchmark Transfer", "year": "2026", "doi_or_arxiv": "arXiv:2610.41803"}
+{"title": "PIDS-Bench: Evaluating Prompt-Injection Detectors Under Over-Defense, Obfuscation, and Distribution Shift", "year": "2026", "doi_or_arxiv": "10.1109/ACCESS.2026.3728186"}
+{"title": "Interpretable and Fair Mechanisms for Abstaining Classifiers", "year": "2025", "doi_or_arxiv": "10.1007/978-3-031-70368-3_25"}

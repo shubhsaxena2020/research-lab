@@ -1,0 +1,2 @@
+{"VERIFIED": 19, "MISMATCH": 0, "FAIL": 0, "DUPLICATE": 0}
+EXIT 0 rows=19

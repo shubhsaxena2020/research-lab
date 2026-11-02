@@ -1,0 +1,70 @@
+{
+  "version": 1,
+  "updated_at": "2026-11-03T00:00:00Z",
+  "entries": [
+    {
+      "id": "main.accuracy.baseline",
+      "file": "results/main.json",
+      "key": "baseline.accuracy",
+      "description": "Test accuracy, baseline, seed 0",
+      "run_id": "20261103T014500Z_baseline_a1b2c3d",
+      "tolerance": 0.0
+    },
+    {
+      "id": "main.f1.baseline",
+      "file": "results/main.json",
+      "key": "baseline.f1_macro",
+      "description": "Macro F1, baseline, seed 0",
+      "tolerance": 0.0
+    },
+    {
+      "id": "main.std.baseline",
+      "file": "results/main.json",
+      "key": "baseline.std_accuracy",
+      "description": "Standard deviation of accuracy over seeds, baseline",
+      "tolerance": 0.0
+    },
+    {
+      "id": "main.accuracy.ours",
+      "file": "results/main.json",
+      "key": "ours.accuracy",
+      "description": "Test accuracy, our model",
+      "tolerance": 0.0
+    },
+    {
+      "id": "main.f1.ours",
+      "file": "results/main.json",
+      "key": "ours.f1_macro",
+      "description": "Macro F1, our model",
+      "tolerance": 0.0
+    },
+    {
+      "id": "main.speedup.ours",
+      "file": "results/main.json",
+      "key": "ours.speedup",
+      "description": "Training speedup vs baseline",
+      "tolerance": 0.0
+    },
+    {
+      "id": "main.p.paired",
+      "file": "results/main.json",
+      "key": "paired.p_value",
+      "description": "Paired Wilcoxon p-value, baseline vs ours",
+      "tolerance": 0.0
+    },
+    {
+      "id": "main.n",
+      "file": "results/main.json",
+      "key": "_meta.n",
+      "description": "Number of held-out examples",
+      "tolerance": 0.0
+    },
+    {
+      "id": "main.seeds",
+      "file": "results/main.json",
+      "key": "_meta.n_seeds",
+      "description": "Number of seeds behind every mean",
+      "tolerance": 0.0
+    }
+  ]
+}

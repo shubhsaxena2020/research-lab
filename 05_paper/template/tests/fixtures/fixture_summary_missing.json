@@ -1,0 +1,22 @@
+{
+  "_note": "Synthetic SUMMARY fixture with a config that has no stats block. The table generator must refuse it instead of printing nan.",
+  "experiment": "fixture-broken",
+  "configs": ["baseline", "ours"],
+  "metric": "accuracy",
+  "n_seeds": 5,
+  "seeds": [0, 1, 2, 3, 4],
+  "per_run": {
+    "baseline": [0.79, 0.80, 0.81, 0.79, 0.80]
+  },
+  "stats": {
+    "baseline": {
+      "mean": 0.798,
+      "std": 0.0075,
+      "ci95": [0.790, 0.806],
+      "n": 5,
+      "ci_method": "bootstrap",
+      "n_boot": 10000,
+      "ci_seed": 12345
+    }
+  }
+}

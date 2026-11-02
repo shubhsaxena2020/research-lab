@@ -68,18 +68,27 @@ def hashed_csr(msgs, n_buckets=1 << 17):
             np.asarray(indptr, np.int64), len(msgs), n_buckets)
 
 
-def tfidf_transform(data, indices, indptr, n, n_buckets):
+def idf_from(rows, idx, indptr, n_buckets):
+    """Document frequencies from the given rows only (no test-fold leakage)."""
     df = np.zeros(n_buckets)
-    for i in range(n):
-        df[indices[indptr[i]:indptr[i + 1]]] += 1.0
-    idf = np.log((1.0 + n) / (1.0 + df)) + 1.0
-    out_v = []
-    for i in range(n):
+    for i in rows:
+        df[idx[indptr[i]:indptr[i + 1]]] += 1.0
+    n = len(rows)
+    return np.log((1.0 + n) / (1.0 + df)) + 1.0
+
+
+def apply_tfidf(rows, data, idx, indptr, idf):
+    """L2-normalised tf-idf rows, using an idf fitted elsewhere."""
+    out_i, out_v, lens = [], [], []
+    for i in rows:
         s, e = indptr[i], indptr[i + 1]
-        v = data[s:e] * idf[indices[s:e]]
+        v = data[s:e] * idf[idx[s:e]]
         nrm = np.sqrt((v * v).sum()) or 1.0
         out_v.append(v / nrm)
-    return np.concatenate(out_v)
+        out_i.append(idx[s:e])
+        lens.append(len(out_i[-1]))
+    return (np.concatenate(out_i), np.concatenate(out_v),
+            np.concatenate([[0], np.cumsum(lens)]))
 
 
 def spmv(idx, val, indptr, w):
@@ -89,7 +98,7 @@ def spmv(idx, val, indptr, w):
     return np.add.reduceat(full, indptr[:-1])
 
 
-def train_logreg(idx, val, indptr, y, n_feat, epochs=300, lr=3.0, l2=1e-5):
+def train_logreg(idx, val, indptr, y, n_feat, epochs=1500, lr=5.0, l2=1e-6):
     n = len(y)
     w = np.zeros(n_feat)
     sw = np.where(y == 1, 0.5 * n / max(y.sum(), 1), 0.5 * n / max((1 - y).sum(), 1))
@@ -131,7 +140,6 @@ def main():
     print(f"KEYWORD RULE    P={pr:.3f} R={rc:.3f} F1={f1:.3f}  fires on {kp.mean()*100:.1f}%  FP={fp} FN={fn}")
 
     data, idx, indptr, nrows, nb = hashed_csr(msgs)
-    val = tfidf_transform(data, idx, indptr, nrows, nb)
 
     rng = np.random.RandomState(7)
     order = rng.permutation(n)
@@ -143,20 +151,23 @@ def main():
     for f in range(5):
         tr = np.where(folds != f)[0]
         te = np.where(folds == f)[0]
-        # rebuild idf inside the training fold only (no test-fold leakage)
-        tr_i = np.concatenate([idx[indptr[i]:indptr[i+1]] for i in tr])
-        tr_v = np.concatenate([val[indptr[i]:indptr[i+1]] for i in tr])
-        tr_ptr = np.concatenate([[0], np.cumsum([indptr[i+1] - indptr[i] for i in tr])])
+        idf = idf_from(tr, idx, indptr, nb)          # fitted on the training fold only
+        tr_i, tr_v, tr_ptr = apply_tfidf(tr, data, idx, indptr, idf)
         w = train_logreg(tr_i, tr_v, tr_ptr, y[tr], nb)
-        te_i = np.concatenate([idx[indptr[i]:indptr[i+1]] for i in te])
-        te_v = np.concatenate([val[indptr[i]:indptr[i+1]] for i in te])
-        te_ptr = np.concatenate([[0], np.cumsum([indptr[i+1] - indptr[i] for i in te])])
+        te_i, te_v, te_ptr = apply_tfidf(te, data, idx, indptr, idf)
         proba[te] = score(te_i, te_v, te_ptr, w)
 
     for thr in (0.5, 0.9, 0.99):
         p = (proba >= thr).astype(int)
         pr, rc, f1, fp, fn = prf(y, p)
         print(f"TFIDF+LR thr={thr:<5} P={pr:.3f} R={rc:.3f} F1={f1:.3f} FP={fp} FN={fn}")
+
+    # oracle threshold: separates ranking quality from threshold placement
+    best = max(((prf(y, (proba >= t).astype(int))[2], t) for t in np.arange(0.02, 1.0, 0.02)))
+    p = (proba >= best[1]).astype(int)
+    pr, rc, f1, fp, fn = prf(y, p)
+    print(f"TFIDF+LR best-thr={best[1]:.2f} P={pr:.3f} R={rc:.3f} F1={f1:.3f} FP={fp} FN={fn}")
+    print(f"score spread: min={proba.min():.4f} median={np.median(proba):.4f} max={proba.max():.4f}")
 
     seen, dup = set(), 0
     for m in msgs:

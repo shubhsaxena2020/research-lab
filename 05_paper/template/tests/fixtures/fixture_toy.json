@@ -1,0 +1,6 @@
+{
+  "toy": true,
+  "_meta": {"run_id": "FIXTURE-TOY", "config_name": "baseline", "seed": 0, "split": "toy", "n": 10},
+  "accuracy": 0.5,
+  "_note": "TOY - NOT A RESULT. Exists only to prove the generators refuse toy files."
+}

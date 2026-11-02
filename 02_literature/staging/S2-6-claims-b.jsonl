@@ -1,0 +1,12 @@
+{"title": "Language Model Tokenizers Introduce Unfairness Between Languages", "year": "2023", "doi_or_arxiv": "10.52202/075280-1608"}
+{"title": "Performance of Grapheme-Based Tokenizers on Word-level and Natural Language Understanding tasks for Indic Languages", "year": "2026", "doi_or_arxiv": "10.18653/2026.findings-emnlp.1093"}
+{"title": "Parallel Tokenizers: Rethinking Vocabulary Design in Cross-Lingual Transfer of Low-Resource Languages", "year": "2026", "doi_or_arxiv": "10.18653/2026.emnlp-main.117"}
+{"title": "When Tokenizers Fail: Byte-Level Chunking for Zero-Shot Transfer to Low-Resource Languages", "year": "2026", "doi_or_arxiv": "10.18653/2026.emnlp-main.2139"}
+{"title": "SemEval-2020 Task 9: Overview of Sentiment Analysis of Code-Mixed Tweets", "year": "2020", "doi_or_arxiv": "10.18653/v1/2020.semeval-1.100"}
+{"title": "Attribute or Abstain: Large Language Models as Long Document Assistants", "year": "2024", "doi_or_arxiv": "10.18653/v1/2024.emnlp-main.463"}
+{"title": "Refer, Infer, or Abstain: Investigating Latent Skill Selection of Large Language Models under Contextual Question Answering Uncertainty", "year": "2026", "doi_or_arxiv": "10.18653/2026.uncertainlp-main.39"}
+{"title": "SentiGrad: A New Hindi-English Code Mixed Sentiment Analysis Dataset with Preliminary Results and Open Challenges", "year": "2024", "doi_or_arxiv": "10.1109/dabcon63472.2024.10919296"}
+{"title": "Findings of WMT 2024's MultiIndic22MT Shared Task for Machine Translation of 22 Indian Languages", "year": "2024", "doi_or_arxiv": "10.18653/v1/2024.wmt-1.55"}
+{"title": "SentMix-3L: A Novel Code-Mixed Test Dataset in Bangla-English-Hindi for Sentiment Analysis", "year": "2023", "doi_or_arxiv": "10.18653/v1/2023.sealp-1.6"}
+{"title": "Implications of Tokenizers in BERT Model for Low-Resource Indian Language", "year": "2023", "doi_or_arxiv": "10.36548/jscp.2022.4.005"}
+{"title": "XTRUST: On the Multilingual Trustworthiness of Large Language Models", "year": "2024", "doi_or_arxiv": "10.48550/arxiv.2409.15762"}

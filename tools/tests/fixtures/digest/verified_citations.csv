@@ -1,0 +1,2 @@
+key,title,authors,year,doi,arxiv_id,venue,status,source,source_url,retrieved_at,evidence
+reimers2019,Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks,"Reimers, Nils; Gurevych, Iryna",2019,10.18653/v1/D19-1410,,EMNLP-IJCNLP,VERIFIED,crossref,https://api.crossref.org/works/10.18653/v1/D19-1410,2026-11-03T00:00:00Z,title=1.00 authors=1.00 year=0

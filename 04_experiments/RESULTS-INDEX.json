@@ -1,0 +1,72 @@
+{
+  "entries": [
+    {
+      "description": "Training epochs for the toy treatment (from the run config) [TOY - NOT A RESULT]",
+      "file": "04_experiments/harness/configs/toy_ours.json",
+      "id": "toy.protocol.epochs",
+      "key": "epochs",
+      "tolerance": 0.0,
+      "toy": true
+    },
+    {
+      "description": "Learning rate for the toy treatment (from the run config) [TOY - NOT A RESULT]",
+      "file": "04_experiments/harness/configs/toy_ours.json",
+      "id": "toy.protocol.lr",
+      "key": "lr",
+      "tolerance": 0.0,
+      "toy": true
+    },
+    {
+      "description": "Number of paired observations [TOY - NOT A RESULT]",
+      "file": "04_experiments/results/summary_toy.json",
+      "id": "toy.protocol.n_pairs",
+      "key": "paired.n_pairs",
+      "tolerance": 0.0,
+      "toy": true
+    },
+    {
+      "description": "Points per class in the synthetic sample (from the run config) [TOY - NOT A RESULT]",
+      "file": "04_experiments/harness/configs/toy_ours.json",
+      "id": "toy.protocol.n_per_class",
+      "key": "n_per_class",
+      "tolerance": 0.0,
+      "toy": true
+    },
+    {
+      "description": "Number of seeds aggregated [TOY - NOT A RESULT]",
+      "file": "04_experiments/results/summary_toy.json",
+      "id": "toy.protocol.n_seeds",
+      "key": "n_seeds",
+      "tolerance": 0.0,
+      "toy": true
+    },
+    {
+      "description": "Adjusted p-value reported for the toy comparison [TOY - NOT A RESULT]",
+      "file": "04_experiments/results/summary_toy.json",
+      "id": "toy.protocol.p",
+      "key": "paired.correction.p_adjusted",
+      "tolerance": 0.0,
+      "toy": true
+    },
+    {
+      "description": "accuracy for config 'toy_baseline' of experiment 'toy': mean over 3 run(s), seeds [0, 1, 2] [TOY - NOT A RESULT]",
+      "file": "04_experiments/results/summary_toy.json",
+      "id": "toy.accuracy.toy_baseline",
+      "key": "stats.toy_baseline.mean",
+      "run_id": "20261102T213930Z_toy_baseline_71afecb-3",
+      "tolerance": 0.0005,
+      "toy": true
+    },
+    {
+      "description": "accuracy for config 'toy_ours' of experiment 'toy': mean over 3 run(s), seeds [0, 1, 2] [TOY - NOT A RESULT]",
+      "file": "04_experiments/results/summary_toy.json",
+      "id": "toy.accuracy.toy_ours",
+      "key": "stats.toy_ours.mean",
+      "run_id": "20261102T213931Z_toy_ours_71afecb",
+      "tolerance": 0.0005,
+      "toy": true
+    }
+  ],
+  "updated_at": "2026-11-02T21:39:31Z",
+  "version": 1
+}

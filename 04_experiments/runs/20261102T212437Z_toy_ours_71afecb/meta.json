@@ -1,0 +1,28 @@
+{
+  "command": "python.exe 04_experiments/harness/runner.py --experiment toy --config 04_experiments/harness/configs/toy_ours.json --check-repro 2",
+  "config_name": "toy_ours",
+  "config_sha256": "8b9b51ab6988ec82955b39d84787b4ca3645d1b5e07a0caf68e2782750dc0ec3",
+  "cpu_count": 14,
+  "device": "cpu",
+  "duration_s": 0.2342,
+  "env": {
+    "PYTHONHASHSEED": "0",
+    "PYTHONIOENCODING": "utf-8",
+    "PYTHONUTF8": "1"
+  },
+  "experiment": "toy",
+  "finished_at": "2026-11-02T21:24:38Z",
+  "git_commit": "71afecb",
+  "git_dirty": true,
+  "host": "DESKTOP-4INP19J",
+  "notes": "check-repro 1/2",
+  "peak_rss_mb": 36.562,
+  "platform": "Windows-10-10.0.26300-SP0",
+  "python": "3.11.15",
+  "run_id": "20261102T212437Z_toy_ours_71afecb",
+  "schema": "run/1",
+  "seed": 0,
+  "started_at": "2026-11-02T21:24:37Z",
+  "status": "ok",
+  "toy": true
+}

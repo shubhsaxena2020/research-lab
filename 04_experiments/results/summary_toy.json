@@ -1,0 +1,114 @@
+{
+  "configs": [
+    "toy_baseline",
+    "toy_ours"
+  ],
+  "experiment": "toy",
+  "generated_at": "2026-11-02T21:39:31Z",
+  "metric": "accuracy",
+  "n_runs": 6,
+  "n_seeds": 3,
+  "paired": {
+    "baseline": "toy_baseline",
+    "correction": {
+      "family_size": 1,
+      "method": "holm",
+      "note": "1 comparison(s) in this family",
+      "p_adjusted": 0.5
+    },
+    "effect_size": {
+      "interpretation": "large effect (Cohen 1988 thresholds: 0.2 small, 0.5 medium, 0.8 large); positive means a > b",
+      "name": "cohens_d",
+      "value": -2.3094010767584914
+    },
+    "n_eff": 2,
+    "n_pairs": 3,
+    "notes": "exact binomial, 0 positive / 2 negative of 2 non-zero differences; minimum attainable p at n=2 is 0.5000; auto chose the sign test because n_eff=2 < 6 (Wilcoxon's exact null is too coarse there)",
+    "p_value": 0.5,
+    "test": "sign_test",
+    "treatment": "toy_ours"
+  },
+  "paired_all": [
+    {
+      "baseline": "toy_baseline",
+      "correction": {
+        "family_size": 1,
+        "method": "holm",
+        "note": "1 comparison(s) in this family",
+        "p_adjusted": 0.5
+      },
+      "effect_size": {
+        "interpretation": "large effect (Cohen 1988 thresholds: 0.2 small, 0.5 medium, 0.8 large); positive means a > b",
+        "name": "cohens_d",
+        "value": -2.3094010767584914
+      },
+      "n_eff": 2,
+      "n_pairs": 3,
+      "notes": "exact binomial, 0 positive / 2 negative of 2 non-zero differences; minimum attainable p at n=2 is 0.5000; auto chose the sign test because n_eff=2 < 6 (Wilcoxon's exact null is too coarse there)",
+      "p_value": 0.5,
+      "test": "sign_test",
+      "treatment": "toy_ours"
+    }
+  ],
+  "per_run": {
+    "toy_baseline": [
+      0.877778,
+      0.866667,
+      0.866667
+    ],
+    "toy_ours": [
+      0.877778,
+      0.888889,
+      0.888889
+    ]
+  },
+  "run_ids": {
+    "toy_baseline": "20261102T213930Z_toy_baseline_71afecb-3",
+    "toy_ours": "20261102T213931Z_toy_ours_71afecb"
+  },
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "stats": {
+    "toy_baseline": {
+      "ci95": [
+        0.866667,
+        0.8740743333
+      ],
+      "ci_alpha": 0.05,
+      "ci_method": "bootstrap",
+      "ci_seed": 12345,
+      "ci_variant": "bca",
+      "max": 0.877778,
+      "mean": 0.8703706667,
+      "median": 0.866667,
+      "min": 0.866667,
+      "n": 3,
+      "n_boot": 10000,
+      "note": "n=3 < 5: SD and any CI are unreliable (the SD itself has large sampling error); treat intervals as indicative only",
+      "std": 0.0064149388
+    },
+    "toy_ours": {
+      "ci95": [
+        0.877778,
+        0.888889
+      ],
+      "ci_alpha": 0.05,
+      "ci_method": "bootstrap",
+      "ci_seed": 12345,
+      "ci_variant": "bca",
+      "max": 0.888889,
+      "mean": 0.8851853333,
+      "median": 0.888889,
+      "min": 0.877778,
+      "n": 3,
+      "n_boot": 10000,
+      "note": "n=3 < 5: SD and any CI are unreliable (the SD itself has large sampling error); treat intervals as indicative only",
+      "std": 0.0064149388
+    }
+  },
+  "tables": [],
+  "toy": true
+}

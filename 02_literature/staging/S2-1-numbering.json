@@ -1,0 +1,562 @@
+{
+ "1_agents": [
+  [
+   1,
+   "Shunyu Yao",
+   "2022",
+   "arXiv preprint",
+   "arXiv:2210.03629",
+   "ReAct: Synergizing Reasoning and Acting in Language Models"
+  ],
+  [
+   2,
+   "Timo Schick",
+   "2023",
+   "arXiv preprint",
+   "arXiv:2302.04761",
+   "Toolformer: Language Models Can Teach Themselves to Use Tools"
+  ],
+  [
+   3,
+   "Shuyan Zhou",
+   "2023",
+   "arXiv preprint",
+   "arXiv:2307.13854",
+   "WebArena: A Realistic Web Environment for Building Autonomous Agents"
+  ],
+  [
+   4,
+   "Xiao Liu",
+   "2023",
+   "arXiv preprint",
+   "arXiv:2308.03688",
+   "AgentBench: Evaluating LLMs as Agents"
+  ],
+  [
+   5,
+   "Shunyu Yao",
+   "2024",
+   "arXiv preprint",
+   "arXiv:2406.12045",
+   "$τ$-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains"
+  ],
+  [
+   6,
+   "Mert Cemri",
+   "2025",
+   "arXiv preprint",
+   "arXiv:2503.13657",
+   "Why Do Multi-Agent LLM Systems Fail?"
+  ]
+ ],
+ "2_rag_memory": [
+  [
+   7,
+   "Patrick Lewis",
+   "2020",
+   "arXiv preprint",
+   "arXiv:2005.11401",
+   "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks"
+  ],
+  [
+   8,
+   "Nelson F. Liu",
+   "2023",
+   "arXiv preprint",
+   "arXiv:2307.03172",
+   "Lost in the Middle: How Language Models Use Long Contexts"
+  ],
+  [
+   9,
+   "Akari Asai",
+   "2023",
+   "arXiv preprint",
+   "arXiv:2310.11511",
+   "Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection"
+  ],
+  [
+   10,
+   "Darren Edge",
+   "2024",
+   "arXiv preprint",
+   "arXiv:2404.16130",
+   "From Local to Global: A Graph RAG Approach to Query-Focused Summarization"
+  ],
+  [
+   11,
+   "Charles Packer",
+   "2023",
+   "arXiv preprint",
+   "arXiv:2310.08560",
+   "MemGPT: Towards LLMs as Operating Systems"
+  ],
+  [
+   12,
+   "Di Wu",
+   "2024",
+   "arXiv preprint",
+   "arXiv:2410.10813",
+   "LongMemEval: Benchmarking Chat Assistants on Long-Term Interactive Memory"
+  ]
+ ],
+ "3_eval": [
+  [
+   13,
+   "Yubo Wang",
+   "2024",
+   "arXiv preprint",
+   "arXiv:2406.01574",
+   "MMLU-Pro: A More Robust and Challenging Multi-Task Language Understanding Benchmark"
+  ],
+  [
+   14,
+   "Anka Reuel",
+   "2024",
+   "arXiv preprint",
+   "arXiv:2411.12990",
+   "BetterBench: Assessing AI Benchmarks, Uncovering Issues, and Establishing Best Practices"
+  ],
+  [
+   15,
+   "Evan Miller",
+   "2024",
+   "arXiv preprint",
+   "arXiv:2411.00640",
+   "Adding Error Bars to Evals: A Statistical Approach to Language Model Evaluations"
+  ],
+  [
+   16,
+   "Shivalika Singh",
+   "2025",
+   "arXiv preprint",
+   "arXiv:2504.20879",
+   "The Leaderboard Illusion"
+  ],
+  [
+   17,
+   "Chunyuan Deng",
+   "2023",
+   "arXiv preprint",
+   "arXiv:2311.09783",
+   "Investigating Data Contamination in Modern Benchmarks for Large Language Models"
+  ]
+ ],
+ "4_reasoning": [
+  [
+   18,
+   "Charlie Snell",
+   "2024",
+   "arXiv preprint",
+   "arXiv:2408.03314",
+   "Scaling LLM Test-Time Compute Optimally can be More Effective than Scaling Model Parameters"
+  ],
+  [
+   19,
+   "Jie Huang",
+   "2023",
+   "arXiv preprint",
+   "arXiv:2310.01798",
+   "Large Language Models Cannot Self-Correct Reasoning Yet"
+  ],
+  [
+   20,
+   "Niklas Muennighoff",
+   "2025",
+   "arXiv preprint",
+   "arXiv:2501.19393",
+   "s1: Simple test-time scaling"
+  ],
+  [
+   21,
+   "Daya Guo",
+   "2025",
+   "Nature",
+   "10.1038/s41586-025-09422-z",
+   "DeepSeek-R1 incentivizes reasoning in LLMs through reinforcement learning"
+  ],
+  [
+   22,
+   "Parshin Shojaee",
+   "2025",
+   "arXiv preprint",
+   "arXiv:2506.06941",
+   "The Illusion of Thinking: Understanding the Strengths and Limitations of Reasoning Models via the Lens of Problem Complexity"
+  ],
+  [
+   23,
+   "Zayne Sprague",
+   "2024",
+   "arXiv preprint",
+   "arXiv:2409.12183",
+   "To CoT or not to CoT? Chain-of-thought helps mainly on math and symbolic reasoning"
+  ]
+ ],
+ "5_small_models": [
+  [
+   24,
+   "Marah Abdin",
+   "2024",
+   "arXiv preprint",
+   "arXiv:2404.14219",
+   "Phi-3 Technical Report: A Highly Capable Language Model Locally on Your Phone"
+  ],
+  [
+   25,
+   "Qwen",
+   "2024",
+   "arXiv preprint",
+   "arXiv:2412.15115",
+   "Qwen2.5 Technical Report"
+  ],
+  [
+   26,
+   "Loubna Ben Allal",
+   "2025",
+   "arXiv preprint",
+   "arXiv:2502.02737",
+   "SmolLM2: When Smol Goes Big -- Data-Centric Training of a Small Language Model"
+  ],
+  [
+   27,
+   "Zechun Liu",
+   "2024",
+   "arXiv preprint",
+   "arXiv:2402.14905",
+   "MobileLLM: Optimizing Sub-billion Parameter Language Models for On-Device Use Cases"
+  ],
+  [
+   28,
+   "Ji Lin",
+   "2023",
+   "arXiv preprint",
+   "arXiv:2306.00978",
+   "AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration"
+  ]
+ ],
+ "6_safety": [
+  [
+   29,
+   "Andy Zou",
+   "2023",
+   "arXiv preprint",
+   "arXiv:2307.15043",
+   "Universal and Transferable Adversarial Attacks on Aligned Language Models"
+  ],
+  [
+   30,
+   "Kai Greshake",
+   "2023",
+   "arXiv preprint",
+   "arXiv:2302.12173",
+   "Not what you've signed up for: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection"
+  ],
+  [
+   31,
+   "Qiusi Zhan",
+   "2024",
+   "arXiv preprint",
+   "arXiv:2403.02691",
+   "InjecAgent: Benchmarking Indirect Prompt Injections in Tool-Integrated Large Language Model Agents"
+  ],
+  [
+   32,
+   "Edoardo Debenedetti",
+   "2024",
+   "arXiv preprint",
+   "arXiv:2406.13352",
+   "AgentDojo: A Dynamic Environment to Evaluate Prompt Injection Attacks and Defenses for LLM Agents"
+  ],
+  [
+   33,
+   "Eric Wallace",
+   "2024",
+   "arXiv preprint",
+   "arXiv:2404.13208",
+   "The Instruction Hierarchy: Training LLMs to Prioritize Privileged Instructions"
+  ],
+  [
+   34,
+   "Andy Arditi",
+   "2024",
+   "arXiv preprint",
+   "arXiv:2406.11717",
+   "Refusal in Language Models Is Mediated by a Single Direction"
+  ]
+ ],
+ "7_multilingual": [
+  [
+   35,
+   "Jay Gala",
+   "2023",
+   "arXiv preprint",
+   "arXiv:2305.16307",
+   "IndicTrans2: Towards High-Quality and Accessible Machine Translation Models for all 22 Scheduled Indian Languages"
+  ],
+  [
+   36,
+   "Sshubam Verma",
+   "2024",
+   "arXiv preprint",
+   "arXiv:2411.02538",
+   "MILU: A Multi-task Indic Language Understanding Benchmark"
+  ],
+  [
+   37,
+   "Wenxuan Zhang",
+   "2023",
+   "arXiv preprint",
+   "arXiv:2306.05179",
+   "M3Exam: A Multilingual, Multimodal, Multilevel Benchmark for Examining Large Language Models"
+  ],
+  [
+   38,
+   "Lucas Bandarkar",
+   "2024",
+   "Proceedings of the conference - Association for Computational Linguistics. Meeting",
+   "10.18653/v1/2024.acl-long.44",
+   "The Belebele Benchmark: a Parallel Reading Comprehension Dataset in 122 Language Variants"
+  ],
+  [
+   39,
+   "Angelika Romanou",
+   "2024",
+   "arXiv preprint",
+   "arXiv:2411.19799",
+   "INCLUDE: Evaluating Multilingual Language Understanding with Regional Knowledge"
+  ]
+ ],
+ "8_scam": [
+  [
+   40,
+   "Shu Yang",
+   "2025",
+   "arXiv preprint",
+   "arXiv:2502.12904",
+   "Fraud-R1 : A Multi-Round Benchmark for Assessing the Robustness of LLM Against Augmented Fraud and Phishing Inducements"
+  ],
+  [
+   41,
+   "Tri Cao",
+   "2024",
+   "arXiv preprint",
+   "arXiv:2408.10738",
+   "PhishAgent: A Robust Multimodal Agent for Phishing Webpage Detection"
+  ],
+  [
+   42,
+   "Najmul Hasan",
+   "2025",
+   "arXiv preprint",
+   "arXiv:2512.10104",
+   "Phishing Email Detection Using Large Language Models"
+  ],
+  [
+   43,
+   "Canyu Chen",
+   "2023",
+   "arXiv preprint",
+   "arXiv:2309.13788",
+   "Can LLM-Generated Misinformation Be Detected?"
+  ],
+  [
+   44,
+   "Muhammad Salman",
+   "2022",
+   "arXiv preprint",
+   "arXiv:2210.10451",
+   "An Empirical Analysis of SMS Scam Detection Systems"
+  ]
+ ],
+ "9_code": [
+  [
+   45,
+   "Carlos E. Jimenez",
+   "2023",
+   "arXiv preprint",
+   "arXiv:2310.06770",
+   "SWE-bench: Can Language Models Resolve Real-World GitHub Issues?"
+  ],
+  [
+   46,
+   "Mark Chen",
+   "2021",
+   "arXiv preprint",
+   "arXiv:2107.03374",
+   "Evaluating Large Language Models Trained on Code"
+  ],
+  [
+   47,
+   "Jiawei Liu",
+   "2023",
+   "arXiv preprint",
+   "arXiv:2305.01210",
+   "Is Your Code Generated by ChatGPT Really Correct? Rigorous Evaluation of Large Language Models for Code Generation"
+  ],
+  [
+   48,
+   "Chunqiu Steven Xia",
+   "2024",
+   "arXiv preprint",
+   "arXiv:2407.01489",
+   "Agentless: Demystifying LLM-based Software Engineering Agents"
+  ],
+  [
+   49,
+   "Alex Gu",
+   "2024",
+   "arXiv preprint",
+   "arXiv:2401.03065",
+   "CRUXEval: A Benchmark for Code Reasoning, Understanding and Execution"
+  ],
+  [
+   50,
+   "Naman Jain",
+   "2024",
+   "arXiv preprint",
+   "arXiv:2403.07974",
+   "LiveCodeBench: Holistic and Contamination Free Evaluation of Large Language Models for Code"
+  ]
+ ],
+ "10_data": [
+  [
+   51,
+   "Suriya Gunasekar",
+   "2023",
+   "arXiv preprint",
+   "arXiv:2306.11644",
+   "Textbooks Are All You Need"
+  ],
+  [
+   52,
+   "Chunting Zhou",
+   "2023",
+   "arXiv preprint",
+   "arXiv:2305.11206",
+   "LIMA: Less Is More for Alignment"
+  ],
+  [
+   53,
+   "Yizhong Wang",
+   "2022",
+   "arXiv preprint",
+   "arXiv:2212.10560",
+   "Self-Instruct: Aligning Language Models with Self-Generated Instructions"
+  ],
+  [
+   54,
+   "Zhangchen Xu",
+   "2024",
+   "arXiv preprint",
+   "arXiv:2406.08464",
+   "Magpie: Alignment Data Synthesis from Scratch by Prompting Aligned LLMs with Nothing"
+  ],
+  [
+   55,
+   "Ilia Shumailov",
+   "2023",
+   "arXiv preprint",
+   "arXiv:2305.17493",
+   "The Curse of Recursion: Training on Generated Data Makes Models Forget"
+  ]
+ ],
+ "11_uncertainty": [
+  [
+   56,
+   "Saurav Kadavath",
+   "2022",
+   "arXiv preprint",
+   "arXiv:2207.05221",
+   "Language Models (Mostly) Know What They Know"
+  ],
+  [
+   57,
+   "Lorenz Kuhn",
+   "2023",
+   "arXiv preprint",
+   "arXiv:2302.09664",
+   "Semantic Uncertainty: Linguistic Invariances for Uncertainty Estimation in Natural Language Generation"
+  ],
+  [
+   58,
+   "Katherine Tian",
+   "2023",
+   "arXiv preprint",
+   "arXiv:2305.14975",
+   "Just Ask for Calibration: Strategies for Eliciting Calibrated Confidence Scores from Language Models Fine-Tuned with Human Feedback"
+  ],
+  [
+   59,
+   "Potsawee Manakul",
+   "2023",
+   "arXiv preprint",
+   "arXiv:2303.08896",
+   "SelfCheckGPT: Zero-Resource Black-Box Hallucination Detection for Generative Large Language Models"
+  ],
+  [
+   60,
+   "Polina Kirichenko",
+   "2025",
+   "arXiv preprint",
+   "arXiv:2506.09038",
+   "AbstentionBench: Reasoning LLMs Fail on Unanswerable Questions"
+  ],
+  [
+   61,
+   "Bingbing Wen",
+   "2024",
+   "arXiv preprint",
+   "arXiv:2407.18418",
+   "Know Your Limits: A Survey of Abstention in Large Language Models"
+  ]
+ ],
+ "12_hai": [
+  [
+   62,
+   "Lianmin Zheng",
+   "2023",
+   "arXiv preprint",
+   "arXiv:2306.05685",
+   "Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena"
+  ],
+  [
+   63,
+   "Wei-Lin Chiang",
+   "2024",
+   "arXiv preprint",
+   "arXiv:2403.04132",
+   "Chatbot Arena: An Open Platform for Evaluating LLMs by Human Preference"
+  ],
+  [
+   64,
+   "Seungone Kim",
+   "2024",
+   "arXiv preprint",
+   "arXiv:2405.01535",
+   "Prometheus 2: An Open Source Language Model Specialized in Evaluating Other Language Models"
+  ],
+  [
+   65,
+   "Yang Liu",
+   "2023",
+   "arXiv preprint",
+   "arXiv:2303.16634",
+   "G-Eval: NLG Evaluation using GPT-4 with Better Human Alignment"
+  ],
+  [
+   66,
+   "Peiyi Wang",
+   "2023",
+   "arXiv preprint",
+   "arXiv:2305.17926",
+   "Large Language Models are not Fair Evaluators"
+  ],
+  [
+   67,
+   "Hannah Rose Kirk",
+   "2024",
+   "The Thirty-eight Conference on Neural Information Processing Systems Datasets and Benchmarks Track (2024)",
+   "arXiv:2404.16019",
+   "The PRISM Alignment Dataset: What Participatory, Representative and Individualised Human Feedback Reveals About the Subjective and Multicultural Alignment of Large Language Models"
+  ]
+ ]
+}

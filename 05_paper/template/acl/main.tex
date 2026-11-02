@@ -1,0 +1,171 @@
+% =============================================================================
+%  acl/main.tex -- MINIMAL ACL / NeurIPS-workshop style stub
+%
+%  This is a stub, not the official template. It uses the plain `article` class
+%  plus natbib -- which is exactly what both official style packages assume --
+%  so it compiles today, on a stock TeX Live, with no download. Turning it into
+%  a real submission is a two-line change (see the switch block below).
+%
+%  BEFORE SUBMISSION:
+%    1. download the official style files yourself:
+%         ACL     https://github.com/acl-org/acl-style-files            (verify)
+%         NeurIPS https://neurips.cc  ->  Paper Information -> Style Files (verify)
+%    2. put acl.sty + acl_natbib.bst (or neurips_20XX.sty) in THIS directory,
+%       read the LICENCE file that ships with them, and keep that licence file
+%       here. Do not redistribute the official files from this repo.
+%    3. read the current page limit and the mandatory checklist (ACL:
+%       Responsible NLP checklist, question E1 covers AI use; NeurIPS: paper
+%       checklist, question on LLM use).
+%
+%  Compile from THIS directory (relative \input paths depend on it):
+%      cd 05_paper/template/acl && latexmk -pdf main.tex
+% =============================================================================
+
+\documentclass[11pt]{article}
+
+% --- SWITCH TO THE OFFICIAL STYLE --------------------------------------------
+% ACL (review mode; use \usepackage{acl} for camera-ready):
+%     \usepackage[review]{acl}
+%     \bibliographystyle{acl_natbib}
+% NeurIPS workshop / main track (pick the file name that matches the year):
+%     \usepackage[preprint]{neurips_2026}     % or [final]
+%     \bibliographystyle{plainnat}            % neurips ships no .bst of its own
+% Keep the natbib load below until you switch; acl.sty loads natbib itself and
+% will error on a duplicate load, so delete it when you switch.
+% -----------------------------------------------------------------------------
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[round,authoryear]{natbib}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+
+\newcommand{\method}{TODO-Method-Name}
+\newcommand{\fillme}[1]{%
+  \par\noindent\fbox{\parbox{0.96\linewidth}{\small\textbf{TODO} --- #1}}\par}
+
+\title{TODO(title): specific and falsifiable\\
+  \large TODO(short title for the running head, $\leq$ 8 words)}
+
+\author{%
+  TODO(Author One)\\
+  TODO(Affiliation)\\
+  \texttt{TODO(email)}
+  \and
+  TODO(Author Two)\\
+  TODO(Affiliation)\\
+  \texttt{TODO(email)}
+  \thanks{%
+    \textbf{Use of AI tools.} TODO(disclosure): name each tool and version, the
+    sections it touched, and what it did (e.g.\ ``Section~3 was written with
+    inputs from <tool>, then rewritten by the author''). ACL requires AI use to
+    be fully disclosed; TODO(venue): quote the policy URL and the retrieval
+    date, and check whether the venue wants this in the Acknowledgements
+    instead. No AI tool produced data, results, figures or references; every
+    citation is recorded in \texttt{02\_literature/verified\_citations.csv}.
+    The tools are not authors. See Section~\ref{sec:ethics}.}%
+}
+
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+% TODO(abstract): 150-200 words for ACL, <= 250 for NeurIPS. Problem, method,
+% headline number (% num:<id> marker), limitation. No citations.
+\fillme{Abstract: problem / method / headline result with its index id /
+limitation.}
+\end{abstract}
+
+% -----------------------------------------------------------------------------
+\section{Introduction}
+\label{sec:intro}
+% TODO(intro): problem / gap / contributions / headline result, and the AI
+% disclosure obligation: ACL requires AI use to be disclosed in the
+% Acknowledgements (see Section~\ref{sec:ethics} and the title footnote).
+\fillme{Introduction: problem, gap, contributions, headline result.}
+
+\section{Related Work}
+\label{sec:related}
+% TODO(related): clusters of prior work, then the delta. Verified keys only.
+\fillme{Related Work: clusters + delta.}
+
+\section{Method}
+\label{sec:method}
+% TODO(method): notation, method, cost.
+\fillme{Method: notation, method, cost.}
+
+\section{Experiments}
+\label{sec:exp}
+% TODO(exp): data, baselines, protocol (seeds, runs, command), metrics.
+\fillme{Experiments: data, baselines, protocol, metrics.}
+
+\section{Results}
+\label{sec:results}
+% TODO(results): the answer first, then Table~\ref{tab:main-results} and
+% Figure~\ref{fig:main-accuracy}. Numbers are generated, never typed.
+\fillme{Results: the answer, then the evidence, then what did not work.}
+
+\begin{table}[t]
+  \centering
+  \caption{TODO(caption): what is compared, on what data, over how many seeds.}
+  \label{tab:main-results}
+  \IfFileExists{../tables/generated/main-results.tex}{%
+    \input{../tables/generated/main-results.tex}%
+  }{%
+    \fbox{\parbox{0.9\linewidth}{\small No generated table yet: run
+      \texttt{tables/make\_tables.py} (see BUILD.md).}}%
+  }
+\end{table}
+
+\begin{figure}[t]
+  \centering
+  \IfFileExists{../figures/generated/main-accuracy.pdf}{%
+    \includegraphics[width=0.85\linewidth]{../figures/generated/main-accuracy.pdf}%
+  }{%
+    \fbox{\parbox[c][3.4cm][c]{0.8\linewidth}{\centering\small Figure PDF not
+      built (needs matplotlib): run \texttt{figures/make\_figures.py}.}}%
+  }
+  \caption{TODO(caption): axes, unit, uncertainty, and the one thing to notice.}
+  \label{fig:main-accuracy}
+\end{figure}
+
+\section{Limitations}
+\label{sec:limitations}
+% TODO(limitations): ACL has a dedicated Limitations section and reviewers
+% score it. Data, compute, statistics, scope -- and what would fix each.
+\fillme{Limitations: data, compute, statistics, scope.}
+
+\section{Ethics Statement}
+\label{sec:ethics}
+% TODO(ethics): data licences, annotator compensation if any, misuse, and the
+% AI-assistance statement. ACL wants it "fully disclosed", e.g. "Section 3 was
+% written with inputs from <tool>". Same wording as the footnote.
+\fillme{Ethics: licences, misuse, AI-assistance statement.}
+
+\section{Reproducibility Statement}
+\label{sec:repro}
+% TODO(repro): repo, command, seeds, released artefacts, rerun tolerance.
+\fillme{Reproducibility: repo, command, seeds, tolerance.}
+
+\section{Conclusion}
+\label{sec:conclusion}
+% TODO(conclusion): what is now known, calibrated to the evidence.
+\fillme{Conclusion: what is now known, and the next experiment.}
+
+% -----------------------------------------------------------------------------
+\section*{Acknowledgements}
+% TODO(ack): non-author help, funding, and -- for ACL -- the AI-use statement
+% if the venue asks for it here rather than in a footnote. Keep one wording.
+\fillme{Acknowledgements: help, funding, AI-use statement.}
+
+\bibliographystyle{plainnat}
+\bibliography{../refs}
+
+\end{document}

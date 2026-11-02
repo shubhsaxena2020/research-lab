@@ -1,0 +1,6 @@
+{
+  "version": 1,
+  "entries": [
+    {"id": "main.accuracy.baseline", "file": "results/main.json", "key": "accuracy", "tolerance": 0.01}
+  ]
+}

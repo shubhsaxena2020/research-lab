@@ -1,0 +1,41 @@
+{
+  "_note": "Synthetic SUMMARY fixture for tests. Shaped like tools/CONTRACTS.md section 4. Not an experimental result.",
+  "experiment": "fixture",
+  "configs": ["baseline", "ours"],
+  "metric": "accuracy",
+  "n_seeds": 5,
+  "seeds": [0, 1, 2, 3, 4],
+  "per_run": {
+    "baseline": [0.79, 0.80, 0.81, 0.79, 0.80],
+    "ours": [0.90, 0.91, 0.92, 0.91, 0.91]
+  },
+  "stats": {
+    "baseline": {
+      "mean": 0.798,
+      "std": 0.0075,
+      "ci95": [0.790, 0.806],
+      "n": 5,
+      "ci_method": "bootstrap",
+      "n_boot": 10000,
+      "ci_seed": 12345
+    },
+    "ours": {
+      "mean": 0.910,
+      "std": 0.011,
+      "ci95": [0.900, 0.920],
+      "n": 5,
+      "ci_method": "bootstrap",
+      "n_boot": 10000,
+      "ci_seed": 12345
+    }
+  },
+  "paired": {
+    "test": "wilcoxon",
+    "p_value": 0.0625,
+    "effect_size": {"name": "cohens_d", "value": 1.84},
+    "n_pairs": 5,
+    "correction": {"method": "holm", "family_size": 3, "p_adjusted": 0.0625,
+                   "note": "3 comparisons in this family"}
+  },
+  "tables": []
+}

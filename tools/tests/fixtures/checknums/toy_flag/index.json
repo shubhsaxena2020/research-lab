@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "id": "toy.accuracy.toy_baseline",
+      "file": "results/summary_toy.json",
+      "key": "stats.toy_baseline.mean",
+      "description": "accuracy for config 'toy_baseline' of experiment 'toy' [TOY - NOT A RESULT]",
+      "tolerance": 0.0005,
+      "toy": true
+    }
+  ]
+}

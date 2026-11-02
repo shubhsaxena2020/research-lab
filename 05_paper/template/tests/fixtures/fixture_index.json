@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "updated_at": "2026-11-03T00:00:00Z",
+  "_note": "Synthetic RESULTS-INDEX fixture for tests. Paths are relative to this file. Not real results.",
+  "entries": [
+    {
+      "id": "main-accuracy.baseline",
+      "file": "fixture_results.json",
+      "key": "accuracy",
+      "description": "Fixture: test accuracy, baseline (synthetic)",
+      "run_id": "FIXTURE-NOT-A-RUN",
+      "tolerance": 0.0005
+    },
+    {
+      "id": "main-accuracy.ours",
+      "file": "fixture_results_ours.json",
+      "key": "accuracy",
+      "description": "Fixture: test accuracy, ours (synthetic)",
+      "run_id": "FIXTURE-NOT-A-RUN",
+      "tolerance": 0.0005
+    },
+    {
+      "id": "main-loss.baseline",
+      "file": "fixture_results.json",
+      "key": "loss",
+      "description": "Fixture: test loss, baseline (synthetic)",
+      "run_id": "FIXTURE-NOT-A-RUN",
+      "tolerance": 0.0005
+    },
+    {
+      "id": "toy-accuracy.baseline",
+      "file": "fixture_toy.json",
+      "key": "accuracy",
+      "description": "Fixture: a toy file, which must never be plotted without --allow-toy",
+      "run_id": "FIXTURE-TOY"
+    }
+  ]
+}

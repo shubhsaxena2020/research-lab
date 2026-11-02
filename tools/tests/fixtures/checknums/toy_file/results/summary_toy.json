@@ -1,0 +1,8 @@
+{
+  "toy": true,
+  "banner": "TOY - NOT A RESULT",
+  "experiment": "toy",
+  "stats": {
+    "toy_baseline": {"mean": 0.55, "std": 0.01, "n": 3}
+  }
+}

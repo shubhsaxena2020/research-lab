@@ -9,3 +9,8 @@ Phase 2 (experiments) stays LOCKED. This file does not yet contain the approval 
 ## Standing decisions
 - Topic decision is the head's. S2 delivers SELECTED.md + NOVELTY-CHECK.md; the head reads them, then writes `TOPIC APPROVED` (or a veto) here.
 - Do not spend effort polishing prose before data/tools exist; correctness and traceability first.
+
+## Checkpoint 2 — 03:25 IST (head, independent checks)
+- S1 PSIT dataset: re-verified 12 random records against Crossref directly: 10/12 exact (title + PSIT affiliation + year); 2/12 title/year match but PSIT not in Crossref's deposited affiliation (probably the Europe PMC route — NOT confirmed). The "793 is a floor" framing is correct and honest. NAAC-SSR inconsistency table (590 vs 117 UGC-CARE papers) is the most valuable finding for the student; keep it prominent.
+- OpenAlex/Semantic Scholar/Crossref/DBLP rate limits were hit by our own sessions (OpenAlex free daily budget shows $0 for this IP until 00:00 UTC). Do NOT hammer public APIs again; cache and back off. Do NOT sign up for API keys with the student's email — that is the student's decision.
+- S3: Phase 1 reported complete; keep Phase 2 locked. S2: 271 verified citations, CANDIDATES.md exists; waiting for NOVELTY-CHECK.md + SELECTED.md + PROPOSAL.md. I will review them and decide the topic myself.

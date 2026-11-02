@@ -1,0 +1,28 @@
+{
+  "command": "python.exe 04_experiments/toy/run_toy.py",
+  "config_name": "toy_ours",
+  "config_sha256": "8b9b51ab6988ec82955b39d84787b4ca3645d1b5e07a0caf68e2782750dc0ec3",
+  "cpu_count": 14,
+  "device": "cpu",
+  "duration_s": 0.1187,
+  "env": {
+    "PYTHONHASHSEED": "0",
+    "PYTHONIOENCODING": "utf-8",
+    "PYTHONUTF8": "1"
+  },
+  "experiment": "toy",
+  "finished_at": "2026-11-02T21:09:32Z",
+  "git_commit": "71afecb",
+  "git_dirty": true,
+  "host": "DESKTOP-4INP19J",
+  "notes": "TOY - NOT A RESULT; synthetic blobs; seed 0",
+  "peak_rss_mb": 35.621,
+  "platform": "Windows-10-10.0.26300-SP0",
+  "python": "3.11.15",
+  "run_id": "20261102T210932Z_toy_ours_71afecb",
+  "schema": "run/1",
+  "seed": 0,
+  "started_at": "2026-11-02T21:09:32Z",
+  "status": "ok",
+  "toy": true
+}

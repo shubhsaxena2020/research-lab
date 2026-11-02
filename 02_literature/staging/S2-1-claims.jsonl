@@ -1,0 +1,67 @@
+{"title": "ReAct: Synergizing Reasoning and Acting in Language Models", "year": "2022", "doi_or_arxiv": "arXiv:2210.03629"}
+{"title": "Toolformer: Language Models Can Teach Themselves to Use Tools", "year": "2023", "doi_or_arxiv": "arXiv:2302.04761"}
+{"title": "WebArena: A Realistic Web Environment for Building Autonomous Agents", "year": "2023", "doi_or_arxiv": "arXiv:2307.13854"}
+{"title": "AgentBench: Evaluating LLMs as Agents", "year": "2023", "doi_or_arxiv": "arXiv:2308.03688"}
+{"title": "$τ$-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains", "year": "2024", "doi_or_arxiv": "arXiv:2406.12045"}
+{"title": "Why Do Multi-Agent LLM Systems Fail?", "year": "2025", "doi_or_arxiv": "arXiv:2503.13657"}
+{"title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks", "year": "2020", "doi_or_arxiv": "arXiv:2005.11401"}
+{"title": "Lost in the Middle: How Language Models Use Long Contexts", "year": "2023", "doi_or_arxiv": "arXiv:2307.03172"}
+{"title": "Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection", "year": "2023", "doi_or_arxiv": "arXiv:2310.11511"}
+{"title": "From Local to Global: A Graph RAG Approach to Query-Focused Summarization", "year": "2024", "doi_or_arxiv": "arXiv:2404.16130"}
+{"title": "MemGPT: Towards LLMs as Operating Systems", "year": "2023", "doi_or_arxiv": "arXiv:2310.08560"}
+{"title": "LongMemEval: Benchmarking Chat Assistants on Long-Term Interactive Memory", "year": "2024", "doi_or_arxiv": "arXiv:2410.10813"}
+{"title": "MMLU-Pro: A More Robust and Challenging Multi-Task Language Understanding Benchmark", "year": "2024", "doi_or_arxiv": "arXiv:2406.01574"}
+{"title": "BetterBench: Assessing AI Benchmarks, Uncovering Issues, and Establishing Best Practices", "year": "2024", "doi_or_arxiv": "arXiv:2411.12990"}
+{"title": "Adding Error Bars to Evals: A Statistical Approach to Language Model Evaluations", "year": "2024", "doi_or_arxiv": "arXiv:2411.00640"}
+{"title": "The Leaderboard Illusion", "year": "2025", "doi_or_arxiv": "arXiv:2504.20879"}
+{"title": "Investigating Data Contamination in Modern Benchmarks for Large Language Models", "year": "2023", "doi_or_arxiv": "arXiv:2311.09783"}
+{"title": "Scaling LLM Test-Time Compute Optimally can be More Effective than Scaling Model Parameters", "year": "2024", "doi_or_arxiv": "arXiv:2408.03314"}
+{"title": "Large Language Models Cannot Self-Correct Reasoning Yet", "year": "2023", "doi_or_arxiv": "arXiv:2310.01798"}
+{"title": "s1: Simple test-time scaling", "year": "2025", "doi_or_arxiv": "arXiv:2501.19393"}
+{"title": "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning", "year": "2025", "doi_or_arxiv": "10.1038/s41586-025-09422-z"}
+{"title": "The Illusion of Thinking: Understanding the Strengths and Limitations of Reasoning Models via the Lens of Problem Complexity", "year": "2025", "doi_or_arxiv": "arXiv:2506.06941"}
+{"title": "To CoT or not to CoT? Chain-of-thought helps mainly on math and symbolic reasoning", "year": "2024", "doi_or_arxiv": "arXiv:2409.12183"}
+{"title": "Phi-3 Technical Report: A Highly Capable Language Model Locally on Your Phone", "year": "2024", "doi_or_arxiv": "arXiv:2404.14219"}
+{"title": "Qwen2.5 Technical Report", "year": "2024", "doi_or_arxiv": "arXiv:2412.15115"}
+{"title": "SmolLM2: When Smol Goes Big -- Data-Centric Training of a Small Language Model", "year": "2025", "doi_or_arxiv": "arXiv:2502.02737"}
+{"title": "MobileLLM: Optimizing Sub-billion Parameter Language Models for On-Device Use Cases", "year": "2024", "doi_or_arxiv": "arXiv:2402.14905"}
+{"title": "AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration", "year": "2023", "doi_or_arxiv": "arXiv:2306.00978"}
+{"title": "Universal and Transferable Adversarial Attacks on Aligned Language Models", "year": "2023", "doi_or_arxiv": "arXiv:2307.15043"}
+{"title": "Not what you've signed up for: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection", "year": "2023", "doi_or_arxiv": "arXiv:2302.12173"}
+{"title": "InjecAgent: Benchmarking Indirect Prompt Injections in Tool-Integrated Large Language Model Agents", "year": "2024", "doi_or_arxiv": "arXiv:2403.02691"}
+{"title": "AgentDojo: A Dynamic Environment to Evaluate Prompt Injection Attacks and Defenses for LLM Agents", "year": "2024", "doi_or_arxiv": "arXiv:2406.13352"}
+{"title": "The Instruction Hierarchy: Training LLMs to Prioritize Privileged Instructions", "year": "2024", "doi_or_arxiv": "arXiv:2404.13208"}
+{"title": "Refusal in Language Models Is Mediated by a Single Direction", "year": "2024", "doi_or_arxiv": "arXiv:2406.11717"}
+{"title": "IndicTrans2: Towards High-Quality and Accessible Machine Translation Models for all 22 Scheduled Indian Languages", "year": "2023", "doi_or_arxiv": "arXiv:2305.16307"}
+{"title": "MILU: A Multi-task Indic Language Understanding Benchmark", "year": "2024", "doi_or_arxiv": "arXiv:2411.02538"}
+{"title": "M3Exam: A Multilingual, Multimodal, Multilevel Benchmark for Examining Large Language Models", "year": "2023", "doi_or_arxiv": "arXiv:2306.05179"}
+{"title": "The Belebele Benchmark: a Parallel Reading Comprehension Dataset in 122 Language Variants", "year": "2023", "doi_or_arxiv": "10.18653/v1/2024.acl-long.44"}
+{"title": "INCLUDE: Evaluating Multilingual Language Understanding with Regional Knowledge", "year": "2024", "doi_or_arxiv": "arXiv:2411.19799"}
+{"title": "Fraud-R1 : A Multi-Round Benchmark for Assessing the Robustness of LLM Against Augmented Fraud and Phishing Inducements", "year": "2025", "doi_or_arxiv": "arXiv:2502.12904"}
+{"title": "PhishAgent: A Robust Multimodal Agent for Phishing Webpage Detection", "year": "2024", "doi_or_arxiv": "arXiv:2408.10738"}
+{"title": "Phishing Email Detection Using Large Language Models", "year": "2025", "doi_or_arxiv": "arXiv:2512.10104"}
+{"title": "Can LLM-Generated Misinformation Be Detected?", "year": "2023", "doi_or_arxiv": "arXiv:2309.13788"}
+{"title": "An Empirical Analysis of SMS Scam Detection Systems", "year": "2022", "doi_or_arxiv": "arXiv:2210.10451"}
+{"title": "SWE-bench: Can Language Models Resolve Real-World GitHub Issues?", "year": "2023", "doi_or_arxiv": "arXiv:2310.06770"}
+{"title": "Evaluating Large Language Models Trained on Code", "year": "2021", "doi_or_arxiv": "arXiv:2107.03374"}
+{"title": "Is Your Code Generated by ChatGPT Really Correct? Rigorous Evaluation of Large Language Models for Code Generation", "year": "2023", "doi_or_arxiv": "arXiv:2305.01210"}
+{"title": "Agentless: Demystifying LLM-based Software Engineering Agents", "year": "2024", "doi_or_arxiv": "arXiv:2407.01489"}
+{"title": "CRUXEval: A Benchmark for Code Reasoning, Understanding and Execution", "year": "2024", "doi_or_arxiv": "arXiv:2401.03065"}
+{"title": "LiveCodeBench: Holistic and Contamination Free Evaluation of Large Language Models for Code", "year": "2024", "doi_or_arxiv": "arXiv:2403.07974"}
+{"title": "Textbooks Are All You Need", "year": "2023", "doi_or_arxiv": "arXiv:2306.11644"}
+{"title": "LIMA: Less Is More for Alignment", "year": "2023", "doi_or_arxiv": "arXiv:2305.11206"}
+{"title": "Self-Instruct: Aligning Language Models with Self-Generated Instructions", "year": "2022", "doi_or_arxiv": "arXiv:2212.10560"}
+{"title": "Magpie: Alignment Data Synthesis from Scratch by Prompting Aligned LLMs with Nothing", "year": "2024", "doi_or_arxiv": "arXiv:2406.08464"}
+{"title": "The Curse of Recursion: Training on Generated Data Makes Models Forget", "year": "2023", "doi_or_arxiv": "arXiv:2305.17493"}
+{"title": "Language Models (Mostly) Know What They Know", "year": "2022", "doi_or_arxiv": "arXiv:2207.05221"}
+{"title": "Semantic Uncertainty: Linguistic Invariances for Uncertainty Estimation in Natural Language Generation", "year": "2023", "doi_or_arxiv": "arXiv:2302.09664"}
+{"title": "Just Ask for Calibration: Strategies for Eliciting Calibrated Confidence Scores from Language Models Fine-Tuned with Human Feedback", "year": "2023", "doi_or_arxiv": "arXiv:2305.14975"}
+{"title": "SelfCheckGPT: Zero-Resource Black-Box Hallucination Detection for Generative Large Language Models", "year": "2023", "doi_or_arxiv": "arXiv:2303.08896"}
+{"title": "AbstentionBench: Reasoning LLMs Fail on Unanswerable Questions", "year": "2025", "doi_or_arxiv": "arXiv:2506.09038"}
+{"title": "Know Your Limits: A Survey of Abstention in Large Language Models", "year": "2024", "doi_or_arxiv": "arXiv:2407.18418"}
+{"title": "Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena", "year": "2023", "doi_or_arxiv": "arXiv:2306.05685"}
+{"title": "Chatbot Arena: An Open Platform for Evaluating LLMs by Human Preference", "year": "2024", "doi_or_arxiv": "arXiv:2403.04132"}
+{"title": "Prometheus 2: An Open Source Language Model Specialized in Evaluating Other Language Models", "year": "2024", "doi_or_arxiv": "arXiv:2405.01535"}
+{"title": "G-Eval: NLG Evaluation using GPT-4 with Better Human Alignment", "year": "2023", "doi_or_arxiv": "arXiv:2303.16634"}
+{"title": "Large Language Models are not Fair Evaluators", "year": "2023", "doi_or_arxiv": "arXiv:2305.17926"}
+{"title": "The PRISM Alignment Dataset: What Participatory, Representative and Individualised Human Feedback Reveals About the Subjective and Multicultural Alignment of Large Language Models", "year": "2024", "doi_or_arxiv": "arXiv:2404.16019"}

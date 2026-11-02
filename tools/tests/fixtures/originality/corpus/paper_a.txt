@@ -1,0 +1,10 @@
+SYNTHETIC FIXTURE -- fabricated prose written for this test, not an excerpt from any
+publication. It exists only to exercise tools/originality_check.py.
+
+The proposed retrieval pipeline encodes each document into a dense vector and
+compares candidate passages with a cosine similarity threshold. That threshold is
+tuned on the development split before any test evaluation is performed, and the
+tuning script is committed alongside the run metadata.
+
+Annotation was carried out by two raters who labelled every third item and then
+discussed disagreements until a consensus label was recorded for the analysis.

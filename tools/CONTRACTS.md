@@ -161,3 +161,40 @@ Every tool: `python tools/<tool>.py --help` works; exit code 0 = pass, 1 = findi
 repo root. No tool makes a network call unless the flag `--online` is passed (default offline,
 so tests and CI never hit the network). Polite by default: 1 request/second/host, descriptive
 User-Agent, exponential backoff on 429/5xx (30/60/120 s, max 3 attempts).
+
+---
+
+## 7. Addendum — things learned by running the toolchain (2026-11-03)
+
+**7.1 An index entry may point at a config file.** The schema in §3 says `file` is a results
+file; in practice protocol constants (learning rate, epochs, points per class, number of
+seeds) are not *results*, they are *settings*, and their evidence is the config that was
+actually used. Pointing the entry at `04_experiments/harness/configs/<name>.json` keeps them
+traceable to committed evidence instead of exempting them. `run_id` is optional for such
+entries. `aggregate.py` preserves hand-added entries whose ids it does not own — verified by
+re-running it and confirming `toy.protocol.*` survives.
+
+**7.2 Free bibliographic APIs are not always available.** From this network on 2026-11-03,
+OpenAlex answered `429` with `Retry-After: 15859` (per-IP credit exhausted) and Semantic
+Scholar answered `429` as well; Crossref, arXiv and DataCite were healthy. Consequences baked
+into the tools:
+
+- title search order is Crossref bibliographic → OpenAlex → Semantic Scholar;
+- `404` from Crossref for a DOI falls through to DataCite (arXiv's `10.48550/*` DOIs are
+  registered there, not with Crossref);
+- a `429` whose `Retry-After` exceeds 120 s marks that host exhausted **for the rest of the
+  run** rather than sleeping through the 30/60/120 ladder, which is both pointless and
+  impolite;
+- the report records `sources_unavailable`, so a run that only looked at two of four indexes
+  says so instead of implying a thorough search.
+
+**7.3 `ERROR` is a first-class status.** A network failure must never render as `NOT_FOUND`
+("this paper does not exist") or as `VERIFIED`. `verify_citations.py` converts a
+`NOT_FOUND`-with-transport-errors into `ERROR`, and `ERROR` never counts toward the verified
+total.
+
+**7.4 Toy artefacts are refused by default.** `check_numbers.py --allow-toy`,
+`make_figures.py --allow-toy` and `make_digest.py` all refuse numbers whose index entry is
+marked `"toy": true` unless told otherwise; `make_tables.py` refuses a toy summary
+unconditionally, because a paper table is exactly where a toy number would slip through.
+

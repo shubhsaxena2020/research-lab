@@ -1,0 +1,320 @@
+% =============================================================================
+%  main.tex -- venue-agnostic paper skeleton (article class)
+%
+%  What this is
+%    A self-contained skeleton that compiles with a stock TeX Live install.
+%    It is NOT a venue template: it has no venue-specific layout, page limit or
+%    reference style. For IEEE / ACL / NeurIPS, read README.md and the stubs in
+%    ieee/ and acl/.
+%
+%  How to use
+%    1. Replace every \fillme{...} box with real prose. Nothing else in this
+%       file is allowed to be vague at submission time.
+%    2. Resolve every "% TODO(...)" comment (`grep -n TODO main.tex`).
+%    3. Never type a number by hand. Every number must come from
+%       04_experiments/RESULTS-INDEX.json and carry a "% num:<id>" comment on
+%       the line immediately above it (tools/CONTRACTS.md section 3).
+%    4. Never add a citation that is not in 02_literature/verified_citations.csv
+%       (RULES.md #1). refs.bib ships with zero active entries on purpose.
+%    5. Tables and figures are generated, not typed: run
+%          python tables/make_tables.py  ...
+%          python figures/make_figures.py ...
+%       The \input blocks below pick the generated files up automatically and
+%       fall back to a visible placeholder when they are missing.
+%
+%  Compile
+%    ./build.sh          (needs latexmk + TeX Live; see BUILD.md)
+%    This file has NOT been compiled in the repo's build environment (no LaTeX
+%    installed there). See BUILD.md, "Verified status".
+% =============================================================================
+
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+
+% -----------------------------------------------------------------------------
+% Macros. Define the method name once; rename it here only.
+% TODO(name): replace with the method's real name. Do not name a method after
+% a dataset or benchmark you did not build.
+% -----------------------------------------------------------------------------
+\newcommand{\method}{TODO-Method-Name}
+
+% Visible placeholder. Every \fillme{...} must be gone before submission;
+% tools/check_numbers.py and the repo linter grep for it.
+\newcommand{\fillme}[1]{%
+  \par\noindent\fbox{\parbox{0.96\linewidth}{\small\textbf{TODO} --- #1}}\par}
+
+% Fenced code / command in running text.
+\newcommand{\code}[1]{\texttt{#1}}
+
+% -----------------------------------------------------------------------------
+% Title block
+% -----------------------------------------------------------------------------
+\title{%
+  TODO(title): a specific, falsifiable title.\\
+  \large TODO(subtitle, optional): the claim in one clause, no adjectives.%
+}
+
+\author{%
+  TODO(Author One)\thanks{Corresponding author: TODO(email).} \and
+  TODO(Author Two)\thanks{%
+    \textbf{Use of AI tools.} TODO(disclosure): name each tool and version, the
+    sections it touched, and what it was used for (e.g.\ language editing of
+    Section~\ref{sec:related}, or an outline the author rewrote). This
+    disclosure is written to satisfy the target venue's policy on AI-assisted
+    writing; TODO(venue): name the venue, quote the policy URL and add the
+    date it was retrieved (starting points: 00\_foundations/ETHICS-AND-AI-USE.md).
+    TODO(verify at drafting time): the following three sentences are the target
+    state, not a verified fact about this paper --- do not let them stand unless
+    each is true on the day of submission, and delete any that is not.
+    (i) no AI tool produced data, results, figures or references;
+    (ii) every citation was resolved and recorded in
+    \code{02\_literature/verified\_citations.csv};
+    (iii) the tools are not authors because they cannot take responsibility for
+    the work. See Section~\ref{sec:ethics}.}%
+}
+
+\date{TODO(date): submission date, or leave empty for \texttt{\textbackslash today}}
+
+\begin{document}
+\maketitle
+
+% -----------------------------------------------------------------------------
+\begin{abstract}
+% TODO(abstract): 150-250 words, written last, containing exactly: the problem,
+% what was done, the headline number (marked with % num:<id>), and the main
+% limitation. No citations, no undefined acronyms, no "state of the art".
+\fillme{Abstract: problem (1 sentence) / method (1 sentence) / headline result
+with its index id / limitation (1 sentence).}
+\end{abstract}
+
+% -----------------------------------------------------------------------------
+\section{Introduction}
+\label{sec:intro}
+
+% TODO(intro-p1): the problem, in plain language, for a reader outside the
+% subfield. One concrete example beats three general sentences.
+% TODO(intro-p2): what is missing in existing work -- this sets up
+% Section~\ref{sec:related}. Cite only verified keys.
+% TODO(intro-p3): what this paper does, one sentence per contribution, each
+% contribution mapped to a section or a table.
+% TODO(intro-p4): the headline result, with its "% num:<id>" marker, and the
+% single most important caveat (do not bury it in Section~\ref{sec:limitations}).
+
+\fillme{Introduction: problem / gap / contributions / headline result.}
+
+% -----------------------------------------------------------------------------
+\section{Related Work}
+\label{sec:related}
+
+% TODO(related): organise by *idea*, not by paper. For each cluster: what the
+% cluster assumes, where it breaks, and how this work differs. Every sentence
+% that names prior work must carry a \citep{} whose key exists in
+% 02_literature/verified_citations.csv. If you cannot verify a citation, drop
+% the sentence (RULES.md #1).
+% TODO(related-delta): one explicit paragraph "how this differs", because a
+% reviewer will look for it first.
+
+\fillme{Related Work: 2-4 thematic clusters, then an explicit delta paragraph.}
+
+% -----------------------------------------------------------------------------
+\section{Method}
+\label{sec:method}
+
+% TODO(method-setup): notation table or a short paragraph fixing symbols.
+% TODO(method-core): the method itself, in the order a reader must understand
+% it. Every design choice needs a reason or a pointer to an ablation
+% (Table~\ref{tab:ablation}).
+% TODO(method-complexity): cost, in time and memory, measured -- not estimated.
+
+\fillme{Method: setup and notation, the method, and its cost.}
+
+\begin{equation}
+\label{eq:objective}
+  \mathcal{L}(\theta) = \underbrace{\frac{1}{N}\sum_{i=1}^{N}\ell\big(f_\theta(x_i), y_i\big)}_{\text{data term}}
+  + \lambda\,\underbrace{\Omega(\theta)}_{\text{regulariser}}
+\end{equation}
+
+% TODO(eq:objective): replace Equation~\ref{eq:objective} with the real
+% objective, or delete it. Keep the label if other text references it.
+
+% -----------------------------------------------------------------------------
+\section{Experiments}
+\label{sec:exp}
+
+% TODO(exp-data): datasets, splits, sizes, and the licence/access route for each
+% (public data only -- RULES.md #6).
+% TODO(exp-baselines): each baseline and why it is the right comparison; state
+% whether you re-ran it or copied the number, and if copied, from where.
+% TODO(exp-protocol): seeds, number of runs, hardware, wall-clock, and the exact
+% command. This paragraph must match 04_experiments/PROTOCOL.md.
+% TODO(exp-metrics): what is measured and in which direction is better.
+
+\fillme{Experiments: data / baselines / protocol (seeds, runs, command) / metrics.}
+
+\subsection{Implementation details}
+\label{sec:impl}
+
+% TODO(impl): framework versions, hyperparameters (Appendix~\ref{app:hparams}),
+% and the commit hash the numbers came from.
+
+\fillme{Implementation details: versions, hyperparameters, commit hash.}
+
+% -----------------------------------------------------------------------------
+\section{Results}
+\label{sec:results}
+
+% TODO(results-p1): answer the research question in one paragraph before any
+% table. Then point at Table~\ref{tab:main-results} and
+% Figure~\ref{fig:main-accuracy}. Numbers come from the generated files; do not
+% retype them.
+% TODO(results-p2): the ablation (Table~\ref{tab:ablation}) -- what each
+% component contributes, and what did NOT help.
+% TODO(results-negative): negative and null results belong here, stated plainly.
+
+\fillme{Results: the answer first, then the evidence, then what did not work.}
+
+% --- Table 1: generated by tables/make_tables.py from a summary_*.json -------
+% The caption and label live here so that the generated file stays a pure
+% tabular body and labels cannot collide. Paths are relative to this directory.
+\begin{table}[t]
+  \centering
+  \caption{%
+    TODO(caption): what is compared, on what data, over how many seeds, and what
+    the interval means. Example shape: ``Test accuracy on TODO(dataset);
+    mean $\pm$ standard deviation over $n$ seeds; 95\% CI is a bootstrap
+    interval.'' Every number in this table is generated from
+    \code{04\_experiments/results/summary\_TODO.json}.}
+  \label{tab:main-results}
+  \IfFileExists{tables/generated/main-results.tex}{%
+    \input{tables/generated/main-results.tex}%
+  }{%
+    \fbox{\parbox{0.9\linewidth}{\small No generated table yet. Run
+      \code{python tables/make\_tables.py --summary
+      04\_experiments/results/summary\_TODO.json --out-dir tables/generated
+      -{}-name main-results}.}}%
+  }
+\end{table}
+
+% --- Figure 1: generated by figures/make_figures.py --------------------------
+\begin{figure}[t]
+  \centering
+  \IfFileExists{figures/generated/main-accuracy.tex}{%
+    \input{figures/generated/main-accuracy.tex}%
+  }{%
+    \fbox{\parbox[c][4cm][c]{0.8\linewidth}{\centering\small No generated
+      figure yet. Run \code{python figures/make\_figures.py --index
+      04\_experiments/RESULTS-INDEX.json --figure main-accuracy
+      -{}-out-dir figures/generated}.}}%
+  }
+  \caption{%
+    TODO(caption): what the axes are, what the bars/points are, and the one
+    thing the reader should notice. State the unit and the uncertainty.}
+  \label{fig:main-accuracy}
+\end{figure}
+
+% --- Table 2: hand-written example of the booktabs style ---------------------
+% Keep this table only if you have an ablation; otherwise delete it and its
+% reference in the text. Placeholder cells say TODO on purpose -- no invented
+% numbers are allowed anywhere in this repo.
+\begin{table}[t]
+  \centering
+  \caption{%
+    TODO(caption): ablation -- which component is removed in each row and what
+    that costs. Same data, same seeds, same protocol as
+    Table~\ref{tab:main-results}.}
+  \label{tab:ablation}
+  \begin{tabular}{lcc}
+    \toprule
+    Variant & TODO(metric) & $\Delta$ vs.\ full \\
+    \midrule
+    \method{} (full)          & TODO(value) & --- \\
+    \hspace{1em}-- without TODO(part A) & TODO(value) & TODO(delta) \\
+    \hspace{1em}-- without TODO(part B) & TODO(value) & TODO(delta) \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+% -----------------------------------------------------------------------------
+\section{Limitations}
+\label{sec:limitations}
+
+% TODO(limitations): the honest list. For each: what it is, who it affects, and
+% what would fix it. Cover at least: data coverage, compute budget, number of
+% seeds and what that means for the confidence intervals, and any claim in the
+% abstract that the evidence only partly supports. Reviewers read this section
+% first; an empty one is a rejection reason.
+
+\fillme{Limitations: data, compute, statistics, scope. Name the claim you cannot
+fully support.}
+
+% -----------------------------------------------------------------------------
+\section{Ethics Statement}
+\label{sec:ethics}
+
+% TODO(ethics): (a) human subjects / personal data -- say ``none'' if none;
+% (b) licences of every dataset and model used; (c) foreseeable misuse;
+% (d) the AI-assistance disclosure, which must match the footnote on the title
+% page exactly, and must follow the target venue's policy rather than a generic
+% one (IEEE and ACL put it in the Acknowledgements; ACM asks in the methods and
+% only for research use; NeurIPS asks in the checklist). Sources:
+% 00_foundations/ETHICS-AND-AI-USE.md.
+
+\fillme{Ethics: data and licences, misuse, and the AI-assistance statement
+(cross-reference the footnote on page~1; keep the two texts identical).}
+
+% -----------------------------------------------------------------------------
+\section{Reproducibility Statement}
+\label{sec:repro}
+
+% TODO(repro): where the code, configs and run logs live; the exact commands;
+% the seeds; what is released and what cannot be (and why). Give one command
+% that reproduces Table~\ref{tab:main-results}, and state the tolerance at
+% which a rerun counts as reproducing the number.
+
+\fillme{Reproducibility: repo path, command, seeds, released artefacts, rerun
+tolerance.}
+
+% -----------------------------------------------------------------------------
+\section{Conclusion}
+\label{sec:conclusion}
+
+% TODO(conclusion): what is now known that was not known before, in two
+% sentences, calibrated to the evidence (no ``state of the art''; RULES.md #5).
+% Then the single most useful next experiment.
+
+\fillme{Conclusion: what is now known, and the next experiment worth running.}
+
+% -----------------------------------------------------------------------------
+% References. refs.bib ships with ZERO active entries: entries may only be
+% added from 02_literature/verified_citations.csv. To populate it:
+%   python tools/citations_to_bib.py --csv 02_literature/verified_citations.csv \
+%          --out refs.generated.bib
+% then either append refs.generated.bib to refs.bib or change the line below to
+%   \bibliography{refs,refs.generated}
+% An empty bibliography produces "no \citation" warnings -- that is expected
+% for an empty skeleton and not an error.
+\bibliographystyle{plainnat}
+\bibliography{refs}
+
+% -----------------------------------------------------------------------------
+\appendix
+\section{Hyperparameters}
+\label{app:hparams}
+
+% TODO(appendix): every hyperparameter, its search range, and the selected
+% value. Copy from the config JSON, do not retype from memory.
+
+\fillme{Appendix: full hyperparameter table, search ranges, selected values.}
+
+\end{document}

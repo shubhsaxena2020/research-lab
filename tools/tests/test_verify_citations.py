@@ -510,3 +510,38 @@ class TestOutputs(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
+
+
+class TestS2RegisterSchema(unittest.TestCase):
+    """S2 writes a different column set; the same tool must read it (DIRECTIVES cross-session
+    alignment: one canonical verifier, no divergent second pipeline)."""
+
+    S2_CSV = (
+        "id,title,authors,year,venue,url,doi_or_arxiv,retrieved_on,verified_by_command\n"
+        "memgpt-towards-llms-as-operating-systems,MemGPT: Towards LLMs as Operating Systems,"
+        '"Charles Packer; Sarah Wooders",2023,arXiv preprint,https://arxiv.org/abs/2310.08560,'
+        "arXiv:2310.08560,2026-11-03,x\n"
+        "some-journal-paper,A Journal Paper,\"A. Author\",2020,Some Venue,"
+        "https://doi.org/10.1000/ABC.42,,2026-11-03,x\n"
+    )
+
+    def test_reads_s2_columns(self):
+        with tempfile.TemporaryDirectory() as td:
+            p = Path(td) / "s2.csv"
+            p.write_text(self.S2_CSV, encoding="utf-8")
+            recs = vc.load_records(p)
+        self.assertEqual(len(recs), 2)
+        self.assertEqual(recs[0].key, "memgpt-towards-llms-as-operating-systems")
+        self.assertEqual(recs[0].arxiv_id, "2310.08560")
+        self.assertIsNone(recs[0].doi)
+        # a doi_or_arxiv cell holding a DOI URL must come out as a normalised DOI
+        self.assertEqual(recs[1].doi, "10.1000/abc.42")
+        self.assertIsNone(recs[1].arxiv_id)
+        self.assertEqual(len(recs[0].authors), 2)
+
+    def test_utf8_bom_header_is_tolerated(self):
+        with tempfile.TemporaryDirectory() as td:
+            p = Path(td) / "bom.csv"
+            p.write_text("\ufeff" + self.S2_CSV, encoding="utf-8")
+            recs = vc.load_records(p)
+        self.assertEqual(recs[0].title, "MemGPT: Towards LLMs as Operating Systems")

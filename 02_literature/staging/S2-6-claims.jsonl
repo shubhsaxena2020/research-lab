@@ -1,0 +1,26 @@
+{"title": "IndicNLPSuite: Monolingual Corpora, Evaluation Benchmarks and Pre-trained Multilingual Language Models for Indian Languages", "year": "2020", "doi_or_arxiv": "10.18653/v1/2020.findings-emnlp.445"}
+{"title": "Towards Leaving No Indic Language Behind: Building Monolingual Corpora, Benchmark and Models for Indic Languages", "year": "2023", "doi_or_arxiv": "10.18653/v1/2023.acl-long.693"}
+{"title": "Samanantar : The Largest Publicly Available Parallel Corpora Collection for 11 Indic Languages", "year": "2022", "doi_or_arxiv": "10.1162/tacl_a_00452"}
+{"title": "MILU: A Multi-task Indic Language Understanding Benchmark", "year": "2025", "doi_or_arxiv": "10.18653/v1/2025.naacl-long.507"}
+{"title": "IndicGenBench: A Multilingual Benchmark to Evaluate Generation Capabilities of LLMs on Indic Languages", "year": "2024", "doi_or_arxiv": "10.18653/v1/2024.acl-long.595"}
+{"title": "IndicNLG Benchmark: Multilingual Datasets for Diverse NLG Tasks in Indic Languages", "year": "2022", "doi_or_arxiv": "10.18653/v1/2022.emnlp-main.360"}
+{"title": "INDIC QA BENCHMARK: A Multilingual Benchmark to Evaluate Question Answering capability of LLMs for Indic Languages", "year": "2025", "doi_or_arxiv": "10.18653/v1/2025.findings-naacl.141"}
+{"title": "XL-Sum: Large-Scale Multilingual Abstractive Summarization for 44 Languages", "year": "2021", "doi_or_arxiv": "10.18653/v1/2021.findings-acl.413"}
+{"title": "The Belebele Benchmark: a Parallel Reading Comprehension Dataset in 122 Language Variants", "year": "2024", "doi_or_arxiv": "10.18653/v1/2024.acl-long.44"}
+{"title": "TyDi QA: A Benchmark for Information-Seeking Question Answering in Typologically Diverse Languages", "year": "2020", "doi_or_arxiv": "10.1162/tacl_a_00317"}
+{"title": "Scaling neural machine translation to 200 languages", "year": "2024", "doi_or_arxiv": "10.1038/s41586-024-07335-x"}
+{"title": "Do All Languages Cost the Same? Tokenization in the Era of Commercial Language Models", "year": "2023", "doi_or_arxiv": "10.18653/v1/2023.emnlp-main.614"}
+{"title": "How Good is Your Tokenizer? On the Monolingual Performance of Multilingual Language Models", "year": "2021", "doi_or_arxiv": "10.18653/v1/2021.acl-long.243"}
+{"title": "Accelerating Multilingual Language Model for Excessively Tokenized Languages", "year": "2024", "doi_or_arxiv": "10.18653/v1/2024.findings-acl.660"}
+{"title": "GLUECoS: An Evaluation Benchmark for Code-Switched NLP", "year": "2020", "doi_or_arxiv": "10.18653/v1/2020.acl-main.329"}
+{"title": "Aksharantar: Open Indic-language Transliteration datasets and models for the Next Billion Users", "year": "2023", "doi_or_arxiv": "10.18653/v1/2023.findings-emnlp.4"}
+{"title": "Bhasa-Abhijnaanam: Native-script and romanized Language Identification for 22 Indic languages", "year": "2023", "doi_or_arxiv": "10.18653/v1/2023.acl-short.71"}
+{"title": "Global MMLU: Understanding and Addressing Cultural and Linguistic Biases in Multilingual Evaluation", "year": "2025", "doi_or_arxiv": "10.18653/v1/2025.acl-long.919"}
+{"title": "IndicMMLU-Pro: Benchmarking Indic Large Language Models on Multi-Task Language Understanding", "year": "2026", "doi_or_arxiv": "10.18653/v1/2026.gem-main.10"}
+{"title": "Multilingual Retrieval-Augmented Generation for Knowledge-Intensive Question Answering Task", "year": "2026", "doi_or_arxiv": "10.18653/v1/2026.findings-eacl.35"}
+{"title": "Answering the Unanswerable Is to Err Knowingly: Analyzing and Mitigating Abstention Failures in Large Reasoning Models", "year": "2026", "doi_or_arxiv": "10.1609/aaai.v40i38.40496"}
+{"title": "Recognition-Refusal Misalignment in LLMs: Why Models Answer Structurally Unanswerable Questions", "year": "2026", "doi_or_arxiv": "10.18653/2026.emnlp-main.1078"}
+{"title": "Multilingual Tokenization through the Lens of Indian Languages: Challenges and Insights", "year": "2026", "doi_or_arxiv": "10.18653/v1/2026.findings-acl.1632"}
+{"title": "IndicParam: Benchmark to evaluate LLMs on low-resource Indic Languages", "year": "2026", "doi_or_arxiv": "10.18653/2026.emnlp-main.250"}
+{"title": "Language-agnostic BERT Sentence Embedding", "year": "2020", "doi_or_arxiv": "arXiv:2007.01852"}
+{"title": "M3Exam: A Multilingual, Multimodal, Multilevel Benchmark for Examining Large Language Models", "year": "2023", "doi_or_arxiv": "arXiv:2306.05179"}

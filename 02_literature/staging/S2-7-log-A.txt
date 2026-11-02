@@ -1,0 +1,6 @@
+  429 on arxiv; backoff 5s
+  429 on arxiv; backoff 10s
+  429 on arxiv; backoff 20s
+  429 on arxiv; backoff 40s
+{"VERIFIED": 19, "MISMATCH": 0, "FAIL": 0, "DUPLICATE": 0}
+EXIT 0 rows=19

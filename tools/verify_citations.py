@@ -47,7 +47,7 @@ from typing import Callable, Dict, List, Optional, Tuple
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from lib import matchlib, netcache                      # noqa: E402
+from lib import citation_schema, matchlib, netcache      # noqa: E402
 from lib.bibtex_min import bibtex_to_records            # noqa: E402
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -91,8 +91,27 @@ class Record:
         return f"<Record {self.key!r} doi={self.doi!r} arxiv={self.arxiv_id!r}>"
 
 
+def _norm_row(r: dict) -> dict:
+    """Map a citation CSV row onto the internal record fields.
+
+    Delegates to `lib.citation_schema.normalize_row` so that this tool, `claims_audit.py` and
+    `05_paper/template/tools/citations_to_bib.py` cannot drift apart again: S2's register
+    (`id,...,doi_or_arxiv,...`) and S3's older 12-column form both normalise identically.
+    """
+    n = citation_schema.normalize_row({k: v for k, v in r.items() if k})
+    return {
+        "key": n["key"] or "",
+        "title": n["title"] or "",
+        "authors": n["authors"] or "",
+        "year": n["year"] or "",
+        "doi": n["doi"] or "",
+        "arxiv_id": n["arxiv_id"] or "",
+        "venue": n["venue"] or "",
+    }
+
+
 def load_records(path: Path) -> List[Record]:
-    text = path.read_text(encoding="utf-8")
+    text = path.read_text(encoding="utf-8-sig")
     if path.suffix.lower() == ".bib" or text.lstrip().startswith("@"):
         rows = bibtex_to_records(text)
     else:
@@ -100,22 +119,23 @@ def load_records(path: Path) -> List[Record]:
     records: List[Record] = []
     seen = set()
     for i, r in enumerate(rows):
-        key = (r.get("key") or "").strip() or f"row{i+1}"
+        row = _norm_row(r)
+        key = row["key"] or f"row{i+1}"
         if key in seen:
             print(f"warning: duplicate key {key!r} — keeping the first", file=sys.stderr)
             continue
         seen.add(key)
-        year_raw = str(r.get("year") or "").strip()
+        year_raw = str(row.get("year") or "").strip()
         year = int(year_raw) if re.fullmatch(r"\d{4}", year_raw) else None
         records.append(
             Record(
                 key=key,
-                title=(r.get("title") or "").strip(),
-                authors=matchlib.split_authors(r.get("authors") or ""),
+                title=row["title"],
+                authors=matchlib.split_authors(row["authors"]),
                 year=year,
-                doi=netcache.normalize_doi(r.get("doi") or ""),
-                arxiv_id=netcache.normalize_arxiv_id(r.get("arxiv_id") or r.get("eprint") or ""),
-                venue=(r.get("venue") or "").strip(),
+                doi=netcache.normalize_doi(row["doi"]),
+                arxiv_id=netcache.normalize_arxiv_id(row["arxiv_id"]),
+                venue=row["venue"],
             )
         )
     return records
@@ -618,43 +638,40 @@ def now_iso() -> str:
 
 # ------------------------------------------------------------------ outputs
 
-VERIFIED_FIELDS = [
-    "key", "title", "authors", "year", "doi", "arxiv_id", "venue",
-    "status", "source", "source_url", "retrieved_at", "evidence",
-]
+VERIFIED_FIELDS = list(citation_schema.CANONICAL_FIELDS)
 
 
 def write_verified_csv(results: List[dict], path: Path) -> int:
+    """Write the VERIFIED rows in the ONE canonical schema (tools/CONTRACTS.md §1).
+
+    There is exactly one `verified_citations.csv` in this repo and S2's tool owns it. Writing
+    a second, differently-shaped file to the same path is what broke `citations_to_bib.py` and
+    `claims_audit.py` on 2026-11-03, so this writer emits the canonical nine columns and
+    nothing else. The full evidence (ratios, source url, reasons) stays in the JSON report.
+    """
     rows = []
     for r in results:
         if r["status"] != "VERIFIED":
             continue
         ev = r["evidence"]
         inp = r["input"]
-        rows.append(
-            {
-                "key": r["key"],
-                "title": ev.get("resolved_title") or inp["title"],
-                "authors": "; ".join(ev.get("resolved_authors") or inp["authors"]),
-                "year": ev.get("resolved_year") or inp["year"] or "",
-                "doi": ev.get("matched_doi") or "",
-                "arxiv_id": ev.get("matched_arxiv_id") or inp.get("arxiv_id") or "",
-                "venue": ev.get("resolved_venue") or inp.get("venue") or "",
-                "status": "VERIFIED",
-                "source": ev.get("source") or "",
-                "source_url": ev.get("source_url") or "",
-                "retrieved_at": r["checked_at"],
-                "evidence": json.dumps(
-                    {
-                        "title_ratio": ev.get("title_ratio"),
-                        "authors_ratio": ev.get("authors_ratio"),
-                        "year_delta": ev.get("year_delta"),
-                        "resolved_by": r.get("resolved_by"),
-                    },
-                    ensure_ascii=False,
-                ),
-            }
+        internal = {
+            "key": r["key"],
+            "title": ev.get("resolved_title") or inp["title"],
+            "authors": "; ".join(ev.get("resolved_authors") or inp["authors"]),
+            "year": ev.get("resolved_year") or inp["year"] or "",
+            "venue": ev.get("resolved_venue") or inp.get("venue") or "",
+            "doi": ev.get("matched_doi") or "",
+            "arxiv_id": ev.get("matched_arxiv_id") or inp.get("arxiv_id") or "",
+            "url": ev.get("source_url") or "",
+            "retrieved_at": r["checked_at"],
+        }
+        command = (
+            f"tools/verify_citations.py --online # source={ev.get('source') or '?'} "
+            f"resolved_by={r.get('resolved_by') or '?'} url={ev.get('source_url') or ''}"
         )
+        rows.append(citation_schema.to_canonical_row(internal, command))
+
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8", newline="") as fh:
         w = csv.DictWriter(fh, fieldnames=VERIFIED_FIELDS)

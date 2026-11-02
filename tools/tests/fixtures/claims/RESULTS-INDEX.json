@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "updated_at": "2026-11-03T02:30:00Z",
+  "entries": [
+    {
+      "id": "main.accuracy.baseline",
+      "file": "tools/tests/fixtures/claims/results/main_baseline.json",
+      "key": "accuracy",
+      "description": "Test accuracy, baseline, seed 0 (fixture)",
+      "run_id": "20261103T014500Z_baseline_a1b2c3d",
+      "tolerance": 0.0005
+    },
+    {
+      "id": "main.accuracy.ours",
+      "file": "tools/tests/fixtures/claims/results/main_ours.json",
+      "key": "accuracy",
+      "description": "Test accuracy, ours, seed 0 (fixture)",
+      "run_id": "20261103T021000Z_ours_b2c3d4e",
+      "tolerance": 0.0005
+    },
+    {
+      "id": "main.latency.ours",
+      "file": "tools/tests/fixtures/claims/results/main_ours.json",
+      "key": "latency_ms",
+      "description": "Mean latency per query, ours (fixture)",
+      "run_id": "20261103T021000Z_ours_b2c3d4e",
+      "tolerance": 0.005
+    },
+    {
+      "id": "main.n_seeds",
+      "file": "tools/tests/fixtures/claims/results/summary_main.json",
+      "key": "n_seeds",
+      "description": "Number of seeds in the main experiment (fixture)"
+    },
+    {
+      "id": "main.p_value",
+      "file": "tools/tests/fixtures/claims/results/summary_main.json",
+      "key": "paired.p_value",
+      "description": "Holm-corrected Wilcoxon p-value, baseline vs ours (fixture)"
+    },
+    {
+      "id": "main.n_queries",
+      "file": "tools/tests/fixtures/claims/results/main_ours.json",
+      "key": "_meta.n",
+      "description": "Held-out query count (fixture)"
+    }
+  ]
+}

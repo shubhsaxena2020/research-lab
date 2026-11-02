@@ -1,0 +1,13 @@
+{
+  "_meta": {
+    "run_id": "FIXTURE-NOT-A-RUN",
+    "config_name": "ours",
+    "seed": 0,
+    "split": "test",
+    "n": 200
+  },
+  "accuracy": 0.910,
+  "f1_macro": 0.88,
+  "loss": 0.2011,
+  "_note": "Synthetic fixture for tests/test_template.py. Not an experimental result; never cite it."
+}

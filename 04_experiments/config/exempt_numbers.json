@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "doc": [
+    "Extra exemption patterns for tools/check_numbers.py.",
+    "Each pattern only exempts a number when the regex match actually covers that number's characters,",
+    "so a pattern that matches somewhere else on the line does nothing. Every pattern must stay narrow:",
+    "name one specific hyperparameter or protocol constant, never a whole category of numbers.",
+    "Patterns are for NUMBERS THAT ARE NOT RESULTS: training settings, protocol constants, footprints.",
+    "If a number is a result, it needs a RESULTS-INDEX.json entry and a num: marker -- not a pattern here.",
+    "Anything added here is printed in the audit report under 'Extra patterns', so it stays visible."
+  ],
+  "patterns": [
+    "learning[-_ ]?rate\\s*(?:=\\s*|:\\s*|of\\s+|is\\s+)?[0-9.]+(?:[eE][-+]?[0-9]+)?",
+    "\\blr\\s*(?:=\\s*|:\\s*|of\\s+|is\\s+)?[0-9.]+(?:[eE][-+]?[0-9]+)?",
+    "dropout(?:\\s*(?:rate|probability|p))?\\s*(?:=\\s*|:\\s*|of\\s+|is\\s+)?[0-9.]+",
+    "batch[-_ ]?size\\s*(?:=\\s*|:\\s*|of\\s+|is\\s+)?[0-9,]+",
+    "\\bepochs?\\s*(?:=\\s*|:\\s*)[0-9,]+",
+    "\\b[0-9]+\\s*epochs?\\b",
+    "\\bseed\\s*(?:=\\s*|:\\s*)?[0-9]+",
+    "\\b[0-9]+-fold\\b",
+    "\\b[0-9]{2}/[0-9]{2}\\s*(?:train|test|validation|split)\\b",
+    "\\b(?:max|min)[-_ ]?(?:len|length|tokens|new[-_ ]?tokens)\\s*(?:=\\s*|:\\s*|of\\s+)[0-9,]+",
+    "\\bwarm[-_ ]?up\\s*(?:=\\s*|:\\s*|of\\s+)[0-9,]+",
+    "\\b[0-9]+\\s*(?:hidden\\s+)?(?:units|layers|heads)\\b",
+    "\\b[0-9]+\\s*-\\s*(?:layer|unit|head)\\b",
+    "\\b[0-9]+\\s+(?:[a-z]+\\s+)?(?:attention\\s+heads|units|layers|heads|dimensions)\\b",
+    "\\b95\\s*%\\s*(?:CI\\b|confidence)"
+  ]
+}

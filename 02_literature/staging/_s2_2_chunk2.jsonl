@@ -1,8 +1,0 @@
-{"title": "MTEB: Massive Text Embedding Benchmark", "year": "2022", "doi_or_arxiv": "arXiv:2210.07316"}
-{"title": "Passage Re-ranking with BERT", "year": "2019", "doi_or_arxiv": "arXiv:1901.04085"}
-{"title": "Document Ranking with a Pretrained Sequence-to-Sequence Model", "year": "2020", "doi_or_arxiv": "arXiv:2003.06713"}
-{"title": "Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection", "year": "2023", "doi_or_arxiv": "arXiv:2310.11511"}
-{"title": "Corrective Retrieval Augmented Generation", "year": "2024", "doi_or_arxiv": "arXiv:2401.15884"}
-{"title": "Seven Failure Points When Engineering a Retrieval Augmented Generation System", "year": "2024", "doi_or_arxiv": "arXiv:2401.05856"}
-{"title": "Lost in the Middle: How Language Models Use Long Contexts", "year": "2023", "doi_or_arxiv": "arXiv:2307.03172"}
-{"title": "RULER: What's the Real Context Size of Your Long-Context Language Models?", "year": "2024", "doi_or_arxiv": "arXiv:2404.06654"}

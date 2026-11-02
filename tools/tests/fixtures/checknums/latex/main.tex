@@ -1,0 +1,28 @@
+\documentclass[11pt]{article}
+\usepackage{graphicx}
+\begin{document}
+
+\section{Results}
+\label{sec:results}
+
+As shown in Figure~\ref{fig:pipeline} and Table~\ref{tab:main}, the baseline reaches
+0.812 % num:main.accuracy.baseline
+on the test split, while our model reaches 0.910 % num:main.accuracy.ours
+on the same split.
+
+\begin{table}[t]
+\centering
+\begin{tabular}{lc}
+\hline
+Model & Accuracy \\
+\hline
+Baseline & 0.812 \\ % num:main.accuracy.baseline
+Ours     & 0.910 \\ % num:main.accuracy.ours
+\hline
+\end{tabular}
+\caption{Test accuracy.}
+\end{table}
+
+\includegraphics[width=0.9\textwidth]{fig/plot1.pdf}
+
+\end{document}

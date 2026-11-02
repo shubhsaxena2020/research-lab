@@ -1,0 +1,36 @@
+{"title": "GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers", "year": "2022", "doi_or_arxiv": "arXiv:2210.17323"}
+{"title": "AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration", "year": "2023", "doi_or_arxiv": "arXiv:2306.00978"}
+{"title": "SmoothQuant: Accurate and Efficient Post-Training Quantization for Large Language Models", "year": "2022", "doi_or_arxiv": "arXiv:2211.10438"}
+{"title": "LLM.int8(): 8-bit Matrix Multiplication for Transformers at Scale", "year": "2022", "doi_or_arxiv": "arXiv:2208.07339"}
+{"title": "Which Quantization Should I Use? A Unified Evaluation of llama.cpp Quantization on Llama-3.1-8B-Instruct", "year": "2026", "doi_or_arxiv": "arXiv:2601.14277"}
+{"title": "Quantize with Confidence? An Empirical Study of Quantization for Code Generation", "year": "2026", "doi_or_arxiv": "arXiv:2607.14181"}
+{"title": "Quantization Hurts Reasoning? An Empirical Study on Quantized Reasoning Models", "year": "2025", "doi_or_arxiv": "arXiv:2504.04823"}
+{"title": "Accuracy is Not All You Need", "year": "2024", "doi_or_arxiv": "arXiv:2407.09141"}
+{"title": "Efficient Memory Management for Large Language Model Serving with PagedAttention", "year": "2023", "doi_or_arxiv": "arXiv:2309.06180"}
+{"title": "H2O: Heavy-Hitter Oracle for Efficient Generative Inference of Large Language Models", "year": "2023", "doi_or_arxiv": "arXiv:2306.14048"}
+{"title": "SnapKV: LLM Knows What You are Looking for Before Generation", "year": "2024", "doi_or_arxiv": "arXiv:2404.14469"}
+{"title": "KIVI: A Tuning-Free Asymmetric 2bit Quantization for KV Cache", "year": "2024", "doi_or_arxiv": "arXiv:2402.02750"}
+{"title": "Benchmarking KV-Cache Optimizations across Task Quality and System Performance for Long-Context Serving", "year": "2026", "doi_or_arxiv": "arXiv:2607.05399"}
+{"title": "Fast Inference from Transformers via Speculative Decoding", "year": "2022", "doi_or_arxiv": "arXiv:2211.17192"}
+{"title": "Accelerating Large Language Model Decoding with Speculative Sampling", "year": "2023", "doi_or_arxiv": "arXiv:2302.01318"}
+{"title": "Lossless but Not Free: An Empirical Anatomy of Speculative Decoding on Consumer Hardware", "year": "2026", "doi_or_arxiv": "arXiv:2607.17283"}
+{"title": "Accelerating CPU Speculative Decoding via Unified Graph", "year": "2026", "doi_or_arxiv": "arXiv:2610.28671"}
+{"title": "Qwen3 Technical Report", "year": "2025", "doi_or_arxiv": "arXiv:2505.09388"}
+{"title": "The Llama 3 Herd of Models", "year": "2024", "doi_or_arxiv": "arXiv:2407.21783"}
+{"title": "Gemma 3 Technical Report", "year": "2025", "doi_or_arxiv": "arXiv:2503.19786"}
+{"title": "Phi-4-Mini Technical Report: Compact yet Powerful Multimodal Language Models via Mixture-of-LoRAs", "year": "2025", "doi_or_arxiv": "arXiv:2503.01743"}
+{"title": "SmolLM2: When Smol Goes Big -- Data-Centric Training of a Small Language Model", "year": "2025", "doi_or_arxiv": "arXiv:2502.02737"}
+{"title": "TinyLlama: An Open-Source Small Language Model", "year": "2024", "doi_or_arxiv": "arXiv:2401.02385"}
+{"title": "Small Language Models: Survey, Measurements, and Insights", "year": "2024", "doi_or_arxiv": "arXiv:2409.15790"}
+{"title": "A Survey of Small Language Models", "year": "2024", "doi_or_arxiv": "arXiv:2410.20011"}
+{"title": "LLM Inference at the Edge: Mobile, NPU, and GPU Performance Efficiency Trade-offs Under Sustained Load", "year": "2026", "doi_or_arxiv": "arXiv:2603.23640"}
+{"title": "A Comprehensive Survey on On-Device AI Models", "year": "2025", "doi_or_arxiv": "arXiv:2503.06027"}
+{"title": "LLM-Inference-Bench: Inference Benchmarking of Large Language Models on AI Accelerators", "year": "2024", "doi_or_arxiv": "arXiv:2411.00136"}
+{"title": "A Measurement Study of LLM Inference Trade-offs Across Edge Continuum Hardware", "year": "2026", "doi_or_arxiv": "arXiv:2609.08307"}
+{"title": "TokenPowerBench: Benchmarking the Power Consumption of LLM Inference", "year": "2025", "doi_or_arxiv": "arXiv:2512.03024"}
+{"title": "LLM Inference Unveiled: Survey and Roofline Model Insights", "year": "2024", "doi_or_arxiv": "arXiv:2402.16363"}
+{"title": "Unified Deployment-Aware Evaluation of Open Reasoning Language Models", "year": "2026", "doi_or_arxiv": "arXiv:2604.07035"}
+{"title": "Efficient Large Language Models: A Survey", "year": "2023", "doi_or_arxiv": "arXiv:2312.03863"}
+{"title": "A Survey on Model Compression for Large Language Models", "year": "2023", "doi_or_arxiv": "arXiv:2308.07633"}
+{"title": "A Survey on Large Language Model Acceleration based on KV Cache", "year": "2024", "doi_or_arxiv": "arXiv:2412.19442"}
+{"title": "Democratizing AI with Small Language Models: Structured Benchmarking and Parameter-Efficient Fine-Tuning for Local Deployment", "year": "2026", "doi_or_arxiv": "arXiv:2607.16202"}

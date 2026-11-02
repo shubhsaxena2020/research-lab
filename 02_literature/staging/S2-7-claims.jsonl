@@ -1,0 +1,38 @@
+{"title": "SoK: Machine Learning for Misinformation Detection", "year": "2023", "doi_or_arxiv": "10.48550/arXiv.2308.12215"}
+{"title": "Truth over Tricks: Measuring and Mitigating Shortcut Learning in Misinformation Detection", "year": "2025", "doi_or_arxiv": "10.48550/arXiv.2506.02350"}
+{"title": "A Guide to Misinformation Detection Data and Evaluation", "year": "2024", "doi_or_arxiv": "10.48550/arXiv.2411.05060"}
+{"title": "Probing Spurious Correlations in Popular Event-Based Rumor Detection Benchmarks", "year": "2022", "doi_or_arxiv": "10.48550/arXiv.2209.08799"}
+{"title": "The Surprising Performance of Simple Baselines for Misinformation Detection", "year": "2021", "doi_or_arxiv": "10.48550/arXiv.2104.06952"}
+{"title": "Yesterday's News: Benchmarking Multi-Dimensional Out-of-Distribution Generalization of Misinformation Detection Models", "year": "2024", "doi_or_arxiv": "10.48550/arXiv.2410.18122"}
+{"title": "An Empirical Analysis of SMS Scam Detection Systems", "year": "2022", "doi_or_arxiv": "10.48550/arXiv.2210.10451"}
+{"title": "SpamDam: Towards Privacy-Preserving and Adversary-Resistant SMS Spam Detection", "year": "2024", "doi_or_arxiv": "10.48550/arXiv.2404.09481"}
+{"title": "Johnny Still Receives Spam SMS: Assessing the Robustness of SMS Spam Detection", "year": "2026", "doi_or_arxiv": "10.48550/arXiv.2609.01171"}
+{"title": "X-MAP: eXplainable Misclassification Analysis and Profiling for Spam and Phishing Detection", "year": "2026", "doi_or_arxiv": "10.48550/arXiv.2602.15298"}
+{"title": "Calibrated Trust, Not Sharper Prediction: An Empirical Test of Uncertainty Fusion", "year": "2026", "doi_or_arxiv": "10.48550/arXiv.2608.14617"}
+{"title": "Supporting Human Raters with the Detection of Harmful Content using Large Language Models", "year": "2024", "doi_or_arxiv": "10.48550/arXiv.2406.12800"}
+{"title": "Fraud-R1 : A Multi-Round Benchmark for Assessing the Robustness of LLM Against Augmented Fraud and Phishing Inducements", "year": "2025", "doi_or_arxiv": "10.48550/arXiv.2502.12904"}
+{"title": "BEACON: A Unified Behavioral-Tactical Framework for Explainable Cybercrime Analysis with Large Language Models", "year": "2025", "doi_or_arxiv": "10.48550/arXiv.2512.06555"}
+{"title": "CASE: An Agentic AI Framework for Enhancing Scam Intelligence in Digital Payments", "year": "2025", "doi_or_arxiv": "10.48550/arXiv.2508.19932"}
+{"title": "Enhancing Trust and Safety in Digital Payments: An LLM-Powered Approach", "year": "2024", "doi_or_arxiv": "10.48550/arXiv.2410.19845"}
+{"title": "Operational Evidence Gaps for LLMs in Fraud Detection and Trust-and-Safety Workflows", "year": "2026", "doi_or_arxiv": "10.48550/arXiv.2607.13078"}
+{"title": "SoK: Systematizing Generation, Characteristics, and Defenses in LLM-Generated Phishing", "year": "2025", "doi_or_arxiv": "10.48550/arXiv.2508.21457"}
+{"title": "Spear Phishing With Large Language Models", "year": "2023", "doi_or_arxiv": "10.48550/arXiv.2305.06972"}
+{"title": "Smishing Dataset I: Phishing SMS Dataset from Smishtank.com", "year": "2024", "doi_or_arxiv": "10.48550/arXiv.2402.18430"}
+{"title": "SpaLLM-Guard: Pairing SMS Spam Detection Using Open-source and Commercial LLMs", "year": "2025", "doi_or_arxiv": "10.48550/arXiv.2501.04985"}
+{"title": "Can AI-Generated Text be Reliably Detected?", "year": "2023", "doi_or_arxiv": "10.48550/arXiv.2303.11156"}
+{"title": "Paraphrasing evades detectors of AI-generated text, but retrieval is an effective defense", "year": "2023", "doi_or_arxiv": "10.48550/arXiv.2303.13408"}
+{"title": "\"It Warned Me Just at the Right Moment\": Exploring LLM-based Real-time Detection of Phone Scams", "year": "2025", "doi_or_arxiv": "10.48550/arXiv.2502.03964"}
+{"title": "Clues in Tweets: Twitter-Guided Discovery and Analysis of SMS Spam", "year": "2022", "doi_or_arxiv": "10.48550/arXiv.2204.01233"}
+{"title": "Short Message Service (SMS) Phishing Attacks and Defenses: A Systematic Review", "year": "2026", "doi_or_arxiv": "10.48550/arXiv.2604.11429"}
+{"title": "On Calibration of Modern Neural Networks", "year": "2017", "doi_or_arxiv": "10.48550/arXiv.1706.04599"}
+{"title": "Contributions to the study of SMS spam filtering: new collection and results", "year": "2011", "doi_or_arxiv": "10.1145/2034691.2034742"}
+{"title": "Devising and Detecting Phishing Emails Using Large Language Models", "year": "2024", "doi_or_arxiv": "10.1109/access.2024.3375882"}
+{"title": "Evaluating spam filters and Stylometric Detection of AI-generated phishing emails", "year": "2025", "doi_or_arxiv": "10.1016/j.eswa.2025.127044"}
+{"title": "Investigating Evasive Techniques in SMS Spam Filtering: A Comparative Analysis of Machine Learning Models", "year": "2024", "doi_or_arxiv": "10.1109/access.2024.3364671"}
+{"title": "TruthfulQA: Measuring How Models Mimic Human Falsehoods", "year": "2022", "doi_or_arxiv": "10.18653/v1/2022.acl-long.229"}
+{"title": "FEVER: a Large-scale Dataset for Fact Extraction and VERification", "year": "2018", "doi_or_arxiv": "10.18653/v1/n18-1074"}
+{"title": "Fact or Fiction: Verifying Scientific Claims", "year": "2020", "doi_or_arxiv": "10.18653/v1/2020.emnlp-main.609"}
+{"title": "\"Liar, Liar Pants on Fire\": A New Benchmark Dataset for Fake News Detection", "year": "2017", "doi_or_arxiv": "10.18653/v1/p17-2067"}
+{"title": "Misinformation on Misinformation: Conceptual and Methodological Challenges", "year": "2023", "doi_or_arxiv": "10.1177/20563051221150412"}
+{"title": "Prompt Engineering or Fine-Tuning? A Case Study on Phishing Detection with Large Language Models", "year": "2024", "doi_or_arxiv": "10.3390/make6010018"}
+{"title": "DSmishSMS-A System to Detect Smishing SMS", "year": "2021", "doi_or_arxiv": "10.1007/s00521-021-06305-y"}

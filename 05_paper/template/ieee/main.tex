@@ -1,0 +1,156 @@
+% =============================================================================
+%  ieee/main.tex -- MINIMAL IEEE-style stub (IEEEtran, two columns)
+%
+%  This is a stub, not the official template. It reproduces the *shape* of an
+%  IEEE conference paper (two columns, IEEE author block, IEEE section order)
+%  using only the IEEEtran class, which ships with TeX Live's publishers
+%  package. It deliberately does NOT copy any file from IEEE.
+%
+%  BEFORE SUBMISSION, and before you spend an hour on formatting:
+%    1. download the official conference template from
+%       https://www.ieee.org/conferences/publishing/templates.html   (verify)
+%    2. read the licence/copyright notice that comes with it and keep it in
+%       this directory -- do not redistribute the official files from this repo
+%    3. copy your text into the official source; layout decisions (page limits,
+%       copyright block, keywords) are venue-owned, not yours.
+%
+%  Compile from THIS directory (relative \input paths depend on it):
+%      cd 05_paper/template/ieee && latexmk -pdf main.tex
+%  Needs: IEEEtran.cls (Debian package texlive-publishers). If it is missing,
+%  build.sh says so instead of failing with 40 lines of TeX errors.
+% =============================================================================
+
+\documentclass[conference]{IEEEtran}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{cite}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+
+% Two-column layout punishes wide floats; keep tables narrow or use table*.
+\newcommand{\method}{TODO-Method-Name}
+\newcommand{\fillme}[1]{%
+  \par\noindent\fbox{\parbox{0.94\linewidth}{\scriptsize\textbf{TODO} --- #1}}\par}
+
+\begin{document}
+
+\title{TODO(title): specific and falsifiable}
+
+\author{%
+\IEEEauthorblockN{TODO(Author One)\IEEEauthorrefmark{1},
+                  TODO(Author Two)\IEEEauthorrefmark{1}}
+\IEEEauthorblockA{\IEEEauthorrefmark{1}TODO(Department), TODO(Institution)\\
+TODO(City), TODO(Country)\\
+TODO(email)}
+\thanks{%
+  \textbf{Use of AI tools.} TODO(disclosure): name each tool and version, the
+  sections it touched, and what it did (e.g.\ language editing of
+  Section~II). IEEE's policy asks for AI-generated content to be identified by
+  section in the acknowledgements; TODO(venue): quote the policy URL and the
+  retrieval date. No AI tool produced data, results, figures or references;
+  every citation is recorded in \texttt{02\_literature/verified\_citations.csv}.
+  The tools are not authors. See Section~\ref{sec:ethics}.}%
+}
+
+\maketitle
+
+\begin{abstract}
+% TODO(abstract): 150-250 words: problem, method, headline number
+% (% num:<id> marker), limitation.
+\fillme{Abstract: problem / method / headline result with its index id /
+limitation.}
+\end{abstract}
+
+\begin{IEEEkeywords}
+TODO(keyword 1), TODO(keyword 2), TODO(keyword 3)  % 3-5, lowercase, from the venue's list
+\end{IEEEkeywords}
+
+\section{Introduction}
+\label{sec:intro}
+% TODO(intro): problem / gap / contributions / headline result. IEEE readers
+% expect the contribution list as an explicit itemised block.
+\fillme{Introduction: problem, gap, contributions, headline result.}
+
+\section{Related Work}
+\label{sec:related}
+% TODO(related): thematic clusters, then one paragraph on how this differs.
+% Only \cite{} keys that exist in 02_literature/verified_citations.csv.
+\fillme{Related Work: clusters + delta.}
+
+\section{Method}
+\label{sec:method}
+% TODO(method): notation, method, cost. One figure at most in two columns.
+\fillme{Method: notation, method, cost.}
+
+\section{Experiments}
+\label{sec:exp}
+% TODO(exp): data, baselines, protocol (seeds, runs, command), metrics.
+\fillme{Experiments: data, baselines, protocol, metrics.}
+
+\section{Results}
+\label{sec:results}
+% TODO(results): answer first, then Table~\ref{tab:main-results}. Numbers are
+% generated -- do not retype them.
+\fillme{Results: the answer, then the evidence.}
+
+\begin{table}[t]
+  \centering
+  \caption{TODO(caption): what is compared, on what data, over how many seeds.}
+  \label{tab:main-results}
+  \IfFileExists{../tables/generated/main-results.tex}{%
+    \input{../tables/generated/main-results.tex}%
+  }{%
+    \fbox{\parbox{0.85\linewidth}{\scriptsize No generated table yet: run
+      \texttt{tables/make\_tables.py} (see BUILD.md).}}%
+  }
+\end{table}
+
+\begin{figure}[t]
+  \centering
+  \IfFileExists{../figures/generated/main-accuracy.pdf}{%
+    \includegraphics[width=\linewidth]{../figures/generated/main-accuracy.pdf}%
+  }{%
+    \fbox{\parbox[c][2.6cm][c]{0.85\linewidth}{\centering\scriptsize Figure PDF
+      not built (needs matplotlib): run \texttt{figures/make\_figures.py}.}}%
+  }
+  \caption{TODO(caption): axes, unit, uncertainty, and the one thing to notice.}
+  \label{fig:main-accuracy}
+\end{figure}
+
+\section{Limitations}
+\label{sec:limitations}
+% TODO(limitations): data, compute, statistics, scope. IEEE does not require
+% the section; keep it anyway -- it is the cheapest credibility you can buy.
+\fillme{Limitations: data, compute, statistics, scope.}
+
+\section{Ethics Statement}
+\label{sec:ethics}
+% TODO(ethics): data licences, human subjects (or ``none''), misuse, and the
+% AI-assistance statement -- identical text to the title-page footnote.
+\fillme{Ethics: licences, misuse, AI-assistance statement.}
+
+\section{Reproducibility Statement}
+\label{sec:repro}
+% TODO(repro): repo, command, seeds, released artefacts, rerun tolerance.
+\fillme{Reproducibility: repo, command, seeds, tolerance.}
+
+\section{Conclusion}
+\label{sec:conclusion}
+% TODO(conclusion): what is now known, calibrated to the evidence.
+\fillme{Conclusion: what is now known, and the next experiment.}
+
+\section*{Acknowledgment}
+% TODO(ack): people and funders who helped but are not authors. The AI
+% disclosure may live here instead of the footnote if the venue prefers it --
+% keep exactly one of the two, never both with different wording.
+\fillme{Acknowledgment: non-author help and funding; AI disclosure if the venue
+wants it here.}
+
+\bibliographystyle{IEEEtran}
+\bibliography{../refs}
+
+\end{document}

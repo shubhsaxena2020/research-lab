@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "id": "toy.accuracy.toy_baseline",
+      "file": "results/summary_toy.json",
+      "key": "stats.toy_baseline.mean",
+      "description": "aggregated toy run",
+      "tolerance": 0.0005
+    }
+  ]
+}

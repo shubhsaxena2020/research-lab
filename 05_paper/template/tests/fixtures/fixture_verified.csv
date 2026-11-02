@@ -1,0 +1,4 @@
+key,title,authors,year,doi,arxiv_id,venue,status,source,source_url,retrieved_at,evidence
+fixture-verified-2024,Fixture Entry: Verified Journal Row (not a real paper),"Example, Ada; Example, Grace",2024,10.0000/fixture.0001,,Fixture Journal,VERIFIED,crossref,https://doi.org/10.0000/fixture.0001,2026-11-03T00:00:00Z,"title=1.00 authors=1.00 year=0"
+fixture-arxiv-2025,Fixture Entry: Verified Preprint Row (not a real paper),"Example, Ada",2025,,2501.00000,arXiv preprint,VERIFIED,arxiv,https://arxiv.org/abs/2501.00000,2026-11-03T00:00:00Z,"title=1.00 authors=1.00 year=0"
+fixture-mismatch-2023,Fixture Entry: Unverified Row (not a real paper),"Example, Ada",2023,10.0000/fixture.0003,,Some Venue,MISMATCH,crossref,https://doi.org/10.0000/fixture.0003,2026-11-03T00:00:00Z,"title=0.61 authors=0.50 year=2"

@@ -1,0 +1,3 @@
+key,title,authors,year,doi,arxiv_id,venue,status,source,source_url,retrieved_at,evidence
+vaswani2017,Attention Is All You Need,"Vaswani, Ashish; Shazeer, Noam",2017,10.48550/arXiv.1706.03762,1706.03762,NeurIPS,VERIFIED,arxiv,https://arxiv.org/abs/1706.03762,2026-11-03T00:10:00Z,title=1.00 authors=1.00 year=0
+fake2019,Fabricated Reranking With Imaginary Gains,"Fabricated, A.",2019,,,Journal of Nonexistent Results,MISMATCH,crossref,https://api.crossref.org/works/10.9999/none,2026-11-03T00:11:00Z,title=0.41 authors=0.00 year=2

@@ -1,0 +1,12 @@
+{
+  "_meta": {
+    "run_id": "20261103T021000Z_ours_b2c3d4e",
+    "config_name": "ours",
+    "seed": 0,
+    "split": "test",
+    "n": 1000
+  },
+  "accuracy": 0.865,
+  "f1_macro": 0.8412,
+  "latency_ms": 14.2
+}

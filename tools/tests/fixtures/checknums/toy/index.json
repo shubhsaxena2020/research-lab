@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "id": "toy.accuracy",
+      "file": "tools/tests/fixtures/checknums/toy/04_experiments/toy/toy_results.json",
+      "key": "accuracy",
+      "description": "Toy dry-run accuracy -- NOT A RESULT (CONTRACTS.md section 5)",
+      "tolerance": 0.0
+    }
+  ]
+}

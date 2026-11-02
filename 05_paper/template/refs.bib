@@ -1,0 +1,75 @@
+% =============================================================================
+%  refs.bib -- bibliography for the paper
+%
+%  THIS FILE SHIPS WITH ZERO ACTIVE ENTRIES, ON PURPOSE.
+%
+%  RULES.md #1: a citation may appear in a draft only if it was resolved
+%  against a real API (DOI / arXiv id / OpenAlex id) and recorded in
+%  02_literature/verified_citations.csv with its URL and retrieval date.
+%  Nothing in this repo may be cited from memory, from a search snippet, or
+%  "approximately". A citation you cannot verify is deleted, not softened.
+%
+%  HOW ENTRIES GET IN HERE (do not hand-write them):
+%      python 05_paper/template/tools/citations_to_bib.py \
+%             --csv 02_literature/verified_citations.csv \
+%             --out 05_paper/template/refs.generated.bib
+%  That script keeps only rows with status=VERIFIED, refuses rows that are
+%  missing a key or a title, and writes a provenance comment above each entry
+%  (which source resolved it, and when). Then either append the generated file
+%  to this one, or point main.tex at both: \bibliography{refs,refs.generated}
+%
+%  WHAT THIS FILE MUST CONTAIN: nothing until the first verified citation
+%  exists. An empty .bib compiles (with "no \citation" warnings) -- that is the
+%  correct state for a skeleton and it is checked by tests/test_template.py.
+%
+%  Conventions the generator follows, so a hand-edit stays indistinguishable:
+%    - key: <first author surname><year><short word>, e.g. smith2024routing
+%    - @article when there is both a DOI and a venue (journal = venue)
+%    - @misc    when the record is an arXiv id, or has no DOI
+%    - title: brace-protect acronyms and proper nouns, e.g. {BERT}
+%    - %, &, #, _ escaped in text fields (they are LaTeX specials)
+%    - url always present; provenance in a comment, never in a printed field
+% =============================================================================
+
+
+% -----------------------------------------------------------------------------
+% EXAMPLES ONLY. These are NOT real references and must never be cited.
+% They exist to show the required fields. They are commented out line by line,
+% so no BibTeX parser sees them as entries: tests/test_template.py strips lines
+% that start with '%' and asserts the result parses to zero entries.
+%
+% If you ever uncomment one, replace EVERY field with a verified record first.
+% -----------------------------------------------------------------------------
+
+% --- example - not a real reference, do not uncomment -----------------------
+% provenance: source=crossref retrieved_at=YYYY-MM-DDTHH:MM:SSZ evidence=title=0.97 authors=1.00 year=0
+% @article{example2024journal,
+%   author  = {Surname, Given and Surname, Given},
+%   title   = {Example entry: a journal article with a {DOI}},
+%   journal = {Journal Name (exactly as registered with Crossref)},
+%   year    = {2024},
+%   doi     = {10.0000/example.0000},
+%   url     = {https://doi.org/10.0000/example.0000}
+% }
+
+% --- example - not a real reference, do not uncomment -----------------------
+% provenance: source=arxiv retrieved_at=YYYY-MM-DDTHH:MM:SSZ evidence=title=1.00 authors=1.00 year=0
+% @misc{example2025arxiv,
+%   author        = {Surname, Given and Surname, Given},
+%   title         = {Example entry: a preprint with an {arXiv} identifier},
+%   howpublished  = {arXiv preprint},
+%   year          = {2025},
+%   eprint        = {2501.00000},
+%   archivePrefix = {arXiv},
+%   url           = {https://arxiv.org/abs/2501.00000}
+% }
+
+% --- example - not a real reference, do not uncomment -----------------------
+% provenance: source=openalex retrieved_at=YYYY-MM-DDTHH:MM:SSZ evidence=title=0.99 authors=1.00 year=0
+% @misc{example2023venueonly,
+%   author       = {Surname, Given},
+%   title        = {Example entry: a record with a venue but no {DOI}},
+%   howpublished = {Workshop Name},
+%   year         = {2023},
+%   url          = {https://example.org/landing-page-verified-on-the-live-site}
+% }
