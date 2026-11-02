@@ -1,0 +1,7 @@
+key,title,authors,year,doi,arxiv_id,venue
+vaswani2017,Attention Is All You Need,"Vaswani, Ashish; Shazeer, Noam; Parmar, Niki",2017,10.48550/arXiv.1706.03762,1706.03762,NeurIPS
+he2016,Deep Residual Learning for Image Recognition,"He, Kaiming; Zhang, Xiangyu; Ren, Shaoqing; Sun, Jian",2016,10.1109/CVPR.2016.90,1512.03385,CVPR
+devlin2019,"BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding","Devlin, Jacob; Chang, Ming-Wei; Lee, Kenton; Toutanova, Kristina",2019,10.18653/v1/N19-1423,1810.04805,NAACL
+kingma2015,Adam: A Method for Stochastic Optimization,"Kingma, Diederik P.; Ba, Jimmy",2015,,1412.6980,ICLR
+lecun2015,Deep learning,"LeCun, Yann; Bengio, Yoshua; Hinton, Geoffrey",2015,10.1038/nature14539,,Nature
+fake2019-fabricated,Quantum Attention Transformers for Sanskrit Machine Translation,"Fabricated, A.; Imaginary, B.",2019,,,Journal of Nonexistent Results

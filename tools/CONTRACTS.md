@@ -1,0 +1,163 @@
+# CONTRACTS — shared data formats (binding for all S3 tooling)
+
+Every tool in this lab reads/writes the formats below. Do not invent a variant.
+All paths are relative to the repo root `C:\Users\shubh\research-lab`.
+All JSON is UTF-8, `ensure_ascii=False`, sorted keys where keys are a set.
+
+---
+
+## 1. Citations: `02_literature/citations.csv` (input) and `verified_citations.csv` (output)
+
+Input CSV — one row per citation the author wants to use:
+
+```
+key,title,authors,year,doi,arxiv_id,venue
+vaswani2017,Attention Is All You Need,"Vaswani, Ashish; Shazeer, Noam",2017,10.48550/arXiv.1706.03762,1706.03762,NeurIPS
+```
+
+- `key`      : required, unique BibTeX-ish key (used to reference the citation in the draft).
+- `title`    : required unless `doi` or `arxiv_id` is present.
+- `authors`  : optional, `;`-separated, `Surname, Given` or `Given Surname`. Used for the author check only.
+- `year`     : optional int. Used for the year check only (±1 year tolerance).
+- `doi`      : optional, bare DOI (`10.x/y`) or `https://doi.org/10.x/y`.
+- `arxiv_id` : optional, bare (`1706.03762`) or with `arXiv:` prefix, or `v2` suffix.
+- `venue`    : optional, informational only, never used for verification.
+
+The same columns are accepted from a `.bib` file instead (`tools/verify_citations.py --bib file.bib`
+parses BibTeX directly; no external bibtex library).
+
+Output `02_literature/verified_citations.csv` — ONLY rows with status `VERIFIED`:
+
+```
+key,title,authors,year,doi,arxiv_id,venue,status,source,source_url,retrieved_at,evidence
+```
+
+`source` ∈ {crossref, arxiv, openalex, semanticscholar}. `retrieved_at` is ISO-8601 UTC
+date-time. `evidence` is a short string, e.g. `title=0.97 authors=1.00 year=0`.
+
+Full report (all statuses) is written to `02_literature/verification_report.json` and
+`verification_report.md`:
+
+```json
+{"generated_at": "...", "n_total": 12, "n_verified": 10, "n_mismatch": 1, "n_not_found": 1,
+ "results": [{"key": "...", "status": "MISMATCH", "confidence": 0.62,
+              "evidence": {"title_ratio": 0.62, "authors_ratio": 0.5, "year_delta": 2,
+                           "resolved_title": "...", "resolved_authors": [...],
+                           "resolved_year": 2019, "source": "crossref",
+                           "source_url": "https://api.crossref.org/works/10.x/y",
+                           "matched_doi": "10.x/y", "matched_arxiv_id": null},
+              "reasons": ["title too dissimilar: 0.62 < 0.90", "year delta 2 > 1"],
+              "checked_at": "..."}]}
+```
+
+`status` is exactly one of `VERIFIED`, `MISMATCH`, `NOT_FOUND`, or `ERROR` (network/parse
+failure — NOT a pass; `ERROR` never counts as verified).
+
+---
+
+## 2. Experiment runs: `04_experiments/runs/<run_id>/`
+
+`run_id` = `<UTC date>T<UTC time>Z_<config_name>_<short git hash>`, e.g.
+`20261103T014500Z_baseline_a1b2c3d`.
+
+```
+runs/<run_id>/
+  meta.json        # provenance, see below
+  config.json      # exact resolved config used (copy, not a pointer)
+  stdout.log
+  stderr.log
+  results.json     # metric dict, see below
+  artifacts/       # optional per-run files (predictions, checkpoints)
+```
+
+`meta.json`:
+
+```json
+{"run_id": "...", "config_name": "baseline", "config_sha256": "...",
+ "git_commit": "a1b2c3d", "git_dirty": false, "python": "3.11.15",
+ "platform": "Windows-11...", "command": "python experiments/train.py --config configs/baseline.json",
+ "started_at": "...", "finished_at": "...", "duration_s": 12.4,
+ "peak_rss_mb": 210.5, "device": "cpu", "cpu_count": 8, "seed": 0,
+ "host": "...", "env": {"PYTHONHASHSEED": "0"}, "notes": ""}
+```
+
+`results.json` — flat dict of scalar metrics plus a `_meta` block. Nested dicts allowed one
+level only; every leaf must be `int`/`float`/`str`/`bool`/`null`.
+
+```json
+{"_meta": {"run_id": "...", "config_name": "baseline", "seed": 0, "split": "test", "n": 1000},
+ "accuracy": 0.812, "f1_macro": 0.79, "loss": 0.4123}
+```
+
+Metric *names* are the stable contract: `accuracy`, `f1_macro`, `loss`, ... A results file
+with a renamed metric breaks `check_numbers.py` and the table generator.
+
+---
+
+## 3. Results index: `04_experiments/RESULTS-INDEX.json`
+
+The single map from "a number in the paper" to "the file that produced it".
+
+```json
+{"version": 1,
+ "updated_at": "...",
+ "entries": [
+   {"id": "main.accuracy.baseline",
+    "file": "04_experiments/results/main_baseline.json",
+    "key": "accuracy",
+    "description": "Test accuracy, baseline, seed 0",
+    "run_id": "20261103T014500Z_baseline_a1b2c3d",
+    "tolerance": 0.0005}
+ ]}
+```
+
+- `id` is what the draft cites in a marker comment: `<!-- num:main.accuracy.baseline -->0.812<!-- /num -->`
+  in Markdown, `% num:main.accuracy.baseline` immediately above the number in LaTeX.
+- `file` is relative to repo root. `key` is a dotted path into that JSON
+  (`accuracy`, or `_meta.n`).
+- `tolerance` (optional, default 0.0) — relative tolerance used when matching a printed
+  number to the stored value.
+- Files under `04_experiments/results/` are the *aggregated* per-experiment results,
+  copied from `runs/<run_id>/results.json` by the harness (`aggregate` command).
+
+---
+
+## 4. Aggregated results + statistics
+
+`04_experiments/results/summary_<experiment>.json`:
+
+```json
+{"experiment": "main", "configs": ["baseline", "ours"], "metric": "accuracy",
+ "n_seeds": 5, "seeds": [0,1,2,3,4],
+ "per_run": {"baseline": [0.79, 0.80, 0.81, 0.79, 0.80]},
+ "stats": {"baseline": {"mean": 0.798, "std": 0.0075, "ci95": [0.790, 0.806],
+                        "n": 5, "ci_method": "bootstrap", "n_boot": 10000,
+                        "ci_seed": 12345},
+           "ours": {"mean": 0.910, "std": 0.011, "ci95": [0.900, 0.920], "n": 5,
+                    "ci_method": "bootstrap", "n_boot": 10000, "ci_seed": 12345}},
+ "paired": {"test": "wilcoxon", "p_value": 0.0312, "effect_size": {"name": "cohens_d", "value": 1.84},
+            "n_pairs": 5, "correction": {"method": "holm", "family_size": 3, "p_adjusted": 0.0312,
+            "note": "3 comparisons in this family"}},
+ "tables": [{"caption": "Main results", "path": "04_experiments/results/table_main.md"}]}
+```
+
+Rules: bootstrap CIs always report `n_boot` and `ci_seed`. Any p-value reported in the paper
+must carry the correction method and family size. Effect sizes always named.
+
+---
+
+## 5. Toy pipeline (clearly labelled, never a result)
+
+`04_experiments/toy/` — end-to-end dry run. Every file carries `"toy": true` in JSON and a
+`TOY — NOT A RESULT` banner in text/markdown. `check_numbers.py --allow-toy` is required to
+accept numbers from it; without that flag toy numbers are flagged as untraceable.
+
+---
+
+## 6. Tool CLI conventions
+
+Every tool: `python tools/<tool>.py --help` works; exit code 0 = pass, 1 = findings/failure,
+2 = usage error. `--json` prints machine-readable output to stdout. No tool writes outside the
+repo root. No tool makes a network call unless the flag `--online` is passed (default offline,
+so tests and CI never hit the network). Polite by default: 1 request/second/host, descriptive
+User-Agent, exponential backoff on 429/5xx (30/60/120 s, max 3 attempts).

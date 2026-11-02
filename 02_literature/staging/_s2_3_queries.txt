@@ -1,0 +1,36 @@
+Selective Classification for Deep Neural Networks
+SelectiveNet A Deep Neural Network with an Integrated Reject Option
+The Art of Abstention Selective Prediction and Error Regularization
+On Calibration of Modern Neural Networks
+Calibration of Pre-trained Transformers
+Language Models Mostly Know What They Know
+Detecting Hallucinations in Large Language Models Using Semantic Entropy
+Semantic Uncertainty Linguistic Invariances for Uncertainty Estimation in Natural Language Generation
+Lookback Lens Detecting and Mitigating Contextual Hallucinations
+The Curious Case of Hallucinatory Unanswerability
+Know What You Don't Know Unanswerable Questions for SQuAD
+Do Large Language Models Know What They Don't Know
+AbstentionBench Evaluating Abstention in Large Reasoning Models
+HaluEval A Large-Scale Hallucination Evaluation Benchmark for Large Language Models
+RAGTruth A Corpus for Word-Level Hallucination in Retrieval-Augmented Generation
+FActScore Fine-grained Atomic Evaluation of Factual Precision
+TruthfulQA Measuring How Models Mimic Human Falsehoods
+XSTest A Test Set for Exaggerated Safety in Large Language Models
+OR-Bench An Over-Refusal Benchmark for Large Language Models
+PopQA Large-scale Open-domain Question Answering with Long-tail Entities
+Conformal Language Modeling
+Just Ask for Calibration Strategies for Eliciting Calibrated Confidence Scores
+Teaching Models to Express Their Uncertainty in Words
+Knowing What LLMs DO NOT Know A Simple but Effective Method for LLMs
+R-Tuning Teaching Large Language Models to Refuse Unknown Questions
+Selective Question Answering under Domain Shift
+Semantic Entropy Probes Robust and Cheap Hallucination Detection
+INSIDE LLMs Internal States Retain the Power of Hallucination Detection
+SelfCheckGPT Zero-Resource Black-Box Hallucination Detection
+The Internal State of an LLM Knows When It's Lying
+Post-Abstention Towards Reliably Re-Attempting the Abstained Instances
+Uncertainty-Based Abstention in LLMs Improves Safety and Reduces Hallucinations
+Do We Know What We Don't Know Studying Unanswerable Questions beyond SQuAD
+Calibration of Retrieval-Augmented Generation
+UAEval Benchmarking Uncertainty in Large Language Models
+Conformal Prediction for Question Answering

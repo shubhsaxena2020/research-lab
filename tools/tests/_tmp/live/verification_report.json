@@ -1,0 +1,255 @@
+{
+  "generated_at": "2026-11-02T19:42:55Z",
+  "source_file": "tools\\tests\\live_sample.csv",
+  "online": true,
+  "thresholds": {
+    "min_title": 0.9,
+    "min_author": 0.6,
+    "year_tolerance": 1,
+    "not_found_below": 0.55
+  },
+  "n_total": 6,
+  "n_verified": 5,
+  "n_mismatch": 0,
+  "n_not_found": 1,
+  "n_error": 0,
+  "n_http_requests": 0,
+  "n_cache_hits": 6,
+  "sources_unavailable": {},
+  "results": [
+    {
+      "key": "vaswani2017",
+      "status": "VERIFIED",
+      "confidence": 1.0,
+      "resolved_by": "doi",
+      "evidence": {
+        "title_ratio": 1.0,
+        "authors_ratio": 1.0,
+        "authors_recall": 1.0,
+        "authors_jaccard": 0.375,
+        "first_author_agrees": true,
+        "year_delta": 0,
+        "resolved_title": "Attention Is All You Need",
+        "resolved_authors": [
+          "Ashish Vaswani",
+          "Noam Shazeer",
+          "Niki Parmar",
+          "Jakob Uszkoreit",
+          "Llion Jones",
+          "Aidan N. Gomez",
+          "Lukasz Kaiser",
+          "Illia Polosukhin"
+        ],
+        "resolved_year": 2017,
+        "resolved_venue": "arXiv",
+        "source": "arxiv",
+        "source_url": "http://export.arxiv.org/api/query?id_list=1706.03762&max_results=1",
+        "matched_doi": null,
+        "matched_arxiv_id": "1706.03762"
+      },
+      "reasons": [],
+      "checked_at": "2026-11-02T19:42:55Z",
+      "input": {
+        "title": "Attention Is All You Need",
+        "authors": [
+          "Vaswani, Ashish",
+          "Shazeer, Noam",
+          "Parmar, Niki"
+        ],
+        "year": 2017,
+        "doi": "10.48550/arxiv.1706.03762",
+        "arxiv_id": "1706.03762",
+        "venue": "NeurIPS"
+      }
+    },
+    {
+      "key": "he2016",
+      "status": "VERIFIED",
+      "confidence": 1.0,
+      "resolved_by": "doi",
+      "evidence": {
+        "title_ratio": 1.0,
+        "authors_ratio": 1.0,
+        "authors_recall": 1.0,
+        "authors_jaccard": 1.0,
+        "first_author_agrees": true,
+        "year_delta": 0,
+        "resolved_title": "Deep Residual Learning for Image Recognition",
+        "resolved_authors": [
+          "Kaiming He",
+          "Xiangyu Zhang",
+          "Shaoqing Ren",
+          "Jian Sun"
+        ],
+        "resolved_year": 2016,
+        "resolved_venue": "2016 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)",
+        "source": "crossref",
+        "source_url": "https://api.crossref.org/works/10.1109/cvpr.2016.90",
+        "matched_doi": "10.1109/cvpr.2016.90",
+        "matched_arxiv_id": null
+      },
+      "reasons": [],
+      "checked_at": "2026-11-02T19:42:55Z",
+      "input": {
+        "title": "Deep Residual Learning for Image Recognition",
+        "authors": [
+          "He, Kaiming",
+          "Zhang, Xiangyu",
+          "Ren, Shaoqing",
+          "Sun, Jian"
+        ],
+        "year": 2016,
+        "doi": "10.1109/cvpr.2016.90",
+        "arxiv_id": "1512.03385",
+        "venue": "CVPR"
+      }
+    },
+    {
+      "key": "devlin2019",
+      "status": "VERIFIED",
+      "confidence": 1.0,
+      "resolved_by": "doi",
+      "evidence": {
+        "title_ratio": 1.0,
+        "authors_ratio": 1.0,
+        "authors_recall": 1.0,
+        "authors_jaccard": 1.0,
+        "first_author_agrees": true,
+        "year_delta": 0,
+        "resolved_title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+        "resolved_authors": [
+          "Jacob Devlin",
+          "Ming-Wei Chang",
+          "Kenton Lee",
+          "Kristina Toutanova"
+        ],
+        "resolved_year": 2019,
+        "resolved_venue": "Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers)",
+        "source": "crossref",
+        "source_url": "https://api.crossref.org/works/10.18653/v1/n19-1423",
+        "matched_doi": "10.18653/v1/n19-1423",
+        "matched_arxiv_id": null
+      },
+      "reasons": [],
+      "checked_at": "2026-11-02T19:42:55Z",
+      "input": {
+        "title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+        "authors": [
+          "Devlin, Jacob",
+          "Chang, Ming-Wei",
+          "Lee, Kenton",
+          "Toutanova, Kristina"
+        ],
+        "year": 2019,
+        "doi": "10.18653/v1/n19-1423",
+        "arxiv_id": "1810.04805",
+        "venue": "NAACL"
+      }
+    },
+    {
+      "key": "kingma2015",
+      "status": "VERIFIED",
+      "confidence": 0.8889,
+      "resolved_by": "arxiv",
+      "evidence": {
+        "title_ratio": 1.0,
+        "authors_ratio": 1.0,
+        "authors_recall": 1.0,
+        "authors_jaccard": 1.0,
+        "first_author_agrees": true,
+        "year_delta": 1,
+        "resolved_title": "Adam: A Method for Stochastic Optimization",
+        "resolved_authors": [
+          "Diederik P. Kingma",
+          "Jimmy Ba"
+        ],
+        "resolved_year": 2014,
+        "resolved_venue": "arXiv",
+        "source": "arxiv",
+        "source_url": "http://export.arxiv.org/api/query?id_list=1412.6980&max_results=1",
+        "matched_doi": null,
+        "matched_arxiv_id": "1412.6980"
+      },
+      "reasons": [],
+      "checked_at": "2026-11-02T19:42:55Z",
+      "input": {
+        "title": "Adam: A Method for Stochastic Optimization",
+        "authors": [
+          "Kingma, Diederik P.",
+          "Ba, Jimmy"
+        ],
+        "year": 2015,
+        "doi": null,
+        "arxiv_id": "1412.6980",
+        "venue": "ICLR"
+      }
+    },
+    {
+      "key": "lecun2015",
+      "status": "VERIFIED",
+      "confidence": 1.0,
+      "resolved_by": "doi",
+      "evidence": {
+        "title_ratio": 1.0,
+        "authors_ratio": 1.0,
+        "authors_recall": 1.0,
+        "authors_jaccard": 1.0,
+        "first_author_agrees": true,
+        "year_delta": 0,
+        "resolved_title": "Deep learning",
+        "resolved_authors": [
+          "Yann LeCun",
+          "Yoshua Bengio",
+          "Geoffrey Hinton"
+        ],
+        "resolved_year": 2015,
+        "resolved_venue": "Nature",
+        "source": "crossref",
+        "source_url": "https://api.crossref.org/works/10.1038/nature14539",
+        "matched_doi": "10.1038/nature14539",
+        "matched_arxiv_id": null
+      },
+      "reasons": [],
+      "checked_at": "2026-11-02T19:42:55Z",
+      "input": {
+        "title": "Deep learning",
+        "authors": [
+          "LeCun, Yann",
+          "Bengio, Yoshua",
+          "Hinton, Geoffrey"
+        ],
+        "year": 2015,
+        "doi": "10.1038/nature14539",
+        "arxiv_id": null,
+        "venue": "Nature"
+      }
+    },
+    {
+      "key": "fake2019-fabricated",
+      "status": "NOT_FOUND",
+      "confidence": 0.5,
+      "resolved_by": null,
+      "evidence": {
+        "closest_title": "Translation Divergences between Sanskrit and Kannada for Machine Translation",
+        "closest_title_ratio": 0.5,
+        "closest_source": "crossref",
+        "closest_source_url": "https://api.crossref.org/works?query.bibliographic=Quantum+Attention+Transformers+for+Sanskrit+Machine+Translation&rows=8&select=DOI,title,author,issued,container-title&mailto=shubh.saxena2020@gmail.com"
+      },
+      "reasons": [
+        "nothing resembling this title exists: best match 0.50 < 0.55"
+      ],
+      "checked_at": "2026-11-02T19:42:55Z",
+      "input": {
+        "title": "Quantum Attention Transformers for Sanskrit Machine Translation",
+        "authors": [
+          "Fabricated, A.",
+          "Imaginary, B."
+        ],
+        "year": 2019,
+        "doi": null,
+        "arxiv_id": null,
+        "venue": "Journal of Nonexistent Results"
+      }
+    }
+  ]
+}

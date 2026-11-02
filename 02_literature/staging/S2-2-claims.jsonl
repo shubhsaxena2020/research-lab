@@ -1,0 +1,44 @@
+{"title": "MemGPT: Towards LLMs as Operating Systems", "year": "2023", "doi_or_arxiv": "arXiv:2310.08560"}
+{"title": "Mem0: Building Production-Ready AI Agents with Scalable Long-Term Memory", "year": "2025", "doi_or_arxiv": "arXiv:2504.19413"}
+{"title": "A-Mem: Agentic Memory for LLM Agents", "year": "2025", "doi_or_arxiv": "arXiv:2502.12110"}
+{"title": "Zep: A Temporal Knowledge Graph Architecture for Agent Memory", "year": "2025", "doi_or_arxiv": "arXiv:2501.13956"}
+{"title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models", "year": "2024", "doi_or_arxiv": "arXiv:2405.14831"}
+{"title": "From Local to Global: A Graph RAG Approach to Query-Focused Summarization", "year": "2024", "doi_or_arxiv": "arXiv:2404.16130"}
+{"title": "LightRAG: Simple and Fast Retrieval-Augmented Generation", "year": "2024", "doi_or_arxiv": "arXiv:2410.05779"}
+{"title": "RAPTOR: Recursive Abstractive Processing for Tree-Organized Retrieval", "year": "2024", "doi_or_arxiv": "arXiv:2401.18059"}
+{"title": "MemoryBank: Enhancing Large Language Models with Long-Term Memory", "year": "2023", "doi_or_arxiv": "arXiv:2305.10250"}
+{"title": "Generative Agents: Interactive Simulacra of Human Behavior", "year": "2023", "doi_or_arxiv": "arXiv:2304.03442"}
+{"title": "Memory OS of AI Agent", "year": "2025", "doi_or_arxiv": "arXiv:2506.06326"}
+{"title": "A Survey on the Memory Mechanism of Large Language Model based Agents", "year": "2024", "doi_or_arxiv": "arXiv:2404.13501"}
+{"title": "ColBERT: Efficient and Effective Passage Search via Contextualized Late Interaction over BERT", "year": "2020", "doi_or_arxiv": "arXiv:2004.12832"}
+{"title": "ColBERTv2: Effective and Efficient Retrieval via Lightweight Late Interaction", "year": "2021", "doi_or_arxiv": "arXiv:2112.01488"}
+{"title": "Dense Passage Retrieval for Open-Domain Question Answering", "year": "2020", "doi_or_arxiv": "arXiv:2004.04906"}
+{"title": "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models", "year": "2021", "doi_or_arxiv": "arXiv:2104.08663"}
+{"title": "MTEB: Massive Text Embedding Benchmark", "year": "2022", "doi_or_arxiv": "arXiv:2210.07316"}
+{"title": "Passage Re-ranking with BERT", "year": "2019", "doi_or_arxiv": "arXiv:1901.04085"}
+{"title": "Document Ranking with a Pretrained Sequence-to-Sequence Model", "year": "2020", "doi_or_arxiv": "arXiv:2003.06713"}
+{"title": "Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection", "year": "2023", "doi_or_arxiv": "arXiv:2310.11511"}
+{"title": "Corrective Retrieval Augmented Generation", "year": "2024", "doi_or_arxiv": "arXiv:2401.15884"}
+{"title": "Seven Failure Points When Engineering a Retrieval Augmented Generation System", "year": "2024", "doi_or_arxiv": "arXiv:2401.05856"}
+{"title": "Lost in the Middle: How Language Models Use Long Contexts", "year": "2023", "doi_or_arxiv": "arXiv:2307.03172"}
+{"title": "RULER: What's the Real Context Size of Your Long-Context Language Models?", "year": "2024", "doi_or_arxiv": "arXiv:2404.06654"}
+{"title": "In-Context Retrieval-Augmented Language Models", "year": "2023", "doi_or_arxiv": "arXiv:2302.00083"}
+{"title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks", "year": "2020", "doi_or_arxiv": "arXiv:2005.11401"}
+{"title": "The Power of Noise: Redefining Retrieval for RAG Systems", "year": "2024", "doi_or_arxiv": "arXiv:2401.14887"}
+{"title": "Is Semantic Chunking Worth the Computational Cost?", "year": "2024", "doi_or_arxiv": "arXiv:2410.13070"}
+{"title": "RAGAS: Automated Evaluation of Retrieval Augmented Generation", "year": "2023", "doi_or_arxiv": "arXiv:2309.15217"}
+{"title": "LongMemEval: Benchmarking Chat Assistants on Long-Term Interactive Memory", "year": "2024", "doi_or_arxiv": "arXiv:2410.10813"}
+{"title": "Evaluating Very Long-Term Conversational Memory of LLM Agents", "year": "2024", "doi_or_arxiv": "arXiv:2402.17753"}
+{"title": "MultiHop-RAG: Benchmarking Retrieval-Augmented Generation for Multi-Hop Queries", "year": "2024", "doi_or_arxiv": "arXiv:2401.15391"}
+{"title": "CRUD-RAG: A Comprehensive Chinese Benchmark for Retrieval-Augmented Generation of Large Language Models", "year": "2024", "doi_or_arxiv": "arXiv:2401.17043"}
+{"title": "LongBench: A Bilingual, Multitask Benchmark for Long Context Understanding", "year": "2023", "doi_or_arxiv": "arXiv:2308.14508"}
+{"title": "Knowledge Conflicts for LLMs: A Survey", "year": "2024", "doi_or_arxiv": "arXiv:2403.08319"}
+{"title": "Large Language Models are Zero-Shot Rankers for Recommender Systems", "year": "2023", "doi_or_arxiv": "arXiv:2305.08845"}
+{"title": "Precise Zero-Shot Dense Retrieval without Relevance Labels", "year": "2022", "doi_or_arxiv": "arXiv:2212.10496"}
+{"title": "An Analysis of Fusion Functions for Hybrid Retrieval", "year": "2022", "doi_or_arxiv": "arXiv:2210.11934"}
+{"title": "Evaluating Memory in LLM Agents via Incremental Multi-Turn Interactions", "year": "2025", "doi_or_arxiv": "arXiv:2507.05257"}
+{"title": "MemBench: Towards More Comprehensive Evaluation on the Memory of LLM-based Agents", "year": "2025", "doi_or_arxiv": "arXiv:2506.21605"}
+{"title": "HippoRAG 2: From RAG to Memory: Non-Parametric Continual Learning for Large Language Models", "year": "2025", "doi_or_arxiv": "arXiv:2502.14802"}
+{"title": "On the Theoretical Limitations of Embedding-Based Retrieval", "year": "2025", "doi_or_arxiv": "arXiv:2508.21038"}
+{"title": "Can Long-Context Language Models Subsume Retrieval, RAG, SQL, and More?", "year": "2024", "doi_or_arxiv": "arXiv:2406.13121"}
+{"title": "AbstentionBench: Reasoning LLMs Fail on Unanswerable Questions", "year": "2025", "doi_or_arxiv": "arXiv:2506.09038"}
