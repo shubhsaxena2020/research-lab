@@ -1,0 +1,240 @@
+{
+ "generated": "2026-11-02T21:51:56Z",
+ "q1_attribution": {
+  "total": 793,
+  "crossref_attributed": 690,
+  "epmc_or_pubmed_only": 103,
+  "crossref_no_psit_author_string": 0,
+  "no_affiliation_text": 1,
+  "epmc_only_examples": [
+   {
+    "doi": "10.1016/j.compbiolchem.2026.109120",
+    "title": "Advances in artificial intelligence for predictive toxicology: From QSAR and omics integra",
+    "source": "europepmc+pubmed",
+    "year": "2026"
+   },
+   {
+    "doi": "10.1038/s41598-025-11075-x",
+    "title": "An ensemble of deep learning models with falcon optimization assisted diabetic retinopathy",
+    "source": "europepmc+pubmed",
+    "year": "2026"
+   },
+   {
+    "doi": "10.1016/j.colsurfb.2026.116008",
+    "title": "Beyond the barrier: Architectural engineering of electrospun nanofibers for oral, nasal, a",
+    "source": "europepmc+pubmed",
+    "year": "2026"
+   },
+   {
+    "doi": "10.1038/s41598-026-61885-w",
+    "title": "Design and analysis of a cantilever-based MEMS switch with dielectric thin film material c",
+    "source": "europepmc+pubmed",
+    "year": "2026"
+   },
+   {
+    "doi": "10.1038/s41598-026-58227-1",
+    "title": "Energy harvesting potential of LiHfIrZ (Z = Si, Ge) quaternary Heusler alloys: a first-pri",
+    "source": "europepmc+pubmed",
+    "year": "2026"
+   },
+   {
+    "doi": "10.3791/70193",
+    "title": "Formal Verification of Blockchain Consensus Mechanisms Using Event-B.",
+    "source": "europepmc+pubmed",
+    "year": "2026"
+   },
+   {
+    "doi": "10.1016/j.compbiolchem.2025.108852",
+    "title": "From 16S rRNA to deep learning: Evolution of computational approaches in human microbiome ",
+    "source": "europepmc+pubmed",
+    "year": "2026"
+   },
+   {
+    "doi": "10.2174/0115701638396146251115115703",
+    "title": "GABA Promoter and PDE4 Inhibitor in the Management of Polycystic Ovary Syndrome: A Nutrace",
+    "source": "europepmc+pubmed",
+    "year": "2026"
+   }
+  ],
+  "crossref_no_psit_examples": []
+ },
+ "q2_false_positives": {
+  "distinct_matched_strings": 583,
+  "by_paper": {
+   "kanpur": 746,
+   "pharmacy": 400,
+   "higher_education": 21,
+   "no_city_word": 110,
+   "non_kanpur_city": 5
+  },
+  "strings_with_another_city": [
+   {
+    "string": "Department of Computer Science and Engineering, Pranveer Singh Institute of Technology, Dr. APJ Abdul Kalam Technical University, Lucknow, I",
+    "papers": 2,
+    "other_city": [
+     "lucknow"
+    ]
+   },
+   {
+    "string": "Pranveer Singh Institute of Technology, Dr. APJ Abdul Kalam Technical University, Lucknow, India.",
+    "papers": 2,
+    "other_city": [
+     "lucknow"
+    ]
+   },
+   {
+    "string": "PSIT, AKTU,Dept. of Computer Science &#x0026; Engineering,Lucknow,India",
+    "papers": 1,
+    "other_city": [
+     "lucknow"
+    ]
+   }
+  ],
+  "top_strings": [
+   {
+    "string": "Pranveer Singh Institute of Technology",
+    "papers": 35
+   },
+   {
+    "string": "Pranveer Singh Institute of Technology,Department of Computer Science and Engineering,Kanpur,India",
+    "papers": 21
+   },
+   {
+    "string": "Pranveer Singh Institute of Technology, Kanpur, India",
+    "papers": 18
+   },
+   {
+    "string": "Pranveer Singh Institute of Technology, India",
+    "papers": 16
+   },
+   {
+    "string": "PSIT-Pranveer Singh Institute of Technology (Pharmacy), Kanpur, India",
+    "papers": 9
+   },
+   {
+    "string": "Department of Electronics and Communication Engineering , Pranveer Singh Institute of Technology , Kanpur , India",
+    "papers": 9
+   },
+   {
+    "string": "PSIT-Pranveer Singh Institute of Technology (Pharmacy)",
+    "papers": 9
+   },
+   {
+    "string": "Department of Pharmacy, Pranveer Singh Institute of Technology, Kanpur, India",
+    "papers": 8
+   },
+   {
+    "string": "PSIT-Pranveer Singh Institute of Technology (Pharmacy), Bhauti Kanpur, Uttar Pradesh, India",
+    "papers": 6
+   },
+   {
+    "string": "Pranveer Singh Institute of Technology,Kanpur,India",
+    "papers": 6
+   },
+   {
+    "string": "PSIT- Pranveer Singh Institute of Technology (Pharmacy), Kanpur, India",
+    "papers": 6
+   },
+   {
+    "string": "Pranveer Singh Institute of Technology,Dept. of Computer Science and Engineering,Kanpur,India",
+    "papers": 6
+   }
+  ]
+ },
+ "q3_recall_probe": {
+  "probes": [
+   {
+    "author": "Pranay Wal",
+    "crossref_items": 100,
+    "authored_by_name": 99,
+    "already_in_dataset": 46,
+    "new_with_psit": 0,
+    "new_without_psit": 53
+   },
+   {
+    "author": "Ankita Wal",
+    "crossref_items": 100,
+    "authored_by_name": 98,
+    "already_in_dataset": 41,
+    "new_with_psit": 0,
+    "new_without_psit": 57
+   },
+   {
+    "author": "Gaurav Tiwari",
+    "crossref_items": 100,
+    "authored_by_name": 100,
+    "already_in_dataset": 13,
+    "new_with_psit": 0,
+    "new_without_psit": 87
+   }
+  ],
+  "new_with_psit_affiliation": 0,
+  "new_without_psit_affiliation": 197,
+  "unattributable_examples": [
+   {
+    "doi": "10.1016/b978-0-12-396454-0.00034-5",
+    "title": "An Overview of Adaptogens with a Special Emphasis on Withania and Rhodiola",
+    "year": 2013,
+    "has_psit_affil": false,
+    "author_probe": "Pranay Wal"
+   },
+   {
+    "doi": "10.22159/ajpcr.2018.v12i1.28533",
+    "title": "NEUROPHARMACOLOGICAL EFFECTS OF THE ETHANOLIC EXTRACT OF DERIVATIVES OF LUPEOL IN RATS",
+    "year": 2019,
+    "has_psit_affil": false,
+    "author_probe": "Pranay Wal"
+   },
+   {
+    "doi": "10.22159/ajpcr.2020.v13i9.38365",
+    "title": "VITAL POTENTIAL OF MULTIPLE HERBS IN PROPHYLAXIS OF OBESITY",
+    "year": 2020,
+    "has_psit_affil": false,
+    "author_probe": "Pranay Wal"
+   },
+   {
+    "doi": "10.1016/b978-0-12-396454-0.00034-5",
+    "title": "An Overview of Adaptogens with a Special Emphasis on Withania and Rhodiola",
+    "year": 2013,
+    "has_psit_affil": false,
+    "author_probe": "Ankita Wal"
+   },
+   {
+    "doi": "10.22159/ajpcr.2018.v12i1.28533",
+    "title": "NEUROPHARMACOLOGICAL EFFECTS OF THE ETHANOLIC EXTRACT OF DERIVATIVES OF LUPEOL IN RATS",
+    "year": 2019,
+    "has_psit_affil": false,
+    "author_probe": "Ankita Wal"
+   },
+   {
+    "doi": "10.22159/ajpcr.2020.v13i9.38365",
+    "title": "VITAL POTENTIAL OF MULTIPLE HERBS IN PROPHYLAXIS OF OBESITY",
+    "year": 2020,
+    "has_psit_affil": false,
+    "author_probe": "Ankita Wal"
+   },
+   {
+    "doi": "10.14257/ijsip.2015.8.6.10",
+    "title": "A Review on Robust Watermarking with its Applications and Comparative Analysis",
+    "year": 2015,
+    "has_psit_affil": false,
+    "author_probe": "Gaurav Tiwari"
+   },
+   {
+    "doi": "10.22214/ijraset.2021.35885",
+    "title": "Android App: Appno ki Madad (AKM)",
+    "year": 2021,
+    "has_psit_affil": false,
+    "author_probe": "Gaurav Tiwari"
+   },
+   {
+    "doi": "10.31031/mapp.2018.02.000527",
+    "title": "\"Total Quality Management: A Requisite Approach  to Improve Research\"",
+    "year": 2018,
+    "has_psit_affil": false,
+    "author_probe": "Gaurav Tiwari"
+   }
+  ],
+  "missed_examples": []
+ }
+}

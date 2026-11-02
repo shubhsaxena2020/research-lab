@@ -1,6 +1,6 @@
 # STATUS S1-foundations
-last_update: 2026-11-03 04:50 IST
-state: **DONE** (Part A complete; Part B complete on the data that was reachable; 3 APIs blocked and documented)
+last_update: 2026-11-03 05:55 IST
+state: **DONE for this session's scope** — Part A complete; Part B complete on reachable data; Crossref filter/coverage audited; 3 APIs blocked and documented (evidence files). Nothing below is ticked without a check.
 
 ## DONE
 Part A (00_foundations), verified by `00_foundations/verify_foundations.py` -> `logs/verify_foundations.json`:
@@ -40,7 +40,7 @@ Part B (01_psit_data):
 - DBLP — 429 / connection reset (`raw/dblp_unavailable.json`).
 - Therefore: `open_access` and `in_dblp` columns are empty; institution works_count (1412) could not be
   reconciled with our 793; the 721 affiliation-string probe reading remains a single unharvested reading.
-- No manual 100-record audit of affiliation correctness (listed in BACKLOG as open).
+- Affiliation correctness: no manual 100-record read, but the filter was audited programmatically (see Third pass) — precision and a bounded recall probe, both reproducible.
 
 ## Open problems for the next session
 1. OpenAlex after 00:00 UTC: `python 01_psit_data/scripts/harvest_openalex.py`. This is the single highest-value next step
@@ -60,4 +60,19 @@ Part B (01_psit_data):
 - [x] `AI-RESEARCH-AT-PSIT.md`: "0 of 168 at a named AI venue" scoped (denominator, 21-name regex, limits, one-line reproducer);
       "evaluation discipline is thin" replaced by a counted abstract audit (`scripts/ai_abstract_audit.py`, `raw/ai_abstract_audit.json`:
       3/108 baseline, 0/108 seeds).
-- [x] `06_review/STUDENT-DIGEST-S1.md` written (<= 1 page).
+- [x] `06_review/STUDENT-DIGEST-S1.md` written, then tightened to one page (see Third pass).
+
+## Third pass, 2026-11-03 05:55 IST (gateway disconnect recovery + head checkpoint 2)
+- [x] Reality check first: re-read STATUS/DIRECTIVES/HEAD-REVIEW and listed every file on disk before touching anything.
+- [x] **Crossref filter + coverage audit** — new `scripts/audit_crossref.py` -> `raw/crossref_audit.json`, written up in
+      `COVERAGE-COMPARISON.md` §6. Results: 690 records attribute via a Crossref-deposited PSIT affiliation, 103 via
+      Europe PMC/PubMed only, 0 Crossref records without a PSIT author string, 1 with no affiliation text at all.
+      583 distinct matched affiliation strings; 5 non-Kanpur hits are all PSIT + AKTU Lucknow (its affiliating university),
+      so **0 false positives found**. Recall probe on the 3 most prolific authors (Crossref `query.author`, 100 items each):
+      **0 missed PSIT-attributed papers**, 197 items by the same people at other affiliations. This also explains the head's
+      checkpoint-2 anomaly (2/12 with no PSIT string in Crossref): those are Europe PMC-route records.
+- [x] `06_review/claims_evidence.md` present and checked on disk: 20 claims, 17 SUPPORTED / 3 PARTLY (all three corrected
+      in the foundation docs) / 0 NOT SUPPORTED.
+- [x] `06_review/STUDENT-DIGEST-S1.md` tightened from 945 to ~650 words so it fits one page.
+- [ ] Still open: OpenAlex harvest (needs 00:00 UTC or a key — the key is Shubh's decision per head checkpoint 2, do not sign up with his email);
+      S2/DBLP enrichment; entity attribution PSIT vs CHE vs Pharmacy; a human 100-record read if the head wants one.

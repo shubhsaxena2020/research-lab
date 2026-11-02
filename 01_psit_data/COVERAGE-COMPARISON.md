@@ -104,6 +104,18 @@ The OpenAlex budget resets at 00:00 UTC (05:30 IST). Then run `python 01_psit_da
 
 Semantic Scholar needs a free key; `enrich_s2_dblp.py` then fills `in_s2`, `s2_citation_count` and `oa_pdf_url` for all 793 DOIs, but discovers nothing new. DBLP needs a polite User-Agent and about one request per second — a convention, not a quoted limit, since its FAQ sits behind a bot check here.
 
+## 6. Audit of the filter and of coverage (run 2026-11-03, after head checkpoint 2)
+
+Script: `scripts/audit_crossref.py` -> `raw/crossref_audit.json`. Three questions, three computations. Nothing here is estimated.
+
+**Q1 - Is every record's PSIT evidence traceable to a source?** Of 793 records: **690** carry a PSIT author-affiliation string deposited in Crossref, **103** come only from Europe PMC/PubMed, **0** are Crossref records lacking a PSIT author string, and **1** has no affiliation text at all. The head's checkpoint-2 anomaly (2 of 12 sampled records had title and year right but no PSIT string in Crossref) is therefore explained by the Europe PMC route, not by a bad filter: Europe PMC indexes the publisher's affiliation even where the Crossref deposit omits it. Example: `10.1038/s41598-025-11075-x` (source `europepmc+pubmed`).
+
+**Q2 - Does the regex fire on a different institution (false positives)?** The 793 records contain **583 distinct matched affiliation strings**. By paper-match: 746 mention Kanpur, 400 mention Pharmacy, 21 mention Higher Education, and **5 name another city - all Lucknow, and all in strings that read "Pranveer Singh Institute of Technology, Dr. APJ Abdul Kalam Technical University, Lucknow"**, i.e. PSIT plus its affiliating university, not a different PSIT. **No false positive was found.** Honest limit: this classifier reads city and institution words, and only the top 12 strings were read by eye; it is not a line-by-line reading of all 583.
+
+**Q3 - What does the filter miss (recall)?** The three most prolific PSIT author strings were probed with Crossref `query.author` (top 100 relevance-ranked items each): 99, 98 and 100 items authored by the named person; 46, 41 and 13 already in our dataset; **new items carrying a PSIT affiliation string: 0**; new items without any PSIT string: **197** (the same people publishing from other affiliations). So no PSIT-attributed paper surfaced that we lack. Limits: Crossref returned at most 100 items per author and ranks them by relevance, so this is a bounded probe, not a census; and a paper whose publisher deposited no affiliation is invisible to this method whether we look or not.
+
+**What the audit does not settle.** Publishers that deposit no affiliation strings at all (invisible to both Crossref and this regex); books, book chapters and regional conference proceedings that never reached Crossref; and the 1,412 works on the OpenAlex institution node, which still cannot be reconciled without an OpenAlex harvest.
+
 ## Sources
 
 1. Crossref REST API documentation, `query.affiliation` — https://github.com/CrossRef/rest-api-doc — retrieved 2026-11-03.
@@ -123,6 +135,6 @@ Semantic Scholar needs a free key; `enrich_s2_dblp.py` then fills `in_s2`, `s2_c
 - **Solid.** The 1,412 figure, institution name and ROR id are copied from the cached OpenAlex record.
 - **UNCERTAIN.** The 721 is one probe reading with no saved body and no results page; it cannot be re-checked today and must never be quoted as "OpenAlex has 721 PSIT papers".
 - **UNCERTAIN.** Semantic Scholar's and DBLP's search behaviour rests on their API design and our scripts, not a docs page we could load; certain only that neither was queried successfully.
-- **UNCERTAIN.** Whether the 1,412 covers both campuses is unresolved — the node's name says pharmacy, its alternatives say the plain institute. Precision of the affiliation match is also unmeasured; the four surviving duplicate groups prove the rule has holes, and their number is a floor.
+- **PARTLY MEASURED (2026-11-03).** Precision was audited in §6: 583 distinct matched strings, no match to another institution, the only non-Kanpur hits being PSIT's affiliating university (AKTU Lucknow). Recall was probed on the three most prolific authors: 0 missed PSIT-attributed papers within a 100-item-per-author window. Whether the 1,412 OpenAlex works cover both campuses remains unresolved.
 
 last_updated: 2026-11-03
