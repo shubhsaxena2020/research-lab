@@ -1,0 +1,26 @@
+# SESSION S1 — Foundations + PSIT public data. You are the lead; use `delegate_task` with up to 9 concurrent subagents. No questions: decide and proceed.
+
+Project: C:\Users\shubh\research-lab (read README.md and RULES.md first; RULES.md is binding). Python: use system `python` (stdlib + requests if present; ask for nothing else; write plain scripts).
+Resume protocol: read sessions\S1-foundations\STATUS.md and BACKLOG.md first; continue unchecked items; update STATUS.md every ~15 min. Also read orchestration\DIRECTIVES.md / HEAD-REVIEW.md when they exist.
+Audience for outputs: Shubh, first-semester BCA student at PSIT CHE (Kanpur), exam period, smart but new to research. Plain English, short paragraphs, concrete examples, no jargon without a definition.
+
+## Part A — 00_foundations (write these; each subagent owns one file; every factual claim cites a verified public source with URL in a "Sources" list; mark anything uncertain as UNCERTAIN)
+A1 WHAT-IS-A-PAPER.md: what a research paper is, parts (abstract..references), types (survey, empirical, position, resource/dataset, negative-result, short/workshop paper), what counts as a contribution, what "novelty" really means, reproducibility.
+A2 HOW-TO-WRITE-ONE.md: end-to-end workflow from idea to submission: literature review, research question, hypotheses, experiments, writing order, figures, LaTeX/Overleaf, common mistakes, a realistic 2-week and a realistic 3-month timeline for a first paper.
+A3 VENUES-AND-PUBLISHING.md: arXiv (endorsement rules), workshops vs conferences vs journals, tiers/CORE ranks, how acceptance works, double-blind review, rebuttal, camera-ready, registration/travel/visa reality, student tracks and student workshops in AI, fully-funded options; predatory venues: how to spot them; Indian context (UGC-CARE, Scopus/WoS indexing, AICTE/NIRF relevance). Give 10 realistic target venue types for an undergraduate first-author paper with typical deadlines pattern (verify from venue sites; mark date-sensitive info with retrieval date).
+A4 ETHICS-AND-AI-USE.md: authorship, plagiarism, self-plagiarism, data/ethics review, disclosure of AI assistance (quote the actual policies of arXiv, ACM, IEEE, NeurIPS/ICML/ACL as of today with URLs), why fabricated citations/results end careers, how to use AI tools legitimately in research.
+A5 WHAT-A-PAPER-DOES-FOR-YOU.md: honest, non-hype effects on a BCA student's life: MCA/MS/PhD admissions, scholarships, internships, GATE/CAT context, research internships (IITs, IISc, Google/Microsoft research programs, DAAD/MITACS-style programs) with eligibility notes (age/year rules; Shubh is 17, born Dec 2008: flag programs with 18+ rules), what a paper does NOT guarantee; costs/time versus exams; how to balance with a first-sem BCA schedule.
+A6 GLOSSARY.md (60+ terms) and READING-LIST.md (15 beginner-friendly "how to read/write papers" resources, verified URLs).
+
+## Part B — 01_psit_data (PUBLIC data only; see RULES.md rule 7-8)
+Institution: Pranveer Singh Institute of Technology (PSIT), Kanpur, incl. "PSIT College of Higher Education" (CHE) — find out and document which names/ROR/OpenAlex ids correspond to which entity; do not merge distinct institutions without evidence.
+B1 OpenAlex: find institution ids; pull ALL works, authors, years, venues, concepts, citation counts, open-access status, DOIs; save raw JSON in 01_psit_data\raw\ and a clean papers.csv (title, year, doi, venue, type, authors, PSIT-affiliated authors, cited_by, concepts).
+B2 Semantic Scholar + Crossref + DBLP cross-check: for the same affiliation, find papers not in OpenAlex; report coverage differences; merge with a `source` column and de-duplicate by DOI/title.
+B3 PSIT public website: R&D / research / publications / patents / conferences / IQAC/NAAC/NIRF public documents; extract research-output numbers the institute itself publishes (NIRF/NAAC SSR publications counts, patents, funded projects); save source PDFs' URLs + extracted figures with page refs.
+B4 Analysis: papers per year, per department/topic, AI/CS share, venue types, indexing (Scopus/WoS where determinable), top authors, citation distribution, collaboration, open access; produce tables + simple charts (matplotlib if installed, else CSV/markdown tables) in 01_psit_data\analysis\.
+B5 STATUS-OF-RESEARCH.md: what is KNOWN (published counts with dates and method), what is UNKNOWN/UNAVAILABLE publicly (ongoing projects, papers under review, internal monitoring/"under surveillance"), and why; plus drafts\EMAIL-TO-PSIT-RnD-CELL.md: a polite, specific email Shubh can send to get the internal info, plus questions to ask a faculty mentor about student research and AI-research opportunities at PSIT.
+B6 01_psit_data\subfolder_ai_research\: PSIT's AI-related public output (title list + abstracts' topics), which faculty/labs work on AI (public pages), existing PSIT AI strengths and gaps → one-page "where could a student contribute".
+Every number must say how it was computed and date it; provide the script that reproduces it (01_psit_data\scripts\).
+
+## Finish
+Keep going through the backlog until done or STOP exists or ~3 h elapsed. Write 06_review\STUDENT-DIGEST-S1.md (what you learned and found, in 1 page). Final: update STATUS.md with DONE/NOT DONE and open problems. Verify before claiming (re-run scripts, open files).

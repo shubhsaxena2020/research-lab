@@ -1,0 +1,21 @@
+# SESSION S2 — AI literature survey, gap mining, topic selection. You are the lead; use `delegate_task` with up to 9 concurrent subagents. No questions: decide and proceed.
+
+Project: C:\Users\shubh\research-lab (read README.md and RULES.md first; RULES.md is binding). Resume protocol: read sessions\S2-literature\STATUS.md + BACKLOG.md first; update STATUS.md every ~15 min.
+Read orchestration\DIRECTIVES.md and HEAD-REVIEW.md when they exist. Audience: Shubh (first-sem BCA student); constraints below shape what topics are realistic.
+
+## Constraints that define a good topic
+- Hardware: ONE Windows laptop (48 GB RAM, Core Ultra 5 225H, Intel Arc iGPU, no CUDA) + an old second laptop; plus an API endpoint to a strong LLM (DeepSeek-v4.1-Flash class) for dev-time experiments. No GPU cluster. Budget ~0.
+- Time: 1-2 weeks of agent-assisted work, then ~weeks of polishing by the student. So: small-scale, rigorous, reproducible experiments on PUBLIC data and open models/benchmarks.
+- Must be genuinely defensible: a clear research question, a real gap (documented), a fair baseline, an honest ablation, limitations. A modest, correct, well-measured contribution beats a grand unverified claim.
+- Student assets that may INSPIRE a topic (never use their private data): (1) a local agent-memory / retrieval system with abstention ("say I don't know") under a strict RAM budget on consumer hardware, built and measured this week (see C:\Users\shubh\ai-memory-core\docs\PRIOR-ART.md and work\FINAL-HANDOFF.md, READ ONLY); (2) a scam/fraud-message detector (TrustShield) that reached a national student finals; (3) multi-agent orchestration with independent reviewer gates. Prefer topics where such real experience gives an edge, using public benchmarks for evaluation.
+
+## Backlog (each subagent owns one output file; every citation verified per RULES.md rule 1 and appended to 02_literature\verified_citations.csv: id,title,authors,year,venue,url,doi_or_arxiv,retrieved_on,verified_by_command)
+S2-1 LANDSCAPE.md: map of AI research areas active 2025-2026 (agents, RAG/memory, evaluation, reasoning, small/efficient models, safety/robustness, multilingual/Indic NLP, on-device AI, scam/misinformation detection, code, data-centric AI...). For each: what's hot, key venues, 5-8 verified landmark papers, open problems, entry difficulty for a student.
+S2-2..S2-7 DEEP-DIVES: six subagents, one per shortlisted area (agent memory & retrieval; abstention/calibration/hallucination; efficient on-device inference; evaluation methodology/benchmarks for agents; Indic/low-resource NLP; scam & misinformation detection). Each: 25+ verified papers read at abstract+intro+results level, taxonomy, what is saturated vs open, reproducible public benchmarks/datasets with licenses, baselines that can run on this hardware.
+S2-8 GAP-MINING.md: from the deep-dives extract 15+ concrete, testable gaps; for each: research question, why unanswered, how to test cheaply, expected failure modes.
+S2-9 CANDIDATES.md: 5 candidate paper topics, each with: title, RQ, hypotheses, method, datasets (public, licensed), baselines, metrics, compute need, 1-week experiment plan, risks, novelty evidence, venue fit (workshop/student track/arXiv), "can a first-year student explain and defend this?" (1-5), rubric scores. Rubric: novelty 25 / feasibility on this hardware 25 / rigor-defensibility 20 / evidence of real gap 15 / personal edge 10 / venue fit 5.
+NOVELTY-CHECK.md for the top 2: >=30 documented search queries across arXiv/Semantic Scholar/OpenAlex/Crossref with result counts and the closest 10 prior works each; state honestly whether the idea is novel, incremental, or already done.
+Then: 03_topics\SELECTED.md (rank 1, plus runner-up) and 03_topics\PROPOSAL.md (2 pages: question, hypotheses, protocol outline, baselines, metrics, timeline, risks, what we will NOT claim). Do not start experiments; S3 does, after head approval. Write 06_review\STUDENT-DIGEST-S2.md (1 page: the field in plain language, why this topic, what to read first).
+
+## Finish
+Verify before claiming: spot-check 20 random citations by re-resolving them. Report any that fail and remove them. Update STATUS.md with DONE/NOT DONE. Stop when done, on STOP, or ~3 h.

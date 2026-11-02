@@ -1,0 +1,22 @@
+# SESSION S3 — Paper pipeline, citation verifier, experiment harness, simulated peer review. You are the lead; use `delegate_task` with up to 9 concurrent subagents. No questions: decide and proceed.
+
+Project: C:\Users\shubh\research-lab (read README.md and RULES.md first; RULES.md is binding). Resume protocol: read sessions\S3-experiments\STATUS.md + BACKLOG.md first; update STATUS.md every ~15 min.
+Read orchestration\DIRECTIVES.md and HEAD-REVIEW.md when they exist. You may import the system python only (plus numpy/pandas/matplotlib/scikit-learn if already installed; else request via sessions\S3-experiments\NEEDS_DEPS.md and continue without).
+
+## Phase 1 (topic-independent; start now)
+S3-1 tools\verify_citations.py: reads a BibTeX/CSV of citations, resolves each by DOI (Crossref), arXiv id (arXiv API) or title (OpenAlex/Semantic Scholar), compares title/authors/year fuzzily, outputs VERIFIED / MISMATCH / NOT_FOUND with evidence; polite rate limits; caches. Unit tests with known-good and fake citations (fake ones must be caught).
+S3-2 tools\check_numbers.py: scans a draft for every number/percent/table value and checks each is traceable to a results file listed in 04_experiments\RESULTS-INDEX.json (name->file->key); flags untraceable numbers.
+S3-3 05_paper\template\: venue-agnostic LaTeX (article + IEEE-style + ACL/NeurIPS-workshop-style stubs; note exact official template sources and licenses, do not copy them verbatim without licence) and a Markdown draft skeleton, bib file, figure/table scripts that read ONLY from results files; a build script (documents what to install; do not install).
+S3-4 04_experiments\harness\: reproducible experiment runner template: fixed seeds, config files, run folders with git-hash/env capture, timing, RAM use, JSON results, CI-style rerun check ("rerun gives same numbers within tolerance"), statistical tools (bootstrap CIs, paired tests, effect sizes, multiple-comparison note), ablation-table generator. Tests included.
+S3-5 06_review\PEER-REVIEW-SIM.md + tools\simulate_review.py: six reviewer personas (methodologist, domain expert, statistician, skeptic of novelty, reproducibility reviewer, writing/clarity reviewer) with a scoring rubric modelled on public NeurIPS/ACL review forms (cite them); script that feeds a draft section to a persona prompt and stores structured reviews; plus a meta-review template.
+S3-6 06_review\ORIGINALITY.md: a concrete procedure for text-overlap checks using only free/local methods (n-gram overlap against the verified source texts, quotation audit), and an AI-disclosure statement template per venue policy (use A4 findings from sessions S1 when they exist: 00_foundations\ETHICS-AND-AI-USE.md).
+S3-7 06_review\CLAIMS-AUDIT-TEMPLATE.md: claim | evidence file | command | verified? | limitation — and the rule that the paper's abstract/intro claims must each map to a row.
+S3-8 STUDENT-DIGEST tooling: tools\make_digest.py generating a 1-page plain-English digest per paper section (what it says, why, what could be asked at a talk, 5 likely questions + honest answers).
+
+## Phase 2 (only when 03_topics\SELECTED.md exists AND orchestration\HEAD-REVIEW.md contains the line `TOPIC APPROVED`)
+S3-9 04_experiments\PROTOCOL.md pre-registration: hypotheses, datasets, baselines, metrics, sample sizes, seeds, analysis plan, stopping rules, what counts as failure — frozen with a hash BEFORE running anything.
+Then run the experiments through the harness (heavy runs one at a time via ops\HEAVY.lock), write results to 04_experiments\results\, build figures/tables from results only, draft the paper in 05_paper\draft\ section by section (each section by a different subagent, then an editing pass by another), run verify_citations.py, check_numbers.py, simulate_review.py (>=2 rounds, address every substantive review point or rebut with evidence), originality check, claims audit, STUDENT-DIGEST. Draft is "DONE" only when: all citations VERIFIED, all numbers traceable, claims-audit rows all verified, reruns reproduce, limitations section honest.
+If Phase 2 is not yet unlocked, spend remaining time hardening Phase 1 tools (more tests, edge cases) and dry-running the pipeline end-to-end on a TOY example kept under 04_experiments\toy\ (clearly labelled toy, never cited as a result).
+
+## Finish
+Verify by running everything you claim. Update STATUS.md with DONE/NOT DONE. Stop when done, on STOP, or ~3 h.
