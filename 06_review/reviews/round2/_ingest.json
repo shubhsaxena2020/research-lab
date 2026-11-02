@@ -1,0 +1,68 @@
+{
+  "generated_at": "2026-11-02T20:59:18Z",
+  "directory": "06_review/reviews/round2",
+  "n_reviews": 2,
+  "missing_personas": [
+    "methodologist",
+    "domain_expert",
+    "novelty_skeptic",
+    "clarity_reviewer"
+  ],
+  "reviews": [
+    {
+      "persona": "statistician",
+      "summary": "The revision now reports the BCa interval per configuration and states n=3 in the\nabstract. With that, the comparison reads honestly: the intervals overlap slightly and\nthe note does not claim significance.",
+      "strengths": [
+        "The abstract now states n=3 and the Results give the BCa interval per configuration.",
+        "The sign-test floor is stated rather than hidden."
+      ],
+      "weaknesses": [
+        "The per-seed values are still only summarised, not tabulated."
+      ],
+      "questions": [
+        "Do the intervals still overlap if you use percentile rather than BCa?"
+      ],
+      "soundness": 3,
+      "presentation": 3,
+      "contribution": 1,
+      "confidence": 4,
+      "overall": 5,
+      "decision": "borderline",
+      "must_fix": [
+        {
+          "claim": "The per-seed values behind 'higher on every paired seed' are not shown.",
+          "where": "Results",
+          "evidence_needed": "Add the per-run accuracies from runs/*/results.json, or a table row per seed."
+        }
+      ],
+      "_file": "statistician.review.yaml"
+    },
+    {
+      "persona": "reproducibility_reviewer",
+      "summary": "The uncertainty gap is fixed. The note still does not give the command that reproduces\nthe table, so a reader cannot rerun it from a clean checkout.",
+      "strengths": [
+        "Intervals and n are now reported."
+      ],
+      "weaknesses": [
+        "No reproducing command."
+      ],
+      "questions": [
+        "Which command regenerates the table?"
+      ],
+      "soundness": 3,
+      "presentation": 3,
+      "contribution": 1,
+      "confidence": 5,
+      "overall": 5,
+      "decision": "borderline",
+      "must_fix": [
+        {
+          "claim": "The note never states the exact command that reproduces the table.",
+          "where": "Method",
+          "evidence_needed": "Add the run command (python 04_experiments/toy/run_toy.py) and the aggregate command."
+        }
+      ],
+      "_file": "reproducibility_reviewer.review.yaml"
+    }
+  ]
+}

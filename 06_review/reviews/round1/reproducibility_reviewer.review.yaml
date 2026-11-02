@@ -1,0 +1,26 @@
+persona: reproducibility_reviewer
+summary: |
+  The pipeline records provenance well: every number traces to a run folder with a git hash,
+  a config copy and a seed. What is missing from the note itself is the command a reader
+  would run, and any statement of what is not reproducible.
+strengths:
+  - "Each number carries a traceability marker resolvable to a committed results file."
+  - "Seeds and hyperparameters live in a config file that is copied into the run folder."
+weaknesses:
+  - "No command line is given for reproducing the table or the figure."
+  - "No data availability statement: a reader cannot tell that the data is generated, not collected."
+questions:
+  - "Which command regenerates the reported numbers from a clean checkout?"
+soundness: 3
+presentation: 3
+contribution: 1
+confidence: 5
+overall: 5
+decision: borderline
+must_fix:
+  - claim: "The accuracy comparison is presented without any uncertainty: n=3 seeds and no interval per configuration."
+    where: "Results, paragraph 1 and the abstract"
+    evidence_needed: "Report the BCa 95% CI per configuration (summary_toy.json stats.*.ci95) and state n=3 in the abstract, or drop the comparison."
+  - claim: "The note never states the exact command that reproduces the table."
+    where: "Method"
+    evidence_needed: "Add the run command (python 04_experiments/toy/run_toy.py) and the aggregate command."

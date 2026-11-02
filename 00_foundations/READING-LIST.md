@@ -1,5 +1,17 @@
 # Reading list — 15 places to learn how to read and write papers
 
+> **READ THIS FIRST — 10 lines**
+> 1. This page is fifteen free things to read about reading and writing papers, in the order that helps most, each with a reading time and a difficulty.
+> 2. The one thing: if you have one hour, read [1] (35 minutes) then [2] (15 minutes) and you have a working method today.
+> 3. Read it today, before your first paper, then come back to it when you start drafting.
+> 4. Skip on a first pass: items 6-8 (writing-style guides) and 15 (the Transformer explainer); they are for later stages.
+> 5. Fifteen items, all free, every URL checked on 2026-11-03, and every one carries a stated reading time.
+> 6. The one-hour path: [1] How to Read a Paper at 35 minutes, plus [2] at 15 minutes.
+> 7. Two weeks before you submit, read [3], [5] and [10] and edit the draft against them.
+> 8. Item [10] is the NeurIPS 2026 reviewer guidelines, 30 minutes, and it is the clearest public statement of what reviewers judge.
+> 9. Date-sensitive: item [10] is year-stamped (2026) and its guidelines change each cycle, and links rot, so re-check before relying on one.
+> 10. Full read about 11 minutes (2,400 words) to read the list itself; the one-hour path is items [1] and [2].
+
 **What this page is for:** fifteen things worth reading, in the order that helps most, so you are not guessing. Each one is free to read, was checked with a live request on 2026-11-03, and says how long it takes and how hard it is.
 
 **If you only have one hour:** read [1] (35 minutes) and [2] (15 minutes). That pair gives you a working method for reading a paper today.

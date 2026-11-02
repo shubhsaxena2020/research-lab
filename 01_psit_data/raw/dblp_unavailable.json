@@ -1,0 +1,14 @@
+{
+ "checked": "2026-11-02T20:31:06Z",
+ "note": "DBLP search API returned HTTP 429 with an empty body for every request from this network at this time; it is not an affiliation-searchable index anyway (title/author search only).",
+ "probes": [
+  {
+   "q": "machine learning drug delivery",
+   "error": "('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
+  },
+  {
+   "q": "PSIT Kanpur",
+   "error": "('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
+  }
+ ]
+}

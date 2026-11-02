@@ -1,0 +1,28 @@
+persona: statistician
+summary: |
+  The note compares a centroid baseline with a logistic classifier on a synthetic task and
+  reports two means to four decimals. With three paired seeds the sign test cannot reach
+  significance, which the draft does admit. My objection is that the headline numbers still
+  appear without intervals, so a reader cannot see how much of the gap is seed noise.
+strengths:
+  - "The Results section states the smallest attainable two-sided sign-test p-value (0.50) rather than reporting a meaningless p."
+  - "Limitations openly says three seeds is too few for a confidence interval to be trusted."
+weaknesses:
+  - "The abstract quotes 0.8704 and 0.8852 to four decimals with no interval and no run count."
+  - "The claim 'the treatment is higher on every paired seed' is true but n=3 makes it weak evidence; the draft does not give the per-seed values."
+questions:
+  - "What are the three per-seed accuracies for each configuration?"
+  - "What is the BCa interval for each mean, and what does it span at n=3?"
+soundness: 3
+presentation: 3
+contribution: 1
+confidence: 4
+overall: 4
+decision: borderline
+must_fix:
+  - claim: "The accuracy comparison is presented without any uncertainty: n=3 seeds and no interval per configuration."
+    where: "Results, paragraph 1 and the abstract"
+    evidence_needed: "Report the BCa 95% CI per configuration (summary_toy.json stats.*.ci95) and state n=3 in the abstract, or drop the comparison."
+  - claim: "The per-seed values behind 'higher on every paired seed' are not shown."
+    where: "Results"
+    evidence_needed: "Add the per-run accuracies from runs/*/results.json, or a table row per seed."

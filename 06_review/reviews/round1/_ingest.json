@@ -1,0 +1,108 @@
+{
+  "generated_at": "2026-11-02T20:58:07Z",
+  "directory": "06_review/reviews/round1",
+  "n_reviews": 3,
+  "missing_personas": [
+    "methodologist",
+    "domain_expert",
+    "novelty_skeptic"
+  ],
+  "reviews": [
+    {
+      "persona": "statistician",
+      "summary": "The note compares a centroid baseline with a logistic classifier on a synthetic task and\nreports two means to four decimals. With three paired seeds the sign test cannot reach\nsignificance, which the draft does admit. My objection is that the headline numbers still\nappear without intervals, so a reader cannot see how much of the gap is seed noise.",
+      "strengths": [
+        "The Results section states the smallest attainable two-sided sign-test p-value (0.50) rather than reporting a meaningless p.",
+        "Limitations openly says three seeds is too few for a confidence interval to be trusted."
+      ],
+      "weaknesses": [
+        "The abstract quotes 0.8704 and 0.8852 to four decimals with no interval and no run count.",
+        "The claim 'the treatment is higher on every paired seed' is true but n=3 makes it weak evidence; the draft does not give the per-seed values."
+      ],
+      "questions": [
+        "What are the three per-seed accuracies for each configuration?",
+        "What is the BCa interval for each mean, and what does it span at n=3?"
+      ],
+      "soundness": 3,
+      "presentation": 3,
+      "contribution": 1,
+      "confidence": 4,
+      "overall": 4,
+      "decision": "borderline",
+      "must_fix": [
+        {
+          "claim": "The accuracy comparison is presented without any uncertainty: n=3 seeds and no interval per configuration.",
+          "where": "Results, paragraph 1 and the abstract",
+          "evidence_needed": "Report the BCa 95% CI per configuration (summary_toy.json stats.*.ci95) and state n=3 in the abstract, or drop the comparison."
+        },
+        {
+          "claim": "The per-seed values behind 'higher on every paired seed' are not shown.",
+          "where": "Results",
+          "evidence_needed": "Add the per-run accuracies from runs/*/results.json, or a table row per seed."
+        }
+      ],
+      "_file": "statistician.review.yaml"
+    },
+    {
+      "persona": "reproducibility_reviewer",
+      "summary": "The pipeline records provenance well: every number traces to a run folder with a git hash,\na config copy and a seed. What is missing from the note itself is the command a reader\nwould run, and any statement of what is not reproducible.",
+      "strengths": [
+        "Each number carries a traceability marker resolvable to a committed results file.",
+        "Seeds and hyperparameters live in a config file that is copied into the run folder."
+      ],
+      "weaknesses": [
+        "No command line is given for reproducing the table or the figure.",
+        "No data availability statement: a reader cannot tell that the data is generated, not collected."
+      ],
+      "questions": [
+        "Which command regenerates the reported numbers from a clean checkout?"
+      ],
+      "soundness": 3,
+      "presentation": 3,
+      "contribution": 1,
+      "confidence": 5,
+      "overall": 5,
+      "decision": "borderline",
+      "must_fix": [
+        {
+          "claim": "The accuracy comparison is presented without any uncertainty: n=3 seeds and no interval per configuration.",
+          "where": "Results, paragraph 1 and the abstract",
+          "evidence_needed": "Report the BCa 95% CI per configuration (summary_toy.json stats.*.ci95) and state n=3 in the abstract, or drop the comparison."
+        },
+        {
+          "claim": "The note never states the exact command that reproduces the table.",
+          "where": "Method",
+          "evidence_needed": "Add the run command (python 04_experiments/toy/run_toy.py) and the aggregate command."
+        }
+      ],
+      "_file": "reproducibility_reviewer.review.yaml"
+    },
+    {
+      "persona": "clarity_reviewer",
+      "summary": "Short and readable, with an honest limitations paragraph. The abstract is the weakest part:\nit states two numbers and stops, so a reader does not learn what the comparison means or\nthat the difference is not significant.",
+      "strengths": [
+        "Sentence-level writing is clear and the Limitations section is unusually honest."
+      ],
+      "weaknesses": [
+        "The abstract makes a comparison with no indication that the difference is within noise."
+      ],
+      "questions": [
+        "Can the abstract say in one clause that the difference is not significant at n=3?"
+      ],
+      "soundness": 3,
+      "presentation": 2,
+      "contribution": 1,
+      "confidence": 4,
+      "overall": 4,
+      "decision": "borderline",
+      "must_fix": [
+        {
+          "claim": "The accuracy comparison is presented without any uncertainty: n=3 seeds and no interval per configuration.",
+          "where": "Results, paragraph 1 and the abstract",
+          "evidence_needed": "Report the BCa 95% CI per configuration (summary_toy.json stats.*.ci95) and state n=3 in the abstract, or drop the comparison."
+        }
+      ],
+      "_file": "clarity_reviewer.review.yaml"
+    }
+  ]
+}

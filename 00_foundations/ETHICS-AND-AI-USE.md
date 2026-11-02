@@ -1,11 +1,23 @@
 # Ethics and AI use: what is actually allowed
 
+> **READ THIS FIRST — 10 lines**
+> 1. This page is the rules that decide whether a paper is publishable or a liability: authorship, plagiarism, data, and AI use.
+> 2. The one thing: AI cannot be an author anywhere, and each venue wants the disclosure in a different place.
+> 3. Read it before you let any AI tool touch your text, and before you agree who the authors are.
+> 4. Skip on a first pass: §5 the case histories, and the GDPR and dataset-licence paragraphs in §4.
+> 5. IEEE wants the tool, version, date and sections named, for example "ChatGPT (GPT-5.2), accessed 12 October 2026".
+> 6. Fabricated references are measurable: about 1 in 277 PubMed-indexed papers in early 2026, up from 1 in 2,828 in 2023.
+> 7. You are legally a child until December 2026; India's DPDP Act section 9(1) requires verifiable parental consent.
+> 8. A similarity score is not a verdict: 22% can be all references and boilerplate, while 4% can hide one stolen paragraph.
+> 9. Date-sensitive: the venue policies quoted here, read on 2026-11-03 (ACM rewrote its own on 14 May 2026 and will again).
+> 10. Full read about 26 minutes (5,700 words); the skim path in item 4 about 23 minutes.
+
 **What this page is for:** the rules that decide whether a paper is publishable or a liability — who counts as an author, what plagiarism means in 2026, when you need ethics approval, and where AI tools are allowed. Every venue policy below is quoted word-for-word from the live page on 2026-11-03 with its URL, so you can check it. Text in quotation marks is the organisation's sentence, not mine.
 
 ## The short version
 
 - An author is a person who did real intellectual work, wrote or revised the text, approved the final version, and will answer for it [14]. AI tools cannot be authors anywhere.
-- **arXiv will not take your paper yet.** "Undergraduate or high school research" sits on its list of content types that are typically not accepted [2]. A workshop or student track first; arXiv after a conventional publication.
+- **arXiv usually will not take your paper yet.** arXiv's policy page lists "Undergraduate or high school research" among the "Content types that are typically NOT accepted" [2]. It is a moderation guideline, not a rule that names you, but plan for it: a workshop or student track first, arXiv after a conventional publication.
 - Disclosure rules differ. IEEE and ACL want AI use named in the Acknowledgements [5][11]. ACM (rewritten May 2026) wants it in the *methods* only when AI was part of the research, and no longer asks about AI used to write [3]. NeurIPS requires no declaration for pure writing help [8].
 - Fabricated references are measurable now: about one in 277 PubMed-indexed papers in early 2026 cited a paper that does not exist, up from one in 2,828 in 2023 [15].
 - The rule that satisfies every venue at once: **if you cannot explain a sentence you wrote, delete it.**
@@ -38,9 +50,7 @@ All three "may have severe consequences for those found to have participated in 
 
 ### Order, and the corresponding author
 
-CS mostly orders authors by contribution, with the student who did the work first; some theory groups go alphabetical; physics-style labs put the senior person last. There is no universal rule, so **agree the order in writing before you start writing**. At ICML it freezes early: "The author list cannot be changed after the abstract deadline." [9]
-
-The corresponding author is the single contact with the editor. IEEE lists the extra duties: including "as co-authors all persons appropriate and none inappropriate", collecting everyone's assent and approval of the final version, and keeping co-authors informed [6]. If you are first author and the only one who understands the code, that is usually you — answering reviewer email at 2 a.m., not your guide.
+CS orders authors by contribution, student first; some theory groups go alphabetical; physics-style labs put the senior person last. Agree the order in writing before you start, because at ICML "The author list cannot be changed after the abstract deadline." [9] The corresponding author is the single contact with the editor, responsible for including "as co-authors all persons appropriate and none inappropriate", collecting approvals, and keeping everyone informed [6]. If you are first author and the only one who understands the code, that is you.
 
 ### If a faculty member asks to be added without contributing
 
@@ -63,7 +73,7 @@ ICMJE's next sentence is the one to remember: "humans are responsible for any su
 
 ### The 17-year-old problem
 
-- **arXiv does not want undergraduate work.** "Undergraduate or high school research" sits among "Content types that are typically NOT accepted", next to course projects and "Proposals for future research" [2]. Post after a workshop or conference has accepted the work.
+- **arXiv does not want undergraduate work as such.** "Undergraduate or high school research" sits among "Content types that are typically NOT accepted", next to course projects and "Proposals for future research" [2]. This is a statement about the *content type*, not about who you are — the accepted list includes ordinary articles, and the Theses section adds that "Undergraduate or Master's level researchers should consult their advisor before submitting to arXiv". Post after a workshop or conference has accepted the work.
 - **You are legally a child until December 2026.** The DPDP Act defines a "child" as "an individual who has not completed the age of eighteen years" [24], and Section 9(1) requires "verifiable consent of the parent" before processing a child's personal data. Run a survey yourself and your own responses are children's data — so are your classmates'.
 
 ---
@@ -92,7 +102,7 @@ arXiv is a preprint server, but its moderation decides whether your work exists 
 
 ### ACM
 
-ACM rewrote its policy on 14 May 2026 and moved opposite to most venues:
+ACM updated its authorship policy on 14 May 2026 ("Updated on May 14, 2026" on the page) and moved opposite to most venues:
 
 > "When using Artificial Intelligence to conduct research, including the design and methodology of the research project, creation and selection of data sources, designing experiments, generation and collection of data, coding, implementing models, running simulations, data analysis, testing, validating results, deploying software, archiving data and code for reproducibility, or any other aspects of the research lifecycle that are directly relevant to the conclusions of the research underlying the Work, the specific use(s) of AI tools must be described in detail in the methods section of the Work." [3]
 
@@ -160,9 +170,9 @@ The student version: reusing your own **method description** across two papers i
 
 ### Salami slicing and figures
 
-Salami slicing is cutting one study into the smallest publishable units to get three papers from one. The test: does each paper stand alone with its own question, or does a reader need the other two? It is also a dual-submission risk — ICML forbids submissions "identical, or substantially similar, to versions that have been previously published" [9], and IEEE requires you to "disclose whether there are prior publications… that are similar" and state "how the new submission differs" [6].
+Salami slicing is cutting one study into the smallest publishable units. The test: does each paper stand alone with its own question, or does a reader need the other two? It is also a dual-submission risk — ICML forbids submissions "identical, or substantially similar, to versions that have been previously published" [9], and IEEE requires you to "disclose whether there are prior publications… that are similar" and state "how the new submission differs" [6].
 
-Figure reuse follows the same logic. Your own earlier figure needs a citation. Someone else's needs permission *and* a citation, because copyright sits with the publisher: CC BY figures can be reused with attribution, CC BY-NC ones cannot go into a commercially published paper without permission. And do not retouch a plot to make it look better — IEEE lists "image manipulation: Excessive or inappropriate adjustment of an image that alters the scientific meaning of the image" beside fabrication and falsification [6].
+Figure reuse is the same rule with copyright attached: your own earlier figure needs a citation; someone else's needs permission *and* a citation (CC BY is reusable with attribution, CC BY-NC is not, in a commercially published paper). Do not retouch a plot — IEEE lists "image manipulation: Excessive or inappropriate adjustment of an image that alters the scientific meaning of the image" beside fabrication [6].
 
 ### The tools
 
@@ -196,11 +206,7 @@ Under 18, add parental consent: DPDP Section 9(1) requires "verifiable consent o
 
 ### Public data is not automatically "no ethics needed"
 
-The distinction is **identifiability**, not whether the data was on the internet.
-
-- **Public and non-personal**: abstracts, arXiv metadata, Wikipedia dumps, published benchmarks, government statistics. No consent; cite the source and licence.
-- **Public but personal**: Reddit posts with usernames, tweets, public profiles, app reviews with names. Public *and* personal. Usually needs review, and always needs anonymisation.
-- **Private**: chats, emails, medical records, marks. Consent and review required. Not a first-paper dataset.
+The distinction is **identifiability**, not whether the data was on the internet. Public *and non-personal* — abstracts, arXiv metadata, Wikipedia dumps, published benchmarks, government statistics — needs no consent, just a citation and the licence. Public *but personal* — Reddit posts with usernames, tweets, public profiles, app reviews with names — is still personal data and usually needs review plus anonymisation. Private data — chats, emails, medical records, marks — needs consent and review, and is not a first-paper dataset.
 
 ACL's checklist asks directly whether you "discussed the steps taken to check whether the data… contains any information that names or uniquely identifies individual people" [12]. One true paragraph is enough.
 
@@ -242,10 +248,9 @@ Frontiers added the detail that matters: "one of the reviewers raised valid conc
 ### The mechanism
 
 1. A reviewer tries to open your citation, and the DOI 404s. One 404 is enough.
-2. Post-publication review: PubPeer lets anyone comment permanently, usually within days; ACL, NeurIPS and ICML papers are discussed on OpenReview within hours.
+2. PubPeer lets anyone comment permanently, usually within days; ACL, NeurIPS and ICML papers are discussed on OpenReview within hours.
 3. Retraction Watch writes it up — that is the version that appears when someone searches your name for the next ten years.
-4. The institution is notified. ACM may contact "the violator's employer" [4]; NeurIPS lists "informing the colluding parties home institutions" among its penalties [7]. For a student that means your college, your guide, and eventually an admissions committee.
-5. The notice stays attached to the DOI and your ORCID. It does not get deleted; it gets cited.
+4. The institution is notified: ACM may contact "the violator's employer" [4], and NeurIPS lists "informing the colluding parties home institutions" among its penalties [7]. The notice then stays attached to the DOI and your ORCID. It does not get deleted; it gets cited.
 
 A fabricated citation saves twenty minutes. Getting caught costs the paper, your guide's trust, and a permanent search result. No student has ever needed that trade.
 
@@ -268,13 +273,11 @@ A fabricated citation saves twenty minutes. Getting caught costs the paper, your
 
 **Keep an AI-use log** from day one. Reconstructing it at submission is impossible and the reconstruction will be wrong.
 
-**Resolve every citation before it enters a draft.** Search the exact title in Crossref, DBLP, Semantic Scholar or arXiv; open the DOI and confirm title, first author, year and venue; save the DOI, URL and retrieval date to `02_literature/verified_citations.csv` (RULES.md already requires this). If it does not resolve in two minutes, delete the sentence that needed it.
+**Resolve every citation before it enters a draft.** Search the exact title in Crossref, DBLP, Semantic Scholar or arXiv; open the DOI and confirm title, first author, year and venue; save DOI, URL and retrieval date to `02_literature/verified_citations.csv`. If it does not resolve in two minutes, delete the sentence that needed it.
 
 **Disclose where the venue asks.** IEEE and ACL: acknowledgements. ACM: methods, research use only. NeurIPS: experimental setup or checklist 16. COPE journals: materials and methods. When unsure, be more specific than required.
 
-**Apply the deletion rule.** If you cannot explain a sentence — why it is there, what it claims, what supports it — delete it. That applies to AI sentences and to ones you wrote at 3 a.m. It is also the test a reviewer applies in the rebuttal.
-
-Do not write to beat a detector. They are noisy, they flag human writing, and the arms race is not winnable. Write so that a human asking "explain this paragraph" gets a good answer from you.
+**Apply the deletion rule.** If you cannot explain a sentence — why it is there, what it claims, what supports it — delete it. Do not write to beat a detector: they are noisy, they flag human writing, and the arms race is not winnable. Write so that a human asking "explain this paragraph" gets a good answer from you.
 
 ---
 

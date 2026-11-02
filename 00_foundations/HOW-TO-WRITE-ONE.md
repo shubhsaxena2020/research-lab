@@ -1,5 +1,17 @@
 # How to Write Your First Paper, End to End
 
+> **READ THIS FIRST — 10 lines**
+> 1. This page is the working process for a first paper: the order of the stages, the hours each takes, and where beginners lose weeks.
+> 2. The most useful rule in it: write the tables and figures first and the introduction last, because the claim only becomes true after the experiment.
+> 3. Read it before you start the experiment; §3 and §4 change what you write down while you work.
+> 4. Skip on a first pass: §8 LaTeX and Overleaf (the skeleton and five errors) and §10(b) the three-month plan; return when you reach that stage.
+> 5. Budget 70-120 hours for the whole paper, and expect the hours to be lumpy.
+> 6. Read 15-25 papers properly and skim 40-60; the Related Work section itself is only half a page.
+> 7. Run 3-5 seeds per configuration and report mean and standard deviation; a 0.6-point gain against a 1.4-point spread is noise.
+> 8. The two-week workshop plan is about 56 hours and works only if the data already exists and is clean.
+> 9. Date-sensitive: the free-tool facts (Colab publishes no GPU limits and sessions die without warning) and each venue's current page limits.
+> 10. Full read about 22 minutes (4,800 words); the skim path in item 4 about 17 minutes.
+
 **What this page is for.** The actual working process behind a first research paper: what happens in what order, how long each stage takes, and where beginners lose weeks. It assumes you know the parts of a paper (title, abstract, method, results, references). It does not assume you have run an experiment, searched a database, or opened LaTeX.
 
 Written for one person: a first-semester BCA student with a laptop, exam weeks, and about 4 hours a day at best.
@@ -72,7 +84,7 @@ There is no universal number. The test is not "have I found every paper" but "wo
 
 For a first small paper: **15–25 papers read properly** (method and results understood, notes filled) and **40–60 skimmed**. That is judgment from practice, not a rule from a textbook; a narrow question may need 12. Set a date: "reading stops on day 8 whether or not I feel ready."
 
-Learn one technique now: Keshav's three passes [1]. First pass, 5–10 minutes — title, abstract, intro, headings, conclusions; decide whether it is relevant at all. Second pass, an hour — figures, tables, method; you should be able to summarise it aloud. Third pass, 4–5 hours — only for the two or three papers you must reimplement or beat. Beginners read everything at pass three and run out of time by paper six.
+Learn one technique now: Keshav's three passes [1]. First pass, 5–10 minutes — title, abstract, intro, headings, conclusions; decide whether it is relevant at all. Second pass, up to an hour — figures, tables, method; you should be able to summarise it aloud. Third pass, four or five hours (Keshav's figure "for beginners"; he says about an hour for an experienced reader) — reserve it for the small number of papers you must reimplement or beat. Beginners read everything at pass three and run out of time by paper six.
 
 ## 3. From reading to a research question
 

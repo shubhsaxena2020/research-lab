@@ -1,0 +1,20 @@
+persona: reproducibility_reviewer
+summary: |
+  The uncertainty gap is fixed. The note still does not give the command that reproduces
+  the table, so a reader cannot rerun it from a clean checkout.
+strengths:
+  - "Intervals and n are now reported."
+weaknesses:
+  - "No reproducing command."
+questions:
+  - "Which command regenerates the table?"
+soundness: 3
+presentation: 3
+contribution: 1
+confidence: 5
+overall: 5
+decision: borderline
+must_fix:
+  - claim: "The note never states the exact command that reproduces the table."
+    where: "Method"
+    evidence_needed: "Add the run command (python 04_experiments/toy/run_toy.py) and the aggregate command."

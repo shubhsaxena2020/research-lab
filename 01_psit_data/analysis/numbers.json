@@ -1,0 +1,204 @@
+{
+ "n_records": 793,
+ "generated": "2026-11-02T21:42:01Z",
+ "source_file": "01_psit_data/papers.csv",
+ "year_counts": {
+  "2007": 1,
+  "2009": 1,
+  "2010": 6,
+  "2011": 5,
+  "2012": 6,
+  "2013": 5,
+  "2014": 2,
+  "2015": 2,
+  "2016": 5,
+  "2017": 2,
+  "2018": 8,
+  "2019": 24,
+  "2020": 27,
+  "2021": 35,
+  "2022": 50,
+  "2023": 74,
+  "2024": 157,
+  "2025": 148,
+  "2026": 234
+ },
+ "year_min": 2007,
+ "year_max": 2026,
+ "year_2026_is_partial": true,
+ "type_counts": {
+  "journal-article": 599,
+  "proceedings-article": 132,
+  "book-chapter": 44,
+  "posted-content": 15,
+  "other": 2,
+  "edited-book": 1
+ },
+ "ai_related_total": 168,
+ "ai_related_share_pct": 21.2,
+ "ai_by_year": {
+  "2007": {
+   "ai": 0,
+   "total": 1,
+   "share_pct": 0.0
+  },
+  "2009": {
+   "ai": 0,
+   "total": 1,
+   "share_pct": 0.0
+  },
+  "2010": {
+   "ai": 0,
+   "total": 6,
+   "share_pct": 0.0
+  },
+  "2011": {
+   "ai": 0,
+   "total": 5,
+   "share_pct": 0.0
+  },
+  "2012": {
+   "ai": 0,
+   "total": 6,
+   "share_pct": 0.0
+  },
+  "2013": {
+   "ai": 0,
+   "total": 5,
+   "share_pct": 0.0
+  },
+  "2014": {
+   "ai": 0,
+   "total": 2,
+   "share_pct": 0.0
+  },
+  "2015": {
+   "ai": 0,
+   "total": 2,
+   "share_pct": 0.0
+  },
+  "2016": {
+   "ai": 0,
+   "total": 5,
+   "share_pct": 0.0
+  },
+  "2017": {
+   "ai": 0,
+   "total": 2,
+   "share_pct": 0.0
+  },
+  "2018": {
+   "ai": 0,
+   "total": 8,
+   "share_pct": 0.0
+  },
+  "2019": {
+   "ai": 1,
+   "total": 24,
+   "share_pct": 4.2
+  },
+  "2020": {
+   "ai": 0,
+   "total": 27,
+   "share_pct": 0.0
+  },
+  "2021": {
+   "ai": 6,
+   "total": 35,
+   "share_pct": 17.1
+  },
+  "2022": {
+   "ai": 12,
+   "total": 50,
+   "share_pct": 24.0
+  },
+  "2023": {
+   "ai": 21,
+   "total": 74,
+   "share_pct": 28.4
+  },
+  "2024": {
+   "ai": 33,
+   "total": 157,
+   "share_pct": 21.0
+  },
+  "2025": {
+   "ai": 33,
+   "total": 148,
+   "share_pct": 22.3
+  },
+  "2026": {
+   "ai": 62,
+   "total": 234,
+   "share_pct": 26.5
+  }
+ },
+ "topic_counts_multilabel": {
+  "medicine-clinical": 373,
+  "pharmacology-toxicology": 217,
+  "pharmacy-drug-delivery": 168,
+  "machine-learning": 135,
+  "chemistry-materials": 78,
+  "energy-environment": 61,
+  "security-crypto": 50,
+  "networks-iot": 43,
+  "management-economics": 40,
+  "nlp": 11,
+  "data-engineering": 9,
+  "education-pedagogy": 4,
+  "computer-vision": 3
+ },
+ "topic_counts_primary": {
+  "untagged": 167,
+  "pharmacy-drug-delivery": 154,
+  "machine-learning": 135,
+  "pharmacology-toxicology": 120,
+  "medicine-clinical": 99,
+  "security-crypto": 37,
+  "networks-iot": 28,
+  "chemistry-materials": 19,
+  "management-economics": 14,
+  "energy-environment": 10,
+  "nlp": 7,
+  "data-engineering": 2,
+  "education-pedagogy": 1
+ },
+ "distinct_venues": 394,
+ "venues_with_1_paper": 258,
+ "distinct_authors_all": 2237,
+ "distinct_psit_authors": 507,
+ "authors_with_10plus": 27,
+ "citation_records_with_count": 792,
+ "citations_total": 5476,
+ "citations_mean": 6.91,
+ "citations_median": 1.0,
+ "citations_zero_share_pct": 40.3,
+ "citations_p50": 1,
+ "citations_p75": 6,
+ "citations_p90": 16,
+ "citations_p95": 26,
+ "citations_p99": 86,
+ "authors_per_paper_median": 5,
+ "authors_per_paper_mean": 5.61,
+ "single_author_papers": 19,
+ "papers_6plus_authors": 325,
+ "affiliation_strings_distinct": 563,
+ "affiliation_buckets": {
+  "mentions_PSIT_abbrev": 342,
+  "mentions_Pranveer": 776,
+  "mentions_higher_education": 21,
+  "mentions_pharmacy": 400,
+  "mentions_kanpur": 746,
+  "records_with_affil_text_nonempty": 792,
+  "records_with_psit_affil_string": 784
+ },
+ "source_counts": {
+  "crossref": 509,
+  "crossref+europepmc+pubmed": 181,
+  "europepmc+pubmed": 98,
+  "europepmc": 4,
+  "pubmed": 1
+ },
+ "in_dblp_yes": 0,
+ "in_dblp_checked": 0
+}

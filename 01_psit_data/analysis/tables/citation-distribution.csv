@@ -1,0 +1,9 @@
+statistic,value
+records with a citation count,792
+total citations (Crossref),5476
+mean,6.91
+median,1.0
+share with zero citations (%),40.3
+p90,16
+p99,86
+max,702

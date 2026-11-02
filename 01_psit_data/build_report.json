@@ -1,0 +1,17 @@
+{
+ "built": "2026-11-02T20:23:20Z",
+ "rows_written": 793,
+ "new_per_source": {
+  "crossref": 690,
+  "europepmc": 102,
+  "pubmed": 1,
+  "merged_dupes": 460
+ },
+ "source_overlap": {
+  "crossref_only": 509,
+  "europepmc_only": 4,
+  "pubmed_only": 1,
+  "any_two_or_more": 279
+ },
+ "dedupe_rule": "normalised DOI; else normalised title[:90]"
+}

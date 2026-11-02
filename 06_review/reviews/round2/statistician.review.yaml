@@ -1,0 +1,22 @@
+persona: statistician
+summary: |
+  The revision now reports the BCa interval per configuration and states n=3 in the
+  abstract. With that, the comparison reads honestly: the intervals overlap slightly and
+  the note does not claim significance.
+strengths:
+  - "The abstract now states n=3 and the Results give the BCa interval per configuration."
+  - "The sign-test floor is stated rather than hidden."
+weaknesses:
+  - "The per-seed values are still only summarised, not tabulated."
+questions:
+  - "Do the intervals still overlap if you use percentile rather than BCa?"
+soundness: 3
+presentation: 3
+contribution: 1
+confidence: 4
+overall: 5
+decision: borderline
+must_fix:
+  - claim: "The per-seed values behind 'higher on every paired seed' are not shown."
+    where: "Results"
+    evidence_needed: "Add the per-run accuracies from runs/*/results.json, or a table row per seed."

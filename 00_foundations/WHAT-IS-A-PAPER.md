@@ -1,5 +1,17 @@
 # What Is a Research Paper?
 
+> **READ THIS FIRST — 10 lines**
+> 1. This page explains what a research paper actually is: its parts, its types, and what "contribution" and "novelty" mean.
+> 2. The one thing to keep: a paper is one main claim plus enough evidence that a stranger can check it without emailing you.
+> 3. Read it in your first week, before you read your first paper closely and before you write anything.
+> 4. Skip on a first pass: §4 Types of paper and §8 A worked mini-example; both make more sense after one experiment.
+> 5. A paper is usually 8 to 12 pages, and the venue sets the limit, not you (NeurIPS 2024 allowed 9 content pages).
+> 6. The abstract is 150-250 words and must contain a number; "we explore X" is not an abstract.
+> 7. Section budgets: method 1.5-2.5 pages, results 1.5-2.5 pages, references 30-60 entries.
+> 8. Reproducibility decides value: Raff tried to reimplement 255 papers from 1984-2017 without the authors' code.
+> 9. Date-sensitive: the per-venue page limits and cycle numbers (NeurIPS 2024, ACL and workshop limits); re-check the live call for papers.
+> 10. Full read about 19 minutes (4,200 words); the skim path in item 4 about 15 minutes.
+
 **What this page is for.** A research paper is the basic unit of scientific communication in computer science, and nobody explains what one actually is in first semester. This page covers the object, its parts, its types, what counts as a contribution, what "novelty" means, and why reproducibility decides whether your work is worth anything.
 
 ---
@@ -149,7 +161,7 @@ Take your idea: "I fine-tuned BERT on my college's feedback comments and got 91%
 
 ## 6. What "novelty" really means
 
-Novelty does not mean "nobody has ever done exactly this". Literally, that bar is either trivially met (nobody used your seed) or impossible (somebody, somewhere, tried it).
+Novelty does not mean "nobody has ever done this". That bar is either trivially met (nobody used your seed) or impossible (somebody, somewhere, tried it).
 
 The workable definition: **a reviewer who knows the field learns something they did not know.** It is a test about the reader, not the artifact.
 
@@ -235,11 +247,11 @@ That is a workshop paper, and a real contribution: small, checkable, and answeri
 4. NeurIPS, Paper Checklist Guidelines (serves the 2026 cycle). https://neurips.cc/public/guides/PaperChecklist (retrieved 2026-11-03).
 5. "A Survey of Large Language Models", arXiv:2303.18223. https://arxiv.org/abs/2303.18223 (retrieved 2026-11-03).
 6. "Attention Is All You Need", arXiv:1706.03762. https://arxiv.org/abs/1706.03762 (retrieved 2026-11-03).
-7. E. Bender et al., "On the Dangers of Stochastic Parrots", FAccT '21, pp. 610-623. DOI 10.1145/3442188.3445922 (retrieved 2026-11-03).
-8. O. Russakovsky et al., "ImageNet Large Scale Visual Recognition Challenge", IJCV 115:211-252, 2015. DOI 10.1007/s11263-015-0816-y (retrieved 2026-11-03).
+7. E. Bender et al., "On the Dangers of Stochastic Parrots", FAccT '21, pp. 610-623. DOI 10.1145/3442188.3445922; https://doi.org/10.1145/3442188.3445922 (retrieved 2026-11-03).
+8. O. Russakovsky et al., "ImageNet Large Scale Visual Recognition Challenge", IJCV 115:211-252, 2015. DOI 10.1007/s11263-015-0816-y; https://doi.org/10.1007/s11263-015-0816-y (retrieved 2026-11-03).
 9. "Are Emergent Abilities of Large Language Models a Mirage?", arXiv:2304.15004. https://arxiv.org/abs/2304.15004 (retrieved 2026-11-03).
-10. M. Keita et al., "Feriji: A French-Zarma Parallel Corpus, Glossary & Translator", ACL 2024 Student Research Workshop, pp. 1-9. DOI 10.18653/v1/2024.acl-srw.1 (retrieved 2026-11-03).
-11. W. Kwon et al., "Efficient Memory Management for LLM Serving with PagedAttention", SOSP '23, pp. 611-626. DOI 10.1145/3600006.3613165 (retrieved 2026-11-03).
+10. M. Keita et al., "Feriji: A French-Zarma Parallel Corpus, Glossary & Translator", ACL 2024 Student Research Workshop, pp. 1-9. DOI 10.18653/v1/2024.acl-srw.1; https://doi.org/10.18653/v1/2024.acl-srw.1 (retrieved 2026-11-03).
+11. W. Kwon et al., "Efficient Memory Management for LLM Serving with PagedAttention", SOSP '23, pp. 611-626. DOI 10.1145/3600006.3613165; https://doi.org/10.1145/3600006.3613165 (retrieved 2026-11-03).
 12. "On the Number of Linear Regions of Deep Neural Networks", arXiv:1402.1869. https://arxiv.org/abs/1402.1869 (retrieved 2026-11-03).
 13. NeurIPS 2024, Call for Datasets and Benchmarks Track. https://neurips.cc/Conferences/2024/CallForDatasetsBenchmarks (retrieved 2026-11-03).
 14. NeurIPS 2024, Call for Workshops. https://neurips.cc/Conferences/2024/CallForWorkshops (retrieved 2026-11-03).

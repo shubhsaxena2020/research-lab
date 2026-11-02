@@ -1,0 +1,54 @@
+{
+  "tool": "simulate_review.py",
+  "tool_version": "1.0.0",
+  "generated_at": "2026-11-02T20:56:56Z",
+  "round": 1,
+  "draft": "04_experiments/toy/draft_toy.md",
+  "draft_sha256": "7aa12b7f50109036fd77734111d3099d94f19e78ca6a41a2175eb68311fd7163",
+  "draft_chars": 1791,
+  "prompts": [
+    {
+      "persona": "methodologist",
+      "prompt_file": "methodologist.PROMPT.md",
+      "prompt_sha256": "0534c1b334361f377c11551c98d9ead0aad5e16b9477d729061895cb5d247a44",
+      "review_file": "methodologist.review.yaml",
+      "persona_file": "06_review/personas/methodologist.md"
+    },
+    {
+      "persona": "domain_expert",
+      "prompt_file": "domain_expert.PROMPT.md",
+      "prompt_sha256": "f84a162c42e52af324a9754734d004bc984436325e73b9bb62d6ee87ecbaf569",
+      "review_file": "domain_expert.review.yaml",
+      "persona_file": "06_review/personas/domain_expert.md"
+    },
+    {
+      "persona": "statistician",
+      "prompt_file": "statistician.PROMPT.md",
+      "prompt_sha256": "4a957f8ee0bdb7fb9de2d4a0e8972e7f30c7f422a09b77915148e8d61f9d73d5",
+      "review_file": "statistician.review.yaml",
+      "persona_file": "06_review/personas/statistician.md"
+    },
+    {
+      "persona": "novelty_skeptic",
+      "prompt_file": "novelty_skeptic.PROMPT.md",
+      "prompt_sha256": "d7c0b89ba7f3ec75fed2560f287d5d45df2d9aef91e51789362a69f97d5ae056",
+      "review_file": "novelty_skeptic.review.yaml",
+      "persona_file": "06_review/personas/novelty_skeptic.md"
+    },
+    {
+      "persona": "reproducibility_reviewer",
+      "prompt_file": "reproducibility_reviewer.PROMPT.md",
+      "prompt_sha256": "4f99f4509e55bff71f7c5deb77ddef99c989366791e5741e7468fe7cf3f74499",
+      "review_file": "reproducibility_reviewer.review.yaml",
+      "persona_file": "06_review/personas/reproducibility_reviewer.md"
+    },
+    {
+      "persona": "clarity_reviewer",
+      "prompt_file": "clarity_reviewer.PROMPT.md",
+      "prompt_sha256": "d489752658fab1de5e478203086115e96453dd91b211f961084a9e1f34d06fb5",
+      "review_file": "clarity_reviewer.review.yaml",
+      "persona_file": "06_review/personas/clarity_reviewer.md"
+    }
+  ],
+  "note": "Prompt packs only. The tool does not generate reviews; a human or agent must fill in each <persona>.review.yaml, then run ingest."
+}

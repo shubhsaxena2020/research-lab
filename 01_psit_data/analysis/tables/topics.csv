@@ -1,0 +1,15 @@
+topic,papers(any tag),papers(primary tag)
+medicine-clinical,373,99
+pharmacology-toxicology,217,120
+pharmacy-drug-delivery,168,154
+machine-learning,135,135
+chemistry-materials,78,19
+energy-environment,61,10
+security-crypto,50,37
+networks-iot,43,28
+management-economics,40,14
+nlp,11,7
+data-engineering,9,2
+education-pedagogy,4,1
+computer-vision,3,0
+untagged,0,167

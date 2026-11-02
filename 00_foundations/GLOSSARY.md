@@ -1,5 +1,17 @@
 # Glossary — research papers, reviewing, publishing and ML basics
 
+> **READ THIS FIRST — 10 lines**
+> 1. This page defines the words you will meet in your first year of reading papers, reviewing and submitting: 125 entries in alphabetical order.
+> 2. The one thing: it is a lookup table, not a book, so use Ctrl+F when a word stops you.
+> 3. Read it in passes: skim it now, then open it whenever a paper or a review uses a word you cannot define.
+> 4. Skip on a first pass: entries whose headword you have never seen in a paper; leave them until you meet them.
+> 5. 125 entries, one or two sentences each, with an example or a number where the number helps.
+> 6. Citation counts differ by database (Google Scholar, Scopus, Web of Science), so always name the one you used and the date.
+> 7. h5-index is the h-index computed over the last five complete years; CORE ranks conferences in four tiers, A* down to C.
+> 8. CORE listed 825 ranked venues when checked on 2026-11-03, and only 7.52% of them were A*.
+> 9. Date-sensitive: the UGC-CARE entry says that list has not been updated since October 2024, and the CORE and h5 numbers move every year.
+> 10. Full read about 27 minutes (6,000 words); used as a lookup, a few seconds per word.
+
 **What this page is for:** the words you will meet in your first year of reading papers, reviewing, and submitting. Each entry is one or two sentences with an example or a number where the number helps. Nothing is grouped by topic; the whole file is alphabetical, so use Ctrl+F to jump to a word.
 
 Read it in passes, not once. Skim it now, then come back each time a word in a paper or a review stops you.

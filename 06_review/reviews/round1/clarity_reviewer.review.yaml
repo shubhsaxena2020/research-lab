@@ -1,0 +1,21 @@
+persona: clarity_reviewer
+summary: |
+  Short and readable, with an honest limitations paragraph. The abstract is the weakest part:
+  it states two numbers and stops, so a reader does not learn what the comparison means or
+  that the difference is not significant.
+strengths:
+  - "Sentence-level writing is clear and the Limitations section is unusually honest."
+weaknesses:
+  - "The abstract makes a comparison with no indication that the difference is within noise."
+questions:
+  - "Can the abstract say in one clause that the difference is not significant at n=3?"
+soundness: 3
+presentation: 2
+contribution: 1
+confidence: 4
+overall: 4
+decision: borderline
+must_fix:
+  - claim: "The accuracy comparison is presented without any uncertainty: n=3 seeds and no interval per configuration."
+    where: "Results, paragraph 1 and the abstract"
+    evidence_needed: "Report the BCa 95% CI per configuration (summary_toy.json stats.*.ci95) and state n=3 in the abstract, or drop the comparison."

@@ -1,0 +1,180 @@
+{
+  "generated": "2026-11-03",
+  "source": "01_psit_data/papers.csv",
+  "subset": {
+    "filter": "ai_related == 'yes'",
+    "n_records": 168,
+    "n_all_records": 793
+  },
+  "venue_name_match": {
+    "field": "venue",
+    "names_searched": [
+      "ACL",
+      "NeurIPS",
+      "NIPS",
+      "ICML",
+      "CVPR",
+      "AAAI",
+      "EMNLP",
+      "ICLR",
+      "KDD",
+      "SIGIR",
+      "IJCAI",
+      "ICCV",
+      "ECCV",
+      "NAACL",
+      "WSDM",
+      "CIKM",
+      "TKDE",
+      "TNNLS",
+      "Pattern Recognition",
+      "Neural Networks",
+      "Expert Systems with Applications"
+    ],
+    "n_distinct_venue_strings": 119,
+    "n_records_with_blank_venue": 9,
+    "n_records_matched": 0,
+    "matches": [],
+    "method_limits": [
+      "string match on the deposited venue value, not on a publisher page",
+      "an unnamed workshop of a top conference is missed",
+      "a differently abbreviated or renamed venue is missed",
+      "the dataset is a Crossref + Europe PMC + PubMed union, not a census"
+    ]
+  },
+  "abstract_audit": {
+    "min_chars_for_audit": 200,
+    "n_audited": 108,
+    "n_no_abstract_below_50_chars": 59,
+    "n_between_50_and_199_chars": 1,
+    "term_counts": {
+      "baseline": {
+        "n": 3,
+        "share_of_audited_pct": 2.8,
+        "regex": "\\bbaselines?\\b"
+      },
+      "random seed": {
+        "n": 0,
+        "share_of_audited_pct": 0.0,
+        "regex": "\\bseeds?\\b|random_state|fixed random"
+      },
+      "spread (std dev or plus-minus)": {
+        "n": 1,
+        "share_of_audited_pct": 0.9,
+        "regex": "standard deviation|\\bstd\\.?\\b|±"
+      },
+      "significance test": {
+        "n": 2,
+        "share_of_audited_pct": 1.9,
+        "regex": "statistical(?:ly)? significan|p-value|p\\s*[<=]\\s*0\\.0[15]"
+      },
+      "ablation": {
+        "n": 2,
+        "share_of_audited_pct": 1.9,
+        "regex": "\\bablation"
+      },
+      "confidence interval": {
+        "n": 0,
+        "share_of_audited_pct": 0.0,
+        "regex": "confidence interval"
+      },
+      "cross-validation": {
+        "n": 5,
+        "share_of_audited_pct": 4.6,
+        "regex": "cross[-\\s]validation"
+      },
+      "dataset": {
+        "n": 29,
+        "share_of_audited_pct": 26.9,
+        "regex": "\\bdatasets?\\b"
+      },
+      "accuracy": {
+        "n": 38,
+        "share_of_audited_pct": 35.2,
+        "regex": "\\baccuracy\\b"
+      },
+      "reproducibility (any 'reproduc-')": {
+        "n": 2,
+        "share_of_audited_pct": 1.9,
+        "regex": "reproduc"
+      }
+    },
+    "n_with_any_eval_marker": 7,
+    "eval_marker_definition": [
+      "baseline",
+      "random seed",
+      "spread (std dev or plus-minus)",
+      "significance test",
+      "ablation"
+    ],
+    "proxy_caveat": "Abstracts are a lossy summary. A paper can fix seeds and report spreads in its methods section without saying so in the abstract, so these counts describe abstract text, not practice. No full text was read."
+  },
+  "citation_split": {
+    "field": "cited_by, as deposited by Crossref / Europe PMC",
+    "all_ai": {
+      "n": 168,
+      "zero_citations": 84,
+      "zero_pct": 50.0,
+      "mean": 5.56,
+      "median": 0.5
+    },
+    "by_year": {
+      "2019": {
+        "n": 1,
+        "zero_citations": 0,
+        "zero_pct": 0.0,
+        "mean": 10,
+        "median": 10
+      },
+      "2021": {
+        "n": 6,
+        "zero_citations": 0,
+        "zero_pct": 0.0,
+        "mean": 25.67,
+        "median": 26.0
+      },
+      "2022": {
+        "n": 12,
+        "zero_citations": 2,
+        "zero_pct": 16.7,
+        "mean": 19.5,
+        "median": 12.5
+      },
+      "2023": {
+        "n": 21,
+        "zero_citations": 3,
+        "zero_pct": 14.3,
+        "mean": 13.19,
+        "median": 8
+      },
+      "2024": {
+        "n": 33,
+        "zero_citations": 5,
+        "zero_pct": 15.2,
+        "mean": 4.61,
+        "median": 2
+      },
+      "2025": {
+        "n": 33,
+        "zero_citations": 17,
+        "zero_pct": 51.5,
+        "mean": 3.06,
+        "median": 0
+      },
+      "2026": {
+        "n": 62,
+        "zero_citations": 57,
+        "zero_pct": 91.9,
+        "mean": 0.1,
+        "median": 0.0
+      }
+    },
+    "pooled_2023_2024": {
+      "n": 54,
+      "zero_citations": 8,
+      "zero_pct": 14.8,
+      "mean": 7.94,
+      "median": 3.0
+    }
+  }
+}
