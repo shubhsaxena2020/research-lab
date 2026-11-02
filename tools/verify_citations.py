@@ -154,10 +154,27 @@ def parse_crossref(body: str, url: str) -> Optional[dict]:
         msg = json.loads(body)["message"]
     except (json.JSONDecodeError, KeyError, TypeError):
         return None
+    if not isinstance(msg, dict):
+        return None
+    # Real Crossref always sends `title` as a list and `author` as a list of objects. Anything
+    # else means the response is malformed, truncated or proxied — and a verifier that trusts
+    # a malformed response can "verify" a citation against garbage. Fail closed: return None,
+    # so the record is reported NOT_FOUND rather than VERIFIED (RULES.md #1).
     titles = msg.get("title") or []
-    title = titles[0] if titles else ""
+    if not isinstance(titles, list):
+        return None
+    title = (titles[0] if titles else "") or ""
+    if not isinstance(title, str):
+        return None
     authors = []
-    for a in msg.get("author") or []:
+    raw_authors = msg.get("author")
+    if raw_authors is None:
+        raw_authors = []
+    if not isinstance(raw_authors, list):
+        return None
+    for a in raw_authors:
+        if not isinstance(a, dict):
+            return None
         name = " ".join(x for x in [a.get("given"), a.get("family")] if x)
         if name:
             authors.append(name)
@@ -231,13 +248,25 @@ def parse_openalex(body: str, url: str) -> List[dict]:
         data = json.loads(body)
     except (json.JSONDecodeError, TypeError):
         return []
+    if not isinstance(data, dict):
+        return []
+    results = data.get("results") or []
+    if not isinstance(results, list):
+        return []
     out = []
-    for w in data.get("results") or []:
+    for w in results:
+        if not isinstance(w, dict):
+            continue
         title = (w.get("title") or w.get("display_name") or "").strip()
         if not title:
             continue
         authors = []
-        for au in w.get("authorships") or []:
+        authorships = w.get("authorships") or []
+        if not isinstance(authorships, list):
+            authorships = []
+        for au in authorships:
+            if not isinstance(au, dict):
+                continue
             name = ((au.get("author") or {}).get("display_name") or "").strip()
             if name:
                 authors.append(name)
@@ -314,15 +343,26 @@ def parse_s2(body: str, url: str) -> List[dict]:
         data = json.loads(body)
     except (json.JSONDecodeError, TypeError):
         return []
+    if not isinstance(data, dict):
+        return []
+    items = data.get("data") or []
+    if not isinstance(items, list):
+        return []
     out = []
-    for w in data.get("data") or []:
+    for w in items:
+        if not isinstance(w, dict):
+            continue
         title = (w.get("title") or "").strip()
         if not title:
             continue
         authors = [
-            (a.get("name") or "").strip() for a in (w.get("authors") or []) if a.get("name")
+            (a.get("name") or "").strip()
+            for a in (w.get("authors") or [])
+            if isinstance(a, dict) and a.get("name")
         ]
         ext = w.get("externalIds") or {}
+        if not isinstance(ext, dict):
+            ext = {}
         out.append(
             {
                 "title": title,

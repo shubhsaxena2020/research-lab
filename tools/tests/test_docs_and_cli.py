@@ -384,7 +384,17 @@ def test_readme_json_flag_claim() -> None:
     advertise --json in its own help.
     """
     text = (REPO / "tools/README.md").read_text(encoding="utf-8")
-    entries = re.findall(r"^\|\s*`([A-Za-z0-9_]+\.py)`\s*\|", text, re.MULTILINE)
+    # The sentence is deliberately scoped ("--json is available on the six paper tools"),
+    # so the claim under test is the one the sentence makes: every tool it NAMES must
+    # advertise --json. A tool listed in the table but not named there is not covered.
+    scope = re.search(r"`--json` is available on the six paper tools\s*\n?\((.*?)\)", text, re.DOTALL)
+    # names are written without the .py suffix in that sentence
+    entries = (
+        [n if n.endswith(".py") else n + ".py" for n in re.findall(r"`([A-Za-z0-9_]+(?:\.py)?)`", scope.group(1))]
+        if scope
+        else re.findall(r"^\|\s*`([A-Za-z0-9_]+\.py)`\s*\|", text, re.MULTILINE)
+    )
+    assert entries, "the --json sentence no longer names the tools it covers"
     missing = []
     for name in entries:
         rel = f"tools/{name}"

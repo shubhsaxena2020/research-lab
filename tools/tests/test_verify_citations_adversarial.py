@@ -36,6 +36,8 @@ TOOLS = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(TOOLS))
 
 import verify_citations as vc                     # noqa: E402
+from lib import citation_schema
+CANONICAL_FIELDS = citation_schema.CANONICAL_FIELDS
 from lib import matchlib, netcache                # noqa: E402
 
 # --------------------------------------------------------------------------- helpers
@@ -177,7 +179,6 @@ def test_crossref_string_title_is_not_verified():
     assert res["status"] != "VERIFIED"
 
 
-@pytest.mark.xfail(strict=False, reason="BUG: parse_crossref treats a string title as a sequence and keeps only its first character")
 def test_crossref_string_title_parser_returns_none_not_a_single_character():
     """Documented contract: "Parsers ... never raise on bad input (return None instead)"."""
     body = json.dumps({"message": {"title": TITLE, "author": []}})
@@ -185,7 +186,6 @@ def test_crossref_string_title_parser_returns_none_not_a_single_character():
     assert parsed is None or parsed["title"] == TITLE, f"title parsed as {parsed!r}"
 
 
-@pytest.mark.xfail(strict=False, reason="BUG: parse_crossref raises AttributeError when message.author is a dict")
 def test_crossref_author_as_dict_does_not_crash():
     """`author` is a dict instead of a list: parser must degrade, not explode."""
     body = json.dumps({"message": {"title": [TITLE], "author": {"given": "Ashish", "family": "Vaswani"}}})
@@ -470,7 +470,6 @@ def test_anagram_title_is_not_verified():
     assert res["status"] != "VERIFIED"
 
 
-@pytest.mark.xfail(strict=False, reason="BUG: containment lift scores a longer survey title 0.95, so a title-only record verifies against a different paper")
 def test_survey_that_prefixes_the_target_title_is_not_verified():
     """A survey title containing the target title as a prefix (+6 words) is a different work."""
     # Same year, different authors, title-only record: only the title check can catch this.
@@ -609,11 +608,13 @@ def test_verified_csv_keeps_only_verified_rows_and_carries_provenance(tmp_path):
     n = vc.write_verified_csv(results, out)
     rows = list(csv.DictReader(io.StringIO(out.read_text(encoding="utf-8"))))
     assert n == 1
-    assert [r["key"] for r in rows] == ["good"]
-    assert all(r["status"] == "VERIFIED" for r in rows)
-    assert all(r["source_url"].strip() for r in rows)
-    assert all(r["retrieved_at"].strip() for r in rows)
-    assert "mismatch" not in {r["key"] for r in rows}
+    # canonical register schema (tools/CONTRACTS.md 1): id, url, retrieved_on, command
+    assert [r["id"] for r in rows] == ["good"]
+    assert set(rows[0]) == set(CANONICAL_FIELDS)
+    assert all(r["url"].strip() for r in rows)
+    assert all(r["retrieved_on"].strip() for r in rows)
+    assert all(r["verified_by_command"].strip() for r in rows)
+    assert "mismatch" not in {r["id"] for r in rows}
     assert "10.1109/cvpr.2016.90" not in out.read_text(encoding="utf-8")
 
 
@@ -649,12 +650,12 @@ def test_main_end_to_end_writes_only_the_verified_row(tmp_path, monkeypatch):
 
     rows = list(csv.DictReader(io.StringIO(
         (out_dir / "verified_citations.csv").read_text(encoding="utf-8"))))
-    assert [r["key"] for r in rows] == ["ok"]
+    assert [r["id"] for r in rows] == ["ok"]
     row = rows[0]
-    assert row["status"] == "VERIFIED"
-    assert row["source_url"].startswith("https://api.crossref.org/")
-    assert row["retrieved_at"].strip()
-    assert row["doi"] == "10.1000/adv.1"
+    assert row["url"].startswith("https://api.crossref.org/")
+    assert row["retrieved_on"].strip()
+    assert row["doi_or_arxiv"] == "10.1000/adv.1"
+    assert set(row) == set(CANONICAL_FIELDS)
 
     report = json.loads((out_dir / "verification_report.json").read_text(encoding="utf-8"))
     assert report["n_total"] == 4

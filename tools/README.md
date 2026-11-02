@@ -2,7 +2,10 @@
 
 Every number and every citation in the paper passes through one of these tools. They are
 deliberately boring: standard library only, offline by default, exit code 0 = pass / 1 =
-findings / 2 = usage error, and `--json` on all of them.
+findings / 2 = usage error. `--json` is available on the six paper tools
+(`verify_citations`, `check_numbers`, `claims_audit`, `originality_check`, `make_digest`,
+`check_all`); `simulate_review.py` is a subcommand dispatcher and reports in Markdown/YAML
+instead, so check `--help` rather than assuming a flag.
 
 Run the whole thing in one command to see it work:
 

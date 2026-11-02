@@ -1,72 +1,63 @@
 # BACKLOG S3-experiments
 
-Tick only what has been verified by running it (RULES #14). Evidence line under each item.
+Tick only what has been verified by running it (RULES #14). Evidence under each item.
 
 ## Phase 1 — topic-independent tooling
 
-- [x] **S3-1** `tools/verify_citations.py` — DOI (Crossref→DataCite) / arXiv / OpenAlex /
+- [x] **S3-1** `tools/verify_citations.py` — DOI (Crossref → DataCite) / arXiv / OpenAlex /
       Semantic Scholar resolution, fuzzy title+author+year check, VERIFIED / MISMATCH /
-      NOT_FOUND / ERROR, cache, polite limits, CSV+BibTeX input, 3 report formats.
-      *Evidence:* `pytest tools/tests -q` → 37 passed; live run on `tools/tests/live_sample.csv`
-      → 5/5 real papers VERIFIED, the fabricated row NOT_FOUND (best match 0.50 < 0.55).
-
-- [x] **S3-2** `tools/check_numbers.py` — every number in a draft traced to
-      `04_experiments/RESULTS-INDEX.json` via `num:` markers, narrow exemptions, percentage
-      and rounding tolerance, UNTRACEABLE / MISMATCH / DANGLING_MARKER.
-      *Evidence:* 46 passed; clean toy draft 0 findings, tampered digit → MISMATCH exit 1.
-
-- [x] **S3-3** `05_paper/template/` — article skeleton, IEEE + ACL stubs, refs.bib with zero
-      active entries, `citations_to_bib.py`, Markdown skeleton, figure/table generators that
-      read only from results files, `build.sh` + `BUILD.md`.
-      *Evidence:* 30 passed; both generators run end to end; toy summary is refused (exit 2).
-
-- [x] **S3-4** `04_experiments/harness/` — runner with provenance (git hash, dirty flag,
-      config sha256, timing, peak RSS), heavy lock, aggregator, stats (bootstrap/BCa,
-      exact Wilcoxon, sign test, Cohen's d, Cliff's delta, Holm, BH), ablation tables, toy
+      NOT_FOUND / ERROR, cache, polite limits, CSV+BibTeX input, one canonical output schema.
+      *Evidence:* 79 tests; live run 5/5 real papers VERIFIED, fabricated row NOT_FOUND.
+- [x] **S3-2** `tools/check_numbers.py` — every draft number traced through `num:` markers to
+      `RESULTS-INDEX.json`; UNTRACEABLE / MISMATCH / DANGLING_MARKER; narrow visible exemptions.
+      *Evidence:* 88 tests; clean toy draft 0 findings, tampered digit → MISMATCH exit 1.
+- [x] **S3-3** `05_paper/template/` — article + IEEE + ACL stubs, refs.bib with zero active
+      entries, `citations_to_bib.py`, Markdown skeleton, figure/table generators, build docs.
+      *Evidence:* 30 tests; generators run end-to-end; toy summary refused (exit 2);
+      **270 verified rows → 270 BibTeX entries** from the real register.
+- [x] **S3-4** `04_experiments/harness/` — runner with provenance, heavy lock, aggregator,
+      bootstrap/BCa, exact Wilcoxon, sign test, effect sizes, Holm/BH, ablation tables, toy
       experiment, `--check-repro`.
-      *Evidence:* 72 passed; exact Wilcoxon n=6 → 0.03125 cross-checked against scipy;
-      `--check-repro` passes on deterministic fn and fails on noisy fn.
-
-- [x] **S3-5** `06_review/PEER-REVIEW-SIM.md` + `tools/simulate_review.py` + six personas +
-      meta-review template. Honest about not calling an LLM.
-      *Evidence:* 9 passed; round 1 → 3 reviews → aggregate ranked the shared must-fix at
-      rank 1 (3 reviewers) → round 2 → `compare` shows it resolved, 2 persisted.
-
+      *Evidence:* 72 tests; exact Wilcoxon n=6 = 0.03125 cross-checked against scipy.
+- [x] **S3-5** `06_review/PEER-REVIEW-SIM.md` + six personas + `tools/simulate_review.py` +
+      meta-review template. Orchestrator only — it never pretends to be an LLM.
+      *Evidence:* 9 tests; round1 → aggregate ranks the shared must-fix #1 → round2 → `compare`
+      shows it resolved.
 - [x] **S3-6** `06_review/ORIGINALITY.md` + `tools/originality_check.py` +
-      `06_review/templates/AI-DISCLOSURE.md`.
-      *Evidence:* 27 passed; a planted 21-word verbatim run caught as UNQUOTED, exit 1;
-      quoted variant exits 0. Disclosure table reconciled with
-      `00_foundations/ETHICS-AND-AI-USE.md` (S1) — our NeurIPS row was wrong and is fixed.
-
+      `06_review/templates/AI-DISCLOSURE.md` (reconciled with S1's verified policy quotes).
+      *Evidence:* 27 tests; planted 21-word copy caught, quoted copy passes.
 - [x] **S3-7** `06_review/CLAIMS-AUDIT-TEMPLATE.md` + `tools/claims_audit.py`.
-      *Evidence:* 16 passed; toy audit PASSes; missing file / wrong value / verified=NO /
-      uncovered claim / unjustified "state of the art" each fail with a named row.
-      *Bug found and fixed by the lead:* `"gain"` matched inside `"against"`, making every
-      comparison sentence an UNCOVERED claim; now word-prefix matched, with regression tests.
-
+      *Evidence:* 16 tests; five failure modes each fail with a named row.
 - [x] **S3-8** `tools/make_digest.py` + `06_review/STUDENT-DIGEST/README.md`.
-      *Evidence:* 11 passed; digests resolve numbers and citation keys from evidence files and
-      emit `[TO FILL]` instead of inventing; `--check` passes on a generated digest.
+      *Evidence:* 11 tests; gaps emitted as `[TO FILL]`, never invented.
 
-- [x] **Toy pipeline dry run** `04_experiments/toy/run_pipeline.py`.
-      *Evidence:* `12/12 steps behaved as expected` — run → aggregate → repro → table refusal
-      → figure → numbers pass → numbers tamper caught → claims → digest → digest check →
-      review pack → originality.
+## Cross-cutting (added this session)
+
+- [x] **One canonical citation schema** `tools/lib/citation_schema.py`; S2 owns the register,
+      S3 writes the same columns. *Evidence:* 270/270 rows load and convert.
+- [x] **One-command proof** `tools/check_all.py` + `ops/check.sh`. *Evidence:* 4/4 steps, 44 s.
+- [x] **Toy pipeline** `04_experiments/toy/run_pipeline.py`. *Evidence:* 12/12 steps.
+- [x] **Protocol checklist** `04_experiments/PROTOCOL-CHECKLIST.md` (topic-agnostic, ready for
+      S3-9 the moment Phase 2 unlocks).
+- [x] **Docs-drift tests** `tools/tests/test_docs_and_cli.py` — every `--help`, exit code 2 on
+      bad usage, documented paths exist, toy rules stated, and the Phase-2 gate asserted by
+      exact line match.
+- [x] **Adversarial suites** `test_check_numbers_adversarial.py`, `test_verify_citations_adversarial.py`
+      — 8 real bugs found, all fixed, all guarded without xfail.
 
 ## Phase 2 — LOCKED
 
 - [ ] **S3-9** `04_experiments/PROTOCOL.md` pre-registration, frozen with a hash.
-      Blocked: `orchestration/HEAD-REVIEW.md` contains no `TOPIC APPROVED` line and
-      `03_topics/SELECTED.md` does not exist. Not started, by design.
+      Blocked: no standalone `TOPIC APPROVED` line in `orchestration/HEAD-REVIEW.md` (line 10
+      only *describes* the line the head will write), and `03_topics/` is empty. Not started.
 
 ## Not done / open
 
-- No LaTeX installed here, so no template was compiled to PDF. Stubs are brace/environment
-  checked only; layout is unverified. Recorded in `05_paper/template/BUILD.md`.
-- `02_literature/sources/` has no PDFs yet, so the originality gate cannot pass on a real
-  draft until sources are deposited (the tool itself is proven).
-- Nothing committed to git: S1/S2 are writing in the same working tree right now, and a commit
-  would capture their in-flight work. `meta.json` records `git_dirty: true` honestly.
-- `02_literature/verified_citations.csv` holds 5 real, API-verified entries (Vaswani 2017,
-  He 2016, Devlin 2019, Kingma 2015, LeCun 2015) with URLs and retrieval timestamps. They are
-  usable in a draft; anything else must be verified before it is added.
+- No LaTeX installed → no template compiled; layout unverified.
+- `02_literature/sources/` empty → originality gate not run on a real draft.
+- `05_paper/draft/` empty → no real section through the gates yet.
+- `simulate_review.py` has no `--json` (documented; the README claim is scoped accordingly).
+- `aggregate.py` writes `summary_<experiment>.json` but does not copy per-run `results.json`
+  into `04_experiments/results/`, although CONTRACTS §3 reads as if it does. Left as a
+  documented discrepancy rather than changed silently.
+- Nothing committed: S1/S2 write in the same tree; a commit would capture their in-flight work.

@@ -71,6 +71,9 @@ def _norm_schema(row: dict) -> dict:
         "venue": n["venue"] or "",
         "status": n["status"] or "",
         "source_url": (row.get("source_url") or row.get("url") or ""),
+        "retrieved_on": (row.get("retrieved_on") or ""),
+        "retrieved_at": (row.get("retrieved_at") or row.get("retrieved_on") or ""),
+        "verified_by_command": (row.get("verified_by_command") or ""),
     }
 
 # Characters that are LaTeX specials and would break compilation if they reach a
@@ -191,9 +194,10 @@ def entry_from_row(row: dict[str, str], *, allow_missing_status: bool) -> str:
     if url:
         fields.append(("url", url))
 
-    # provenance, kept out of the printed reference list
+    # provenance, kept out of the printed reference list. The canonical register records it in
+    # `verified_by_command` + `retrieved_on`; the older form used `source`/`retrieved_at`.
     prov = []
-    for col in ("source", "retrieved_at", "evidence"):
+    for col in ("source", "retrieved_on", "retrieved_at", "verified_by_command", "evidence"):
         val = (row.get(col) or "").strip()
         if val:
             prov.append(f"{col}={val}")
@@ -248,9 +252,12 @@ def main(argv: list[str] | None = None) -> int:
     entries: dict[str, str] = {}
     counts = {"read": len(rows), "kept": 0, "skipped_status": 0, "refused": 0}
     refused: list[str] = []
-    for row in rows:
-        if not any(v.strip() for v in row.values()):
+    for raw_row in rows:
+        if not any(v.strip() for v in raw_row.values()):
             continue
+        # Normalise ONCE, before any key comparison: the register's key column is `id`,
+        # and reading `key` before mapping it made every row look like the same empty key.
+        row = _norm_schema(raw_row)
         status = (row.get("status") or "").strip().upper()
         if has_status and status != "VERIFIED":
             counts["skipped_status"] += 1

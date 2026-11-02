@@ -14,3 +14,19 @@ Phase 2 (experiments) stays LOCKED. This file does not yet contain the approval 
 - S1 PSIT dataset: re-verified 12 random records against Crossref directly: 10/12 exact (title + PSIT affiliation + year); 2/12 title/year match but PSIT not in Crossref's deposited affiliation (probably the Europe PMC route — NOT confirmed). The "793 is a floor" framing is correct and honest. NAAC-SSR inconsistency table (590 vs 117 UGC-CARE papers) is the most valuable finding for the student; keep it prominent.
 - OpenAlex/Semantic Scholar/Crossref/DBLP rate limits were hit by our own sessions (OpenAlex free daily budget shows $0 for this IP until 00:00 UTC). Do NOT hammer public APIs again; cache and back off. Do NOT sign up for API keys with the student's email — that is the student's decision.
 - S3: Phase 1 reported complete; keep Phase 2 locked. S2: 271 verified citations, CANDIDATES.md exists; waiting for NOVELTY-CHECK.md + SELECTED.md + PROPOSAL.md. I will review them and decide the topic myself.
+
+## Checkpoint 3 — TOPIC DECISION — 04:00 IST 2026-11-03 (head)
+Reviewed 03_topics/SELECTED.md, PROPOSAL.md, 02_literature/NOVELTY-CHECK.md in full.
+Independent check: resolved 16 of the arXiv IDs the proposal/novelty case rests on against the arXiv API: 15/16 exist with matching titles and dates (all 2026 papers real).
+1 error found and fixed by the head: B4's citation arXiv:2305.11206 is LIMA (alignment), NOT the confidence-baseline paper; replaced by Kadavath et al. arXiv:2207.05221 (verified). Add 2207.05221 to verified_citations.csv. Lesson for all sessions: an ID that resolves is not proof it supports the sentence — check title against claim.
+
+TOPIC APPROVED
+
+Approved topic: C1 "How Hard Are Your Negatives? A Hardness Ladder for Retrieval-Feature Abstention Gates". C3 (scam operating points) is the day-3 fallback exactly as SELECTED.md states; C2 abandoned.
+Conditions (binding on S3 and any later session):
+1. Honest framing everywhere: INCREMENTAL / workshop-level measurement paper. Never write "novel", "first", or "state of the art". NOVELTY-CHECK is one index deep (arXiv only): before the introduction claims any gap, re-run against OpenAlex (budget resets 00:00 UTC = 05:30 IST) and Semantic Scholar, plus >=15 slice-wording queries per finalist. If a paper appears that fits two thresholds on retrieval features and reports both directions per rung, C1 is dead -> move to C3.
+2. The separability audit (surface-only AUROC > 0.75 on any rung -> rebuild that rung) is a hard gate before any result is reported.
+3. Pre-registration first: 04_experiments/PREREGISTRATION.md frozen with a hash BEFORE the first run; deviations logged.
+4. The "47 of 82 refused" figure comes from the student's PRIVATE memory-system evaluation, whose held-out set was contaminated; do NOT present it as a result or a dataset. At most one sentence, as an unmeasured motivating anecdote, no numbers from that corpus. All experiments use public data only (SQuAD 2.0 dev, 2WikiMultihopQA).
+5. Compute: all heavy jobs through C:\Users\shubh\ai-memory-core\tools\heavy.py (shared lock with the memory build — the laptop is shared) and never while free RAM < 8 GB. No OpenAlex/Semantic Scholar hammering; cache responses.
+6. Every citation re-verified (resolve + title-vs-claim) before it enters a draft; every number traceable (tools\check_numbers.py).

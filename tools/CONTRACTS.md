@@ -6,34 +6,52 @@ All JSON is UTF-8, `ensure_ascii=False`, sorted keys where keys are a set.
 
 ---
 
-## 1. Citations: `02_literature/citations.csv` (input) and `verified_citations.csv` (output)
+## 1. Citations: `02_literature/citations.csv` (input) and `verified_citations.csv` (register)
 
-Input CSV — one row per citation the author wants to use:
+### 1a. The register — ONE schema, owned by S2's tool
+
+`02_literature/verified_citations.csv` is a single file with a single schema. It was briefly
+two (S2's 9-column register vs S3's 12-column output, written to the same path), which made
+`citations_to_bib.py` and `claims_audit.py` unable to read it. The canonical schema is S2's,
+because S2 owns the file; S3's verifier writes exactly these columns too. The mapping lives in
+`tools/lib/citation_schema.py` — import it, never re-implement it.
+
+```
+id,title,authors,year,venue,url,doi_or_arxiv,retrieved_on,verified_by_command
+```
+
+- `id`      : required, unique key used to reference the citation in the draft (`\\cite{id}`).
+- `title`   : required.
+- `authors` : `;`-separated, `Surname, Given` or `Given Surname`. Used for the author check.
+- `year`    : 4-digit year. Used for the year check (±1 year tolerance).
+- `venue`   : informational only, never used for verification.
+- `url`     : the page the record was resolved from (OpenAlex/DOI/arXiv).
+- `doi_or_arxiv` : one column holding either a bare DOI (`10.x/y`) or `arXiv:xxxx.xxxxx`.
+- `retrieved_on` : ISO date the row was checked.
+- `verified_by_command` : the exact command + evidence that proved the row.
+
+Output `02_literature/verified_citations.csv` — exactly these columns, in this order:
+
+```
+id,title,authors,year,venue,url,doi_or_arxiv,retrieved_on,verified_by_command
+```
+
+**There is no `status` column.** A row that is not verified belongs in a report, never in this
+file (RULES.md #1). Any consumer that needs a status treats a row carrying
+`verified_by_command` as VERIFIED; `citation_schema.normalize_row()` does this for you and
+also accepts the older 12-column form (`key,...,status,source,source_url,retrieved_at`) and
+S2's staging files (`02_literature/staging/*.csv`).
+
+### 1b. Input to `tools/verify_citations.py`
+
+A CSV of *candidates* to be resolved — either the schema above, or this simplest form:
 
 ```
 key,title,authors,year,doi,arxiv_id,venue
 vaswani2017,Attention Is All You Need,"Vaswani, Ashish; Shazeer, Noam",2017,10.48550/arXiv.1706.03762,1706.03762,NeurIPS
 ```
 
-- `key`      : required, unique BibTeX-ish key (used to reference the citation in the draft).
-- `title`    : required unless `doi` or `arxiv_id` is present.
-- `authors`  : optional, `;`-separated, `Surname, Given` or `Given Surname`. Used for the author check only.
-- `year`     : optional int. Used for the year check only (±1 year tolerance).
-- `doi`      : optional, bare DOI (`10.x/y`) or `https://doi.org/10.x/y`.
-- `arxiv_id` : optional, bare (`1706.03762`) or with `arXiv:` prefix, or `v2` suffix.
-- `venue`    : optional, informational only, never used for verification.
-
-The same columns are accepted from a `.bib` file instead (`tools/verify_citations.py --bib file.bib`
-parses BibTeX directly; no external bibtex library).
-
-Output `02_literature/verified_citations.csv` — ONLY rows with status `VERIFIED`:
-
-```
-key,title,authors,year,doi,arxiv_id,venue,status,source,source_url,retrieved_at,evidence
-```
-
-`source` ∈ {crossref, arxiv, openalex, semanticscholar}. `retrieved_at` is ISO-8601 UTC
-date-time. `evidence` is a short string, e.g. `title=0.97 authors=1.00 year=0`.
+A `.bib` file works too (`--bib`); no external BibTeX library is needed.
 
 Full report (all statuses) is written to `02_literature/verification_report.json` and
 `verification_report.md`:

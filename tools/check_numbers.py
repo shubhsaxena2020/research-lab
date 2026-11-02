@@ -136,6 +136,7 @@ RULE_DOC: Dict[str, str] = {
     "latex_command_arg": "argument of \\ref \\label \\cite \\includegraphics \\begin ...",
     "latex_dimension": "LaTeX length: 11pt, 0.9\\textwidth, width=0.5\\linewidth",
     "identifier_attached": "digit glued to a name (GPT-4, ResNet-50, v2, L2)",
+    "equation_number": "a bracketed integer or one-decimal section number: equation (1), section (2.1)",
     "config_exempt": "number covered by a pattern in the --exempt config file",
 }
 
@@ -147,7 +148,9 @@ NUMBER_RE = re.compile(
     r"""
     (?<![\w.])                                       # not glued to a word or a previous dot
     (?P<sign>[+\-\u2212\u00b1])?                     # + - (unicode minus) or +/- sign
-    (?P<num>(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?|\.\d+)
+    (?P<num>\d{1,3}(?:\.\d{3})+,\d+
+            |(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?
+            |\.\d+)
     (?P<exp>[eE][+\-]?\d+)?                          # 3e-4, 1.5E-3
     (?P<suffix>%|[x\u00d7])?                         # 12.3%   3.5x   3.5×
     """,
@@ -183,6 +186,12 @@ PROTECTED_PATTERNS: List[Tuple[str, "re.Pattern[str]"]] = [
         "file_path",
         re.compile(r"(?:[\w.\-]+/)+[\w.\-]+\.(?:png|jpe?g|pdf|svg|py|json|tex|md|csv|txt)\b"),
     ),
+    # A bracketed integer is an equation/section label, not a measurement: LaTeX output of
+    # \begin{equation} ... \end{equation} is "(1)", and prose refers to it as "in (1)".
+    # Narrow on purpose: only short integers or a one-decimal section number, and never a
+    # value with two or more decimals — "(0.85)" stays a candidate because that is a number
+    # someone measures, while "(1)" is something someone numbers.
+    ("equation_number", re.compile(r"\(\d{1,3}(?:\.\d)?\)")),
 ]
 
 FLOAT_PREFIX_RE = re.compile(
@@ -331,7 +340,14 @@ def parse_number(match: "re.Match[str]") -> Optional[Tuple[Decimal, Decimal, Dec
     stored metric is a fraction. `half_ulp` is half of the last decimal place *as printed*,
     also in fraction units, so "81.2%" gets 0.0005 and "0.8123" gets 0.00005.
     """
-    raw = match.group("num").replace(",", "")
+    # European thousands format ("1.234,56"): the dot groups thousands, the comma is the
+    # decimal separator. Read the other way it splits into 1.234 and 56, and the integer part
+    # can match a stored value 1000x smaller — a traced-looking number that is not the one
+    # printed.
+    num_raw = match.group("num")
+    if re.fullmatch(r"[+-]?\d{1,3}(\.\d{3})+,\d+", num_raw):
+        num_raw = num_raw.replace(".", "").replace(",", ".")
+    raw = num_raw.replace(",", "")
     if match.group("exp"):
         raw += match.group("exp")
     try:
@@ -340,6 +356,12 @@ def parse_number(match: "re.Match[str]") -> Optional[Tuple[Decimal, Decimal, Dec
         return None
     suffix = match.group("suffix") or ""
     percent = suffix == "%"
+    if not percent:
+        # Typography allows a space before the unit ("12.3 %"). Without this, such a number
+        # is read as a bare 12.3 and every correctly-printed percentage becomes a MISMATCH.
+        after = match.string[match.end():match.end() + 10]
+        if re.match(r"\s{0,3}%", after):
+            percent = True
     if not percent:
         after = match.string[match.end():match.end() + 10]
         percent = bool(PERCENT_WORD_RE.match(after))
@@ -462,10 +484,17 @@ def find_markers(
 
 
 def bind_markers(markers: List[Marker], tokens: List[Token], starts: Sequence[int]) -> None:
-    """Attach each marker to the token(s) it vouches for. Fills `Marker.bound` in place."""
+    """Attach each marker to the token(s) it vouches for. Fills `Marker.bound` in place.
+
+    Binding is order-preserving and exclusive: a token already claimed by an earlier marker
+    is not available to a later one. Without that, two `% num:` comments stacked above a line
+    with two numbers both bound to the *first* number, so the second marker's claimed value
+    was never compared against anything and a wrong number passed as traced.
+    """
     by_line: Dict[int, List[Token]] = {}
     for t in tokens:
         by_line.setdefault(t.line, []).append(t)
+    claimed: set = set()
 
     for mk in markers:
         if mk.style == "md":
@@ -473,28 +502,38 @@ def bind_markers(markers: List[Marker], tokens: List[Token], starts: Sequence[in
             mk.bound = [t for t in tokens if t.start >= mk.start and t.end <= mk.end]
             if not mk.bound:
                 mk.style = "md-open"  # empty pair: treat like a bare marker for binding
+            else:
+                claimed |= {id(t) for t in mk.bound}
+                continue
         if mk.style == "md-open":
-            after = [t for t in tokens if t.start >= mk.end]
+            after = [t for t in tokens if t.start >= mk.end and id(t) not in claimed]
             if after and after[0].start - mk.end <= 200 and after[0].line <= mk.line + 1:
                 mk.bound = [after[0]]
-                continue
-            before = [t for t in by_line.get(mk.line, []) if t.end <= mk.start]
-            mk.bound = before[-1:] if before else []
+            else:
+                before = [
+                    t for t in by_line.get(mk.line, [])
+                    if t.end <= mk.start and id(t) not in claimed
+                ]
+                mk.bound = before[-1:] if before else []
         elif mk.style == "tex-raw":
-            on_line = [t for t in by_line.get(mk.line, []) if t.end <= mk.start]
+            on_line = [
+                t for t in by_line.get(mk.line, [])
+                if t.end <= mk.start and id(t) not in claimed
+            ]
             if on_line:
-                # Trailing comment: the nearest number on the left is the annotated one.
+                # Trailing comment: the nearest unclaimed number on the left is the annotated one.
                 mk.bound = [on_line[-1]]
                 mk.style = "tex-inline"
-                continue
-            # Otherwise look at the next line that has content and is not a comment.
-            n_lines = len(starts)
-            for idx in range(mk.line, min(mk.line + 4, n_lines)):  # mk.line is 1-based -> idx is the next line
-                cand = [t for t in by_line.get(idx + 1, [])]
-                if cand:
-                    mk.bound = [cand[0]]
-                    mk.style = "tex-above"
-                    break
+            else:
+                # Otherwise look at the next line that has content and is not a comment.
+                n_lines = len(starts)
+                for idx in range(mk.line, min(mk.line + 4, n_lines)):  # mk.line is 1-based
+                    cand = [t for t in by_line.get(idx + 1, []) if id(t) not in claimed]
+                    if cand:
+                        mk.bound = [cand[0]]
+                        mk.style = "tex-above"
+                        break
+        claimed |= {id(t) for t in mk.bound}
 
 
 # --------------------------------------------------------------------------- index
@@ -713,8 +752,11 @@ def compare(tok: Token, entry: IndexEntry, stored: Decimal) -> Tuple[bool, str]:
     tol_abs = abs(tol)
     tol_rel = abs(tol) * abs(stored)
     readings: List[Tuple[Decimal, Decimal, str]] = [(tok.value, tok.half_ulp, "fraction")]
-    if tok.percent:
-        # Alternative reading: the results file stores 81.2 rather than 0.812.
+    if tok.percent and abs(stored) > Decimal("1"):
+        # Alternative reading: the results file stores 81.2 rather than 0.812. Only credible
+        # when the stored value cannot be a fraction — otherwise "0.50%" would "match" a
+        # stored 0.5, accepting a 100x error. A metric stored in [0, 1] is a fraction by
+        # CONTRACTS §2, so the percent reading is not available for it.
         readings.append((tok.raw_value, tok.half_ulp * Decimal(100), "percent"))
 
     best_reason = ""

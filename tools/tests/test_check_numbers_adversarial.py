@@ -170,7 +170,6 @@ class TestNumberFormats:
         )
         assert rep["n_tokens"] == 1, "a grouped integer must not be scanned as several tokens"
 
-    @pytest.mark.xfail(strict=False, reason="BUG: European '1.234,56' splits into 1.234 + 56; the integer part is compared (and can MATCH) as if it were the whole number")
     def test_european_thousands_separator_is_not_silently_truncated(self):
         text = "Value 1.234,56 here."
         toks = cn.scan_tokens(text, cn.blank(text, []), "x")
@@ -217,7 +216,6 @@ class TestNumberFormats:
             "why 12.3 and 0.123 were treated as equal"
         )
 
-    @pytest.mark.xfail(strict=False, reason="BUG: '12.3 %' (space before %) is parsed as plain 12.3, so a correct percentage is reported MISMATCH")
     def test_percent_with_a_space_before_the_sign_matches(self, tmp_path):
         code, rep = audit(
             tmp_path / "pct_space", "Accuracy <!-- num:a -->12.3 %<!-- /num --> on test.\n",
@@ -372,7 +370,6 @@ class TestRoundingTolerance:
             "the evidence must name the percentage reading, so the match is auditable later"
         )
 
-    @pytest.mark.xfail(strict=False, reason="BUG: '0.50%' (=0.005) MATCHes stored 0.5 via the percent-units fallback, a 100x error reported as traced")
     def test_zero_point_five_zero_percent_is_not_one_half(self, tmp_path):
         code, rep = audit(
             tmp_path / "tiny", "Only <!-- num:a -->0.50%<!-- /num --> of runs diverged.\n",
@@ -461,7 +458,6 @@ class TestMarkerPlacement:
             "the second marker bound the first cell and the other cell went unchecked"
         )
 
-    @pytest.mark.xfail(strict=False, reason="BUG: a second stacked % num: marker is silently discarded; the number is checked only against the last one")
     def test_stacked_markers_do_not_silently_discard_one(self, tmp_path):
         code, rep = audit(
             tmp_path / "stacked", "% num:a\n% num:b\n0.812 \\\\\n",
@@ -550,7 +546,6 @@ class TestStructuralNumbers:
         )
         assert rep["n_matched"] == 0, "no structural number may be reported as a traced result"
 
-    @pytest.mark.xfail(strict=False, reason="BUG: a bare equation number '(1)' is UNTRACEABLE unless the word 'Equation' precedes it")
     def test_bare_equation_number_is_not_a_result(self, tmp_path):
         code, rep = audit(tmp_path / "eq", "The loss in (1) is minimised over the batch.\n")
         assert code == 0, (

@@ -92,17 +92,40 @@ def token_f1(a: str, b: str) -> float:
 
 
 def title_similarity(a: str, b: str) -> float:
-    """Conservative combined title score: min(difflib, token-F1), but a strict
-    substring containment (one title fully inside the other, >=4 tokens) is lifted to 0.95
-    because subtitles are routinely truncated by databases."""
+    """Conservative combined title score: min(difflib, token-F1), plus a bounded lift for
+    subtitle truncation.
+
+    The lift exists because databases routinely store a subtitle-less title ("BERT:
+    Pre-training of Deep Bidirectional Transformers") while the record quotes the full one.
+    It is deliberately narrow: the shorter title must be fully contained in the longer, and
+    the *extra* words on the longer side must be few and must not be the words that turn one
+    work into a different work (survey, review, benchmark, correction ...). Without that
+    guard, a survey whose title merely begins with the target title scores 0.95 and a wrong
+    DOI gets recorded as VERIFIED — the exact failure RULES.md #1 exists to prevent.
+    """
     r = title_ratio(a, b)
     f = token_f1(a, b)
     score = min(r, f)
     na, nb = normalize_title(a), normalize_title(b)
     short, long_ = (na, nb) if len(na) <= len(nb) else (nb, na)
     if short and short in long_ and len(short.split()) >= 4:
-        score = max(score, 0.95)
+        extra = [t for t in long_.replace(short, " ", 1).split()]
+        different_work = _DIFFERENT_WORK_MARKERS & set(extra)
+        if len(extra) <= _MAX_SUBTITLE_EXTRA and not different_work:
+            score = max(score, 0.95)
     return round(score, 4)
+
+
+#: Extra words above this count mean the "longer title" is a different, larger work.
+_MAX_SUBTITLE_EXTRA = 4
+
+#: Words that turn a title into a different work even when only a few are added.
+_DIFFERENT_WORK_MARKERS = {
+    "survey", "review", "tutorial", "benchmark", "benchmarks", "dataset", "datasets",
+    "challenge", "revisited", "correction", "corrigendum", "erratum", "retraction",
+    "commentary", "comment", "critique", "response", "reply", "reprint", "preprint",
+    "extended", "appendix", "addendum",
+}
 
 
 # --------------------------------------------------------------------------- authors

@@ -56,6 +56,9 @@ import sys
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Tuple
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from lib import citation_schema  # noqa: E402  (shared one-schema mapping; see CONTRACTS §1)
+
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
 COLUMNS = (

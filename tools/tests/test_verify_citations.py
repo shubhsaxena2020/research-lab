@@ -26,6 +26,7 @@ TOOLS = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(TOOLS))
 
 import verify_citations as vc                     # noqa: E402
+from lib import citation_schema                   # noqa: E402
 from lib import matchlib, netcache                # noqa: E402
 from lib.bibtex_min import bibtex_to_records      # noqa: E402
 
@@ -494,10 +495,13 @@ class TestOutputs(unittest.TestCase):
             self.assertEqual(n, 1)
             rows = list(csv.DictReader(io.StringIO(out.read_text(encoding="utf-8"))))
         self.assertEqual(len(rows), 1)
-        self.assertEqual(rows[0]["key"], "good")
-        self.assertEqual(rows[0]["status"], "VERIFIED")
-        self.assertTrue(rows[0]["source_url"].startswith("https://"))
-        self.assertTrue(rows[0]["retrieved_at"])
+        # the ONE canonical register schema (tools/CONTRACTS.md 1): id, not key
+        self.assertEqual(rows[0]["id"], "good")
+        self.assertTrue(rows[0]["url"].startswith("https://"))
+        self.assertTrue(rows[0]["retrieved_on"])
+        self.assertTrue(rows[0]["verified_by_command"])
+        # only VERIFIED rows, and never a status column to argue about
+        self.assertEqual(set(rows[0]), set(citation_schema.CANONICAL_FIELDS))
 
     def test_exit_code_nonzero_on_findings(self):
         with tempfile.TemporaryDirectory() as td:
