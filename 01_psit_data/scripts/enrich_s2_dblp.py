@@ -99,6 +99,11 @@ def enrich(skip_s2=False):
         if res:
             s2_by_doi[doi] = res
     print("S2 matched %d of %d DOIs" % (len(s2_by_doi), len(dois)))
+    if dois and not s2_by_doi:
+        # A totally empty result means the API refused us (429/blocked), not that
+        # none of the 793 papers is indexed. Refuse to record that as 'no'.
+        raise SystemExit("S2 returned no records for %d DOIs - treating as unavailable, "
+                         "not as evidence of absence. See raw/s2_unavailable.json." % len(dois))
 
     n_in = 0
     for r in rows:
