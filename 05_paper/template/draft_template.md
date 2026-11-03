@@ -401,9 +401,10 @@ the stronger form that the band is worse than the recall-matched single by
 <!-- num:c1.h3.diff.corr -->-2.23%<!-- /num --> (95% CI
 [<!-- num:c1.h3.diff.lo.corr -->-3.11%<!-- /num -->, <!-- num:c1.h3.diff.hi.corr -->-1.35%<!-- /num -->]).
 Two caveats on that last number: the matched single threshold is refitted on corrected dev scores, where
-its dev precision falls below the 0.80 constraint, so the comparison is descriptive rather than a
-re-run of the registered test; and the corrected exploratory band ends at an over-refusal of
-<!-- num:c1.expl.over_refusal.corr -->11.00%<!-- /num -->, above the 0.10 cap it was constrained to on dev
+its dev precision falls below the <!-- num:c1.const.target_precision -->0.80<!-- /num --> constraint, so the
+comparison is descriptive rather than a re-run of the registered test; and the corrected exploratory band
+ends at an over-refusal of <!-- num:c1.expl.over_refusal.corr -->11.00%<!-- /num -->, above the
+<!-- num:c1.const.over_cap -->0.10<!-- /num --> cap it was constrained to on dev
 — the constraint is on dev, not on the held-out half, and we report the breach rather than hide it.
 The corrected dense baseline is a real score at a degenerate operating point:
 <!-- num:c1.b2.pooled.corr -->99.73%<!-- /num --> pooled precision at
@@ -429,9 +430,11 @@ length. So the R2 figures describe the sampled question set rather than a select
 that several p-values sit between five and ten percent.
 
 **Do the intervals survive clustering?** Resampling whole articles instead of items leaves every verdict
-unchanged. Of the five comparable cells, four cluster intervals are narrower than the item intervals (width ratios
-from 0.45 to 0.85) and one is slightly wider (1.17), because the refusal rate is almost constant across
-the held-out articles and there is almost no article-level variance for clustering to add. Two cells are
+unchanged. Of the five comparable cells, four cluster intervals are narrower than the item intervals (narrowest:
+confirmatory R2, width ratio <!-- num:c1.st.cluster.ratio.conf.r2 -->0.45<!-- /num -->) and one is slightly
+wider (exploratory R4, <!-- num:c1.st.cluster.ratio.expl.r4 -->1.17<!-- /num -->), because the refusal rate is
+almost constant across the held-out articles and there is almost no article-level variance for clustering
+to add. Two cells are
 zero-width at both levels because every item in them is refused.
 
 **Is the matched-recall comparison fair?** The recall-matched single threshold is chosen on dev, never on

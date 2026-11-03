@@ -5,37 +5,18 @@
 
 Draft: `05_paper/draft/paper.md`  
 Index: `04_experiments/RESULTS-INDEX.json`  
-Generated: 2026-11-03T02:16:19Z  
+Generated: 2026-11-03T02:17:03Z  
 Toy numbers allowed: False
 
-**FAIL** — 5 finding(s) over 1 file(s).
+**PASS** — 0 finding(s) over 1 file(s).
 
 | scanned | matched | exempt | untraceable | mismatch | dangling | index error | unbound |
 |---|---|---|---|---|---|---|---|
-| 463 | 291 | 167 | 5 | 0 | 0 | 0 | 0 |
+| 462 | 295 | 167 | 0 | 0 | 0 | 0 | 0 |
 
 ## Findings
 
-| # | where | token | status | why |
-|---|-------|-------|--------|-----|
-| 1 | `05_paper/draft/paper.md:459:35` | `0.80` | **UNTRACEABLE** | no num: marker and no exemption rule matched — add <!-- num:<id> --> around it (or `% num:<id>` above it in LaTeX) with an entry in RESULTS-INDEX.json, or name it in the --exempt config |
-| 2 | `05_paper/draft/paper.md:461:70` | `0.10` | **UNTRACEABLE** | no num: marker and no exemption rule matched — add <!-- num:<id> --> around it (or `% num:<id>` above it in LaTeX) with an entry in RESULTS-INDEX.json, or name it in the --exempt config |
-| 3 | `05_paper/draft/paper.md:488:6` | `0.45` | **UNTRACEABLE** | no num: marker and no exemption rule matched — add <!-- num:<id> --> around it (or `% num:<id>` above it in LaTeX) with an entry in RESULTS-INDEX.json, or name it in the --exempt config |
-| 4 | `05_paper/draft/paper.md:488:14` | `0.85` | **UNTRACEABLE** | no num: marker and no exemption rule matched — add <!-- num:<id> --> around it (or `% num:<id>` above it in LaTeX) with an entry in RESULTS-INDEX.json, or name it in the --exempt config |
-| 5 | `05_paper/draft/paper.md:488:47` | `1.17` | **UNTRACEABLE** | no num: marker and no exemption rule matched — add <!-- num:<id> --> around it (or `% num:<id>` above it in LaTeX) with an entry in RESULTS-INDEX.json, or name it in the --exempt config |
-
-### Where they are
-
-- `05_paper/draft/paper.md:459:35` **UNTRACEABLE** `0.80` — no num: marker and no exemption rule matched — add <!-- num:<id> --> around it (or `% num:<id>` above it in LaTeX) with an entry in RESULTS-INDEX.json, or name it in the --exempt config
-  > …rrected dev scores, where its dev precision falls below the 0.80 constraint, so the comparison is descriptive rather than a …
-- `05_paper/draft/paper.md:461:70` **UNTRACEABLE** `0.10` — no num: marker and no exemption rule matched — add <!-- num:<id> --> around it (or `% num:<id>` above it in LaTeX) with an entry in RESULTS-INDEX.json, or name it in the --exempt config
-  > …c1.expl.over_refusal.corr -->11.00%<!-- /num -->, above the 0.10 cap it was constrained to on dev — the constraint is on dev…
-- `05_paper/draft/paper.md:488:6` **UNTRACEABLE** `0.45` — no num: marker and no exemption rule matched — add <!-- num:<id> --> around it (or `% num:<id>` above it in LaTeX) with an entry in RESULTS-INDEX.json, or name it in the --exempt config
-  > …als are narrower than the item intervals (width ratios from 0.45 to 0.85) and one is slightly wider (1.17), because the refu…
-- `05_paper/draft/paper.md:488:14` **UNTRACEABLE** `0.85` — no num: marker and no exemption rule matched — add <!-- num:<id> --> around it (or `% num:<id>` above it in LaTeX) with an entry in RESULTS-INDEX.json, or name it in the --exempt config
-  > …narrower than the item intervals (width ratios from 0.45 to 0.85) and one is slightly wider (1.17), because the refusal rate…
-- `05_paper/draft/paper.md:488:47` **UNTRACEABLE** `1.17` — no num: marker and no exemption rule matched — add <!-- num:<id> --> around it (or `% num:<id>` above it in LaTeX) with an entry in RESULTS-INDEX.json, or name it in the --exempt config
-  > …(width ratios from 0.45 to 0.85) and one is slightly wider (1.17), because the refusal rate is almost constant across the he…
+None. Every numeric token is marked-and-matching or exempt.
 
 ## Matched numbers
 
@@ -303,35 +284,39 @@ Toy numbers allowed: False
 | `05_paper/draft/paper.md:456` | `-2.23%` | `c1.h3.diff.corr` | `-0.0223` | printed '-2.23%' vs stored -0.0223; percentage form: -2.23/100 = -0.0223, so '-2.23%' is the same number as -0.0223; diff 0.0000 <= allowed 0.0005 (half last decimal 0.00005, entry tolerance 0.0005) |
 | `05_paper/draft/paper.md:457` | `-3.11%` | `c1.h3.diff.lo.corr` | `-0.0311` | printed '-3.11%' vs stored -0.0311; percentage form: -3.11/100 = -0.0311, so '-3.11%' is the same number as -0.0311; diff 0.0000 <= allowed 0.00005 (half last decimal 0.00005, entry tolerance 0.0) |
 | `05_paper/draft/paper.md:457` | `-1.35%` | `c1.h3.diff.hi.corr` | `-0.0135` | printed '-1.35%' vs stored -0.0135; percentage form: -1.35/100 = -0.0135, so '-1.35%' is the same number as -0.0135; diff 0.0000 <= allowed 0.00005 (half last decimal 0.00005, entry tolerance 0.0) |
+| `05_paper/draft/paper.md:459` | `0.80` | `c1.const.target_precision` | `0.8` | printed '0.80' vs stored 0.8; diff 0.00 <= allowed 0.005 (half last decimal 0.005, entry tolerance 0.0) |
 | `05_paper/draft/paper.md:461` | `11.00%` | `c1.expl.over_refusal.corr` | `0.11` | printed '11.00%' vs stored 0.11; percentage form: 11.00/100 = 0.11, so '11.00%' is the same number as 0.11; diff 0.00 <= allowed 0.0005 (half last decimal 0.00005, entry tolerance 0.0005) |
-| `05_paper/draft/paper.md:464` | `99.73%` | `c1.b2.pooled.corr` | `0.9973` | printed '99.73%' vs stored 0.9973; percentage form: 99.73/100 = 0.9973, so '99.73%' is the same number as 0.9973; diff 0.0000 <= allowed 0.0005 (half last decimal 0.00005, entry tolerance 0.0005) |
-| `05_paper/draft/paper.md:465` | `0.27%` | `c1.b2.coverage.corr` | `0.0027` | printed '0.27%' vs stored 0.0027; percentage form: 0.27/100 = 0.0027, so '0.27%' is the same number as 0.0027; diff 0.0000 <= allowed 0.0005 (half last decimal 0.00005, entry tolerance 0.0005) |
-| `05_paper/draft/paper.md:468` | `0.862` | `c1.abl.no_dense.test` | `0.8623` | printed '0.862' vs stored 0.8623; diff 0.0003 <= allowed 0.0005 (half last decimal 0.0005, entry tolerance 0.0005) |
-| `05_paper/draft/paper.md:469` | `0.874` | `c1.abl.all_12.test` | `0.8738` | printed '0.874' vs stored 0.8738; diff 0.0002 <= allowed 0.0005 (half last decimal 0.0005, entry tolerance 0.0005) |
-| `05_paper/draft/paper.md:470` | `0.811` | `c1.abl.lex_overlap_only.test` | `0.8111` | printed '0.811' vs stored 0.8111; diff 0.0001 <= allowed 0.0005 (half last decimal 0.0005, entry tolerance 0.0005) |
-| `05_paper/draft/paper.md:479` | `273` | `c1.st.exch.kept.dev` | `273` | printed '273' vs stored 273; diff 0 <= allowed 0.5 (half last decimal 0.5, entry tolerance 0.0) |
-| `05_paper/draft/paper.md:480` | `127` | `c1.st.exch.dropped.dev` | `127` | printed '127' vs stored 127; diff 0 <= allowed 0.5 (half last decimal 0.5, entry tolerance 0.0) |
-| `05_paper/draft/paper.md:482` | `0.052` | `c1.st.exch.p` | `0.052366` | printed '0.052' vs stored 0.052366; diff 0.000366 <= allowed 0.0005 (half last decimal 0.0005, entry tolerance 0.0) |
-| `05_paper/draft/paper.md:494` | `0.00` | `c1.st.match.maxdiff` | `0.0` | printed '0.00' vs stored 0.0; diff 0.00 <= allowed 0.005 (half last decimal 0.005, entry tolerance 0.0) |
-| `05_paper/draft/paper.md:498` | `553` | `c1.reader.n` | `553` | printed '553' vs stored 553; diff 0 <= allowed 0.5 (half last decimal 0.5, entry tolerance 0.0) |
-| `05_paper/draft/paper.md:500` | `0.419` | `c1.reader.auroc` | `0.4192` | printed '0.419' vs stored 0.4192; diff 0.0002 <= allowed 0.0005 (half last decimal 0.0005, entry tolerance 0.0) |
-| `05_paper/draft/paper.md:508` | `400` | `c1.data.transfer.items` | `400` | printed '400' vs stored 400; diff 0 <= allowed 0.5 (half last decimal 0.5, entry tolerance 0) |
-| `05_paper/draft/paper.md:510` | `98.50%` | `c1.tr.precision.conf` | `0.985` | printed '98.50%' vs stored 0.985; percentage form: 98.50/100 = 0.985, so '98.50%' is the same number as 0.985; diff 0.000 <= allowed 0.0005 (half last decimal 0.00005, entry tolerance 0.0005) |
-| `05_paper/draft/paper.md:511` | `89.50%` | `c1.tr.over_refusal.conf` | `0.895` | printed '89.50%' vs stored 0.895; percentage form: 89.50/100 = 0.895, so '89.50%' is the same number as 0.895; diff 0.000 <= allowed 0.0005 (half last decimal 0.00005, entry tolerance 0.0005) |
-| `05_paper/draft/paper.md:513` | `85.50%` | `c1.tr.precision.expl` | `0.855` | printed '85.50%' vs stored 0.855; percentage form: 85.50/100 = 0.855, so '85.50%' is the same number as 0.855; diff 0.000 <= allowed 0.0005 (half last decimal 0.00005, entry tolerance 0.0005) |
-| `05_paper/draft/paper.md:513` | `79.50%` | `c1.tr.ci.lo` | `0.795` | printed '79.50%' vs stored 0.795; percentage form: 79.50/100 = 0.795, so '79.50%' is the same number as 0.795; diff 0.000 <= allowed 0.0005 (half last decimal 0.00005, entry tolerance 0.0005) |
-| `05_paper/draft/paper.md:514` | `89.50%` | `c1.tr.ci.hi` | `0.895` | printed '89.50%' vs stored 0.895; percentage form: 89.50/100 = 0.895, so '89.50%' is the same number as 0.895; diff 0.000 <= allowed 0.0005 (half last decimal 0.00005, entry tolerance 0.0005) |
-| `05_paper/draft/paper.md:515` | `7.25` | `c1.tr.drop.expl` | `7.25` | printed '7.25' vs stored 7.25; diff 0.00 <= allowed 0.005 (half last decimal 0.005, entry tolerance 0.0) |
-| `05_paper/draft/paper.md:516` | `0.982` | `c1.auroc.test.run` | `0.9824` | printed '0.982' vs stored 0.9824; diff 0.0004 <= allowed 0.0005 (half last decimal 0.0005, entry tolerance 0.0005) |
-| `05_paper/draft/paper.md:517` | `0.640` | `c1.tr.auroc` | `0.6402` | printed '0.640' vs stored 0.6402; diff 0.0002 <= allowed 0.0005 (half last decimal 0.0005, entry tolerance 0.0005) |
-| `05_paper/draft/paper.md:527` | `0.80` | `c1.const.target_precision` | `0.8` | printed '0.80' vs stored 0.8; diff 0.00 <= allowed 0.005 (half last decimal 0.005, entry tolerance 0.0) |
-| `05_paper/draft/paper.md:529` | `24.50%` | `c1.pm.band.answer_rate` | `0.245` | printed '24.50%' vs stored 0.245; percentage form: 24.50/100 = 0.245, so '24.50%' is the same number as 0.245; diff 0.000 <= allowed 0.0005 (half last decimal 0.00005, entry tolerance 0.0005) |
-| `05_paper/draft/paper.md:530` | `83.03%` | `c1.pm.band.pooled_precision` | `0.8303` | printed '83.03%' vs stored 0.8303; percentage form: 83.03/100 = 0.8303, so '83.03%' is the same number as 0.8303; diff 0.0000 <= allowed 0.0005 (half last decimal 0.00005, entry tolerance 0.0005) |
-| `05_paper/draft/paper.md:533` | `75.50%` | `c1.band.over_refusal.run` | `0.755` | printed '75.50%' vs stored 0.755; percentage form: 75.50/100 = 0.755, so '75.50%' is the same number as 0.755; diff 0.000 <= allowed 0.0005 (half last decimal 0.00005, entry tolerance 0.0005) |
-| `05_paper/draft/paper.md:573` | `273` | `c1.items.rung2.dev` | `273` | printed '273' vs stored 273; diff 0 <= allowed 0.5 (half last decimal 0.5, entry tolerance 0.0) |
-| `05_paper/draft/paper.md:574` | `280` | `c1.pm.n.r2` | `280` | printed '280' vs stored 280; diff 0 <= allowed 0.5 (half last decimal 0.5, entry tolerance 0) |
-| `05_paper/draft/paper.md:579` | `553` | `c1.reader.n` | `553` | printed '553' vs stored 553; diff 0 <= allowed 0.5 (half last decimal 0.5, entry tolerance 0.0) |
-| `05_paper/draft/paper.md:580` | `1873` | `c1.items.dev` | `1873` | printed '1873' vs stored 1873; diff 0 <= allowed 0.5 (half last decimal 0.5, entry tolerance 0.0) |
+| `05_paper/draft/paper.md:462` | `0.10` | `c1.const.over_cap` | `0.1` | printed '0.10' vs stored 0.1; diff 0.00 <= allowed 0.005 (half last decimal 0.005, entry tolerance 0.0) |
+| `05_paper/draft/paper.md:465` | `99.73%` | `c1.b2.pooled.corr` | `0.9973` | printed '99.73%' vs stored 0.9973; percentage form: 99.73/100 = 0.9973, so '99.73%' is the same number as 0.9973; diff 0.0000 <= allowed 0.0005 (half last decimal 0.00005, entry tolerance 0.0005) |
+| `05_paper/draft/paper.md:466` | `0.27%` | `c1.b2.coverage.corr` | `0.0027` | printed '0.27%' vs stored 0.0027; percentage form: 0.27/100 = 0.0027, so '0.27%' is the same number as 0.0027; diff 0.0000 <= allowed 0.0005 (half last decimal 0.00005, entry tolerance 0.0005) |
+| `05_paper/draft/paper.md:469` | `0.862` | `c1.abl.no_dense.test` | `0.8623` | printed '0.862' vs stored 0.8623; diff 0.0003 <= allowed 0.0005 (half last decimal 0.0005, entry tolerance 0.0005) |
+| `05_paper/draft/paper.md:470` | `0.874` | `c1.abl.all_12.test` | `0.8738` | printed '0.874' vs stored 0.8738; diff 0.0002 <= allowed 0.0005 (half last decimal 0.0005, entry tolerance 0.0005) |
+| `05_paper/draft/paper.md:471` | `0.811` | `c1.abl.lex_overlap_only.test` | `0.8111` | printed '0.811' vs stored 0.8111; diff 0.0001 <= allowed 0.0005 (half last decimal 0.0005, entry tolerance 0.0005) |
+| `05_paper/draft/paper.md:480` | `273` | `c1.st.exch.kept.dev` | `273` | printed '273' vs stored 273; diff 0 <= allowed 0.5 (half last decimal 0.5, entry tolerance 0.0) |
+| `05_paper/draft/paper.md:481` | `127` | `c1.st.exch.dropped.dev` | `127` | printed '127' vs stored 127; diff 0 <= allowed 0.5 (half last decimal 0.5, entry tolerance 0.0) |
+| `05_paper/draft/paper.md:483` | `0.052` | `c1.st.exch.p` | `0.052366` | printed '0.052' vs stored 0.052366; diff 0.000366 <= allowed 0.0005 (half last decimal 0.0005, entry tolerance 0.0) |
+| `05_paper/draft/paper.md:489` | `0.45` | `c1.st.cluster.ratio.conf.r2` | `0.4521` | printed '0.45' vs stored 0.4521; diff 0.0021 <= allowed 0.005 (half last decimal 0.005, entry tolerance 0.0) |
+| `05_paper/draft/paper.md:490` | `1.17` | `c1.st.cluster.ratio.expl.r4` | `1.1658` | printed '1.17' vs stored 1.1658; diff 0.0042 <= allowed 0.005 (half last decimal 0.005, entry tolerance 0.0) |
+| `05_paper/draft/paper.md:497` | `0.00` | `c1.st.match.maxdiff` | `0.0` | printed '0.00' vs stored 0.0; diff 0.00 <= allowed 0.005 (half last decimal 0.005, entry tolerance 0.0) |
+| `05_paper/draft/paper.md:501` | `553` | `c1.reader.n` | `553` | printed '553' vs stored 553; diff 0 <= allowed 0.5 (half last decimal 0.5, entry tolerance 0.0) |
+| `05_paper/draft/paper.md:503` | `0.419` | `c1.reader.auroc` | `0.4192` | printed '0.419' vs stored 0.4192; diff 0.0002 <= allowed 0.0005 (half last decimal 0.0005, entry tolerance 0.0) |
+| `05_paper/draft/paper.md:511` | `400` | `c1.data.transfer.items` | `400` | printed '400' vs stored 400; diff 0 <= allowed 0.5 (half last decimal 0.5, entry tolerance 0) |
+| `05_paper/draft/paper.md:513` | `98.50%` | `c1.tr.precision.conf` | `0.985` | printed '98.50%' vs stored 0.985; percentage form: 98.50/100 = 0.985, so '98.50%' is the same number as 0.985; diff 0.000 <= allowed 0.0005 (half last decimal 0.00005, entry tolerance 0.0005) |
+| `05_paper/draft/paper.md:514` | `89.50%` | `c1.tr.over_refusal.conf` | `0.895` | printed '89.50%' vs stored 0.895; percentage form: 89.50/100 = 0.895, so '89.50%' is the same number as 0.895; diff 0.000 <= allowed 0.0005 (half last decimal 0.00005, entry tolerance 0.0005) |
+| `05_paper/draft/paper.md:516` | `85.50%` | `c1.tr.precision.expl` | `0.855` | printed '85.50%' vs stored 0.855; percentage form: 85.50/100 = 0.855, so '85.50%' is the same number as 0.855; diff 0.000 <= allowed 0.0005 (half last decimal 0.00005, entry tolerance 0.0005) |
+| `05_paper/draft/paper.md:516` | `79.50%` | `c1.tr.ci.lo` | `0.795` | printed '79.50%' vs stored 0.795; percentage form: 79.50/100 = 0.795, so '79.50%' is the same number as 0.795; diff 0.000 <= allowed 0.0005 (half last decimal 0.00005, entry tolerance 0.0005) |
+| `05_paper/draft/paper.md:517` | `89.50%` | `c1.tr.ci.hi` | `0.895` | printed '89.50%' vs stored 0.895; percentage form: 89.50/100 = 0.895, so '89.50%' is the same number as 0.895; diff 0.000 <= allowed 0.0005 (half last decimal 0.00005, entry tolerance 0.0005) |
+| `05_paper/draft/paper.md:518` | `7.25` | `c1.tr.drop.expl` | `7.25` | printed '7.25' vs stored 7.25; diff 0.00 <= allowed 0.005 (half last decimal 0.005, entry tolerance 0.0) |
+| `05_paper/draft/paper.md:519` | `0.982` | `c1.auroc.test.run` | `0.9824` | printed '0.982' vs stored 0.9824; diff 0.0004 <= allowed 0.0005 (half last decimal 0.0005, entry tolerance 0.0005) |
+| `05_paper/draft/paper.md:520` | `0.640` | `c1.tr.auroc` | `0.6402` | printed '0.640' vs stored 0.6402; diff 0.0002 <= allowed 0.0005 (half last decimal 0.0005, entry tolerance 0.0005) |
+| `05_paper/draft/paper.md:530` | `0.80` | `c1.const.target_precision` | `0.8` | printed '0.80' vs stored 0.8; diff 0.00 <= allowed 0.005 (half last decimal 0.005, entry tolerance 0.0) |
+| `05_paper/draft/paper.md:532` | `24.50%` | `c1.pm.band.answer_rate` | `0.245` | printed '24.50%' vs stored 0.245; percentage form: 24.50/100 = 0.245, so '24.50%' is the same number as 0.245; diff 0.000 <= allowed 0.0005 (half last decimal 0.00005, entry tolerance 0.0005) |
+| `05_paper/draft/paper.md:533` | `83.03%` | `c1.pm.band.pooled_precision` | `0.8303` | printed '83.03%' vs stored 0.8303; percentage form: 83.03/100 = 0.8303, so '83.03%' is the same number as 0.8303; diff 0.0000 <= allowed 0.0005 (half last decimal 0.00005, entry tolerance 0.0005) |
+| `05_paper/draft/paper.md:536` | `75.50%` | `c1.band.over_refusal.run` | `0.755` | printed '75.50%' vs stored 0.755; percentage form: 75.50/100 = 0.755, so '75.50%' is the same number as 0.755; diff 0.000 <= allowed 0.0005 (half last decimal 0.00005, entry tolerance 0.0005) |
+| `05_paper/draft/paper.md:576` | `273` | `c1.items.rung2.dev` | `273` | printed '273' vs stored 273; diff 0 <= allowed 0.5 (half last decimal 0.5, entry tolerance 0.0) |
+| `05_paper/draft/paper.md:577` | `280` | `c1.pm.n.r2` | `280` | printed '280' vs stored 280; diff 0 <= allowed 0.5 (half last decimal 0.5, entry tolerance 0) |
+| `05_paper/draft/paper.md:582` | `553` | `c1.reader.n` | `553` | printed '553' vs stored 553; diff 0 <= allowed 0.5 (half last decimal 0.5, entry tolerance 0.0) |
+| `05_paper/draft/paper.md:583` | `1873` | `c1.items.dev` | `1873` | printed '1873' vs stored 1873; diff 0 <= allowed 0.5 (half last decimal 0.5, entry tolerance 0.0) |
 
 ## Exemptions used
 

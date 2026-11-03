@@ -1,0 +1,442 @@
+{
+  "generated_at": "2026-11-03T02:17:17Z",
+  "directory": "06_review/reviews/round2-c1",
+  "n_reviews": 6,
+  "missing_personas": [],
+  "reviews": [
+    {
+      "persona": "methodologist",
+      "summary": "The paper audits a four-rung negative ladder with one retrieval-feature gate on SQuAD v2.0 dev,\npre-registers three hypotheses, and reports that at the registered operating point the gate refuses\n75.50% of answerable items so the ladder disappears (H1 and H3 unsupported) while H2 transfers only\ndegenerately. The instrument around that result - the surface-feature audit, the overlap sensitivity\nvariant, the overlap-matched and top-1 control arms, and the disclosed dense-feature defect - is the\npart worth reading, and the round-1 objections have been answered with new experiments rather than\nprose. I score it borderline rather than accept because the quantity the paper turns on is never\ndefined: what Section 4.2 calls abstain precision is a refusal rate over each rung's negatives, so\nthe headline 100.00% cannot be reconciled with the 75.50% over-refusal printed beside it, and the\ncorrected run that carries the most striking claim is compared with the frozen run at a different\noperating point and sits outside the pre-registration hash chain.",
+      "strengths": [
+        "The split is article-disjoint and both thresholds are fitted on dev only (Section 3.1, Section 3.3), so no held-out number is selected on the half it is reported on; the placement diagnostic in Section 3.3 ('All three sit inside the observed dev score range') is exactly the check a sceptic would ask for.",
+        "The separability audit is a real gate with a rebuild rule and a published failure path (Section 3.4), and the rung closest to the gate is reported honestly rather than dropped: R5 at 0.721 against a 0.750 gate (Table 3).",
+        "Round-1 defects are answered with new experiments, not with prose: the top-1-presented arm (Section 4.5), the leave-one-group-out ablation (Table 6), and the exchangeability and cluster checks (Section 4.7).",
+        "The implementation defect is disclosed in the text with both sets of numbers and the frozen run left unchanged (Section 4.6), which is the behaviour a pre-registered paper should show when the frozen code is wrong."
+      ],
+      "weaknesses": [
+        "The primary metric is mislabelled and undefined. In Table 1 the R1 cell is 400 refusals out of 400 negatives and R2 is 279 out of 280, i.e. the column is P(refused | negative) for that rung, while the rule in Section 3.3 fits on a pooled P(negative | refused) of 0.8369 at 1760 refusals out of 1873 dev items (results_full.json, thresholds.band). Two different quantities share the name 'abstain precision', and the one in Table 1 cannot produce a precision of 100.00% while 75.50% of answerables are also refused - pooled, the held-out precision under the fitting definition is 1478/1780, about 83.0%.",
+        "Section 5.1's 'produced a gate that answers about one question in twenty' contradicts the abstract's 'refuses 75.50% of answerable questions', which is a 24.5% answer rate on questions; the 5.27% coverage figure is a fraction of all 1879 held-out items, including negatives that should never be admitted, and the draft never says which denominator coverage uses.",
+        "Table 4 is an apples-to-oranges comparison and the draft does not say so: the frozen and corrected bands are refitted on their own dev rows, giving thresholds [0.9072, 0.9478] against [0.5232, 0.5370], over-refusal 75.50% against 91.50%, and exploratory coverage 25.44% against 39.60% (the exploratory coverage row is omitted from Table 4 entirely). The results summary in 04_experiments/results/c1_corrected/SUMMARY.md states this caveat explicitly ('compare two different dev-fitted cuts, not the same cut on two feature sets'); the draft drops it while keeping the side-by-side table.",
+        "The abstract mixes the two runs inside one comparison: R5 is quoted at 89.25% (frozen) and R4 at 12.53% (corrected) in the same sentence. Section 4.4's 'between R2 and R3 in the ordering' is only true of the corrected R5 (93.75%, between 92.86% and 95.50%); against the quoted frozen 89.25% the number sits below both R2 and R3.",
+        "H2's second-corpus leg is never adjudicated. Table 2's H2 row reports only the dev-to-test leg ('dev-to-test loss 0.07%'), while Section 4.8 reports a 7.25-point drop on the second corpus - which falls in the undefined gap between the pre-registered refutation band of 5 points and the 10-point criterion, and is not at matched recall (over-refusal 57.50% there against 9.50% on the main corpus).",
+        "The audit's headline number is confounded with the rung-0 construction. Section 4.1's 0.977 is computed between each rung's negatives and answerable items that always present the gold paragraph, so it cannot separate 'the rungs differ in overlap' from 'this is the gold paragraph'; the same objection the paper makes about R4 ('because R4's passage is the gold passage') applies to R1-R3 and is not made there.",
+        "Rung 4 is admitted to be unvalidated ('forty inspected rung-4 items included substitutions that preserved the surface type but not the grammatical role', Section 5.4) yet it alone carries the corrected run's headline claim, and the held-out rung-2 shortfall is never stated: Section 3.1 gives 273 dev items only, Table 1 shows n = 280 of 400, and the exchangeability check in Section 4.7 claims 'either split' while reporting the dev 273/127 split and one dev p-value (0.052).",
+        "Local cross-reference errors make parts of the argument hard to check: Table 1's note points to '(§4.5)' for the dense defect that is Section 4.6, Section 2 sends the reader to '(§4.8)' for the reader baseline that is Section 4.7, no table in the body carries a visible caption or number, and the numbers used only in cross-references do not follow document order (Table 7 opens Section 2, Table 3 precedes Tables 1 and 2)."
+      ],
+      "questions": [
+        "Write out the formulas for abstain precision, over-refusal and coverage with their numerators and denominators, and give the pooled held-out precision under the definition the 0.80 constraint uses - is it 83.0% or 99.93%?",
+        "Under the corrected features, does the second-corpus arm still show a drop at all? The archive has 97.50% exploratory against 95.50% on the main corpus's R3, which is a gain rather than a 7.25-point drop.",
+        "Was the IDF used to select rung 2's anchor paragraph computed within each split pool or over the full corpus, and were the 40 inspected rung-4 items drawn at random or chosen?",
+        "If the audit's overlap variant were re-run inside the top-1-presented arm, where rung 0 is not always the gold paragraph, would R1 still separate at about 0.98?"
+      ],
+      "soundness": 2,
+      "presentation": 3,
+      "contribution": 3,
+      "confidence": 4,
+      "overall": 5,
+      "decision": "borderline",
+      "must_fix": [
+        {
+          "claim": "The quantity reported as abstain precision is a per-rung refusal rate, so the 100.00% headline and the 75.50% over-refusal beside it cannot both be read as precision.",
+          "where": "Section 3.3, Section 4.2, Table 1",
+          "evidence_needed": "Define abstain precision, over-refusal and coverage with explicit numerators/denominators; the R1 cell is 400/400 refusals while Section 3.3's constraint is P(negative|refused) = 0.8369 at 1760/1873 dev refusals (results_full.json), and the pooled held-out value under that definition is 1478/1780 = 83.0%, not 99.93%."
+        },
+        {
+          "claim": "Table 4 compares two runs at different dev-fitted operating points without saying so, and omits the corrected exploratory coverage row that would expose the difference.",
+          "where": "Section 4.6, Table 4",
+          "evidence_needed": "Add the corrected thresholds ([0.5232, 0.5370] against [0.9072, 0.9478]) and the exploratory coverage row (25.44% to 39.60%, per c1_corrected/SUMMARY.md) to Table 4, or report R4 at matched coverage and state that the precision rows are not the same cut on two feature sets."
+        },
+        {
+          "claim": "The abstract and Sections 4.4 and 4.8 mix frozen and corrected numbers inside single comparisons, so the control-arm conclusions come from the run the paper calls defective.",
+          "where": "Abstract, Section 4.4, Section 4.8, Table 5",
+          "evidence_needed": "Report R5 and the transfer arm under both runs (R5 89.25% frozen against 93.75% corrected; transfer 85.50% at AUROC 0.640 frozen against 97.50% at 0.706 corrected), or label every mixed sentence with the run it comes from."
+        },
+        {
+          "claim": "D4 is called a declared deviation but the pre-registration's hash chain and deviation log stop at D3, so the paper's most striking result rests on an unregistered re-analysis.",
+          "where": "Title note, Section 4.6, Section 5.3",
+          "evidence_needed": "PREREGISTRATION.sha256 holds three hashes (frozen, D1, D2+D3) and Section 10 ends at D3; either add the D4 entry and hash, or stop calling it declared and stop recommending its numbers in Section 5.3."
+        },
+        {
+          "claim": "H1 and H3 are labelled refuted although the paper's own argument is that the quantity is undefined at that operating point, which conflates 'criterion not met' with 'hypothesis false'.",
+          "where": "Abstract, Table 2, Section 4.2",
+          "evidence_needed": "Distinguish degenerate from refuted as Section 4.2 already does for H2, and reconcile a flat 'H1 refuted' with the exploratory arm's 7.00-point R1-R3 drop in H1's predicted direction (95% CI [4.50, 9.75])."
+        },
+        {
+          "claim": "The second-corpus leg of H2 is never scored against the pre-registered criterion, and its 7.25-point drop lands in the undefined gap between the 5-point refutation band and the 10-point criterion.",
+          "where": "Table 2, Section 4.8",
+          "evidence_needed": "Add an explicit H2 verdict for the second corpus, with the recall each arm operates at (over-refusal 57.50% there against 9.50% on the main corpus), and state what the pre-registered rule says about a 5-to-10-point loss."
+        },
+        {
+          "claim": "The audit's 0.977 separates rungs from answerable items that are always the gold paragraph, so it cannot distinguish rung hardness from 'is this the gold paragraph'.",
+          "where": "Section 4.1, Table 3",
+          "evidence_needed": "Re-run the six-surface-plus-overlap audit inside the D3 top-1-presented items, where rung 0 is not always gold, and report the R1-R3 AUROCs from that variant beside the current 0.977 / 0.889 / 0.923."
+        }
+      ],
+      "_file": "methodologist.review.yaml"
+    },
+    {
+      "persona": "domain_expert",
+      "summary": "The paper claims a pre-registered four-rung ladder shows three things: a gate fitted to a precision\ntarget without a coverage constraint satisfies it by refusing almost everything, the ladder's apparent\nhardness is really lexical overlap, and a rung that changes one span inside the gold paragraph breaks\nthe gate once the dense feature is implemented as specified. The first two are real and worth\nreporting, and the disclosure in Section 4.6 is unusually honest. But the quantity reported throughout\nas 'abstain precision' is abstention recall - the share of a rung's negatives that were refused, 279/280\nin the R2 cell - so the paper never reports the metric its own thesis is about, coverage is computed\nover items with four negatives per question rather than over questions, and no negative in the study\ncarries an adjudicated answerability label. Those are repairable, but as printed the central measurement\nis not the one the abstract names.",
+      "strengths": [
+        "Section 3.1 uses an article-level split and states item counts, drop rates and construction rules, so the ladder is reconstructible and free of paragraph-level leakage.",
+        "Section 4.1 makes a separability audit a hard gate that runs before any result is reported, and reports the R4 exception (0.408) instead of quietly dropping it.",
+        "Section 4.5 builds the top-1-presented arm that tests the 'gate reads retrieval rank' objection rather than arguing about it.",
+        "Section 4.6 discloses a defect that flattered the headline number (held-out AUROC 0.982 to 0.874) and reports both runs side by side.",
+        "Section 4.7 reports the R2 exchangeability check with the actual smallest p-value (0.052) and the awkward caveat that several p-values sit between five and ten percent."
+      ],
+      "weaknesses": [
+        "The metric is not the field's metric: the cited survey (arXiv:2407.18418, Section 4.2 and its Table 1) defines Abstention Precision as N5/(N3+N5), the share of refusals that were correct, whereas every cell in the paper reproduces as the share of that rung's negatives refused, which the same table calls abstention recall.",
+        "Coverage is admitted items over 1879 items, and the pool contains four negatives for every answerable question, so 5.27% is roughly a quarter of the field's coverage (98/400 = 24.5% of questions answered); Section 5.1's 'about one question in twenty' follows from the wrong denominator.",
+        "Every negative in the study is author-constructed and none is adjudicated: an adjacent paragraph (R3) or an IDF-anchored paragraph (R2) may genuinely support the question, and no annotator, instruction or agreement statistic is reported anywhere, including for the forty rung-4 items inspected in Section 5.4.",
+        "The only human-labelled negatives available, SQuAD 2.0's impossible questions, are excluded on the assertion that they are 'a different kind of negative', so no negative in the study is anchored to human answerability judgement.",
+        "The claim that 'the ladder therefore varies the negative along one axis at a time' (Section 3.1) is false as constructed: rungs differ in length, provenance and document position together, and Section 4.4 concedes that R5 items 'are the longest negatives in the ladder'.",
+        "The reader-side baseline is a proxy: Section 2 cites P(True) (arXiv:2207.05221) as 'the strongest cheap reader-side baseline a reviewer expects' and then substitutes mean generated-token log-probability, so the negative result says nothing about the baseline the field would actually run.",
+        "The audit only flags AUROC above 0.750, so R4 at 0.415 is recorded as a pass even though it is the same leak with the sign inverted; the table also omits its split and n, so a reader cannot tell whether those AUROCs are dev or pooled.",
+        "Section 1 contribution 4 claims the two control arms 'localise the effect', but Section 4.5 concedes that in the top-1 arm 'the comparison cannot separate the two readings', so that arm tests the objection without adjudicating it.",
+        "The second corpus is never named in the body - Section 4.8 calls it 'the multi-hop corpus described in Section 3.1 of the pre-registration' - so a reader cannot tell what data produced the 0.640 AUROC without reconstructing it from the reference list."
+      ],
+      "questions": [
+        "What is the gate's abstention precision at the registered point, computed as the cited survey defines it, and what happens to H1 and H3 when the recomputed quantity is used?",
+        "How many of the R2 and R3 passages contain a span that actually answers their question, and what is the agreement between two annotators on that judgement?",
+        "What AUROC does P(True) reach on the 553 dev items where the log-probability proxy was run?",
+        "Does the R4 collapse survive at the corrected confirmatory point (90.73% precision at 91.50% over-refusal), or does it exist only at the exploratory band?"
+      ],
+      "soundness": 2,
+      "presentation": 3,
+      "contribution": 2,
+      "confidence": 4,
+      "overall": 4,
+      "decision": "reject",
+      "must_fix": [
+        {
+          "claim": "Every figure labelled 'abstain precision' is the share of a rung's negatives refused, so the paper never reports abstention precision and its central claim about precision is untested.",
+          "where": "Abstract ('abstain precision is then identical on every rung'); Section 4.2, results table; Section 4.6, comparison table",
+          "evidence_needed": "Recompute as refusals of negatives / all refusals, per rung and pooled, report the refusal count behind each cell, and state the definition explicitly: R2's 99.64% is 279/280 (recall), while its precision is 279/(279+302) = 48.0%."
+        },
+        {
+          "claim": "Coverage is computed over items with four negatives per question, which understates the field's coverage by about a factor of five and inflates the paper's headline claim.",
+          "where": "Abstract ('admits 5.27% of the held-out benchmark'); Section 5.1 ('about one question in twenty')",
+          "evidence_needed": "Coverage reported over questions (98 of 400 = 24.5%) alongside the item-level figure, and AURCC or abstention F1 added as the companion metrics the cited survey recommends."
+        },
+        {
+          "claim": "No negative in the study has an adjudicated answerability label, so 'negative' means 'not the gold paragraph' rather than 'does not answer the question'.",
+          "where": "Section 3.1, rung table and 'Only the answerable rows are used'",
+          "evidence_needed": "A two-annotator adjudication of a sample of at least 100 R2 and R3 passages for whether each supports the question, with instructions and Cohen's kappa reported, plus SQuAD 2.0's impossible rows as a human-labelled anchor rung."
+        },
+        {
+          "claim": "'The ladder therefore varies the negative along one axis at a time' is contradicted by the paper's own length observation, so hardness is not identified with any single axis.",
+          "where": "Section 3.1; Section 4.4 ('they are the longest negatives in the ladder')",
+          "evidence_needed": "Per-rung length and overlap distributions, and one rung matched on both question overlap and passage length, to show the ordering survives when both are held constant."
+        },
+        {
+          "claim": "The reader-side baseline is a fluency proxy, not the P(True) baseline the paper says a reviewer expects, so its failure is not evidence about reader-side gating.",
+          "where": "Section 2; Section 4.7, reader-confidence paragraph",
+          "evidence_needed": "P(True) scores on the same 553 dev items with AUROC and a threshold, or the removal of the claim that reader-side confidence fails on this task."
+        },
+        {
+          "claim": "The separability audit is one-sided, so inverted separation at R4 is recorded as a pass.",
+          "where": "Section 3.4 ('Any rung above an AUROC of 0.750'); Section 4.1, audit table",
+          "evidence_needed": "A two-sided rule on |AUROC - 0.5| with confidence intervals, the audit table's split and n stated, and R4's 0.415 reported as separation in the reverse direction rather than as no separation."
+        },
+        {
+          "claim": "The mechanistic conclusion about R4 rests on one post-hoc exploratory cell while the registered analysis reports the opposite for that rung.",
+          "where": "Abstract; Section 5.2 ('the rung which changes what the passage says must be in the ladder'); Section 4.6, comparison table",
+          "evidence_needed": "Either promote the D4 corrected run to the primary analysis in the title and abstract, or report the registered R4 value (100.00%) beside the exploratory 12.53% and restrict Section 5.2 to what the registered run supports."
+        }
+      ],
+      "_file": "domain_expert.review.yaml"
+    },
+    {
+      "persona": "statistician",
+      "summary": "The paper pre-registers three hypotheses, fits one gate and both operating points on a dev half,\nand reports that the ladder vanishes at the registered point while a coverage-constrained\nexploratory point recovers about half of it. The reporting discipline is better than most: n per\nrung in Table 1, paired bootstrap with a stated seed and 10,000 resamples, Holm over exactly the\ntwo tests that carry p-values, CIs on both control arms, and an item-plus-cluster bootstrap. It\nstill does not support its own numbers as estimates: the column labelled abstain precision is a\nrefusal rate (400/400, 279/280) rather than the precision the gate was fitted to, the headline\nintervals are zero-width bootstrap artefacts reported as if they were estimates, no AUROC in the\npaper has an interval, and the corrected-versus-frozen comparison changes the operating point at\nthe same time as the feature set. Those are fixable on the existing data, which is why this is\nborderline rather than reject.",
+      "strengths": [
+        "Table 1 gives n for every rung (400, 280, 400, 399 on the held-out half), so the reader at least knows the denominator of the per-rung rate; the paper reports 1879 held-out items and 1873 dev items rather than a bare percentage.",
+        "The H3 comparison is paired by question with the resampling scheme, seed (12345) and resample count (10000) all stated in Section 3.5, and Section 4.7 reports the decisive fact for an exact-zero difference - zero discordant pairs - instead of leaning on the interval alone.",
+        "Holm is applied over exactly the two tests that carry p-values, and the reason H2 has none is stated rather than left implicit (Section 3.5); the corrected run then reports an interval on the H3 difference that excludes zero ([-3.11, -1.35]).",
+        "Both control arms carry intervals (R5 [85.75, 91.75], transfer [79.50, 89.50], Table 5) rather than point estimates, and the exchangeability check in Section 4.7 reports an actual p-value with its variable named."
+      ],
+      "weaknesses": [
+        "The two numbers called abstain precision are on different scales. Table 1's R1 cell is 400 refusals out of 400 negatives and R2 is 279 of 280, i.e. P(refused | negative); the constraint the gate was fitted to is a pooled P(negative | refused) of 0.8369 at 1760 refusals out of 1873 dev items (results_full.json, thresholds.band). Pooled on the held-out half the fitting definition gives 1478/1780, about 83.0%, not the 99.93% the paper calls pooled precision.",
+        "The abstract's 'abstain precision is then identical on every rung' is contradicted by the paper's own table: R2 is 99.64% and the reported sequence is [1.00, 0.9964, 1.00, 1.00], so the rungs are not identical even though three of the four round to 100.00%.",
+        "The headline intervals are degenerate. H1 and H3 both report '95% CI [0.00%, 0.00%]' from a bootstrap in which every paired difference is zero; a zero-width interval is what a boundary proportion produces, not evidence of no difference, and Section 3.5's claim of BCa throughout is inconsistent with the archive, which records method 'percentile' for rungs 1, 3 and 4 (results_full.json, per_rung.*.ci95.method).",
+        "No AUROC anywhere carries an interval, although the 0.982 to 0.874 drop is the corrected run's headline finding and 0.640 is the basis of the transfer verdict (Section 4.6, Section 4.8). AUROC is reported to three decimals across 1879 items drawn from 18 held-out articles without any sampling statement.",
+        "The cluster bootstrap is thin and partly vacuous. It resamples 18 held-out articles (stats_addendum.json, n_articles_test); the two cells H1 rests on are zero-width in both item and cluster resampling and are excluded from the five 'comparable' cells, and per-article rates are 1.0 in 17 of 18 articles for exploratory rung 1 (18 of 18 for the confirmatory cell), so 'leaves every verdict unchanged' (Section 4.7) cannot be checked where it matters. The same sentence's 'width ratio as low as 0.851' is also wrong against the archive, whose smallest ratio is 0.4521.",
+        "Table 6 supports an equivalence claim - 'No single group carries the result' - with eight point estimates and no intervals: all_12 0.874, no_dense 0.862, dense_only 0.870, no_bm25 0.868, on the same 1879 items. A 0.012 AUROC spread across eight feature subsets is not evidence that the separation is evenly distributed.",
+        "In the corrected run the H3 comparison is not at matched recall and its comparator breaches the constraint: the band's dev recall is 0.9898 against the matched single's 0.9925, and the matched single's dev precision is 0.7886, below the 0.80 the rule requires. The -2.23% is therefore a comparison of two different operating points, not the pre-registered one.",
+        "Section 4.3 declares the exploratory rule as precision at least 0.80 and dev over-refusal at most 0.10, and Table 4 then reports the corrected exploratory arm at 11.00% over-refusal with no comment on whether the cap was breached or simply binds on dev.",
+        "The held-out rung-2 shortfall is never quantified and the exchangeability check covers only dev: Section 3.1 gives 273 dev items, Table 1 shows 280 of 400 on the test half, and Section 4.7 claims 'in either split' while reporting the dev 273/127 split and a single dev p-value (0.052). The reader baseline's 0.419 AUROC (Section 4.7) likewise has no interval, on 553 dev items and 6 refusals at the fitted threshold."
+      ],
+      "questions": [
+        "What is the pooled held-out abstain precision under the definition the 0.80 constraint uses, and why is it not the number in Table 1?",
+        "How many held-out articles are there, and what do the cluster intervals look like for rungs 1 and 3, where the item interval is already zero-width?",
+        "If the corrected exploratory arm must respect the 0.10 over-refusal cap, is its 11.00% a dev-side or test-side breach, and what happens to the R4 collapse if the cap is enforced on the reported half?",
+        "Can you report a paired bootstrap interval on the corrected AUROC difference (0.982 against 0.874) over the same 1879 items, and on all_12 against no_dense in Table 6?"
+      ],
+      "soundness": 2,
+      "presentation": 2,
+      "contribution": 3,
+      "confidence": 4,
+      "overall": 5,
+      "decision": "borderline",
+      "must_fix": [
+        {
+          "claim": "The values reported as abstain precision are refusal rates over each rung's negatives, not the pooled precision the 0.80 constraint was fitted to, so the table cannot be checked against the rule.",
+          "where": "Section 3.3, Section 4.2, Table 1, Abstract",
+          "evidence_needed": "Give the formula for both quantities: Table 1's R1 is 400/400 and R2 is 279/280 (predictions.csv), while thresholds.band.dev_precision is 0.8369 at 1760/1873 dev refusals; the pooled held-out precision under the fitting definition is 1478/1780 = 83.0%. Report both, and correct 'identical on every rung' given R2 = 99.64%."
+        },
+        {
+          "claim": "Zero-width 95% intervals on H1 and H3 are presented as estimates when they are artefacts of a boundary proportion, and the stated interval method does not match the archive.",
+          "where": "Section 3.5, Table 2, Section 4.2",
+          "evidence_needed": "Report the discordant counts (H1 0 of 400 pairs, H3 0 of 1479) as the primary evidence and describe the interval as degenerate, and reconcile Section 3.5's 'BCa' with the 'percentile' method recorded for rungs 1, 3 and 4 in results_full.json."
+        },
+        {
+          "claim": "No AUROC in the paper carries an interval or a paired difference interval, including the 0.982-to-0.874 drop that the corrected run turns on.",
+          "where": "Section 4.1, Section 4.6, Section 4.8",
+          "evidence_needed": "A paired bootstrap 95% CI on the AUROC difference over the 1879 held-out items for 0.982 against 0.874, and intervals for the 0.945, 0.640 and 0.977 figures, with the number of articles (18) stated."
+        },
+        {
+          "claim": "The cluster bootstrap rests on 18 held-out articles, the two cells that carry H1 are zero-width and excluded from its comparable set, and its quoted minimum width ratio is wrong.",
+          "where": "Section 4.7",
+          "evidence_needed": "Report n_articles = 18 beside the cluster intervals, show the rung-1 and rung-3 cluster intervals rather than describing them, and correct 'width ratio as low as 0.851' to the archive's 0.4521 (stats_addendum.json, cluster_bootstrap)."
+        },
+        {
+          "claim": "The corrected H3 comparison is not at matched abstain recall and its matched single violates the 0.80 precision constraint, so -2.23% is not the pre-registered test.",
+          "where": "Section 4.6, Table 4",
+          "evidence_needed": "Report the corrected dev recalls (band 0.9898, matched single 0.9925) and the matched single's dev precision (0.7886), then re-match on recall and re-report the difference and its interval."
+        },
+        {
+          "claim": "The corrected exploratory arm reports 11.00% over-refusal against a declared cap of 0.10 with no statement of whether the declared rule was breached.",
+          "where": "Section 4.3, Table 4",
+          "evidence_needed": "State whether the 'dev over-refusal at most 0.10' cap binds on dev or on the held-out half, and give the corrected dev over-refusal; if the reported 11.00% is a breach, note it or rebuild the arm under the cap."
+        },
+        {
+          "claim": "The equivalence claim that no single feature group carries the result is supported only by point estimates across eight subsets.",
+          "where": "Section 4.6, Table 6",
+          "evidence_needed": "A paired bootstrap 95% CI on the held-out AUROC difference for all_12 against no_dense (0.874 against 0.862) and against dense_only (0.874 against 0.870) over the same 1879 items."
+        },
+        {
+          "claim": "The held-out rung-2 shortfall is never stated and the exchangeability check that Section 3.1 promises for both splits reports only dev figures.",
+          "where": "Section 3.1, Section 4.7",
+          "evidence_needed": "Report the held-out split's kept and dropped counts (280 of 400) and the per-variable p-values for that half, alongside the dev 273/127 and its 0.052 minimum."
+        }
+      ],
+      "_file": "statistician.review.yaml"
+    },
+    {
+      "persona": "novelty_skeptic",
+      "summary": "The paper reports a pre-registered negative result: at an operating point that maximises abstain recall\nsubject to 0.80 dev precision, a retrieval-feature gate refuses 75.50% of answerable questions and\nadmits 5.27% of the held-out set, after which every rung of the negative ladder scores the same\nprecision. Framed as a measurement rather than a method, with an explicit disclaimer of novelty in §1,\nthat is the right level for the evidence, and the separability audit in §4.1 is a genuinely quotable\ninstrument. The positioning does not survive inspection, however: Table 7 compares two prior works and\nomits every near neighbour the project's own documented search marks as closest, including the work\nthat record says occupies the separability finding the paper calls its hard gate. The two headline\nnegative claims are also weaker than stated - H1's refutation is a measurement collapse at 5.27%\ncoverage, and \"the ladder is a ladder of lexical overlap\" is an identifiability result that the paper's\nown rung ordering contradicts.",
+      "strengths": [
+        "§1 states the contribution level explicitly - 'We do not claim novelty, state of the art, or generality beyond one corpus family' - and the title's 'with a Negative Result' and the abstract's opening sentence both lead with the negative finding rather than burying it.",
+        "The negative claim is stated as an empirical finding with its numbers attached (§1, §5.1, Abstract): 75.50% over-refusal at 5.27% coverage, generalised as 'a precision figure for an abstention gate is not interpretable without its coverage'.",
+        "§4.1 reports a pre-declared threshold (0.750, §3.4) against measured values (0.506/0.539/0.488/0.415) and publishes the uncomfortable sensitivity variant (0.977/0.889/0.923) in the same table, so the instrument's own negative evidence is not hidden.",
+        "Table 7's Abdumalikov row checks out against the source in 02_literature/sources/txt/arxiv-2403.01461.txt: random-negative training evaluated on high-overlap excerpts, accuracy 98% to 1%, and no coverage or threshold reported (neither word occurs in the source text).",
+        "§4.6 and §5.3 disclose a defect that lowers the paper's own held-out AUROC from 0.982 to 0.874 and say the corrected numbers are the ones to carry forward - a positioning decision most authors would not make."
+      ],
+      "weaknesses": [
+        "Table 7 is the entire positioning apparatus and has two rows; the project's own novelty record (02_literature/NOVELTY-CHECK.md §3) lists thirteen near neighbours, four marked CLOSE - N1 dual-threshold conformal band (arXiv:2502.07255), N2 retrieval-only confidence with a coverage sweep (arXiv:2609.22056), N3 published false-refusal rate (doi:10.32604/cmc.2026.088937), N4 surface-only adversary at AUROC 0.979 (arXiv:2609.32269), N10 retrieval-score gate trained on hard negatives - and none of them appears in §2 or §9.",
+        "'The ladder, in other words, is a ladder of lexical overlap' (Abstract, repeated in §5.2) is supported only by rung-versus-answerable AUROCs, which measure identifiability; the paper's own ordering contradicts a hardness reading, since R2 (overlap AUC 0.889) scores 91.07% while R3 (0.923) scores 92.75%, and overlap-matched R5 scores 89.25%.",
+        "H1 is reported as REFUTED in the abstract and in Table 2 on the strength of an operating point where R1, R3 and R4 sit at 100.00% and R2 at 99.64% (279/280), so the criterion cannot be exercised; the 95% CI [0.00%, 0.00%] is a bootstrap at the boundary, not evidence of equality.",
+        "§4.4 places R5 'between R2 and R3 in the ordering', but 89.25% lies below R2's 91.07% and above R4's 84.71% in the paper's own Table 2.",
+        "Contribution 4 in §1 says the control arms 'say what the gate is really measuring', while §4.5 concedes that the top-1 variant 'cannot separate the two readings'; the bullet claims more than the section supports.",
+        "Table 7's DeclineCraft row ('several unanswerable classes', 'per category, retrieval and memory reported separately') does not match the cited source, whose title and abstract state that retrieval and parametric abstention are measured 'jointly' (arXiv:2610.28340), and it contradicts §2's own sentence that DeclineCraft measures them jointly.",
+        "The §4.1 sensitivity variant is presented in the Method (§3.4) as part of the design, but the frozen pre-registration's §8 defines only a six-feature 'surface-only separability AUROC' with a 0.750 rebuild rule; the overlap variant appears in no deviation entry, and D2 already cites its numbers as motivation.",
+        "Table 7's row for this paper ('every precision reported with over-refusal and coverage beside it') is not true of the dense-cosine baseline column in Table 2 or the top-1 row in Table 5, both of which give precision without coverage."
+      ],
+      "questions": [
+        "Of N1, N2, N3, N4 and N10, which does §4.1's audit differ from, and on what axis - the pre-run gate and rebuild rule, or the measurement itself?",
+        "If the confirmatory gate admits 5.27% of held-out items, what observation would have made H1 'supported' rather than refuted, and does the exploratory 7.00-point R1-R3 drop (below the 15-point criterion) not already answer the hardness question in the opposite direction?",
+        "What is the ordering variable in the title's 'hard', given that R2 sits below R3 on precision while R3 is the more identifiable rung by overlap?",
+        "Was the overlap sensitivity audit run before or after the gate results in §4.2, and where is it declared?"
+      ],
+      "soundness": 2,
+      "presentation": 3,
+      "contribution": 2,
+      "confidence": 4,
+      "overall": 4,
+      "decision": "reject",
+      "must_fix": [
+        {
+          "claim": "Table 7 compares this paper with two prior works and omits all five near neighbours that the project's own documented search marks as closest, including the work that occupies the separability finding.",
+          "where": "Section 2, Table 7; NOVELTY-CHECK.md §3",
+          "evidence_needed": "Rows and a differentiating paragraph for N1 (arXiv:2502.07255), N2 (arXiv:2609.22056), N3 (doi:10.32604/cmc.2026.088937), N4 (arXiv:2609.32269) and N10, each stating what is varied and what is reported per rung, and what §4.1's audit adds beyond N4's surface-only adversary at AUROC 0.979; plus a pointer to the search record (84 OpenAlex and 91 arXiv queries, 2026-11-03) so a reader can see the search happened."
+        },
+        {
+          "claim": "The paper's headline measurement - the overlap-augmented audit at 0.977/0.889/0.923 - is not defined anywhere in the frozen pre-registration and has no deviation entry, yet §3.4 presents it as part of the design.",
+          "where": "Section 3.4, Section 4.1; PREREGISTRATION.md §8 and §10",
+          "evidence_needed": "Either the frozen §8 text that defines the six-features-plus-overlap-and-question-length variant, with its hash, or a dated §10 entry declaring it exploratory and the time it was first run; plus one sentence in §3.4 and §4.1 labelling it post hoc if it was computed after the gate results."
+        },
+        {
+          "claim": "H1 is reported as REFUTED although the confirmatory operating point cannot exercise the criterion, so a measurement collapse is presented as evidence about negative hardness.",
+          "where": "Abstract; Section 4.2, Table 2; Section 1",
+          "evidence_needed": "State in the abstract and §4.2 that at 5.27% coverage three rungs are at 100.00% and R2 at 279/280, that the CI [0.00, 0.00] is a boundary bootstrap, and report H1 as not testable at the registered point with the exploratory 7.00-point drop [4.50, 9.75] as the only measured ordering."
+        },
+        {
+          "claim": "'The ladder is a ladder of lexical overlap' states an identifiability result as a hardness ordering, and the paper's own rung precisions contradict the ordering.",
+          "where": "Abstract; Section 4.1; Section 5.2",
+          "evidence_needed": "Either a per-rung overlap statistic showing precision ordered by overlap magnitude, or a rewritten sentence saying only that overlap separates each rung from answerable items, with the R2 91.07 versus R3 92.75 inversion and R5 89.25 stated beside it."
+        },
+        {
+          "claim": "Section 4.4 misstates where R5 falls in the ordering.",
+          "where": "Section 4.4",
+          "evidence_needed": "Correct 'between R2 and R3' to 'between R2 (91.07%) and R4 (84.71%)', or report the ordering statistic that puts R5 second of four."
+        },
+        {
+          "claim": "Table 7's DeclineCraft row mischaracterises the cited benchmark and contradicts the paper's own description of it.",
+          "where": "Section 2, Table 7",
+          "evidence_needed": "Rewrite the row from arXiv:2610.28340 (title and abstract: retrieval and parametric abstention measured jointly; reported quantity is Correct Abstention Rate per model and retrieval condition), removing 'several unanswerable classes' and 'retrieval and memory reported separately' unless a named section of the source supports them."
+        },
+        {
+          "claim": "The matched-recall comparison that carries H3 is degenerate by construction because the matched single threshold is the band's own lower threshold.",
+          "where": "Section 3.3, Section 4.7",
+          "evidence_needed": "Report that single_matched_recall.t = 0.90722098925 equals band.t_lo = 0.90722098925, so only the upper cut can differ, replace the claim that zero discordant pairs is 'not a binning artefact' with what the construction guarantees, and give the number of held-out items scoring above t_hi."
+        }
+      ],
+      "_file": "novelty_skeptic.review.yaml"
+    },
+    {
+      "persona": "reproducibility_reviewer",
+      "summary": "The artefact is unusually strong for this project: §8 gives a literal command sequence, build_draft.py\ninlines every table and refuses to build on a missing or duplicated one, and tools/check_numbers.py\npasses with 0 findings over 417 scanned tokens, so round 1's complaint that the submitted draft\ncontained no tables and no clean numbers audit is answered. What still blocks a clean rerun is the\nenvironment and the provenance record: the repository contains no requirements file or lockfile, the\nrun metadata records only Python 3.11.15, a Windows build and a CPU count, and the two model\ncheckpoints are named without revisions. Three provenance defects matter more than any missing pin -\nthe frozen run stores preregistration_sha256 as '#', the deviation log stops at D3 while the paper\ncalls the corrected run 'deviation D4', and Table 4 sets two runs side by side whose fitted thresholds\ndiffer without saying so.",
+      "strengths": [
+        "Round-1 items MF-9 and MF-10 are genuinely closed: tables are inlined at build time and the build refuses a missing or duplicated placeholder (05_paper/build_draft.py), and 06_review/audits/numbers-audit.md reports PASS with 0 findings over 417 scanned tokens (263 matched, 154 exempt, 0 untraceable, 0 mismatch).",
+        "§8 is a literal ordered command block rather than 'see the README', and the confirmatory analysis is cheap enough to serve as its own smoke test: run_c1.py finished in 6.52 s on CPU (runs/20261102T235941Z_c1_gate_e20bc7f/meta.json, duration_s 6.5198).",
+        "Run metadata records the command line, config sha256, source hashes for gate/audit/build_items/features, git commit, Python version, platform, env vars and peak RSS - more than most artefacts at this level carry (04_experiments/runs/.../meta.json).",
+        "Data provenance is per request with URL, status, byte count and sha256 (04_experiments/data/TRANSFER-DATA.md, data/raw/2wiki/fetch_log.jsonl), and the item counts reconcile exactly: per_rung_dev {400,400,273,400,400} plus per_rung_test {400,400,280,400,399} gives 1873 + 1879 = 3752, matching §3.1 and §6 item 7.",
+        "§4.6 names the defect, the mechanism and the affected fraction (78.70% of rows), and §6 item 8 states that neither run substitutes for a fresh replication - a self-named irreproducibility that most artefacts omit."
+      ],
+      "weaknesses": [
+        "No dependency pinning anywhere: there is no requirements.txt, pyproject.toml or lockfile in the repository, and the paper names no version for bm25s, sentence-transformers, torch or scikit-learn; only the feature-CSV sha256 would catch a silent version change, and nothing states which versions produce it.",
+        "The two checkpoints are named ('BAAI/bge-small-en-v1.5', 'cross-encoder/ms-marco-MiniLM-L-6-v2' in data/features_meta.json) with no revision or weight hash, and every feature column behind every table depends on them.",
+        "04_experiments/results/c1/results_full.json carries preregistration_sha256 = '#', the first token of the hash file's comment line, so the frozen run does not record which pre-registration text it executed, contrary to §7's 'the pre-registration hash is recorded before the first result-producing run'.",
+        "PREREGISTRATION.md §10 ends at D3 and PREREGISTRATION.sha256 holds three hashes (the current file matches the third, c24a9e51...), so 'deviation D4' in §4.6 and §8 names an entry that does not exist in the log.",
+        "Table 4's two columns are not a like-for-like comparison: c1_corrected/SUMMARY.md records the confirmatory band moving from [0.9072, 0.9478] to [0.5232, 0.5370] and the exploratory band from [0.2974, 0.9478] to [0.3032, 0.6362], and §4.6 never says the operating points were refitted.",
+        "Table 7 is not generated: make_paper_assets.py:table_prior_work() returns the rows as a literal string and its cells carry no num: markers, so nothing checks them, which contradicts the title page's claim that every table is written from a results file and every numeral is bound to RESULTS-INDEX.json.",
+        "No table or figure in the draft carries a number or a caption, so the ten 'Table N' references cannot be resolved, and three cross-references are wrong on their own terms - 'constant (§4.5)' points at the wrong section for the dense defect that §4.6 describes, and '(§4.8)' points at the second-corpus section for the reader baseline that §4.7 reports.",
+        "04_experiments/results/c1/results_full.json is not byte-identical to the run artefact (20929 B versus 18445 B): ablation_no_rank.py appends an ablation_no_rank block after the run, §8 does not list that script, and its numbers (AUROC 0.9875 dev / 0.9824 test) appear in no table."
+      ],
+      "questions": [
+        "Which run id produced Table 2, and does that run's meta.json show git_dirty true or false?",
+        "What are the pinned revisions of bge-small-en-v1.5 and ms-marco-MiniLM-L-6-v2, and would re-downloading them today reproduce features.csv byte for byte?",
+        "When was the corrected dense feature run first executed relative to D3, and why is it called a declared deviation when §10 has no entry for it?",
+        "Does run_c1.py stop before writing results_full.json if a rung fails the 0.750 audit, or does it only record the failure, given that audit.json and results_full.json appear in the same run's artefacts?"
+      ],
+      "soundness": 3,
+      "presentation": 3,
+      "contribution": 2,
+      "confidence": 4,
+      "overall": 6,
+      "decision": "borderline",
+      "must_fix": [
+        {
+          "claim": "The artefact is unpinned: no requirements or lockfile exists, no library version appears in the paper, and the two model checkpoints are given without revisions.",
+          "where": "Section 8; repository root; data/features_meta.json",
+          "evidence_needed": "A pinned requirements.txt or lockfile that regenerates the recorded environment, the two Hugging Face model revisions with weight hashes, and one sentence in §8 naming them, verified by rerunning features.py to features.csv with sha256 f9de87f6... (data/features_meta.json)."
+        },
+        {
+          "claim": "The frozen run records preregistration_sha256 as '#', so the run does not evidence which pre-registration text it executed.",
+          "where": "Section 7; 04_experiments/results/c1/results_full.json (field preregistration_sha256)",
+          "evidence_needed": "Fix the parser to store c24a9e51... (or the hash actually in force at run time) in the results file, re-run, and quote the field value in §7."
+        },
+        {
+          "claim": "The deviation log stops at D3 while §4.6 and §8 describe the corrected dense run as 'deviation D4'.",
+          "where": "Section 4.6, Section 8; PREREGISTRATION.md §10 and PREREGISTRATION.sha256",
+          "evidence_needed": "A dated §10 entry D4 recording when the corrected features were first run and whether that was before or after the frozen numbers were seen, plus a fourth hash in PREREGISTRATION.sha256; or drop the word 'deviation' and label the corrected analysis post hoc wherever it is cited."
+        },
+        {
+          "claim": "§8 omits the commands that produce two reported results: the transfer item builder and the reader baseline.",
+          "where": "Section 8; Section 4.7, Section 4.8",
+          "evidence_needed": "Add 'python 04_experiments/src/build_transfer_items.py' before features_transfer.py and 'python 04_experiments/src/reader_logprob.py' before the script that consumes reader_features.csv, and state in §4.7 and §4.8 which file each number (n=553, AUROC 0.419; 400 transfer items) comes from."
+        },
+        {
+          "claim": "Table 4 juxtaposes two runs whose fitted operating points differ, and the column header labels the frozen run as deviation D1.",
+          "where": "Section 4.6, Table 4",
+          "evidence_needed": "Print the corrected thresholds beside the frozen ones ([0.9072, 0.9478] to [0.5232, 0.5370]) and mark the precision and coverage rows as different cuts with AUROC as the only threshold-free comparison, as c1_corrected/SUMMARY.md already does; retitle the column 'frozen run' since D1 is the exploratory operating point."
+        },
+        {
+          "claim": "No table in the draft is numbered or captioned, so no 'Table N' reference can be resolved and three cross-references point at the wrong sections.",
+          "where": "Sections 4.1-4.8, Section 2; all table and section references",
+          "evidence_needed": "Number and caption every table in order of appearance and correct the references (audit table in §4.1, per-rung in §4.2, arms in §4.4, frozen-versus-corrected and ablations in §4.6, prior work in §2), plus the §4.2 '(§4.5)' and §2 '(§4.8)' section references; the generator prefixes T1-T7 do not match appearance order."
+        },
+        {
+          "claim": "Table 7 is a hardcoded string in the table generator and carries no traceability markers, contradicting the title page's statement that every table is generated from a results file.",
+          "where": "Title page; Section 2, Table 7; 04_experiments/src/make_paper_assets.py table_prior_work()",
+          "evidence_needed": "Generate Table 7 from a checked-in source (a prior-work CSV with a citation-id column) or amend the title-page sentence to say which tables are generated and which are hand-written, and add the five cited identifiers to the citation register so the citation checker covers them."
+        },
+        {
+          "claim": "The frozen run was produced from a dirty working tree and no diff was stored, so the recorded commit does not identify the code that produced the headline numbers.",
+          "where": "04_experiments/runs/20261102T235941Z_c1_gate_e20bc7f/meta.json; Section 8",
+          "evidence_needed": "Re-run from a clean checkout at a recorded commit, or commit the diff and the post-diff source hashes so that commit plus patch identifies the executed code; state in §8 which of the two the reported numbers come from."
+        }
+      ],
+      "_file": "reproducibility_reviewer.review.yaml"
+    },
+    {
+      "persona": "clarity_reviewer",
+      "summary": "The paper claims that a four-rung ladder of negatives for a retrieval-feature abstention gate measures\nlexical overlap rather than answerability hardness, and that at a precision target without a coverage\nconstraint the ladder's signal disappears; the audit in Section 4.1, the overlap-matched rung in\nSection 4.4 and the top-1 arm in Section 4.5 do support a version of that. What the page actually shows\nis a gate that refuses three answerable questions in four, and a per-rung column called 'abstain\nprecision' whose values are exactly the share of each rung's negatives that were refused (99.64% is\n279/280), so the quantity the abstract names is never the quantity the tables report. A skimming reader\ncannot state the claim correctly after the abstract: the two headline numbers use different\ndenominators, the metric is undefined, and there is no Figure 1 to fall back on because the draft\ncontains no figures at all.",
+      "strengths": [
+        "The rung table in Section 3.1 lets a reader reconstruct all five conditions and their item counts without reading code.",
+        "Confirmatory and exploratory results are labelled consistently (D1-D4), and the abstract marks its exploratory numbers as exploratory.",
+        "The table in Section 4.6 puts the frozen and corrected runs side by side, so the implementation correction can be checked rather than taken on trust.",
+        "Section 5.1 states the practical lesson in one sentence a non-specialist could repeat, which is what the rest of the paper is for."
+      ],
+      "weaknesses": [
+        "The abstract's two quantitative clauses, 'refuses 75.50% of answerable questions' and 'admits 5.27% of the held-out benchmark', are on different denominators (400 answerables against 1879 items) and read as a contradiction; Section 5.1 then converts the second into 'about one question in twenty' when the gate answers 98 of 400 questions, one in four.",
+        "'Abstain precision' is never defined, and every reported value is exactly k divided by the rung size: 279/280 = 99.64%, 357/400 = 89.25%, 50/399 = 12.53%. No table says how many refusals each precision is computed over, and Section 3.3 uses the word for the constraint the thresholds were fitted to, which is a different quantity again.",
+        "No table has a number or a caption, so the six table references in the prose cannot be resolved: the related-work table is cited as Table 7 but is the first table in the paper, Table 4 is cited before Table 5 and appears after it, and Table 1 is never referred to at all.",
+        "Two cross-references point at the wrong section: the note under the Section 4.2 table sends the reader to Section 4.5 for the dense-column defect that Section 4.6 describes, and Section 2 sends the reader to Section 4.8 for the reader baseline that Section 4.7 reports.",
+        "The arm table in Section 4.4 labels a marginal probability as the wrong conditional: 87.30% is P(miss | refused), while the sentence above it gives P(refused | miss) = 63.22%, so the parenthetical 'P(miss refused)' points a reader at the wrong number.",
+        "Section 1 contribution 3 promises 'the numbers beside every precision figure' and Section 2's table claims coverage is reported beside every precision, but the five arm rows of the Section 4.4 table carry no coverage column, and the confirmatory R5 row's over-refusal cell reads 'degenerate, see §4.4' instead of a number.",
+        "Terms arrive before their definitions: 'over-refusal' first appears as a column header in Section 4.2 and is defined nowhere, while 'admit mass' (6.03%) and 'degenerate' are used as a measured quantity and as a verdict without either being defined."
+      ],
+      "questions": [
+        "What is the exact definition of 'abstain precision' in this paper, numerator and denominator, and what happens to the abstract's numbers if it is recomputed as negatives refused divided by all refusals?",
+        "How many items were refused on each rung at the confirmatory point, and what is the precision of those refusals?",
+        "If a skimming reader is meant to carry away one number, is it the 75.50% over-refusal or the 24.5% of questions actually answered?",
+        "Which of the eight tables is Table 2, and is there a precision-against-coverage plot that could serve as Figure 1?"
+      ],
+      "soundness": 2,
+      "presentation": 2,
+      "contribution": 2,
+      "confidence": 4,
+      "overall": 4,
+      "decision": "reject",
+      "must_fix": [
+        {
+          "claim": "The abstract reports two headline numbers on different denominators in one sentence, so a reader cannot tell whether the gate answers one question in four or one in twenty.",
+          "where": "Abstract; Section 5.1",
+          "evidence_needed": "Both figures restated over one population (coverage = questions answered / questions asked = 98/400 = 24.5%), and 'about one question in twenty' in Section 5.1 corrected or replaced by that number."
+        },
+        {
+          "claim": "'Abstain precision' is undefined and the reported cells are the per-rung refusal rate, not the precision of refusals.",
+          "where": "Section 3.3; Section 4.2, results table first row",
+          "evidence_needed": "A one-sentence definition with numerator and denominator, the number of refusals behind every cell, and the eight per-rung cells recomputed as (negatives refused)/(all refusals): the R2 cell becomes 279/(279+302) = 48.0%, not 99.64%."
+        },
+        {
+          "claim": "No table is numbered or captioned, and the in-text table numbers do not resolve against the tables as printed.",
+          "where": "Tables in Sections 2, 3.1, 4.1, 4.2, 4.4 and 4.6",
+          "evidence_needed": "Sequential numbers and self-contained captions (what is plotted, n, split, units) for all eight tables, with every in-text reference rewritten to the appearance order."
+        },
+        {
+          "claim": "There is no figure anywhere in the draft, so the paper's central trade-off has no visual form and the abstract has no Figure 1 to be read against.",
+          "where": "Whole manuscript; Abstract; Section 4.2",
+          "evidence_needed": "The generated figure asset already in 05_paper/figures/generated inlined in the draft with a caption (what is plotted, n, split, units), and, given the metric problem above, one panel plotting abstain precision and over-refusal against coverage with the registered operating point marked."
+        },
+        {
+          "claim": "Two cross-references send the reader to the wrong section.",
+          "where": "Note under the Section 4.2 table ('§4.5'); Section 2 ('§4.8')",
+          "evidence_needed": "The dense-column pointer changed to Section 4.6 and the reader-baseline pointer changed to Section 4.7, checked against the section that actually reports each number."
+        },
+        {
+          "claim": "The arm table names the wrong conditional for its 87.30% cell.",
+          "where": "Section 4.4, arm table, last row",
+          "evidence_needed": "Both conditionals stated with their denominators: P(refused | miss) = 63.22% and P(miss | refused) = 87.30%, with the cell relabelled to say which one it reports."
+        },
+        {
+          "claim": "The paper claims coverage is reported beside every precision figure, and it is not.",
+          "where": "Section 1 (contribution 3); Section 2 table ('This paper' row); Section 4.4, arm table",
+          "evidence_needed": "A coverage column added to all five arm rows, or the contribution and the related-work table narrowed to the two tables where the claim is true."
+        }
+      ],
+      "_file": "clarity_reviewer.review.yaml"
+    }
+  ]
+}

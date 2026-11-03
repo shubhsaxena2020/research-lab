@@ -445,6 +445,10 @@ def const_entries() -> None:
         "Recall-matched single over-refusal for the H3 comparison")
     reg("c1.st.cluster.ratio.r2", STATS, "cluster_bootstrap.exploratory_band.2.width_ratio",
         "Cluster-bootstrap / item-bootstrap interval width, exploratory R2")
+    reg("c1.st.cluster.ratio.conf.r2", STATS, "cluster_bootstrap.per_rung.2.width_ratio",
+        "Cluster-bootstrap / item-bootstrap interval width, confirmatory R2")
+    reg("c1.st.cluster.ratio.expl.r4", STATS, "cluster_bootstrap.exploratory_band.4.width_ratio",
+        "Cluster-bootstrap / item-bootstrap interval width, exploratory R4")
     reg("c1.tr.drop.conf", REL_TR, "drop_vs_test_rung3.confirmatory_band.drop_pp",
         "Transfer-arm precision drop vs test R3, confirmatory band, percentage points")
     reg("c1.tr.drop.expl", REL_TR, "drop_vs_test_rung3.exploratory_band.drop_pp",

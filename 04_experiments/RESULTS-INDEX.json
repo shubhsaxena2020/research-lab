@@ -1339,6 +1339,22 @@
       "toy": false
     },
     {
+      "description": "Cluster-bootstrap / item-bootstrap interval width, confirmatory R2",
+      "file": "04_experiments/results/c1/stats_addendum.json",
+      "id": "c1.st.cluster.ratio.conf.r2",
+      "key": "cluster_bootstrap.per_rung.2.width_ratio",
+      "tolerance": 0.0,
+      "toy": false
+    },
+    {
+      "description": "Cluster-bootstrap / item-bootstrap interval width, exploratory R4",
+      "file": "04_experiments/results/c1/stats_addendum.json",
+      "id": "c1.st.cluster.ratio.expl.r4",
+      "key": "cluster_bootstrap.exploratory_band.4.width_ratio",
+      "tolerance": 0.0,
+      "toy": false
+    },
+    {
       "description": "Cluster-bootstrap / item-bootstrap interval width, exploratory R2",
       "file": "04_experiments/results/c1/stats_addendum.json",
       "id": "c1.st.cluster.ratio.r2",
@@ -1619,6 +1635,6 @@
       "toy": false
     }
   ],
-  "updated_at": "2026-11-03T02:16:18Z",
+  "updated_at": "2026-11-03T02:17:03Z",
   "version": 1
 }
