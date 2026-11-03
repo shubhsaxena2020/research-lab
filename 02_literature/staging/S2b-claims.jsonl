@@ -1,0 +1,26 @@
+{"title": "Predictable Failure in Multi-Hop Retrieval: Score-Distributional Confidence Scoring and Abstention", "year": 2026, "doi_or_arxiv": "10.48550/arxiv.2609.22056"}
+{"title": "Sufficiency-Gated Retrieval-Augmented Generation: Reducing Hallucination via Context Adequacy Estimation", "year": 2026, "doi_or_arxiv": "10.32604/cmc.2026.088937"}
+{"title": "Before Answering: Evidence Sufficiency under Size-Matched Memory Construction", "year": 2026, "doi_or_arxiv": "10.48550/arxiv.2609.32269"}
+{"title": "Learning When to Remember: Risk-Sensitive Contextual Bandits for Abstention-Aware Memory Retrieval in LLM-Based Coding Agents", "year": 2026, "doi_or_arxiv": "10.48550/arxiv.2604.27283"}
+{"title": "BalanceRAG: Joint Risk Calibration for Cascaded Retrieval-Augmented Generation", "year": 2026, "doi_or_arxiv": "10.18653/2026.findings-emnlp.1391"}
+{"title": "Reliable Biomedical RAG with Answerability-Aware Hybrid Retrieval", "year": 2026, "doi_or_arxiv": "10.5281/zenodo.20547014"}
+{"title": "RCL: A Retrieval-Confidence Layer for Detecting Insufficient Context in Enterprise Retrieval-Augmented Code Generation", "year": 2026, "doi_or_arxiv": "10.48550/arxiv.2609.11023"}
+{"title": "The Confidence Gate Theorem: When Should Ranked Decision Systems Abstain?", "year": 2026, "doi_or_arxiv": "10.48550/arxiv.2603.09947"}
+{"title": "Training Negatives Still Matter After Calibrating Answerability Readouts", "year": 2026, "doi_or_arxiv": "10.48550/arxiv.2610.26461"}
+{"title": "Do LLMs Know When Evidence is Insufficient? An Evidence Sufficiency Benchmark for Answer-Abstention Calibration in Retrieval-Augmented Generation", "year": 2026, "doi_or_arxiv": "10.32604/cmc.2026.086343"}
+{"title": "Cost-Aware Gated Retrieval: Decoupling Retrieval Initiation from Evidence-Conditioned Escalation", "year": 2026, "doi_or_arxiv": "10.21203/rs.3.rs-11499644/v1"}
+{"title": "Abstain-R1: Calibrated Abstention and Post-Refusal Clarification via Verifiable RL", "year": 2026, "doi_or_arxiv": "10.18653/v1/2026.findings-acl.985"}
+{"title": "Beyond Confidence: Adaptive Abstention in Dual-Threshold Conformal Prediction for Autonomous System Perception", "year": 2025, "doi_or_arxiv": "10.48550/arxiv.2502.07255"}
+{"title": "Where Abstention Lives: A Pre-Registered Four-Way Comparison of Abstention Interfaces in a Small Language Model with Versioned Memory", "year": 2026, "doi_or_arxiv": "10.21203/rs.3.rs-10839567/v1"}
+{"title": "The Fragility of Phishing Detection Models: Evidence from Cross-Corpus Transfer, Prevalence Shift, Artifact Learning, and Evasion Risk", "year": 2026, "doi_or_arxiv": "10.3390/bdcc10070211"}
+{"title": "Default Zero-Shot LLM APIs Over-Flag Indian Financial SMS: A Policy-Aligned Benchmark and Template-Level Pre-Deployment Audit", "year": 2026, "doi_or_arxiv": "10.18653/2026.groundlm-1.79"}
+{"title": "Anonymous Supplementary Artifact — EMNLP 2026 Industry Track Submission (Multilingual Indian SMS Scam Detection)", "year": 2026, "doi_or_arxiv": "10.5281/zenodo.20478596"}
+{"title": "Cost-Sensitive Conformal Prediction and Human-in-the-Loop Abstention for Imbalanced High-Stakes Decision Support: A Multi-Domain Benchmark", "year": 2026, "doi_or_arxiv": "10.48550/arxiv.2607.27143"}
+{"title": "Distribution-Free Error Control for Fraud Alert Triage: Conformal Anomaly P-Values Under Class Imbalance, Concept Drift, and Calibration Contamination", "year": 2026, "doi_or_arxiv": "10.56201/ijasmt.vol.12.no8.2026pg35.48"}
+{"title": "Objective over Architecture: Fraud Detection Under Extreme Imbalance in Bank Account Opening", "year": 2025, "doi_or_arxiv": "10.3390/computation13120290"}
+{"title": "Explainable fraud detection under fixed false positive rate", "year": 2026, "doi_or_arxiv": "10.7717/peerj-cs.4007"}
+{"title": "The Threshold, Not the Model: A Cost-Sensitive Re-Evaluation of Offensive Language Detection on the Offensive Language Identification Dataset (OLID)", "year": 2026, "doi_or_arxiv": "10.5281/zenodo.22852006"}
+{"title": "ConformalGuard: False-Positive-Controlled Action Gating for LM Classifiers", "year": 2026, "doi_or_arxiv": "10.48550/arxiv.2610.14365"}
+{"title": "A Hybrid Context-Aware Hinglish Spam And Scam Detection System Using Ensemble Machine Learning", "year": 2026, "doi_or_arxiv": "10.5281/zenodo.20153347"}
+{"title": "Beyond Keywords: Attack Signatures and a Diagnostic Benchmark for Multilingual Scam Detection in Indian Languages", "year": 2026, "doi_or_arxiv": "10.5281/zenodo.22867073"}
+{"title": "Cost-Sensitive Threshold Optimization for Network Intrusion Detection: A Per-Class Approach with XGBoost", "year": 2026, "doi_or_arxiv": "10.3390/electronics15071542"}

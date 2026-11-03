@@ -1,0 +1,560 @@
+{
+  "auroc": {
+    "definition": "P(score_hit > score_miss), gold vs non-gold, test items",
+    "dev_gate_auroc": 0.9696,
+    "test_gate_auroc": 0.9453
+  },
+  "design": {
+    "gate": "logistic regression, L2 C=1.0, lbfgs, max_iter=1000, standardised on dev \u2014 same \u00a75 estimator",
+    "label_rule": "1 iff the rank-1 paragraph is the question's gold paragraph (hit) else 0 (miss)",
+    "presented_passage": "BM25 rank-1 paragraph for the question, from the item's own split pool",
+    "rung": -1,
+    "statistics": "BCa bootstrap, 10000 resamples, BOOT_SEED=12345, item-level",
+    "thresholds": "gate.fit_band_thresholds (target dev abstain precision 0.80) and gate.fit_band_constrained (dev over-refusal cap 0.10); fitted on dev only",
+    "variant": "top1_presented",
+    "why_new_gate": "different item population and label prevalence; the frozen gate does not apply (D3)"
+  },
+  "experiment": "C1 \u2014 exploratory top-1-presented variant",
+  "features": {
+    "consistency_check_vs_frozen_rung0": {
+      "compared_features": [
+        "bm25_presented",
+        "ce_presented",
+        "lex_overlap"
+      ],
+      "excluded": {
+        "dense_presented": "frozen column degenerate; see frozen_dense_columns_are_degenerate"
+      },
+      "max_abs_diff": {
+        "bm25_presented": 5e-09,
+        "ce_presented": 3.815e-06,
+        "lex_overlap": 0.0
+      },
+      "n_compared": 655,
+      "passed": true,
+      "tolerance": {
+        "bm25_presented": 1e-06,
+        "ce_presented": 0.0001,
+        "lex_overlap": 0.0
+      }
+    },
+    "constant_by_construction": {
+      "bm25_rank_log": [
+        0.69314718056
+      ],
+      "note": "log1p(1) = 0.6931 for every row: the presented passage is the BM25 rank-1 document. Kept in the vector; contributes nothing to the fitted score."
+    },
+    "csv_sha256": "3d22e100c1991ed63b3155ef6f0f66a873377d410ce0b9d629346ed4185e4a5c",
+    "dense_math": {
+      "literal_frozen_math_would_give": "dense_presented = 1.0 constant, AUROC 0.5 by construction",
+      "reason": "PREREGISTRATION.md \u00a74 defines the feature this way; the frozen code does not",
+      "used_here": "query = question; dense_presented = cos(question, presented passage)"
+    },
+    "features": [
+      "bm25_presented",
+      "bm25_rank_log",
+      "bm25_top1",
+      "bm25_top5_mean",
+      "bm25_margin",
+      "dense_presented",
+      "dense_rank_log",
+      "dense_top1",
+      "dense_margin",
+      "top1_agreement",
+      "ce_presented",
+      "lex_overlap"
+    ],
+    "frozen_dense_columns_are_degenerate": {
+      "cause": "features.py encodes present_text as the dense query (Pq = encode(present_text)), so cos(presented, presented) = 1.0; dense_rank_log is then log1p(1) = 0.6931 and dense_top1 = 1.0 for every corpus-document row",
+      "consequence": "three of the twelve frozen gate columns carry no question-passage signal; the dense block reduces to dense_margin (a passage-distinctiveness term)",
+      "fraction_within_1e-3_of_1.0": 0.804371,
+      "per_rung_dense_presented": {
+        "0": {
+          "max": 1.0,
+          "mean": 1.0,
+          "min": 1.0,
+          "n": 800,
+          "sd": 0.0
+        },
+        "1": {
+          "max": 1.0,
+          "mean": 1.0,
+          "min": 1.0,
+          "n": 800,
+          "sd": 0.0
+        },
+        "2": {
+          "max": 1.0,
+          "mean": 1.0,
+          "min": 1.0,
+          "n": 553,
+          "sd": 0.0
+        },
+        "3": {
+          "max": 1.0,
+          "mean": 1.0,
+          "min": 1.0,
+          "n": 800,
+          "sd": 0.0
+        },
+        "4": {
+          "max": 0.999922,
+          "mean": 0.987813,
+          "min": 0.89792,
+          "n": 799,
+          "sd": 0.014018
+        }
+      },
+      "source": "04_experiments/data/features.csv columns dense_presented / dense_top1 / dense_rank_log"
+    },
+    "n_features": 12
+  },
+  "gate": {
+    "coef": {
+      "bm25_margin": 1.2794,
+      "bm25_presented": 0.4413,
+      "bm25_rank_log": -0.0033,
+      "bm25_top1": 0.4413,
+      "bm25_top5_mean": -0.544,
+      "ce_presented": 1.3556,
+      "dense_margin": 0.4845,
+      "dense_presented": 0.2432,
+      "dense_rank_log": -0.695,
+      "dense_top1": -1.5519,
+      "lex_overlap": 0.1435,
+      "top1_agreement": 0.5893
+    },
+    "feature_sds": {
+      "bm25_margin": 2.9842,
+      "bm25_presented": 4.0315,
+      "bm25_rank_log": 0.0,
+      "bm25_top1": 4.0315,
+      "bm25_top5_mean": 1.9672,
+      "ce_presented": 4.7577,
+      "dense_margin": 0.0454,
+      "dense_presented": 0.0967,
+      "dense_rank_log": 1.0786,
+      "dense_top1": 0.0702,
+      "lex_overlap": 0.1584,
+      "top1_agreement": 0.4645
+    },
+    "intercept": 4.0408
+  },
+  "items": {
+    "hit_rate_definition": "fraction of the 400 sampled questions per split whose BM25 rank-1 paragraph is the gold paragraph",
+    "items_sha256": "a586606d6ec23b10f86c9104e343e77ccc2fc03130feb0bc5cb014a39f42ed55",
+    "n_items_total": 800,
+    "per_split": {
+      "dev": {
+        "gold_rank_leq10": 389,
+        "gold_rank_leq5": 383,
+        "gold_rank_median": 1,
+        "hit_rate": 0.855,
+        "mean_n_context_chars": 838.2,
+        "n_hits": 342,
+        "n_items": 400,
+        "n_misses": 58,
+        "pool_size": 608
+      },
+      "test": {
+        "gold_rank_leq10": 388,
+        "gold_rank_leq5": 381,
+        "gold_rank_median": 1,
+        "hit_rate": 0.7825,
+        "mean_n_context_chars": 806.0,
+        "n_hits": 313,
+        "n_items": 400,
+        "n_misses": 87,
+        "pool_size": 596
+      }
+    }
+  },
+  "label": "EXPLORATORY (PREREGISTRATION.md \u00a710 D3) \u2014 not part of H1/H2/H3",
+  "operating_points": {
+    "band_constrained_over_refusal_0.10": {
+      "dev": {
+        "abstain_precision": 0.7414,
+        "abstain_precision_definition": "P(refused | non-gold), i.e. the fraction of retrieval misses refused",
+        "coverage": 0.87,
+        "n_hits": 342,
+        "n_misses": 58,
+        "n_refused": 52,
+        "n_refused_hits": 9,
+        "n_refused_misses": 43,
+        "over_refusal": 0.0263,
+        "precision_miss_given_refused": 0.8269,
+        "precision_miss_given_refused_ci95": {
+          "hi": 0.913,
+          "lo": 0.702,
+          "method": "bca",
+          "n": 400,
+          "n_boot": 10000,
+          "seed": 12345,
+          "statistic": "sum(refused & non-gold) / sum(refused)"
+        },
+        "refusal_rate_hits": 0.0263,
+        "refusal_rate_hits_ci95": {
+          "hi": 0.0439,
+          "lo": 0.0117,
+          "method": "bca",
+          "n": 342,
+          "n_boot": 10000,
+          "seed": 12345
+        },
+        "refusal_rate_misses": 0.7414,
+        "refusal_rate_misses_ci95": {
+          "hi": 0.8276,
+          "lo": 0.5931,
+          "method": "bca",
+          "n": 58,
+          "n_boot": 10000,
+          "seed": 12345
+        },
+        "refuse_all_precision": 0.145
+      },
+      "test": {
+        "abstain_precision": 0.6322,
+        "abstain_precision_definition": "P(refused | non-gold), i.e. the fraction of retrieval misses refused",
+        "coverage": 0.8425,
+        "n_hits": 313,
+        "n_misses": 87,
+        "n_refused": 63,
+        "n_refused_hits": 8,
+        "n_refused_misses": 55,
+        "over_refusal": 0.0256,
+        "precision_miss_given_refused": 0.873,
+        "precision_miss_given_refused_ci95": {
+          "hi": 0.9394,
+          "lo": 0.7681,
+          "method": "bca",
+          "n": 400,
+          "n_boot": 10000,
+          "seed": 12345,
+          "statistic": "sum(refused & non-gold) / sum(refused)"
+        },
+        "refusal_rate_hits": 0.0256,
+        "refusal_rate_hits_ci95": {
+          "hi": 0.0447,
+          "lo": 0.0096,
+          "method": "bca",
+          "n": 313,
+          "n_boot": 10000,
+          "seed": 12345
+        },
+        "refusal_rate_misses": 0.6322,
+        "refusal_rate_misses_ci95": {
+          "hi": 0.7241,
+          "lo": 0.5172,
+          "method": "bca",
+          "n": 87,
+          "n_boot": 10000,
+          "seed": 12345
+        },
+        "refuse_all_precision": 0.2175
+      },
+      "test_gap": {
+        "ci95_hi": -0.5019,
+        "ci95_lo": -0.7082,
+        "hits_minus_misses_refusal": -0.6066,
+        "method": "stratified item-level bootstrap (hits and misses resampled separately)",
+        "n_boot": 10000,
+        "seed": 12345
+      },
+      "thresholds": {
+        "dev_n_refused": 52,
+        "dev_over_refusal": 0.0263,
+        "dev_precision": 0.8269,
+        "dev_recall": 0.7414,
+        "feasible": true,
+        "max_over_refusal": 0.1,
+        "t_hi": 0.999989882884,
+        "t_lo": 0.532266197642
+      }
+    },
+    "band_target_precision_0.80": {
+      "dev": {
+        "abstain_precision": 0.7414,
+        "abstain_precision_definition": "P(refused | non-gold), i.e. the fraction of retrieval misses refused",
+        "coverage": 0.87,
+        "n_hits": 342,
+        "n_misses": 58,
+        "n_refused": 52,
+        "n_refused_hits": 9,
+        "n_refused_misses": 43,
+        "over_refusal": 0.0263,
+        "precision_miss_given_refused": 0.8269,
+        "precision_miss_given_refused_ci95": {
+          "hi": 0.913,
+          "lo": 0.702,
+          "method": "bca",
+          "n": 400,
+          "n_boot": 10000,
+          "seed": 12345,
+          "statistic": "sum(refused & non-gold) / sum(refused)"
+        },
+        "refusal_rate_hits": 0.0263,
+        "refusal_rate_hits_ci95": {
+          "hi": 0.0439,
+          "lo": 0.0117,
+          "method": "bca",
+          "n": 342,
+          "n_boot": 10000,
+          "seed": 12345
+        },
+        "refusal_rate_misses": 0.7414,
+        "refusal_rate_misses_ci95": {
+          "hi": 0.8276,
+          "lo": 0.5931,
+          "method": "bca",
+          "n": 58,
+          "n_boot": 10000,
+          "seed": 12345
+        },
+        "refuse_all_precision": 0.145
+      },
+      "test": {
+        "abstain_precision": 0.6322,
+        "abstain_precision_definition": "P(refused | non-gold), i.e. the fraction of retrieval misses refused",
+        "coverage": 0.8425,
+        "n_hits": 313,
+        "n_misses": 87,
+        "n_refused": 63,
+        "n_refused_hits": 8,
+        "n_refused_misses": 55,
+        "over_refusal": 0.0256,
+        "precision_miss_given_refused": 0.873,
+        "precision_miss_given_refused_ci95": {
+          "hi": 0.9394,
+          "lo": 0.7681,
+          "method": "bca",
+          "n": 400,
+          "n_boot": 10000,
+          "seed": 12345,
+          "statistic": "sum(refused & non-gold) / sum(refused)"
+        },
+        "refusal_rate_hits": 0.0256,
+        "refusal_rate_hits_ci95": {
+          "hi": 0.0447,
+          "lo": 0.0096,
+          "method": "bca",
+          "n": 313,
+          "n_boot": 10000,
+          "seed": 12345
+        },
+        "refusal_rate_misses": 0.6322,
+        "refusal_rate_misses_ci95": {
+          "hi": 0.7241,
+          "lo": 0.5172,
+          "method": "bca",
+          "n": 87,
+          "n_boot": 10000,
+          "seed": 12345
+        },
+        "refuse_all_precision": 0.2175
+      },
+      "test_gap": {
+        "ci95_hi": -0.5019,
+        "ci95_lo": -0.7082,
+        "hits_minus_misses_refusal": -0.6066,
+        "method": "stratified item-level bootstrap (hits and misses resampled separately)",
+        "n_boot": 10000,
+        "seed": 12345
+      },
+      "thresholds": {
+        "band_width": 0.467724,
+        "dev_n_refused": 52,
+        "dev_precision": 0.8269,
+        "dev_recall": 0.7414,
+        "feasible": true,
+        "t_hi": 0.999989882884,
+        "t_lo": 0.532266197642
+      }
+    },
+    "single_constrained_over_refusal_0.10": {
+      "test": {
+        "abstain_precision": 0.7241,
+        "abstain_precision_definition": "P(refused | non-gold), i.e. the fraction of retrieval misses refused",
+        "coverage": 0.7975,
+        "n_hits": 313,
+        "n_misses": 87,
+        "n_refused": 81,
+        "n_refused_hits": 18,
+        "n_refused_misses": 63,
+        "over_refusal": 0.0575,
+        "precision_miss_given_refused": 0.7778,
+        "precision_miss_given_refused_ci95": {
+          "hi": 0.8571,
+          "lo": 0.6746,
+          "method": "bca",
+          "n": 400,
+          "n_boot": 10000,
+          "seed": 12345,
+          "statistic": "sum(refused & non-gold) / sum(refused)"
+        },
+        "refusal_rate_hits": 0.0575,
+        "refusal_rate_hits_ci95": {
+          "hi": 0.0831,
+          "lo": 0.0319,
+          "method": "bca",
+          "n": 313,
+          "n_boot": 10000,
+          "seed": 12345
+        },
+        "refusal_rate_misses": 0.7241,
+        "refusal_rate_misses_ci95": {
+          "hi": 0.8046,
+          "lo": 0.6092,
+          "method": "bca",
+          "n": 87,
+          "n_boot": 10000,
+          "seed": 12345
+        },
+        "refuse_all_precision": 0.2175
+      },
+      "thresholds": {
+        "dev_n_refused": 56,
+        "dev_over_refusal": 0.0292,
+        "dev_precision": 0.8214,
+        "dev_recall": 0.7931,
+        "feasible": true,
+        "max_over_refusal": 0.1,
+        "t": 0.659878614612
+      }
+    },
+    "single_target_precision_0.80": {
+      "test": {
+        "abstain_precision": 0.7241,
+        "abstain_precision_definition": "P(refused | non-gold), i.e. the fraction of retrieval misses refused",
+        "coverage": 0.7975,
+        "n_hits": 313,
+        "n_misses": 87,
+        "n_refused": 81,
+        "n_refused_hits": 18,
+        "n_refused_misses": 63,
+        "over_refusal": 0.0575,
+        "precision_miss_given_refused": 0.7778,
+        "precision_miss_given_refused_ci95": {
+          "hi": 0.8571,
+          "lo": 0.6746,
+          "method": "bca",
+          "n": 400,
+          "n_boot": 10000,
+          "seed": 12345,
+          "statistic": "sum(refused & non-gold) / sum(refused)"
+        },
+        "refusal_rate_hits": 0.0575,
+        "refusal_rate_hits_ci95": {
+          "hi": 0.0831,
+          "lo": 0.0319,
+          "method": "bca",
+          "n": 313,
+          "n_boot": 10000,
+          "seed": 12345
+        },
+        "refusal_rate_misses": 0.7241,
+        "refusal_rate_misses_ci95": {
+          "hi": 0.8046,
+          "lo": 0.6092,
+          "method": "bca",
+          "n": 87,
+          "n_boot": 10000,
+          "seed": 12345
+        },
+        "refuse_all_precision": 0.2175
+      },
+      "thresholds": {
+        "dev_n_refused": 56,
+        "dev_precision": 0.8214,
+        "dev_recall": 0.7931,
+        "feasible": true,
+        "t": 0.659878614612
+      }
+    }
+  },
+  "placement_diagnostic": {
+    "band_hi_inside_dev_range": true,
+    "band_lo_inside_dev_range": true,
+    "dev_hit_rate": 0.855,
+    "dev_refused_above_hi": 0.01,
+    "dev_refused_below_lo": 0.12,
+    "dev_score_max": 1.0,
+    "dev_score_median": 0.9881,
+    "dev_score_min": 0.0009,
+    "n_dev": 400,
+    "n_test": 400,
+    "test_hit_rate": 0.7825,
+    "test_score_max": 1.0,
+    "test_score_min": 0.0013
+  },
+  "single_feature_auroc": {
+    "bm25_margin": {
+      "dev_auroc": 0.8983,
+      "test_auroc": 0.8961
+    },
+    "bm25_presented": {
+      "dev_auroc": 0.8133,
+      "test_auroc": 0.7884
+    },
+    "bm25_rank_log": {
+      "dev_auroc": 0.5,
+      "test_auroc": 0.5
+    },
+    "bm25_top1": {
+      "dev_auroc": 0.8133,
+      "test_auroc": 0.7884
+    },
+    "bm25_top5_mean": {
+      "dev_auroc": 0.6255,
+      "test_auroc": 0.595
+    },
+    "ce_presented": {
+      "dev_auroc": 0.8928,
+      "test_auroc": 0.8448
+    },
+    "dense_margin": {
+      "dev_auroc": 0.7163,
+      "test_auroc": 0.6592
+    },
+    "dense_presented": {
+      "dev_auroc": 0.7901,
+      "role": "reverse-direction check: AUROC of the raw bge cosine between question and presented passage, no fitting",
+      "test_auroc": 0.676
+    },
+    "dense_rank_log": {
+      "dev_auroc": 0.1003,
+      "test_auroc": 0.1809
+    },
+    "dense_top1": {
+      "dev_auroc": 0.5961,
+      "test_auroc": 0.5055
+    },
+    "lex_overlap": {
+      "dev_auroc": 0.7329,
+      "test_auroc": 0.6913
+    },
+    "top1_agreement": {
+      "dev_auroc": 0.8502,
+      "test_auroc": 0.7863
+    }
+  },
+  "status": "ok",
+  "verification": {
+    "all_passed": true,
+    "checks": {
+      "400_per_split": true,
+      "all_rung_minus1": true,
+      "all_variant_top1": true,
+      "bm25_rank_log_constant_log1p1": true,
+      "dense_presented_varies": true,
+      "feature_ids_match": true,
+      "feature_rows_800": true,
+      "item_id_format": true,
+      "label_equals_context_is_gold_paragraph": true,
+      "label_equals_is_gold": true,
+      "n_context_chars_matches": true,
+      "n_items_800": true,
+      "qids_are_the_sampled_rung0_qids": true
+    },
+    "note": "recomputed from data/raw/dev-v2.0.json and data/items.jsonl, not from the builders"
+  }
+}

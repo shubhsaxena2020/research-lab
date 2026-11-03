@@ -1,0 +1,161 @@
+{
+  "corpus": {
+    "files": [
+      {
+        "file": "02_literature\\sources\\txt\\acl-2020.coling-main.580.txt",
+        "hits": 0,
+        "longest_run": 0,
+        "status": "CLEAR",
+        "words": 9316
+      },
+      {
+        "file": "02_literature\\sources\\txt\\arxiv-1806.03822.txt",
+        "hits": 0,
+        "longest_run": 0,
+        "status": "CLEAR",
+        "words": 4417
+      },
+      {
+        "file": "02_literature\\sources\\txt\\arxiv-1901.04085.txt",
+        "hits": 0,
+        "longest_run": 0,
+        "status": "CLEAR",
+        "words": 2279
+      },
+      {
+        "file": "02_literature\\sources\\txt\\arxiv-2004.04906.txt",
+        "hits": 0,
+        "longest_run": 0,
+        "status": "CLEAR",
+        "words": 9369
+      },
+      {
+        "file": "02_literature\\sources\\txt\\arxiv-2207.05221.txt",
+        "hits": 0,
+        "longest_run": 0,
+        "status": "CLEAR",
+        "words": 20374
+      },
+      {
+        "file": "02_literature\\sources\\txt\\arxiv-2309.07597.txt",
+        "hits": 0,
+        "longest_run": 0,
+        "status": "CLEAR",
+        "words": 9257
+      },
+      {
+        "file": "02_literature\\sources\\txt\\arxiv-2403.01461.txt",
+        "hits": 0,
+        "longest_run": 0,
+        "status": "CLEAR",
+        "words": 3662
+      },
+      {
+        "file": "02_literature\\sources\\txt\\arxiv-2407.18418.txt",
+        "hits": 0,
+        "longest_run": 0,
+        "status": "CLEAR",
+        "words": 16566
+      },
+      {
+        "file": "02_literature\\sources\\txt\\arxiv-2610.28340.txt",
+        "hits": 0,
+        "longest_run": 0,
+        "status": "CLEAR",
+        "words": 27752
+      }
+    ],
+    "n_files": 9,
+    "path": "02_literature\\sources\\txt",
+    "words": 102992
+  },
+  "draft": "05_paper\\draft\\paper.md",
+  "draft_words": 2668,
+  "generated_at": "2026-11-03T01:04:04Z",
+  "hits": [],
+  "params": {
+    "context": 12,
+    "ignore_references": true,
+    "min_words": 8,
+    "n": 8,
+    "quote_budget": 0.02
+  },
+  "quotes": [
+    {
+      "cited": false,
+      "line": 63,
+      "sentence": 32,
+      "text": "\"this rung is hard\"",
+      "words": 4
+    },
+    {
+      "cited": false,
+      "line": 63,
+      "sentence": 32,
+      "text": "\"this rung is identifiable from formatting\"",
+      "words": 6
+    },
+    {
+      "cited": false,
+      "line": 185,
+      "sentence": 85,
+      "text": "\"it transfers\"",
+      "words": 2
+    },
+    {
+      "cited": false,
+      "line": 229,
+      "sentence": 102,
+      "text": "\"abstain precision 0.98\"",
+      "words": 4
+    },
+    {
+      "cited": false,
+      "line": 247,
+      "sentence": 111,
+      "text": "\"is this the retrieved passage\"",
+      "words": 5
+    },
+    {
+      "cited": false,
+      "line": 250,
+      "sentence": 112,
+      "text": "\"premise violation\"",
+      "words": 2
+    },
+    {
+      "cited": false,
+      "line": 251,
+      "sentence": 112,
+      "text": "\"answer absent\"",
+      "words": 2
+    },
+    {
+      "cited": false,
+      "line": 258,
+      "sentence": 118,
+      "text": "\"retrieval found the gold paragraph\"",
+      "words": 5
+    }
+  ],
+  "summary": {
+    "caveat": "Not a plagiarism detector. A PASS means no shared run of >= 8 words outside quotation marks was found in THIS corpus, which contains only the sources we consulted. It does not prove originality and does not check the web.",
+    "failures": [],
+    "longest_quoted": 0,
+    "longest_unquoted": 0,
+    "n_hits": 0,
+    "n_quoted": 0,
+    "n_quotes": 8,
+    "n_uncited_quotes": 8,
+    "n_unquoted": 0,
+    "quote_budget": 0.02,
+    "quote_findings": [
+      "8 quoted span(s) without a citation in the same sentence"
+    ],
+    "quote_ratio": 0.011244,
+    "quoted_words": 30,
+    "verdict": "PASS"
+  },
+  "tool": "tools/originality_check.py",
+  "tool_version": 1
+}

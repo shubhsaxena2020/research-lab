@@ -1,0 +1,61 @@
+persona: novelty_skeptic
+summary: |
+  The paper reports a pre-registered negative result: at an operating point that maximises abstain recall
+  subject to 0.80 dev precision, a retrieval-feature gate refuses 75.50% of answerable questions and
+  admits 5.27% of the held-out set, after which every rung of the negative ladder scores the same
+  precision. Framed as a measurement rather than a method, with an explicit disclaimer of novelty in §1,
+  that is the right level for the evidence, and the separability audit in §4.1 is a genuinely quotable
+  instrument. The positioning does not survive inspection, however: Table 7 compares two prior works and
+  omits every near neighbour the project's own documented search marks as closest, including the work
+  that record says occupies the separability finding the paper calls its hard gate. The two headline
+  negative claims are also weaker than stated - H1's refutation is a measurement collapse at 5.27%
+  coverage, and "the ladder is a ladder of lexical overlap" is an identifiability result that the paper's
+  own rung ordering contradicts.
+strengths:
+  - "§1 states the contribution level explicitly - 'We do not claim novelty, state of the art, or generality beyond one corpus family' - and the title's 'with a Negative Result' and the abstract's opening sentence both lead with the negative finding rather than burying it."
+  - "The negative claim is stated as an empirical finding with its numbers attached (§1, §5.1, Abstract): 75.50% over-refusal at 5.27% coverage, generalised as 'a precision figure for an abstention gate is not interpretable without its coverage'."
+  - "§4.1 reports a pre-declared threshold (0.750, §3.4) against measured values (0.506/0.539/0.488/0.415) and publishes the uncomfortable sensitivity variant (0.977/0.889/0.923) in the same table, so the instrument's own negative evidence is not hidden."
+  - "Table 7's Abdumalikov row checks out against the source in 02_literature/sources/txt/arxiv-2403.01461.txt: random-negative training evaluated on high-overlap excerpts, accuracy 98% to 1%, and no coverage or threshold reported (neither word occurs in the source text)."
+  - "§4.6 and §5.3 disclose a defect that lowers the paper's own held-out AUROC from 0.982 to 0.874 and say the corrected numbers are the ones to carry forward - a positioning decision most authors would not make."
+weaknesses:
+  - "Table 7 is the entire positioning apparatus and has two rows; the project's own novelty record (02_literature/NOVELTY-CHECK.md §3) lists thirteen near neighbours, four marked CLOSE - N1 dual-threshold conformal band (arXiv:2502.07255), N2 retrieval-only confidence with a coverage sweep (arXiv:2609.22056), N3 published false-refusal rate (doi:10.32604/cmc.2026.088937), N4 surface-only adversary at AUROC 0.979 (arXiv:2609.32269), N10 retrieval-score gate trained on hard negatives - and none of them appears in §2 or §9."
+  - "'The ladder, in other words, is a ladder of lexical overlap' (Abstract, repeated in §5.2) is supported only by rung-versus-answerable AUROCs, which measure identifiability; the paper's own ordering contradicts a hardness reading, since R2 (overlap AUC 0.889) scores 91.07% while R3 (0.923) scores 92.75%, and overlap-matched R5 scores 89.25%."
+  - "H1 is reported as REFUTED in the abstract and in Table 2 on the strength of an operating point where R1, R3 and R4 sit at 100.00% and R2 at 99.64% (279/280), so the criterion cannot be exercised; the 95% CI [0.00%, 0.00%] is a bootstrap at the boundary, not evidence of equality."
+  - "§4.4 places R5 'between R2 and R3 in the ordering', but 89.25% lies below R2's 91.07% and above R4's 84.71% in the paper's own Table 2."
+  - "Contribution 4 in §1 says the control arms 'say what the gate is really measuring', while §4.5 concedes that the top-1 variant 'cannot separate the two readings'; the bullet claims more than the section supports."
+  - "Table 7's DeclineCraft row ('several unanswerable classes', 'per category, retrieval and memory reported separately') does not match the cited source, whose title and abstract state that retrieval and parametric abstention are measured 'jointly' (arXiv:2610.28340), and it contradicts §2's own sentence that DeclineCraft measures them jointly."
+  - "The §4.1 sensitivity variant is presented in the Method (§3.4) as part of the design, but the frozen pre-registration's §8 defines only a six-feature 'surface-only separability AUROC' with a 0.750 rebuild rule; the overlap variant appears in no deviation entry, and D2 already cites its numbers as motivation."
+  - "Table 7's row for this paper ('every precision reported with over-refusal and coverage beside it') is not true of the dense-cosine baseline column in Table 2 or the top-1 row in Table 5, both of which give precision without coverage."
+questions:
+  - "Of N1, N2, N3, N4 and N10, which does §4.1's audit differ from, and on what axis - the pre-run gate and rebuild rule, or the measurement itself?"
+  - "If the confirmatory gate admits 5.27% of held-out items, what observation would have made H1 'supported' rather than refuted, and does the exploratory 7.00-point R1-R3 drop (below the 15-point criterion) not already answer the hardness question in the opposite direction?"
+  - "What is the ordering variable in the title's 'hard', given that R2 sits below R3 on precision while R3 is the more identifiable rung by overlap?"
+  - "Was the overlap sensitivity audit run before or after the gate results in §4.2, and where is it declared?"
+soundness: 2
+presentation: 3
+contribution: 2
+confidence: 4
+overall: 4
+decision: reject
+must_fix:
+  - claim: "Table 7 compares this paper with two prior works and omits all five near neighbours that the project's own documented search marks as closest, including the work that occupies the separability finding."
+    where: "Section 2, Table 7; NOVELTY-CHECK.md §3"
+    evidence_needed: "Rows and a differentiating paragraph for N1 (arXiv:2502.07255), N2 (arXiv:2609.22056), N3 (doi:10.32604/cmc.2026.088937), N4 (arXiv:2609.32269) and N10, each stating what is varied and what is reported per rung, and what §4.1's audit adds beyond N4's surface-only adversary at AUROC 0.979; plus a pointer to the search record (84 OpenAlex and 91 arXiv queries, 2026-11-03) so a reader can see the search happened."
+  - claim: "The paper's headline measurement - the overlap-augmented audit at 0.977/0.889/0.923 - is not defined anywhere in the frozen pre-registration and has no deviation entry, yet §3.4 presents it as part of the design."
+    where: "Section 3.4, Section 4.1; PREREGISTRATION.md §8 and §10"
+    evidence_needed: "Either the frozen §8 text that defines the six-features-plus-overlap-and-question-length variant, with its hash, or a dated §10 entry declaring it exploratory and the time it was first run; plus one sentence in §3.4 and §4.1 labelling it post hoc if it was computed after the gate results."
+  - claim: "H1 is reported as REFUTED although the confirmatory operating point cannot exercise the criterion, so a measurement collapse is presented as evidence about negative hardness."
+    where: "Abstract; Section 4.2, Table 2; Section 1"
+    evidence_needed: "State in the abstract and §4.2 that at 5.27% coverage three rungs are at 100.00% and R2 at 279/280, that the CI [0.00, 0.00] is a boundary bootstrap, and report H1 as not testable at the registered point with the exploratory 7.00-point drop [4.50, 9.75] as the only measured ordering."
+  - claim: "'The ladder is a ladder of lexical overlap' states an identifiability result as a hardness ordering, and the paper's own rung precisions contradict the ordering."
+    where: "Abstract; Section 4.1; Section 5.2"
+    evidence_needed: "Either a per-rung overlap statistic showing precision ordered by overlap magnitude, or a rewritten sentence saying only that overlap separates each rung from answerable items, with the R2 91.07 versus R3 92.75 inversion and R5 89.25 stated beside it."
+  - claim: "Section 4.4 misstates where R5 falls in the ordering."
+    where: "Section 4.4"
+    evidence_needed: "Correct 'between R2 and R3' to 'between R2 (91.07%) and R4 (84.71%)', or report the ordering statistic that puts R5 second of four."
+  - claim: "Table 7's DeclineCraft row mischaracterises the cited benchmark and contradicts the paper's own description of it."
+    where: "Section 2, Table 7"
+    evidence_needed: "Rewrite the row from arXiv:2610.28340 (title and abstract: retrieval and parametric abstention measured jointly; reported quantity is Correct Abstention Rate per model and retrieval condition), removing 'several unanswerable classes' and 'retrieval and memory reported separately' unless a named section of the source supports them."
+  - claim: "The matched-recall comparison that carries H3 is degenerate by construction because the matched single threshold is the band's own lower threshold."
+    where: "Section 3.3, Section 4.7"
+    evidence_needed: "Report that single_matched_recall.t = 0.90722098925 equals band.t_lo = 0.90722098925, so only the upper cut can differ, replace the claim that zero discordant pairs is 'not a binning artefact' with what the construction guarantees, and give the number of held-out items scoring above t_hi."

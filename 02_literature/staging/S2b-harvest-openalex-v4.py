@@ -31,7 +31,7 @@ H = {"User-Agent": "research-lab-s2b/1.0 (mailto:shubh.saxena2020@gmail.com)",
 MAIL = "shubh.saxena2020@gmail.com"
 SELECT = ("id,doi,title,publication_year,publication_date,primary_location,authorships,"
           "cited_by_count,abstract_inverted_index,type,language,open_access")
-MIN_CREDITS = 60
+MIN_CREDITS = 40
 
 
 def slug(q):
@@ -89,7 +89,7 @@ def main():
 
     qf = open(qfile, "a", encoding="utf-8")
     hf = open(hfile, "a", encoding="utf-8")
-    gap, last, fresh, skipped_streak, remaining = 6.0, 0.0, 0, 0, None
+    gap, last, fresh, skipped_streak, remaining = 5.0, 0.0, 0, 0, None
 
     for fam, kind, q in jobs:
         if q in done:
@@ -134,7 +134,7 @@ def main():
                 fresh += 1
                 got = True
                 skipped_streak = 0
-                gap = max(6.0, gap - 1.0)
+                gap = max(5.0, gap - 1.0)
                 print(f"200 {fam}/{kind} count={row['count']} rem={remaining} "
                       f"gap={gap:.0f} att={attempt} :: {q}")
                 if remaining is not None and remaining.isdigit() and int(remaining) < MIN_CREDITS:

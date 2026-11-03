@@ -1,0 +1,283 @@
+{
+  "auroc": {
+    "answerable_test_rung0_vs_rung5": 0.9728,
+    "n_answerable": 400,
+    "n_rung5": 400,
+    "reference_answerable_vs_rung1_4": {
+      "1": 0.9992,
+      "2": 0.9694,
+      "3": 0.9817,
+      "4": 0.573
+    }
+  },
+  "corrected_gate_assertion": {
+    "asserted_against": "results/c1_corrected/results_full.json",
+    "coef_corrected_results_full": {
+      "bm25_margin": -0.0444,
+      "bm25_presented": 1.6064,
+      "bm25_rank_log": 0.0362,
+      "bm25_top1": -1.4197,
+      "bm25_top5_mean": 0.017,
+      "ce_presented": 0.6613,
+      "dense_margin": 0.0791,
+      "dense_presented": 2.8719,
+      "dense_rank_log": 0.4797,
+      "dense_top1": -1.5039,
+      "lex_overlap": 0.086,
+      "top1_agreement": -0.2571
+    },
+    "coef_refit": {
+      "bm25_margin": -0.0444,
+      "bm25_presented": 1.6064,
+      "bm25_rank_log": 0.0362,
+      "bm25_top1": -1.4197,
+      "bm25_top5_mean": 0.017,
+      "ce_presented": 0.6613,
+      "dense_margin": 0.0791,
+      "dense_presented": 2.8719,
+      "dense_rank_log": 0.4797,
+      "dense_top1": -1.5039,
+      "lex_overlap": 0.086,
+      "top1_agreement": -0.2571
+    },
+    "intercept_corrected": -4.1525,
+    "intercept_refit": -4.1525,
+    "max_absdiff_coef": 0.0,
+    "n_dev_ids": 1873,
+    "passed": true,
+    "tolerance": 0.001
+  },
+  "experiment": "c1",
+  "gate_source": "results/c1_corrected/results_full.json (refit on corrected dev rows, asserted)",
+  "items": {
+    "features_rung5_sha256": "1c5ff749385fe902f92145cfa8ea01f1a4a583ec1f6d1145784b7eb22e446591",
+    "n_answerable_test": 400,
+    "n_rung5_dev": 400,
+    "n_rung5_test": 400
+  },
+  "label": "EXPLORATORY (D2) \u2014 SENSITIVITY ANALYSIS on corrected dense features",
+  "note": "Rung 5 = overlap-matched negatives, scored with the CORRECTED gate (question-query dense features) and the corrected confirmatory/exploratory thresholds. Rung-5 dense features come from features_corrected_rung5.csv. Exploratory throughout: not part of H1, cannot rescue H1.",
+  "preregistration_section": "\u00a710 D2",
+  "reference_test_rungs_1_4": {
+    "1": {
+      "confirmatory_band": {
+        "abstain_precision": 1.0,
+        "auroc_answerable_vs_this_rung": 0.9992,
+        "ci95": {
+          "hi": 1.0,
+          "lo": 1.0,
+          "method": "percentile",
+          "n": 400,
+          "n_boot": 10000,
+          "seed": 12345
+        },
+        "n": 400
+      },
+      "exploratory_band": {
+        "abstain_precision": 0.9975,
+        "auroc_answerable_vs_this_rung": 0.9992,
+        "ci95": {
+          "hi": 1.0,
+          "lo": 0.985,
+          "method": "bca",
+          "n": 400,
+          "n_boot": 10000,
+          "seed": 12345
+        },
+        "n": 400
+      }
+    },
+    "2": {
+      "confirmatory_band": {
+        "abstain_precision": 0.9964,
+        "auroc_answerable_vs_this_rung": 0.9694,
+        "ci95": {
+          "hi": 1.0,
+          "lo": 0.9786,
+          "method": "bca",
+          "n": 280,
+          "n_boot": 10000,
+          "seed": 12345
+        },
+        "n": 280
+      },
+      "exploratory_band": {
+        "abstain_precision": 0.9286,
+        "auroc_answerable_vs_this_rung": 0.9694,
+        "ci95": {
+          "hi": 0.9536,
+          "lo": 0.8893,
+          "method": "bca",
+          "n": 280,
+          "n_boot": 10000,
+          "seed": 12345
+        },
+        "n": 280
+      }
+    },
+    "3": {
+      "confirmatory_band": {
+        "abstain_precision": 1.0,
+        "auroc_answerable_vs_this_rung": 0.9817,
+        "ci95": {
+          "hi": 1.0,
+          "lo": 1.0,
+          "method": "percentile",
+          "n": 400,
+          "n_boot": 10000,
+          "seed": 12345
+        },
+        "n": 400
+      },
+      "exploratory_band": {
+        "abstain_precision": 0.955,
+        "auroc_answerable_vs_this_rung": 0.9817,
+        "ci95": {
+          "hi": 0.97,
+          "lo": 0.9275,
+          "method": "bca",
+          "n": 400,
+          "n_boot": 10000,
+          "seed": 12345
+        },
+        "n": 400
+      }
+    },
+    "4": {
+      "confirmatory_band": {
+        "abstain_precision": 0.9073,
+        "auroc_answerable_vs_this_rung": 0.573,
+        "ci95": {
+          "hi": 0.9298,
+          "lo": 0.8747,
+          "method": "bca",
+          "n": 399,
+          "n_boot": 10000,
+          "seed": 12345
+        },
+        "n": 399
+      },
+      "exploratory_band": {
+        "abstain_precision": 0.1253,
+        "auroc_answerable_vs_this_rung": 0.573,
+        "ci95": {
+          "hi": 0.1579,
+          "lo": 0.0927,
+          "method": "bca",
+          "n": 399,
+          "n_boot": 10000,
+          "seed": 12345
+        },
+        "n": 399
+      }
+    }
+  },
+  "rung5_dev_reference": {
+    "confirmatory_band": {
+      "abstain_precision": 0.9975,
+      "ci95": {
+        "hi": 1.0,
+        "lo": 0.98,
+        "method": "bca",
+        "n": 400,
+        "n_boot": 10000,
+        "seed": 12345
+      },
+      "gate": "band_primary",
+      "mean_score": 0.0426,
+      "median_score": 0.004,
+      "n": 400
+    },
+    "exploratory_band": {
+      "abstain_precision": 0.965,
+      "ci95": {
+        "hi": 0.9775,
+        "lo": 0.94,
+        "method": "bca",
+        "n": 400,
+        "n_boot": 10000,
+        "seed": 12345
+      },
+      "gate": "exploratory_band",
+      "mean_score": 0.0426,
+      "median_score": 0.004,
+      "n": 400
+    }
+  },
+  "rung5_test": {
+    "confirmatory_band": {
+      "abstain_precision": 0.9975,
+      "ci95": {
+        "hi": 1.0,
+        "lo": 0.985,
+        "method": "bca",
+        "n": 400,
+        "n_boot": 10000,
+        "seed": 12345
+      },
+      "gate": "band_primary",
+      "mean_score": 0.062,
+      "median_score": 0.008,
+      "n": 400
+    },
+    "exploratory_band": {
+      "abstain_precision": 0.9375,
+      "ci95": {
+        "hi": 0.955,
+        "lo": 0.9075,
+        "method": "bca",
+        "n": 400,
+        "n_boot": 10000,
+        "seed": 12345
+      },
+      "gate": "exploratory_band",
+      "mean_score": 0.062,
+      "median_score": 0.008,
+      "n": 400
+    }
+  },
+  "separability_audit": {
+    "cv": {
+      "folds": 5,
+      "seed": 13
+    },
+    "gate_auroc": 0.75,
+    "rung5": {
+      "dev": {
+        "auroc_primary_6": 0.7208,
+        "auroc_with_lex_overlap": 0.7936,
+        "n_answerable": 400,
+        "n_negatives": 400,
+        "passes_primary_6": true
+      },
+      "test": {
+        "auroc_primary_6": 0.6651,
+        "auroc_with_lex_overlap": 0.7537,
+        "n_answerable": 400,
+        "n_negatives": 400,
+        "passes_primary_6": true
+      }
+    }
+  },
+  "thresholds": {
+    "confirmatory_band": {
+      "dev_precision": 0.8024,
+      "dev_recall": 0.9898,
+      "source": "c1_corrected/results_full.json",
+      "t_hi": 0.537011889113,
+      "t_lo": 0.52318216643
+    },
+    "exploratory_band": {
+      "dev_over_refusal": 0.095,
+      "dev_precision": 0.9668,
+      "dev_recall": 0.7502,
+      "source": "c1_corrected/results_full.json",
+      "t_hi": 0.636224300244,
+      "t_lo": 0.303228201895
+    },
+    "refitted_here": false
+  },
+  "timings_s": {
+    "total_s": 0.79
+  }
+}

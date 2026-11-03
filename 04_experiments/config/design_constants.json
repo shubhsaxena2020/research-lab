@@ -1,0 +1,56 @@
+{
+  "audit_auroc_gate": 0.75,
+  "boot_seed": 12345,
+  "criterion_h1_drop_points": 15,
+  "criterion_h2_loss_points": 10,
+  "criterion_h2_slack_points": 5,
+  "criterion_h3_gain_points": 5,
+  "criterion_source": "PREREGISTRATION.md section 1 (frozen); H1 and H3 re-checked against results_full.json hypotheses.H1.criterion_points / H3.criterion_points",
+  "cv_folds": 5,
+  "data_seed": 20261103,
+  "gate_features": [
+    "bm25_presented",
+    "bm25_rank_log",
+    "bm25_top1",
+    "bm25_top5_mean",
+    "bm25_margin",
+    "dense_presented",
+    "dense_rank_log",
+    "dense_top1",
+    "dense_margin",
+    "top1_agreement",
+    "ce_presented",
+    "lex_overlap"
+  ],
+  "generated_by": "04_experiments/src/design_constants.py",
+  "max_rebuilds": 2,
+  "n_boot": 10000,
+  "n_gate_features": 12,
+  "n_questions_per_split": 400,
+  "n_rungs": 4,
+  "n_surface_features": 6,
+  "note": "Values imported from the modules that implement them; quoted in the paper's method.",
+  "rungs_defined": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "source_sha256": {
+    "audit": "9db4b2464181c547de4f2ce5e44eb9c4b7618cbce1f74a80064871a215e8b7b2",
+    "build_items": "d5ce3f0175f8ce8aeb52bb4bcbfa2836709b30492104e3b66abea88276006611",
+    "features": "abfd2a9fc393ce804bd00f4dda5471d82ef5f5924e0d0aca9fe41f87e9653ab0",
+    "gate": "33a34d6997ac2658578bcc87004dc9900bd3e312e78f847ef4182eb019749f57"
+  },
+  "split_seed": 7,
+  "surface_features": [
+    "n_chars",
+    "n_tokens",
+    "digit_ratio",
+    "upper_ratio",
+    "punct_ratio",
+    "mean_word_len"
+  ],
+  "target_abstain_precision": 0.8
+}

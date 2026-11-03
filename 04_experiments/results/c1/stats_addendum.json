@@ -1,0 +1,867 @@
+{
+  "ablation_summary": {
+    "file": "04_experiments/results/c1/ablations.json",
+    "rows": {
+      "all_12": {
+        "auroc_dev": 0.9879,
+        "auroc_test": 0.9824,
+        "n_features": 12,
+        "over_refusal_confirmatory": 0.755
+      },
+      "lex_overlap_only": {
+        "auroc_dev": 0.8118,
+        "auroc_test": 0.8111,
+        "n_features": 1,
+        "over_refusal_confirmatory": 0.9225
+      },
+      "no_bm25_presented_pair": {
+        "auroc_dev": 0.9845,
+        "auroc_test": 0.9785,
+        "n_features": 10,
+        "over_refusal_confirmatory": 0.865
+      },
+      "no_ce_presented": {
+        "auroc_dev": 0.9844,
+        "auroc_test": 0.9759,
+        "n_features": 11,
+        "over_refusal_confirmatory": 0.79
+      },
+      "no_dense": {
+        "auroc_dev": 0.8667,
+        "auroc_test": 0.8624,
+        "n_features": 8,
+        "over_refusal_confirmatory": 0.8825
+      },
+      "no_lex_overlap": {
+        "auroc_dev": 0.9878,
+        "auroc_test": 0.9823,
+        "n_features": 11,
+        "over_refusal_confirmatory": 0.8025
+      },
+      "no_rank": {
+        "auroc_dev": 0.9875,
+        "auroc_test": 0.9824,
+        "n_features": 10,
+        "over_refusal_confirmatory": 0.81
+      }
+    }
+  },
+  "cluster_bootstrap": {
+    "exploratory_band": {
+      "1": {
+        "cluster_ci95": {
+          "hi": 1.0,
+          "lo": 0.9918
+        },
+        "item_ci95": {
+          "hi": 1.0,
+          "lo": 0.985
+        },
+        "n_items": 400,
+        "per_article_rate": {
+          "max": 1.0,
+          "min": 0.96,
+          "n_at_0": 0,
+          "n_at_1": 17,
+          "sd": 0.0094
+        },
+        "point": 0.9975,
+        "width_cluster": 0.0082,
+        "width_item": 0.015,
+        "width_ratio": 0.5435
+      },
+      "2": {
+        "cluster_ci95": {
+          "hi": 0.9373,
+          "lo": 0.8796
+        },
+        "item_ci95": {
+          "hi": 0.9357,
+          "lo": 0.8679
+        },
+        "n_items": 280,
+        "per_article_rate": {
+          "max": 1.0,
+          "min": 0.8,
+          "n_at_0": 0,
+          "n_at_1": 3,
+          "sd": 0.0659
+        },
+        "point": 0.9107,
+        "width_cluster": 0.0577,
+        "width_item": 0.0678,
+        "width_ratio": 0.8511
+      },
+      "3": {
+        "cluster_ci95": {
+          "hi": 0.9508,
+          "lo": 0.9034
+        },
+        "item_ci95": {
+          "hi": 0.9475,
+          "lo": 0.895
+        },
+        "n_items": 400,
+        "per_article_rate": {
+          "max": 1.0,
+          "min": 0.8148,
+          "n_at_0": 0,
+          "n_at_1": 3,
+          "sd": 0.0564
+        },
+        "point": 0.9275,
+        "width_cluster": 0.0474,
+        "width_item": 0.0525,
+        "width_ratio": 0.9034
+      },
+      "4": {
+        "cluster_ci95": {
+          "hi": 0.8867,
+          "lo": 0.8019
+        },
+        "item_ci95": {
+          "hi": 0.8772,
+          "lo": 0.8045
+        },
+        "n_items": 399,
+        "per_article_rate": {
+          "max": 1.0,
+          "min": 0.6562,
+          "n_at_0": 0,
+          "n_at_1": 1,
+          "sd": 0.0847
+        },
+        "point": 0.8471,
+        "width_cluster": 0.0848,
+        "width_item": 0.0727,
+        "width_ratio": 1.1658
+      }
+    },
+    "method": "articles resampled with replacement; all items of each resampled article enter the rung mean (percentile 2.5/97.5)",
+    "n_articles_test": 18,
+    "n_boot": 10000,
+    "per_rung": {
+      "1": {
+        "cluster_ci95": {
+          "hi": 1.0,
+          "lo": 1.0
+        },
+        "item_ci95": {
+          "hi": 1.0,
+          "lo": 1.0,
+          "method": "percentile"
+        },
+        "n_articles_with_items": 18,
+        "n_items": 400,
+        "per_article_rate": {
+          "max": 1.0,
+          "min": 1.0,
+          "n_at_0": 0,
+          "n_at_1": 18,
+          "sd": 0.0
+        },
+        "point": 1.0,
+        "width_cluster": 0.0,
+        "width_item": 0.0,
+        "width_ratio": null
+      },
+      "2": {
+        "cluster_ci95": {
+          "hi": 1.0,
+          "lo": 0.9871
+        },
+        "item_ci95": {
+          "hi": 1.0,
+          "lo": 0.9714,
+          "method": "bca"
+        },
+        "n_articles_with_items": 18,
+        "n_items": 280,
+        "per_article_rate": {
+          "max": 1.0,
+          "min": 0.8333,
+          "n_at_0": 0,
+          "n_at_1": 17,
+          "sd": 0.0393
+        },
+        "point": 0.9964,
+        "width_cluster": 0.0129,
+        "width_item": 0.0286,
+        "width_ratio": 0.4521
+      },
+      "3": {
+        "cluster_ci95": {
+          "hi": 1.0,
+          "lo": 1.0
+        },
+        "item_ci95": {
+          "hi": 1.0,
+          "lo": 1.0,
+          "method": "percentile"
+        },
+        "n_articles_with_items": 18,
+        "n_items": 400,
+        "per_article_rate": {
+          "max": 1.0,
+          "min": 1.0,
+          "n_at_0": 0,
+          "n_at_1": 18,
+          "sd": 0.0
+        },
+        "point": 1.0,
+        "width_cluster": 0.0,
+        "width_item": 0.0,
+        "width_ratio": null
+      },
+      "4": {
+        "cluster_ci95": {
+          "hi": 1.0,
+          "lo": 1.0
+        },
+        "item_ci95": {
+          "hi": 1.0,
+          "lo": 1.0,
+          "method": "percentile"
+        },
+        "n_articles_with_items": 18,
+        "n_items": 399,
+        "per_article_rate": {
+          "max": 1.0,
+          "min": 1.0,
+          "n_at_0": 0,
+          "n_at_1": 18,
+          "sd": 0.0
+        },
+        "point": 1.0,
+        "width_cluster": 0.0,
+        "width_item": 0.0,
+        "width_ratio": null
+      }
+    },
+    "reading": "Cluster and item intervals agree in verdict everywhere. Of the 5 comparable rung-gate cells, 4 cluster intervals are narrower than the item interval and 1 is wider (width ratio 0.45 to 1.17); the widest is the exploratory rung 4, [0.802, 0.887] versus [0.804, 0.877] at item level. No interval's lower bound falls below 0.80. Intervals lying entirely below the 0.90 line: exploratory band rung 4. Clustering does not widen the intervals materially, and the reason is visible in the per-article rates: the exploratory refusal rate is almost constant across articles (between-article sd 0.009\u20130.085, 17/18 articles at 1.00 in rung 1), so there is no article-level variance for the cluster bootstrap to add. The confirmatory gate's rung-2 interval is the one case where clustering narrows the interval, from [0.971, 1.000] to [0.987, 1.000], because only one article supplies the single non-refused rung-2 item.",
+    "seed": 12345,
+    "thresholds_note": "Decision-relevant thresholds named in the paper: the 0.80 dev target precision and the exploratory over-refusal cap 0.10, plus the 0.90 line the ladder argument leans on. See 'reading' for whether any interval crosses them.",
+    "unit": "article (items.jsonl 'title'; whole SQuAD articles are never split)"
+  },
+  "confirmatory_from_results_full": {
+    "1": {
+      "abstain_precision": 1.0,
+      "ci95": {
+        "hi": 1.0,
+        "lo": 1.0,
+        "method": "percentile"
+      },
+      "n": 400
+    },
+    "2": {
+      "abstain_precision": 0.9964,
+      "ci95": {
+        "hi": 1.0,
+        "lo": 0.9714,
+        "method": "bca"
+      },
+      "n": 280
+    },
+    "3": {
+      "abstain_precision": 1.0,
+      "ci95": {
+        "hi": 1.0,
+        "lo": 1.0,
+        "method": "percentile"
+      },
+      "n": 400
+    },
+    "4": {
+      "abstain_precision": 1.0,
+      "ci95": {
+        "hi": 1.0,
+        "lo": 1.0,
+        "method": "percentile"
+      },
+      "n": 399
+    }
+  },
+  "exchangeability": {
+    "definition": "Per split, the 400 sampled questions are the rung-0 rows of items.jsonl. A question is 'dropped' for rung 2 when items.jsonl has no rung-2 row with its qid (build_items.py drop reason 'no_anchor_candidate': no content token of the question occurs in any non-gold paragraph of the split pool). Variables are measured on the rung-0 row.",
+    "min_p": {
+      "value": 0.052366,
+      "variable": "dev/q_chars"
+    },
+    "significant_at_0.05": [],
+    "splits": {
+      "dev": {
+        "n_dropped": 127,
+        "n_kept": 273,
+        "share_kept": 0.6825,
+        "variables": {
+          "answer_type": {
+            "counts": {
+              "date": {
+                "dropped": 1,
+                "kept": 7
+              },
+              "name": {
+                "dropped": 47,
+                "kept": 76
+              },
+              "number": {
+                "dropped": 11,
+                "kept": 27
+              },
+              "other": {
+                "dropped": 62,
+                "kept": 149
+              },
+              "year": {
+                "dropped": 6,
+                "kept": 14
+              }
+            },
+            "dropped_share": {
+              "date": 0.0079,
+              "name": 0.3701,
+              "number": 0.0866,
+              "other": 0.4882,
+              "year": 0.0472
+            },
+            "fisher_collapsed": {
+              "name_vs_other": {
+                "dropped_share": 0.3701,
+                "kept_share": 0.2784,
+                "odds_ratio": 0.6567,
+                "p_value": 0.080542,
+                "table": {
+                  "dropped": [
+                    47,
+                    80
+                  ],
+                  "kept": [
+                    76,
+                    197
+                  ]
+                },
+                "test": "fisher_exact_two_sided"
+              },
+              "numeric_vs_other": {
+                "dropped_share": 0.1417,
+                "kept_share": 0.1758,
+                "odds_ratio": 1.2919,
+                "p_value": 0.469841,
+                "table": {
+                  "dropped": [
+                    18,
+                    109
+                  ],
+                  "kept": [
+                    48,
+                    225
+                  ]
+                },
+                "test": "fisher_exact_two_sided"
+              }
+            },
+            "kept_share": {
+              "date": 0.0256,
+              "name": 0.2784,
+              "number": 0.0989,
+              "other": 0.5458,
+              "year": 0.0513
+            },
+            "min_expected": 2.54,
+            "n_perm": 10000,
+            "p_value": 0.354065,
+            "reason": "at least one expected cell < 5 (scipy.stats.fisher_exact is 2x2 only, so the 5x2 table uses the exact-conditional permutation version)",
+            "seed": 12345,
+            "statistic": 4.449,
+            "test": "monte_carlo_permutation_chi2"
+          },
+          "gold_chars": {
+            "dropped": {
+              "max": 4063.0,
+              "mean": 951.4882,
+              "median": 753.0,
+              "min": 271.0,
+              "n": 127,
+              "sd": 679.9758
+            },
+            "kept": {
+              "max": 4063.0,
+              "mean": 782.8681,
+              "median": 717.0,
+              "min": 206.0,
+              "n": 273,
+              "sd": 363.4299
+            },
+            "median_diff_kept_minus_dropped": -36.0,
+            "p_value": 0.087968,
+            "test": "mann_whitney_u_two_sided"
+          },
+          "n_paragraphs": {
+            "dropped": {
+              "max": 49.0,
+              "mean": 39.1024,
+              "median": 43.0,
+              "min": 22.0,
+              "n": 127,
+              "sd": 9.152
+            },
+            "kept": {
+              "max": 49.0,
+              "mean": 39.4579,
+              "median": 43.0,
+              "min": 22.0,
+              "n": 273,
+              "sd": 8.9705
+            },
+            "median_diff_kept_minus_dropped": 0.0,
+            "p_value": 0.924249,
+            "test": "mann_whitney_u_two_sided"
+          },
+          "q_chars": {
+            "dropped": {
+              "max": 131.0,
+              "mean": 67.8819,
+              "median": 65.0,
+              "min": 13.0,
+              "n": 127,
+              "sd": 23.4844
+            },
+            "kept": {
+              "max": 155.0,
+              "mean": 63.7143,
+              "median": 60.0,
+              "min": 18.0,
+              "n": 273,
+              "sd": 22.4848
+            },
+            "median_diff_kept_minus_dropped": -5.0,
+            "p_value": 0.052366,
+            "test": "mann_whitney_u_two_sided"
+          },
+          "q_tokens": {
+            "dropped": {
+              "max": 23.0,
+              "mean": 11.189,
+              "median": 10.0,
+              "min": 3.0,
+              "n": 127,
+              "sd": 3.8436
+            },
+            "kept": {
+              "max": 26.0,
+              "mean": 10.8425,
+              "median": 10.0,
+              "min": 4.0,
+              "n": 273,
+              "sd": 3.8099
+            },
+            "median_diff_kept_minus_dropped": 0.0,
+            "p_value": 0.362028,
+            "test": "mann_whitney_u_two_sided"
+          }
+        }
+      },
+      "test": {
+        "n_dropped": 120,
+        "n_kept": 280,
+        "share_kept": 0.7,
+        "variables": {
+          "answer_type": {
+            "counts": {
+              "date": {
+                "dropped": 2,
+                "kept": 4
+              },
+              "name": {
+                "dropped": 41,
+                "kept": 78
+              },
+              "number": {
+                "dropped": 8,
+                "kept": 40
+              },
+              "other": {
+                "dropped": 62,
+                "kept": 142
+              },
+              "year": {
+                "dropped": 7,
+                "kept": 16
+              }
+            },
+            "dropped_share": {
+              "date": 0.0167,
+              "name": 0.3417,
+              "number": 0.0667,
+              "other": 0.5167,
+              "year": 0.0583
+            },
+            "fisher_collapsed": {
+              "name_vs_other": {
+                "dropped_share": 0.3417,
+                "kept_share": 0.2786,
+                "odds_ratio": 0.744,
+                "p_value": 0.232892,
+                "table": {
+                  "dropped": [
+                    41,
+                    79
+                  ],
+                  "kept": [
+                    78,
+                    202
+                  ]
+                },
+                "test": "fisher_exact_two_sided"
+              },
+              "numeric_vs_other": {
+                "dropped_share": 0.1417,
+                "kept_share": 0.2143,
+                "odds_ratio": 1.6524,
+                "p_value": 0.098295,
+                "table": {
+                  "dropped": [
+                    17,
+                    103
+                  ],
+                  "kept": [
+                    60,
+                    220
+                  ]
+                },
+                "test": "fisher_exact_two_sided"
+              }
+            },
+            "kept_share": {
+              "date": 0.0143,
+              "name": 0.2786,
+              "number": 0.1429,
+              "other": 0.5071,
+              "year": 0.0571
+            },
+            "min_expected": 1.8,
+            "n_perm": 10000,
+            "p_value": 0.262774,
+            "reason": "at least one expected cell < 5 (scipy.stats.fisher_exact is 2x2 only, so the 5x2 table uses the exact-conditional permutation version)",
+            "seed": 12345,
+            "statistic": 5.2363,
+            "test": "monte_carlo_permutation_chi2"
+          },
+          "gold_chars": {
+            "dropped": {
+              "max": 1941.0,
+              "mean": 839.9,
+              "median": 766.0,
+              "min": 503.0,
+              "n": 120,
+              "sd": 307.5798
+            },
+            "kept": {
+              "max": 1992.0,
+              "mean": 791.5143,
+              "median": 703.0,
+              "min": 349.0,
+              "n": 280,
+              "sd": 283.2398
+            },
+            "median_diff_kept_minus_dropped": -63.0,
+            "p_value": 0.210955,
+            "test": "mann_whitney_u_two_sided"
+          },
+          "n_paragraphs": {
+            "dropped": {
+              "max": 47.0,
+              "mean": 35.9083,
+              "median": 39.0,
+              "min": 21.0,
+              "n": 120,
+              "sd": 8.739
+            },
+            "kept": {
+              "max": 47.0,
+              "mean": 35.2321,
+              "median": 39.0,
+              "min": 21.0,
+              "n": 280,
+              "sd": 8.9806
+            },
+            "median_diff_kept_minus_dropped": 0.0,
+            "p_value": 0.442933,
+            "test": "mann_whitney_u_two_sided"
+          },
+          "q_chars": {
+            "dropped": {
+              "max": 139.0,
+              "mean": 61.2833,
+              "median": 58.0,
+              "min": 21.0,
+              "n": 120,
+              "sd": 23.9962
+            },
+            "kept": {
+              "max": 129.0,
+              "mean": 59.45,
+              "median": 57.0,
+              "min": 21.0,
+              "n": 280,
+              "sd": 19.3955
+            },
+            "median_diff_kept_minus_dropped": -1.0,
+            "p_value": 0.69666,
+            "test": "mann_whitney_u_two_sided"
+          },
+          "q_tokens": {
+            "dropped": {
+              "max": 23.0,
+              "mean": 10.5583,
+              "median": 10.0,
+              "min": 3.0,
+              "n": 120,
+              "sd": 4.0101
+            },
+            "kept": {
+              "max": 22.0,
+              "mean": 10.3179,
+              "median": 10.0,
+              "min": 4.0,
+              "n": 280,
+              "sd": 3.482
+            },
+            "median_diff_kept_minus_dropped": 0.0,
+            "p_value": 0.620548,
+            "test": "mann_whitney_u_two_sided"
+          }
+        }
+      }
+    },
+    "tests": {
+      "categorical": "Pearson chi-square on the 5x2 answer-type table; when any expected cell < 5, a Monte Carlo permutation of the answer-type labels with fixed margins (10,000 draws, seed 12345) is used instead and named in 'answer_type_test'",
+      "continuous": "two-sided Mann-Whitney U (scipy.stats.mannwhitneyu, no continuity correction), exact only when n<8"
+    },
+    "verdict": "No variable differs between kept and dropped questions at the 0.05 level in either split (smallest p = 0.052, dev/q_chars), so on these five variables the rung-2 subsample is exchangeable with the sampled questions and rung-2 figures can be read as describing the sampled question set rather than a selected subset. Caveat: dev/q_chars (p=0.052), dev/answer_type:name_vs_other (p=0.081), dev/gold_chars (p=0.088), test/answer_type:numeric_vs_other (p=0.098) sit between 0.05 and 0.10, so the null is not comfortable either."
+  },
+  "exploratory_uncertainty": {
+    "coverage": 0.2544,
+    "over_refusal": 0.095,
+    "paired_diffs": {
+      "confirmatory_r1_minus_r3": {
+        "ci95": {
+          "hi": 0.0,
+          "lo": 0.0
+        },
+        "column": "band_refused",
+        "contains_zero": true,
+        "diff": 0.0,
+        "method": "paired percentile bootstrap over questions (both rungs resampled jointly)",
+        "n_boot": 10000,
+        "n_pairs": 400,
+        "p_a": 1.0,
+        "p_b": 1.0,
+        "rung_a": 1,
+        "rung_b": 3,
+        "seed": 12345
+      },
+      "exploratory_r1_minus_r3": {
+        "ci95": {
+          "hi": 0.0975,
+          "lo": 0.045
+        },
+        "column": "expl_band_refused",
+        "contains_zero": false,
+        "diff": 0.07,
+        "method": "paired percentile bootstrap over questions (both rungs resampled jointly)",
+        "n_boot": 10000,
+        "n_pairs": 400,
+        "p_a": 0.9975,
+        "p_b": 0.9275,
+        "rung_a": 1,
+        "rung_b": 3,
+        "seed": 12345
+      },
+      "exploratory_r1_minus_r3_single": {
+        "ci95": {
+          "hi": 0.0475,
+          "lo": 0.015
+        },
+        "column": "expl_single_refused",
+        "contains_zero": false,
+        "diff": 0.03,
+        "method": "paired percentile bootstrap over questions (both rungs resampled jointly)",
+        "n_boot": 10000,
+        "n_pairs": 400,
+        "p_a": 1.0,
+        "p_b": 0.97,
+        "rung_a": 1,
+        "rung_b": 3,
+        "seed": 12345
+      },
+      "exploratory_r1_minus_r4": {
+        "ci95": {
+          "hi": 0.188,
+          "lo": 0.1153
+        },
+        "column": "expl_band_refused",
+        "contains_zero": false,
+        "diff": 0.1504,
+        "method": "paired percentile bootstrap over questions (both rungs resampled jointly)",
+        "n_boot": 10000,
+        "n_pairs": 399,
+        "p_a": 0.9975,
+        "p_b": 0.8471,
+        "rung_a": 1,
+        "rung_b": 4,
+        "seed": 12345
+      }
+    },
+    "per_rung_from_results_full": {
+      "1": {
+        "abstain_precision": 0.9975,
+        "ci95": {
+          "hi": 1.0,
+          "lo": 0.985,
+          "method": "bca"
+        },
+        "n": 400
+      },
+      "2": {
+        "abstain_precision": 0.9107,
+        "ci95": {
+          "hi": 0.9357,
+          "lo": 0.8679,
+          "method": "bca"
+        },
+        "n": 280
+      },
+      "3": {
+        "abstain_precision": 0.9275,
+        "ci95": {
+          "hi": 0.9475,
+          "lo": 0.895,
+          "method": "bca"
+        },
+        "n": 400
+      },
+      "4": {
+        "abstain_precision": 0.8471,
+        "ci95": {
+          "hi": 0.8772,
+          "lo": 0.8045,
+          "method": "bca"
+        },
+        "n": 399
+      }
+    },
+    "pooled_abstain_precision": 0.9216,
+    "reading": "The exploratory rung-1 minus rung-3 difference is +0.070 (95% CI [+0.045, +0.098], 400 paired questions), so the interval excludes zero but the point difference is 7.0 points against the pre-registered 15-point criterion: H1's effect-size clause fails and its monotonicity clause fails too (rung 2 0.911 sits below rung 3 0.927). The rung 3 and rung 4 intervals do not overlap, so the rung-4 drop is separable; rung 1 minus rung 4 is +0.150 [+0.115, +0.188].",
+    "sequence_from_results_full": [
+      0.9975,
+      0.9107,
+      0.9275,
+      0.8471
+    ],
+    "source": "results_full.json['test']['exploratory_band']['per_rung'][r]['ci95'] (BCa, 10,000 draws, seed 12345, item-level)"
+  },
+  "generated_by": "04_experiments/src/stats_addendum.py",
+  "inputs": {
+    "ablation_no_rank": "c98e97cc059e33b878a0be57a8eb3c0e30a5806730e8b76819940af2e3958e4f",
+    "features_csv": "f9de87f699da1e73968dde27c5a55600c23c077ff9e5a446823e05abe0733cbb",
+    "items_jsonl": "c6f46ad80e7d15f495cd2a4b1e7b5a5556bfa929264c7afabd81826dd8d049d0",
+    "predictions_csv": "154ed6df4756ae28a13823ffdf6811db0e7c6809d5d23498cb799e24ccd03133",
+    "results_full": "e4cf65cb0b2bae52e4ee4b379e0c4e66450ed21474d71b57e49e8d4218c36b35"
+  },
+  "items": {
+    "n_dev": 1873,
+    "n_test": 1879
+  },
+  "matched_recall": {
+    "answerable_side": {
+      "coverage_band": 0.0527,
+      "coverage_matched": 0.0591,
+      "n_rung0_test": 400,
+      "over_refusal_band": 0.755,
+      "over_refusal_matched": 0.725
+    },
+    "dev": {
+      "band_dev_abstain_precision": 0.8369,
+      "band_dev_abstain_recall": 1.0,
+      "matched_single_dev_abstain_precision": 0.8461,
+      "matched_single_dev_abstain_recall": 1.0,
+      "matched_threshold_t": 0.90722098925,
+      "matching_rule": "single threshold chosen so that dev abstain recall matches the band's dev abstain recall; matched on dev, never on test (gate.py docstring)"
+    },
+    "h3_test_on_negatives": {
+      "boot_precision_diff": {
+        "contains_zero": true,
+        "diff": 0.0,
+        "hi": 0.0,
+        "lo": 0.0,
+        "method": "paired percentile bootstrap over negative items",
+        "n": 1479,
+        "n_boot": 10000,
+        "seed": 12345
+      },
+      "comparison": "band vs recall-matched single, refusal indicators over the negatives (test half)",
+      "discordant_pairs": 0,
+      "paired_sign": {
+        "n_eff": 0,
+        "n_pairs": 1479,
+        "p_note": "no discordant pairs (all differences zero)",
+        "p_value": 1.0,
+        "statistic": null,
+        "test": "sign_test"
+      }
+    },
+    "max_abs_diff_pp": 0.0,
+    "metric_note": "On the held-out half the refusal rate over a rung's negatives is abstain recall and abstain precision at once: every item refused in that rung is a negative, so precision = recall = mean(refused) over that rung. Both names are reported.",
+    "reading": "At matched dev abstain recall the band and the single threshold refuse the same negatives to 0.0 points in every rung and 0.0 pooled, so the band's second threshold adds no negative-side recall at all. Its only measurable effect is on answerable items: over-refusal 0.76 (band) versus 0.72 (matched single) on the 400 rung-0 test items, coverage 0.05 versus 0.06. H3's \u22655-point precision gain is therefore 0.0 points and the band is the worse operating point on the metric H3 is about.",
+    "test": {
+      "1": {
+        "band_refusal_rate": 1.0,
+        "difference_band_minus_matched": 0.0,
+        "difference_pp": 0.0,
+        "matched_single_refusal_rate": 1.0,
+        "n": 400,
+        "n_refused_band": 400,
+        "n_refused_matched": 400
+      },
+      "2": {
+        "band_refusal_rate": 0.9964,
+        "difference_band_minus_matched": 0.0,
+        "difference_pp": 0.0,
+        "matched_single_refusal_rate": 0.9964,
+        "n": 280,
+        "n_refused_band": 279,
+        "n_refused_matched": 279
+      },
+      "3": {
+        "band_refusal_rate": 1.0,
+        "difference_band_minus_matched": 0.0,
+        "difference_pp": 0.0,
+        "matched_single_refusal_rate": 1.0,
+        "n": 400,
+        "n_refused_band": 400,
+        "n_refused_matched": 400
+      },
+      "4": {
+        "band_refusal_rate": 1.0,
+        "difference_band_minus_matched": 0.0,
+        "difference_pp": 0.0,
+        "matched_single_refusal_rate": 1.0,
+        "n": 399,
+        "n_refused_band": 399,
+        "n_refused_matched": 399
+      },
+      "pooled_1_4": {
+        "band_refusal_rate": 0.9993,
+        "difference_band_minus_matched": 0.0,
+        "difference_pp": 0.0,
+        "matched_single_refusal_rate": 0.9993,
+        "n": 1479,
+        "n_refused_band": 1478,
+        "n_refused_matched": 1478
+      }
+    }
+  },
+  "n_boot": 10000,
+  "seed": 12345
+}

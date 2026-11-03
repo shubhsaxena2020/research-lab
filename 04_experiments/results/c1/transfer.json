@@ -1,0 +1,219 @@
+{
+  "coefficient_assertion": {
+    "intercept_abs_diff": 2.1274e-06,
+    "max_abs_diff": 4.28698e-05,
+    "max_abs_diff_per_coef": {
+      "bm25_margin": 9.0039e-06,
+      "bm25_presented": 2.91e-07,
+      "bm25_rank_log": 3.71124e-05,
+      "bm25_top1": 4.28698e-05,
+      "bm25_top5_mean": 3.3203e-05,
+      "ce_presented": 3.60287e-05,
+      "dense_margin": 1.1396e-06,
+      "dense_presented": 3.19721e-05,
+      "dense_rank_log": 2.02865e-05,
+      "dense_top1": 3.19721e-05,
+      "lex_overlap": 1.46002e-05,
+      "top1_agreement": 4.20577e-05
+    },
+    "n_dev": 1873,
+    "passed": true,
+    "tolerance": 0.001
+  },
+  "command": "python 04_experiments/src/eval_transfer.py",
+  "construct_note": "DIRECTION TEST ONLY. The transfer corpus is 2WikiMultihopQA dev (Ho et al., COLING 2020), not SQuAD 2.0, and three construct differences prevent magnitude equivalence. (1) No article grouping: each 2Wiki item ships `context` as independent Wikipedia articles, so the rung-3 negative is another paragraph from the same question's article set, not a same-document neighbour as in the dev arm. (2) Passage length: corpus median paragraph 203 chars vs 712 for SQuAD 2.0 dev; the 400 presented transfer passages have median 312 chars (length-filtered to 120-1200 by the builder). (3) Question type: 2Wiki questions are multi-hop (compositional / comparison / bridge-comparison / inference) and need two or more articles, whereas SQuAD questions are single-paragraph extractive. The retrieval pool is also different in kind: the union of the 200 source questions' article sets, not a split-wide paragraph pool. Read the transfer numbers as the direction in which the frozen operating point moves on a harder, differently-built corpus, not as an estimate of the same quantity.",
+  "corpus_lengths": {
+    "2wiki_paragraph_median_chars": 203.0,
+    "n_2wiki_paragraphs": 125760,
+    "n_squad_paragraphs": 1204,
+    "squad2_paragraph_median_chars": 711.5
+  },
+  "drop_vs_test_rung3": {
+    "confirmatory_band": {
+      "definition": "test rung-3 abstain precision minus transfer rung-3 abstain precision (same gate, same thresholds)",
+      "drop_points": 0.015,
+      "drop_pp": 1.5,
+      "test_rung1_precision": 1.0,
+      "test_rung3_precision": 1.0,
+      "transfer_rung3_precision": 0.985
+    },
+    "exploratory_band": {
+      "definition": "test rung-3 abstain precision minus transfer rung-3 abstain precision (same gate, same thresholds)",
+      "drop_points": 0.0725,
+      "drop_pp": 7.25,
+      "test_rung1_precision": 0.9975,
+      "test_rung3_precision": 0.9275,
+      "transfer_rung3_precision": 0.855
+    }
+  },
+  "experiment": "c1-transfer",
+  "feature_observation_dense_degenerate": {
+    "main_run_features_csv": {
+      "frac_dense_presented_eq_1": 0.787,
+      "frac_dense_presented_eq_dense_top1": 1.0,
+      "n_distinct_dense_rank_log": 1,
+      "n_rows": 3752,
+      "per_rung_frac_dense_presented_eq_1": {
+        "0": 1.0,
+        "1": 1.0,
+        "2": 1.0,
+        "3": 1.0,
+        "4": 0.0
+      }
+    },
+    "note": "features.py sets the dense query to the presented passage itself (Pq = dense.encode(present_text)), so the presented passage is scored against itself: dense_presented is 1.0 and dense_rank_log is log1p(1) for every main-run row of rungs 0-3 and for every transfer row. The dense terms therefore carry no question-conditioned retrieval signal; the gate's separation comes from BM25, the cross-encoder and lexical overlap. The transfer arm reuses the maths exactly as instructed; features.py was not modified (out of scope for this task).",
+    "transfer_features_csv": {
+      "frac_dense_presented_eq_1": 1.0,
+      "frac_dense_presented_eq_dense_top1": 1.0,
+      "n_distinct_dense_rank_log": 1,
+      "n_rows": 400
+    }
+  },
+  "gate": "same dev-fitted logistic gate as results_full.json, re-fitted and asserted",
+  "main_run_test_reference": {
+    "band_primary": {
+      "coverage": 0.0527,
+      "over_refusal": 0.755,
+      "rung1_precision": 1.0,
+      "rung3_ci95": {
+        "hi": 1.0,
+        "lo": 1.0,
+        "method": "percentile",
+        "n": 400,
+        "n_boot": 10000,
+        "seed": 12345
+      },
+      "rung3_precision": 1.0
+    },
+    "exploratory_band": {
+      "coverage": 0.2544,
+      "over_refusal": 0.095,
+      "rung1_precision": 0.9975,
+      "rung3_ci95": {
+        "hi": 0.9475,
+        "lo": 0.895,
+        "method": "bca",
+        "n": 400,
+        "n_boot": 10000,
+        "seed": 12345
+      },
+      "rung3_precision": 0.9275
+    }
+  },
+  "score_distribution_transfer": {
+    "frac_below_confirmatory_t_lo": 0.9375,
+    "frac_below_exploratory_t_lo": 0.7125,
+    "max": 0.951147,
+    "median": 0.084269,
+    "median_rung0": 0.178302,
+    "median_rung3": 0.058059,
+    "min": 5.2e-05
+  },
+  "statistics": {
+    "ci": "item-level BCa bootstrap, gate.ci_mean",
+    "n_boot": 10000,
+    "seed": 12345
+  },
+  "status": "ok",
+  "thresholds": {
+    "confirmatory_band": {
+      "t_hi": 0.947838803928,
+      "t_lo": 0.90722098925
+    },
+    "exploratory_band": {
+      "t_hi": 0.947838803928,
+      "t_lo": 0.297426271744
+    }
+  },
+  "transfer": {
+    "n_items": 400,
+    "n_rung0": 200,
+    "n_rung3": 200,
+    "operating_points": {
+      "confirmatory_band": {
+        "auroc_answerable_vs_rung3": 0.6402,
+        "coverage": 0.06,
+        "gate": "confirmatory_band",
+        "n_items": 400,
+        "n_refused": 376,
+        "operating_point": {
+          "label": "confirmatory (pre-registered)",
+          "source": "results_full.json ['thresholds']['band']",
+          "t_hi": 0.947838803928,
+          "t_lo": 0.90722098925
+        },
+        "over_refusal": 0.895,
+        "per_rung": {
+          "3": {
+            "abstain_precision": 0.985,
+            "auroc_answerable_vs_this_rung": 0.6402,
+            "ci95": {
+              "hi": 0.995,
+              "lo": 0.95,
+              "method": "bca",
+              "n": 200,
+              "n_boot": 10000,
+              "seed": 12345
+            },
+            "n": 200
+          }
+        },
+        "pooled_abstain_precision": 0.985,
+        "refused_fraction": 0.94,
+        "transfer_rung0_over_refusal": 0.895,
+        "transfer_rung3_abstain_precision": 0.985,
+        "transfer_rung3_ci95": {
+          "hi": 0.995,
+          "lo": 0.95,
+          "method": "bca",
+          "n": 200,
+          "n_boot": 10000,
+          "seed": 12345
+        },
+        "transfer_rung3_n": 200
+      },
+      "exploratory_band": {
+        "auroc_answerable_vs_rung3": 0.6402,
+        "coverage": 0.285,
+        "gate": "exploratory_band",
+        "n_items": 400,
+        "n_refused": 286,
+        "operating_point": {
+          "label": "EXPLORATORY (D1.2 constrained band)",
+          "source": "results_full.json ['exploratory']['operating_point']['band']",
+          "t_hi": 0.947838803928,
+          "t_lo": 0.297426271744
+        },
+        "over_refusal": 0.575,
+        "per_rung": {
+          "3": {
+            "abstain_precision": 0.855,
+            "auroc_answerable_vs_this_rung": 0.6402,
+            "ci95": {
+              "hi": 0.895,
+              "lo": 0.795,
+              "method": "bca",
+              "n": 200,
+              "n_boot": 10000,
+              "seed": 12345
+            },
+            "n": 200
+          }
+        },
+        "pooled_abstain_precision": 0.855,
+        "refused_fraction": 0.715,
+        "transfer_rung0_over_refusal": 0.575,
+        "transfer_rung3_abstain_precision": 0.855,
+        "transfer_rung3_ci95": {
+          "hi": 0.895,
+          "lo": 0.795,
+          "method": "bca",
+          "n": 200,
+          "n_boot": 10000,
+          "seed": 12345
+        },
+        "transfer_rung3_n": 200
+      }
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "bm25": "bm25s",
+  "bm25_params": {
+    "b": 0.75,
+    "k1": 1.5,
+    "method": "lucene"
+  },
+  "bm25_stopwords": "en",
+  "ce_model": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+  "csv_sha256": "f7c70b07edae77a3126a39d04addb1753e85717ab83c43b9c2d706141dbe8582",
+  "dense_model": "BAAI/bge-small-en-v1.5",
+  "n_items": 400,
+  "n_per_rung": {
+    "0": 200,
+    "3": 200
+  },
+  "n_presented_not_in_pool": 0,
+  "pool": {
+    "n_duplicate_texts_dropped": 541,
+    "n_paragraphs_before_dedup": 2000,
+    "n_pool_documents": 1459,
+    "n_qids": 200
+  },
+  "pool_definition": "union of every [title,[sentences]] paragraph in the context of the 200 source 2Wiki questions, dedup by exact text; analogue of the split pool in features.py",
+  "presented_chars": {
+    "all_median": 311.5,
+    "rung0_median": 352.0,
+    "rung3_median": 287.0
+  },
+  "source_corpus": "04_experiments/data/raw/2wiki/2wikimultihop_dev.json",
+  "source_items": "04_experiments/data/transfer_items.jsonl",
+  "timings": {
+    "ce_s": 14.01,
+    "encode_presented_s": 32.5,
+    "index_s": 118.58,
+    "model_load_s": 4.14,
+    "scoring_s": 0.28
+  }
+}

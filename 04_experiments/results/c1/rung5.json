@@ -1,0 +1,317 @@
+{
+  "auroc": {
+    "answerable_test_rung0_vs_rung5": 0.9736,
+    "n_answerable": 400,
+    "n_rung5": 400,
+    "reference_answerable_vs_rung1_4": {
+      "1": 0.9995,
+      "2": 0.9764,
+      "3": 0.9836,
+      "4": 0.9681
+    }
+  },
+  "experiment": "c1",
+  "frozen_gate_assertion": {
+    "coef_refit": {
+      "bm25_margin": -0.1597,
+      "bm25_presented": 2.4863,
+      "bm25_rank_log": 0.3868,
+      "bm25_top1": -2.0522,
+      "bm25_top5_mean": -0.1834,
+      "ce_presented": 1.7105,
+      "dense_margin": 0.1901,
+      "dense_presented": 5.9181,
+      "dense_rank_log": 0.044,
+      "dense_top1": 5.9181,
+      "lex_overlap": 0.0896,
+      "top1_agreement": 0.569
+    },
+    "intercept_refit": -6.2862,
+    "max_absdiff": 0.0,
+    "n_dev_ids": 1873,
+    "n_features": 12,
+    "passed": true,
+    "tolerance": 0.001
+  },
+  "items": {
+    "features_rung5_sha256": "5dab233176e8e2e745095859e877e0e93d1a0a866a6514ec93eeeb787caa2a33",
+    "n_answerable_test": 400,
+    "n_rung5_dev": 400,
+    "n_rung5_test": 400,
+    "rung5_sha256": "48d5bc9edee13701084e94c417d279b1c197d396214e7d512e547014f0c073c1"
+  },
+  "label": "EXPLORATORY (D2)",
+  "matching_diagnostic": {
+    "dev": {
+      "contrast_n": 400,
+      "contrast_rung1_random_negative_mean_overlap_absdiff": 0.4328,
+      "max_overlap_absdiff": 0.6,
+      "mean_overlap_absdiff": 0.1138,
+      "mean_overlap_chosen": 0.5538,
+      "mean_overlap_target": 0.6676,
+      "median_overlap_absdiff": 0.0909
+    },
+    "test": {
+      "contrast_n": 400,
+      "contrast_rung1_random_negative_mean_overlap_absdiff": 0.4208,
+      "max_overlap_absdiff": 0.5,
+      "mean_overlap_absdiff": 0.1029,
+      "mean_overlap_chosen": 0.5628,
+      "mean_overlap_target": 0.6644,
+      "median_overlap_absdiff": 0.0909
+    }
+  },
+  "note": "Rung 5 = overlap-matched negatives. Exploratory: not part of H1, cannot rescue H1, never described as confirmatory. The gate and both thresholds are frozen from results_full.json and were not refitted for this rung.",
+  "preregistration_section": "\u00a710 D2",
+  "reference_test_rungs_1_4": {
+    "1": {
+      "confirmatory_band": {
+        "abstain_precision": 1.0,
+        "auroc_answerable_vs_this_rung": 0.9995,
+        "ci95": {
+          "hi": 1.0,
+          "lo": 1.0,
+          "method": "percentile",
+          "n": 400,
+          "n_boot": 10000,
+          "seed": 12345
+        },
+        "n": 400
+      },
+      "exploratory_band": {
+        "abstain_precision": 0.9975,
+        "auroc_answerable_vs_this_rung": 0.9995,
+        "ci95": {
+          "hi": 1.0,
+          "lo": 0.985,
+          "method": "bca",
+          "n": 400,
+          "n_boot": 10000,
+          "seed": 12345
+        },
+        "n": 400
+      }
+    },
+    "2": {
+      "confirmatory_band": {
+        "abstain_precision": 0.9964,
+        "auroc_answerable_vs_this_rung": 0.9764,
+        "ci95": {
+          "hi": 1.0,
+          "lo": 0.9714,
+          "method": "bca",
+          "n": 280,
+          "n_boot": 10000,
+          "seed": 12345
+        },
+        "n": 280
+      },
+      "exploratory_band": {
+        "abstain_precision": 0.9107,
+        "auroc_answerable_vs_this_rung": 0.9764,
+        "ci95": {
+          "hi": 0.9357,
+          "lo": 0.8679,
+          "method": "bca",
+          "n": 280,
+          "n_boot": 10000,
+          "seed": 12345
+        },
+        "n": 280
+      }
+    },
+    "3": {
+      "confirmatory_band": {
+        "abstain_precision": 1.0,
+        "auroc_answerable_vs_this_rung": 0.9836,
+        "ci95": {
+          "hi": 1.0,
+          "lo": 1.0,
+          "method": "percentile",
+          "n": 400,
+          "n_boot": 10000,
+          "seed": 12345
+        },
+        "n": 400
+      },
+      "exploratory_band": {
+        "abstain_precision": 0.9275,
+        "auroc_answerable_vs_this_rung": 0.9836,
+        "ci95": {
+          "hi": 0.9475,
+          "lo": 0.895,
+          "method": "bca",
+          "n": 400,
+          "n_boot": 10000,
+          "seed": 12345
+        },
+        "n": 400
+      }
+    },
+    "4": {
+      "confirmatory_band": {
+        "abstain_precision": 1.0,
+        "auroc_answerable_vs_this_rung": 0.9681,
+        "ci95": {
+          "hi": 1.0,
+          "lo": 1.0,
+          "method": "percentile",
+          "n": 399,
+          "n_boot": 10000,
+          "seed": 12345
+        },
+        "n": 399
+      },
+      "exploratory_band": {
+        "abstain_precision": 0.8471,
+        "auroc_answerable_vs_this_rung": 0.9681,
+        "ci95": {
+          "hi": 0.8772,
+          "lo": 0.8045,
+          "method": "bca",
+          "n": 399,
+          "n_boot": 10000,
+          "seed": 12345
+        },
+        "n": 399
+      }
+    }
+  },
+  "rung5_dev_reference": {
+    "confirmatory_band": {
+      "abstain_precision": 1.0,
+      "ci95": {
+        "hi": 1.0,
+        "lo": 1.0,
+        "method": "percentile",
+        "n": 400,
+        "n_boot": 10000,
+        "seed": 12345
+      },
+      "gate": "band_primary",
+      "mean_score": 0.0675,
+      "median_score": 0.0143,
+      "n": 400
+    },
+    "exploratory_band": {
+      "abstain_precision": 0.9325,
+      "ci95": {
+        "hi": 0.9525,
+        "lo": 0.9025,
+        "method": "bca",
+        "n": 400,
+        "n_boot": 10000,
+        "seed": 12345
+      },
+      "gate": "exploratory_band",
+      "mean_score": 0.0675,
+      "median_score": 0.0143,
+      "n": 400
+    }
+  },
+  "rung5_test": {
+    "confirmatory_band": {
+      "abstain_precision": 1.0,
+      "ci95": {
+        "hi": 1.0,
+        "lo": 1.0,
+        "method": "percentile",
+        "n": 400,
+        "n_boot": 10000,
+        "seed": 12345
+      },
+      "gate": "band_primary",
+      "mean_score": 0.1016,
+      "median_score": 0.0245,
+      "n": 400
+    },
+    "exploratory_band": {
+      "abstain_precision": 0.8925,
+      "ci95": {
+        "hi": 0.9175,
+        "lo": 0.8575,
+        "method": "bca",
+        "n": 400,
+        "n_boot": 10000,
+        "seed": 12345
+      },
+      "gate": "exploratory_band",
+      "mean_score": 0.1016,
+      "median_score": 0.0245,
+      "n": 400
+    }
+  },
+  "separability_audit": {
+    "cv": {
+      "folds": 5,
+      "seed": 13
+    },
+    "gate_auroc": 0.75,
+    "reference_rungs_1_4": {
+      "1": {
+        "dev_auroc_primary_6": 0.5063,
+        "dev_auroc_with_lex_overlap": 0.9773,
+        "test_auroc_primary_6": 0.5199
+      },
+      "2": {
+        "dev_auroc_primary_6": 0.5392,
+        "dev_auroc_with_lex_overlap": 0.8886,
+        "test_auroc_primary_6": 0.5867
+      },
+      "3": {
+        "dev_auroc_primary_6": 0.4881,
+        "dev_auroc_with_lex_overlap": 0.9232,
+        "test_auroc_primary_6": 0.4895
+      },
+      "4": {
+        "dev_auroc_primary_6": 0.4151,
+        "dev_auroc_with_lex_overlap": 0.4082,
+        "test_auroc_primary_6": 0.4259
+      }
+    },
+    "rung5": {
+      "dev": {
+        "auroc_primary_6": 0.7208,
+        "auroc_with_lex_overlap": 0.7936,
+        "length_chars_neg_median": 995.5,
+        "length_chars_pos_median": 723.0,
+        "n_answerable": 400,
+        "n_negatives": 400,
+        "passes_primary_6": true
+      },
+      "test": {
+        "auroc_primary_6": 0.6651,
+        "auroc_with_lex_overlap": 0.7537,
+        "length_chars_neg_median": 902.0,
+        "length_chars_pos_median": 711.0,
+        "n_answerable": 400,
+        "n_negatives": 400,
+        "passes_primary_6": true
+      }
+    }
+  },
+  "thresholds": {
+    "confirmatory_band": {
+      "dev_precision": 0.8369,
+      "dev_recall": 1.0,
+      "source": "results_full.json['thresholds']['band']",
+      "t_hi": 0.947838803928,
+      "t_lo": 0.90722098925
+    },
+    "exploratory_band": {
+      "dev_over_refusal": 0.1,
+      "dev_precision": 0.9719,
+      "dev_recall": 0.9389,
+      "source": "results_full.json['exploratory']['operating_point']['band']",
+      "t_hi": 0.947838803928,
+      "t_lo": 0.297426271744
+    },
+    "refitted_here": false
+  },
+  "timings_s": {
+    "audit_s": 0.63,
+    "gate_refit_s": 1.97,
+    "score_rung5_s": 0.0,
+    "total_s": 2.79
+  }
+}

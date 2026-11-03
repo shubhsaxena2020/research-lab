@@ -1,0 +1,760 @@
+                                         Dense Passage Retrieval for Open-Domain Question Answering
+
+                                                  Vladimir Karpukhin∗, Barlas Og˘uz,∗ Sewon Min†, Patrick Lewis,
+                                                        Ledell Wu, Sergey Edunov, Danqi Chen‡, Wen-tau Yih
+
+                                               Facebook AI †University of Washington ‡Princeton University
+                                        {vladk, barlaso, plewis, ledell, edunov, scottyih}@fb.com
+
+                                                                      sewon@cs.washington.edu
+                                                                      danqic@cs.princeton.edu
+
+arXiv:2004.04906v3 [cs.CL] 30 Sep 2020                        Abstract                                    Retrieval in open-domain QA is usually imple-
+                                                                                                       mented using TF-IDF or BM25 (Robertson and
+                                             Open-domain question answering relies on ef-              Zaragoza, 2009), which matches keywords efﬁ-
+                                             ﬁcient passage retrieval to select candidate              ciently with an inverted index and can be seen
+                                             contexts, where traditional sparse vector space           as representing the question and context in high-
+                                             models, such as TF-IDF or BM25, are the de                dimensional, sparse vectors (with weighting). Con-
+                                             facto method. In this work, we show that                  versely, the dense, latent semantic encoding is com-
+                                             retrieval can be practically implemented us-              plementary to sparse representations by design. For
+                                             ing dense representations alone, where em-                example, synonyms or paraphrases that consist of
+                                             beddings are learned from a small number                  completely different tokens may still be mapped to
+                                             of questions and passages by a simple dual-               vectors close to each other. Consider the question
+                                             encoder framework. When evaluated on a                   “Who is the bad guy in lord of the rings?”, which can
+                                             wide range of open-domain QA datasets, our                be answered from the context “Sala Baker is best
+                                             dense retriever outperforms a strong Lucene-              known for portraying the villain Sauron in the Lord
+                                             BM25 system greatly by 9%-19% absolute in                 of the Rings trilogy.” A term-based system would
+                                             terms of top-20 passage retrieval accuracy, and           have difﬁculty retrieving such a context, while
+                                             helps our end-to-end QA system establish new              a dense retrieval system would be able to better
+                                             state-of-the-art on multiple open-domain QA               match “bad guy” with “villain” and fetch the cor-
+                                             benchmarks.1                                              rect context. Dense encodings are also learnable
+                                                                                                       by adjusting the embedding functions, which pro-
+                                        1 Introduction                                                 vides additional ﬂexibility to have a task-speciﬁc
+                                                                                                       representation. With special in-memory data struc-
+                                        Open-domain question answering (QA) (Voorhees,                 tures and indexing schemes, retrieval can be done
+                                        1999) is a task that answers factoid questions us-             efﬁciently using maximum inner product search
+                                        ing a large collection of documents. While early               (MIPS) algorithms (e.g., Shrivastava and Li (2014);
+                                        QA systems are often complicated and consist of                Guo et al. (2016)).
+                                        multiple components (Ferrucci (2012); Moldovan
+                                        et al. (2003), inter alia), the advances of reading               However, it is generally believed that learn-
+                                        comprehension models suggest a much simpliﬁed                  ing a good dense vector representation needs a
+                                        two-stage framework: (1) a context retriever ﬁrst              large number of labeled pairs of question and con-
+                                        selects a small subset of passages where some                  texts. Dense retrieval methods have thus never
+                                        of them contain the answer to the question, and                be shown to outperform TF-IDF/BM25 for open-
+                                        then (2) a machine reader can thoroughly exam-                 domain QA before ORQA (Lee et al., 2019), which
+                                        ine the retrieved contexts and identify the correct            proposes a sophisticated inverse cloze task (ICT)
+                                        answer (Chen et al., 2017). Although reducing                  objective, predicting the blocks that contain the
+                                        open-domain QA to machine reading is a very rea-               masked sentence, for additional pretraining. The
+                                        sonable strategy, a huge performance degradation               question encoder and the reader model are then ﬁne-
+                                        is often observed in practice2, indicating the needs           tuned using pairs of questions and answers jointly.
+                                        of improving retrieval.                                        Although ORQA successfully demonstrates that
+                                                                                                       dense retrieval can outperform BM25, setting new
+                                             ∗Equal contribution                                       state-of-the-art results on multiple open-domain
+                                            1The code and trained models have been released at
+                                        https://github.com/facebookresearch/DPR.
+                                            2For instance, the exact match score on SQuAD v1.1 drops
+                                        from above 80% to less than 40% (Yang et al., 2019a).
+QA datasets, it also suffers from two weaknesses.      the extractive QA setting, in which the answer is
+First, ICT pretraining is computationally intensive    restricted to a span appearing in one or more pas-
+and it is not completely clear that regular sentences  sages in the corpus. Assume that our collection
+are good surrogates of questions in the objective      contains D documents, d1, d2, · · · , dD. We ﬁrst
+function. Second, because the context encoder is       split each of the documents into text passages of
+not ﬁne-tuned using pairs of questions and answers,    equal lengths as the basic retrieval units3 and get M
+the corresponding representations could be subop-      total passages in our corpus C = {p1, p2, . . . , pM },
+timal.                                                 where each passage pi can be viewed as a sequence
+                                                       of tokens w1(i), w2(i), · · · , w|(pi)i|. Given a question q,
+   In this paper, we address the question: can we      the task is to ﬁnd a span ws(i), ws(i+)1, · · · , we(i) from
+train a better dense embedding model using only        one of the passages pi that can answer the question.
+pairs of questions and passages (or answers), with-    Notice that to cover a wide variety of domains, the
+out additional pretraining? By leveraging the now      corpus size can easily range from millions of docu-
+standard BERT pretrained model (Devlin et al.,         ments (e.g., Wikipedia) to billions (e.g., the Web).
+2019) and a dual-encoder architecture (Bromley         As a result, any open-domain QA system needs to
+et al., 1994), we focus on developing the right        include an efﬁcient retriever component that can se-
+training scheme using a relatively small number        lect a small set of relevant texts, before applying the
+of question and passage pairs. Through a series        reader to extract the answer (Chen et al., 2017).4
+of careful ablation studies, our ﬁnal solution is      Formally speaking, a retriever R : (q, C) → CF
+surprisingly simple: the embedding is optimized        is a function that takes as input a question q and a
+for maximizing inner products of the question and      corpus C and returns a much smaller ﬁlter set of
+relevant passage vectors, with an objective compar-    texts CF ⊂ C, where |CF | = k |C|. For a ﬁxed
+ing all pairs of questions and passages in a batch.    k, a retriever can be evaluated in isolation on top-k
+Our Dense Passage Retriever (DPR) is exception-        retrieval accuracy, which is the fraction of ques-
+ally strong. It not only outperforms BM25 by a         tions for which CF contains a span that answers the
+large margin (65.2% vs. 42.9% in Top-5 accuracy),      question.
+but also results in a substantial improvement on
+the end-to-end QA accuracy compared to ORQA            3 Dense Passage Retriever (DPR)
+(41.5% vs. 33.3%) in the open Natural Questions
+setting (Lee et al., 2019; Kwiatkowski et al., 2019).  We focus our research in this work on improv-
+                                                       ing the retrieval component in open-domain QA.
+   Our contributions are twofold. First, we demon-     Given a collection of M text passages, the goal of
+strate that with the proper training setup, sim-       our dense passage retriever (DPR) is to index all
+ply ﬁne-tuning the question and passage encoders       the passages in a low-dimensional and continuous
+on existing question-passage pairs is sufﬁcient to     space, such that it can retrieve efﬁciently the top
+greatly outperform BM25. Our empirical results         k passages relevant to the input question for the
+also suggest that additional pretraining may not be    reader at run-time. Note that M can be very large
+needed. Second, we verify that, in the context of      (e.g., 21 million passages in our experiments, de-
+open-domain question answering, a higher retrieval     scribed in Section 4.1) and k is usually small, such
+precision indeed translates to a higher end-to-end     as 20–100.
+QA accuracy. By applying a modern reader model
+to the top retrieved passages, we achieve compara-     3.1 Overview
+ble or better results on multiple QA datasets in the
+open-retrieval setting, compared to several, much      Our dense passage retriever (DPR) uses a dense
+complicated systems.                                   encoder EP (·) which maps any text passage to a d-
+                                                       dimensional real-valued vectors and builds an index
+2 Background                                           for all the M passages that we will use for retrieval.
+
+The problem of open-domain QA studied in this              3The ideal size and boundary of a text passage are func-
+paper can be described as follows. Given a factoid     tions of both the retriever and reader. We also experimented
+question, such as “Who ﬁrst voiced Meg on Family       with natural paragraphs in our preliminary trials and found that
+Guy?” or “Where was the 8th Dalai Lama born?”, a       using ﬁxed-length passages performs better in both retrieval
+system is required to answer it using a large corpus   and ﬁnal QA accuracy, as observed by Wang et al. (2019).
+of diversiﬁed topics. More speciﬁcally, we assume
+                                                           4Exceptions include (Seo et al., 2019) and (Roberts et al.,
+                                                       2020), which retrieves and generates the answers, respectively.
+At run-time, DPR applies a different encoder EQ(·)    larity) than the irrelevant ones, by learning a better
+that maps the input question to a d-dimensional
+vector, and retrieves k passages of which vectors     embedding function.
+are the closest to the question vector. We deﬁne         Let D = { qi, p+i , pi−,1, · · · , pi−,n }im=1 be the
+the similarity between the question and the passage
+using the dot product of their vectors:               training data that consists of m instances. Each
+
+sim(q, p) = EQ(q) EP (p).  (1)                        instance contains one question qi and one relevant
+                                                      (positive) passage pi+, along with n irrelevant (neg-
+Although more expressive model forms for measur-      ative) passages pi−,j. We optimize the loss function
+ing the similarity between a question and a passage   as the negative log likelihood of the positive pas-
+do exist, such as networks consisting of multiple
+layers of cross attentions, the similarity function   sage:
+needs to be decomposable so that the represen-
+tations of the collection of passages can be pre-     L(qi, pi+, p−i,1, · · · , p−i,n)                    (2)
+computed. Most decomposable similarity functions
+are some transformations of Euclidean distance        esim(qi,pi+)
+(L2). For instance, cosine is equivalent to inner     = − log                                             .
+product for unit vectors and the Mahalanobis dis-                 esim(qi,p+i ) +  n    esim(qi,pi−,j  )
+tance is equivalent to L2 distance in a transformed                                j=1
+space. Inner product search has been widely used
+and studied, as well as its connection to cosine      Positive and negative passages For retrieval
+similarity and L2 distance (Mussmann and Ermon,       problems, it is often the case that positive examples
+2016; Ram and Gray, 2012). As our ablation study      are available explicitly, while negative examples
+ﬁnds other similarity functions perform compara-      need to be selected from an extremely large pool.
+bly (Section 5.2; Appendix B), we thus choose         For instance, passages relevant to a question may
+the simpler inner product function and improve the    be given in a QA dataset, or can be found using the
+dense passage retriever by learning better encoders.  answer. All other passages in the collection, while
+                                                      not speciﬁed explicitly, can be viewed as irrelevant
+Encoders Although in principle the question and       by default. In practice, how to select negative ex-
+passage encoders can be implemented by any neu-       amples is often overlooked but could be decisive
+ral networks, in this work we use two independent     for learning a high-quality encoder. We consider
+BERT (Devlin et al., 2019) networks (base, un-        three different types of negatives: (1) Random: any
+cased) and take the representation at the [CLS]       random passage from the corpus; (2) BM25: top
+token as the output, so d = 768.                      passages returned by BM25 which don’t contain
+                                                      the answer but match most question tokens; (3)
+Inference During inference time, we apply the         Gold: positive passages paired with other questions
+passage encoder EP to all the passages and index      which appear in the training set. We will discuss the
+them using FAISS (Johnson et al., 2017) ofﬂine.       impact of different types of negative passages and
+FAISS is an extremely efﬁcient, open-source li-       training schemes in Section 5.2. Our best model
+brary for similarity search and clustering of dense   uses gold passages from the same mini-batch and
+vectors, which can easily be applied to billions of   one BM25 negative passage. In particular, re-using
+vectors. Given a question q at run-time, we derive    gold passages from the same batch as negatives
+its embedding vq = EQ(q) and retrieve the top k       can make the computation efﬁcient while achiev-
+passages with embeddings closest to vq.               ing great performance. We discuss this approach
+                                                      below.
+3.2 Training
+                                                      In-batch negatives Assume that we have B
+Training the encoders so that the dot-product sim-    questions in a mini-batch and each one is asso-
+ilarity (Eq. (1)) becomes a good ranking function     ciated with a relevant passage. Let Q and P be the
+for retrieval is essentially a metric learning prob-  (B ×d) matrix of question and passage embeddings
+lem (Kulis, 2013). The goal is to create a vector     in a batch of size B. S = QPT is a (B × B) ma-
+space such that relevant pairs of questions and pas-  trix of similarity scores, where each row of which
+sages will have smaller distance (i.e., higher simi-  corresponds to a question, paired with B passages.
+                                                      In this way, we reuse computation and effectively
+                                                      train on B2 (qi, pj) question/passage pairs in each
+                                                      batch. Any (qi, pj) pair is a positive example when
+                                                      i = j, and negative otherwise. This creates B train-
+                                                      ing instances in each batch, where there are B − 1
+negative passages for each question.                           Dataset            Train            Dev      Test
+   The trick of in-batch negatives has been used in
+                                                               Natural Questions  79,168  58,880  8,757   3,610
+the full batch setting (Yih et al., 2011) and more             TriviaQA           78,785  60,413  8,837  11,313
+recently for mini-batch (Henderson et al., 2017;               WebQuestions
+Gillick et al., 2019). It has been shown to be an              CuratedTREC         3,417   2,474    361   2,032
+effective strategy for learning a dual-encoder model           SQuAD               1,353   1,125    133     694
+that boosts the number of training examples.                                      78,713  70,096  8,886
+                                                                                                         10,570
+4 Experimental Setup
+                                                               Table 1: Number of questions in each QA dataset. The
+In this section, we describe the data we used for              two columns of Train denote the original training ex-
+experiments and the basic setup.                               amples in the dataset and the actual questions used for
+                                                               training DPR after ﬁltering. See text for more details.
+4.1 Wikipedia Data Pre-processing
+                                                               as well as various Web sources and is intended for
+Following (Lee et al., 2019), we use the English               open-domain QA from unstructured corpora.
+Wikipedia dump from Dec. 20, 2018 as the source                SQuAD v1.1 (Rajpurkar et al., 2016) is a popu-
+documents for answering questions. We ﬁrst apply               lar benchmark dataset for reading comprehension.
+the pre-processing code released in DrQA (Chen                 Annotators were presented with a Wikipedia para-
+et al., 2017) to extract the clean, text-portion of            graph, and asked to write questions that could be
+articles from the Wikipedia dump. This step re-                answered from the given text. Although SQuAD
+moves semi-structured data, such as tables, info-              has been used previously for open-domain QA re-
+boxes, lists, as well as the disambiguation pages.             search, it is not ideal because many questions lack
+We then split each article into multiple, disjoint text        context in absence of the provided paragraph. We
+blocks of 100 words as passages, serving as our                still include it in our experiments for providing
+basic retrieval units, following (Wang et al., 2019),          a fair comparison to previous work and we will
+which results in 21,015,324 passages in the end.5              discuss more in Section 5.1.
+Each passage is also prepended with the title of the
+Wikipedia article where the passage is from, along             Selection of positive passages Because only
+with an [SEP] token.                                           pairs of questions and answers are provided in
+                                                               TREC, WebQuestions and TriviaQA6, we use the
+4.2 Question Answering Datasets                                highest-ranked passage from BM25 that contains
+                                                               the answer as the positive passage. If none of the
+We use the same ﬁve QA datasets and train-                     top 100 retrieved passages has the answer, the ques-
+ing/dev/testing splitting method as in previous                tion will be discarded. For SQuAD and Natural
+work (Lee et al., 2019). Below we brieﬂy describe              Questions, since the original passages have been
+each dataset and refer readers to their paper for the          split and processed differently than our pool of
+details of data preparation.                                   candidate passages, we match and replace each
+Natural Questions (NQ) (Kwiatkowski et al.,                    gold passage with the corresponding passage in the
+2019) was designed for end-to-end question an-                 candidate pool.7 We discard the questions when
+swering. The questions were mined from real                    the matching is failed due to different Wikipedia
+Google search queries and the answers were spans               versions or pre-processing. Table 1 shows the num-
+in Wikipedia articles identiﬁed by annotators.                 ber of questions in training/dev/test sets for all the
+TriviaQA (Joshi et al., 2017) contains a set of trivia         datasets and the actual questions used for training
+questions with answers that were originally scraped            the retriever.
+from the Web.
+WebQuestions (WQ) (Berant et al., 2013) consists               5 Experiments: Passage Retrieval
+of questions selected using Google Suggest API,
+where the answers are entities in Freebase.                    In this section, we evaluate the retrieval perfor-
+CuratedTREC (TREC) (Baudisˇ and Sˇ edivy`,                     mance of our Dense Passage Retriever (DPR),
+2015) sources questions from TREC QA tracks                    along with analysis on how its output differs from
+
+    5However, Wang et al. (2019) also propose splitting docu-      6We use the unﬁltered TriviaQA version and discard the
+ments into overlapping passages, which we do not ﬁnd advan-    noisy evidence documents mined from Bing.
+tageous compared to the non-overlapping version.
+                                                                   7The improvement of using gold contexts over passages
+                                                               that contain answers is small. See Section 5.2 and Ap-
+                                                               pendix A.
+Training Retriever              Top-20                                                       Top-100
+
+                    NQ TriviaQA WQ TREC SQuAD NQ TriviaQA WQ TREC SQuAD
+
+None    BM25        59.1 66.9 55.0 70.9 68.8 73.7 76.7 71.1 84.1 80.0
+
+Single  DPR         78.4  79.4  73.2 79.8                      63.2 85.4               85.0  81.4 89.1             77.2
+                          79.8  71.0 85.2                      71.5 83.8               84.5  80.5 92.7             81.3
+        BM25 + DPR 76.6
+
+Multi   DPR         79.4 78.8 75.0 89.1 51.6 86.0 84.7 82.9 93.9 67.6
+
+        BM25 + DPR 78.0 79.9 74.7 88.5 66.2 83.9 84.4 82.3 94.1 78.6
+
+Table 2: Top-20 & Top-100 retrieval accuracy on test sets, measured as the percentage of top 20/100 retrieved
+passages that contain the answer. Single and Multi denote that our Dense Passage Retriever (DPR) was trained
+using individial or combined training datasets (all the datasets excluding SQuAD). See text for more details.
+
+traditional retrieval methods, the effects of different                            90
+training schemes and the run-time efﬁciency.
+                                                               Top-k accuracy (%)  80
+   The DPR model used in our main experiments
+is trained using the in-batch negative setting (Sec-                               70
+tion 3.2) with a batch size of 128 and one additional
+BM25 negative passage per question. We trained                                     60                 BM25
+the question and passage encoders for up to 40                                                        # Train: 1k
+epochs for large datasets (NQ, TriviaQA, SQuAD)                                                       # Train: 10k
+and 100 epochs for small datasets (TREC, WQ),                                      50                 # Train: 20k
+with a learning rate of 10−5 using Adam, linear                                                       # Train: 40k
+scheduling with warm-up and dropout rate 0.1.                                                         # Train: all (59k)
+                                                                                   40
+   While it is good to have the ﬂexibility to adapt                                    20k: # of4r0etrieved60passag8e0s 100
+the retriever to each dataset, it would also be de-
+sirable to obtain a single retriever that works well           Figure 1: Retriever top-k accuracy with different num-
+across the board. To this end, we train a multi-               bers of training examples used in our dense passage re-
+dataset encoder by combining training data from                triever vs BM25. The results are measured on the de-
+all datasets excluding SQuAD.8 In addition to DPR,             velopment set of Natural Questions. Our DPR trained
+we also present the results of BM25, the traditional           using 1,000 examples already outperforms BM25.
+retrieval method9 and BM25+DPR, using a linear
+combination of their scores as the new ranking                 tiple datasets, TREC, the smallest dataset of the
+function. Speciﬁcally, we obtain two initial sets              ﬁve, beneﬁts greatly from more training examples.
+of top-2000 passages based on BM25 and DPR,                    In contrast, Natural Questions and WebQuestions
+respectively, and rerank the union of them using               improve modestly and TriviaQA degrades slightly.
+BM25(q,p) + λ · sim(q, p) as the ranking function.             Results can be improved further in some cases by
+We used λ = 1.1 based on the retrieval accuracy in             combining DPR with BM25 in both single- and
+the development set.                                           multi-dataset settings.
+
+5.1 Main Results                                                  We conjecture that the lower performance on
+                                                               SQuAD is due to two reasons. First, the annota-
+Table 2 compares different passage retrieval sys-              tors wrote questions after seeing the passage. As
+tems on ﬁve QA datasets, using the top-k accuracy              a result, there is a high lexical overlap between
+(k ∈ {20, 100}). With the exception of SQuAD,                  passages and questions, which gives BM25 a clear
+DPR performs consistently better than BM25 on                  advantage. Second, the data was collected from
+all datasets. The gap is especially large when k is            only 500+ Wikipedia articles and thus the distribu-
+small (e.g., 78.4% vs. 59.1% for top-20 accuracy               tion of training examples is extremely biased, as
+on Natural Questions). When training with mul-                 argued previously by Lee et al. (2019).
+
+    8SQuAD is limited to a small set of Wikipedia documents    5.2 Ablation Study on Model Training
+and thus introduces unwanted bias. We will discuss this issue
+more in Section 5.1.                                           To understand further how different model training
+                                                               options affect the results, we conduct several addi-
+    9Lucene implementation. BM25 parameters b = 0.4 (doc-      tional experiments and discuss our ﬁndings below.
+ument length normalization) and k1 = 0.9 (term frequency
+scaling) are tuned using development sets.
+Sample efﬁciency We explore how many train-            Type    #N   IB Top-5 Top-20 Top-100
+ing examples are needed to achieve good passage
+retrieval performance. Figure 1 illustrates the top-k  Random  7     47.0 64.3 77.8
+retrieval accuracy with respect to different num-                    50.0 63.3 74.8
+bers of training examples, measured on the devel-      BM25    7     42.6 63.1 78.3
+opment set of Natural Questions. As is shown, a
+dense passage retriever trained using only 1,000 ex-   Gold    7
+amples already outperforms BM25. This suggests
+that with a general pretrained language model, it is   Gold    7     51.1 69.1 80.8
+possible to train a high-quality dense retriever with  Gold
+a small number of question–passage pairs. Adding       Gold    31    52.1 70.8 82.1
+more training examples (from 1k to 59k) further
+improves the retrieval accuracy consistently.                  127   55.8 73.0 83.1
+
+In-batch negative training We test different           G.+BM25(1) 31+32  65.0 77.3    84.4
+training schemes on the development set of Natural
+Questions and summarize the results in Table 3.        G.+BM25(2) 31+64  64.5 76.4    84.0
+The top block is the standard 1-of-N training set-
+ting, where each question in the batch is paired       G.+BM25(1) 127+128  65.8 78.0  84.9
+with a positive passage and its own set of n neg-
+ative passages (Eq. (2)). We ﬁnd that the choice       Table 3: Comparison of different training schemes,
+of negatives — random, BM25 or gold passages           measured as top-k retrieval accuracy on Natural Ques-
+(positive passages from other questions) — does
+not impact the top-k accuracy much in this setting     tions (development set). #N: number of negative
+when k ≥ 20.                                           examples, IB: in-batch training. G.+BM25(1) and
+                                                       G.+BM25(2) denote in-batch training with 1 or 2 ad-
+   The middle bock is the in-batch negative training
+(Section 3.2) setting. We ﬁnd that using a similar     ditional BM25 negatives, which serve as negative pas-
+conﬁguration (7 gold negative passages), in-batch
+negative training improves the results substantially.  sages for all questions in the batch.
+The key difference between the two is whether the
+gold negative passages come from the same batch        Our experiments on Natural Questions show that
+or from the whole training set. Effectively, in-batch  switching to distantly-supervised passages (using
+negative training is an easy and memory-efﬁcient       the highest-ranked BM25 passage that contains the
+way to reuse the negative examples already in the      answer), has only a small impact: 1 point lower
+batch rather than creating new ones. It produces       top-k accuracy for retrieval. Appendix A contains
+more pairs and thus increases the number of train-     more details.
+ing examples, which might contribute to the good
+model performance. As a result, accuracy consis-       Similarity and loss Besides dot product, cosine
+tently improves as the batch size grows.               and Euclidean L2 distance are also commonly used
+                                                       as decomposable similarity functions. We test these
+   Finally, we explore in-batch negative training      alternatives and ﬁnd that L2 performs compara-
+with additional “hard” negative passages that have     ble to dot product, and both of them are superior
+high BM25 scores given the question, but do not        to cosine. Similarly, in addition to negative log-
+contain the answer string (the bottom block). These    likelihood, a popular option for ranking is triplet
+additional passages are used as negative passages      loss, which compares a positive passage and a nega-
+for all questions in the same batch. We ﬁnd that       tive one directly with respect to a question (Burges
+adding a single BM25 negative passage improves         et al., 2005). Our experiments show that using
+the result substantially while adding two does not     triplet loss does not affect the results much. More
+help further.                                          details can be found in Appendix B.
+
+Impact of gold passages We use passages that           Cross-dataset generalization One interesting
+match the gold contexts in the original datasets       question regarding DPR’s discriminative training
+(when available) as positive examples (Section 4.2).   is how much performance degradation it may suf-
+                                                       fer from a non-iid setting. In other words, can
+                                                       it still generalize well when directly applied to
+                                                       a different dataset without additional ﬁne-tuning?
+                                                       To test the cross-dataset generalization, we train
+                                                       DPR on Natural Questions only and test it directly
+                                                       on the smaller WebQuestions and CuratedTREC
+                                                       datasets. We ﬁnd that DPR generalizes well, with
+                                                       3-5 points loss from the best performing ﬁne-tuned
+                                                       model in top-20 retrieval accuracy (69.9/86.3 vs.
+                                                       75.0/89.1 for WebQuestions and TREC, respec-
+                                                       tively), while still greatly outperforming the BM25
+                                                       baseline (55.0/70.9).
+5.3 Qualitative Analysis                                     score is chosen as the ﬁnal answer. The passage
+                                                             selection model serves as a reranker through cross-
+Although DPR performs better than BM25 in gen-               attention between the question and the passage. Al-
+eral, passages retrieved by these two methods dif-           though cross-attention is not feasible for retrieving
+fer qualitatively. Term-matching methods like                relevant passages in a large corpus due to its non-
+BM25 are sensitive to highly selective keywords              decomposable nature, it has more capacity than the
+and phrases, while DPR captures lexical variations           dual-encoder model sim(q, p) as in Eq. (1). Apply-
+or semantic relationships better. See Appendix C             ing it to selecting the passage from a small number
+for examples and more discussion.                            of retrieved candidates has been shown to work
+                                                             well (Wang et al., 2019, 2018; Lin et al., 2018).
+5.4 Run-time Efﬁciency
+                                                                Speciﬁcally, let Pi ∈ RL×h (1 ≤ i ≤ k) be
+The main reason that we require a retrieval compo-           a BERT (base, uncased in our experiments) rep-
+nent for open-domain QA is to reduce the number              resentation for the i-th passage, where L is the
+of candidate passages that the reader needs to con-          maximum length of the passage and h the hidden
+sider, which is crucial for answering user’s ques-           dimension. The probabilities of a token being the
+tions in real-time. We proﬁled the passage retrieval         starting/ending positions of an answer span and a
+speed on a server with Intel Xeon CPU E5-2698 v4             passage being selected are deﬁned as:
+@ 2.20GHz and 512GB memory. With the help of
+FAISS in-memory index for real-valued vectors10,             Pstart,i(s) = softmax Piwstart s, (3)
+DPR can be made incredibly efﬁcient, processing
+995.0 questions per second, returning top 100 pas-           Pend,i(t) = softmax Piwend t,  (4)
+sages per question. In contrast, BM25/Lucene (im-
+plemented in Java, using ﬁle index) processes 23.7           Pselected(i) = softmax Pˆ wselected i, (5)
+questions per second per CPU thread.
+                                                             where Pˆ = [P[1CLS], . . . , Pk[CLS]] ∈ Rh×k and
+   On the other hand, the time required for building         wstart, wend, wselected ∈ Rh are learnable vectors.
+an index for dense vectors is much longer. Com-              We compute a span score of the s-th to t-th words
+puting dense embeddings on 21-million passages               from the i-th passage as Pstart,i(s) × Pend,i(t), and
+is resource intensive, but can be easily parallelized,       a passage selection score of the i-th passage as
+taking roughly 8.8 hours on 8 GPUs. However,                 Pselected(i).
+building the FAISS index on 21-million vectors
+on a single server takes 8.5 hours. In comparison,              During training, we sample one positive and
+building an inverted index using Lucene is much              m˜ − 1 negative passages from the top 100 passages
+cheaper and takes only about 30 minutes in total.            returned by the retrieval system (BM25 or DPR)
+                                                             for each question. m˜ is a hyper-parameter and we
+6 Experiments: Question Answering                            use m˜ = 24 in all the experiments. The training ob-
+                                                             jective is to maximize the marginal log-likelihood
+In this section, we experiment with how different            of all the correct answer spans in the positive pas-
+passage retrievers affect the ﬁnal QA accuracy.              sage (the answer string may appear multiple times
+                                                             in one passage), combined with the log-likelihood
+6.1 End-to-end QA System                                     of the positive passage being selected. We use the
+                                                             batch size of 16 for large (NQ, TriviaQA, SQuAD)
+We implement an end-to-end question answering                and 4 for small (TREC, WQ) datasets, and tune k
+system in which we can plug different retriever              on the development set. For experiments on small
+systems directly. Besides the retriever, our QA sys-         datasets under the Multi setting, in which using
+tem consists of a neural reader that outputs the             other datasets is allowed, we ﬁne-tune the reader
+answer to the question. Given the top k retrieved            trained on Natural Questions to the target dataset.
+passages (up to 100 in our experiments), the reader          All experiments were done on eight 32GB GPUs.
+assigns a passage selection score to each passage.
+In addition, it extracts an answer span from each            6.2 Results
+passage and assigns a span score. The best span
+from the passage with the highest passage selection          Table 4 summarizes our ﬁnal end-to-end QA re-
+                                                             sults, measured by exact match with the reference
+   10FAISS conﬁguration: we used HNSW index type on CPU,     answer after minor normalization as in (Chen et al.,
+neighbors to store per node = 512, construction time search  2017; Lee et al., 2019). From the table, we can
+depth = 200, search depth = 128.
+Training Model                                          NQ TriviaQA WQ TREC SQuAD
+
+Single BM25+BERT (Lee et al., 2019) 26.5 47.1 17.7 21.3 33.2
+
+Single ORQA (Lee et al., 2019)                          33.3 45.0 36.4 30.1 20.2
+
+Single HardEM (Min et al., 2019a)                       28.1 50.9  -  -       -
+
+Single GraphRetriever (Min et al., 2019b) 34.5 56.0 36.4 -                    -
+
+Single PathRetriever (Asai et al., 2020) 32.6                 -    -  -       56.5
+
+Single REALMWiki (Guu et al., 2020)                     39.2  -    40.2 46.8  -
+
+Single REALMNews (Guu et al., 2020) 40.4                      -    40.7 42.9  -
+
+Single  BM25                                            32.6 52.4 29.9 24.9 38.1
+        DPR                                             41.5 56.8 34.6 25.9 29.8
+        BM25+DPR                                        39.0 57.0 35.2 28.0 36.7
+
+Multi   DPR                                             41.5 56.8 42.4 49.4 24.1
+        BM25+DPR                                        38.8 57.9 41.1 50.6 35.8
+
+Table 4: End-to-end QA (Exact Match) Accuracy. The ﬁrst block of results are copied from their cited papers.
+REALMWiki and REALMNews are the same model but pretrained on Wikipedia and CC-News, respectively. Single
+and Multi denote that our Dense Passage Retriever (DPR) is trained using individual or combined training datasets
+(all except SQuAD). For WQ and TREC in the Multi setting, we ﬁne-tune the reader trained on NQ.
+
+see that higher retriever accuracy typically leads to   trained, following Lee et al. (2019). This approach
+better ﬁnal QA results: in all cases except SQuAD,      obtains a score of 39.8 EM, which suggests that our
+answers extracted from the passages retrieved by        strategy of training a strong retriever and reader in
+DPR are more likely to be correct, compared to          isolation can leverage effectively available supervi-
+those from BM25. For large datasets like NQ and         sion, while outperforming a comparable joint train-
+TriviaQA, models trained using multiple datasets        ing approach with a simpler design (Appendix D).
+(Multi) perform comparably to those trained using
+the individual training set (Single). Conversely,          One thing worth noticing is that our reader does
+on smaller datasets like WQ and TREC, the multi-        consider more passages compared to ORQA, al-
+dataset setting has a clear advantage. Overall, our     though it is not completely clear how much more
+DPR-based models outperform the previous state-         time it takes for inference. While DPR processes
+of-the-art results on four out of the ﬁve datasets,     up to 100 passages for each question, the reader
+with 1% to 12% absolute differences in exact match      is able to ﬁt all of them into one batch on a sin-
+accuracy. It is interesting to contrast our results to  gle 32GB GPU, thus the latency remains almost
+those of ORQA (Lee et al., 2019) and also the           identical to the single passage case (around 20ms).
+concurrently developed approach, REALM (Guu             The exact impact on throughput is harder to mea-
+et al., 2020). While both methods include addi-         sure: ORQA uses 2-3x longer passages compared
+tional pretraining tasks and employ an expensive        to DPR (288 word pieces compared to our 100
+end-to-end training regime, DPR manages to out-         tokens) and the computational complexity is super-
+perform them on both NQ and TriviaQA, simply            linear in passage length. We also note that we
+by focusing on learning a strong passage retrieval      found k = 50 to be optimal for NQ, and k = 10
+model using pairs of questions and answers. The         leads to only marginal loss in exact match accu-
+additional pretraining tasks are likely more useful     racy (40.8 vs. 41.5 EM on NQ), which should be
+only when the target training sets are small. Al-       roughly comparable to ORQA’s 5-passage setup.
+though the results of DPR on WQ and TREC in the
+single-dataset setting are less competitive, adding     7 Related Work
+more question–answer pairs helps boost the perfor-
+mance, achieving the new state of the art.              Passage retrieval has been an important compo-
+                                                        nent for open-domain QA (Voorhees, 1999). It
+   To compare our pipeline training approach with       not only effectively reduces the search space for
+joint learning, we run an ablation on Natural Ques-     answer extraction, but also identiﬁes the support
+tions where the retriever and reader are jointly        context for users to verify the answer. Strong sparse
+                                                        vector space models like TF-IDF or BM25 have
+been used as the standard method applied broadly        effective solution that shows stronger empirical per-
+to various QA tasks (e.g., Chen et al., 2017; Yang      formance, without relying on additional pretraining
+et al., 2019a,b; Nie et al., 2019; Min et al., 2019a;   or complex joint training schemes.
+Wolfson et al., 2020). Augmenting text-based re-
+trieval with external structured information, such         DPR has also been used as an important mod-
+as knowledge graph and Wikipedia hyperlinks, has        ule in very recent work. For instance, extending
+also been explored recently (Min et al., 2019b; Asai    the idea of leveraging hard negatives, Xiong et al.
+et al., 2020).                                          (2020a) use the retrieval model trained in the pre-
+                                                        vious iteration to discover new negatives and con-
+   The use of dense vector representations for re-      struct a different set of examples in each training
+trieval has a long history since Latent Semantic        iteration. Starting from our trained DPR model,
+Analysis (Deerwester et al., 1990). Using labeled       they show that the retrieval performance can be
+pairs of queries and documents, discriminatively        further improved. Recent work (Izacard and Grave,
+trained dense encoders have become popular re-          2020; Lewis et al., 2020b) have also shown that
+cently (Yih et al., 2011; Huang et al., 2013; Gillick   DPR can be combined with generation models
+et al., 2019), with applications to cross-lingual       such as BART (Lewis et al., 2020a) and T5 (Raf-
+document retrieval, ad relevance prediction, Web        fel et al., 2019), achieving good performance on
+search and entity retrieval. Such approaches com-       open-domain QA and other knowledge-intensive
+plement the sparse vector methods as they can po-       tasks.
+tentially give high similarity scores to semantically
+relevant text pairs, even without exact token match-    8 Conclusion
+ing. The dense representation alone, however, is
+typically inferior to the sparse one. While not the     In this work, we demonstrated that dense retrieval
+focus of this work, dense representations from pre-     can outperform and potentially replace the tradi-
+trained models, along with cross-attention mecha-       tional sparse retrieval component in open-domain
+nisms, have also been shown effective in passage        question answering. While a simple dual-encoder
+or dialogue re-ranking tasks (Nogueira and Cho,         approach can be made to work surprisingly well,
+2019; Humeau et al., 2020). Finally, a concurrent       we showed that there are some critical ingredients
+work (Khattab and Zaharia, 2020) demonstrates           to training a dense retriever successfully. Moreover,
+the feasibility of full dense retrieval in IR tasks.    our empirical analysis and ablation studies indicate
+Instead of employing the dual-encoder framework,        that more complex model frameworks or similarity
+they introduced a late-interaction operator on top      functions do not necessarily provide additional val-
+of the BERT encoders.                                   ues. As a result of improved retrieval performance,
+                                                        we obtained new state-of-the-art results on multiple
+   Dense retrieval for open-domain QA has been          open-domain question answering benchmarks.
+explored by Das et al. (2019), who propose to re-
+trieve relevant passages iteratively using reformu-     Acknowledgments
+lated question vectors. As an alternative approach
+that skips passage retrieval, Seo et al. (2019) pro-    We thank the anonymous reviewers for their helpful
+pose to encode candidate answer phrases as vectors      comments and suggestions.
+and directly retrieve the answers to the input ques-
+tions efﬁciently. Using additional pretraining with     References
+the objective that matches surrogates of questions
+and relevant passages, Lee et al. (2019) jointly train  Akari Asai, Kazuma Hashimoto, Hannaneh Hajishirzi,
+the question encoder and reader. Their approach            Richard Socher, and Caiming Xiong. 2020. Learn-
+outperforms the BM25 plus reader paradigm on               ing to retrieve reasoning paths over Wikipedia graph
+multiple open-domain QA datasets in QA accuracy,           for question answering. In International Conference
+and is further extended by REALM (Guu et al.,              on Learning Representations (ICLR).
+2020), which includes tuning the passage encoder
+asynchronously by re-indexing the passages dur-         Petr Baudisˇ and Jan Sˇ edivy`. 2015. Modeling of the
+ing training. The pretraining objective has also           question answering task in the yodaqa system. In In-
+recently been improved by Xiong et al. (2020b).            ternational Conference of the Cross-Language Eval-
+In contrast, our model provides a simple and yet           uation Forum for European Languages, pages 222–
+                                                           228. Springer.
+
+                                                        Jonathan Berant, Andrew Chou, Roy Frostig, and Percy
+                                                           Liang. 2013. Semantic parsing on Freebase from
+   question-answer pairs. In Empirical Methods in Nat-        clickthrough data. In ACM International Confer-
+   ural Language Processing (EMNLP).                          ence on Information and Knowledge Management
+                                                              (CIKM), pages 2333–2338.
+Jane Bromley, Isabelle Guyon, Yann LeCun, Eduard
+   Sa¨ckinger, and Roopak Shah. 1994. Signature veriﬁ-     Samuel Humeau, Kurt Shuster, Marie-Anne Lachaux,
+   cation using a “Siamese” time delay neural network.        and Jason Weston. 2020. Poly-encoders: Architec-
+   In NIPS, pages 737–744.                                    tures and pre-training strategies for fast and accurate
+                                                              multi-sentence scoring. In International Conference
+Chris Burges, Tal Shaked, Erin Renshaw, Ari Lazier,           on Learning Representations (ICLR).
+   Matt Deeds, Nicole Hamilton, and Greg Hullender.
+   2005. Learning to rank using gradient descent. In       Gautier Izacard and Edouard Grave. 2020. Leveraging
+   Proceedings of the 22nd international conference on        passage retrieval with generative models for open do-
+   Machine learning, pages 89–96.                             main question answering. ArXiv, abs/2007.01282.
+
+Danqi Chen, Adam Fisch, Jason Weston, and Antoine          Jeff Johnson, Matthijs Douze, and Herve´ Je´gou. 2017.
+   Bordes. 2017. Reading Wikipedia to answer open-            Billion-scale similarity search with GPUs. ArXiv,
+   domain questions. In Association for Computa-              abs/1702.08734.
+   tional Linguistics (ACL), pages 1870–1879.
+                                                           Mandar Joshi, Eunsol Choi, Daniel Weld, and Luke
+Rajarshi Das, Shehzaad Dhuliawala, Manzil Zaheer,             Zettlemoyer. 2017. TriviaQA: A large scale dis-
+   and Andrew McCallum. 2019. Multi-step retriever-           tantly supervised challenge dataset for reading com-
+   reader interaction for scalable open-domain question       prehension. In Association for Computational Lin-
+   answering. In International Conference on Learn-           guistics (ACL), pages 1601–1611.
+   ing Representations (ICLR).
+                                                           Omar Khattab and Matei Zaharia. 2020. ColBERT:
+Scott Deerwester, Susan T Dumais, George W Fur-               Efﬁcient and effective passage search via contextu-
+   nas, Thomas K Landauer, and Richard Harshman.              alized late interaction over BERT. In ACM SIGIR
+   1990. Indexing by latent semantic analysis. Jour-          Conference on Research and Development in Infor-
+   nal of the American society for information science,       mation Retrieval (SIGIR), pages 39–48.
+   41(6):391–407.
+                                                           Brian Kulis. 2013. Metric learning: A survey. Foun-
+Jacob Devlin, Ming-Wei Chang, Kenton Lee, and                 dations and Trends in Machine Learning, 5(4):287–
+   Kristina Toutanova. 2019. BERT: Pre-training of            364.
+   deep bidirectional transformers for language under-
+   standing. In North American Association for Com-        Tom Kwiatkowski, Jennimaria Palomaki, Olivia Red-
+   putational Linguistics (NAACL).                            ﬁeld, Michael Collins, Ankur Parikh, Chris Alberti,
+                                                              Danielle Epstein, Illia Polosukhin, Matthew Kelcey,
+David A Ferrucci. 2012. Introduction to “This is Wat-         Jacob Devlin, Kenton Lee, Kristina N. Toutanova,
+   son”. IBM Journal of Research and Development,             Llion Jones, Ming-Wei Chang, Andrew Dai, Jakob
+   56(3.4):1–1.                                               Uszkoreit, Quoc Le, and Slav Petrov. 2019. Natu-
+                                                              ral questions: a benchmark for question answering
+Daniel Gillick, Sayali Kulkarni, Larry Lansing,               research. Transactions of the Association of Compu-
+   Alessandro Presta, Jason Baldridge, Eugene Ie, and         tational Linguistics (TACL).
+   Diego Garcia-Olano. 2019. Learning dense repre-
+   sentations for entity retrieval. In Computational Nat-  Kenton Lee, Ming-Wei Chang, and Kristina Toutanova.
+   ural Language Learning (CoNLL).                            2019. Latent retrieval for weakly supervised open
+                                                              domain question answering. In Association for Com-
+Ruiqi Guo, Sanjiv Kumar, Krzysztof Choromanski, and           putational Linguistics (ACL), pages 6086–6096.
+   David Simcha. 2016. Quantization based fast inner
+   product search. In Artiﬁcial Intelligence and Statis-   Mike Lewis, Yinhan Liu, Naman Goyal, Mar-
+   tics, pages 482–490.                                       jan Ghazvininejad, Abdelrahman Mohamed, Omer
+                                                              Levy, Veselin Stoyanov, and Luke Zettlemoyer.
+Kelvin Guu, Kenton Lee, Zora Tung, Panupong Pa-               2020a. BART: Denoising sequence-to-sequence pre-
+   supat, and Ming-Wei Chang. 2020. REALM:                    training for natural language generation, translation,
+   Retrieval-augmented language model pre-training.           and comprehension. In Association for Computa-
+   ArXiv, abs/2002.08909.                                     tional Linguistics (ACL), pages 7871–7880.
+
+Matthew Henderson, Rami Al-Rfou, Brian Strope, Yun-        Patrick Lewis, Ethan Perez, Aleksandara Piktus,
+   hsuan Sung, La´szlo´ Luka´cs, Ruiqi Guo, Sanjiv Ku-        Fabio Petroni, Vladimir Karpukhin, Naman Goyal,
+   mar, Balint Miklos, and Ray Kurzweil. 2017. Efﬁ-           Heinrich Ku¨ttler, Mike Lewis, Wen-tau Yih,
+   cient natural language response suggestion for smart       Tim Rockta¨schel, Sebastian Riedel, and Douwe
+   reply. ArXiv, abs/1705.00652.                              Kiela. 2020b. Retrieval-augmented generation for
+                                                              knowledge-intensive NLP tasks. In Advances in
+Po-Sen Huang, Xiaodong He, Jianfeng Gao, Li Deng,             Neural Information Processing Systems (NeurIPS).
+   Alex Acero, and Larry Heck. 2013. Learning deep
+   structured semantic models for Web search using
+Yankai Lin, Haozhe Ji, Zhiyuan Liu, and Maosong Sun.       Anshumali Shrivastava and Ping Li. 2014. Asymmet-
+   2018. Denoising distantly supervised open-domain           ric LSH (ALSH) for sublinear time maximum inner
+   question answering. In Association for Computa-            product search (MIPS). In Advances in Neural In-
+   tional Linguistics (ACL), pages 1736–1745.                 formation Processing Systems (NIPS), pages 2321–
+                                                              2329.
+Sewon Min, Danqi Chen, Hannaneh Hajishirzi, and
+   Luke Zettlemoyer. 2019a. A discrete hard EM ap-         Ellen M Voorhees. 1999. The TREC-8 question an-
+   proach for weakly supervised question answering.           swering track report. In TREC, volume 99, pages
+   In Empirical Methods in Natural Language Process-          77–82.
+   ing (EMNLP).
+                                                           Shuohang Wang, Mo Yu, Xiaoxiao Guo, Zhiguo Wang,
+Sewon Min, Danqi Chen, Luke Zettlemoyer, and Han-             Tim Klinger, Wei Zhang, Shiyu Chang, Gerry
+   naneh Hajishirzi. 2019b. Knowledge guided text re-         Tesauro, Bowen Zhou, and Jing Jiang. 2018. Rˆ3:
+   trieval and reading for open domain question answer-       Reinforced ranker-reader for open-domain question
+   ing. ArXiv, abs/1911.03868.                                answering. In Conference on Artiﬁcial Intelligence
+                                                              (AAAI).
+Dan Moldovan, Marius Pas¸ca, Sanda Harabagiu, and
+   Mihai Surdeanu. 2003. Performance issues and er-        Zhiguo Wang, Patrick Ng, Xiaofei Ma, Ramesh Nalla-
+   ror analysis in an open-domain question answering          pati, and Bing Xiang. 2019. Multi-passage BERT:
+   system. ACM Transactions on Information Systems            A globally normalized bert model for open-domain
+   (TOIS), 21(2):133–154.                                     question answering. In Empirical Methods in Natu-
+                                                              ral Language Processing (EMNLP).
+Stephen Mussmann and Stefano Ermon. 2016. Learn-
+   ing and inference via maximum inner product search.     Tomer Wolfson, Mor Geva, Ankit Gupta, Matt Gard-
+   In International Conference on Machine Learning            ner, Yoav Goldberg, Daniel Deutch, and Jonathan
+   (ICML), pages 2587–2596.                                   Berant. 2020. Break it down: A question under-
+                                                              standing benchmark. Transactions of the Associa-
+Yixin Nie, Songhe Wang, and Mohit Bansal. 2019. Re-           tion of Computational Linguistics (TACL).
+   vealing the importance of semantic retrieval for ma-
+   chine reading at scale. In Empirical Methods in Nat-    Lee Xiong, Chenyan Xiong, Ye Li, Kwok-Fung Tang,
+   ural Language Processing (EMNLP).                          Jialin Liu, Paul Bennett, Junaid Ahmed, and Arnold
+                                                              Overwijk. 2020a. Approximate nearest neighbor
+Rodrigo Nogueira and Kyunghyun Cho. 2019. Passage             negative contrastive learning for dense text retrieval.
+   re-ranking with BERT. ArXiv, abs/1901.04085.               ArXiv, abs/2007.00808.
+
+Colin Raffel, Noam Shazeer, Adam Roberts, Katherine        Wenhan Xiong, Hankang Wang, and William Yang
+   Lee, Sharan Narang, Michael Matena, Yanqi Zhou,            Wang. 2020b. Progressively pretrained dense corpus
+   Wei Li, and Peter J Liu. 2019. Exploring the limits        index for open-domain question answering. ArXiv,
+   of transfer learning with a uniﬁed text-to-text trans-     abs/2005.00038.
+   former. ArXiv, abs/1910.10683.
+                                                           Wei Yang, Yuqing Xie, Aileen Lin, Xingyu Li, Luchen
+Pranav Rajpurkar, Jian Zhang, Konstantin Lopyrev, and         Tan, Kun Xiong, Ming Li, and Jimmy Lin. 2019a.
+   Percy Liang. 2016. SQuAD: 100,000+ questions               End-to-end open-domain question answering with
+   for machine comprehension of text. In Empirical            bertserini. In North American Association for Com-
+   Methods in Natural Language Processing (EMNLP),            putational Linguistics (NAACL), pages 72–77.
+   pages 2383–2392.
+                                                           Wei Yang, Yuqing Xie, Luchen Tan, Kun Xiong, Ming
+Parikshit Ram and Alexander G Gray. 2012. Maximum             Li, and Jimmy Lin. 2019b. Data augmentation for
+   inner-product search using cone trees. In Proceed-         bert ﬁne-tuning in open-domain question answering.
+   ings of the 18th ACM SIGKDD international con-             ArXiv, abs/1904.06652.
+   ference on Knowledge discovery and data mining,
+   pages 931–939.                                          Wen-tau Yih, Kristina Toutanova, John C Platt, and
+                                                              Christopher Meek. 2011. Learning discriminative
+Adam Roberts, Colin Raffel, and Noam Shazeer. 2020.           projections for text similarity measures. In Com-
+   How much knowledge can you pack into the param-            putational Natural Language Learning (CoNLL),
+   eters of a language model? ArXiv, abs/2002.08910.          pages 247–256.
+
+Stephen Robertson and Hugo Zaragoza. 2009. The
+   probabilistic relevance framework: BM25 and be-
+   yond. Foundations and Trends in Information Re-
+   trieval, 3(4):333–389.
+
+Minjoon Seo, Jinhyuk Lee, Tom Kwiatkowski, Ankur
+   Parikh, Ali Farhadi, and Hannaneh Hajishirzi. 2019.
+   Real-time open-domain question answering with
+   dense-sparse phrase index. In Association for Com-
+   putational Linguistics (ACL).
+A Distant Supervision                                             Top-1 Top-5 Top-20 Top-100
+
+When training our ﬁnal DPR model using Natural          Gold           44.9 66.8 78.1 85.0
+Questions, we use the passages in our collection
+that best match the gold context as the positive        Dist. Sup. 43.9 65.3 77.1 84.4
+passages. As some QA datasets contain only the
+question and answer pairs, it is thus interesting       Table 5: Retrieval accuracy on the development set of
+to see when using the passages that contain the         Natural Questions, trained on passages that match the
+answers as positives (i.e., the distant supervision     gold context (Gold) or the top BM25 passage that con-
+setting), whether there is a signiﬁcant performance     tains the answer (Dist. Sup.).
+degradation. Using the question and answer to-
+gether as the query, we run Lucene-BM25 and pick        Sim Loss             Retrieval Accuracy
+the top passage that contains the answer as the pos-
+itive passage. Table 5 shows the performance of                        Top-1 Top-5 Top-20 Top-100
+DPR when trained using the original setting and
+the distant supervision setting.                        DP    NLL      44.9  66.8  78.1  85.0
+                                                              Triplet  41.6  65.0  77.2  84.5
+B Alternative Similarity Functions &
+     Triplet Loss                                       L2    NLL 43.5       64.7  76.1  83.1
+                                                              Triplet 42.2   66.0  78.1  84.9
+In addition to dot product (DP) and negative log-
+likelihood based on softmax (NLL), we also exper-       Table 6: Retrieval Top-k accuracy on the development
+iment with Euclidean distance (L2) and the triplet      set of Natural Questions using different similarity and
+loss. We negate L2 similarity scores before ap-         loss functions.
+plying softmax and change signs of question-to-
+positive and question-to-negative similarities when     the correct answer, presumably by matching “body
+applying the triplet loss on dot product scores. The    of water” with semantic neighbors such as sea and
+margin value of the triplet loss is set to 1. Ta-       channel, even though no lexical overlap exists. The
+ble 6 summarizes the results. All these additional      second example is one where BM25 does better.
+experiments are conducted using the same hyper-         The salient phrase “Thoros of Myr” is critical, and
+parameters tuned for the baseline (DP, NLL).            DPR is unable to capture it.
+
+   Note that the retrieval accuracy for our “baseline”  D Joint Training of Retriever and
+settings reported in Table 5 (Gold) and Table 6              Reader
+(DP, NLL) is slightly better than those reported in
+Table 3. This is due to a better hyper-parameter        We ﬁx the passage encoder in our joint-training
+setting used in these analysis experiments, which       scheme while allowing only the question encoder
+is documented in our code release.                      to receive backpropagation signal from the com-
+                                                        bined (retriever + reader) loss function. This allows
+C Qualitative Analysis                                  us to leverage the HNSW-based FAISS index for
+                                                        efﬁcient low-latency retrieving, without reindexing
+Although DPR performs better than BM25 in gen-          the passages during model updates. Our loss func-
+eral, the retrieved passages of these two retrievers    tion largely follows ORQA’s approach, which uses
+actually differ qualitatively. Methods like BM25        log probabilities of positive passages selected from
+are sensitive to highly selective keywords and          the retriever model, and correct spans and passages
+phrases, but cannot capture lexical variations or se-   selected from the reader model. Since the passage
+mantic relationships well. In contrast, DPR excels      encoder is ﬁxed, we could use larger amount of
+at semantic representation, but might lack sufﬁcient    retrieved passages when calculating the retriever
+capacity to represent salient phrases which appear      loss. Speciﬁcally, we get top 100 passages for each
+rarely. Table 7 illustrates this phenomenon with        question in a mini-batch and use the method similar
+two examples. In the ﬁrst example, the top scor-        to in-batch negative training: all retrieved passages’
+ing passage from BM25 is irrelevant, even though        vectors participate in the loss calculation for all
+keywords such as England and Ireland appear mul-        questions in a batch. Our training batch size is set
+tiple times. In comparison, DPR is able to return       to 16, which effectively gives 1,600 passages per
+                                                        question to calculate retriever loss. The reader still
+                                                        uses 24 passages per question, which are selected
+Question                      Passage received by BM25                                        Passage retrieved by DPR
+What is the body of water
+between England and Ireland?  Title:British Cycling                                           Title: Irish Sea
+                              . . . England is not recognised as a region by the UCI, and     . . . Annual trafﬁc between Great Britain and Ireland amounts
+Who plays Thoros of Myr in    there is no English cycling team outside the Commonwealth       to over 12 million passengers and of traded goods. The Irish
+Game of Thrones?              Games. For those occasions, British Cycling selects and sup-    Sea is connected to the North Atlantic at both its northern
+                              ports the England team. Cycling is represented on the Isle      and southern ends. To the north, the connection is through
+                              of Man by the Isle of Man Cycling Association. Cycling in       the North Channel between Scotland and Northern Ireland
+                              Northern Ireland is organised under Cycling Ulster, part of     and the Malin Sea. The southern end is linked to the Atlantic
+                              the all-Ireland governing body Cycling Ireland. Until 2006,     through the St George’s Channel between Ireland and Pem-
+                              a rival governing body existed, . . .                           brokeshire, and the Celtic Sea. . . .
+
+                              Title: No One (Game of Thrones)                                 Title: Pa˚l Sverre Hagen
+                              . . . He may be ”no one,” but there’s still enough of a person  Pa˚l Sverre Valheim Hagen (born 6 November 1980) is a Nor-
+                              left in him to respect, and admire who this girl is and what    wegian stage and screen actor. He appeared in the Norwe-
+                              she’s become. Arya ﬁnally tells us something that we’ve kind    gian ﬁlm ”Max Manus” and played Thor Heyerdahl in the
+                              of known all along, that she’s not no one, she’s Arya Stark     Oscar-nominated 2012 ﬁlm ”Kon-Tiki”. Pl Hagen was born
+                              of Winterfell.” ”No One” saw the reintroduction of Richard      in Stavanger, Norway, the son of Roar Hagen, a Norwegian
+                              Dormer and Paul Kaye, who portrayed Beric Dondarrion and        cartoonist who has long been associated with Norways´ largest
+                              Thoros of Myr, respectively, in the third season, . . .         daily, ”VG”. He lived in Jtten, a neighborhood in the city of
+                                                                                              Stavanger in south-western Norway. . . .
+
+Table 7: Examples of passages returned from BM25 and DPR. Correct answers are written in blue and the content
+words in the question are written in bold.
+
+from the top 5 positive and top 30 negative passages
+(from the set of top 100 passages retrieved from
+the same question). The question encoder’s initial
+state is taken from a DPR model previously trained
+on the NQ dataset. The reader’s initial state is a
+BERT-base model. In terms of the end-to-end QA
+results, our joint-training scheme does not provide
+better results compared to the usual retriever/reader
+training pipeline, resulting in the same 39.8 exact
+match score on NQ dev as in our regular reader
+model training.

@@ -1,0 +1,63 @@
+persona: reproducibility_reviewer
+summary: |
+  The artefact is unusually strong for this project: §8 gives a literal command sequence, build_draft.py
+  inlines every table and refuses to build on a missing or duplicated one, and tools/check_numbers.py
+  passes with 0 findings over 417 scanned tokens, so round 1's complaint that the submitted draft
+  contained no tables and no clean numbers audit is answered. What still blocks a clean rerun is the
+  environment and the provenance record: the repository contains no requirements file or lockfile, the
+  run metadata records only Python 3.11.15, a Windows build and a CPU count, and the two model
+  checkpoints are named without revisions. Three provenance defects matter more than any missing pin -
+  the frozen run stores preregistration_sha256 as '#', the deviation log stops at D3 while the paper
+  calls the corrected run 'deviation D4', and Table 4 sets two runs side by side whose fitted thresholds
+  differ without saying so.
+strengths:
+  - "Round-1 items MF-9 and MF-10 are genuinely closed: tables are inlined at build time and the build refuses a missing or duplicated placeholder (05_paper/build_draft.py), and 06_review/audits/numbers-audit.md reports PASS with 0 findings over 417 scanned tokens (263 matched, 154 exempt, 0 untraceable, 0 mismatch)."
+  - "§8 is a literal ordered command block rather than 'see the README', and the confirmatory analysis is cheap enough to serve as its own smoke test: run_c1.py finished in 6.52 s on CPU (runs/20261102T235941Z_c1_gate_e20bc7f/meta.json, duration_s 6.5198)."
+  - "Run metadata records the command line, config sha256, source hashes for gate/audit/build_items/features, git commit, Python version, platform, env vars and peak RSS - more than most artefacts at this level carry (04_experiments/runs/.../meta.json)."
+  - "Data provenance is per request with URL, status, byte count and sha256 (04_experiments/data/TRANSFER-DATA.md, data/raw/2wiki/fetch_log.jsonl), and the item counts reconcile exactly: per_rung_dev {400,400,273,400,400} plus per_rung_test {400,400,280,400,399} gives 1873 + 1879 = 3752, matching §3.1 and §6 item 7."
+  - "§4.6 names the defect, the mechanism and the affected fraction (78.70% of rows), and §6 item 8 states that neither run substitutes for a fresh replication - a self-named irreproducibility that most artefacts omit."
+weaknesses:
+  - "No dependency pinning anywhere: there is no requirements.txt, pyproject.toml or lockfile in the repository, and the paper names no version for bm25s, sentence-transformers, torch or scikit-learn; only the feature-CSV sha256 would catch a silent version change, and nothing states which versions produce it."
+  - "The two checkpoints are named ('BAAI/bge-small-en-v1.5', 'cross-encoder/ms-marco-MiniLM-L-6-v2' in data/features_meta.json) with no revision or weight hash, and every feature column behind every table depends on them."
+  - "04_experiments/results/c1/results_full.json carries preregistration_sha256 = '#', the first token of the hash file's comment line, so the frozen run does not record which pre-registration text it executed, contrary to §7's 'the pre-registration hash is recorded before the first result-producing run'."
+  - "PREREGISTRATION.md §10 ends at D3 and PREREGISTRATION.sha256 holds three hashes (the current file matches the third, c24a9e51...), so 'deviation D4' in §4.6 and §8 names an entry that does not exist in the log."
+  - "Table 4's two columns are not a like-for-like comparison: c1_corrected/SUMMARY.md records the confirmatory band moving from [0.9072, 0.9478] to [0.5232, 0.5370] and the exploratory band from [0.2974, 0.9478] to [0.3032, 0.6362], and §4.6 never says the operating points were refitted."
+  - "Table 7 is not generated: make_paper_assets.py:table_prior_work() returns the rows as a literal string and its cells carry no num: markers, so nothing checks them, which contradicts the title page's claim that every table is written from a results file and every numeral is bound to RESULTS-INDEX.json."
+  - "No table or figure in the draft carries a number or a caption, so the ten 'Table N' references cannot be resolved, and three cross-references are wrong on their own terms - 'constant (§4.5)' points at the wrong section for the dense defect that §4.6 describes, and '(§4.8)' points at the second-corpus section for the reader baseline that §4.7 reports."
+  - "04_experiments/results/c1/results_full.json is not byte-identical to the run artefact (20929 B versus 18445 B): ablation_no_rank.py appends an ablation_no_rank block after the run, §8 does not list that script, and its numbers (AUROC 0.9875 dev / 0.9824 test) appear in no table."
+questions:
+  - "Which run id produced Table 2, and does that run's meta.json show git_dirty true or false?"
+  - "What are the pinned revisions of bge-small-en-v1.5 and ms-marco-MiniLM-L-6-v2, and would re-downloading them today reproduce features.csv byte for byte?"
+  - "When was the corrected dense feature run first executed relative to D3, and why is it called a declared deviation when §10 has no entry for it?"
+  - "Does run_c1.py stop before writing results_full.json if a rung fails the 0.750 audit, or does it only record the failure, given that audit.json and results_full.json appear in the same run's artefacts?"
+soundness: 3
+presentation: 3
+contribution: 2
+confidence: 4
+overall: 6
+decision: borderline
+must_fix:
+  - claim: "The artefact is unpinned: no requirements or lockfile exists, no library version appears in the paper, and the two model checkpoints are given without revisions."
+    where: "Section 8; repository root; data/features_meta.json"
+    evidence_needed: "A pinned requirements.txt or lockfile that regenerates the recorded environment, the two Hugging Face model revisions with weight hashes, and one sentence in §8 naming them, verified by rerunning features.py to features.csv with sha256 f9de87f6... (data/features_meta.json)."
+  - claim: "The frozen run records preregistration_sha256 as '#', so the run does not evidence which pre-registration text it executed."
+    where: "Section 7; 04_experiments/results/c1/results_full.json (field preregistration_sha256)"
+    evidence_needed: "Fix the parser to store c24a9e51... (or the hash actually in force at run time) in the results file, re-run, and quote the field value in §7."
+  - claim: "The deviation log stops at D3 while §4.6 and §8 describe the corrected dense run as 'deviation D4'."
+    where: "Section 4.6, Section 8; PREREGISTRATION.md §10 and PREREGISTRATION.sha256"
+    evidence_needed: "A dated §10 entry D4 recording when the corrected features were first run and whether that was before or after the frozen numbers were seen, plus a fourth hash in PREREGISTRATION.sha256; or drop the word 'deviation' and label the corrected analysis post hoc wherever it is cited."
+  - claim: "§8 omits the commands that produce two reported results: the transfer item builder and the reader baseline."
+    where: "Section 8; Section 4.7, Section 4.8"
+    evidence_needed: "Add 'python 04_experiments/src/build_transfer_items.py' before features_transfer.py and 'python 04_experiments/src/reader_logprob.py' before the script that consumes reader_features.csv, and state in §4.7 and §4.8 which file each number (n=553, AUROC 0.419; 400 transfer items) comes from."
+  - claim: "Table 4 juxtaposes two runs whose fitted operating points differ, and the column header labels the frozen run as deviation D1."
+    where: "Section 4.6, Table 4"
+    evidence_needed: "Print the corrected thresholds beside the frozen ones ([0.9072, 0.9478] to [0.5232, 0.5370]) and mark the precision and coverage rows as different cuts with AUROC as the only threshold-free comparison, as c1_corrected/SUMMARY.md already does; retitle the column 'frozen run' since D1 is the exploratory operating point."
+  - claim: "No table in the draft is numbered or captioned, so no 'Table N' reference can be resolved and three cross-references point at the wrong sections."
+    where: "Sections 4.1-4.8, Section 2; all table and section references"
+    evidence_needed: "Number and caption every table in order of appearance and correct the references (audit table in §4.1, per-rung in §4.2, arms in §4.4, frozen-versus-corrected and ablations in §4.6, prior work in §2), plus the §4.2 '(§4.5)' and §2 '(§4.8)' section references; the generator prefixes T1-T7 do not match appearance order."
+  - claim: "Table 7 is a hardcoded string in the table generator and carries no traceability markers, contradicting the title page's statement that every table is generated from a results file."
+    where: "Title page; Section 2, Table 7; 04_experiments/src/make_paper_assets.py table_prior_work()"
+    evidence_needed: "Generate Table 7 from a checked-in source (a prior-work CSV with a citation-id column) or amend the title-page sentence to say which tables are generated and which are hand-written, and add the five cited identifiers to the citation register so the citation checker covers them."
+  - claim: "The frozen run was produced from a dirty working tree and no diff was stored, so the recorded commit does not identify the code that produced the headline numbers."
+    where: "04_experiments/runs/20261102T235941Z_c1_gate_e20bc7f/meta.json; Section 8"
+    evidence_needed: "Re-run from a clean checkout at a recorded commit, or commit the diff and the post-diff source hashes so that commit plus patch identifies the executed code; state in §8 which of the two the reported numbers come from."

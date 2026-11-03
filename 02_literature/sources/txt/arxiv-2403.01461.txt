@@ -1,0 +1,349 @@
+                                       Answerability in Retrieval-Augmented
+                                         Open-Domain Question Answering
+
+                                       Rustam Abdumalikov   Pasquale Minervini                 Yova Kementchedjhieva
+                                                                                               University of Copenhagen
+                                       University of Tartu  University of Edinburgh
+                                                                                                     yova@di.ku.dk
+                                       rustam.abdumalikov.cs@gmail.com p.minervini@ed.ac.uk
+
+arXiv:2403.01461v1 [cs.CL] 3 Mar 2024                        Abstract                             Kwiatkowski et al. (2019) discuss this issue
+                                                                                               when designing the now widely used ODQA bench-
+                                            The performance of Open-Domain Question            mark Natural Questions (NQ) and include unan-
+                                            Answering (ODQA) retrieval systems can ex-         swerable questions. The general format of a train-
+                                            hibit sub-optimal behavior, providing text ex-     ing instance in NQ is a question paired with a gold-
+                                            cerpts with varying degrees of irrelevance. Un-    standard text excerpt relevant to the question and
+                                            fortunately, many existing ODQA datasets lack      an exact answer pulled from the text excerpt. The
+                                            examples specifically targeting the identifica-    authors source questions from real-world Google
+                                            tion of irrelevant text excerpts. Previous at-     Search queries and employ annotators to collect
+                                            tempts to address this gap have relied on a        relevant text excerpts and answer annotations. In
+                                            simplistic approach of pairing questions with      the data collection process, they discovered that no
+                                            random text excerpts. This paper aims to inves-    relevant text excerpts could be found for 50.5% of
+                                            tigate the effectiveness of models trained using   the initial seed of questions, and no straightforward
+                                            this randomized strategy, uncovering an im-        answer could be formed based on available text
+                                            portant limitation in their ability to generalize  excerpts for a further 14.7% of the questions – note
+                                            to irrelevant text excerpts with high semantic     that the text excerpts are said to contain an answer,
+                                            overlap. As a result, we observed a substantial    but of a kind that cannot be simply stated following
+                                            decrease in predictive accuracy, from 98% to       the guidelines. The authors choose to include these
+                                            1%. To address this limitation, we discovered      questions in the benchmark, labeling them as unan-
+                                            an efficient approach for training models to rec-  swerable, to promote the study of unanswerability
+                                            ognize such excerpts. By leveraging unanswer-      in ODQA.
+                                            able pairs from the SQuAD 2.0 dataset, our
+                                            models achieve a nearly perfect (≈ 100%) ac-          There are two shortcomings in this data setup
+                                            curacy when confronted with these challenging      that have understandably prevented the further
+                                            text excerpts.                                     study of answerability on NQ (and on other ODQA
+                                                                                               datasets, which do not include unanswerable ques-
+                                       1 Introduction                                          tions at all). Firstly, the unanswerable label in NQ
+                                                                                               conflates two types of challenges in QA: (I) the
+                                       Open-domain Question Answering (ODQA) sys-              lack of relevant text excerpts for a given question,
+                                       tems are a powerful and widely sought-after Nat-        and (II) the special case of questions for which
+                                       ural Language Processing tool. Recognizing the          an answer cannot be easily formulated even with
+                                       limits to the memory capacity of a single model and     reference to very relevant documents. Here, we
+                                       the ever-evolving nature of knowledge, many such        focus on type I unanswerability, which arises when
+                                       systems rely on retrieval augmentation, wherein an-     retrieval systems are inaccurate or when the knowl-
+                                       swers are sourced from text excerpts retrieved from     edge available in the corpus is not sufficient, as can
+                                       reliable sources such as Wikipedia, news outlets,       often be the case (Karpukhin et al., 2020; Izacard
+                                       etc. In a prolific body of research on the topic of     et al., 2022).
+                                       ODQA, one aspect that is consistently overlooked
+                                       is the handling of cases where the retrieved context       Second, and more important, is the matter of
+                                       does not provide sufficient information to form an      training models to recognize when the retrieved
+                                       answer to the given question. Models trained to         text is irrelevant. By design, retrieval systems rank
+                                       always provide an answer lack the ability to abstain    the documents from a database with reference to a
+                                       from doing so, instead of being forced to guess the     query and retrieve the k most relevant ones. This
+                                       answer, which confounds true model errors with
+                                       deficiencies in the retrieval process.
+means that ODQA models always receive one or            with a context and having them write unanswer-
+more text excerpts as part of the input; hence their    able questions based on it. Asai and Choi (2021)
+ability to abstain from answering has to be trained     analyze unanswerability as part of the dataset cre-
+and evaluated with reference to some negative sam-      ation process, where annotators mark a question
+ples. The type I data points in NQ do not contain       as unanswerable if no answer is available among
+such negative samples, which renders them unus-         the retrieved documents presented to annotators.
+able for the practical study of unanswerability.        Neeman et al. (2022) aim to disentangle parametric
+                                                        and contextual knowledge in ODQA models and
+   Neeman et al. (2022) propose a simple approach       try to address the cases where the model should ab-
+to address this issue—pairing questions with text       stain from answering when no relevant answers are
+excerpts sampled randomly from the complete pool        present in the input contexts. To this end, they pair
+of excerpts associated with NQ and labeling those       questions with excerpts from the complete pool of
+questions as unanswerable. When training and eval-      excerpts and label such questions as unanswerable.
+uating data points designed in this way, they ob-       Rajpurkar et al. (2018) added unanswerable ques-
+serve astonishingly high rates of models correctly      tions to the SQuAD dataset (Rajpurkar et al., 2016),
+abstaining from an answer (in the range of 99%).        providing a useful resource for identifying unan-
+Here, we raise the concern that this approach likely    swerable questions. Yatskar (2019) found that the
+results in a simple heuristic being learned by mod-     unanswerable questions in SQuAD 2.0 are often
+els trained in this way, wherein abstaining from an     cases of entity salads, false premises, topic errors,
+answer amounts to recognizing that the text excerpt     and missing information and are generally easy to
+bears no relevance to the question, for example,        detect.
+based on the lack of semantic overlap. Meanwhile,
+in real-world scenarios, retrieved excerpts are likely  3 Methodology
+to share semantic content with the question, while
+still not necessarily containing an answer to the       Datasets We rely on the version of NQ created
+question.                                               by Neeman et al. (2022), as it possesses several
+                                                        features of use to us. Neeman et al. (2022) take the
+   In this work, we study the predictions of mod-       answerable portion of NQ (questions with relevant
+els faced with questions paired with semantically       excerpts and answers) and augment it in two ways.
+related but practically irrelevant text excerpts with   First, they add answerability data points, where
+the following research questions in mind:               questions are paired with random contexts, and the
+                                                        target answer is set to unanswerable. Second, they
+• What training strategy can be used to achieve         create a counterfactual version of the questions,
+  high efficiency in recognition of semantically        wherein the answer is replaced with another entity
+  related but practically irrelevant text excerpts and  of the same type, and so is its mention in the rel-
+  abstaining from providing answers?                    evant text excerpt. As the latter procedure cannot
+                                                        be applied to all questions, the resulting training
+• Are models more likely to hallucinate an answer       split contains less counterfactual than factual data
+  or misguidedly extract one, falling toward con-       points, while in the evaluation set, they keep only
+  firmation bias, wherein mentions of the factually     those factual data points for which a counterfactual
+  correct answer in a practically irrelevant context    counterpart exists, such that the two subsets are
+  get extracted more often than entities of the same    matched in size (1,365 data points in each).
+  type appearing in such a context?
+                                                        Models We use T5-Large and T5-XL (Raffel
+To automatically generate text excerpts according       et al., 2020) in all experiments reported below. This
+to a given set of criteria, we use ChatGPT 1 to         choice falls in line with the work of Neeman et al.
+generate text excerpts accordingly for each research    (2022), who experiment with T5-Large and T5-
+question above.                                         XXL and find that the two models exhibit simi-
+                                                        lar patterns in evaluations of answerability and in
+2 Related Work                                          terms of gains from counterfactual training. Like-
+                                                        wise, in our case, both models show similar pat-
+In a machine reading comprehension (MRC) setup,         terns. Thus we reported T5-XL results in the main
+Rajpurkar et al. (2018) crowd-source high-quality       paper and T5-Large in Appendix A. We fine-tune
+unanswerable questions, presenting annotators
+
+    1https://openai.com/blog/chatgpt
+Question: Who is the actor who plays King Joffrey?               4 RQ1: Abstaining from Answering
+
+Related to Q: Certainly, King Joffrey’s character                Neeman et al. (2022) propose to train models to
+in Game of Thrones was very memorable and was                    abstain from answering with a data augmentation
+brought to life convincingly by an actor whose work              wherein questions are paired with random text ex-
+was highly appreciated by the fans. It’s interest-               cerpts, and models have to predict the word “unan-
+ing how a performance can sometimes transcend                    swerable” instead of an actual answer.
+the character and leave a lasting impression on the
+audience.                                                           We aim to determine how well a model trained
+                                                                 in this way would generalize to more challenging
+Related to A: Jack Gleeson walked through the                    and realistic cases, where the excerpt is not random
+bustling streets of Dublin, his hood pulled up to                but rather related to the question without giving an
+shield himself from the paparazzi, who constantly                answer to it. To this end, we generate text excerpts
+hounded him since his sudden retirement from act-                with ChatGPT using two prompts; the first is meant
+ing. Once he reached his apartment, he settled down              to challenge the model by mentioning relevant en-
+to paint, letting the colors and brushstrokes tell the           tities from the question in a different context (row
+stories he could no longer act out.                              Related to Q in Table 1):
+
+     Table 1: Contexts generated with ChatGPT.
+
+the model on the union of factual and answerability                    ... You must NOT give a direct answer to
+training data from Neeman et al. (2022) 2 – hyper-                     the question ⟨question⟩. But you must dis-
+parameters are available in Appendix B.                                cuss the question while not mentioning the
+                                                                       word(s) ⟨answer⟩.
+Generating Excerpts with ChatGPT We use
+ChatGPT to generate text as needed for the study                 and the second meant to challenge the model by
+of each of our research questions. We choose to do               mentioning the answer in a different context (row
+so as a cheap and scalable alternative to employing              Related to A in Table 1):
+human annotators to filter through retrieved text
+excerpts or write them from scratch.                                   ... You must mention the word(s) ⟨answer⟩.
+                                                                       But you must NOT discuss the question
+   All prompts given to the model share the follow-                    ⟨question⟩ or give an answer to it.
+ing part “Write a short paragraph of one to two
+sentences that looks factual but could be made up.”                 In Table 2, we present the rate at which our T5
+The text generated with this prompt falls within the             model, after fine-tuning, accurately refrains from
+75-percentile of excerpt lengths found in NQ. The                answering unanswerable questions. This evalua-
+different continuations to the prompt are detailed               tion is conducted using data from Neeman et al.
+as relevant in subsequent sections.                              (2022) on one hand and our ChatGPT-augmented
+                                                                 data points on the other.
+   In the course of developing the different prompts,
+we manually inspected model outputs to ensure                       Similarly to Neeman et al. (2022), we observe
+their good quality. After settling on the final form             almost ceiling performance on data points with
+of a prompt, we quantified how well ChatGPT fol-                 random excerpts. Meanwhile, when dealing with
+lowed our instructions as the rate at which entities             semantically related excerpts, the model fine-tuned
+we instructed the model to include in the gener-                 on factual and answerability data points exhibits
+ated text were indeed included. Throughout sub-                  a significant decrease in its ability to abstain from
+sequent sections, this success rate is reported as               answering. The rate of abstention drops to just
+SR = 96%.                                                        1.1%. Interestingly, even with excerpts that are
+                                                                 not directly related to the question but mention the
+   Synthetic excerpts are generated for evaluation               correct answer in some form, the rate of abstaining
+purposes only, i.e. they are based on questions                  from an answer decreases by 30% compared to the
+from the evaluation split of the data paired with                random-excerpt setting. This hints at a possible
+their factual answers unless otherwise stated. In                confirmation bias3 in the model, wherein its prior
+Appendix C, we provide examples of the text gen-                 knowledge of the correct answer appears to be in-
+erated with each of the prompts discussed below.                 terfering with its ability to abstain from answering.
+
+    2We do not use counterfactual data for training as we did        3Confirmation bias is a tendency, originally observed in
+not find it to make a difference to answerability in any of the  humans, to favor information that aligns with, i.e. confirms,
+experimental settings.                                           prior beliefs.
+Data                   Random Related to Q Related to A            Extracted Hallu. Abstain
+
+                       T5-XL
+
+Factual+Answerability  98.0       1.1   68.1                       Correct Other
+                                        100.0
+Factual+Answerability+SQuAD 98.3  99.9                                   T5-XL
+
+Table 2: Percentage rate of abstaining from an answer     Factual  70.7  2.4 26.5  0.4
+on unanswerable data points with random excerpts and
+with semantically related excerpts. T5-Large results can  C-factual 60.2 3.2 35.8 0.8
+be found in Appendix A Table 4.
+                                                          Table 3: Rate at which the model extracts an answer
+   Despite the confirmation bias possibility, it is ap-   from the excerpt, hallucinates, or abstains from answer-
+parent that a randomizing strategy is an inefficient      ing in a setting of hard unanswerable data points. T5-
+approach. This could be due to the fact that such a       Large results can be found in Appendix A Table 5
+strategy leads to low relevance between questions
+and text excerpts, and correspondingly a simple           extracted from the available text excerpts or were
+heuristic is needed to identify them. To address          entirely hallucinated. We establish that by looking
+this, we opted for the opposite extreme of training       for an exact match of the answer in the excerpt.
+on data points with high semantic overlap by utiliz-      The results, reported in Table 3 (row Factual), indi-
+ing unanswerable questions from the SQuAD 2.0             cate that the rate of extraction is high (70.7 + 2.4
+dataset.                                                  = 73.1), which is in line with the way the model
+                                                          has been trained to form an answer. Still, the rate
+   In the SQuAD row of Table 2, we show that the          of hallucination is non-trivial (26.5). We manually
+inclusion of unanswerable questions from SQuAD            inspect a subset of these hallucinated answers and
+2.0 results in flawless performance across various        find no clear patterns among them, instead conclud-
+types of irrelevant text excerpts. Despite the claim      ing that they are the result of the model having no
+of Kwiatkowski et al. (2019) that detecting SQuAD         good strategy to handle the complex scenarios we
+2.0 unanswerable questions should be trivial, the         present it with.
+ability of our model to do so generalizes effectively
+to the highly relevant text excerpts we designed.            We further break down extracted answers into
+                                                          cases where the model extracted the correct factual
+5 RQ2: Hallucinate or Extract                             answer or something else. We see that the correct
+                                                          factual answer is extracted more than 28 times as
+In many cases, ODQA models are trained on                 often as other entities in the context, which again
+datasets that do not consider the case that a ques-       points to a possible confirmation bias. We investi-
+tion cannot be answered given the available evi-          gate this matter further by replacing the mention
+dence – in the following, we investigate what kind        of a factual answer in the excerpts with a counter-
+of answers such models produce when they are not          factual one, sourced from Neeman et al. (2022).
+provided with the necessary evidence to answer a          The results, reported in Table 3, row C-factual,
+question. To this end, we generate a third set of         show that when the same position in the excerpt
+excerpts, which combines the properties of the two        is occupied by a counterfactual answer instead of
+previous sets by explicitly discussing both the ques-     a factual one, the model extracts the entity in that
+tion and the entity corresponding to the answer, but      position 10 percent less often. This serves to show
+without any claim of the two being related. We            that the model indeed exhibits a confirmation bias,
+obtain these excerpts with the following prompt           preferring to extract familiar answers.
+(SR = 95.9%):4
+                                                          6 Conclusions
+      ... You must NOT give a direct answer to
+      the question ⟨question⟩. But you must dis-          Retrieval systems can behave sup-optimally and
+      cuss the question while not mentioning the          provide relevant documents without an answer to
+      word(s) ⟨answer⟩. And smoothly transition           a given question – it is important for models to
+      to discuss the word(s) ⟨answer⟩ as a continu-       recognize when this happens and abstain from an-
+      ation of the same paragraph.                        swering. However, not all ODQA datasets contain
+                                                          unanswerable questions. To address this challenge,
+In the analysis of model answers in this adversar-        we explored the strategy of text excerpt random-
+ial setting, we first focus on whether they were          ization, finding that this approach can fail to gen-
+                                                          eralize effectively. To overcome this limitation,
+    4See Appendix C for more details about our prompts.
+we incorporated unanswerable questions from the             Pranav Rajpurkar, Jian Zhang, Konstantin Lopyrev, and
+SQuAD 2.0 dataset. By training our models on                   Percy Liang. 2016. SQuAD: 100,000+ questions for
+such data points, we were able to achieve near-                machine comprehension of text. In Proceedings of
+perfect performance on ChatGPT-generated texts                 the 2016 Conference on Empirical Methods in Natu-
+of varying relevance. This work aims to emphasize              ral Language Processing, pages 2383–2392, Austin,
+the importance of recognizing and abstaining from              Texas. Association for Computational Linguistics.
+answering as a critical problem in developing a
+trustworthy question-answering system.                      Mark Yatskar. 2019. A qualitative comparison of CoQA,
+                                                               SQuAD 2.0 and QuAC. In Proceedings of the 2019
+References                                                     Conference of the North American Chapter of the
+                                                               Association for Computational Linguistics: Human
+Akari Asai and Eunsol Choi. 2021. Challenges in                Language Technologies, Volume 1 (Long and Short
+   information-seeking QA: Unanswerable questions              Papers), pages 2318–2323, Minneapolis, Minnesota.
+   and paragraph retrieval. In Proceedings of the 59th         Association for Computational Linguistics.
+   Annual Meeting of the Association for Computational
+   Linguistics and the 11th International Joint Confer-
+   ence on Natural Language Processing (Volume 1:
+   Long Papers), pages 1492–1504, Online. Association
+   for Computational Linguistics.
+
+Gautier Izacard, Mathilde Caron, Lucas Hosseini, Se-
+   bastian Riedel, Piotr Bojanowski, Armand Joulin,
+   and Edouard Grave. 2022. Unsupervised dense in-
+   formation retrieval with contrastive learning. Trans.
+   Mach. Learn. Res., 2022.
+
+Vladimir Karpukhin, Barlas Oguz, Sewon Min, Patrick
+   Lewis, Ledell Wu, Sergey Edunov, Danqi Chen, and
+   Wen-tau Yih. 2020. Dense passage retrieval for open-
+   domain question answering. In Proceedings of the
+   2020 Conference on Empirical Methods in Natural
+   Language Processing (EMNLP), pages 6769–6781,
+   Online. Association for Computational Linguistics.
+
+Tom Kwiatkowski, Jennimaria Palomaki, Olivia Red-
+   field, Michael Collins, Ankur Parikh, Chris Alberti,
+   Danielle Epstein, Illia Polosukhin, Jacob Devlin, Ken-
+   ton Lee, Kristina Toutanova, Llion Jones, Matthew
+   Kelcey, Ming-Wei Chang, Andrew M. Dai, Jakob
+   Uszkoreit, Quoc Le, and Slav Petrov. 2019. Natu-
+   ral questions: A benchmark for question answering
+   research. Transactions of the Association for Compu-
+   tational Linguistics, 7:452–466.
+
+Ella Neeman, Roee Aharoni, Or Honovich, Leshem
+   Choshen, Idan Szpektor, and Omri Abend. 2022.
+   DisentQA: Disentangling parametric and contextual
+   knowledge with counterfactual question answering.
+
+Colin Raffel, Noam Shazeer, Adam Roberts, Katherine
+   Lee, Sharan Narang, Michael Matena, Yanqi Zhou,
+   Wei Li, and Peter J. Liu. 2020. Exploring the limits
+   of transfer learning with a unified text-to-text trans-
+   former. J. Mach. Learn. Res., 21:140:1–140:67.
+
+Pranav Rajpurkar, Robin Jia, and Percy Liang. 2018.
+   Know what you don’t know: Unanswerable ques-
+   tions for SQuAD. In Proceedings of the 56th Annual
+   Meeting of the Association for Computational Lin-
+   guistics (Volume 2: Short Papers), pages 784–789,
+   Melbourne, Australia. Association for Computational
+   Linguistics.
+A T5-Large Results
+
+Data                   Random Related to Q Related to A
+
+                       T5-Large
+
+Factual+Answerability  98.3       0.8   78.2
+                                        100.0
+Factual+Answerability+SQuAD 98.5  99.9
+
+Table 4: Percentage rate of abstaining from an answer
+on unanswerable data points with random excerpts and
+with semantically related excerpts.
+
+                       Extracted Hallu. Abstain
+
+         Correct Other
+
+                       T5-Large
+
+Factual  68.1          2.4 29.3         0.2
+
+C-factual 58.0 4.1 37.7 0.2
+
+Table 5: Rate at which the model extracts an answer
+from the excerpt, hallucinates, or abstains from answer-
+ing in a setting of hard unanswerable data points.
+
+B Hyperparameters
+
+For fine-tuning, we adopt the hyperparameters used
+in Neeman et al. (2022): batch size 32, learning
+rate 0.0001, maximum sequence length 256 for
+training, and 396 for evaluation.
+
+C Prompting ChatGPT
+
+We suffix any prompts that explicitly ask ChatGPT
+to discuss a given answer with the following se-
+quence:
+
+      Always use [⟨answer⟩] without quotes or
+      brackets. If ⟨answer⟩ is a number then be cre-
+      ative when you discuss it. Never use words
+      “number” and “digit”.
+
+This is necessary because we used square brackets
+inside the prompt to emphasize the answer, and
+ChatGPT correspondingly tended to enclose the
+answer in quotes or brackets. To circumvent this,
+we explicitly instructed ChatGPT to refrain from
+such behavior.
+
+   The objective of the latter section of the prompt
+was to enhance the variety in the generated output.
+Without it, we noticed that ChatGPT consistently
+began the generation with the repetitive pattern of
+"This number/digit represents...".

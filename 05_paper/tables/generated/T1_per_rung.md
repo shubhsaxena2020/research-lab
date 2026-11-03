@@ -1,8 +1,8 @@
-| Rung | n | Band (confirmatory) abstain prec. | Band over-refusal | Exploratory band prec. | Dense-cosine baseline prec. |
+| Rung | n | Band refusal rate | Band precision | Exploratory refusal rate | Exploratory precision |
 |---:|---:|---:|---:|---:|---:|
-| 1 | 400 | 100.00 | 75.50 | 99.75 | 65.00 |
-| 2 | 280 | 99.64 | 75.50 | 91.07 | 66.79 |
-| 3 | 400 | 100.00 | 75.50 | 92.75 | 64.25 |
-| 4 | 399 | 100.00 | 75.50 | 84.71 | 100.00 |
+| R1 | <!-- num:c1.pm.n.r1 -->400<!-- /num --> | <!-- num:c1.pm.band.refusal.r1 -->100.00%<!-- /num --> | <!-- num:c1.pm.band.precision.r1 -->56.98%<!-- /num --> | <!-- num:c1.pm.expl.refusal.r1 -->99.75%<!-- /num --> | <!-- num:c1.pm.expl.precision.r1 -->91.30%<!-- /num --> |
+| R2 | <!-- num:c1.pm.n.r2 -->280<!-- /num --> | <!-- num:c1.pm.band.refusal.r2 -->99.64%<!-- /num --> | <!-- num:c1.pm.band.precision.r2 -->48.02%<!-- /num --> | <!-- num:c1.pm.expl.refusal.r2 -->91.07%<!-- /num --> | <!-- num:c1.pm.expl.precision.r2 -->87.03%<!-- /num --> |
+| R3 | <!-- num:c1.pm.n.r3 -->400<!-- /num --> | <!-- num:c1.pm.band.refusal.r3 -->100.00%<!-- /num --> | <!-- num:c1.pm.band.precision.r3 -->56.98%<!-- /num --> | <!-- num:c1.pm.expl.refusal.r3 -->92.75%<!-- /num --> | <!-- num:c1.pm.expl.precision.r3 -->90.71%<!-- /num --> |
+| R4 | <!-- num:c1.pm.n.r4 -->399<!-- /num --> | <!-- num:c1.pm.band.refusal.r4 -->100.00%<!-- /num --> | <!-- num:c1.pm.band.precision.r4 -->56.92%<!-- /num --> | <!-- num:c1.pm.expl.refusal.r4 -->84.71%<!-- /num --> | <!-- num:c1.pm.expl.precision.r4 -->89.89%<!-- /num --> |
 
-All values are percentages on the held-out half. Over-refusal is a property of the gate, not of a rung, so it is repeated for readability.
+Refusal rate is P(refused | a negative of that rung) — a recall on the rung, and the quantity the pre-registration labelled abstain precision. Precision is P(negative of that rung | refused), over that rung's items and the answerable items together. Pooled precision is <!-- num:c1.pm.band.pooled_precision -->83.03%<!-- /num --> at the registered point and <!-- num:c1.pm.expl.pooled_precision -->97.29%<!-- /num --> at the exploratory point; the band gate answers <!-- num:c1.pm.band.answer_rate -->24.50%<!-- /num --> of answerable questions, while its item-level coverage is much lower because every question contributes four negatives to the item count.

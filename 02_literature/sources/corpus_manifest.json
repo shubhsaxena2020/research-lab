@@ -1,0 +1,107 @@
+{
+ "built": "2026-11-03",
+ "draft": "05_paper/draft/paper.md",
+ "n_files": 9,
+ "total_bytes": 8264437,
+ "sources": [
+  {
+   "file": "arxiv-2403.01461.pdf",
+   "txt": "arxiv-2403.01461.txt",
+   "id": "arXiv:2403.01461",
+   "title": "Answerability in Retrieval-Augmented Open-Domain Question Answering",
+   "url": "https://arxiv.org/pdf/2403.01461",
+   "bytes": 155238,
+   "sha256": "2ab8a2d1695d4e719faa8be03af9847284803956d907234383637ce32dbd55e0",
+   "fetched": "2026-11-03T06:29:14+0530",
+   "words_wc": 3545
+  },
+  {
+   "file": "arxiv-1806.03822.pdf",
+   "txt": "arxiv-1806.03822.txt",
+   "id": "arXiv:1806.03822",
+   "title": "Know What You Don't Know: Unanswerable Questions for SQuAD",
+   "url": "https://arxiv.org/pdf/1806.03822",
+   "bytes": 916105,
+   "sha256": "c69190f82a892d2502a0610e5957a17f19ec1145875a974aaac4e26d400edb0e",
+   "fetched": "2026-11-03T06:29:16+0530",
+   "words_wc": 4218
+  },
+  {
+   "file": "arxiv-2407.18418.pdf",
+   "txt": "arxiv-2407.18418.txt",
+   "id": "arXiv:2407.18418",
+   "title": "Know Your Limits: A Survey of Abstention in Large Language Models",
+   "url": "https://arxiv.org/pdf/2407.18418",
+   "bytes": 740481,
+   "sha256": "f7aae419ec81c10457bc9cf696f061166a3e0f0c00ffa9a04d4e0c3c292fe465",
+   "fetched": "2026-11-03T06:29:20+0530",
+   "words_wc": 16039
+  },
+  {
+   "file": "arxiv-2610.28340.pdf",
+   "txt": "arxiv-2610.28340.txt",
+   "id": "arXiv:2610.28340",
+   "title": "DeclineCraft: A RAG Abstention Benchmark for Jointly Measuring Combined Retrieval and Parametric Knowledge",
+   "url": "https://arxiv.org/pdf/2610.28340",
+   "bytes": 1301621,
+   "sha256": "5768c9f865cecbf3cf4838e044c57d9ea432b10be86414c017000eb40e7798cd",
+   "fetched": "2026-11-03T06:29:23+0530",
+   "words_wc": 25334
+  },
+  {
+   "file": "arxiv-2309.07597.pdf",
+   "txt": "arxiv-2309.07597.txt",
+   "id": "arXiv:2309.07597",
+   "title": "C-Pack: Packed Resources For General Chinese Embeddings",
+   "url": "https://arxiv.org/pdf/2309.07597",
+   "bytes": 1332241,
+   "sha256": "a5e1d16924173006b0fbb1abf169e69231465c71ab43c03770266bb8d592d849",
+   "fetched": "2026-11-03T06:29:28+0530",
+   "words_wc": 8390
+  },
+  {
+   "file": "arxiv-1901.04085.pdf",
+   "txt": "arxiv-1901.04085.txt",
+   "id": "arXiv:1901.04085",
+   "title": "Passage Re-ranking with BERT",
+   "url": "https://arxiv.org/pdf/1901.04085",
+   "bytes": 179659,
+   "sha256": "b3f05b72d6d24b00761fb0a7363b6e7a10dac22b7f0abfaf4f5025bea7f8e22e",
+   "fetched": "2026-11-03T06:29:33+0530",
+   "words_wc": 2093
+  },
+  {
+   "file": "arxiv-2004.04906.pdf",
+   "txt": "arxiv-2004.04906.txt",
+   "id": "arXiv:2004.04906",
+   "title": "Dense Passage Retrieval for Open-Domain Question Answering",
+   "url": "https://arxiv.org/pdf/2004.04906",
+   "bytes": 383508,
+   "sha256": "3e67fc1a9977715acf722d85f0b7d124b03715e975f6310a4d6c12094190912f",
+   "fetched": "2026-11-03T06:29:36+0530",
+   "words_wc": 8870
+  },
+  {
+   "file": "arxiv-2207.05221.pdf",
+   "txt": "arxiv-2207.05221.txt",
+   "id": "arXiv:2207.05221",
+   "title": "Language Models (Mostly) Know What They Know",
+   "url": "https://arxiv.org/pdf/2207.05221",
+   "bytes": 2616253,
+   "sha256": "1d861f7732f65769703cb2731dc085f3c9e69771b1b6196d074646d1473c3fbf",
+   "fetched": "2026-11-03T06:29:39+0530",
+   "words_wc": 18802
+  },
+  {
+   "file": "acl-2020.coling-main.580.pdf",
+   "txt": "acl-2020.coling-main.580.txt",
+   "id": "10.18653/v1/2020.coling-main.580",
+   "title": "Constructing A Multi-hop QA Dataset for Comprehensive Evaluation of Reasoning Steps",
+   "url": "https://aclanthology.org/2020.coling-main.580.pdf",
+   "bytes": 639331,
+   "sha256": "e5e15d11dbf116a2d58437e7435ae4ce118dfc5373e3568e1c7d1cbdf0a0387d",
+   "fetched": "2026-11-03T06:29:45+0530",
+   "words_wc": 8933
+  }
+ ]
+}

@@ -1,0 +1,398 @@
+{
+  "experiment": "c1",
+  "features_file": "04_experiments/data/features_corrected.csv",
+  "generated_by": "04_experiments/src/ablation_corrected.py",
+  "label": "SPEC-CORRECTED ABLATIONS (D4) - exploratory, not the pre-registered analysis",
+  "reproduction_check": {
+    "all_12_test_auroc": 0.8738,
+    "ok": true,
+    "results_full_test_auroc": 0.8738
+  },
+  "rows": {
+    "all_12": {
+      "auroc_dev": 0.887,
+      "auroc_test": 0.8738,
+      "band": {
+        "coverage": 0.0383,
+        "over_refusal": 0.915,
+        "per_rung_precision": {
+          "1": 1.0,
+          "2": 0.9964,
+          "3": 1.0,
+          "4": 0.9073
+        },
+        "thresholds": {
+          "dev_precision": 0.8024,
+          "dev_recall": 0.9898,
+          "t_hi": 0.537011889113,
+          "t_lo": 0.52318216643
+        }
+      },
+      "exploratory_band": {
+        "coverage": 0.396,
+        "over_refusal": 0.11,
+        "per_rung_precision": {
+          "1": 0.9975,
+          "2": 0.9286,
+          "3": 0.955,
+          "4": 0.1253
+        },
+        "thresholds": {
+          "dev_over_refusal": 0.095,
+          "dev_precision": 0.9668,
+          "dev_recall": 0.7502,
+          "t_hi": 0.636224300244,
+          "t_lo": 0.303228201895
+        }
+      },
+      "features": [
+        "bm25_presented",
+        "bm25_rank_log",
+        "bm25_top1",
+        "bm25_top5_mean",
+        "bm25_margin",
+        "dense_presented",
+        "dense_rank_log",
+        "dense_top1",
+        "dense_margin",
+        "top1_agreement",
+        "ce_presented",
+        "lex_overlap"
+      ],
+      "n_features": 12
+    },
+    "dense_only": {
+      "auroc_dev": 0.8876,
+      "auroc_test": 0.8695,
+      "band": {
+        "coverage": 0.016,
+        "over_refusal": 0.9475,
+        "per_rung_precision": {
+          "1": 1.0,
+          "2": 0.9964,
+          "3": 0.9975,
+          "4": 0.9825
+        },
+        "thresholds": {
+          "dev_precision": 0.8012,
+          "dev_recall": 0.9986,
+          "t_hi": 0.510228457031,
+          "t_lo": 0.50727344006
+        }
+      },
+      "exploratory_band": {
+        "coverage": 0.4034,
+        "over_refusal": 0.1025,
+        "per_rung_precision": {
+          "1": 0.9925,
+          "2": 0.8964,
+          "3": 0.85,
+          "4": 0.2306
+        },
+        "thresholds": {
+          "dev_over_refusal": 0.0975,
+          "dev_precision": 0.9659,
+          "dev_recall": 0.7495,
+          "t_hi": 0.540529874645,
+          "t_lo": 0.234985612864
+        }
+      },
+      "features": [
+        "dense_presented",
+        "dense_rank_log",
+        "dense_top1",
+        "dense_margin"
+      ],
+      "n_features": 4
+    },
+    "lex_overlap_only": {
+      "auroc_dev": 0.8118,
+      "auroc_test": 0.8111,
+      "band": {
+        "coverage": 0.0335,
+        "over_refusal": 0.9225,
+        "per_rung_precision": {
+          "1": 1.0,
+          "2": 0.9893,
+          "3": 0.995,
+          "4": 0.9323
+        },
+        "thresholds": {
+          "dev_precision": 0.8009,
+          "dev_recall": 0.9722,
+          "t_hi": 0.613801766167,
+          "t_lo": 0.560135166641
+        }
+      },
+      "exploratory_band": {
+        "coverage": 0.5428,
+        "over_refusal": 0.105,
+        "per_rung_precision": {
+          "1": 0.9125,
+          "2": 0.525,
+          "3": 0.6625,
+          "4": 0.1003
+        },
+        "thresholds": {
+          "dev_over_refusal": 0.1,
+          "dev_precision": 0.9544,
+          "dev_recall": 0.5682,
+          "t_hi": 0.69323583057,
+          "t_lo": 0.121917584466
+        }
+      },
+      "features": [
+        "lex_overlap"
+      ],
+      "n_features": 1
+    },
+    "no_bm25": {
+      "auroc_dev": 0.8814,
+      "auroc_test": 0.8683,
+      "band": {
+        "coverage": 0.0298,
+        "over_refusal": 0.9125,
+        "per_rung_precision": {
+          "1": 1.0,
+          "2": 0.9929,
+          "3": 1.0,
+          "4": 0.9524
+        },
+        "thresholds": {
+          "dev_precision": 0.8008,
+          "dev_recall": 0.9878,
+          "t_hi": 0.68462471848,
+          "t_lo": 0.613642149547
+        }
+      },
+      "exploratory_band": {
+        "coverage": 0.4066,
+        "over_refusal": 0.0975,
+        "per_rung_precision": {
+          "1": 0.995,
+          "2": 0.9143,
+          "3": 0.93,
+          "4": 0.1253
+        },
+        "thresholds": {
+          "dev_over_refusal": 0.08,
+          "dev_precision": 0.9715,
+          "dev_recall": 0.7413,
+          "t_hi": 0.68462471848,
+          "t_lo": 0.253631021643
+        }
+      },
+      "features": [
+        "dense_presented",
+        "dense_rank_log",
+        "dense_top1",
+        "dense_margin",
+        "top1_agreement",
+        "ce_presented",
+        "lex_overlap"
+      ],
+      "n_features": 7
+    },
+    "no_cross_encoder": {
+      "auroc_dev": 0.8857,
+      "auroc_test": 0.8715,
+      "band": {
+        "coverage": 0.0287,
+        "over_refusal": 0.9375,
+        "per_rung_precision": {
+          "1": 1.0,
+          "2": 0.9893,
+          "3": 0.995,
+          "4": 0.9398
+        },
+        "thresholds": {
+          "dev_precision": 0.8008,
+          "dev_recall": 0.9878,
+          "t_hi": 0.581838229613,
+          "t_lo": 0.553531539485
+        }
+      },
+      "exploratory_band": {
+        "coverage": 0.3965,
+        "over_refusal": 0.1075,
+        "per_rung_precision": {
+          "1": 0.9975,
+          "2": 0.925,
+          "3": 0.945,
+          "4": 0.1378
+        },
+        "thresholds": {
+          "dev_over_refusal": 0.0975,
+          "dev_precision": 0.9659,
+          "dev_recall": 0.7495,
+          "t_hi": 0.625714385838,
+          "t_lo": 0.308758745994
+        }
+      },
+      "features": [
+        "bm25_presented",
+        "bm25_rank_log",
+        "bm25_top1",
+        "bm25_top5_mean",
+        "bm25_margin",
+        "dense_presented",
+        "dense_rank_log",
+        "dense_top1",
+        "dense_margin",
+        "top1_agreement",
+        "lex_overlap"
+      ],
+      "n_features": 11
+    },
+    "no_dense": {
+      "auroc_dev": 0.8669,
+      "auroc_test": 0.8623,
+      "band": {
+        "coverage": 0.0436,
+        "over_refusal": 0.8775,
+        "per_rung_precision": {
+          "1": 1.0,
+          "2": 1.0,
+          "3": 1.0,
+          "4": 0.9173
+        },
+        "thresholds": {
+          "dev_precision": 0.802,
+          "dev_recall": 0.979,
+          "t_hi": 0.629028488086,
+          "t_lo": 0.572425830877
+        }
+      },
+      "exploratory_band": {
+        "coverage": 0.4023,
+        "over_refusal": 0.105,
+        "per_rung_precision": {
+          "1": 0.9975,
+          "2": 0.9214,
+          "3": 0.9625,
+          "4": 0.0977
+        },
+        "thresholds": {
+          "dev_over_refusal": 0.0875,
+          "dev_precision": 0.9689,
+          "dev_recall": 0.7393,
+          "t_hi": 0.629028488086,
+          "t_lo": 0.261581746338
+        }
+      },
+      "features": [
+        "bm25_presented",
+        "bm25_rank_log",
+        "bm25_top1",
+        "bm25_top5_mean",
+        "bm25_margin",
+        "top1_agreement",
+        "ce_presented",
+        "lex_overlap"
+      ],
+      "n_features": 8
+    },
+    "no_lex_overlap": {
+      "auroc_dev": 0.8877,
+      "auroc_test": 0.8742,
+      "band": {
+        "coverage": 0.0378,
+        "over_refusal": 0.905,
+        "per_rung_precision": {
+          "1": 1.0,
+          "2": 0.9964,
+          "3": 1.0,
+          "4": 0.9198
+        },
+        "thresholds": {
+          "dev_precision": 0.8035,
+          "dev_recall": 0.9912,
+          "t_hi": 0.528782038849,
+          "t_lo": 0.512810211616
+        }
+      },
+      "exploratory_band": {
+        "coverage": 0.3965,
+        "over_refusal": 0.1075,
+        "per_rung_precision": {
+          "1": 0.9975,
+          "2": 0.9286,
+          "3": 0.95,
+          "4": 0.1303
+        },
+        "thresholds": {
+          "dev_over_refusal": 0.0875,
+          "dev_precision": 0.9694,
+          "dev_recall": 0.7522,
+          "t_hi": 0.634813515091,
+          "t_lo": 0.301989293625
+        }
+      },
+      "features": [
+        "bm25_presented",
+        "bm25_rank_log",
+        "bm25_top1",
+        "bm25_top5_mean",
+        "bm25_margin",
+        "dense_presented",
+        "dense_rank_log",
+        "dense_top1",
+        "dense_margin",
+        "top1_agreement",
+        "ce_presented"
+      ],
+      "n_features": 11
+    },
+    "no_rank": {
+      "auroc_dev": 0.8845,
+      "auroc_test": 0.8718,
+      "band": {
+        "coverage": 0.0277,
+        "over_refusal": 0.9225,
+        "per_rung_precision": {
+          "1": 1.0,
+          "2": 1.0,
+          "3": 0.9975,
+          "4": 0.9499
+        },
+        "thresholds": {
+          "dev_precision": 0.8013,
+          "dev_recall": 0.9885,
+          "t_hi": 0.597328685107,
+          "t_lo": 0.572436832794
+        }
+      },
+      "exploratory_band": {
+        "coverage": 0.396,
+        "over_refusal": 0.105,
+        "per_rung_precision": {
+          "1": 0.9975,
+          "2": 0.9286,
+          "3": 0.9525,
+          "4": 0.1328
+        },
+        "thresholds": {
+          "dev_over_refusal": 0.0975,
+          "dev_precision": 0.9659,
+          "dev_recall": 0.7495,
+          "t_hi": 0.642122396536,
+          "t_lo": 0.307389025615
+        }
+      },
+      "features": [
+        "bm25_presented",
+        "bm25_top1",
+        "bm25_top5_mean",
+        "bm25_margin",
+        "dense_presented",
+        "dense_top1",
+        "dense_margin",
+        "top1_agreement",
+        "ce_presented",
+        "lex_overlap"
+      ],
+      "n_features": 10
+    }
+  },
+  "rule": "logistic gate on dev, band threshold at dev abstain precision >= 0.80; exploratory band adds dev over-refusal <= 0.10"
+}

@@ -1,0 +1,12 @@
+{
+  "auroc_dev": 0.9696,
+  "auroc_test": 0.9453,
+  "generated_by": "04_experiments/src/make_paper_assets.py",
+  "hit_rate_dev": 0.855,
+  "hit_rate_test": 0.7825,
+  "over_refusal": 0.0256,
+  "precision_miss_given_refused": 0.873,
+  "refuse_hit": 0.0256,
+  "refuse_miss": 0.6322,
+  "source": "04_experiments/results/c1/top1_variant.json operating_points.band_target_precision_0.80.test"
+}

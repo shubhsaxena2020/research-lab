@@ -192,3 +192,79 @@ Consequences, fixed now and not later:
    exploratory check with its own n, never as a held-out result.
 
 None of these five changes alters an item, a feature, a model, a seed or the confirmatory gate.
+
+### D2 — 2026-11-03T05:58+05:30 — exploratory rung 5 (overlap-matched negatives)
+
+Requested by the head (HEAD-REVIEW Checkpoint 4, item 2) and declared **before** any of its numbers were
+computed. Motivation: the §8 sensitivity audit shows that adding question–passage overlap to the six
+surface features makes rungs 1–3 almost perfectly identifiable (0.9773 / 0.8886 / 0.9232 on dev). If the
+rungs differ mainly in overlap, then a negative built to *match* the gold paragraph's overlap should be
+indistinguishable from an answerable item by any overlap-driven signal, and a retrieval-only gate should
+lose whatever separation overlap was buying.
+
+Definition, fixed now:
+
+- **Rung 5 (negative, overlap-matched).** For each sampled answerable question, compute
+  `lex_overlap(p) = |tokens(q) ∩ tokens(p)| / |tokens(q)|` for the gold paragraph `P_gold`, then choose
+  the candidate paragraph `p ≠ P_gold` from the same split's pool whose `lex_overlap` is closest to
+  `lex_overlap(P_gold)` (absolute difference; ties broken by `random.Random("20261103:<qid>:5")`).
+  The item records `overlap_target`, `overlap_chosen` and `overlap_absdiff`.
+- Rung 5 is built for **both** splits (dev and test), reusing exactly the 400 sampled questions per split
+  that rungs 0–4 use, so items are paired by question.
+- The gate is **not refitted for rung 5**. The frozen model is re-fitted from the same dev rows (rungs
+  0–4) and its coefficients are checked against `results_full.json` before use; the confirmatory and
+  exploratory thresholds are read from that file, not recomputed.
+- Rung 5 is analysed with (a) the surface audit's six features and (b) the same six plus overlap, so the
+  audit can be compared rung-by-rung.
+- Rung 5 is **exploratory**: it is not part of H1, it cannot rescue H1, and it is labelled `EXPLORATORY`
+  in every file, table and sentence that reports it.
+
+### D3 — 2026-11-03T05:58+05:30 — exploratory "top-1 presented" variant
+
+Declared before its numbers. The first review round's top must-fix item (MF-1) is that answerable items
+always present the gold paragraph while negatives do not, so the gate may be reading "is this the
+retrieved document" rather than answerability. The pre-registered design cannot answer that. This variant
+changes the *presentation*, not the hypothesis:
+
+- For every sampled question in both splits, the presented passage is the **BM25 top-1 retrieved
+  paragraph** for that question, taken from the item's own split pool. Label is 1 if that paragraph is
+  the question's gold paragraph and 0 otherwise (i.e. the item is a retrieval hit or a retrieval miss).
+- The twelve features are computed exactly as in §4, with the presented passage being that top-1
+  document. Rung-5-style records carry `rung = -1` and `variant = "top1_presented"`.
+- A gate fitted on this variant cannot be the frozen gate (different item population and label
+  prevalence), so a fresh logistic gate is fitted on the dev half and evaluated on the test half. This is
+  a **new measurement, exploratory by construction**, and is reported only as "what the same feature
+  stack does when the presented passage is always the retrieved one".
+- It changes no rung definition, no feature, no model, no seed, and no confirmatory result.
+
+### D4 — 2026-11-03T07:05+05:30 — the dense block was degenerate; a spec-conformant re-implementation is added
+
+Found while answering review round 1, by two readers of the code working separately, and recorded here
+before any of its numbers were written into a draft.
+
+`features.py` set the dense query to the presented passage itself (`Pq = dense.encode(present_text)`)
+rather than to the question. Consequently `dense_presented` and `dense_top1` were both identically 1.0 and
+`dense_rank_log` was constant on every row of rungs R0–R3 (78.70% of all rows; the remaining rows are the
+rung-4 rewrites). The gate therefore had ten informative columns rather than twelve, and baseline B2 — a
+threshold on `dense_top1` — was a threshold on a constant.
+
+Consequences, fixed now and not later:
+
+1. **The pre-registered analysis is not refitted and not replaced.** `results/c1/results_full.json` and
+   everything downstream of it remain exactly as produced from the frozen code; the hash chain in
+   `PREREGISTRATION.sha256` still covers the file above this paragraph.
+2. **A spec-conformant implementation is added**: `features_corrected.py` computes the §4 feature as a
+   question-to-passage cosine (question as query), for the main items, the R5 items and the transfer
+   items. `eval_corrected.py` re-runs the *whole* analysis through the same code path
+   (`run_c1.analyse` with the features file swapped) and writes to `results/c1_corrected/`. It asserts
+   that the item ids, order and per-rung counts are unchanged, and every non-dense column is byte-identical
+   to the frozen CSV.
+3. **The corrected analysis refits the two thresholds** on corrected dev scores, because the score
+   distribution changes. Thresholds are therefore not comparable between the two runs; AUROC is, because
+   it is threshold-free. Table 4 of the paper reports both and says this.
+4. **The corrected run is exploratory.** It is labelled `c1_corrected` and `D4` everywhere it appears. It
+   cannot rescue a hypothesis and it does not change a pre-registered verdict; it changes what we believe
+   the gate is measuring, which is stated in §4.6 and §5.2 of the paper.
+5. This deviation is also the reason the paper reports leave-one-group-out ablations on the corrected
+   features (`ablation_corrected.py`) rather than on the frozen ones: an ablation of a degenerate column
+   would have been uninterpretable.

@@ -1,0 +1,61 @@
+persona: domain_expert
+summary: |
+  The paper claims a pre-registered four-rung ladder shows three things: a gate fitted to a precision
+  target without a coverage constraint satisfies it by refusing almost everything, the ladder's apparent
+  hardness is really lexical overlap, and a rung that changes one span inside the gold paragraph breaks
+  the gate once the dense feature is implemented as specified. The first two are real and worth
+  reporting, and the disclosure in Section 4.6 is unusually honest. But the quantity reported throughout
+  as 'abstain precision' is abstention recall - the share of a rung's negatives that were refused, 279/280
+  in the R2 cell - so the paper never reports the metric its own thesis is about, coverage is computed
+  over items with four negatives per question rather than over questions, and no negative in the study
+  carries an adjudicated answerability label. Those are repairable, but as printed the central measurement
+  is not the one the abstract names.
+strengths:
+  - "Section 3.1 uses an article-level split and states item counts, drop rates and construction rules, so the ladder is reconstructible and free of paragraph-level leakage."
+  - "Section 4.1 makes a separability audit a hard gate that runs before any result is reported, and reports the R4 exception (0.408) instead of quietly dropping it."
+  - "Section 4.5 builds the top-1-presented arm that tests the 'gate reads retrieval rank' objection rather than arguing about it."
+  - "Section 4.6 discloses a defect that flattered the headline number (held-out AUROC 0.982 to 0.874) and reports both runs side by side."
+  - "Section 4.7 reports the R2 exchangeability check with the actual smallest p-value (0.052) and the awkward caveat that several p-values sit between five and ten percent."
+weaknesses:
+  - "The metric is not the field's metric: the cited survey (arXiv:2407.18418, Section 4.2 and its Table 1) defines Abstention Precision as N5/(N3+N5), the share of refusals that were correct, whereas every cell in the paper reproduces as the share of that rung's negatives refused, which the same table calls abstention recall."
+  - "Coverage is admitted items over 1879 items, and the pool contains four negatives for every answerable question, so 5.27% is roughly a quarter of the field's coverage (98/400 = 24.5% of questions answered); Section 5.1's 'about one question in twenty' follows from the wrong denominator."
+  - "Every negative in the study is author-constructed and none is adjudicated: an adjacent paragraph (R3) or an IDF-anchored paragraph (R2) may genuinely support the question, and no annotator, instruction or agreement statistic is reported anywhere, including for the forty rung-4 items inspected in Section 5.4."
+  - "The only human-labelled negatives available, SQuAD 2.0's impossible questions, are excluded on the assertion that they are 'a different kind of negative', so no negative in the study is anchored to human answerability judgement."
+  - "The claim that 'the ladder therefore varies the negative along one axis at a time' (Section 3.1) is false as constructed: rungs differ in length, provenance and document position together, and Section 4.4 concedes that R5 items 'are the longest negatives in the ladder'."
+  - "The reader-side baseline is a proxy: Section 2 cites P(True) (arXiv:2207.05221) as 'the strongest cheap reader-side baseline a reviewer expects' and then substitutes mean generated-token log-probability, so the negative result says nothing about the baseline the field would actually run."
+  - "The audit only flags AUROC above 0.750, so R4 at 0.415 is recorded as a pass even though it is the same leak with the sign inverted; the table also omits its split and n, so a reader cannot tell whether those AUROCs are dev or pooled."
+  - "Section 1 contribution 4 claims the two control arms 'localise the effect', but Section 4.5 concedes that in the top-1 arm 'the comparison cannot separate the two readings', so that arm tests the objection without adjudicating it."
+  - "The second corpus is never named in the body - Section 4.8 calls it 'the multi-hop corpus described in Section 3.1 of the pre-registration' - so a reader cannot tell what data produced the 0.640 AUROC without reconstructing it from the reference list."
+questions:
+  - "What is the gate's abstention precision at the registered point, computed as the cited survey defines it, and what happens to H1 and H3 when the recomputed quantity is used?"
+  - "How many of the R2 and R3 passages contain a span that actually answers their question, and what is the agreement between two annotators on that judgement?"
+  - "What AUROC does P(True) reach on the 553 dev items where the log-probability proxy was run?"
+  - "Does the R4 collapse survive at the corrected confirmatory point (90.73% precision at 91.50% over-refusal), or does it exist only at the exploratory band?"
+soundness: 2
+presentation: 3
+contribution: 2
+confidence: 4
+overall: 4
+decision: reject
+must_fix:
+  - claim: "Every figure labelled 'abstain precision' is the share of a rung's negatives refused, so the paper never reports abstention precision and its central claim about precision is untested."
+    where: "Abstract ('abstain precision is then identical on every rung'); Section 4.2, results table; Section 4.6, comparison table"
+    evidence_needed: "Recompute as refusals of negatives / all refusals, per rung and pooled, report the refusal count behind each cell, and state the definition explicitly: R2's 99.64% is 279/280 (recall), while its precision is 279/(279+302) = 48.0%."
+  - claim: "Coverage is computed over items with four negatives per question, which understates the field's coverage by about a factor of five and inflates the paper's headline claim."
+    where: "Abstract ('admits 5.27% of the held-out benchmark'); Section 5.1 ('about one question in twenty')"
+    evidence_needed: "Coverage reported over questions (98 of 400 = 24.5%) alongside the item-level figure, and AURCC or abstention F1 added as the companion metrics the cited survey recommends."
+  - claim: "No negative in the study has an adjudicated answerability label, so 'negative' means 'not the gold paragraph' rather than 'does not answer the question'."
+    where: "Section 3.1, rung table and 'Only the answerable rows are used'"
+    evidence_needed: "A two-annotator adjudication of a sample of at least 100 R2 and R3 passages for whether each supports the question, with instructions and Cohen's kappa reported, plus SQuAD 2.0's impossible rows as a human-labelled anchor rung."
+  - claim: "'The ladder therefore varies the negative along one axis at a time' is contradicted by the paper's own length observation, so hardness is not identified with any single axis."
+    where: "Section 3.1; Section 4.4 ('they are the longest negatives in the ladder')"
+    evidence_needed: "Per-rung length and overlap distributions, and one rung matched on both question overlap and passage length, to show the ordering survives when both are held constant."
+  - claim: "The reader-side baseline is a fluency proxy, not the P(True) baseline the paper says a reviewer expects, so its failure is not evidence about reader-side gating."
+    where: "Section 2; Section 4.7, reader-confidence paragraph"
+    evidence_needed: "P(True) scores on the same 553 dev items with AUROC and a threshold, or the removal of the claim that reader-side confidence fails on this task."
+  - claim: "The separability audit is one-sided, so inverted separation at R4 is recorded as a pass."
+    where: "Section 3.4 ('Any rung above an AUROC of 0.750'); Section 4.1, audit table"
+    evidence_needed: "A two-sided rule on |AUROC - 0.5| with confidence intervals, the audit table's split and n stated, and R4's 0.415 reported as separation in the reverse direction rather than as no separation."
+  - claim: "The mechanistic conclusion about R4 rests on one post-hoc exploratory cell while the registered analysis reports the opposite for that rung."
+    where: "Abstract; Section 5.2 ('the rung which changes what the passage says must be in the ladder'); Section 4.6, comparison table"
+    evidence_needed: "Either promote the D4 corrected run to the primary analysis in the title and abstract, or report the registered R4 value (100.00%) beside the exploratory 12.53% and restrict Section 5.2 to what the registered run supports."

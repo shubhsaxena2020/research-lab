@@ -1,0 +1,231 @@
+{
+  "bm25": {
+    "b": 0.75,
+    "k1": 1.5,
+    "k1_b": "library defaults",
+    "library": "bm25s",
+    "stopwords": "en"
+  },
+  "features": {
+    "ce_model": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+    "consistency_check_vs_frozen_rung0": {
+      "compared_features": [
+        "bm25_presented",
+        "ce_presented",
+        "lex_overlap"
+      ],
+      "excluded": {
+        "dense_presented": "frozen column degenerate; see frozen_dense_columns_are_degenerate"
+      },
+      "max_abs_diff": {
+        "bm25_presented": 5e-09,
+        "ce_presented": 3.815e-06,
+        "lex_overlap": 0.0
+      },
+      "n_compared": 655,
+      "passed": true,
+      "tolerance": {
+        "bm25_presented": 1e-06,
+        "ce_presented": 0.0001,
+        "lex_overlap": 0.0
+      }
+    },
+    "constant_by_construction": {
+      "bm25_rank_log": [
+        0.69314718056
+      ],
+      "note": "log1p(1) = 0.6931 for every row: the presented passage is the BM25 rank-1 document. Kept in the vector; contributes nothing to the fitted score."
+    },
+    "csv_sha256": "3d22e100c1991ed63b3155ef6f0f66a873377d410ce0b9d629346ed4185e4a5c",
+    "dense_math": {
+      "literal_frozen_math_would_give": "dense_presented = 1.0 constant, AUROC 0.5 by construction",
+      "reason": "PREREGISTRATION.md \u00a74 defines the feature this way; the frozen code does not",
+      "used_here": "query = question; dense_presented = cos(question, presented passage)"
+    },
+    "dense_model": "BAAI/bge-small-en-v1.5",
+    "feature_ranges": {
+      "bm25_margin": {
+        "max": 18.641876,
+        "min": 0.000971,
+        "sd": 2.836455
+      },
+      "bm25_presented": {
+        "max": 27.011395,
+        "min": 2.198088,
+        "sd": 3.812626
+      },
+      "bm25_rank_log": {
+        "max": 0.693147,
+        "min": 0.693147,
+        "sd": 0.0
+      },
+      "bm25_top1": {
+        "max": 27.011395,
+        "min": 2.198088,
+        "sd": 3.812626
+      },
+      "bm25_top5_mean": {
+        "max": 17.511975,
+        "min": 1.781658,
+        "sd": 1.892976
+      },
+      "ce_presented": {
+        "max": 11.223682,
+        "min": -11.396169,
+        "sd": 4.72209
+      },
+      "dense_margin": {
+        "max": 0.282881,
+        "min": 4e-06,
+        "sd": 0.043455
+      },
+      "dense_presented": {
+        "max": 0.909329,
+        "min": 0.361514,
+        "sd": 0.091784
+      },
+      "dense_rank_log": {
+        "max": 6.150603,
+        "min": 0.693147,
+        "sd": 1.04044
+      },
+      "dense_top1": {
+        "max": 0.909329,
+        "min": 0.510587,
+        "sd": 0.06798
+      },
+      "lex_overlap": {
+        "max": 1.0,
+        "min": 0.142857,
+        "sd": 0.152376
+      },
+      "top1_agreement": {
+        "max": 1.0,
+        "min": 0.0,
+        "sd": 0.470213
+      }
+    },
+    "features": [
+      "bm25_presented",
+      "bm25_rank_log",
+      "bm25_top1",
+      "bm25_top5_mean",
+      "bm25_margin",
+      "dense_presented",
+      "dense_rank_log",
+      "dense_top1",
+      "dense_margin",
+      "top1_agreement",
+      "ce_presented",
+      "lex_overlap"
+    ],
+    "frozen_dense_columns_are_degenerate": {
+      "cause": "features.py encodes present_text as the dense query (Pq = encode(present_text)), so cos(presented, presented) = 1.0; dense_rank_log is then log1p(1) = 0.6931 and dense_top1 = 1.0 for every corpus-document row",
+      "consequence": "three of the twelve frozen gate columns carry no question-passage signal; the dense block reduces to dense_margin (a passage-distinctiveness term)",
+      "fraction_within_1e-3_of_1.0": 0.804371,
+      "per_rung_dense_presented": {
+        "0": {
+          "max": 1.0,
+          "mean": 1.0,
+          "min": 1.0,
+          "n": 800,
+          "sd": 0.0
+        },
+        "1": {
+          "max": 1.0,
+          "mean": 1.0,
+          "min": 1.0,
+          "n": 800,
+          "sd": 0.0
+        },
+        "2": {
+          "max": 1.0,
+          "mean": 1.0,
+          "min": 1.0,
+          "n": 553,
+          "sd": 0.0
+        },
+        "3": {
+          "max": 1.0,
+          "mean": 1.0,
+          "min": 1.0,
+          "n": 800,
+          "sd": 0.0
+        },
+        "4": {
+          "max": 0.999922,
+          "mean": 0.987813,
+          "min": 0.89792,
+          "n": 799,
+          "sd": 0.014018
+        }
+      },
+      "source": "04_experiments/data/features.csv columns dense_presented / dense_top1 / dense_rank_log"
+    },
+    "n_items": 800,
+    "timings": {
+      "dev_ce_s": 9.17,
+      "dev_encode_questions_s": 1.36,
+      "dev_index_s": 25.01,
+      "dev_scoring_s": 0.06,
+      "model_load_s": 3.38,
+      "test_ce_s": 8.76,
+      "test_encode_questions_s": 1.72,
+      "test_index_s": 23.75,
+      "test_scoring_s": 0.06
+    }
+  },
+  "items": {
+    "dev": {
+      "bm25_params": {
+        "b": 0.75,
+        "k1": 1.5,
+        "method": "lucene"
+      },
+      "distinct_top1_docs": 301,
+      "gold_rank_leq1": 342,
+      "gold_rank_leq10": 389,
+      "gold_rank_leq5": 383,
+      "gold_rank_mean": 4.827,
+      "gold_rank_median": 1,
+      "hit_rate": 0.855,
+      "mean_n_context_chars": 838.2,
+      "n_hits": 342,
+      "n_items": 400,
+      "n_misses": 58,
+      "n_questions": 400,
+      "pool_size": 608
+    },
+    "test": {
+      "bm25_params": {
+        "b": 0.75,
+        "k1": 1.5,
+        "method": "lucene"
+      },
+      "distinct_top1_docs": 275,
+      "gold_rank_leq1": 313,
+      "gold_rank_leq10": 388,
+      "gold_rank_leq5": 381,
+      "gold_rank_mean": 3.11,
+      "gold_rank_median": 1,
+      "hit_rate": 0.7825,
+      "mean_n_context_chars": 806.0,
+      "n_hits": 313,
+      "n_items": 400,
+      "n_misses": 87,
+      "n_questions": 400,
+      "pool_size": 596
+    }
+  },
+  "items_sha256": "a586606d6ec23b10f86c9104e343e77ccc2fc03130feb0bc5cb014a39f42ed55",
+  "items_timings_s": {
+    "dev_index_s": 0.15,
+    "dev_retrieve_s": 0.05,
+    "test_index_s": 0.08,
+    "test_retrieve_s": 0.06
+  },
+  "label_rule": "label = 1 iff the BM25 rank-1 paragraph text equals the question's gold paragraph",
+  "n_items_total": 800,
+  "rung": -1,
+  "variant": "top1_presented"
+}

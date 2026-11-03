@@ -1,0 +1,767 @@
+{
+  "auroc_test_drops": {
+    "no_bm25_presented_pair": 0.0039,
+    "no_ce_presented": 0.0065,
+    "no_dense": 0.12,
+    "no_lex_overlap": 0.0001,
+    "no_rank": 0.0
+  },
+  "feature_redundancy": {
+    "constant_columns": [
+      "dense_rank_log"
+    ],
+    "dense_rank_log_value": [
+      0.6931471806
+    ],
+    "identical_pairs": [
+      [
+        "dense_presented",
+        "dense_top1"
+      ]
+    ],
+    "n_columns": 12,
+    "n_distinct_columns": 11,
+    "n_informative_columns": 10,
+    "note": "dense_presented and dense_top1 are the same number for every item, and dense_rank_log is constant (ln 2) in both splits, so the 'four dense features' supply one distinct informative signal. The all-12 gate therefore has 10 informative columns, not 12.",
+    "per_split": {
+      "dev": {
+        "constant": [
+          "dense_rank_log"
+        ],
+        "dense_presented_equals_dense_top1": true,
+        "n": 1873
+      },
+      "test": {
+        "constant": [
+          "dense_rank_log"
+        ],
+        "dense_presented_equals_dense_top1": true,
+        "n": 1879
+      }
+    }
+  },
+  "frozen_rule": "logistic gate (L2, C=1.0, lbfgs, max_iter=1000, class_weight=None) on dev standardised features; confirmatory band = gate.fit_band_thresholds(target precision 0.80); exploratory band = gate.fit_band_constrained(cap 0.10); evaluated on the test half only",
+  "generated_by": "04_experiments/src/stats_addendum.py",
+  "n_boot": 10000,
+  "reproduction_checks": {
+    "all_12_thresholds": {
+      "band": {
+        "expected_t_hi": 0.947838803928,
+        "expected_t_lo": 0.90722098925,
+        "t_hi": 0.947838803928,
+        "t_lo": 0.90722098925
+      },
+      "exact": true,
+      "exploratory_band": {
+        "expected_t_hi": 0.947838803928,
+        "expected_t_lo": 0.297426271744,
+        "t_hi": 0.947838803928,
+        "t_lo": 0.297426271744
+      }
+    },
+    "all_12_vs_results_full": {
+      "dev_auroc": 0.9879,
+      "expected_dev": 0.9879,
+      "expected_test": 0.9824,
+      "passed": true,
+      "test_auroc": 0.9824,
+      "tolerance": 0.001
+    },
+    "no_rank_vs_ablation_no_rank_json": {
+      "dev_auroc": 0.9875,
+      "expected": {
+        "dev_auroc": 0.9875,
+        "over_refusal": 0.81,
+        "test_auroc": 0.9824
+      },
+      "over_refusal": 0.81,
+      "passed": true,
+      "test_auroc": 0.9824,
+      "tolerance_auroc": 0.001,
+      "tolerance_rates": 1e-09
+    }
+  },
+  "rows": {
+    "all_12": {
+      "auroc_dev": 0.9879,
+      "auroc_test": 0.9824,
+      "features": [
+        "bm25_presented",
+        "bm25_rank_log",
+        "bm25_top1",
+        "bm25_top5_mean",
+        "bm25_margin",
+        "dense_presented",
+        "dense_rank_log",
+        "dense_top1",
+        "dense_margin",
+        "top1_agreement",
+        "ce_presented",
+        "lex_overlap"
+      ],
+      "label": "all 12 retrieval features (reproduction)",
+      "n_features": 12,
+      "name": "all_12",
+      "test_band": {
+        "coverage": 0.0527,
+        "gate": "all_12_band",
+        "n_items": 1879,
+        "over_refusal": 0.755,
+        "per_rung": {
+          "1": {
+            "abstain_precision": 1.0,
+            "auroc_answerable_vs_this_rung": 0.9995,
+            "n": 400
+          },
+          "2": {
+            "abstain_precision": 0.9964,
+            "auroc_answerable_vs_this_rung": 0.9764,
+            "n": 280
+          },
+          "3": {
+            "abstain_precision": 1.0,
+            "auroc_answerable_vs_this_rung": 0.9836,
+            "n": 400
+          },
+          "4": {
+            "abstain_precision": 1.0,
+            "auroc_answerable_vs_this_rung": 0.9681,
+            "n": 399
+          }
+        },
+        "pooled_abstain_precision": 0.9993
+      },
+      "test_band_exploratory": {
+        "coverage": 0.2544,
+        "gate": "all_12_band_exploratory",
+        "n_items": 1879,
+        "over_refusal": 0.095,
+        "per_rung": {
+          "1": {
+            "abstain_precision": 0.9975,
+            "auroc_answerable_vs_this_rung": 0.9995,
+            "n": 400
+          },
+          "2": {
+            "abstain_precision": 0.9107,
+            "auroc_answerable_vs_this_rung": 0.9764,
+            "n": 280
+          },
+          "3": {
+            "abstain_precision": 0.9275,
+            "auroc_answerable_vs_this_rung": 0.9836,
+            "n": 400
+          },
+          "4": {
+            "abstain_precision": 0.8471,
+            "auroc_answerable_vs_this_rung": 0.9681,
+            "n": 399
+          }
+        },
+        "pooled_abstain_precision": 0.9216
+      },
+      "thresholds": {
+        "band": {
+          "band_width": 0.040618,
+          "dev_n_refused": 1760,
+          "dev_precision": 0.8369,
+          "dev_recall": 1.0,
+          "feasible": true,
+          "t_hi": 0.947838803928,
+          "t_lo": 0.90722098925
+        },
+        "band_exploratory": {
+          "dev_n_refused": 1423,
+          "dev_over_refusal": 0.1,
+          "dev_precision": 0.9719,
+          "dev_recall": 0.9389,
+          "feasible": true,
+          "max_over_refusal": 0.1,
+          "t_hi": 0.947838803928,
+          "t_lo": 0.297426271744
+        }
+      }
+    },
+    "lex_overlap_only": {
+      "auroc_dev": 0.8118,
+      "auroc_test": 0.8111,
+      "features": [
+        "lex_overlap"
+      ],
+      "label": "lex_overlap alone",
+      "n_features": 1,
+      "name": "lex_overlap_only",
+      "test_band": {
+        "coverage": 0.0335,
+        "gate": "lex_overlap_only_band",
+        "n_items": 1879,
+        "over_refusal": 0.9225,
+        "per_rung": {
+          "1": {
+            "abstain_precision": 1.0,
+            "auroc_answerable_vs_this_rung": 0.9806,
+            "n": 400
+          },
+          "2": {
+            "abstain_precision": 0.9893,
+            "auroc_answerable_vs_this_rung": 0.8601,
+            "n": 280
+          },
+          "3": {
+            "abstain_precision": 0.995,
+            "auroc_answerable_vs_this_rung": 0.9044,
+            "n": 400
+          },
+          "4": {
+            "abstain_precision": 0.9323,
+            "auroc_answerable_vs_this_rung": 0.5133,
+            "n": 399
+          }
+        },
+        "pooled_abstain_precision": 0.9784
+      },
+      "test_band_exploratory": {
+        "coverage": 0.5428,
+        "gate": "lex_overlap_only_band_exploratory",
+        "n_items": 1879,
+        "over_refusal": 0.105,
+        "per_rung": {
+          "1": {
+            "abstain_precision": 0.9125,
+            "auroc_answerable_vs_this_rung": 0.9806,
+            "n": 400
+          },
+          "2": {
+            "abstain_precision": 0.525,
+            "auroc_answerable_vs_this_rung": 0.8601,
+            "n": 280
+          },
+          "3": {
+            "abstain_precision": 0.6625,
+            "auroc_answerable_vs_this_rung": 0.9044,
+            "n": 400
+          },
+          "4": {
+            "abstain_precision": 0.1003,
+            "auroc_answerable_vs_this_rung": 0.5133,
+            "n": 399
+          }
+        },
+        "pooled_abstain_precision": 0.5524
+      },
+      "thresholds": {
+        "band": {
+          "band_width": 0.053667,
+          "dev_n_refused": 1788,
+          "dev_precision": 0.8009,
+          "dev_recall": 0.9722,
+          "feasible": true,
+          "t_hi": 0.613801766167,
+          "t_lo": 0.560135166641
+        },
+        "band_exploratory": {
+          "dev_n_refused": 877,
+          "dev_over_refusal": 0.1,
+          "dev_precision": 0.9544,
+          "dev_recall": 0.5682,
+          "feasible": true,
+          "max_over_refusal": 0.1,
+          "t_hi": 0.69323583057,
+          "t_lo": 0.121917584466
+        }
+      }
+    },
+    "no_bm25_presented_pair": {
+      "auroc_dev": 0.9845,
+      "auroc_test": 0.9785,
+      "features": [
+        "bm25_top1",
+        "bm25_top5_mean",
+        "bm25_margin",
+        "dense_presented",
+        "dense_rank_log",
+        "dense_top1",
+        "dense_margin",
+        "top1_agreement",
+        "ce_presented",
+        "lex_overlap"
+      ],
+      "label": "without bm25_presented + bm25_rank_log",
+      "n_features": 10,
+      "name": "no_bm25_presented_pair",
+      "test_band": {
+        "coverage": 0.0287,
+        "gate": "no_bm25_presented_pair_band",
+        "n_items": 1879,
+        "over_refusal": 0.865,
+        "per_rung": {
+          "1": {
+            "abstain_precision": 1.0,
+            "auroc_answerable_vs_this_rung": 0.9993,
+            "n": 400
+          },
+          "2": {
+            "abstain_precision": 1.0,
+            "auroc_answerable_vs_this_rung": 0.9722,
+            "n": 280
+          },
+          "3": {
+            "abstain_precision": 1.0,
+            "auroc_answerable_vs_this_rung": 0.9773,
+            "n": 400
+          },
+          "4": {
+            "abstain_precision": 1.0,
+            "auroc_answerable_vs_this_rung": 0.9632,
+            "n": 399
+          }
+        },
+        "pooled_abstain_precision": 1.0
+      },
+      "test_band_exploratory": {
+        "coverage": 0.2469,
+        "gate": "no_bm25_presented_pair_band_exploratory",
+        "n_items": 1879,
+        "over_refusal": 0.1125,
+        "per_rung": {
+          "1": {
+            "abstain_precision": 0.9975,
+            "auroc_answerable_vs_this_rung": 0.9993,
+            "n": 400
+          },
+          "2": {
+            "abstain_precision": 0.9143,
+            "auroc_answerable_vs_this_rung": 0.9722,
+            "n": 280
+          },
+          "3": {
+            "abstain_precision": 0.93,
+            "auroc_answerable_vs_this_rung": 0.9773,
+            "n": 400
+          },
+          "4": {
+            "abstain_precision": 0.8596,
+            "auroc_answerable_vs_this_rung": 0.9632,
+            "n": 399
+          }
+        },
+        "pooled_abstain_precision": 0.9263
+      },
+      "thresholds": {
+        "band": {
+          "band_width": 0.026296,
+          "dev_n_refused": 1817,
+          "dev_precision": 0.8107,
+          "dev_recall": 1.0,
+          "feasible": true,
+          "t_hi": 0.966541687124,
+          "t_lo": 0.940245656112
+        },
+        "band_exploratory": {
+          "dev_n_refused": 1423,
+          "dev_over_refusal": 0.1,
+          "dev_precision": 0.9719,
+          "dev_recall": 0.9389,
+          "feasible": true,
+          "max_over_refusal": 0.1,
+          "t_hi": 0.966541687124,
+          "t_lo": 0.291003703317
+        }
+      }
+    },
+    "no_ce_presented": {
+      "auroc_dev": 0.9844,
+      "auroc_test": 0.9759,
+      "features": [
+        "bm25_presented",
+        "bm25_rank_log",
+        "bm25_top1",
+        "bm25_top5_mean",
+        "bm25_margin",
+        "dense_presented",
+        "dense_rank_log",
+        "dense_top1",
+        "dense_margin",
+        "top1_agreement",
+        "lex_overlap"
+      ],
+      "label": "without ce_presented (cross-encoder)",
+      "n_features": 11,
+      "name": "no_ce_presented",
+      "test_band": {
+        "coverage": 0.0474,
+        "gate": "no_ce_presented_band",
+        "n_items": 1879,
+        "over_refusal": 0.79,
+        "per_rung": {
+          "1": {
+            "abstain_precision": 1.0,
+            "auroc_answerable_vs_this_rung": 0.9986,
+            "n": 400
+          },
+          "2": {
+            "abstain_precision": 0.9893,
+            "auroc_answerable_vs_this_rung": 0.9548,
+            "n": 280
+          },
+          "3": {
+            "abstain_precision": 0.9975,
+            "auroc_answerable_vs_this_rung": 0.9793,
+            "n": 400
+          },
+          "4": {
+            "abstain_precision": 0.9975,
+            "auroc_answerable_vs_this_rung": 0.9644,
+            "n": 399
+          }
+        },
+        "pooled_abstain_precision": 0.9966
+      },
+      "test_band_exploratory": {
+        "coverage": 0.2773,
+        "gate": "no_ce_presented_band_exploratory",
+        "n_items": 1879,
+        "over_refusal": 0.08,
+        "per_rung": {
+          "1": {
+            "abstain_precision": 0.995,
+            "auroc_answerable_vs_this_rung": 0.9986,
+            "n": 400
+          },
+          "2": {
+            "abstain_precision": 0.8036,
+            "auroc_answerable_vs_this_rung": 0.9548,
+            "n": 280
+          },
+          "3": {
+            "abstain_precision": 0.92,
+            "auroc_answerable_vs_this_rung": 0.9793,
+            "n": 400
+          },
+          "4": {
+            "abstain_precision": 0.8396,
+            "auroc_answerable_vs_this_rung": 0.9644,
+            "n": 399
+          }
+        },
+        "pooled_abstain_precision": 0.8966
+      },
+      "thresholds": {
+        "band": {
+          "band_width": 0.028722,
+          "dev_n_refused": 1779,
+          "dev_precision": 0.828,
+          "dev_recall": 1.0,
+          "feasible": true,
+          "t_hi": 0.878403197364,
+          "t_lo": 0.849681170708
+        },
+        "band_exploratory": {
+          "dev_n_refused": 1367,
+          "dev_over_refusal": 0.095,
+          "dev_precision": 0.9722,
+          "dev_recall": 0.9022,
+          "feasible": true,
+          "max_over_refusal": 0.1,
+          "t_hi": 0.91093288704,
+          "t_lo": 0.199332108275
+        }
+      }
+    },
+    "no_dense": {
+      "auroc_dev": 0.8667,
+      "auroc_test": 0.8624,
+      "features": [
+        "bm25_presented",
+        "bm25_rank_log",
+        "bm25_top1",
+        "bm25_top5_mean",
+        "bm25_margin",
+        "top1_agreement",
+        "ce_presented",
+        "lex_overlap"
+      ],
+      "label": "without the four dense features",
+      "n_features": 8,
+      "name": "no_dense",
+      "test_band": {
+        "coverage": 0.0458,
+        "gate": "no_dense_band",
+        "n_items": 1879,
+        "over_refusal": 0.8825,
+        "per_rung": {
+          "1": {
+            "abstain_precision": 1.0,
+            "auroc_answerable_vs_this_rung": 0.9993,
+            "n": 400
+          },
+          "2": {
+            "abstain_precision": 1.0,
+            "auroc_answerable_vs_this_rung": 0.9735,
+            "n": 280
+          },
+          "3": {
+            "abstain_precision": 0.995,
+            "auroc_answerable_vs_this_rung": 0.9822,
+            "n": 400
+          },
+          "4": {
+            "abstain_precision": 0.9073,
+            "auroc_answerable_vs_this_rung": 0.5271,
+            "n": 399
+          }
+        },
+        "pooled_abstain_precision": 0.9736
+      },
+      "test_band_exploratory": {
+        "coverage": 0.4066,
+        "gate": "no_dense_band_exploratory",
+        "n_items": 1879,
+        "over_refusal": 0.0925,
+        "per_rung": {
+          "1": {
+            "abstain_precision": 0.9975,
+            "auroc_answerable_vs_this_rung": 0.9993,
+            "n": 400
+          },
+          "2": {
+            "abstain_precision": 0.9214,
+            "auroc_answerable_vs_this_rung": 0.9735,
+            "n": 280
+          },
+          "3": {
+            "abstain_precision": 0.9525,
+            "auroc_answerable_vs_this_rung": 0.9822,
+            "n": 400
+          },
+          "4": {
+            "abstain_precision": 0.1003,
+            "auroc_answerable_vs_this_rung": 0.5271,
+            "n": 399
+          }
+        },
+        "pooled_abstain_precision": 0.7289
+      },
+      "thresholds": {
+        "band": {
+          "band_width": 0.022174,
+          "dev_n_refused": 1798,
+          "dev_precision": 0.8014,
+          "dev_recall": 0.9783,
+          "feasible": true,
+          "t_hi": 0.543909900319,
+          "t_lo": 0.521736365359
+        },
+        "band_exploratory": {
+          "dev_n_refused": 1124,
+          "dev_over_refusal": 0.0975,
+          "dev_precision": 0.9653,
+          "dev_recall": 0.7366,
+          "feasible": true,
+          "max_over_refusal": 0.1,
+          "t_hi": 0.629083715945,
+          "t_lo": 0.237183078573
+        }
+      }
+    },
+    "no_lex_overlap": {
+      "auroc_dev": 0.9878,
+      "auroc_test": 0.9823,
+      "features": [
+        "bm25_presented",
+        "bm25_rank_log",
+        "bm25_top1",
+        "bm25_top5_mean",
+        "bm25_margin",
+        "dense_presented",
+        "dense_rank_log",
+        "dense_top1",
+        "dense_margin",
+        "top1_agreement",
+        "ce_presented"
+      ],
+      "label": "without lex_overlap",
+      "n_features": 11,
+      "name": "no_lex_overlap",
+      "test_band": {
+        "coverage": 0.0426,
+        "gate": "no_lex_overlap_band",
+        "n_items": 1879,
+        "over_refusal": 0.8025,
+        "per_rung": {
+          "1": {
+            "abstain_precision": 1.0,
+            "auroc_answerable_vs_this_rung": 0.9995,
+            "n": 400
+          },
+          "2": {
+            "abstain_precision": 0.9964,
+            "auroc_answerable_vs_this_rung": 0.9765,
+            "n": 280
+          },
+          "3": {
+            "abstain_precision": 1.0,
+            "auroc_answerable_vs_this_rung": 0.9838,
+            "n": 400
+          },
+          "4": {
+            "abstain_precision": 1.0,
+            "auroc_answerable_vs_this_rung": 0.9678,
+            "n": 399
+          }
+        },
+        "pooled_abstain_precision": 0.9993
+      },
+      "test_band_exploratory": {
+        "coverage": 0.2544,
+        "gate": "no_lex_overlap_band_exploratory",
+        "n_items": 1879,
+        "over_refusal": 0.0925,
+        "per_rung": {
+          "1": {
+            "abstain_precision": 0.995,
+            "auroc_answerable_vs_this_rung": 0.9995,
+            "n": 400
+          },
+          "2": {
+            "abstain_precision": 0.9107,
+            "auroc_answerable_vs_this_rung": 0.9765,
+            "n": 280
+          },
+          "3": {
+            "abstain_precision": 0.93,
+            "auroc_answerable_vs_this_rung": 0.9838,
+            "n": 400
+          },
+          "4": {
+            "abstain_precision": 0.8496,
+            "auroc_answerable_vs_this_rung": 0.9678,
+            "n": 399
+          }
+        },
+        "pooled_abstain_precision": 0.9222
+      },
+      "thresholds": {
+        "band": {
+          "band_width": 0.03352,
+          "dev_n_refused": 1779,
+          "dev_precision": 0.828,
+          "dev_recall": 1.0,
+          "feasible": true,
+          "t_hi": 0.947289883254,
+          "t_lo": 0.913770058484
+        },
+        "band_exploratory": {
+          "dev_n_refused": 1424,
+          "dev_over_refusal": 0.0975,
+          "dev_precision": 0.9726,
+          "dev_recall": 0.9403,
+          "feasible": true,
+          "max_over_refusal": 0.1,
+          "t_hi": 0.947289883254,
+          "t_lo": 0.295109450794
+        }
+      }
+    },
+    "no_rank": {
+      "auroc_dev": 0.9875,
+      "auroc_test": 0.9824,
+      "features": [
+        "bm25_presented",
+        "bm25_top1",
+        "bm25_top5_mean",
+        "bm25_margin",
+        "dense_presented",
+        "dense_top1",
+        "dense_margin",
+        "top1_agreement",
+        "ce_presented",
+        "lex_overlap"
+      ],
+      "label": "without the two rank features",
+      "n_features": 10,
+      "name": "no_rank",
+      "test_band": {
+        "coverage": 0.041,
+        "gate": "no_rank_band",
+        "n_items": 1879,
+        "over_refusal": 0.81,
+        "per_rung": {
+          "1": {
+            "abstain_precision": 1.0,
+            "auroc_answerable_vs_this_rung": 0.9995,
+            "n": 400
+          },
+          "2": {
+            "abstain_precision": 0.9964,
+            "auroc_answerable_vs_this_rung": 0.9757,
+            "n": 280
+          },
+          "3": {
+            "abstain_precision": 1.0,
+            "auroc_answerable_vs_this_rung": 0.9838,
+            "n": 400
+          },
+          "4": {
+            "abstain_precision": 1.0,
+            "auroc_answerable_vs_this_rung": 0.9685,
+            "n": 399
+          }
+        },
+        "pooled_abstain_precision": 0.9993
+      },
+      "test_band_exploratory": {
+        "coverage": 0.2512,
+        "gate": "no_rank_band_exploratory",
+        "n_items": 1879,
+        "over_refusal": 0.1,
+        "per_rung": {
+          "1": {
+            "abstain_precision": 0.9975,
+            "auroc_answerable_vs_this_rung": 0.9995,
+            "n": 400
+          },
+          "2": {
+            "abstain_precision": 0.9036,
+            "auroc_answerable_vs_this_rung": 0.9757,
+            "n": 280
+          },
+          "3": {
+            "abstain_precision": 0.935,
+            "auroc_answerable_vs_this_rung": 0.9838,
+            "n": 400
+          },
+          "4": {
+            "abstain_precision": 0.8546,
+            "auroc_answerable_vs_this_rung": 0.9685,
+            "n": 399
+          }
+        },
+        "pooled_abstain_precision": 0.9243
+      },
+      "thresholds": {
+        "band": {
+          "band_width": 0.033023,
+          "dev_n_refused": 1779,
+          "dev_precision": 0.828,
+          "dev_recall": 1.0,
+          "feasible": true,
+          "t_hi": 0.944848276498,
+          "t_lo": 0.911825003477
+        },
+        "band_exploratory": {
+          "dev_n_refused": 1424,
+          "dev_over_refusal": 0.1,
+          "dev_precision": 0.9719,
+          "dev_recall": 0.9396,
+          "feasible": true,
+          "max_over_refusal": 0.1,
+          "t_hi": 0.944848276498,
+          "t_lo": 0.303125257266
+        }
+      }
+    }
+  },
+  "seed": 12345,
+  "verdict": "The dense presented-passage score carries the separation: dropping the four dense columns costs 12.0 points of test AUROC (0.982 \u2192 0.862) and is the only single-group removal that does, while dropping lex_overlap costs 0.0, the two rank features 0.0, the cross-encoder 0.7 and the bm25 presented pair 0.4. The block is narrower than its name: dense_presented and dense_top1 are the same number for every item and dense_rank_log is constant at ln 2, so the all-12 gate really has 10 informative columns and 'without the four dense features' removes one distinct signal. The effect is concentrated in rung 4: without it the confirmatory gate's rung-4 abstain precision falls to 0.907 and the exploratory band's to 0.100. lex_overlap alone reaches test AUROC 0.811, so overlap is not what carries the result inside this feature stack \u2014 although the separate surface audit (audit.json) shows overlap is highly predictive of rung membership on its own, which is a different question."
+}

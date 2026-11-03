@@ -1,0 +1,64 @@
+persona: statistician
+summary: |
+  The paper pre-registers three hypotheses, fits one gate and both operating points on a dev half,
+  and reports that the ladder vanishes at the registered point while a coverage-constrained
+  exploratory point recovers about half of it. The reporting discipline is better than most: n per
+  rung in Table 1, paired bootstrap with a stated seed and 10,000 resamples, Holm over exactly the
+  two tests that carry p-values, CIs on both control arms, and an item-plus-cluster bootstrap. It
+  still does not support its own numbers as estimates: the column labelled abstain precision is a
+  refusal rate (400/400, 279/280) rather than the precision the gate was fitted to, the headline
+  intervals are zero-width bootstrap artefacts reported as if they were estimates, no AUROC in the
+  paper has an interval, and the corrected-versus-frozen comparison changes the operating point at
+  the same time as the feature set. Those are fixable on the existing data, which is why this is
+  borderline rather than reject.
+strengths:
+  - "Table 1 gives n for every rung (400, 280, 400, 399 on the held-out half), so the reader at least knows the denominator of the per-rung rate; the paper reports 1879 held-out items and 1873 dev items rather than a bare percentage."
+  - "The H3 comparison is paired by question with the resampling scheme, seed (12345) and resample count (10000) all stated in Section 3.5, and Section 4.7 reports the decisive fact for an exact-zero difference - zero discordant pairs - instead of leaning on the interval alone."
+  - "Holm is applied over exactly the two tests that carry p-values, and the reason H2 has none is stated rather than left implicit (Section 3.5); the corrected run then reports an interval on the H3 difference that excludes zero ([-3.11, -1.35])."
+  - "Both control arms carry intervals (R5 [85.75, 91.75], transfer [79.50, 89.50], Table 5) rather than point estimates, and the exchangeability check in Section 4.7 reports an actual p-value with its variable named."
+weaknesses:
+  - "The two numbers called abstain precision are on different scales. Table 1's R1 cell is 400 refusals out of 400 negatives and R2 is 279 of 280, i.e. P(refused | negative); the constraint the gate was fitted to is a pooled P(negative | refused) of 0.8369 at 1760 refusals out of 1873 dev items (results_full.json, thresholds.band). Pooled on the held-out half the fitting definition gives 1478/1780, about 83.0%, not the 99.93% the paper calls pooled precision."
+  - "The abstract's 'abstain precision is then identical on every rung' is contradicted by the paper's own table: R2 is 99.64% and the reported sequence is [1.00, 0.9964, 1.00, 1.00], so the rungs are not identical even though three of the four round to 100.00%."
+  - "The headline intervals are degenerate. H1 and H3 both report '95% CI [0.00%, 0.00%]' from a bootstrap in which every paired difference is zero; a zero-width interval is what a boundary proportion produces, not evidence of no difference, and Section 3.5's claim of BCa throughout is inconsistent with the archive, which records method 'percentile' for rungs 1, 3 and 4 (results_full.json, per_rung.*.ci95.method)."
+  - "No AUROC anywhere carries an interval, although the 0.982 to 0.874 drop is the corrected run's headline finding and 0.640 is the basis of the transfer verdict (Section 4.6, Section 4.8). AUROC is reported to three decimals across 1879 items drawn from 18 held-out articles without any sampling statement."
+  - "The cluster bootstrap is thin and partly vacuous. It resamples 18 held-out articles (stats_addendum.json, n_articles_test); the two cells H1 rests on are zero-width in both item and cluster resampling and are excluded from the five 'comparable' cells, and per-article rates are 1.0 in 17 of 18 articles for exploratory rung 1 (18 of 18 for the confirmatory cell), so 'leaves every verdict unchanged' (Section 4.7) cannot be checked where it matters. The same sentence's 'width ratio as low as 0.851' is also wrong against the archive, whose smallest ratio is 0.4521."
+  - "Table 6 supports an equivalence claim - 'No single group carries the result' - with eight point estimates and no intervals: all_12 0.874, no_dense 0.862, dense_only 0.870, no_bm25 0.868, on the same 1879 items. A 0.012 AUROC spread across eight feature subsets is not evidence that the separation is evenly distributed."
+  - "In the corrected run the H3 comparison is not at matched recall and its comparator breaches the constraint: the band's dev recall is 0.9898 against the matched single's 0.9925, and the matched single's dev precision is 0.7886, below the 0.80 the rule requires. The -2.23% is therefore a comparison of two different operating points, not the pre-registered one."
+  - "Section 4.3 declares the exploratory rule as precision at least 0.80 and dev over-refusal at most 0.10, and Table 4 then reports the corrected exploratory arm at 11.00% over-refusal with no comment on whether the cap was breached or simply binds on dev."
+  - "The held-out rung-2 shortfall is never quantified and the exchangeability check covers only dev: Section 3.1 gives 273 dev items, Table 1 shows 280 of 400 on the test half, and Section 4.7 claims 'in either split' while reporting the dev 273/127 split and a single dev p-value (0.052). The reader baseline's 0.419 AUROC (Section 4.7) likewise has no interval, on 553 dev items and 6 refusals at the fitted threshold."
+questions:
+  - "What is the pooled held-out abstain precision under the definition the 0.80 constraint uses, and why is it not the number in Table 1?"
+  - "How many held-out articles are there, and what do the cluster intervals look like for rungs 1 and 3, where the item interval is already zero-width?"
+  - "If the corrected exploratory arm must respect the 0.10 over-refusal cap, is its 11.00% a dev-side or test-side breach, and what happens to the R4 collapse if the cap is enforced on the reported half?"
+  - "Can you report a paired bootstrap interval on the corrected AUROC difference (0.982 against 0.874) over the same 1879 items, and on all_12 against no_dense in Table 6?"
+must_fix:
+  - claim: "The values reported as abstain precision are refusal rates over each rung's negatives, not the pooled precision the 0.80 constraint was fitted to, so the table cannot be checked against the rule."
+    where: "Section 3.3, Section 4.2, Table 1, Abstract"
+    evidence_needed: "Give the formula for both quantities: Table 1's R1 is 400/400 and R2 is 279/280 (predictions.csv), while thresholds.band.dev_precision is 0.8369 at 1760/1873 dev refusals; the pooled held-out precision under the fitting definition is 1478/1780 = 83.0%. Report both, and correct 'identical on every rung' given R2 = 99.64%."
+  - claim: "Zero-width 95% intervals on H1 and H3 are presented as estimates when they are artefacts of a boundary proportion, and the stated interval method does not match the archive."
+    where: "Section 3.5, Table 2, Section 4.2"
+    evidence_needed: "Report the discordant counts (H1 0 of 400 pairs, H3 0 of 1479) as the primary evidence and describe the interval as degenerate, and reconcile Section 3.5's 'BCa' with the 'percentile' method recorded for rungs 1, 3 and 4 in results_full.json."
+  - claim: "No AUROC in the paper carries an interval or a paired difference interval, including the 0.982-to-0.874 drop that the corrected run turns on."
+    where: "Section 4.1, Section 4.6, Section 4.8"
+    evidence_needed: "A paired bootstrap 95% CI on the AUROC difference over the 1879 held-out items for 0.982 against 0.874, and intervals for the 0.945, 0.640 and 0.977 figures, with the number of articles (18) stated."
+  - claim: "The cluster bootstrap rests on 18 held-out articles, the two cells that carry H1 are zero-width and excluded from its comparable set, and its quoted minimum width ratio is wrong."
+    where: "Section 4.7"
+    evidence_needed: "Report n_articles = 18 beside the cluster intervals, show the rung-1 and rung-3 cluster intervals rather than describing them, and correct 'width ratio as low as 0.851' to the archive's 0.4521 (stats_addendum.json, cluster_bootstrap)."
+  - claim: "The corrected H3 comparison is not at matched abstain recall and its matched single violates the 0.80 precision constraint, so -2.23% is not the pre-registered test."
+    where: "Section 4.6, Table 4"
+    evidence_needed: "Report the corrected dev recalls (band 0.9898, matched single 0.9925) and the matched single's dev precision (0.7886), then re-match on recall and re-report the difference and its interval."
+  - claim: "The corrected exploratory arm reports 11.00% over-refusal against a declared cap of 0.10 with no statement of whether the declared rule was breached."
+    where: "Section 4.3, Table 4"
+    evidence_needed: "State whether the 'dev over-refusal at most 0.10' cap binds on dev or on the held-out half, and give the corrected dev over-refusal; if the reported 11.00% is a breach, note it or rebuild the arm under the cap."
+  - claim: "The equivalence claim that no single feature group carries the result is supported only by point estimates across eight subsets."
+    where: "Section 4.6, Table 6"
+    evidence_needed: "A paired bootstrap 95% CI on the held-out AUROC difference for all_12 against no_dense (0.874 against 0.862) and against dense_only (0.874 against 0.870) over the same 1879 items."
+  - claim: "The held-out rung-2 shortfall is never stated and the exchangeability check that Section 3.1 promises for both splits reports only dev figures."
+    where: "Section 3.1, Section 4.7"
+    evidence_needed: "Report the held-out split's kept and dropped counts (280 of 400) and the per-variable p-values for that half, alongside the dev 273/127 and its 0.052 minimum."
+soundness: 2
+presentation: 2
+contribution: 3
+confidence: 4
+overall: 5
+decision: borderline

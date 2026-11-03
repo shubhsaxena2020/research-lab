@@ -1,0 +1,1206 @@
+[
+ {
+  "openalex_id": "W7163576638",
+  "title": "Reliable Biomedical RAG with Answerability-Aware Hybrid Retrieval",
+  "year": 2026,
+  "date": "2026-06-04",
+  "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+  "doi": "10.5281/zenodo.20547014",
+  "url": "https://openalex.org/W7163576638",
+  "cites": 0,
+  "type": "article",
+  "language": "en",
+  "oa": "https://doi.org/10.5281/zenodo.20547014",
+  "authors": "Soumyadeep Saha; Rima Hazra; Brijesh Kumar Karna; Om Pandey; Pethuru Raj; Binod Kumar; Anand Mishra",
+  "abstract": "Reliable retrieval-augmented generation (RAG) in biomedical settings must solve two coupled problems: the system must retrieve high-coverage evidence for supported questions, and it must abstain gracefully when the corpus does not contain sufficient evidence. We present an answerability-aware hybrid retrieval pipeline evaluated on the SciFact benchmark. The system first converts 5,183 scientific abstracts into 6,241 sentence-aware passages, then combines sparse BM25 retrieval with dense sentence-embedding retrieval using min-max normalized score fusion. In parallel, it constructs an answerability dataset from 1,109 SciFact queries augmented with out-of-domain and domain-similar hard negatives, and trains a BERT-based answerability gate to distinguish supported from unsupported questions. Empirically, hybrid retrieval yields the best evidence coverage, improving Recall@5 to 0.773 over 0.695 for BM25 and 0.749 for dense retrieval; Recall@10 rises to 0.826 over 0.748 and 0.800, respectively. The answerability classifier reaches 80.5% validation accuracy, with 97.5% recall on answerable queries and 64.3% recall on unsupported queries. We further formalize the offline training and online inference algorithms used by the system, making explicit how abstention, sparse candidate generation, dense rescoring, and retrieval-conditioned answering interact. Together, these results show that answerability-aware hybrid retrieval is a practical systems design for reliable biomedical RAG, especially when retrieval and abstention are evaluated as first-class components rather than incidental pre-processing steps.",
+  "found_by": "abstain answerable questions",
+  "_score": 22,
+  "_present": 4,
+  "_titlehits": 2,
+  "_hits": {
+   "abstain": 4,
+   "retrieval": 7,
+   "gate": 1,
+   "hardness": 1
+  },
+  "_in_register": false,
+  "_slice_hits": [
+   "retrieval_features",
+   "hardness_ladder"
+  ],
+  "_slice_score": 2
+ },
+ {
+  "openalex_id": "W7222885454",
+  "title": "Reliable Indonesian Academic Service Chatbot Using Retrieval-Augmented Generation and Adaptive Refusal",
+  "year": 2026,
+  "date": "2026-09-28",
+  "venue": "Jurnal RESTI (Rekayasa Sistem dan Teknologi Informasi)",
+  "doi": "10.29207/resti.v10i5.8018",
+  "url": "https://openalex.org/W7222885454",
+  "cites": 0,
+  "type": "article",
+  "language": "en",
+  "oa": "https://jurnal.iaii.or.id/index.php/RESTI/article/download/8018/1340",
+  "authors": "Jarot Budiasto; Tatik Melinda Tallulembang; Selfina Pare; Muhammad Hasbi",
+  "abstract": "Academic service information is often stored in lengthy, formal, and distributed university documents, making accurate access difficult. Generative chatbots can improve access but may answer unsupported questions unless retrieval and refusal are controlled. This study proposes a reliability-oriented Retrieval-Augmented Generation (RAG) chatbot for Indonesian academic services integrating BGE-M3, FAISS, adaptive refusal thresholding, rule-based guardrails, Qwen2.5, and retry-on-refusal. A controlled experiment used 12 official documents and 160 Indonesian questions across eight categories. The final configuration achieved Precision@5 of 0.7250, Recall@5 of 0.9125, MRR of 0.8940, nDCG@5 of 0.8888, and mean semantic similarity of 0.8516. All 16 expected-refusal questions were refused and none of the 144 answerable questions was falsely refused, yielding observed refusal accuracy of 1.0000 and a false refusal rate of 0.0000. Retry-on-refusal reduced the false refusal rate from 0.0556 to 0.0000 and increased answerable-only similarity from 0.8150 to 0.8392. These results provide initial evidence that combining retrieval confidence, guardrails, and retry supports more reliable behavior within the controlled benchmark. Because the refusal subset was small and institution-specific, larger evaluations using naturally occurring student queries are required before inferring operational reliability.",
+  "found_by": "over-refusal retrieval augmented",
+  "_score": 19,
+  "_present": 3,
+  "_titlehits": 2,
+  "_hits": {
+   "abstain": 2,
+   "retrieval": 3,
+   "gate": 2,
+   "hardness": 0
+  },
+  "_in_register": false,
+  "_slice_hits": [
+   "retrieval_features",
+   "over_refusal"
+  ],
+  "_slice_score": 2
+ },
+ {
+  "openalex_id": "W7169720146",
+  "title": "The Resonance Gate: confirmatory study of endogenous confidence in a VSA memory substrate.",
+  "year": 2026,
+  "date": "2026-07-19",
+  "venue": "",
+  "doi": "10.17605/osf.io/95e2q",
+  "url": "https://openalex.org/W7169720146",
+  "cites": 0,
+  "type": "preprint",
+  "language": "en",
+  "oa": "https://osf.io/95e2q",
+  "authors": "Jon-Paul Cacioli",
+  "abstract": "# RG confirmatory study — registration (final; file on OSF, then fill the two lines below) OSF URL: PENDING Filed: PENDING Artifact: tag rg-freeze-1.0 = commit 15be7513b32af89abe519a7b48e588565fee12d2 (tag object 7210edc71adbbd3d71f8a44908e6217f3c1ebdc4). Tunables inventory: docs/freeze_checklist.md (frozen with the tag). Exploratory record: notebook.md entries 1-12 (append-only lab log). ## System under test The Resonance Gate (RG): a VSA/MAP memory substrate (D=8192, whitened projection lambda=0.75 substrate-side) in which retrieval and confidence are the same operation; two-geometry interface (raw-cosine registry); two-source ambiguity (referential + stored); SmolLM3-3B mouth under template-forward verify-then-speak. No confidence-specific training exists anywhere in the gate path, and NO correctness-fit calibration mapping exists or will exist in the system (C2 discipline): ECE is reported descriptively and this trade is accepted in advance. ## Hypotheses and decision rules (one run, registered seeds, two-sided alpha=.05) Primary gate scalar (frozen, chosen on dev): 1-u. Secondaries (reported, never substituted): b, b/(b+d). - H1 (endogeneity, primary): AUROC2(GATE 1-u) > AUROC2(VERBALISED); paired-bootstrap (B=2000, seed 777000003) 95% CI of the difference excludes zero. Dev evidence: gap +0.41 [E4]. Falsified -> published as the negative it is. - H2 (parity with a trained readout): AUROC2(FOIL) - AUROC2(GATE 1-u) <= 0.02, where FOIL is the frozen logistic head over the gate's own retrieval features (a, m_l1, m_l2, m_ref, k, N), trained on DEV only (instruments/h2_foil_head.json, sha256 b068c096dd6cf9f8...; dev cross-fit AUROC2 0.9750 vs analytic 0.9567, dev gap 0.018). - H2b (architectural prediction): AUROC2 of the probe-on-mouth baseline has a 95% CI containing 0.5. The mouth never holds the facts; chance decoding is the thesis's own prediction, promoted from baseline to registered claim. - H3 (ignorance/ambiguity separation): referential-d AUC (referential probes vs clean correct ID) >= 0.90 AND stored-d AUC (planted collisions vs clean correct ID) >= 0.90. Dev: 0.985 / 1.000. - H4 (gate discipline): ungrounded emitted leak <= 2%, measured by the characterised leak_v2 checker; checker precision AND recall on its 60-output labelled sample reported alongside the rate. Null model: FULL permutation test (1000 permutations, seed 777000004) of the primary scalar against correctness. (The plan's strata-shuffled null is AUROC2-invariant by construction — apparatus finding, entry 10 — and is therefore not the registered null for rank statistics.) ## Exclusions - meta-d'/M-ratio: computed only if forced-answer accuracy is in [0.55, 0.95] and d' >= 0.2 (Guggenmos); otherwise excluded and reported as excluded, never force-fit. AUROC2/ECE/leak have no exclusions. - Echo-check-rejected writes are logged and excluded from ID sampling (never stored). - Interpretation note (registered in advance): M-ratio > 1 is the PREDICTED signature, not an anomaly — the type-2 signal (retrieval geometry) has access to resolution failure that the forced type-1 answer lacks, so metacognitive hypersensitivity is expected for a memory whose confidence is its retrieval geometry. ## Stimuli and n - Confirmatory corpus: instruments/corpus.py, CorpusConfig(seed=777000001, n_entities=500, n_facts=160, n_id=150, n_ood=90, n_coll=20, n_ref=20) -> 280 items (>= registered floor n=200). Seed family disjoint from every dev seed (dev family documented in entries 5-10). - Registered seeds: corpus 777000001, item assignment/elicitation 777000002, bootstrap 777000003, permutation 777000004. Used nowhere before Phase C. ## Analysis - One command: `python instruments/phase_c.py` (refuses to run until the OSF URL and filing timestamp are entered above; verifies the frozen foil-head hash before running). - Script blob hashes at the freeze tag (git hash-object): - instruments/phase_c.py: d151fac35329bf1b557daf9a83bc90250695534c - instruments/corpus.py: 7b9c0e8ea4da4339fefed585302ed9de5d6bc35b - instruments/type2.py: 8a0d6b42f14267588343ef8a750c31491ab64fe1 - instruments/baselines.py: 47e85d8cae98670ffbcbcde8969c6e9faa8cfaac - instruments/leak_v2.py: bbfe976522aab13ea670f9551753343297ab18f3 - instruments/h2_foil.py: 344653b4060b8db5abe89c99ca3b08ca8d1bb65a - instruments/calibrate_l2.py: 5eb45185414444c33abc0e273c5b409cb0ee23e0 - instruments/dress_rehearsal.py: 3064adb4b7cf823eadf599ef2e1c3ef7611c0fac - Backend: GPU (hipBLAS gfx1100); RG_CPU=1 is the registered fallback and changes no substrate/gate number (E3.2 evidence, entry 9). ## Known adaptations (registered deviations) - Type-2 apparatus and pseudo-2AFC: literature-standard implementations validated by synthetic-known-answer tests (instruments/test_type2.py); the Synthium apparatus doc was absent from docs/ at freeze — cross-programme comparability is approximate. - Probe-on-mouth features are answer-token logits (llama.cpp exposes logits, not residual streams). - Deviation log: any departure from this document is dated and logged in the deviation log published with the OSF filing; results are reported whichever way they fall.",
+  "found_by": "retrieval confidence gate",
+  "_score": 16,
+  "_present": 3,
+  "_titlehits": 1,
+  "_hits": {
+   "abstain": 1,
+   "retrieval": 3,
+   "gate": 4,
+   "hardness": 0
+  },
+  "_in_register": false,
+  "_slice_hits": [
+   "two_threshold",
+   "retrieval_features"
+  ],
+  "_slice_score": 2
+ },
+ {
+  "openalex_id": "W7214082270",
+  "title": "RADAR: A Prototype for Grounding Large Language Model Consult Support in an ACR-Structured Appropriateness Knowledge Base with Citation Validation and Abstention",
+  "year": 2026,
+  "date": "2026-09-23",
+  "venue": "Journal of Imaging Informatics in Medicine",
+  "doi": "10.1007/s10278-026-02326-y",
+  "url": "https://openalex.org/W7214082270",
+  "cites": 0,
+  "type": "article",
+  "language": "en",
+  "oa": "https://link.springer.com/content/pdf/10.1007/s10278-026-02326-y.pdf",
+  "authors": "Chiranjeevi Vantaku; Amy Avakian",
+  "abstract": "Large language models (LLMs) answer medical questions fluently but fabricate statements and citations too often to be trusted unaided at the point of care. We describe RADAR (Radiology Appropriateness Decision and Advisory Resource), a prototype retrieval-augmented consult-support pipeline that grounds an LLM in a knowledge base structured like the American College of Radiology (ACR) Appropriateness Criteria at the level of individual clinical variants. The knowledge base is synthetic (twelve variants across five topics) because the official criteria are copyrighted. The design is deliberately conservative: a BM25 retriever, an absolute-score abstention gate, a structured-output generator bound by an in-prompt grounding contract, and a deterministic validator that strips any recommendation whose citation does not resolve to a retrieved chunk. We report a development set (eight scenarios, seven off-domain probes) used during parameter selection and a held-out set written after all parameters were frozen (36 scenarios, three per variant, and 24 clinically adjacent probes), evaluated in a deterministic retrieval-only mode and in the full pipeline over five independent runs at temperature 0. Retrieval alone ranked the correct variant first in 25 of 36 held-out scenarios (69.4%; 95% CI 51.9-83.7) but always placed it within the top five, and the score gate stopped only 3 of 22 clinically adjacent probes. The full pipeline (claude-sonnet-4-6, temperature 0, five runs) selected the correct variant and top procedure in every run for 33 of 36 scenarios (91.7%; 95% CI 77.5-98.2) and in 33 or 34 of 36 scenarios in each individual run; every failed run was a false abstention on a thunderclap-headache presentation, and no run of any scenario recommended a wrong variant. It refused 17 of 22 clinically adjacent probes (77.3%; 54.6-92.2). All 721 emitted citations resolved to a retrieved chunk. The findings characterize a proof of concept: lexical retrieval delivers topic routing and citation traceability, while variant selection and realistic abstention depend on the generator acting as a semantic reranker, and the residual failures are refusals rather than wrong answers. Clinical readiness will require licensed ACR content, a larger reference-standard set, and prospective evaluation.",
+  "found_by": "retrieval score margin abstention",
+  "_score": 15,
+  "_present": 3,
+  "_titlehits": 1,
+  "_hits": {
+   "abstain": 2,
+   "retrieval": 3,
+   "gate": 1,
+   "hardness": 0
+  },
+  "_in_register": false,
+  "_slice_hits": [
+   "retrieval_features",
+   "over_refusal"
+  ],
+  "_slice_score": 2
+ },
+ {
+  "openalex_id": "W7165572977",
+  "title": "Evidence-Calibrated RAG for Unanswerable Question Answering: Retrieval Coverage, Abstention Calibration, and Hallucination-Proxy Analysis on SQuAD 2.0",
+  "year": 2025,
+  "date": "2025-08-25",
+  "venue": "Journal of Technology Informatics and Engineering",
+  "doi": "10.51903/jtie.v4i2.536",
+  "url": "https://openalex.org/W7165572977",
+  "cites": 0,
+  "type": "article",
+  "language": "en",
+  "oa": "https://jtie.stekom.ac.id/index.php/jtie/article/download/536/347",
+  "authors": "Ziliang Samuel Zhong; Jing Chen; Eric Zhong; Xinzhuo Sun",
+  "abstract": "This paper presents a controlled and reproducible empirical study of evidence-calibrated retrieval-augmented question answering (RAG) for answerable and unanswerable reading-comprehension tasks using the SQuAD 2.0 benchmark. The study focuses on whether a system should abstain when retrieved evidence is insufficient rather than always producing an answer. Six lightweight architectures were evaluated on the full validation set of 11,873 questions, including closed-book, BM25, dense, hybrid, reranked, and a proposed evidence-calibrated hybrid RAG model. The proposed approach combines hybrid top-25 retrieval, lexical reranking, deterministic extractive answering, and evidence sufficiency calibration trained on 43,482 examples. On the validation set, it achieved 31.65% exact match, 34.74% F1, 53.01% answerability accuracy, 53.71% refusal F1, and a 37.49% hallucination-proxy rate. Although overall QA performance remains modest, calibrated evidence sufficiency substantially reduced unsupported answers compared with a forced-answer hybrid reranker, lowering the hallucination-proxy rate from 77.80% while improving F1. However, evidence calibration itself remained weak (AUROC 0.5475, ECE 0.1144). The findings demonstrate that retrieval coverage alone is insufficient to prevent hallucinations and highlight the need for stronger evidence calibration in trustworthy RAG systems.",
+  "found_by": "answerability classification retrieval",
+  "_score": 28,
+  "_present": 4,
+  "_titlehits": 4,
+  "_hits": {
+   "abstain": 7,
+   "retrieval": 6,
+   "gate": 1,
+   "hardness": 1
+  },
+  "_in_register": false,
+  "_slice_hits": [
+   "retrieval_features"
+  ],
+  "_slice_score": 1
+ },
+ {
+  "openalex_id": "W7214096275",
+  "title": "Comparative Analysis of Confidence-Aware and Verification Based Hallucination Reduction Techniques in Retrieval-Augmented Generation Systems",
+  "year": 2026,
+  "date": "2026-09-24",
+  "venue": "INTERANTIONAL JOURNAL OF SCIENTIFIC RESEARCH IN ENGINEERING AND MANAGEMENT",
+  "doi": "10.55041/ijsrem67393",
+  "url": "https://openalex.org/W7214096275",
+  "cites": 0,
+  "type": "article",
+  "language": "en",
+  "oa": "https://ijsrem.com/uploads/articles/1789913698330-c8588562694a-RAG_Comparison.pdf",
+  "authors": "Khushboo Buwade; Mitali Bedmutha",
+  "abstract": "Retrieval-Augmented Generation (RAG) grounds language-model responses in externally retrieved evidence, yet weak retrieval or unsupported generation can still reduce reliability. This pilot study compares two lightweight safeguards: retrieval-confidence gating and post-generation evidence verification. Four configurations were evaluated on the same 30-question benchmark: Basic RAG, Confidence-Aware RAG, Verification-Based RAG, and a Combined approach. The benchmark used 30 short passages, 25 answerable questions, and five deliberately unanswerable questions. Retrieval employed normalized all-MiniLM-L6-v2 embeddings with FAISS top-3 search; generation and verification used Groq Compound Mini. All 120 runs completed without API errors. Basic and Verification-Based RAG achieved 30/30 preliminary correct outcomes. Confidence-Aware and Combined RAG achieved 29/30 because one answerable query received a similarity score of 0.261 and was rejected by the fixed 0.55 threshold. No unsupported final answer was observed. Mean response times were 0.50 s, 0.40 s, 1.29 s, and 0.95 s, respectively. The results reveal a practical trade-off: confidence gating can reduce model calls and encourage safe refusal, but an uncalibrated threshold may reduce answer coverage, while verification preserves coverage at additional latency.",
+  "found_by": "retrieval confidence gate",
+  "_score": 24,
+  "_present": 4,
+  "_titlehits": 2,
+  "_hits": {
+   "abstain": 3,
+   "retrieval": 4,
+   "gate": 4,
+   "hardness": 1
+  },
+  "_in_register": false,
+  "_slice_hits": [
+   "retrieval_features"
+  ],
+  "_slice_score": 1
+ },
+ {
+  "openalex_id": "W7221787151",
+  "title": "Answerability-Aware Retrieval-Augmented Generation for Enterprise Helpdesk Question Answering: An Empirical Study of Similarity Thresholds and Grounding Strategies",
+  "year": 2026,
+  "date": "2026-10-14",
+  "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+  "doi": "10.5281/zenodo.23378507",
+  "url": "https://openalex.org/W7221787151",
+  "cites": 0,
+  "type": "preprint",
+  "language": "en",
+  "oa": "https://doi.org/10.5281/zenodo.23378507",
+  "authors": "Maimoona Qayyum",
+  "abstract": "Retrieval-augmented generation (RAG) systems can improve question answering by grounding large language model responses in external documents. However, enterprise deployments require not only relevant answers but also reliable abstention when the available knowledge base lacks sufficient evidence. This study investigates answerability control in an enterprise helpdesk RAG system by evaluating retrieval similarity thresholds, grounding instructions, and an explicit evidence-sufficiency mechanism. Experiments used a synthetic enterprise corpus containing 23 documents and 51 retrievable chunks. Five RAG configurations were compared on a 30-question development benchmark, and the selected configuration was evaluated on a separate 50-question test benchmark. The selected configuration achieved answerability precision, recall, and F1 scores of 1.00 on the test set, with no observed false refusals or unsupported answers. Retrieval recall at k was 0.9667, while automated keyword answer accuracy was 0.90. The findings indicate that similarity-threshold selection substantially influenced false refusals in the evaluated setting, while stronger grounding instructions improved keyword-match performance. However, the small synthetic corpus and benchmark limit the generalisability of these findings.",
+  "found_by": "retrieval evidence sufficiency",
+  "_score": 23,
+  "_present": 3,
+  "_titlehits": 3,
+  "_hits": {
+   "abstain": 4,
+   "retrieval": 4,
+   "gate": 2,
+   "hardness": 0
+  },
+  "_in_register": false,
+  "_slice_hits": [
+   "over_refusal"
+  ],
+  "_slice_score": 1
+ },
+ {
+  "openalex_id": "W7214006980",
+  "title": "Evaluating and Mitigating Hallucinations in Retrieval-Augmented Question Answering over Uzbek School Textbooks",
+  "year": 2026,
+  "date": "2026-09-23",
+  "venue": "Research Square",
+  "doi": "10.21203/rs.3.rs-11114152/v1",
+  "url": "https://openalex.org/W7214006980",
+  "cites": 0,
+  "type": "preprint",
+  "language": "en",
+  "oa": "https://www.researchsquare.com/article/rs-11114152/latest.pdf",
+  "authors": "Ruzimboy Kholmurotov",
+  "abstract": "Abstract School students increasingly use large language models as study aids, yet fluent but unfounded answers pose a distinctive risk in education, because a learner who asks a question is not positioned to verify the reply. Retrieval-augmented generation (RAG) mitigates this hallucination risk but does not eliminate it, and the evidence base comes almost entirely from high-resource languages. This study examines hallucination in textbook-grounded question answering for Uzbek, an agglutinative and under-resourced language. In a 30,628-word official history textbook, 55.5% of the 7,867 distinct word forms occur exactly once, so query and document surface forms frequently fail to match. We construct UzHistQA (Uzbek History Question Answering), an openly available dataset of 56 question–answer pairs in which each answer is linked to a gold passage and approximately one fifth of questions are deliberately unanswerable. Four configurations are compared: an ungrounded model, dense-retrieval RAG, hybrid retrieval with reranking, and hybrid retrieval with enforced citation and abstention. Grounding reduced unsupported assertions from 91% of responses to 9% (p < 0.001) and fabricated answers to unanswerable questions from eleven of twelve cases to one; enforced abstention eliminated fabrication entirely, at a coverage cost of 14%. Hybrid retrieval improved recall yet did not reduce hallucination, indicating that retrieval-stage gains need not propagate to the generated answer. The study contributes the first open evaluation resource for grounded question answering in Uzbek and evidence that retrieval quality and faithfulness must be measured separately.",
+  "found_by": "unanswerable retrieval augmented generation",
+  "_score": 22,
+  "_present": 4,
+  "_titlehits": 2,
+  "_hits": {
+   "abstain": 2,
+   "retrieval": 6,
+   "gate": 2,
+   "hardness": 1
+  },
+  "_in_register": false,
+  "_slice_hits": [
+   "retrieval_features"
+  ],
+  "_slice_score": 1
+ },
+ {
+  "openalex_id": "W7154899371",
+  "title": "Trust-Calibrated Multilingual RAG for Humanitarian Information Platforms: Empirical Evaluation on OMoS-QA for Migration Information Access",
+  "year": 2026,
+  "date": "2026-04-15",
+  "venue": "International Journal of Graphic Design",
+  "doi": "10.51903/ijgd.v4i1.3552",
+  "url": "https://openalex.org/W7154899371",
+  "cites": 0,
+  "type": "article",
+  "language": "en",
+  "oa": "https://journal.stekom.ac.id/index.php/ijgd/article/download/3552/2300",
+  "authors": "Yushan Chen; Haosen Xu",
+  "abstract": "Humanitarian information platforms increasingly serve migrants, refugees, and crisis-affected users who need correct answers about housing, schooling, legal procedures, benefits, health, and emergency services. In this setting, a wrong answer is more harmful than a missing answer, so multilingual question-answering systems must not only retrieve and summarize relevant content but also calibrate when to answer, when to abstain, and how to communicate uncertainty to the user. This paper develops a trust-calibrated multilingual retrieval-augmented generation (RAG) design for humanitarian information platforms and evaluates it on the public OMoS-QA benchmark for migration information access. The study combines two empirical layers. First, we run a direct page-retrieval evaluation over the full public corpus and compare BM25, word-level TF-IDF, character-level TF-IDF, and a lexical-character hybrid retriever. Second, we reanalyze the officially scored benchmark outputs released with OMoS-QA for sentence-level answer extraction, question-level no-answer detection, multilingual transfer, and cross-language transfer. All numerical results are empirically measured; no illustrative placeholders are used. The hybrid retriever reaches 69.4% recall at rank 1, 82.6% at rank 3, and 86.1% at rank 5, outperforming the sparse baselines. On same-language answer extraction, DeBERTa achieves the strongest balanced F1 (62.5 German, 64.9 English), while Llama-3-70B and GPT-3.5-Turbo obtain the strongest no-answer detection results. Explicit answerability prompting raises Llama-3-70B recall on unanswerable questions to 83.6% in German and 78.2% in English. Multilingual experiments show moderate degradation for French and larger losses for Arabic and Ukrainian, while cross-language transfer remains surprisingly robust. Based on these findings, the paper formulates a design contribution for graphic and interaction design: a trust-calibrated evidence-card pattern that combines evidence highlighting, citation links, uncertainty cues, and escalation to human support. The result is a benchmark-grounded interface logic for safer public-interest LLM applications rather than a user-validated final interface.",
+  "found_by": "abstain precision abstain recall unanswerable",
+  "_score": 22,
+  "_present": 4,
+  "_titlehits": 2,
+  "_hits": {
+   "abstain": 5,
+   "retrieval": 5,
+   "gate": 1,
+   "hardness": 1
+  },
+  "_in_register": false,
+  "_slice_hits": [
+   "retrieval_features"
+  ],
+  "_slice_score": 1
+ },
+ {
+  "openalex_id": "W7214656215",
+  "title": "CARGO: Context-Aware Retrieval-Gated Evaluation of Agentic AI in Production",
+  "year": 2026,
+  "date": "2026-09-24",
+  "venue": "arXiv (Cornell University)",
+  "doi": "10.48550/arxiv.2609.30471",
+  "url": "https://openalex.org/W7214656215",
+  "cites": 0,
+  "type": "preprint",
+  "language": "en",
+  "oa": "https://arxiv.org/pdf/2609.30471",
+  "authors": "Mukul Chhabra; Shail Patel; Luigi Medrano",
+  "abstract": "Reference-based LLM-as-a-judge evaluation assumes the reference answer is the target. In deployed agentic systems that operate over dynamic entities (support cases, assets, accounts), the closest available reference typically applies the correct procedure to a different entity, so a literal judge penalizes different identifiers, dates, and statuses as errors or hallucinations. We name this failure mode reference-instance divergence (RID). We propose CARGO, a framework that (i) treats retrieved references as procedural exemplars and grounds factual judgments in the live instance's observed context, (ii) assigns each claim a three-way status (supported, contradicted, unverifiable) and penalizes only contradictions, and (iii) gates evaluation by retrieval confidence, casting production evaluation as selective prediction. We introduce CARGO-Bench, a perturbation-based diagnostic suite with ground truth by construction that separates leniency from discrimination. On CARGO-Bench (246 items, two judge models, 7,872 judgments), the standard reference-based judge penalizes 100% of correct entity-transplanted answers and is uninformative (discrimination index DI ~ 0); supplying the live facts without reframing changes nothing. CARGO eliminates these false penalties (0/50) while retaining near-complete contradiction recall (50/50 and 49/50), raising DI to 0.58 [0.48, 0.68]; a rubric-swap control attributes most of the effect to context-grounded dimension definitions. CARGO also exposes a limitation of its own design: the leniency that protects entity values suppresses detection of procedural corruptions (20% recall). A post-hoc fix does not close the gap, and an LLM-as-annotator study with written guidelines and adjudication shows the same blind spot. We release a preregistered protocol for extending the evaluation to expert agreement, risk-coverage, and cost on production traffic.",
+  "found_by": "retrieval confidence gate",
+  "_score": 21,
+  "_present": 4,
+  "_titlehits": 2,
+  "_hits": {
+   "abstain": 1,
+   "retrieval": 2,
+   "gate": 3,
+   "hardness": 1
+  },
+  "_in_register": false,
+  "_slice_hits": [
+   "retrieval_features"
+  ],
+  "_slice_score": 1
+ },
+ {
+  "openalex_id": "W7213880269",
+  "title": "Predictable Failure in Multi-Hop Retrieval: Score-Distributional Confidence Scoring and Abstention",
+  "year": 2026,
+  "date": "2026-09-18",
+  "venue": "arXiv (Cornell University)",
+  "doi": "10.48550/arxiv.2609.22056",
+  "url": "https://openalex.org/W7213880269",
+  "cites": 0,
+  "type": "preprint",
+  "language": "en",
+  "oa": "https://arxiv.org/pdf/2609.22056",
+  "authors": "André Melo Bacellar",
+  "abstract": "Multi-hop retrieval failures are not uniformly distributed across queries: they cluster in structurally predictable subpopulations. We prove two results formalizing this structure. First (CWAR Reducibility): confident-failure reduction is achievable if and only if retrieval features carry mutual information about success, a condition satisfied by LLM-judge pipelines but substantially weaker in dense-only settings, explaining the AUC-AC gap between regimes. Second (Feature Regime Complementarity): no single ANN score feature achieves best predictive performance across all failure regimes; the dominant feature differs between datasets (query length on MuSiQue, hop-1 concentration on HoVer), and a constructive witness pair shows each is necessary in one regime and non-contributory in the other. We instantiate these principles in RegimeAbstain, which computes a Retrieval Confidence Score (RCS), a logistic function of up to nine query-ANN structural features, all available without any additional LLM call, and uses it to implement a calibrated abstention policy. We define the Confident-Wrong-Answer Rate (CWAR) metric and evaluate across three multi-hop benchmarks (MuSiQue, 2WikiMultiHopQA, HoVer) and two retrieval architectures (LLM-judge and dense-only), covering five failure regimes with CWAR from 14.5% to 62.1%. RCS achieves best or co-best AUC-AC in all five conditions against eight confidence baselines. On MuSiQue (LLM-judge), RCS reduces CWAR from 39.5% to 20.6% at 50% coverage (47.8% relative reduction), with ECE=0.035. A model trained on MuSiQue transfers to 2WikiMultiHopQA with only -0.5pp AUC loss, confirming the domain-agnostic structure of regime features.",
+  "found_by": "retrieval confidence",
+  "_score": 21,
+  "_present": 3,
+  "_titlehits": 3,
+  "_hits": {
+   "abstain": 2,
+   "retrieval": 2,
+   "gate": 2,
+   "hardness": 0
+  },
+  "_in_register": false,
+  "_slice_hits": [
+   "retrieval_features"
+  ],
+  "_slice_score": 1
+ },
+ {
+  "openalex_id": "W7212255630",
+  "title": "PERA-Tutor: A Personalized Explainable Retrieval-Augmented Tutor for Educational Question Answering",
+  "year": 2026,
+  "date": "2026-09-11",
+  "venue": "International Journal for Research in Applied Science and Engineering Technology",
+  "doi": "10.22214/ijraset.2026.84814",
+  "url": "https://openalex.org/W7212255630",
+  "cites": 0,
+  "type": "article",
+  "language": "en",
+  "oa": "https://doi.org/10.22214/ijraset.2026.84814",
+  "authors": "Sabyasachi Saha",
+  "abstract": "Retrieval-augmented generation (RAG) is attractive for educational question answering because external evidence can improve provenance, while learner models can adapt explanations to prior knowledge and misconceptions. However, apparent gains can be overstated when synthetic benchmarks leak topic labels or make unanswerable queries trivially separable. This paper introduces PERA-Tutor, a personalized and explainable retrieval-augmented tutoring architecture, and reports a deterministic retrieval-stage evaluation that can be reproduced without a language model. The benchmark contains 240 curriculum chunks, 1,200 questions (900 answerable and 300 unanswerable), and 1,500 retrieval stress cases. With a BM25 first stage and a 25-document candidate pool, the prespecified pedagogical re-ranking point (semantic/topic/difficulty/misconception weights 0.55/0.20/0.15/0.10) increases Recall@5 from 0.550 to 0.624 versus semantic-only ranking (paired delta = 0.074, exact McNemar p = 1.09e-7) and increases Difficulty Fit@5 from 0.625 to 0.744 (delta = 0.119, Wilcoxon p = 2.18e-49). Yet a post-hoc no-topic reallocation yields only a 0.011 Recall@5 gain (p = 0.477), because every answerable template contains its gold topic name. Masking that surface form reduces PERA Recall@5 to 0.090. Separately, raw BM25 top scores distinguish answerable from unanswerable queries with AUC = 0.944 overall and 0.917 for in-corpus-subject negatives. A five-fold calibrated retrievalscore baseline (B0) correctly abstains on all 300 unanswerable queries while accepting 817 of 900 answerable queries. These findings support difficulty-aware ranking as a mechanism for pedagogical fit, but not a general claim of retrieval or hallucination superiority. They also establish two requirements for future end-to-end evaluation: leakage-resistant questions and verification baselines that outperform calibrated retrieval-score abstention.",
+  "found_by": "answerability classification retrieval",
+  "_score": 20,
+  "_present": 4,
+  "_titlehits": 1,
+  "_hits": {
+   "abstain": 4,
+   "retrieval": 5,
+   "gate": 1,
+   "hardness": 2
+  },
+  "_in_register": false,
+  "_slice_hits": [
+   "retrieval_features"
+  ],
+  "_slice_score": 1
+ },
+ {
+  "openalex_id": "W7203956628",
+  "title": "Building a Reliable Retrieval-Augmented Generation (RAG) System with Hallucination Awareness",
+  "year": 2026,
+  "date": "2026-06-24",
+  "venue": "Aaltodoc (Aalto University)",
+  "doi": "",
+  "url": "https://openalex.org/W7203956628",
+  "cites": 0,
+  "type": "dissertation",
+  "language": "en",
+  "oa": "https://aaltodoc.aalto.fi/bitstreams/0a383cde-9f4e-4563-9684-29da95cce14e/download",
+  "authors": "Loreta Pajaziti",
+  "abstract": "Retrieval-augmented generation has become an important approach for improving the factual grounding of large language model outputs by conditioning generation on externally retrieved documents. However, retrieval alone does not guarantee reliable answers. A system may retrieve irrelevant or incomplete evidence, generate unsupported claims, or fail to communicate uncertainty when the available knowledge is insufficient. This thesis investigates how RAG systems can be designed and evaluated with a focus on reliability and hallucination-aware behaviour in a fixed-size knowledge base. The work follows a system-building and evaluation approach. A modular RAG prototype was developed to support controlled experimentation across different pipeline configurations. The system was evaluated on a researchpaper corpus using a custom query dataset containing answerable, ambiguous, and unanswerable questions. Three main retrieval configurations were compared: baseline dense retrieval, query expansion with reranking, and dynamic retrieval based on reranker score gaps. The experiments also compared three embedding models and multiple retrieval depths. The evaluation used retrieval-side metrics, including recall, hit rate, and mean reciprocal rank, together with generation-side metrics such as answer correctness and faithfulness. The results show that retrieval-side design choices substantially affect system reliability. The choice of embedding model had a strong impact on retrieval quality, while query expansion improved evidence coverage and ranking, especially under smaller retrieval depths. Dynamic retrieval provided a strong trade-off between retrieval quality and context size by selecting a variable number of chunks while maintaining competitive performance. However, the experiments also showed that stronger retrieval metrics did not always lead to proportional improvements in answer correctness or faithfulness. Qualitative error analysis further showed that reliability failures included not only unsupported answers, but also unnecessary refusals and insufficiently calibrated responses to ambiguous questions. The thesis concludes that hallucination-aware RAG should be treated as a pipeline-level problem. Reliable behaviour requires not only retrieving relevant evidence, but also assessing whether the evidence is sufficient for the specific question and communicating uncertainty when appropriate. The developed prototype and evaluation provide a practical foundation for further work on adaptive, transparent, and trustworthy RAG systems.",
+  "found_by": "unanswerable retrieval augmented generation",
+  "_score": 20,
+  "_present": 4,
+  "_titlehits": 1,
+  "_hits": {
+   "abstain": 5,
+   "retrieval": 7,
+   "gate": 2,
+   "hardness": 1
+  },
+  "_in_register": false,
+  "_slice_hits": [
+   "retrieval_features"
+  ],
+  "_slice_score": 1
+ },
+ {
+  "openalex_id": "W7131412174",
+  "title": "Claim-Aware Scientific RAG: Evidence-First Retrieval and Abstention for Scientific Fact Responses on SciFact",
+  "year": 2023,
+  "date": "2023-01-07",
+  "venue": "Journal of Advanced Computing Systems",
+  "doi": "10.69987/jacs.2023.30102",
+  "url": "https://openalex.org/W7131412174",
+  "cites": 0,
+  "type": "article",
+  "language": "en",
+  "oa": "https://scipublication.com/index.php/JACS/article/download/315/286",
+  "authors": "Jing Chen; Xinzhuo Sun; Vincent Brown",
+  "abstract": "Retrieval-augmented generation (RAG) is widely adopted to reduce hallucinations, yet most systems still answer even when retrieval fails, producing fluent but unsupported “scientific facts”. This paper studies a claim-aware scientific RAG design principle: the system is allowed to answer only when it can cite evidence. We conduct full experimental evaluations on the SciFact scientific claim retrieval task using the BEIR-style SciFact split (5,183 abstracts; 809 training claims; 300 test claims). We compare a sparse BM25 retriever, a contrastive dense dual-encoder, and a hybrid retriever using reciprocal rank fusion (RRF), followed by an interaction-based reranker. We then add an evidence layer that extracts candidate citation sentences and scores them with a lightweight verifier, and we enforce an abstention gate that refuses to answer when confidence is low. On the SciFact test set, BM25 achieves nDCG@10=0.662 and Recall@100=0.883. The dense retriever alone underperforms (nDCG@10=0.537), but hybrid RRF improves Recall@100 to 0.923 and a reranker recovers nDCG@10 to 0.659. For evidence extraction, token-level evidence F1 reaches 0.190 when selecting two sentences. Finally, we quantify a refusal–hallucination tradeoff via confidence-based abstention: gating by the top-1 BM25 score reduces the rate of answers without any relevant abstract in the top-10 from 0.193 to 0.047 at 28.3% answer coverage. These results provide a reproducible baseline showing how evidence-first retrieval and calibrated refusal can be combined to control hallucinations in scientific RAG.",
+  "found_by": "abstention gate retrieval features",
+  "_score": 20,
+  "_present": 3,
+  "_titlehits": 2,
+  "_hits": {
+   "abstain": 2,
+   "retrieval": 6,
+   "gate": 4,
+   "hardness": 0
+  },
+  "_in_register": false,
+  "_slice_hits": [
+   "retrieval_features"
+  ],
+  "_slice_score": 1
+ },
+ {
+  "openalex_id": "W7214084395",
+  "title": "Evaluating and Mitigating Over-Refusals in LLMs via Task-aware Representation Steering",
+  "year": 2025,
+  "date": "2025-12-30",
+  "venue": "Macquarie University",
+  "doi": "10.25949/31593361",
+  "url": "https://openalex.org/W7214084395",
+  "cites": 0,
+  "type": "dissertation",
+  "language": "en",
+  "oa": "https://doi.org/10.25949/31593361",
+  "authors": "Utsav Maskey",
+  "abstract": "Large language models (LLMs) demonstrate impressive capabilities across diverse tasks including text generation, translation, and question answering. However, their potential misuse for harmful content has led to extensive safety alignment efforts---to make model responses safer (i.e. helpful and harmless). Yet, a fundamental tension exists: harmlessness requires refusing unsafe prompts, while helpfulness demands compliance. Concurrent models rely on safety filters. Consequently, models that heavily rely on exaggerated safety often strike a poor balance, refusing even safe prompts that merely resemble unsafe intent or mention sensitive topics. This thesis investigates the failure mode of over-refusal—the tendency of safety-aligned LLMs to reject benign requests when superficial inputs resemble disallowed content. This work explores this phenomenon across three complementary studies. First, LLM safety on long-tail distributed (encrypted) inputs is analysed: (i) Safety of Instruction Refusal---which examines LLM's tendency to reject harmful obfuscated instructions, and (ii) Generation Safety---which quantifies the suppression of generating harmful responses. This evaluation uncovers early-refusal behaviors, and reveal that aligned LLMs often over-refuse benign tasks or fail to suppress unsafe generation. Building on these findings, secondly task over-refusal is analysed, where LLMs decline responses to harmful instructions, even when they are re-framed as benign tasks (such as sentiment analysis, translation, etc.). Our mechanistic analysis reveal that LLMs follow distinct \"constellation'' patterns in embedding space as representations traverse layers, with each task maintaining consistent trajectories that shift predictably between refusal and non-refusal cases---and this work introduces \"SafeConstellations'', a mechanism that guides representations toward safe and non-refusal pathways when the intention of input task is benign. Thirdly and finally, this thesis extends the over-refusal analysis to Retrieval-Augmented Generation (RAG) pipelines, where both query intent and retrieved context properties influence refusal behavior. Empirical analysis suggest that context arrangement (combination of benign and harmful contexts), domain of query and context, and harmful-text density trigger refusals. Hence, this work extends our prior method to SafeRAG-Steering, that steers embeding regions toward the confirmed safe, non-refusing output regions---reducing refusals in contaminated RAG pipelines. These contributions advance theoretical understanding of over-refusal mechanisms and suggests strategies for deploying safe and controlled language models.",
+  "found_by": "over-refusal retrieval augmented",
+  "_score": 19,
+  "_present": 3,
+  "_titlehits": 2,
+  "_hits": {
+   "abstain": 2,
+   "retrieval": 3,
+   "gate": 2,
+   "hardness": 0
+  },
+  "_in_register": false,
+  "_slice_hits": [
+   "over_refusal"
+  ],
+  "_slice_score": 1
+ },
+ {
+  "openalex_id": "W4417450033",
+  "title": "MTRACE: Multilingual Retrieval-Augmented Generation for Temporally Diverse Text Corpora",
+  "year": 2025,
+  "date": "2025-12-14",
+  "venue": "arXiv (Cornell University)",
+  "doi": "10.48550/arxiv.2512.12694",
+  "url": "https://openalex.org/W4417450033",
+  "cites": 0,
+  "type": "preprint",
+  "language": "en",
+  "oa": "https://arxiv.org/pdf/2512.12694",
+  "authors": "Souhail Bakkali; Anthony Mudet",
+  "abstract": "Large multilingual knowledge bases expose temporally diverse information, yet retrieval quality remains sensitive to lexical variation and cross-lingual terminology shifts. We develop and evaluate MTRACE (Multilingual Temporal Retrieval-Augmented Generation with evidence grounding), a pipeline designed to test whether query expansion and multi-query fusion mitigate vocabulary mismatch in temporally layered text corpora, on the French and English subsets of MIRACL. Our approach integrates: (i) semantic query expansion (SQE) and multi-query fusion via Reciprocal Rank Fusion (RRF), targeting retrieval stability under query variation; (ii) a generation prompt enforcing strict grounding in retrieved evidence and explicit abstention when evidence is insufficient; and (iii) a modular architecture enabling systematic component evaluation. Ablation studies on Named Entity Recognition (NER) and embedding model selection demonstrate the importance of syntactic coherence in entity extraction and of self-retrieval and efficiency measurements for retriever selection. Our end-to-end evaluation over 50 constructed queries shows faithful answers for well-supported queries, correct abstention on unanswerable questions, and no re-scored similarity gains from multi-query fusion over single-query dense retrieval. By scoping our claims to a clean, text-only baseline, we separate these effects from OCR-noise confounds; direct measurement of diachronic lexical drift is left to future work. Code and configurations are available at \\url{https://anonymous.4open.science/r/MIRAGE-8EAA/",
+  "found_by": "unanswerable retrieval augmented generation",
+  "_score": 19,
+  "_present": 4,
+  "_titlehits": 1,
+  "_hits": {
+   "abstain": 3,
+   "retrieval": 3,
+   "gate": 1,
+   "hardness": 1
+  },
+  "_in_register": false,
+  "_slice_hits": [
+   "retrieval_features"
+  ],
+  "_slice_score": 1
+ },
+ {
+  "openalex_id": "W7223089569",
+  "title": "DeclineCraft: A RAG Abstention Benchmark for Jointly Measuring Combined Retrieval and Parametric Knowledge",
+  "year": 2026,
+  "date": "2026-10-20",
+  "venue": "arXiv (Cornell University)",
+  "doi": "10.48550/arxiv.2610.28340",
+  "url": "https://openalex.org/W7223089569",
+  "cites": 0,
+  "type": "preprint",
+  "language": "en",
+  "oa": "https://arxiv.org/pdf/2610.28340",
+  "authors": "Atharva Thakur; Abulhair Saparov; Bruno Ribeiro",
+  "abstract": "Reliable retrieval-augmented generation (RAG) requires recognizing when neither retrieved documents nor parametric knowledge supports an answer. We introduce DeclineCraft, a dynamic abstention benchmark whose unanswerable questions target Minecraft feature additions after a corpus cut-off, with audits of possible parametric exposure. Later cut-offs support evaluation of future models. Across 27 LLMs, we measure Correct Abstention Rate (CAR; how often models acknowledge insufficient knowledge on unanswerable questions), Answerable Attempt Rate and Answer Accuracy. We find that (1) single-shot retrieval significantly raises CAR in 38 of 40 configurations (model and thinking setting) versus no retrieval. (2) Iterative RAG, in which the model self-assesses its context and can request up to two further retrieval rounds, significantly lowers CAR versus single-shot RAG in 30 of 40 configurations (mean 46.4%), with little change in Answer Accuracy (68.5% to 69.3%). Adding query rewriting and reranking to hybrid (dense & sparse) retrieval lowers CAR for all 12 models tested. (3) Larger models answer more accurately (Spearman $ρ= +0.60$ with total parameters), but neither model size nor release date shows a significant association with CAR. (4) Without retrieval, enabling thinking on the same weights lowers CAR significantly for 8 of 13 models (by 14% points on average), and the responses shift from acknowledged uncertainty to premise denial.",
+  "found_by": "abstention benchmark",
+  "_score": 19,
+  "_present": 3,
+  "_titlehits": 2,
+  "_hits": {
+   "abstain": 5,
+   "retrieval": 6,
+   "gate": 0,
+   "hardness": 1
+  },
+  "_in_register": true,
+  "_slice_hits": [
+   "retrieval_features"
+  ],
+  "_slice_score": 1
+ },
+ {
+  "openalex_id": "W7213317855",
+  "title": "Condence, Calibration, and Abstention in Small Open-Weight Language Models on Psychiatric Knowledge Questions: A Cross-Domain Replication",
+  "year": 2026,
+  "date": "2026-09-15",
+  "venue": "Research Square",
+  "doi": "10.21203/rs.3.rs-11012222/v1",
+  "url": "https://openalex.org/W7213317855",
+  "cites": 0,
+  "type": "preprint",
+  "language": "en",
+  "oa": "https://www.researchsquare.com/article/rs-11012222/latest.pdf",
+  "authors": "Kunal Dhanda",
+  "abstract": "Abstract Small, locally deployable language models are increasingly proposed for psychiatric clinical decision support on privacy and compute grounds; two contemporaneous 2026 systems (ClinMPO; PKFAR) report accuracy or reasoning-quality gains from augmenting such models, and a 120-study taxonomy of LLMs in mental healthcare lists calibration as an evaluated dimension in none of the studies it covers. A separate, contemporaneous study (Boie et al., 2026) evaluates verbalized-condence cali- bration across 20 medical specialties using six proprietary frontier models on MedMCQA, and a third (Bentegeac et al., 2025) shows across several medical QA benchmarks that verbalized condence is a weak predictor of correctness (AUROC 0.520.68) compared to token probability (AUROC 0.710.87). We narrow the open question this leaves for small, open-weight models specically to psychiatry, using the identical four-model ladder (1.2B9.2B parameters, Ollama, fully local) and harness as a companion general-medicine pilot, on 150 psychiatric-knowledge multiple-choice items (MedMCQA, subject = Psychiatry). Accuracy is higher than on the general-medicine benchmark (57.375.3% vs. 47.763.2%, though at n = 150 the per-model standard error is ±3.54.0 points), and the accuracy ranking partially reorders most notably the 4.3B model falls from 3rd of 4 in general medicine to last in psychiatry. Verbalized condence remains poorly informative about correctness as a ranking signal (AUROC 0.4900.645; one model, the 4.3B, is statistically indistin- guishable from chance) and severely miscalibrated in the aggregate sense (ECE 0.1480.378, well above the 0.0410.141 range Boie et al. report for proprietary frontier models on the same under- lying benchmark family). A naive, unpaired accuracy on answered items framing suggested that oering an abstention option modestly beneted three of the four models. A same-item paired analysis (McNemar's test, bootstrap condence intervals on paired accuracy, and an explicit A→B outcome-transition table) overturns most of that: only the smallest model (1.2B) shows a paired eect distinguishable from noise, and it is negative (−6.7 points, 95% CI [−12.7,−0.7]) repli- cating, point estimate for point estimate, the same model's paired eect on the general-medicine benchmark (−6.7 points, 95% CI [−10.6,−2.5], n = 480). The model with the best condence- ranking signal of the four (7.6B, AUROC 0.645) shows the worst-targeted self-chosen abstentions 8 of its 12 abstentions forfeited an item it would otherwise have answered correctly and its paired eect reverses from a naive +0.8 to a signicant −5.3 points (95% CI [−9.3,−1.3]). We 1read the surviving evidence as: miscalibration and weak error-detection are general properties of this model family; accuracy ranking is domain-dependent and should not be assumed to transfer; and a prompted abstention option is not a free safety improvement for any of the four models once evaluated with paired, coverage-aware statistics rather than naive answered-item accuracy. This is a pilot. n = 150 on a single benchmark family, no clinician adjudicated any output, and MedMCQA multiple-choice measures psychiatric knowledge recall, not psychiatric clinical decision-making. Read as hypotheses for a larger, clinician-involved study, not deployment guidance.",
+  "found_by": "abstention threshold calibration",
+  "_score": 19,
+  "_present": 4,
+  "_titlehits": 2,
+  "_hits": {
+   "abstain": 1,
+   "retrieval": 1,
+   "gate": 2,
+   "hardness": 1
+  },
+  "_in_register": false,
+  "_slice_hits": [
+   "hardness_ladder"
+  ],
+  "_slice_score": 1
+ },
+ {
+  "openalex_id": "W7222798325",
+  "title": "When Is Enough Evidence Enough? Sufficiency Judgments and Stopping Rules in Multi-Step Retrieval Agents",
+  "year": 2026,
+  "date": "2026-10-17",
+  "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+  "doi": "10.5281/zenodo.23437804",
+  "url": "https://openalex.org/W7222798325",
+  "cites": 0,
+  "type": "report",
+  "language": "en",
+  "oa": "https://doi.org/10.5281/zenodo.23437804",
+  "authors": "Garvit Kaushik",
+  "abstract": "A retrieval agent that searches in several steps must decide when it has seen enough. We let two Gemini models retrieve for five steps over a BM25 index and, after every step, state whether the evidence suffices, how likely that is, and their current answer. Logging every step lets us replay any stopping rule offline from one run per model. On 500 HotpotQA and 500 MuSiQue questions we ask how often \"enough\" is true, whether the judgement predicts a correct answer, and which rule gives the best accuracy for the retrieval spent. Stopping at the first \"sufficient\" verdict uses 34 to 67% fewer steps than always taking five, at an answer-F1 cost that is not significant in three of four model and dataset pairs and about 0.025 in the fourth. Model choice moves F1 by 0.07 to 0.26, far more than any rule. Against \"all gold paragraphs retrieved\" the verdict is right 65 to 93% of the time, but a read of 50 apparent premature stops found about 7 in 10 already answerable from the retrieved text, so gold coverage understates it. A dense retriever (small model only) gives the same picture with larger savings. Stated probabilities sit near 0 and 1 and are poorly calibrated; much of their apparent power to predict correctness comes from answers that abstain, and on answered steps the small model's probability is no better than chance. Technical report, not peer reviewed. Code, logs and all numbers: https://github.com/garvitkaushik-123/evidence-sufficiency-agents",
+  "found_by": "retrieval evidence sufficiency",
+  "_score": 19,
+  "_present": 3,
+  "_titlehits": 2,
+  "_hits": {
+   "abstain": 3,
+   "retrieval": 4,
+   "gate": 1,
+   "hardness": 0
+  },
+  "_in_register": false,
+  "_slice_hits": [
+   "retrieval_features"
+  ],
+  "_slice_score": 1
+ },
+ {
+  "openalex_id": "W7214920484",
+  "title": "Evidence-Gated Generative AI: A Reliability-Oriented Architecture for Retrieval-Augmented Enterprise Knowledge Systems",
+  "year": 2024,
+  "date": "2024-01-01",
+  "venue": "International Journal of Scientific Research in Science Engineering and Technology",
+  "doi": "10.32628/ijsrset2613385",
+  "url": "https://openalex.org/W7214920484",
+  "cites": 0,
+  "type": "article",
+  "language": "en",
+  "oa": "https://ijsrset.com/paper/14452.pdf",
+  "authors": "Prudvi Saisaran Ponduru; Pavani Priya Vyshnavi Nandanavanam; Sai Kesav Kumar Ponduru",
+  "abstract": "Large language models can generate fluent answers even when the available evidence is incomplete, stale, contradictory, or outside the user’s authorization boundary. Retrieval-augmented generation (RAG) reduces dependence on parametric memory, but a retrieved passage is not automatically trustworthy and a generated answer is not automatically supported by the passage that accompanies it. This paper proposes Evidence-Gated Generative AI (EG-GAI), a reliability-oriented architecture that separates answer generation from authorization to release the answer. EG-GAI introduces an evidence ledger carrying source authority, freshness, version and access metadata; claim-level support and contradiction analysis; an Evidence Sufficiency Vector; corrective retrieval for weak evidence; and a tri-state release gate that can release, qualify, or abstain. The architecture is model- and cloud-provider-neutral and is intended for enterprise knowledge assistants, operational copilots, document intelligence, and other high-consequence retrieval-grounded applications. A controlled failure-injection study isolates the retrieval and evidence-control layer using 1,640 documents, 2,600 factual queries, and five equally represented conditions: clean retrieval, irrelevant-document injection, stale-document dominance, peer-quality conflict, and missing evidence. In this controlled corpus, a simple top-1 RAG baseline answered every query but produced a 45.12% unsupported-release rate. Metadata-aware reranking reduced that rate to 13.42%. The full EG-GAI gate released 64.92% of queries, achieved 100% selective accuracy among released answers, and produced no unsupported releases in the controlled study; the absolute unsupported-release reduction versus top-1 RAG was 45.15 percentage points with a 95% bootstrap interval of 43.27-46.96 points. These numbers measure the evidence-control mechanism rather than end-to-end LLM factuality, and therefore are not presented as a benchmark result for any specific language model. The results support the central systems claim: in enterprise Generative AI, generation and release authorization should be distinct decisions, and abstention should be treated as a normal reliability outcome rather than a failure of the interface.",
+  "found_by": "retrieval evidence sufficiency",
+  "_score": 19,
+  "_present": 3,
+  "_titlehits": 2,
+  "_hits": {
+   "abstain": 3,
+   "retrieval": 6,
+   "gate": 1,
+   "hardness": 0
+  },
+  "_in_register": false,
+  "_slice_hits": [
+   "retrieval_features"
+  ],
+  "_slice_score": 1
+ },
+ {
+  "openalex_id": "W7220704958",
+  "title": "Search Engines Never Say No: How Frozen Agents React When the Retrieval Tool Refuses",
+  "year": 2026,
+  "date": "2026-10-04",
+  "venue": "arXiv (Cornell University)",
+  "doi": "10.48550/arxiv.2610.05348",
+  "url": "https://openalex.org/W7220704958",
+  "cites": 0,
+  "type": "preprint",
+  "language": "en",
+  "oa": "https://arxiv.org/pdf/2610.05348",
+  "authors": "Ramraj Chandradevan; Sayontan Ghosh; Vinoth Selvendran",
+  "abstract": "A search tool never says no: it returns its top-k passages even when the index holds no answer, so the agent sees irrelevant text instead of a miss signal. We ask what frozen search agents do when the tool refuses instead. On an index-hole testbed (257 NQ and 300 HotpotQA questions run with and without their gold passages in a 21M-passage BM25 index), seven agents receive one of five refusal wordings. An un-announced one-sentence refusal raises abstention on unanswerable questions from 23% to 97% on average for Qwen3-8B/32B and from 28% to 57% for Claude Haiku 4.5, cutting wrong answers almost one-for-one and beating a system-prompt instruction by 51 points on average. Search-R1 ignores the refusal and fabricates retrievals; Claude Sonnet 5.5 and Opus 5.5 answer from memory (abstention +2 points) and obey a system-prompt directive instead (+16). We also found that wording matters: an explanation beats a bare token; a directive inside the observation is decisive for Haiku; a soft warning is useless. Realistic triggers, from a lightweight score-based predictor to an LLM grounding judge, fall well short of the oracle, and all land on a benefit-versus-signal-quality curve that prices any trigger by its recall at a fixed false-refusal budget: for compliant agents the bottleneck is the detector inside the tool, not the agent, and the curve tells future detector work what each point of recall is worth.",
+  "found_by": "two thresholds abstain refuse",
+  "_score": 19,
+  "_present": 3,
+  "_titlehits": 2,
+  "_hits": {
+   "abstain": 3,
+   "retrieval": 3,
+   "gate": 0,
+   "hardness": 1
+  },
+  "_in_register": false,
+  "_slice_hits": [
+   "retrieval_features"
+  ],
+  "_slice_score": 1
+ },
+ {
+  "openalex_id": "W7172261375",
+  "title": "Budgeted Multi-Hop Retrieval Agents with Evidence-Chain Reliability and Cost-Aware Abstention",
+  "year": 2026,
+  "date": "2026-06-25",
+  "venue": "Journal of Knowledge Learning and Science Technology",
+  "doi": "10.60087/jklst.vol5.n2.006",
+  "url": "https://openalex.org/W7172261375",
+  "cites": 0,
+  "type": "article",
+  "language": "en",
+  "oa": "https://jklst.org/index.php/home/article/download/385/338",
+  "authors": "Caleb Kong",
+  "abstract": "Fixed top-k retrieval spends the same context budget on every question without indicating whether a multi-document evidence chain is complete. This study evaluates a budgeted agent on MultiHop-RAG using all 609 documents and 2,556 questions. The 1,534/511/511 train/validation/test split kept each evidence group in one partition. The pipeline compared BM25, 256-dimensional latent-semantic retrieval, equal and weighted reciprocal rank fusion, supervised reranking, fixed depth, and calibrated dynamic stopping. A sparse reader, null detector, and isotonic calibration supported answer, evidence, citation, cost, and abstention evaluation. On 451 answerable test questions, reranking achieved 0.9069 Recall@10, 0.8064 nDCG@10, and 0.7428 complete-chain retrieval. The dynamic agent used a mean of 544.16 tokens and obtained 0.6184 F1, compared with 666.29 tokens and 0.6243 F1 for the null-gated Reranker-8 policy. Its paired F1 difference was -0.0059 with a 95% cluster-bootstrap interval of [-0.0246, 0.0115], while the 122.13-token reduction remained significant after Holm adjustment. Isotonic calibration reduced expected calibration error from 0.2671 to 0.0321. Selective answering operated at 0.3326 coverage and 0.2200 exact-match risk. Snippet retention and citation precision, rather than candidate generation alone, limited joint reliability. The results establish a measured quality-cost trade-off and identify where deeper retrieval still fails to improve answers.",
+  "found_by": "abstention gate retrieval features",
+  "_score": 19,
+  "_present": 3,
+  "_titlehits": 2,
+  "_hits": {
+   "abstain": 2,
+   "retrieval": 6,
+   "gate": 2,
+   "hardness": 0
+  },
+  "_in_register": false,
+  "_slice_hits": [
+   "retrieval_features"
+  ],
+  "_slice_score": 1
+ },
+ {
+  "openalex_id": "W7211924628",
+  "title": "Bilingual Retrieval-Augmented Access to ANVISA Regulatory Documents: A Technical Evaluation Using Drug-Development and Health-Product Questions",
+  "year": 2026,
+  "date": "2026-09-08",
+  "venue": "Research Square",
+  "doi": "10.21203/rs.3.rs-10438674/v1",
+  "url": "https://openalex.org/W7211924628",
+  "cites": 0,
+  "type": "preprint",
+  "language": "en",
+  "oa": "https://www.researchsquare.com/article/rs-10438674/latest.pdf",
+  "authors": "Carlos Victor Montefusco-Pereira; Howard Lopes Ribeiro",
+  "abstract": "Abstract Background. Regulatory teams often need to interpret long health-authority documents while working across languages. In Brazil, many regulatory sources are published in Portuguese, while companies and scientists may ask questions in English. Objective. To evaluate whether a bilingual retrieval-augmented generation prototype could locate, cite, and summarize selected ANVISA regulatory requirements relevant to drug development and health-product regulation. Methods. Six ANVISA regulatory documents were cleaned and indexed as an article-level closed corpus. The system was implemented in Python 3.10 using LlamaIndex, sentence-transformers, rank-bm25, Streamlit, and the Google Generative AI interface. Dense retrieval used sentence-transformers/all-MiniLM-L6-v2; keyword retrieval used BM25; candidates were merged by reciprocal rank fusion and reranked with cross-encoder/mmarco-mMiniLMv2-L12-H384-v1. The final answer model was models/gemini-flash-lite-latest. The benchmark included 200 bilingual questions: 70 Portuguese answerable, 70 English answerable, 20 multi-article or exception questions, and 40 unanswerable or adversarial questions. An automated AI judge scored faithfulness, citation correctness, completeness, and refusal correctness on a 0 to 1 scale. Results. The final article-aware index contained 382 detected regulatory articles and 481 chunks. In the first AI-authored prospective stress test, answerable questions had source hit 1.000, source MRR 0.988, normalized article Recall@5 0.967, normalized article MRR@5 0.913, citation correctness 0.975, faithfulness 1.000, and completeness 0.943. Refusal correctness for unanswerable/adversarial questions was lower at 0.700. After refusal calibration using separate development data, a refusal-focused AI-authored test reached refusal correctness 0.944, with faithfulness 1.000, citation correctness 1.000, and completeness 0.908 on answerable controls. Conclusion. A bilingual RAG system may support regulatory information access when answers are tied to verifiable articles and refusal is evaluated as a primary endpoint. The project did not validate regulatory advice. It tested a narrower use case: locating and summarizing evidence inside a defined ANVISA corpus.",
+  "found_by": "BM25 score abstention answerability",
+  "_score": 19,
+  "_present": 4,
+  "_titlehits": 1,
+  "_hits": {
+   "abstain": 3,
+   "retrieval": 7,
+   "gate": 1,
+   "hardness": 1
+  },
+  "_in_register": false,
+  "_slice_hits": [
+   "retrieval_features"
+  ],
+  "_slice_score": 1
+ },
+ {
+  "openalex_id": "W4404782124",
+  "title": "RE-RAG: Improving Open-Domain QA Performance and Interpretability with Relevance Estimator in Retrieval-Augmented Generation",
+  "year": 2024,
+  "date": "2024-01-01",
+  "venue": "Conference on Empirical Methods in Natural Language Processing (EMNLP)",
+  "doi": "10.18653/v1/2024.emnlp-main.1236",
+  "url": "https://openalex.org/W4404782124",
+  "cites": 14,
+  "type": "conference-paper",
+  "language": "en",
+  "oa": "https://aclanthology.org/2024.emnlp-main.1236.pdf",
+  "authors": "Kiseung Kim; Jay Yoon Lee",
+  "abstract": "The Retrieval Augmented Generation (RAG) framework utilizes a combination of parametric knowledge and external knowledge to demonstrate state-of-the-art performance on opendomain question answering tasks.However, the RAG framework suffers from performance degradation when the query is accompanied by irrelevant contexts.In this work, we propose the RE-RAG framework, which introduces a relevance estimator (RE) that not only provides relative relevance between contexts as previous rerankers did, but also provides confidence, which can be used to classify whether given context is useful for answering the given question.We propose a weakly supervised method for training the RE simply utilizing questionanswer data without any labels for correct contexts.We show that RE trained with a small generator (sLM) can not only improve the sLM fine-tuned together with RE but also improve previously unreferenced large language models (LLMs).Furthermore, we investigate new decoding strategies that utilize the proposed confidence measured by RE such as choosing to let the user know that it is \"unanswerable\" to answer the question given the retrieved contexts or choosing to rely on LLM's parametric knowledge rather than unrelated contexts.",
+  "found_by": "unanswerable retrieval augmented generation",
+  "_score": 18,
+  "_present": 4,
+  "_titlehits": 1,
+  "_hits": {
+   "abstain": 1,
+   "retrieval": 4,
+   "gate": 2,
+   "hardness": 1
+  },
+  "_in_register": false,
+  "_slice_hits": [
+   "retrieval_features"
+  ],
+  "_slice_score": 1
+ },
+ {
+  "openalex_id": "W7223172733",
+  "title": "Dialect-Aware Retrieval-Augmented Generation for Arabic Question Answering: Measuring and Mitigating the Moroccan Darija–MSA Retrieval Gap",
+  "year": 2026,
+  "date": "2026-10-22",
+  "venue": "Preprints.org",
+  "doi": "10.20944/preprints202610.2180.v1",
+  "url": "https://openalex.org/W7223172733",
+  "cites": 0,
+  "type": "preprint",
+  "language": "en",
+  "oa": "https://doi.org/10.20944/preprints202610.2180.v1",
+  "authors": "Rania Khaoudane; Adnane El Amrani; Yousra Chtouki; Karim Bouzoubaa",
+  "abstract": "Retrieval-augmented generation (RAG) systems for Arabic are evaluated almost exclusively with Modern Standard Arabic (MSA) queries, although users write in dialect. We study this mismatch with a parallel benchmark of 200 questions written in both MSA and Moroccan Darija over 3,054 Arabic Wikipedia passages. Dialectal queries lower hybrid-retrieval Recall@1 from 0.755 to 0.620, and the loss reaches the answers: with five retrieved passages, answer correctness falls from 0.810 to 0.690, mostly through additional refusals; part of this loss persists even when the gold passage is supplied directly, so retrieval is the larger but not the only component. Rewriting Darija queries into MSA does not help. Zero-shot cross-encoder reranking raises dialectal Recall@1 to 0.800 (MSA: 0.755 unreranked, 0.875 reranked) and lets a single retrieved passage replace five unreranked passages with no loss larger than five percentage points and a 3.7-fold shorter prompt. Because dialectal queries are retrieved with lower confidence, gating the reranker on the retriever’s score margin concentrates its cost on them without any dialect detection, retaining 94% of the benefit while reranking about half of the queries. The findings hold under a human-validated LLM judge (Cohen’s κ=0.797), Holm correction and three prompt wordings, and replicate judge-free on a second, Darija-trained generator. We release the benchmark, corpus, code and all result files.",
+  "found_by": "over-refusal retrieval augmented",
+  "_score": 18,
+  "_present": 3,
+  "_titlehits": 2,
+  "_hits": {
+   "abstain": 1,
+   "retrieval": 5,
+   "gate": 2,
+   "hardness": 0
+  },
+  "_in_register": false,
+  "_slice_hits": [
+   "retrieval_features"
+  ],
+  "_slice_score": 1
+ },
+ {
+  "openalex_id": "W7127628945",
+  "title": "Rethinking the Reranker: Boundary-Aware Evidence Selection for Robust Retrieval-Augmented Generation",
+  "year": 2026,
+  "date": "2026-02-03",
+  "venue": "arXiv (Cornell University)",
+  "doi": "10.48550/arxiv.2602.03689",
+  "url": "https://openalex.org/W7127628945",
+  "cites": 0,
+  "type": "preprint",
+  "language": "en",
+  "oa": "https://arxiv.org/pdf/2602.03689",
+  "authors": "Jiashuo Sun; Pengcheng Jiang; Saizhuo Wang; Jiajun Fan; Heng Wang; Siru Ouyang; Ming Zhong; Yizhu Jiao; Chengsong Huang; Xueqiang Xu; Pengrui Han; Peiran Li; Jiaxin Huang; Ge Liu; Heng Ji; Jiawei Han",
+  "abstract": "Retrieval-Augmented Generation (RAG) systems remain brittle under realistic retrieval noise, even when the required evidence appears in the top-K results. A key reason is that retrievers and rerankers optimize solely for relevance, often selecting either trivial, answer-revealing passages or evidence that lacks the critical information required to answer the question, without considering whether the evidence is suitable for the generator. We propose BAR-RAG, which reframes the reranker as a boundary-aware evidence selector that targets the generator's Goldilocks Zone -- evidence that is neither trivially easy nor fundamentally unanswerable for the generator, but is challenging yet sufficient for inference and thus provides the strongest learning signal. BAR-RAG trains the selector with reinforcement learning using generator feedback, and adopts a two-stage pipeline that fine-tunes the generator under the induced evidence distribution to mitigate the distribution mismatch between training and inference. Experiments on knowledge-intensive question answering benchmarks show that BAR-RAG consistently improves end-to-end performance under noisy retrieval, achieving an average gain of 10.3 percent over strong RAG and reranking baselines while substantially improving robustness. Code is publicly avaliable at https://github.com/GasolSun36/BAR-RAG.",
+  "found_by": "unanswerable retrieval augmented generation",
+  "_score": 18,
+  "_present": 4,
+  "_titlehits": 1,
+  "_hits": {
+   "abstain": 2,
+   "retrieval": 5,
+   "gate": 1,
+   "hardness": 1
+  },
+  "_in_register": false,
+  "_slice_hits": [
+   "retrieval_features"
+  ],
+  "_slice_score": 1
+ },
+ {
+  "openalex_id": "W4407424277",
+  "title": "Beyond Confidence: Adaptive Abstention in Dual-Threshold Conformal Prediction for Autonomous System Perception",
+  "year": 2025,
+  "date": "2025-02-11",
+  "venue": "arXiv (Cornell University)",
+  "doi": "10.48550/arxiv.2502.07255",
+  "url": "https://openalex.org/W4407424277",
+  "cites": 0,
+  "type": "preprint",
+  "language": "en",
+  "oa": "https://arxiv.org/pdf/2502.07255",
+  "authors": "Divake Kumar; Nastaran Darabi; Sina Tayebati; Amit Ranjan Trivedi",
+  "abstract": "Safety-critical perception systems require both reliable uncertainty quantification and principled abstention mechanisms to maintain safety under diverse operational conditions. We present a novel dual-threshold conformalization framework that provides statistically-guaranteed uncertainty estimates while enabling selective prediction in high-risk scenarios. Our approach uniquely combines a conformal threshold ensuring valid prediction sets with an abstention threshold optimized through ROC analysis, providing distribution-free coverage guarantees (>= 1 - alpha) while identifying unreliable predictions. Through comprehensive evaluation on CIFAR-100, ImageNet1K, and ModelNet40 datasets, we demonstrate superior robustness across camera and LiDAR modalities under varying environmental perturbations. The framework achieves exceptional detection performance (AUC: 0.993 to 0.995) under severe conditions while maintaining high coverage (>90.0%) and enabling adaptive abstention (13.5% to 63.4% +/- 0.5) as environmental severity increases. For LiDAR-based perception, our approach demonstrates particularly strong performance, maintaining robust coverage (>84.5%) while appropriately abstaining from unreliable predictions. Notably, the framework shows remarkable stability under heavy perturbations, with detection performance (AUC: 0.995 +/- 0.001) significantly outperforming existing methods across all modalities. Our unified approach bridges the gap between theoretical guarantees and practical deployment needs, offering a robust solution for safety-critical autonomous systems operating in challenging real-world conditions.",
+  "found_by": "abstention threshold calibration",
+  "_score": 18,
+  "_present": 3,
+  "_titlehits": 2,
+  "_hits": {
+   "abstain": 3,
+   "retrieval": 0,
+   "gate": 2,
+   "hardness": 1
+  },
+  "_in_register": false,
+  "_slice_hits": [
+   "two_threshold"
+  ],
+  "_slice_score": 1
+ },
+ {
+  "openalex_id": "W7213344824",
+  "title": "The Magnitude Mirage: Rethinking Confidence for Reasoning-Intensive Retrieval",
+  "year": 2026,
+  "date": "2026-01-01",
+  "venue": "Conference on Empirical Methods in Natural Language Processing (EMNLP)",
+  "doi": "10.18653/2026.emnlp-main.517",
+  "url": "https://openalex.org/W7213344824",
+  "cites": 0,
+  "type": "conference-paper",
+  "language": "en",
+  "oa": "https://aclanthology.org/2026.emnlp-main.517.pdf",
+  "authors": "Jamie Holdcroft; Abdelrahman Abdallah; Adam Jatowt",
+  "abstract": "Many production RAG systems implement retrieval abstention by thresholding raw similarity scores, implicitly treating score magnitude as a confidence signal.We demonstrate that this practice degrades systematically as queries require reasoning beyond semantic matching.Across 11 retrieval architectures and 28 datasets, neural retrievers consistently assign high similarity scores to semantically related but constraint-violating documents, causing magnitude-based thresholds to collapse toward near-random abstention performance on logical and temporal reasoning tasks-a failure we term the Magnitude Mirage.To address this without computationally expensive alternatives, we conduct a large-scale empirical study of six zero-cost Query Performance Prediction (QPP) metrics across three cognitive tiers: semantic matching (BEIR), logical reasoning (BRIGHT), and temporal reasoning (TEMPO).Our central finding is that the key improvement comes from abandoning magnitude in favor of scoredistribution signals: the gain from this shift exceeds the differences among distributional alternatives by a factor of 5-10×.In particular, Score Gap (s 1s k ) and a practical adaptation of Score Magnitude and Variance (LSMV) improve abstention AUROC by up to 0.16 in settings where magnitude-based confidence provides little discriminative power.These methods require no additional inference, retraining, or latency, making them a practical zero-cost replacement for magnitude thresholding in deployed RAG systems.",
+  "found_by": "retrieval confidence",
+  "_score": 18,
+  "_present": 3,
+  "_titlehits": 2,
+  "_hits": {
+   "abstain": 1,
+   "retrieval": 2,
+   "gate": 3,
+   "hardness": 0
+  },
+  "_in_register": false,
+  "_slice_hits": [
+   "retrieval_features"
+  ],
+  "_slice_score": 1
+ },
+ {
+  "openalex_id": "W7212514115",
+  "title": "R2VC: Modular Fact-Checking with Retrieval, Verification, and Confidence Calibration",
+  "year": 2026,
+  "date": "2026-08-06",
+  "venue": "arXiv (Cornell University)",
+  "doi": "10.48550/arxiv.2609.11955",
+  "url": "https://openalex.org/W7212514115",
+  "cites": 0,
+  "type": "preprint",
+  "language": "en",
+  "oa": "https://arxiv.org/pdf/2609.11955",
+  "authors": "Dhruv Dixit; Pandey, Paritosh",
+  "abstract": "Large language models are increasingly used for automated fact checking, but end-to-end prompting often entangles evidence retrieval, reasoning, and uncertainty estimation, making failures difficult to diagnose and confidence difficult to trust. We present R2VC, a modular retrieve, reason, verify, calibrate architecture for evidence-grounded fact checking with citations and abstention. R2VC combines hybrid sparse+dense retrieval over Wikipedia, a supervised fine-tuned and DPO-aligned generator that produces diverse structured verdict candidates, an external NLI cross-encoder for evidence-based candidate selection, and a lightweight sequence-level calibrator for confidence estimation and selective abstention. On FEVER, an 8B backbone with R2VC achieves 13.74% higher accuracy than baseline. Ablation studies show that verifier-based candidate selection and confidence calibration are the largest contributors to performance. Removing candidate selection drops FEVER accuracy to 76.24%, while removing calibration nearly doubles the Brier score to 0.161. A manual analysis of 250 errors further shows that retrieval failures, especially wrong-entity evidence, remain the dominant bottleneck. Together, these results show that modular fact-checking pipelines can substantially improve both predictive accuracy and confidence reliability in open-domain verification.",
+  "found_by": "retrieval confidence",
+  "_score": 18,
+  "_present": 3,
+  "_titlehits": 2,
+  "_hits": {
+   "abstain": 1,
+   "retrieval": 3,
+   "gate": 2,
+   "hardness": 0
+  },
+  "_in_register": false,
+  "_slice_hits": [
+   "retrieval_features"
+  ],
+  "_slice_score": 1
+ },
+ {
+  "openalex_id": "W4414942254",
+  "title": "FalseReject: A Resource for Improving Contextual Safety and Mitigating Over-Refusals in LLMs via Structured Reasoning",
+  "year": 2025,
+  "date": "2025-05-12",
+  "venue": "arXiv (Cornell University)",
+  "doi": "10.48550/arxiv.2505.08054",
+  "url": "https://openalex.org/W4414942254",
+  "cites": 0,
+  "type": "preprint",
+  "language": "en",
+  "oa": "https://arxiv.org/pdf/2505.08054",
+  "authors": "Zhang, Zhehao; Weijie Xu; Fanyou Wu; Chandan K. A. Reddy",
+  "abstract": "Safety alignment approaches in large language models (LLMs) often lead to the over-refusal of benign queries, significantly diminishing their utility in sensitive scenarios. To address this challenge, we introduce FalseReject, a comprehensive resource containing 16k seemingly toxic queries accompanied by structured responses across 44 safety-related categories. We propose a graph-informed adversarial multi-agent interaction framework to generate diverse and complex prompts, while structuring responses with explicit reasoning to aid models in accurately distinguishing safe from unsafe contexts. FalseReject includes training datasets tailored for both standard instruction-tuned models and reasoning-oriented models, as well as a human-annotated benchmark test set. Our extensive benchmarking on 29 state-of-the-art (SOTA) LLMs reveals persistent over-refusal challenges. Empirical results demonstrate that supervised finetuning with FalseReject substantially reduces unnecessary refusals without compromising overall safety or general language capabilities.",
+  "found_by": "over-refusal",
+  "_score": 18,
+  "_present": 3,
+  "_titlehits": 3,
+  "_hits": {
+   "abstain": 1,
+   "retrieval": 1,
+   "gate": 1,
+   "hardness": 0
+  },
+  "_in_register": false,
+  "_slice_hits": [
+   "over_refusal"
+  ],
+  "_slice_score": 1
+ },
+ {
+  "openalex_id": "W7164809413",
+  "title": "Evidence Retention Is Not Sufficient for Answerability: A Diagnostic Study of Context Budgeting for Small Language Model RAG",
+  "year": 2026,
+  "date": "2026-06-15",
+  "venue": "",
+  "doi": "10.1145/3816713.3819786",
+  "url": "https://openalex.org/W7164809413",
+  "cites": 0,
+  "type": "conference-paper",
+  "language": "en",
+  "oa": "https://doi.org/10.1145/3816713.3819786",
+  "authors": "SeoWan Kim; Jinhong Yang",
+  "abstract": "Small language model retrieval-augmented generation (SLM-RAG) is often motivated by local deployment and lower serving cost, but these systems are sensitive to how much retrieved context is placed in the prompt. More context can increase evidence coverage, while also adding distractors and increasing prefill cost; compression can reduce tokens, while also removing evidence or making it less usable. This paper presents a diagnostic evaluation of this trade-off rather than a new compression architecture. We evaluate HotpotQA and QASPER with three seeds, 200 calibration examples and 200 test examples per seed, and three instruction-tuned SLMs from different model families: Qwen2.5-1.5B-Instruct, Phi-3.5-mini-instruct, and SmolLM2-1.7B-Instruct. The protocol compares uncompressed top-k, fixed extractive budgets, a training-free adaptive budget rule, a complexity-aware adaptive budget heuristic, BM25 sentence-window extractive compression, LLMLingua2 token-level compression, and oracle evidence-only context. We further add evidence-conditioned answerability (ECA), answerability loss, adaptive policy ablations, and a QASPER larger-k retrieval setting. The main observation is that evidence retention is not sufficient for answerability: for example, on HotpotQA, LLMLingua2 1024 preserves approximate evidence recall at 0.999 for Qwen2.5-1.5B but reduces F1 from 0.429 to 0.358. Conversely, extractive compression can help some models, such as SmolLM2 on HotpotQA, while reducing F1 for others under the same budget. The results support a practical conclusion: SLM-RAG context budgeting should be treated as a model-specific diagnostic and operating decision rather than as a universal compression-ratio rule.",
+  "found_by": "sufficient context",
+  "_score": 18,
+  "_present": 3,
+  "_titlehits": 2,
+  "_hits": {
+   "abstain": 2,
+   "retrieval": 5,
+   "gate": 1,
+   "hardness": 0
+  },
+  "_in_register": false,
+  "_slice_hits": [
+   "retrieval_features"
+  ],
+  "_slice_score": 1
+ },
+ {
+  "openalex_id": "W7214069806",
+  "title": "Reasoning-Focused Legal Retrieval-Augmented Question Answering under Low Lexical Overlap: Query Expansion, Evidence Citation, and Selective Abstention",
+  "year": 2026,
+  "date": "2026-01-15",
+  "venue": "",
+  "doi": "10.61424/ygk7h578",
+  "url": "https://openalex.org/W7214069806",
+  "cites": 0,
+  "type": "article",
+  "language": "en",
+  "oa": "https://stoutjournals.org/index.php/SLSS/article/download/78/76",
+  "authors": "Isabel Sun",
+  "abstract": "Legal retrieval-augmented question answering is difficult when a fact pattern and its controlling rule use different language. This study evaluates all 1,195 Bar Exam QA retrieval questions, 1,194 complete four-choice items, and the full 856,835-passage corpus. It compares BM25, 96-dimensional latent semantic indexing (LSI), reciprocal-rank fusion, pseudo-relevance feedback, answer-choice expansion, and cross-fitted rule-space expansion. LSI derives from TF–IDF and truncated singular-value decomposition; it is not a neural dense retriever. BM25 used a 40,000-term unigram/bigram vocabulary with k₁=1.2 and b=0.75. Mean query–gold TF–IDF cosine similarity was 0.0509, and 182 questions had zero overlap. Plain BM25 achieved 1.339% Recall@10; answer-choice expansion raised it to 5.105%, while rule-space BM25 reached 1.841%. The best retrieval-conditioned answer selector achieved 26.382% accuracy, versus 24.372% without evidence and 49.581% with gold evidence. Its 2.010-point gain over no evidence was nonsignificant (p=.265). Temperature scaling reduced its expected calibration error from 0.1486 to 0.0240, but risk–coverage ordering remained weak. Only 3.183% of depth-five contexts contained the gold or exact-equivalent passage, and 71.776% of questions combined missed gold evidence with a wrong answer. Stronger retrieval is therefore necessary before calibrated confidence can support dependable selective answering.",
+  "found_by": "abstention gate retrieval features",
+  "_score": 18,
+  "_present": 3,
+  "_titlehits": 2,
+  "_hits": {
+   "abstain": 1,
+   "retrieval": 7,
+   "gate": 2,
+   "hardness": 0
+  },
+  "_in_register": false,
+  "_slice_hits": [
+   "retrieval_features"
+  ],
+  "_slice_score": 1
+ },
+ {
+  "openalex_id": "W7214777989",
+  "title": "Evidence-Aware Abstention in Low-Resource Scientific RAG: A Persian Retrieval-Stage Study",
+  "year": 2026,
+  "date": "2026-09-30",
+  "venue": "Research Square",
+  "doi": "10.21203/rs.3.rs-11164673/v1",
+  "url": "https://openalex.org/W7214777989",
+  "cites": 0,
+  "type": "preprint",
+  "language": "en",
+  "oa": "https://www.researchsquare.com/article/rs-11164673/latest.pdf",
+  "authors": "Asghar Hussain",
+  "abstract": "Abstract Retrieval-augmented generation (RAG) systems can reduce reliance on parametric memory, but their reliability remains constrained by whether retrieved evidence actually supports a response. This issue is especially relevant for low-resource scientific question answering, where evidence collections and linguistic resources are limited. We study the answer-or-abstain problem on Persian scientific question answering using PersianSciQA and PersianSciQA-Extractive. The work deliberately separates retrieval quality from selective answering: first, we audit the data and establish a reproducible BM25 baseline; second, we train a lightweight evidence-aware selector using only retrieval- and language-derived features. On the held-out PersianSciQA test set, BM25 achieved Recall@10 of 0.7764 for questions with relevance at least 1 and 0.9749 for relevance-3 questions. On the clean PersianSciQA-Extractive test subset, Recall@10 was 0.9761. For selective answering, the clean test set contained 1005 examples; an always-answer policy had an unsupported-answer decision rate of 45.17%. A logistic selector using the full feature set achieved an AURC of 0.3693, compared with 0.4025 for retrieval-score features alone. At an approximately 25% coverage operating point, unsupported-answer rate decreased from 40.39% to 30.99%; a 5,000-resample paired bootstrap estimated a difference of -9.40 percentage points (95% CI: -15.23 to -3.76). Lexical evidence features accounted for most of the improvement, while language-composition features alone provided a smaller gain. The data audit also found 179 Extractive generation-error rows and 2,915/7,293 cross-dataset split disagreements. Because dense multilingual retrieval and end-to-end LLM generation could not be executed in the available environment, the present results are a retrieval-stage study rather than a complete RAG benchmark. The results nevertheless provide a reproducible baseline and evidence-aware selective-answering framework for the next experimental stage.",
+  "found_by": "retrieval score margin abstention",
+  "_score": 18,
+  "_present": 3,
+  "_titlehits": 2,
+  "_hits": {
+   "abstain": 2,
+   "retrieval": 5,
+   "gate": 1,
+   "hardness": 0
+  },
+  "_in_register": false,
+  "_slice_hits": [
+   "retrieval_features"
+  ],
+  "_slice_score": 1
+ },
+ {
+  "openalex_id": "W7172503845",
+  "title": "Retrieval Failure Prediction for Adaptive Retrieval Augmented Generation Using ConfidenceGuided Recovery",
+  "year": 2026,
+  "date": "2026-08-01",
+  "venue": "JOURNAL OF ADVANCE AND FUTURE RESEARCH",
+  "doi": "10.56975/jaafr.v4i8.513472",
+  "url": "https://openalex.org/W7172503845",
+  "cites": 0,
+  "type": "article",
+  "language": "en",
+  "oa": "https://rjwave.org/jaafr/papers/JAAFR2608020.pdf",
+  "authors": "Ramneet Singh Chadha; Vivan Sharma",
+  "abstract": "RAG augments LLMs by injecting external knowledge during inference; however, traditional RAG pipelines are built under the assumption that the retrieval will be successful for all questions as long as a fixed Top-K retrieval is applied. In reality, a number of failures related to the retrieval stage, induced by ambiguous queries, semantic mismatch, and shallow retrieval, result in partial context and hallucinations in answers. This work proposes an Adaptive Retrieval-Augmented Generation with Retrieval Failure Prediction framework that evaluates the retrieval sufficiency with a set of lightweight statistical and semantic retrieval features and decides when to apply retrieval depth expansion, hybrid dense-sparse retrieval, query rewriting, and multi-query retrieval before generating responses. The framework is implemented in a modular, model-agnostic fashion, utilizing FAISS, Sentence Transformers, BM25, Cross-Encoder re-ranking, and an XGBoost-based confidence predictor. An empirical study on the SQuAD v2 dataset shows that the proposed framework achieves consistent improvements in answer quality compared to a traditional fixed Top-K RAG framework while incurring extra computational cost only on low-confidence questions.",
+  "found_by": "answerability classification retrieval",
+  "_score": 17,
+  "_present": 3,
+  "_titlehits": 2,
+  "_hits": {
+   "abstain": 1,
+   "retrieval": 5,
+   "gate": 1,
+   "hardness": 0
+  },
+  "_in_register": false,
+  "_slice_hits": [
+   "retrieval_features"
+  ],
+  "_slice_score": 1
+ },
+ {
+  "openalex_id": "W7162461060",
+  "title": "Enhancing Offline Maritime Translation Safety: A Retrieval-Gated Generation Approach with Entity Constraints",
+  "year": 2026,
+  "date": "2026-03-20",
+  "venue": "",
+  "doi": "10.1109/icnlp69856.2026.11528073",
+  "url": "https://openalex.org/W7162461060",
+  "cites": 0,
+  "type": "conference-paper",
+  "language": "en",
+  "oa": "",
+  "authors": "Linfeng Wu; Enjiao Zhao; Wei Zhou",
+  "abstract": "Maritime communication faces a critical dilemma: it demands a near-zero tolerance for errors to ensure safety, yet relies on offline edge deployment where computational resources are strictly limited. To resolve this conflict, this paper proposes a retrieval-gated generation framework for bidirectional maritime translation. The system prioritizes a domain knowledge base for standardized phrase recall, utilizing a neural model as a fallback only when retrieval confidence is insufficient. By integrating similarity-based gating with entity-consistency verification, our method minimizes high-risk errors in numbers, headings, bearings, and distress keywords. Experiments on an in-domain dataset demonstrate that the system improves BLEU scores from 14.84 to 16.24 for Chinese-to-English translation and from 21.56 to 23.88 for English-to-Chinese translation. Furthermore, analysis of knowledge-base hit rates confirms that the proposed approach effectively balances deterministic safety with the efficiency constraints of edge environments.",
+  "found_by": "retrieval confidence gate",
+  "_score": 17,
+  "_present": 3,
+  "_titlehits": 2,
+  "_hits": {
+   "abstain": 1,
+   "retrieval": 1,
+   "gate": 3,
+   "hardness": 0
+  },
+  "_in_register": false,
+  "_slice_hits": [
+   "retrieval_features"
+  ],
+  "_slice_score": 1
+ },
+ {
+  "openalex_id": "W7163131347",
+  "title": "TechRAG: Evidence-Gated Multimodal Agentic RAG for Technical Literature Reasoning",
+  "year": 2026,
+  "date": "2026-06-01",
+  "venue": "arXiv (Cornell University)",
+  "doi": "10.48550/arxiv.2606.01613",
+  "url": "https://openalex.org/W7163131347",
+  "cites": 0,
+  "type": "preprint",
+  "language": "en",
+  "oa": "https://arxiv.org/pdf/2606.01613",
+  "authors": "Kanwar Bharat Singh",
+  "abstract": "This paper presents an agentic multimodal retrieval-augmented generation (RAG) framework for domain-specific literature reasoning, instantiated on a curated corpus of several thousand papers in intelligent tires, vehicle dynamics, vehicle control, sensing, estimation, and machine learning. Unlike conventional single-pass RAG systems, the proposed architecture uses an autonomous, evidence-gated pipeline that classifies query intent, generates separate text and visual query rewrites, performs hybrid text retrieval with FAISS and BM25 followed by cross-encoder reranking, expands evidence through graph-guided chunk traversal over a Neo4j knowledge graph, and retrieves visual document evidence using ColSmol late-interaction embeddings with MUVERA fixed-dimensional encoding, approximate nearest-neighbor search, and MaxSim reranking. The framework scores evidence sufficiency using a 100-point rubric with hybrid rule-based/LLM review, retries retrieval through drift-guarded reformulation, searches external academic databases through optimize--search--vet loops, merges and deduplicates multimodal evidence, verifies citation integrity, and generates cited answers through Planner, Researcher, Writer, and Critic agents with self-correcting revision. Key contributions include: (i) a scalable multimodal retrieval architecture combining text, graph, and visual evidence over 40,000 document pages; (ii) an interpretable evidence sufficiency and retry mechanism; (iii) a multi-agent generation pipeline with evidence mapping and critic-driven revision; (iv) a domain knowledge graph with LLM-based entity extraction, OpenAlex author validation, and intra-corpus citation resolution; and (v) a route-dependent external search architecture for targeted literature expansion. The result is a practical, evidence-gated, multimodal agentic RAG architecture for technical reasoning over specialized research corpora.",
+  "found_by": "retrieval evidence sufficiency",
+  "_score": 17,
+  "_present": 3,
+  "_titlehits": 2,
+  "_hits": {
+   "abstain": 1,
+   "retrieval": 6,
+   "gate": 1,
+   "hardness": 0
+  },
+  "_in_register": false,
+  "_slice_hits": [
+   "retrieval_features"
+  ],
+  "_slice_score": 1
+ },
+ {
+  "openalex_id": "W7152741207",
+  "title": "Hallucination as output-boundary misclassification: a composite abstention architecture for language models",
+  "year": 2026,
+  "date": "2026-03-12",
+  "venue": "arXiv (Cornell University)",
+  "doi": "10.48550/arxiv.2604.06195",
+  "url": "https://openalex.org/W7152741207",
+  "cites": 0,
+  "type": "preprint",
+  "language": "en",
+  "oa": "https://arxiv.org/pdf/2604.06195",
+  "authors": "Angelina Davini Hintsanen",
+  "abstract": "Large language models often produce unsupported claims. We frame this as a misclassification error at the output boundary, where internally generated completions are emitted as if they were grounded in evidence. This motivates a composite intervention that combines instruction-based refusal with a structural abstention gate. The gate computes a support deficit score, St, from three black-box signals: self-consistency (At), paraphrase stability (Pt), and citation coverage (Ct), and blocks output when St exceeds a threshold. In a controlled evaluation across 50 items, five epistemic regimes, and three models, neither mechanism alone was sufficient. Instruction-only prompting reduced hallucination sharply, but still showed over-cautious abstention on answerable items and residual hallucination for GPT-3.5-turbo. The structural gate preserved answerable accuracy across models but missed confident confabulation on conflicting-evidence items. The composite architecture achieved high overall accuracy with low hallucination, while also inheriting some over-abstention from the instruction component. A supplementary 100-item no-context stress test derived from TruthfulQA showed that structural gating provides a capability-independent abstention floor. Overall, instruction-based refusal and structural gating show complementary failure modes, which suggests that effective hallucination control benefits from combining both mechanisms.",
+  "found_by": "over-refusal rate answerable questions gate",
+  "_score": 17,
+  "_present": 3,
+  "_titlehits": 1,
+  "_hits": {
+   "abstain": 4,
+   "retrieval": 2,
+   "gate": 3,
+   "hardness": 0
+  },
+  "_in_register": false,
+  "_slice_hits": [
+   "over_refusal"
+  ],
+  "_slice_score": 1
+ },
+ {
+  "openalex_id": "W4394646487",
+  "title": "CONFLARE: CONFormal LArge language model REtrieval",
+  "year": 2024,
+  "date": "2024-04-04",
+  "venue": "arXiv (Cornell University)",
+  "doi": "10.48550/arxiv.2404.04287",
+  "url": "https://openalex.org/W4394646487",
+  "cites": 3,
+  "type": "preprint",
+  "language": "en",
+  "oa": "https://arxiv.org/pdf/2404.04287",
+  "authors": "Pouria Rouzrokh; Shahriar Faghani; Cooper U. Gamble; Moein Shariatnia; Bradley James Erickson",
+  "abstract": "Retrieval-augmented generation (RAG) frameworks enable large language models (LLMs) to retrieve relevant information from a knowledge base and incorporate it into the context for generating responses. This mitigates hallucinations and allows for the updating of knowledge without retraining the LLM. However, RAG does not guarantee valid responses if retrieval fails to identify the necessary information as the context for response generation. Also, if there is contradictory content, the RAG response will likely reflect only one of the two possible responses. Therefore, quantifying uncertainty in the retrieval process is crucial for ensuring RAG trustworthiness. In this report, we introduce a four-step framework for applying conformal prediction to quantify retrieval uncertainty in RAG frameworks. First, a calibration set of questions answerable from the knowledge base is constructed. Each question's embedding is compared against document embeddings to identify the most relevant document chunks containing the answer and record their similarity scores. Given a user-specified error rate (α), these similarity scores are then analyzed to determine a similarity score cutoff threshold. During inference, all chunks with similarity exceeding this threshold are retrieved to provide context to the LLM, ensuring the true answer is captured in the context with a (1-α) confidence level. We provide a Python package that enables users to implement the entire workflow proposed in our work, only using LLMs and without human intervention.",
+  "found_by": "answerability classification retrieval",
+  "_score": 16,
+  "_present": 3,
+  "_titlehits": 1,
+  "_hits": {
+   "abstain": 1,
+   "retrieval": 3,
+   "gate": 4,
+   "hardness": 0
+  },
+  "_in_register": false,
+  "_slice_hits": [
+   "retrieval_features"
+  ],
+  "_slice_score": 1
+ },
+ {
+  "openalex_id": "W7222883631",
+  "title": "The Trifecta Test: A Three-Arm Cross-Provider Benchmark for AI Governance Portability — Planted Independence Overcount, Misuse Refusal, and Over-Refusal, with Frozen Parity Bands (ERES Test Kit v0.1)",
+  "year": 2012,
+  "date": "2012-02-04",
+  "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+  "doi": "10.5281/zenodo.23451900",
+  "url": "https://openalex.org/W7222883631",
+  "cites": 0,
+  "type": "software",
+  "language": "en",
+  "oa": "https://doi.org/10.5281/zenodo.23451900",
+  "authors": "Joseph A Sprute",
+  "abstract": "Every AI provider's safety policy governs its own model. A governance framework therefore sits alongside every AI instrument and above none — which leaves it one thing to prove: that it works the same way whichever model is underneath. This package is a runnable benchmark for that claim. The Trifecta puts three arms around model behavior. Arm A supplies an ERES effective-independence rule (CDFE, Galwey effective number over a correlation eigenspectrum) and a text asserting four independent confirmations where three sources share an upstream derivation at r = 0.90. Ground truth is computable: n_eff = 2.7320, an overcount of 1.268 effective tests. The defect appears at three detectability levels — one, two and three inferential steps — with ground truth held identical across them, so catch-rate differences isolate detectability rather than magnitude. Each defective item carries a clean twin, making false alarms measurable. Arm B presents ERES-framed harmful requests, framing only, where refusal is correct. Arm C presents benign ERES requests with edgy surface vocabulary, where refusal is the failure. The three arms form a minimal, irredundant cover of the failure space: no pair suffices, and no arm is removable. The kit ships with a twenty-two-test self-validation suite (22/22, exit 0), a scorer enforcing a context-only submission threshold, parity bands frozen before any run, three falsifiable predictions with explicit reject criteria, and a definition of \"run\" whose start rule closes the retroactive-relabeling loophole. Scope. The test measures whether models apply an ERES check consistently, refuse ERES-framed harm, and assist benign ERES work. It does not evaluate the truth of any substantive ERES claim. A pass establishes cross-provider applicability only. No runs have been conducted at v0.1; all rates are undetermined. License. Released under the CARE Commons Attribution License v2.1 (CCAL v2.1), canonical text at DOI 10.5281/zenodo.23451312. CCAL v2.1 is not CC-BY 4.0: it is compatible with CC-BY 4.0 in its attribution requirements only, and adds the Care Clause (Three Governing Principles), the Earth-First Constraint, Transparency, Share-Forward, Non-Enclosure, and Patent Non-Assertion with Defensive Termination. Derivatives may be released under CCAL v2.1 or a Compatible License per CCAL Section 12, which includes CC-BY 4.0, CC-BY-SA 4.0, MIT, Apache 2.0, ODC-BY, GFDL, and CERN-OHL-S v2. Full terms in LICENSE.txt; per CCAL Section 13, the canonical Zenodo deposit governs over any mirror. Attribution: Joseph Allen Sprute / ERES Institute for New Age Cybernetics. Licensed under CCAL v2.1. Package note, 2026-10-18: the license declaration was corrected across all ten package files; LICENSE.txt added. No prompt, excerpt, rubric or parity band was altered, so the test version remains v0.1 under the instrument's own run definition.",
+  "found_by": "false refusal",
+  "_score": 16,
+  "_present": 3,
+  "_titlehits": 2,
+  "_hits": {
+   "abstain": 1,
+   "retrieval": 1,
+   "gate": 2,
+   "hardness": 0
+  },
+  "_in_register": false,
+  "_slice_hits": [
+   "over_refusal"
+  ],
+  "_slice_score": 1
+ },
+ {
+  "openalex_id": "W7204525818",
+  "title": "The Answerability Calculus",
+  "year": 2026,
+  "date": "2026-08-28",
+  "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+  "doi": "10.5281/zenodo.22148044",
+  "url": "https://openalex.org/W7204525818",
+  "cites": 0,
+  "type": "preprint",
+  "language": "en",
+  "oa": "https://doi.org/10.5281/zenodo.22148044",
+  "authors": "Mark Whitlock",
+  "abstract": "Paper 9 of 11 — A General Theory of Answerability The eleven-paper TUS OS mathematical research programme Abstract This paper develops a general mathematical theory of Answerability as a constituted, typed relation and establishes laws governing its lawful transformation, resource representation, repair, composition, activation, obstruction and conservation. Its governing result is the Base Theorem of Answerability: Answerability is a constituted, typed relation. No terminal proposition counts as an answer unless it lawfully discharges the independently constituted contract. A typed Answerability problem therefore fixes its semantic frame and contract, admitted realisation category, resource structure and tolerance regime before candidate success or optimisation is inspected. This preserves distinct levels of semantic satisfiability, admitted-category realisability and budgeted feasibility, preventing terminal truth, implementation existence and resource affordability from being silently identified. The paper develops a lawful reduction calculus with separately typed semantic transformations, operational lifts and resource lifts; standalone and contextual equivalence; and a contract–resource representation theory based on exact attained resources and principal-budget feasibility. Under explicit generation hypotheses, the complete lower-budget geometry admits extremal reconstruction from irreducible frontiers. Lawful repair is set-valued in general, with a canonical greatest repair only on a stronger order-theoretic branch. Typed composition is then introduced through independent semantic, operational and resource data. Structural activation is defined by genuinely new mandatory composite obligations and is kept distinct from resource activation. Independent obstruction certificates provide the bridge from new obligations to resource consequences, yielding exact feasible-resource activation only under additional stated comparison conditions. The resulting theory allows structural activation without resource penalty, resource advantage without structural activation, and incomparable multi-resource composition regimes. The impossibility theory closes the same object from the opposite direction. Capability and obstruction form a complementary principal-budget geometry: lawful reductions transport feasibility forward and obstruction contravariantly backward. Composite impossibility separates inherited constituent obstructions from activation-induced obstructions, while the cycle theory distinguishes frontier preservation, pointwise fixation, profile conservation and full mixed-geometry invariance. Forty explicit countermodels and conservativity results protect these theorem boundaries and prevent weaker equivalences, construction failures or resource bounds from being promoted into stronger claims. The accompanying historical comparison is logically separate from the mathematics. Under a reproducible whole-object comparison protocol, it identified no earlier public source or coherent corpus among sources publicly available before 4 March 2026 that independently constitutes a structure-preserving equivalent of the complete Answerability organism, nor an earlier identified complete formal calculus of that organism at comparable material scope. This is a bounded and falsifiable historical finding, not a priority claim over the constituent mathematics. At the scope proved here, Paper 9 therefore constitutes and closes Answerability as a general mathematical object whose lawful discharge, realisation, resource geometry, transformation, failure and conservation structure are explicit and independently testable. Supporting General Theory Programme This paper is Paper 9 in the TUS OS quantum-operational and Answerability research programme. Building on Paper 8’s resource geometry of answerable inference, it constitutes Answerability as a typed mathematical relation and develops the general Answerability Calculus, including lawful discharge, reduction, operational and resource lifts, equivalence, repair, composition, activation, obstruction, failure, and resource conservation. Paper 10 then returns to TUS OS to prove its exact protected representation, two-sided reconstruction, and complete executable realisation within that calculus; Paper 11 closes the programme with A General Theory of Answerability, establishing Structural Identity, Recognition, the canonical mandatory protected core, and lawful Realisation Freedom. Paper 1 — Canonical Tetrahedral Qubit-State Geometry in the TUS OS TriadXOR Completion, Receipt Verification and the Qubit-Geometric Semantic WitnessEstablishes the canonical tetrahedral geometry, unique XOR completion, exact qubit-SIC representation and centred-face trine geometry. Paper 2 — The TUS OS Operational CalculusClassical Construction of Exact Qubit Prepare–Measure Behaviour from a Receipt-Custodied Engine ArchitectureEstablishes exact full-carrier qubit prepare–measure behaviour from the deterministic classical engine under the declared Coordinate-Incidence Operational Harness. For each lawful foundation, the 64 six-bit carriers map to exactly 27 anchor-relative qubit preparations, while the separately declared face Harness gives the exact trine table. Paper 3 — From Finite Relational Structure to Qubit Operational FormAmbient Foundations, Canonical Subatlas, Exact Global Quantum Dimension, GUIDANCE Witness, Sequential Closure and Global Representation in TUS OSEstablishes the repeated-common-effect static Atlas, its exact minimum complex Hilbert dimension 4, exact carrier-reconstruction structure and deterministic predictive-state minimum 64 for the frozen complete principal future language. Paper 4 — Technical Volume I — Formal Foundations and the Complete-Future CorpusNative Contract, Statistical Discrimination and the Invariant Probability ModuleEstablishes the frozen complete principal terminal future-experiment language, complete statistical separation of distinct carrier pairs, exact parity-resolved discrimination results, complement reachability and the 33-dimensional rational invariant probability module. Paper 4 — Technical Volume II — Orthogonality, Process Closure and Native Triadic SynthesisEstablishes universal complement-support orthogonality and its propagation under exact common-CPTP dynamics, the resulting common-CPTP process bounds, recovery-complete LANDING and GUIDANCE results, exact 64-dimensional selected-line instrument/readout minima at their declared contracts, an exact classical–quantum hybrid construction, and the native structural/predictive quotient correspondence. The state-only common-CPTP minimum remains bounded within 32–64 rather than being fixed at 64. Paper 5 — TUS OS as an Anchored Analog Quantum SystemNative Witnesses, Predictive Synthesis, and Access-Contract Resource SeparationDefines Analog Quantum Views and Anchored Analog Quantum Systems, proves that TUS OS is a proper Anchored Analog Quantum System on its 64-input abstract canonical corpus, elevates the inherited structural/predictive correspondence into the Predictive Synthesis Identity Theorem, and composes the recognition, predictive, resource and downstream-conservation results into the TUS OS Anchored Analog Quantum System Theorem. Paper 6 — Contract-Relative Quantum Realisations of Classical ProcessesPredictive Compression, Vanishing Worst-Case Causal-State Transparency, and Finite-Dimensional BreakdownExtends the programme beyond the TUS-specific discovery corpus by formalising the contract-relative achievable-resource object (S,C,𝔐,ε) ⟼ Ach(S,C;𝔐,ε), and establishes three exact contract-relative regimes: strict finite separation, unbounded finite separation and finite-capacity breakdown. These are instantiated respectively by the TUS OS 4→64 separation, the periodically modulated decay 2→N exact prediction-to-transparency separation, and dual-Poisson finite-capacity breakdown for every positive uniform worst-case transparency threshold. Paper 7 — Operational Observability and Contract-Induced Resource Transitions in Quantum RealisabilityStructural Classification, Family Scaling, and Finite-Resource BreakdownDevelops the structural classification theory for contract-induced representation-resource transitions. It introduces the Contract Distinction System (CDS) as a representation-independent source description of the additional distinctions, recovery targets, challenge structure and interface/commonality obligations introduced by lawful contract strengthening; semantic challenge refinement and CRC cofinal/refinement equivalence to control presentation dependence; and a Certified Observability Transport Theory (COTT) that maps licensed source-level structure into necessary category- and tolerance-specific resource lower bounds. The resulting directed finitary-demand theory separates internal divergence within one fixed strengthened contract from family divergence across finitely realisable members, while keeping lower recognition logically independent from upper-side construction or compactness/gluing. Conditional on finite baseline feasibility, the pointwise classifier distinguishes resource-neutral, strict finite, finite-resource breakdown and UNRESOLVED transitions, with incrementally unbounded finite separation retained as a separate family-scaling modifier. Paper 8 — The Resource Geometry of Answerable InferenceIrreducible Answerability Structure, Minimal Sufficient Cores, and Certified Inference-Resource BoundariesDevelops the resource geometry of answerable inference. It formalises lawful-discharge semantics, source-level inferential obligations, answerability-sufficient reductions and irreducible sufficient cores, while keeping semantic structure, certified lower bounds and operational feasibility independently constituted. Gate E establishes a local answerability-to-resource threshold result; globally, exact closure identifies the",
+  "found_by": "answerability classifier",
+  "_score": 16,
+  "_present": 3,
+  "_titlehits": 1,
+  "_hits": {
+   "abstain": 2,
+   "retrieval": 2,
+   "gate": 3,
+   "hardness": 0
+  },
+  "_in_register": false,
+  "_slice_hits": [
+   "two_threshold"
+  ],
+  "_slice_score": 1
+ }
+]

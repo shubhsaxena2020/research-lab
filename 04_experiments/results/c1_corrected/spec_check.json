@@ -1,0 +1,152 @@
+{
+  "bm25_ce_lex_unchanged": "verified by cell-by-cell string comparison of the corrected CSVs against features.csv / features_rung5.csv / features_transfer.csv: every non-dense column is byte-identical",
+  "features": {
+    "main": {
+      "csv_sha256": "1d7f1b3aa16234168d1801565bf5c0f074d7260f2006574505fcee725fdd2fa6",
+      "degeneracy_after": {
+        "frac_dense_presented_eq_1": 0.0,
+        "frac_dense_presented_eq_dense_top1": 0.1599,
+        "n_distinct_dense_presented": 3731,
+        "n_distinct_dense_rank_log": 527,
+        "n_distinct_dense_top1": 886,
+        "n_nan_dense_presented": 0,
+        "n_rows": 3752
+      },
+      "n_items": 3752,
+      "pool_sizes": {
+        "dev": 608,
+        "test": 596
+      }
+    },
+    "rung5": {
+      "csv_sha256": "1c5ff749385fe902f92145cfa8ea01f1a4a583ec1f6d1145784b7eb22e446591",
+      "degeneracy_after": {
+        "frac_dense_presented_eq_1": 0.0,
+        "frac_dense_presented_eq_dense_top1": 0.035,
+        "n_distinct_dense_presented": 800,
+        "n_distinct_dense_rank_log": 279,
+        "n_distinct_dense_top1": 800,
+        "n_nan_dense_presented": 0,
+        "n_rows": 800
+      },
+      "n_items": 800,
+      "pool_sizes": {
+        "dev": 608,
+        "test": 596
+      }
+    },
+    "transfer": {
+      "csv_sha256": "8bde677cbf860e22593162e2102003a4fc007984bccee85fa53303389b9656bb",
+      "degeneracy_after": {
+        "frac_dense_presented_eq_1": 0.0,
+        "frac_dense_presented_eq_dense_top1": 0.1075,
+        "n_distinct_dense_presented": 400,
+        "n_distinct_dense_rank_log": 161,
+        "n_distinct_dense_top1": 200,
+        "n_nan_dense_presented": 0,
+        "n_rows": 400
+      },
+      "n_items": 400,
+      "pool_sizes": {
+        "transfer": 1459
+      }
+    }
+  },
+  "gate_coef_abs_delta": {
+    "bm25_margin": 0.1153,
+    "bm25_presented": 0.8799,
+    "bm25_rank_log": 0.3506,
+    "bm25_top1": 0.6325,
+    "bm25_top5_mean": 0.2004,
+    "ce_presented": 1.0492,
+    "dense_margin": 0.111,
+    "dense_presented": 3.0462,
+    "dense_rank_log": 0.4357,
+    "dense_top1": 7.422,
+    "lex_overlap": 0.0036,
+    "top1_agreement": 0.8261
+  },
+  "gate_coef_corrected": {
+    "bm25_margin": -0.0444,
+    "bm25_presented": 1.6064,
+    "bm25_rank_log": 0.0362,
+    "bm25_top1": -1.4197,
+    "bm25_top5_mean": 0.017,
+    "ce_presented": 0.6613,
+    "dense_margin": 0.0791,
+    "dense_presented": 2.8719,
+    "dense_rank_log": 0.4797,
+    "dense_top1": -1.5039,
+    "lex_overlap": 0.086,
+    "top1_agreement": -0.2571
+  },
+  "gate_coef_frozen": {
+    "bm25_margin": -0.1597,
+    "bm25_presented": 2.4863,
+    "bm25_rank_log": 0.3868,
+    "bm25_top1": -2.0522,
+    "bm25_top5_mean": -0.1834,
+    "ce_presented": 1.7105,
+    "dense_margin": 0.1901,
+    "dense_presented": 5.9181,
+    "dense_rank_log": 0.044,
+    "dense_top1": 5.9181,
+    "lex_overlap": 0.0896,
+    "top1_agreement": 0.569
+  },
+  "gate_intercept_corrected": -4.1525,
+  "gate_intercept_frozen": -6.2862,
+  "gate_max_abs_coef_delta": 7.422,
+  "item_identity": {
+    "ids_identical_and_ordered": true,
+    "n_dev": 1873,
+    "n_ids": 3752,
+    "n_test": 1879,
+    "per_rung_counts_identical": true,
+    "predictions_order_identical": true,
+    "surface_audit_identical": true
+  },
+  "purpose": "Declared sensitivity analysis: PREREGISTRATION.md \u00a74 says dense_presented is a bge-small-en-v1.5 cosine; features.py encoded the presented passage as the dense query, so dense_presented was a self-cosine. This run recomputes the dense block as cosine(question, presented passage).",
+  "thresholds_corrected": {
+    "band": {
+      "band_width": 0.01383,
+      "dev_n_refused": 1817,
+      "dev_precision": 0.8024,
+      "dev_recall": 0.9898,
+      "feasible": true,
+      "t_hi": 0.537011889113,
+      "t_lo": 0.52318216643
+    },
+    "exploratory_band": {
+      "dev_n_refused": 1143,
+      "dev_over_refusal": 0.095,
+      "dev_precision": 0.9668,
+      "dev_recall": 0.7502,
+      "feasible": true,
+      "max_over_refusal": 0.1,
+      "t_hi": 0.636224300244,
+      "t_lo": 0.303228201895
+    }
+  },
+  "thresholds_frozen": {
+    "band": {
+      "band_width": 0.040618,
+      "dev_n_refused": 1760,
+      "dev_precision": 0.8369,
+      "dev_recall": 1.0,
+      "feasible": true,
+      "t_hi": 0.947838803928,
+      "t_lo": 0.90722098925
+    },
+    "exploratory_band": {
+      "dev_n_refused": 1423,
+      "dev_over_refusal": 0.1,
+      "dev_precision": 0.9719,
+      "dev_recall": 0.9389,
+      "feasible": true,
+      "max_over_refusal": 0.1,
+      "t_hi": 0.947838803928,
+      "t_lo": 0.297426271744
+    }
+  }
+}

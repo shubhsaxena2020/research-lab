@@ -1,0 +1,83 @@
+unique OpenAlex works: 3681
+C1: 387 candidates pass the 3-of-4 concept filter (of 3681 works); top 40 written
+   28 NEW 2025 | Evidence-Calibrated RAG for Unanswerable Question Answering: Retrieval Coverage, Abstention Calibration,  | Journal of Technology Informatics and Enginee
+   24 NEW 2026 | Comparative Analysis of Confidence-Aware and Verification Based Hallucination Reduction Techniques in Ret | INTERANTIONAL JOURNAL OF SCIENTIFIC RESEARCH 
+   24 NEW 2026 | Towards Reliable Long-Context Reasoning: Detecting Unanswerable Questions via FactGuard | Conference on Empirical Methods in Natural La
+   24 NEW 2026 | FinAbstain: Uncertainty-Calibrated Multimodal RAG for Selective Financial Forecasting | arXiv (Cornell University)
+   23 NEW 2026 | RCL: A Retrieval-Confidence Layer for Detecting Insufficient Context in Enterprise Retrieval-Augmented Co | arXiv (Cornell University)
+   23 NEW 2026 | Answerability-Aware Retrieval-Augmented Generation for Enterprise Helpdesk Question Answering: An Empiric | Zenodo (CERN European Organization for Nuclea
+   23 NEW 2026 | Before Answering: Evidence Sufficiency under Size-Matched Memory Construction | arXiv (Cornell University)
+   23 NEW 2026 | Evidence-constrained mechanistic synthesis for pre-calibration perturbation inference | bioRxiv (Cold Spring Harbor Laboratory)
+   22 NEW 2026 | Memory-Efficient Adaptation and Unanswerable-Aware Supervision for Reliable Private Email Question Answer | Applied Sciences
+   22 NEW 2026 | Reliable Biomedical RAG with Answerability-Aware Hybrid Retrieval | Zenodo (CERN European Organization for Nuclea
+   22 reg 2026 | Refer, Infer, or Abstain: Investigating Latent Skill Selection of Large Language Models under Contextual  | 
+   22 NEW 2026 | Evaluating and Mitigating Hallucinations in Retrieval-Augmented Question Answering over Uzbek School Text | Research Square
+   22 NEW 2026 | Do LLMs Know When Evidence is Insufficient? An Evidence Sufficiency Benchmark for Answer-Abstention Calib | Computers, materials & continua/Computers, ma
+   22 reg 2026 | Prompt-Based Abstention Fails Under Misleading Context: A Controlled Study of Small Frozen RAG Models | arXiv (Cornell University)
+   22 NEW 2026 | Evidence-Gated Agent Architecture (EGAA): Evidence Sufficiency, Policy Hard-Gating, Plan Validation, and  | Zenodo (CERN European Organization for Nuclea
+   22 NEW 2026 | Gated, grounded, and governed: integrating large language models, authorised tool calling, and retrieval- | Jurnal Multimedia dan Teknologi Informasi (Ja
+   22 NEW 2026 | Trust-Calibrated Multilingual RAG for Humanitarian Information Platforms: Empirical Evaluation on OMoS-QA | International Journal of Graphic Design
+   21 NEW 2020 | Challenges in Information-Seeking QA: Unanswerable Questions and Paragraph Retrieval | arXiv (Cornell University)
+   21 NEW 2026 | Training Negatives Still Matter After Calibrating Answerability Readouts | arXiv (Cornell University)
+   21 NEW 2026 | Probe Before you Answer! Answerability Probing for Abstention in Cross-Lingual Context-Based Question Ans | Conference on Machine Translation (WMT)
+   21 NEW 2026 | Cost-Aware Gated Retrieval: Decoupling Retrieval Initiation from Evidence-Conditioned Escalation | Research Square
+   21 NEW 2026 | CARGO: Context-Aware Retrieval-Gated Evaluation of Agentic AI in Production | arXiv (Cornell University)
+   21 NEW 2026 | Audit-Ready Patent Valuation: Evidence-Grounded Estimates with Calibrated Uncertainty and Abstention | Zenodo (CERN European Organization for Nuclea
+   21 NEW 2026 | AERIS-Chart: Evidence-Sufficient And Uncertainty-Calibrated Retrieval For Chart Claim Verification | Zenodo (CERN European Organization for Nuclea
+   21 NEW 2026 | SAFE-MR: Evidence Sufficiency Learning for Selective Multimodal Rumor Detection | arXiv (Cornell University)
+   21 NEW 2026 | Predictable Failure in Multi-Hop Retrieval: Score-Distributional Confidence Scoring and Abstention | arXiv (Cornell University)
+   21 NEW 2026 | Learning When to Remember: Risk-Sensitive Contextual Bandits for Abstention-Aware Memory Retrieval in LLM | arXiv (Cornell University)
+   21 NEW 2026 | Beyond Cultural Trivia: Calibrated Exemplar Retrieval, Mode-Aware Routing, and Selective Abstention for C | Stout in Humanities and Social Sciences
+   20 NEW 2025 | Women Leadership in Navigating Self-Sufficient Transformational and Transactional Leadership in an Islami | Leadership and Policy in Schools
+   20 NEW 2026 | Know Before You Fetch: Calibrated Retrieval-Budget Allocation for Retrieval-Augmented Generation | arXiv (Cornell University)
+   20 NEW 2026 | PERA-Tutor: A Personalized Explainable Retrieval-Augmented Tutor for Educational Question Answering | International Journal for Research in Applied
+   20 NEW 2026 | Answerability: LLMs Know What They Can Answer, Not Whether They Are Right | Zenodo (CERN European Organization for Nuclea
+   20 NEW 2026 | When Silence Is Golden: Can LLMs Learn to Abstain in Temporal QA and Beyond? | arXiv (Cornell University)
+   20 NEW 2026 | Building a Reliable Retrieval-Augmented Generation (RAG) System with Hallucination Awareness | Aaltodoc (Aalto University)
+   20 NEW 2025 | Towards answering unanswerable questions: data augmentation for enhanced medical domain question answerin | Open University of Cape Town (University of C
+   20 NEW 2026 | Sufficiency-Gated Retrieval-Augmented Generation: Reducing Hallucination via Context Adequacy Estimation | Computers, materials & continua/Computers, ma
+   20 NEW 2023 | Claim-Aware Scientific RAG: Evidence-First Retrieval and Abstention for Scientific Fact Responses on SciF | Journal of Advanced Computing Systems
+   20 NEW 2026 | BalanceRAG: Joint Risk Calibration for Cascaded Retrieval-Augmented Generation | Findings of the Association for Computational
+   20 NEW 2026 | An LLM-Based Multi-Path Question Answering System with XGBoost Routing and Threshold-Based Refusal | Electronics
+   20 NEW 2026 | When Visual Evidence Is Insufficient: How Instructions, Post-Training, and Internal Activations Shape Ref | arXiv (Cornell University)
+C3: 241 candidates pass the 3-of-4 concept filter (of 3681 works); top 40 written
+   27 NEW 2026 | GRP-07-163 SMISHGUARD: An AI-Powered Framework for SMS Phishing Detection and Alert System for Vulnerable | DigitalCommons - Kennesaw State University (K
+   26 NEW 2026 | Cross-lingual SMS spam detection using GAN-based augmentation for imbalanced datasets | Scientific Reports
+   24 NEW 2026 | Handling Class Imbalance in SMS Spam Datasets Using Advanced Sampling Techniques | International Journal of Emerging Trends in C
+   23 NEW 2023 | Cost-Sensitive GNN-Based Imbalanced Learning for Mobile Social Network Fraud Detection | IEEE Transactions on Computational Social Sys
+   22 NEW 2025 | Key insights into recommended SMS spam detection datasets | Scientific Reports
+   22 NEW 2024 | SMS Scam Detection Application Based on Optical Character Recognition for Image Data Using Unsupervised a | Sensors
+   22 NEW 2026 | Enhancing Credit Card Fraud Detection under Severe Class Imbalance using Cost-Sensitive Learning and Thre | EAI endorsed transactions on intelligent syst
+   22 NEW 2026 | Distribution-Free Error Control for Fraud Alert Triage: Conformal Anomaly P-Values Under Class Imbalance, | INTERNATIONAL JOURNAL OF APPLIED SCIENCE AND 
+   21 NEW 2026 | Cost-Sensitive Conformal Prediction and Human-in-the-Loop Abstention for Imbalanced High-Stakes Decision  | arXiv (Cornell University)
+   21 NEW 2026 | A Comparative Study of Transformer-Based Models for Multi-Class SMS Phishing Detection | International Conference on Data Science, Mac
+   21 NEW 2026 | A TRANSFORMER-BASED DISTILBERT FRAMEWORK FOR REAL-TIME DETECTION OF PHISHING ATTACKS IN SMS AND WHATSAPP | International Journal of Progressive Research
+   21 NEW 2026 | A Finite-State Machine (FSM)-Based Approach for Detecting SMS Phishing | IEEE SoutheastCon
+   21 NEW 2026 | Default Zero-Shot LLM APIs Over-Flag Indian Financial SMS: A Policy-Aligned Benchmark and Template-Level  | 
+   21 NEW 2026 | Cost-sensitive random forest with adaptive threshold optimization for imbalanced financial fraud detectio | Frontiers in Artificial Intelligence
+   21 NEW 2026 | Resilient Semantic Threat Detection at the Edge: A Knowledge Distillation Framework for SMS Spam Classifi | International Journal of Creative and Open Re
+   21 NEW 2026 | Cost-Sensitive and Leakage-Aware Evaluation of Credit Card Fraud Detection Under Extreme Class Imbalance | Zenodo (CERN European Organization for Nuclea
+   21 NEW 2026 | Anonymous Supplementary Artifact — EMNLP 2026 Industry Track Submission (Multilingual Indian SMS Scam Det | Zenodo (CERN European Organization for Nuclea
+   20 NEW 2025 | Arabic SMS Spam Detection | International Conference on Innovation in Art
+   20 NEW 2026 | The Fragility of Phishing Detection Models: Evidence from Cross-Corpus Transfer, Prevalence Shift, Artifa | Big Data and Cognitive Computing
+   20 NEW 2025 | Spam SMS Classification | International Journal of Research Publication
+   20 NEW 2026 | Adaptive and explainable machine learning for Indonesian SMS phishing detection: Few-shot prototype learn | Science, Technology, and Communication Journa
+   20 NEW 2024 | Impact of AI-Driven Fraud Alerts on User Behaviour in Digital Payment Systems | 
+   20 NEW 2026 | Ensemble Learning Methods for Improving SMS Spam Classification Accuracy | International Journal of Computer Science and
+   20 reg 2026 | Johnny Still Receives Spam SMS: Assessing the Robustness of SMS Spam Detection | arXiv (Cornell University)
+   20 NEW 2025 | THRESHOLD OPTIMIZATION STRATEGIES FOR IMBALANCED FRAUD DETECTION MODELS | International Research Journal of Modernizati
+   20 NEW 2026 | MULTILINGUAL SMS SPAM DETECTION USING NATURAL LANGUAGE PROCESSING AND MACHINE LEARNING TECHNIQUES | Science and Culture
+   19 NEW 2014 | Applying Cost-Sensitive Classification for Financial Fraud Detection under High Class-Imbalance | IEEE ... International Conference on Data Min
+   19 NEW 2025 | Objective over Architecture: Fraud Detection Under Extreme Imbalance in Bank Account Opening | Computation
+   19 NEW 2015 | A COMPARATIVE STUDY OF DECISION TREE ALGORITHMS FOR CLASS IMBALANCED LEARNING IN CREDIT CARD FRAUD DETECT | 
+   19 NEW 2025 | Smishing Detection: Combating SMS Phishing Attacks by Utilizing Machine-Learning Algorithms | International Journal of Innovative Technolog
+   19 NEW 2025 | Spam SMS Detection Using Machine Learning | INTERANTIONAL JOURNAL OF SCIENTIFIC RESEARCH 
+   19 NEW 2026 | Adversarial Attacks and Robustness in SMS Spam Classification Models | International Journal of Computer Science and
+   19 NEW 2026 | A SPAMTRANSFORMERMODEL FOR SMS SPAM DETECTION | International Journal of AI Electronics and N
+   19 NEW 2026 | A Cost-Sensitive and Adversarially Robust Decision Layer for Credit-Card Fraud Detection: Cost-Minimising | Sci
+   19 NEW 2026 | Application of Cost-Sensitive Focal-Loss, Imbalance-Aware Stacking Framework for Financial Fraud Detectio | Journal of Electrical Systems
+   19 NEW 2026 | Explainable fraud detection under fixed false positive rate | PeerJ Computer Science
+   19 NEW 2024 | Enhancement of Random Forest Algorithm Applied to SMS Fraud Detection | International Journal For Multidisciplinary R
+   18 NEW 2022 | A deep learning method for automatic SMS spam classification: Performance of learning algorithms on indig | Concurrency and Computation Practice and Expe
+   18 NEW 2024 | Advancements of SMS Spam Detection: A Comprehensive Survey of NLP and ML Techniques | Procedia Computer Science
+   18 NEW 2015 | Improving Knowledge Based Spam Detection Methods: The Effect of Malicious Related Features in Imbalance D | International Journal of Communications Netwo

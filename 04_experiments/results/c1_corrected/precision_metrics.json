@@ -1,0 +1,97 @@
+{
+  "definitions": {
+    "answer_rate": "P(admitted | answerable) \u2014 the share of questions actually answered",
+    "precision": "P(negative of that rung | refused), over that rung's items and the answerable items together",
+    "refusal_rate": "P(refused | negative of that rung) \u2014 a recall on the rung"
+  },
+  "experiment": "c1",
+  "generated_by": "04_experiments/src/precision_metrics.py",
+  "operating_points": {
+    "band": {
+      "answer_rate": 0.085,
+      "n_answerable": 400,
+      "n_refused_answerable": 366,
+      "over_refusal": 0.915,
+      "per_rung": {
+        "1": {
+          "n": 400,
+          "n_refused": 400,
+          "precision": 0.5222,
+          "precision_note": "P(negative of this rung | refused), denominator = this rung's refusals + the refused answerable items",
+          "refusal_rate": 1.0
+        },
+        "2": {
+          "n": 280,
+          "n_refused": 279,
+          "precision": 0.4326,
+          "precision_note": "P(negative of this rung | refused), denominator = this rung's refusals + the refused answerable items",
+          "refusal_rate": 0.9964
+        },
+        "3": {
+          "n": 400,
+          "n_refused": 400,
+          "precision": 0.5222,
+          "precision_note": "P(negative of this rung | refused), denominator = this rung's refusals + the refused answerable items",
+          "refusal_rate": 1.0
+        },
+        "4": {
+          "n": 399,
+          "n_refused": 362,
+          "precision": 0.4973,
+          "precision_note": "P(negative of this rung | refused), denominator = this rung's refusals + the refused answerable items",
+          "refusal_rate": 0.9073
+        }
+      },
+      "pooled": {
+        "n_negatives": 1479,
+        "n_refused_negatives": 1441,
+        "precision": 0.7975,
+        "refusal_rate": 0.9743
+      }
+    },
+    "exploratory_band": {
+      "answer_rate": 0.89,
+      "n_answerable": 400,
+      "n_refused_answerable": 44,
+      "over_refusal": 0.11,
+      "per_rung": {
+        "1": {
+          "n": 400,
+          "n_refused": 399,
+          "precision": 0.9007,
+          "precision_note": "P(negative of this rung | refused), denominator = this rung's refusals + the refused answerable items",
+          "refusal_rate": 0.9975
+        },
+        "2": {
+          "n": 280,
+          "n_refused": 260,
+          "precision": 0.8553,
+          "precision_note": "P(negative of this rung | refused), denominator = this rung's refusals + the refused answerable items",
+          "refusal_rate": 0.9286
+        },
+        "3": {
+          "n": 400,
+          "n_refused": 382,
+          "precision": 0.8967,
+          "precision_note": "P(negative of this rung | refused), denominator = this rung's refusals + the refused answerable items",
+          "refusal_rate": 0.955
+        },
+        "4": {
+          "n": 399,
+          "n_refused": 50,
+          "precision": 0.5319,
+          "precision_note": "P(negative of this rung | refused), denominator = this rung's refusals + the refused answerable items",
+          "refusal_rate": 0.1253
+        }
+      },
+      "pooled": {
+        "n_negatives": 1479,
+        "n_refused_negatives": 1091,
+        "precision": 0.9612,
+        "refusal_rate": 0.7377
+      }
+    }
+  },
+  "run": "corrected",
+  "source": "04_experiments/results/c1_corrected/predictions.csv"
+}

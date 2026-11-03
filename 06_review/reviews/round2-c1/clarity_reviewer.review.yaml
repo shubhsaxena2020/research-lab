@@ -1,0 +1,58 @@
+persona: clarity_reviewer
+summary: |
+  The paper claims that a four-rung ladder of negatives for a retrieval-feature abstention gate measures
+  lexical overlap rather than answerability hardness, and that at a precision target without a coverage
+  constraint the ladder's signal disappears; the audit in Section 4.1, the overlap-matched rung in
+  Section 4.4 and the top-1 arm in Section 4.5 do support a version of that. What the page actually shows
+  is a gate that refuses three answerable questions in four, and a per-rung column called 'abstain
+  precision' whose values are exactly the share of each rung's negatives that were refused (99.64% is
+  279/280), so the quantity the abstract names is never the quantity the tables report. A skimming reader
+  cannot state the claim correctly after the abstract: the two headline numbers use different
+  denominators, the metric is undefined, and there is no Figure 1 to fall back on because the draft
+  contains no figures at all.
+strengths:
+  - "The rung table in Section 3.1 lets a reader reconstruct all five conditions and their item counts without reading code."
+  - "Confirmatory and exploratory results are labelled consistently (D1-D4), and the abstract marks its exploratory numbers as exploratory."
+  - "The table in Section 4.6 puts the frozen and corrected runs side by side, so the implementation correction can be checked rather than taken on trust."
+  - "Section 5.1 states the practical lesson in one sentence a non-specialist could repeat, which is what the rest of the paper is for."
+weaknesses:
+  - "The abstract's two quantitative clauses, 'refuses 75.50% of answerable questions' and 'admits 5.27% of the held-out benchmark', are on different denominators (400 answerables against 1879 items) and read as a contradiction; Section 5.1 then converts the second into 'about one question in twenty' when the gate answers 98 of 400 questions, one in four."
+  - "'Abstain precision' is never defined, and every reported value is exactly k divided by the rung size: 279/280 = 99.64%, 357/400 = 89.25%, 50/399 = 12.53%. No table says how many refusals each precision is computed over, and Section 3.3 uses the word for the constraint the thresholds were fitted to, which is a different quantity again."
+  - "No table has a number or a caption, so the six table references in the prose cannot be resolved: the related-work table is cited as Table 7 but is the first table in the paper, Table 4 is cited before Table 5 and appears after it, and Table 1 is never referred to at all."
+  - "Two cross-references point at the wrong section: the note under the Section 4.2 table sends the reader to Section 4.5 for the dense-column defect that Section 4.6 describes, and Section 2 sends the reader to Section 4.8 for the reader baseline that Section 4.7 reports."
+  - "The arm table in Section 4.4 labels a marginal probability as the wrong conditional: 87.30% is P(miss | refused), while the sentence above it gives P(refused | miss) = 63.22%, so the parenthetical 'P(miss refused)' points a reader at the wrong number."
+  - "Section 1 contribution 3 promises 'the numbers beside every precision figure' and Section 2's table claims coverage is reported beside every precision, but the five arm rows of the Section 4.4 table carry no coverage column, and the confirmatory R5 row's over-refusal cell reads 'degenerate, see §4.4' instead of a number."
+  - "Terms arrive before their definitions: 'over-refusal' first appears as a column header in Section 4.2 and is defined nowhere, while 'admit mass' (6.03%) and 'degenerate' are used as a measured quantity and as a verdict without either being defined."
+questions:
+  - "What is the exact definition of 'abstain precision' in this paper, numerator and denominator, and what happens to the abstract's numbers if it is recomputed as negatives refused divided by all refusals?"
+  - "How many items were refused on each rung at the confirmatory point, and what is the precision of those refusals?"
+  - "If a skimming reader is meant to carry away one number, is it the 75.50% over-refusal or the 24.5% of questions actually answered?"
+  - "Which of the eight tables is Table 2, and is there a precision-against-coverage plot that could serve as Figure 1?"
+soundness: 2
+presentation: 2
+contribution: 2
+confidence: 4
+overall: 4
+decision: reject
+must_fix:
+  - claim: "The abstract reports two headline numbers on different denominators in one sentence, so a reader cannot tell whether the gate answers one question in four or one in twenty."
+    where: "Abstract; Section 5.1"
+    evidence_needed: "Both figures restated over one population (coverage = questions answered / questions asked = 98/400 = 24.5%), and 'about one question in twenty' in Section 5.1 corrected or replaced by that number."
+  - claim: "'Abstain precision' is undefined and the reported cells are the per-rung refusal rate, not the precision of refusals."
+    where: "Section 3.3; Section 4.2, results table first row"
+    evidence_needed: "A one-sentence definition with numerator and denominator, the number of refusals behind every cell, and the eight per-rung cells recomputed as (negatives refused)/(all refusals): the R2 cell becomes 279/(279+302) = 48.0%, not 99.64%."
+  - claim: "No table is numbered or captioned, and the in-text table numbers do not resolve against the tables as printed."
+    where: "Tables in Sections 2, 3.1, 4.1, 4.2, 4.4 and 4.6"
+    evidence_needed: "Sequential numbers and self-contained captions (what is plotted, n, split, units) for all eight tables, with every in-text reference rewritten to the appearance order."
+  - claim: "There is no figure anywhere in the draft, so the paper's central trade-off has no visual form and the abstract has no Figure 1 to be read against."
+    where: "Whole manuscript; Abstract; Section 4.2"
+    evidence_needed: "The generated figure asset already in 05_paper/figures/generated inlined in the draft with a caption (what is plotted, n, split, units), and, given the metric problem above, one panel plotting abstain precision and over-refusal against coverage with the registered operating point marked."
+  - claim: "Two cross-references send the reader to the wrong section."
+    where: "Note under the Section 4.2 table ('§4.5'); Section 2 ('§4.8')"
+    evidence_needed: "The dense-column pointer changed to Section 4.6 and the reader-baseline pointer changed to Section 4.7, checked against the section that actually reports each number."
+  - claim: "The arm table names the wrong conditional for its 87.30% cell."
+    where: "Section 4.4, arm table, last row"
+    evidence_needed: "Both conditionals stated with their denominators: P(refused | miss) = 63.22% and P(miss | refused) = 87.30%, with the cell relabelled to say which one it reports."
+  - claim: "The paper claims coverage is reported beside every precision figure, and it is not."
+    where: "Section 1 (contribution 3); Section 2 table ('This paper' row); Section 4.4, arm table"
+    evidence_needed: "A coverage column added to all five arm rows, or the contribution and the related-work table narrowed to the two tables where the claim is true."

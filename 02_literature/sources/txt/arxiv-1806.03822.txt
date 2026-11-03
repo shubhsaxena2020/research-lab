@@ -1,0 +1,402 @@
+                                        Know What You Don’t Know: Unanswerable Questions for SQuAD
+
+                                                           Pranav Rajpurkar∗ Robin Jia∗ Percy Liang
+                                                             Computer Science Department, Stanford University
+
+                                                       {pranavsr,robinjia,pliang}@cs.stanford.edu
+
+arXiv:1806.03822v1 [cs.CL] 11 Jun 2018                        Abstract                                     Article: Endangered Species Act
+                                                                                                           Paragraph: “ . . . Other legislation followed, including
+                                            Extractive reading comprehension sys-                          the Migratory Bird Conservation Act of 1929, a 1937
+                                            tems can often locate the correct answer to                    treaty prohibiting the hunting of right and gray whales,
+                                            a question in a context document, but they                     and the Bald Eagle Protection Act of 1940. These later
+                                            also tend to make unreliable guesses on                        laws had a low cost to society—the species were rela-
+                                            questions for which the correct answer is                      tively rare—and little opposition was raised.”
+                                            not stated in the context. Existing datasets
+                                            either focus exclusively on answerable                         Question 1: “Which laws faced signiﬁcant opposition?”
+                                            questions, or use automatically generated                      Plausible Answer: later laws
+                                            unanswerable questions that are easy to
+                                            identify. To address these weaknesses, we                      Question 2: “What was the name of the 1937 treaty?”
+                                            present SQuAD 2.0, the latest version of                       Plausible Answer: Bald Eagle Protection Act
+                                            the Stanford Question Answering Dataset
+                                            (SQuAD). SQuAD 2.0 combines exist-                          Figure 1: Two unanswerable questions written by
+                                            ing SQuAD data with over 50,000 unan-                       crowdworkers, along with plausible (but incorrect) an-
+                                            swerable questions written adversarially                    swers. Relevant keywords are shown in blue.
+                                            by crowdworkers to look similar to an-
+                                            swerable ones. To do well on SQuAD 2.0,                     even produced systems that surpass human-level
+                                            systems must not only answer questions                      exact match accuracy on the Stanford Question
+                                            when possible, but also determine when no                   Answering Dataset (SQuAD), one of the most
+                                            answer is supported by the paragraph and                    widely-used reading comprehension benchmarks
+                                            abstain from answering. SQuAD 2.0 is a                      (Rajpurkar et al., 2016).
+                                            challenging natural language understand-
+                                            ing task for existing models: a strong neu-                    Nonetheless, these systems are still far from
+                                            ral system that gets 86% F1 on SQuAD 1.1                    true language understanding. Recent analysis
+                                            achieves only 66% F1 on SQuAD 2.0.                          shows that models can do well at SQuAD by learn-
+                                                                                                        ing context and type-matching heuristics (Weis-
+                                        1 Introduction                                                  senborn et al., 2017), and that success on SQuAD
+                                                                                                        does not ensure robustness to distracting sen-
+                                        Machine reading comprehension has become a                      tences (Jia and Liang, 2017). One root cause of
+                                        central task in natural language understanding, fu-             these problems is SQuAD’s focus on questions for
+                                        eled by the creation of many large-scale datasets               which a correct answer is guaranteed to exist in the
+                                        (Hermann et al., 2015; Hewlett et al., 2016; Ra-                context document. Therefore, models only need to
+                                        jpurkar et al., 2016; Nguyen et al., 2016; Trischler            select the span that seems most related to the ques-
+                                        et al., 2017; Joshi et al., 2017). In turn, these               tion, instead of checking that the answer is actually
+                                        datasets have spurred a diverse array of model                  entailed by the text.
+                                        architecture improvements (Seo et al., 2016; Hu
+                                        et al., 2017; Wang et al., 2017; Clark and Gard-                   In this work, we construct SQuAD 2.0,1 a new
+                                        ner, 2017; Huang et al., 2018). Recent work has                 dataset that combines answerable questions from
+                                                                                                        the previous version of SQuAD (SQuAD 1.1)
+                                             ∗ The ﬁrst two authors contributed equally to this paper.
+                                                                                                            1 In the ACL version of this paper, we called our new
+                                                                                                        dataset SQUADRUN; here we use the name SQuAD 2.0, to
+                                                                                                        emphasize that it is in fact the new version of SQuAD.
+with 53,775 new, unanswerable questions about         term “negative example” to refer to a context pas-
+the same paragraphs. Crowdworkers crafted these       sage paired with an unanswerable question.
+questions so that (1) they are relevant to the para-
+graph, and (2) the paragraph contains a plausible     3.1 Extractive datasets
+answer—something of the same type as what the
+question asks for. Two such examples are shown        In extractive reading comprehension datasets, a
+in Figure 1.                                          system must extract the correct answer to a ques-
+                                                      tion from a context document or paragraph. The
+   We conﬁrm that SQuAD 2.0 is both challeng-         Zero-shot Relation Extraction dataset (Levy et al.,
+ing and high-quality. A state-of-the-art model        2017) contains negative examples generated with
+achieves only 66.3% F1 score when trained and         distant supervision. Levy et al. (2017) found that
+tested on SQuAD 2.0, whereas human accuracy           65% of these negative examples do not have a
+is 89.5% F1, a full 23.2 points higher. The same      plausible answer, making them easy to identify.
+model architecture trained on SQuAD 1.1 gets
+85.8% F1, only 5.4 points worse than humans.             Other distant supervision strategies can also
+We also show that our unanswerable questions are      create negative examples. TriviaQA (Joshi et al.,
+more challenging than ones created automatically,     2017) retrieves context documents from the web or
+either via distant supervision (Clark and Gard-       Wikipedia for each question. Some documents do
+ner, 2017) or a rule-based method (Jia and Liang,     not contain the correct answer, yielding negative
+2017). We release SQuAD 2.0 to the public as          examples; however, these are excluded from the
+new version of SQuAD, and make it the primary         ﬁnal dataset. Clark and Gardner (2017) generate
+benchmark on the ofﬁcial SQuAD leaderboard.2          negative examples for SQuAD by pairing existing
+We are optimistic that this new dataset will en-      questions with other paragraphs from the same ar-
+courage the development of reading comprehen-         ticle based on TF-IDF overlap; we refer to these as
+sion systems that know what they don’t know.          TFIDF examples. In general, distant supervision
+                                                      does not ensure the existence of a plausible answer
+2 Desiderata                                          in the retrieved context, and might also add noise,
+                                                      as the context might contain a paraphrase of the
+We ﬁrst outline our goals for SQuAD 2.0. Besides      correct answer. Moreover, when retrieving from
+the generic goals of large size, diversity, and low   a small set of possible contexts, as in Clark and
+noise, we posit two desiderata speciﬁc to unan-       Gardner (2017), we ﬁnd that the retrieved para-
+swerable questions:                                   graphs are often not very relevant to the question,
+                                                      making these negative examples easy to identify.
+Relevance. The unanswerable questions should
+appear relevant to the topic of the context para-        The NewsQA data collection process also yields
+graph. Otherwise, simple heuristics (e.g., based on   unanswerable questions, because crowdworkers
+word overlap) could distinguish answerable and        write questions given only a summary of an article,
+unanswerable questions (Yih et al., 2013).            not the full text (Trischler et al., 2017). Only 9.5%
+                                                      of their questions are unanswerable, making this
+Existence of plausible answers. There should          strategy hard to scale. Of this fraction, we found
+be some span in the context whose type matches        that some are misannotated as unanswerable, and
+the type of answer the question asks for. For ex-     others are out-of-scope (e.g., summarization ques-
+ample, if the question asks, “What company was        tions). Trischler et al. (2017) also exclude negative
+founded in 1992?”, then some company should           examples from their ﬁnal dataset.
+appear in the context. Otherwise, type-matching
+heuristics could distinguish answerable and unan-        Jia and Liang (2017) propose a rule-based pro-
+swerable questions (Weissenborn et al., 2017).        cedure for editing SQuAD questions to make them
+                                                      unanswerable. Their questions are not very di-
+3 Existing datasets                                   verse: they only replace entities and numbers with
+                                                      similar words, and replace nouns and adjectives
+Next, we survey existing reading comprehension        with WordNet antonyms. We refer to these unan-
+datasets with these criteria in mind. We use the      swerable questions as RULEBASED questions.
+
+    2 As with previous versions of SQuAD, we release  3.2 Answer sentence selection datasets
+SQuAD 2.0 under the CC BY-SA 4.0 license.
+                                                      Sentence selection datasets test whether a system
+                                                      can rank sentences that answer a question higher
+Reasoning    Description                 Example                                                         Percentage
+Negation                                 Sentence: “Several hospital pharmacies have decided to                   9%
+             Negation word inserted      outsource high risk preparations . . . ”
+Antonym      or removed.                 Question: “What types of pharmacy functions have never                 20%
+                                         been outsourced?”                                                      21%
+Entity Swap  Antonym used.               S: “the extinction of the dinosaurs. . . allowed the                   15%
+                                         tropical rainforest to spread out across the continent.”
+Mutual       Entity, number, or date     Q: “The extinction of what led to the decline of rainforests?”           4%
+Exclusion    replaced with other         S: “These values are much greater than the 9–88 cm
+             entity, number, or date.    as projected . . . in its Third Assessment Report.”                    24%
+Impossible   Word or phrase is           Q: “What was the projection of sea level increases in the                7%
+Condition    mutually exclusive          fourth assessment report?”
+             with something for which    S: “BSkyB. . . waiv[ed] the charge for subscribers whose
+Other        an answer is present.       package included two or more premium channels.”
+Neutral                                  Q: “What service did BSkyB give away for free
+Answerable   Asks for condition that     unconditionally?”
+             is not satisﬁed by          S: “Union forces left Jacksonville and confronted
+             anything in the paragraph.  a Confederate Army at the Battle of Olustee. . .
+                                         Union forces then retreated to Jacksonville
+             Other cases where the       and held the city for the remainder of the war.”
+             paragraph does not imply    Q: “After what battle did Union forces leave
+             any answer.                 Jacksonville for good?”
+             Question is answerable      S: “Schuenemann et al. concluded in 2011 that the
+             (i.e. dataset noise).       Black Death. . . was caused by a variant of Y. pestis. . . ”
+                                         Q: “Who discovered Y. pestis?”
+
+Table 1: Types of negative examples in SQuAD 2.0 exhibiting a wide range of phenomena.
+
+than sentences that do not. Wang et al. (2007)        4.1 Dataset creation
+constructed the QASENT dataset from questions
+in the TREC 8-13 QA tracks. Yih et al. (2013)         We employed crowdworkers on the Daemo crowd-
+showed that lexical baselines are highly competi-     sourcing platform (Gaikwad et al., 2015) to write
+tive on this dataset. WikiQA (Yang et al., 2015)      unanswerable questions. Each task consisted of
+pairs questions from Bing query logs with sen-        an entire article from SQuAD 1.1. For each para-
+tences from Wikipedia. Like TFIDF examples,           graph in the article, workers were asked to pose up
+these sentences are not guaranteed to have plausi-    to ﬁve questions that were impossible to answer
+ble answers or high relevance to the question. The    based on the paragraph alone, while referencing
+dataset is also limited in scale (3,047 questions,    entities in the paragraph and ensuring that a plau-
+1,473 answers).                                       sible answer is present. As inspiration, we also
+                                                      showed questions from SQuAD 1.1 for each para-
+3.3 Multiple choice datasets                          graph; this further encouraged unanswerable ques-
+                                                      tions to look similar to answerable ones. Workers
+Finally, some datasets, like MCTest (Richard-         were asked to spend 7 minutes per paragraph, and
+son et al., 2013) and RACE (Lai et al., 2017),        were paid $10.50 per hour. Screenshots of our in-
+pose multiple choice questions, which can have        terface are shown in Appendix A.1.
+a “none of the above” option. In practice, mul-
+tiple choice options are often unavailable, making       We removed questions from workers who wrote
+these datasets less suited for training user-facing   25 or fewer questions on that article; this ﬁlter
+systems. Multiple choice questions also tend to       helped remove noise from workers who had trou-
+be quite different from extractive ones, with more    ble understanding the task, and therefore quit be-
+emphasis on ﬁll-in-the-blank, interpretation, and     fore completing the whole article. We applied this
+summarization (Lai et al., 2017).                     ﬁlter to both our new data and the existing an-
+                                                      swerable questions from SQuAD 1.1. To gener-
+4 SQuAD 2.0                                           ate train, development, and test splits, we used the
+                                                      same partition of articles as SQuAD 1.1, and com-
+We now describe our new dataset, which we con-        bined the existing data with our new data for each
+structed to satisfy both the relevance and plausible  split. For the SQuAD 2.0 development and test
+answer desiderata from Section 2.                     sets, we removed articles for which we did not
+Train                    SQuAD 1.1      SQuAD 2.0      examples, and give examples and their frequency
+Total examples                                         in SQuAD 2.0. We observe a wide range of phe-
+Negative examples             87,599        130,319    nomena, extending beyond expected phenomena
+Total articles                       0       43,498    like negation, antonymy, and entity changes. In
+Articles with negatives                                particular, SQuAD 2.0 is much more diverse than
+Development                       442            442   RULEBASED, which creates unanswerable ques-
+Total examples                       0           285   tions by applying entity, number, and antonym
+Negative examples                                      swaps to existing SQuAD 1.1 questions. We also
+Total articles                10,570         11,873    found that 93% of the sampled negative examples
+Articles with negatives              0         5,945   are indeed unanswerable.
+Test
+Total examples                      48             35  5 Experiments
+Negative examples                    0             35
+Total articles                                         5.1 Models
+Articles with negatives         9,533          8,862
+                                     0         4,332   We evaluated three existing model architectures:
+                                                       the BiDAF-No-Answer (BNA) model proposed by
+                                    46             28  Levy et al. (2017), and two versions of the Docu-
+                                     0             28  mentQA No-Answer (DocQA) model from Clark
+                                                       and Gardner (2017), namely versions with and
+Table 2: Dataset statistics of SQuAD 2.0, compared to  without ELMo (Peters et al., 2018). These mod-
+the previous SQuAD 1.1.                                els all learn to predict the probability that a ques-
+                                                       tion is unanswerable, in addition to a distribution
+collect unanswerable questions. This resulted in       over answer choices. At test time, models abstain
+a roughly one-to-one ratio of answerable to unan-      whenever their predicted probability that a ques-
+swerable questions in these splits, whereas the        tion is unanswerable exceeds some threshold. We
+train data has roughly twice as many answerable        tune this threshold separately for each model on
+questions as unanswerable ones. Table 2 summa-         the development set. When evaluating on the test
+rizes overall statistics of SQuAD 2.0.                 set, we use the threshold that maximizes F1 score
+                                                       on the development set. We ﬁnd this strategy does
+4.2 Human accuracy                                     slightly better than simply taking the argmax pre-
+                                                       diction, possibly due to the different proportions
+To conﬁrm that our dataset is clean, we hired ad-      of negative examples at training and test time.
+ditional crowdworkers to answer all questions in
+the SQuAD 2.0 development and test sets. In each       5.2 Main results
+task, we showed workers an entire article from the
+dataset. For each paragraph, we showed all as-         First, we trained and tested all three models on
+sociated questions; unanswerable and answerable        SQuAD 2.0, as shown in Table 3. Following
+questions were shufﬂed together. For each ques-        Rajpurkar et al. (2016), we report average exact
+tion, workers were told to either highlight the an-    match and F1 scores.3 The best model, DocQA +
+swer in the paragraph, or mark it as unanswer-         ELMo, achieves only 66.3 F1 on the test set, 23.2
+able. Workers were told to expect every paragraph      points lower than the human accuracy of 89.5 F1.
+to have some answerable and some unanswerable          Note that a baseline that always abstains gets 48.9
+questions. They were asked to spend one minute         test F1; existing models are closer to this base-
+per question, and were paid $10.50 per hour.           line than they are to human performance. There-
+                                                       fore, we see signiﬁcant room for model improve-
+   To reduce crowdworker noise, we collected           ment on this task. We also compare with reported
+multiple human answers for each question and se-       test numbers for analogous model architectures on
+lected the ﬁnal answer by majority vote, breaking      SQuAD 1.1. There is a much larger gap between
+ties in favor of answering questions and preferring    humans and machines on SQuAD 2.0 compared to
+shorter answers to longer ones. On average, we         SQuAD 1.1, which conﬁrms that SQuAD 2.0 is a
+collected 4.8 answers per question. We note that       much harder dataset for existing models.
+for SQuAD 1.1, Rajpurkar et al. (2016) evaluated a
+single human’s performance; therefore, they likely         3 For negative examples, abstaining receives a score of 1,
+underestimate human accuracy.                          and any other response gets 0, for both exact match and F1.
+
+4.3 Analysis
+
+We manually inspected 100 randomly chosen neg-
+ative examples from our development set to un-
+derstand the challenges these examples present. In
+Table 1, we deﬁne different categories of negative
+System              SQuAD 1.1 test                          SQuAD 2.0 dev  SQuAD 2.0 test
+                    EM F1                                   EM F1          EM F1
+BNA                 68.0 77.3                               59.8 62.6      59.2 62.1
+DocQA               72.1 81.0                               61.9 64.8      59.3 62.3
+DocQA + ELMo        78.6 85.8                               65.1 67.6      63.4 66.3
+Human               82.3 91.2                               86.3 89.0      86.9 89.5
+Human–Machine Gap    3.7 5.4                                21.2 21.4      23.5 23.2
+
+Table 3: Exact Match (EM) and F1 scores on SQuAD 1.1 and 2.0. The gap between humans and the best tested
+model is much larger on SQuAD 2.0, suggesting there is a great deal of room for model improvement.
+
+System        SQuAD 1.1 + TFIDF                       SQuAD 1.1 + RULEBASED  SQuAD 2.0 dev
+                                                                             EM F1
+BNA           EM    F1                                EM    F1               59.8 62.6
+DocQA                                                                        61.9 64.8
+DocQA + ELMo  72.7  76.6                              80.1  84.8             65.1 67.6
+
+              75.6  79.2                              80.8  84.8
+
+              79.4  83.0                              85.7  89.6
+
+Table 4: Exact Match (EM) and F1 scores on the SQuAD 2.0 development set, compared with SQuAD 1.1 with
+two types of automatically generated negative examples. SQuAD 2.0 is more challenging for current models.
+
+5.3 Automatically generated negatives                 tual entailment (RTE) requires systems to decide
+                                                      whether a hypothesis is entailed by, contradicted
+Next, we investigated whether automatic ways          by, or neutral with respect to a premise (Marelli
+of generating negative examples can also yield a      et al., 2014; Bowman et al., 2015). Relation ex-
+challenging dataset. We trained and tested all three  traction systems must understand when a possible
+model architectures on SQuAD 1.1 augmented            relationship between two entities is not entailed by
+with either TFIDF or RULEBASED examples. To           the text (Zhang et al., 2017).
+ensure a fair comparison with SQuAD 2.0, we
+generated training data by applying TFIDF or             Jia and Liang (2017) created adversarial test ex-
+RULEBASED only to the 285 articles for which          amples that fool models trained on SQuAD 1.1.
+SQuAD 2.0 has unanswerable questions. We              However, models that are trained on similar ex-
+tested on the articles and answerable questions in    amples are not easily fooled by their method. In
+the SQuAD 2.0 development set, adding unan-           contrast, the adversarial examples in SQuAD 2.0
+swerable questions in a roughly one-to-one ratio      are difﬁcult even for models trained on examples
+with answerable ones. These results are shown in      from the same distribution.
+Table 4. The highest score on SQuAD 2.0 is 15.4
+F1 points lower than the highest score on either of      In conclusion, we have presented SQuAD 2.0,
+the other two datasets, suggesting that automati-     a challenging, diverse, and large-scale dataset that
+cally generated negative examples are much easier     forces models to understand when a question can-
+for existing models to detect.                        not be answered given the context. We are op-
+                                                      timistic that SQuAD 2.0 will encourage the de-
+5.4 Plausible answers as distractors                  velopment of new reading comprehension models
+                                                      that know what they don’t know, and therefore un-
+Finally, we measured how often systems were           derstand language at a deeper level.
+fooled into answering the plausible but incorrect
+answers provided by crowdworkers for our unan-        Reproducibility. All code, data, experiments
+swerable questions. For both computer systems         are available on the CodaLab platform at https:
+and humans, roughly half of all wrong answers on      //bit.ly/2rDHBgY.
+unanswerable questions exactly matched the plau-
+sible answers. This suggests that the plausible an-   Acknowledgments. We would like to thank the
+swers do indeed serve as effective distractors. Full  anonymous reviewers, Arun Chaganty, Peng Qi,
+results are shown in Appendix A.2.                    and Sharon Zhou for their constructive feedback.
+                                                      We are grateful to Durim Morina and Michael
+6 Discussion                                          Bernstein for their help with the Daemo platform.
+                                                      This work was supported by funding from Face-
+SQuAD 2.0 forces models to understand whether         book. R.J. is supported by an NSF Graduate Re-
+a paragraph entails that a certain span is the an-    search Fellowship under Grant No. DGE-114747.
+swer to a question. Similarly, recognizing tex-
+References                                                 T. Nguyen, M. Rosenberg, X. Song, J. Gao, S. Tiwary,
+                                                              R. Majumder, and L. Deng. 2016. MS MARCO:
+S. Bowman, G. Angeli, C. Potts, and C. D. Manning.            A human generated machine reading comprehension
+   2015. A large annotated corpus for learning natural        dataset. In Workshop on Cognitive Computing at
+   language inference. In Empirical Methods in Natu-          NIPS.
+   ral Language Processing (EMNLP).
+                                                           M. E. Peters, M. Neumann, M. Iyyer, M. Gard-
+C. Clark and M. Gardner. 2017. Simple and effec-              ner, C. Clark, K. Lee, and L. Zettlemoyer. 2018.
+   tive multi-paragraph reading comprehension. arXiv          Deep contextualized word representations. In North
+   preprint arXiv:1710.10723 .                                American Association for Computational Linguis-
+                                                              tics (NAACL).
+S. N. Gaikwad, D. Morina, R. Nistala, M. Agarwal,
+   A. Cossette, R. Bhanu, S. Savage, V. Narwal, K. Ra-     P. Rajpurkar, J. Zhang, K. Lopyrev, and P. Liang. 2016.
+   jpal, J. Regino, et al. 2015. Daemo: A self-governed       SQuAD: 100,000+ questions for machine compre-
+   crowdsourcing marketplace. In Proceedings of the           hension of text. In Empirical Methods in Natural
+   28th Annual ACM Symposium on User Interface                Language Processing (EMNLP).
+   Software & Technology. pages 101–102.
+                                                           M. Richardson, C. J. Burges, and E. Renshaw. 2013.
+K. M. Hermann, T. Koisk, E. Grefenstette, L. Espe-            Mctest: A challenge dataset for the open-domain
+   holt, W. Kay, M. Suleyman, and P. Blunsom. 2015.           machine comprehension of text. In Empirical Meth-
+   Teaching machines to read and comprehend. In Ad-           ods in Natural Language Processing (EMNLP).
+   vances in Neural Information Processing Systems            pages 193–203.
+   (NIPS).
+                                                           M. Seo, A. Kembhavi, A. Farhadi, and H. Hajishirzi.
+D. Hewlett, A. Lacoste, L. Jones, I. Polosukhin,              2016. Bidirectional attention ﬂow for machine com-
+   A. Fandrianto, J. Han, M. Kelcey, and D. Berthelot.        prehension. arXiv .
+   2016. Wikireading: A novel large-scale language
+   understanding task over Wikipedia. In Association       A. Trischler, T. Wang, X. Yuan, J. Harris, A. Sordoni,
+   for Computational Linguistics (ACL).                       P. Bachman, and K. Suleman. 2017. NewsQA: A
+                                                              machine comprehension dataset. In Workshop on
+M. Hu, Y. Peng, and X. Qiu. 2017. Rein-                       Representation Learning for NLP.
+   forced mnemonic reader for machine comprehen-
+   sion. arXiv .                                           M. Wang, N. A. Smith, and T. Mitamura. 2007. What is
+                                                              the jeopardy model? a quasi-synchronous grammar
+H. Huang, C. Zhu, Y. Shen, and W. Chen. 2018. Fu-             for QA. In Empirical Methods in Natural Language
+   sionnet: Fusing via fully-aware attention with appli-      Processing (EMNLP).
+   cation to machine comprehension. In International
+   Conference on Learning Representations (ICLR).          W. Wang, N. Yang, F. Wei, B. Chang, and M. Zhou.
+                                                              2017. Gated self-matching networks for reading
+R. Jia and P. Liang. 2017. Adversarial examples for           comprehension and question answering. In Associ-
+   evaluating reading comprehension systems. In Em-           ation for Computational Linguistics (ACL).
+   pirical Methods in Natural Language Processing
+   (EMNLP).                                                D. Weissenborn, G. Wiese, and L. Seiffe. 2017. Mak-
+                                                              ing neural QA as simple as possible but not sim-
+M. Joshi, E. Choi, D. Weld, and L. Zettlemoyer. 2017.         pler. In Computational Natural Language Learning
+   TriviaQA: A large scale distantly supervised chal-         (CoNLL).
+   lenge dataset for reading comprehension. In Associ-
+   ation for Computational Linguistics (ACL).              Y. Yang, W. Yih, and C. Meek. 2015. WikiQA: A chal-
+                                                              lenge dataset for open-domain question answering.
+G. Lai, Q. Xie, H. Liu, Y. Yang, and E. Hovy.                 In Empirical Methods in Natural Language Process-
+   2017. Race: Large-scale reading comprehen-                 ing (EMNLP). pages 2013–2018.
+   sion dataset from examinations. arXiv preprint
+   arXiv:1704.04683 .                                      W. Yih, M. Chang, C. Meek, and A. Pastusiak. 2013.
+                                                              Question answering using enhanced lexical seman-
+O. Levy, M. Seo, E. Choi, and L. Zettlemoyer.                 tic models. In Association for Computational Lin-
+   2017. Zero-shot relation extraction via reading com-       guistics (ACL).
+   prehension. In Computational Natural Language
+   Learning (CoNLL).                                       Y. Zhang, V. Zhong, D. Chen, G. Angeli, and C. D.
+                                                              Manning. 2017. Position-aware attention and super-
+M. Marelli, S. Menini, M. Baroni, L. Bentivogli,              vised data improve slot ﬁlling. In Empirical Meth-
+   R. bernardi, and R. Zamparelli. 2014. A SICK cure          ods in Natural Language Processing (EMNLP).
+   for the evaluation of compositional distributional se-
+   mantic models. In Language Resources and Evalu-
+   ation Conference (LREC).
+A Supplementary material
+
+A.1 Crowdsourcing details
+
+Figure 2 shows the instructions that crowdworkers
+were given at the beginning of each question writ-
+ing task. Figure 3 shows the interface they used to
+write unanswerable questions for each paragraph.
+In the interface, workers ﬁrst write an unanswer-
+able question, then highlight a plausible answer in
+the paragraph.
+
+A.2 Plausible answers as distractors
+
+As mentioned in Section 5.4, we measured how
+often systems were fooled into answering the
+plausible answers provided by crowdworkers for
+our unanswerable questions. For each system,
+we ﬁrst isolated their false positive errors—cases
+where they predicted an answer to an unanswer-
+able question—on the development set. Within
+this set of examples, we measured exact match
+and F1 scores between the system predictions and
+plausible answers. These numbers are shown in
+Table 5. Plausible answers account for roughly
+half of the false positive errors made by each of
+the computer systems, as well as by human an-
+swerers. We conclude that the plausible answers
+in our dataset do indeed serve their purpose of be-
+ing distracting spans that could be mistaken for the
+correct answer.
+
+       EM F1
+
+BNA    48.6 63.0
+
+DocQA  55.0 69.9
+
+DocQA +ELMo 54.9 69.2
+
+Human  46.4 60.6
+
+Table 5: Exact match (EM) and F1 scores between sys-
+tem predictions and plausible answers, in cases where
+the system made a false positive error.
+Figure 2: The instructions shown to crowdworkers at the beginning of each question writing task.
+Figure 3: The interface crowdworkers used to write unanswerable questions and annotate plausible answers.

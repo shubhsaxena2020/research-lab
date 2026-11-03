@@ -1,0 +1,139 @@
+{
+ "C1": [
+  [
+   "two threshold",
+   3
+  ],
+  [
+   "two-threshold",
+   0
+  ],
+  [
+   "dual threshold",
+   1
+  ],
+  [
+   "dead zone",
+   0
+  ],
+  [
+   "dead-zone",
+   0
+  ],
+  [
+   "dead band",
+   0
+  ],
+  [
+   "grey zone",
+   0
+  ],
+  [
+   "uncertainty band",
+   4
+  ],
+  [
+   "admit and refuse",
+   0
+  ],
+  [
+   "admit/refuse",
+   0
+  ],
+  [
+   "false refusal",
+   17
+  ],
+  [
+   "over-refusal rate",
+   2
+  ],
+  [
+   "abstain precision",
+   0
+  ],
+  [
+   "abstain recall",
+   0
+  ],
+  [
+   "negative hardness",
+   0
+  ],
+  [
+   "hardness ladder",
+   1
+  ],
+  [
+   "per rung",
+   0
+  ],
+  [
+   "retrieval-side feature",
+   0
+  ],
+  [
+   "retrieval-only feature",
+   0
+  ],
+  [
+   "threshold placement",
+   1
+  ],
+  [
+   "outside the observed range",
+   0
+  ]
+ ],
+ "C3": [
+  [
+   "alerts per",
+   0
+  ],
+  [
+   "per 10,000",
+   1
+  ],
+  [
+   "per 10000",
+   0
+  ],
+  [
+   "operating point",
+   33
+  ],
+  [
+   "cost ratio",
+   7
+  ],
+  [
+   "cost-sensitive threshold",
+   8
+  ],
+  [
+   "base rate",
+   56
+  ],
+  [
+   "0.1% prevalence",
+   0
+  ],
+  [
+   "1% prevalence",
+   0
+  ],
+  [
+   "code-mixed",
+   9
+  ],
+  [
+   "hinglish",
+   10
+  ],
+  [
+   "indian english",
+   1
+  ]
+ ],
+ "corpus": 3681
+}

@@ -1,0 +1,17 @@
+{
+  "_doc": "Numbers quoted from prior work, with provenance. These are NOT our results: each entry records the source, the quoted sentence and the file in 02_literature/sources/txt/ where the sentence was read. tools/check_numbers.py traces a numeral in the draft to this file so that a quoted figure cannot be confused with a measured one.",
+  "numbers": {
+    "abdumalikov_random_negative_accuracy": {
+      "value": 0.98,
+      "source": "arXiv:2403.01461 (Abdumalikov, Minervini, Kementchedjhieva), abstract",
+      "quote": "we observed a substantial decrease in predictive accuracy, from 98% to 1%",
+      "read_in": "02_literature/sources/txt/arxiv-2403.01461.txt"
+    },
+    "abdumalikov_overlap_negative_accuracy": {
+      "value": 0.01,
+      "source": "arXiv:2403.01461, abstract",
+      "quote": "we observed a substantial decrease in predictive accuracy, from 98% to 1%",
+      "read_in": "02_literature/sources/txt/arxiv-2403.01461.txt"
+    }
+  }
+}
