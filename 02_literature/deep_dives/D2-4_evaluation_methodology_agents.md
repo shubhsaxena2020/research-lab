@@ -219,9 +219,9 @@ headline claim, even though the same accuracy can be bought at 50x the price [8]
 difference between benchmarks [10].
 
 **Selective prediction.** No agent benchmark reports risk-coverage curves; agents either answer or
-fail. This is the gap closest to the lab's existing work, where an abstention gate with precision 0.30
-refused 47 of 82 answerable questions — a failure that a coverage-aware metric would have caught
-immediately and a bare accuracy number cannot express.
+fail. This is the gap closest to the lab's existing work, where an abstention gate over-refused on
+answerable items (a contaminated private evaluation; no figure is quoted) — a failure that a
+coverage-aware metric would have caught immediately and a bare accuracy number cannot express.
 
 ### 3.1 Six adversarial questions, answered with names
 
@@ -423,8 +423,9 @@ published logs come from scaffolds that were tuned for pass@1, so the recomputed
 what a reliability-tuned system could achieve.
 
 **5. Selective prediction metrics for abstention gates.** No agent benchmark reports risk-coverage
-curves, yet abstention is where deployed systems fail: the lab's own gate refused 47 of 82 answerable
-questions at precision 0.30, a failure invisible to accuracy-only reporting. The cheapest experiment
+curves, yet abstention is where deployed systems fail: the lab's own gate over-refused on answerable
+items (contaminated private evaluation, no figure quoted), a failure invisible to accuracy-only
+reporting. The cheapest experiment
 is to take a public QA set, sweep an abstention threshold on a 3B model's confidence, and report AURC
 and accuracy at fixed coverage against two baselines. The confound is that confidence is not
 calibrated out of the box, so the curve may measure calibration failure rather than gate design; a

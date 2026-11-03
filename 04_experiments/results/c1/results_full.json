@@ -1,0 +1,820 @@
+{
+  "ablation_no_rank": {
+    "auroc_dev": 0.9875,
+    "auroc_test": 0.9824,
+    "features": [
+      "bm25_presented",
+      "bm25_top1",
+      "bm25_top5_mean",
+      "bm25_margin",
+      "dense_presented",
+      "dense_top1",
+      "dense_margin",
+      "top1_agreement",
+      "ce_presented",
+      "lex_overlap"
+    ],
+    "n_features": 10,
+    "note": "same items, seeds and threshold rule; only the two presented-passage rank features removed",
+    "test": {
+      "coverage": 0.041,
+      "gate": "ablation_no_rank_band",
+      "n_items": 1879,
+      "over_refusal": 0.81,
+      "per_rung": {
+        "1": {
+          "abstain_precision": 1.0,
+          "auroc_answerable_vs_this_rung": 0.9995,
+          "ci95": {
+            "hi": 1.0,
+            "lo": 1.0,
+            "method": "percentile",
+            "n": 400,
+            "n_boot": 10000,
+            "seed": 12345
+          },
+          "n": 400
+        },
+        "2": {
+          "abstain_precision": 0.9964,
+          "auroc_answerable_vs_this_rung": 0.9757,
+          "ci95": {
+            "hi": 1.0,
+            "lo": 0.9714,
+            "method": "bca",
+            "n": 280,
+            "n_boot": 10000,
+            "seed": 12345
+          },
+          "n": 280
+        },
+        "3": {
+          "abstain_precision": 1.0,
+          "auroc_answerable_vs_this_rung": 0.9838,
+          "ci95": {
+            "hi": 1.0,
+            "lo": 1.0,
+            "method": "percentile",
+            "n": 400,
+            "n_boot": 10000,
+            "seed": 12345
+          },
+          "n": 400
+        },
+        "4": {
+          "abstain_precision": 1.0,
+          "auroc_answerable_vs_this_rung": 0.9685,
+          "ci95": {
+            "hi": 1.0,
+            "lo": 1.0,
+            "method": "percentile",
+            "n": 399,
+            "n_boot": 10000,
+            "seed": 12345
+          },
+          "n": 399
+        }
+      },
+      "pooled_abstain_precision": 0.9993
+    },
+    "thresholds": {
+      "band": {
+        "band_width": 0.033023,
+        "dev_n_refused": 1779,
+        "dev_precision": 0.828,
+        "dev_recall": 1.0,
+        "feasible": true,
+        "t_hi": 0.944848276498,
+        "t_lo": 0.911825003477
+      },
+      "single": {
+        "dev_n_refused": 1835,
+        "dev_precision": 0.8027,
+        "dev_recall": 1.0,
+        "feasible": true,
+        "t": 0.938276056745
+      }
+    }
+  },
+  "audit": {
+    "dev_all_pass_after_rebuild": true,
+    "dev_auroc_primary": {
+      "1": 0.5063,
+      "2": 0.5392,
+      "3": 0.4881,
+      "4": 0.4151
+    },
+    "dev_auroc_sensitivity_with_lex": {
+      "1": 0.9773,
+      "2": 0.8886,
+      "3": 0.9232,
+      "4": 0.4082
+    },
+    "dev_failing_after_rebuild": [],
+    "rebuilt_rungs": {},
+    "test_reference_primary": {
+      "1": 0.5199,
+      "2": 0.5867,
+      "3": 0.4895,
+      "4": 0.4259
+    }
+  },
+  "baselines": {
+    "B1_bm25_top1": {
+      "test": {
+        "coverage": 0.983,
+        "gate": "B1_bm25_top1",
+        "n_items": 1879,
+        "over_refusal": 0.0175,
+        "per_rung": {
+          "1": {
+            "abstain_precision": 0.0175,
+            "auroc_answerable_vs_this_rung": 0.5,
+            "ci95": {
+              "hi": 0.03,
+              "lo": 0.005,
+              "method": "bca",
+              "n": 400,
+              "n_boot": 10000,
+              "seed": 12345
+            },
+            "n": 400
+          },
+          "2": {
+            "abstain_precision": 0.0143,
+            "auroc_answerable_vs_this_rung": 0.5236,
+            "ci95": {
+              "hi": 0.0286,
+              "lo": 0.0036,
+              "method": "bca",
+              "n": 280,
+              "n_boot": 10000,
+              "seed": 12345
+            },
+            "n": 280
+          },
+          "3": {
+            "abstain_precision": 0.0175,
+            "auroc_answerable_vs_this_rung": 0.5,
+            "ci95": {
+              "hi": 0.03,
+              "lo": 0.005,
+              "method": "bca",
+              "n": 400,
+              "n_boot": 10000,
+              "seed": 12345
+            },
+            "n": 400
+          },
+          "4": {
+            "abstain_precision": 0.0175,
+            "auroc_answerable_vs_this_rung": 0.5005,
+            "ci95": {
+              "hi": 0.0301,
+              "lo": 0.005,
+              "method": "bca",
+              "n": 399,
+              "n_boot": 10000,
+              "seed": 12345
+            },
+            "n": 399
+          }
+        },
+        "pooled_abstain_precision": 0.0169
+      },
+      "threshold": {
+        "dev_n_refused": 15,
+        "dev_precision": 0.8,
+        "dev_recall": 0.0081,
+        "feasible": true,
+        "t": 2.750588894
+      }
+    },
+    "B2_dense_top1": {
+      "test": {
+        "coverage": 0.2773,
+        "gate": "B2_dense_top1",
+        "n_items": 1879,
+        "over_refusal": 0.6375,
+        "per_rung": {
+          "1": {
+            "abstain_precision": 0.65,
+            "auroc_answerable_vs_this_rung": 0.5091,
+            "ci95": {
+              "hi": 0.695,
+              "lo": 0.6,
+              "method": "bca",
+              "n": 400,
+              "n_boot": 10000,
+              "seed": 12345
+            },
+            "n": 400
+          },
+          "2": {
+            "abstain_precision": 0.6679,
+            "auroc_answerable_vs_this_rung": 0.5263,
+            "ci95": {
+              "hi": 0.7179,
+              "lo": 0.6071,
+              "method": "bca",
+              "n": 280,
+              "n_boot": 10000,
+              "seed": 12345
+            },
+            "n": 280
+          },
+          "3": {
+            "abstain_precision": 0.6425,
+            "auroc_answerable_vs_this_rung": 0.5067,
+            "ci95": {
+              "hi": 0.685,
+              "lo": 0.5925,
+              "method": "bca",
+              "n": 400,
+              "n_boot": 10000,
+              "seed": 12345
+            },
+            "n": 400
+          },
+          "4": {
+            "abstain_precision": 1.0,
+            "auroc_answerable_vs_this_rung": 1.0,
+            "ci95": {
+              "hi": 1.0,
+              "lo": 1.0,
+              "method": "percentile",
+              "n": 399,
+              "n_boot": 10000,
+              "seed": 12345
+            },
+            "n": 399
+          }
+        },
+        "pooled_abstain_precision": 0.7458
+      },
+      "threshold": {
+        "dev_n_refused": 1343,
+        "dev_precision": 0.8094,
+        "dev_recall": 0.7379,
+        "feasible": true,
+        "t": 1.000000119
+      }
+    },
+    "B4_reader_logprob": {
+      "reason": "no reader features file (see DATA/reader log)",
+      "status": "NOT RUN"
+    }
+  },
+  "config_seed": 20261103,
+  "discrimination": {
+    "dev_auroc": 0.9879,
+    "n_dev": 1873,
+    "n_test": 1879,
+    "test_auroc": 0.9824
+  },
+  "experiment": "c1",
+  "exploratory": {
+    "H1_sequence": {
+      "coverage": 0.2544,
+      "diff_r1_minus_r3": 0.07,
+      "label": "EXPLORATORY (D1.2) - not a pre-registered test",
+      "monotone_1_to_4": false,
+      "over_refusal": 0.095,
+      "sequence": [
+        0.9975,
+        0.9107,
+        0.9275,
+        0.8471
+      ]
+    },
+    "operating_point": {
+      "band": {
+        "dev_n_refused": 1423,
+        "dev_over_refusal": 0.1,
+        "dev_precision": 0.9719,
+        "dev_recall": 0.9389,
+        "feasible": true,
+        "max_over_refusal": 0.1,
+        "t_hi": 0.947838803928,
+        "t_lo": 0.297426271744
+      },
+      "max_over_refusal": 0.1,
+      "single": {
+        "dev_n_refused": 1461,
+        "dev_over_refusal": 0.09,
+        "dev_precision": 0.9754,
+        "dev_recall": 0.9674,
+        "feasible": true,
+        "max_over_refusal": 0.1,
+        "t": 0.501731556862
+      }
+    }
+  },
+  "gate": {
+    "coef": {
+      "bm25_margin": -0.1597,
+      "bm25_presented": 2.4863,
+      "bm25_rank_log": 0.3868,
+      "bm25_top1": -2.0522,
+      "bm25_top5_mean": -0.1834,
+      "ce_presented": 1.7105,
+      "dense_margin": 0.1901,
+      "dense_presented": 5.9181,
+      "dense_rank_log": 0.044,
+      "dense_top1": 5.9181,
+      "lex_overlap": 0.0896,
+      "top1_agreement": 0.569
+    },
+    "feature_sds": {
+      "bm25_margin": 2.9537,
+      "bm25_presented": 4.7141,
+      "bm25_rank_log": 2.0972,
+      "bm25_top1": 4.0214,
+      "bm25_top5_mean": 1.973,
+      "ce_presented": 7.6394,
+      "dense_margin": 0.0486,
+      "dense_presented": 0.0093,
+      "dense_rank_log": 0.0,
+      "dense_top1": 0.0093,
+      "lex_overlap": 0.2375,
+      "top1_agreement": 0.4837
+    },
+    "intercept": -6.2862
+  },
+  "hypotheses": {
+    "H1": {
+      "ci95_hi": 0.0,
+      "ci95_lo": 0.0,
+      "criterion_points": 15,
+      "diff_r1_minus_r3": 0.0,
+      "monotone_1_to_4": false,
+      "n_pairs": 400,
+      "passes_point_threshold": false,
+      "rung1_precision": 1.0,
+      "rung3_precision": 1.0,
+      "sequence": [
+        1.0,
+        0.9964,
+        1.0,
+        1.0
+      ],
+      "sign_test": {
+        "n_eff": 0,
+        "n_pairs": 400,
+        "p_note": "no discordant pairs (all differences zero)",
+        "p_value": 1.0,
+        "statistic": null,
+        "test": "sign_test"
+      },
+      "supported": false
+    },
+    "H2": {
+      "dev_pooled_precision": 1.0,
+      "loss_points": 0.0007,
+      "p_note": "no test: one side is the fitting half (D1.4)",
+      "p_value": null,
+      "refuted": true,
+      "second_corpus": "NOT RUN (2WikiMultihopQA not available in this window; \u00a79.5)",
+      "supported": false,
+      "test_pooled_precision": 0.9993
+    },
+    "H3": {
+      "band_dev_recall": 1.0,
+      "band_precision": 0.9993,
+      "criterion_points": 5,
+      "difference": {
+        "contains_zero": true,
+        "diff": 0.0,
+        "hi": 0.0,
+        "lo": 0.0,
+        "method": "paired percentile bootstrap over negative items",
+        "n": 1479,
+        "n_boot": 10000,
+        "seed": 12345
+      },
+      "matched_single_precision": 0.9993,
+      "matched_threshold": {
+        "dev_n_refused": 1741,
+        "dev_precision": 0.8461,
+        "dev_recall": 1.0,
+        "t": 0.90722098925
+      },
+      "supported": false
+    }
+  },
+  "items": {
+    "n_dev": 1873,
+    "n_test": 1879,
+    "n_total": 3752,
+    "per_rung_dev": {
+      "0": 400,
+      "1": 400,
+      "2": 273,
+      "3": 400,
+      "4": 400
+    },
+    "per_rung_test": {
+      "0": 400,
+      "1": 400,
+      "2": 280,
+      "3": 400,
+      "4": 399
+    }
+  },
+  "multiple_comparisons": {
+    "adjusted": {
+      "H1": 1.0,
+      "H3_sign": 1.0
+    },
+    "alpha": 0.05,
+    "family": [
+      "H1",
+      "H3_sign"
+    ],
+    "method": "holm",
+    "raw": {
+      "H1": 1.0,
+      "H3_sign": 1.0
+    }
+  },
+  "placement_diagnostic": {
+    "dev_admit_mass": 0.0603,
+    "dev_refused_above_hi": 0.0101,
+    "dev_refused_below_lo": 0.9295,
+    "dev_score_max": 0.9722,
+    "dev_score_median": 0.0092,
+    "dev_score_min": 0.0,
+    "single_t": 0.939398578046,
+    "single_t_inside_dev_range": true,
+    "t_hi": 0.947838803928,
+    "t_hi_inside_dev_range": true,
+    "t_lo": 0.90722098925,
+    "t_lo_inside_dev_range": true
+  },
+  "preregistration_sha256": "#",
+  "reader_baseline_dev_only": {
+    "auroc_answerable_vs_negatives": 0.4192,
+    "coverage_fraction_of_dev": 0.2952,
+    "n": 553,
+    "note": "reader = Qwen2.5-0.5B-Instruct, mean generated-token logprob; see 04_experiments/results/B4_reader_run_notes.md for the failure mode (a confident NOT_ANSWERABLE string scores as high confidence)",
+    "over_refusal": 0.0085,
+    "per_rung_abstain_precision": {
+      "1": {
+        "abstain_precision": 0.0,
+        "n": 118
+      },
+      "2": {
+        "abstain_precision": 0.0,
+        "n": 81
+      },
+      "3": {
+        "abstain_precision": 0.0085,
+        "n": 118
+      },
+      "4": {
+        "abstain_precision": 0.0339,
+        "n": 118
+      }
+    },
+    "status": "dev-only, exploratory",
+    "threshold": {
+      "dev_n_refused": 6,
+      "dev_precision": 0.8333,
+      "dev_recall": 0.0115,
+      "feasible": true,
+      "t": -0.8732924
+    }
+  },
+  "status": "ok",
+  "test": {
+    "band_primary": {
+      "coverage": 0.0527,
+      "gate": "band_primary",
+      "n_items": 1879,
+      "over_refusal": 0.755,
+      "per_rung": {
+        "1": {
+          "abstain_precision": 1.0,
+          "auroc_answerable_vs_this_rung": 0.9995,
+          "ci95": {
+            "hi": 1.0,
+            "lo": 1.0,
+            "method": "percentile",
+            "n": 400,
+            "n_boot": 10000,
+            "seed": 12345
+          },
+          "n": 400
+        },
+        "2": {
+          "abstain_precision": 0.9964,
+          "auroc_answerable_vs_this_rung": 0.9764,
+          "ci95": {
+            "hi": 1.0,
+            "lo": 0.9714,
+            "method": "bca",
+            "n": 280,
+            "n_boot": 10000,
+            "seed": 12345
+          },
+          "n": 280
+        },
+        "3": {
+          "abstain_precision": 1.0,
+          "auroc_answerable_vs_this_rung": 0.9836,
+          "ci95": {
+            "hi": 1.0,
+            "lo": 1.0,
+            "method": "percentile",
+            "n": 400,
+            "n_boot": 10000,
+            "seed": 12345
+          },
+          "n": 400
+        },
+        "4": {
+          "abstain_precision": 1.0,
+          "auroc_answerable_vs_this_rung": 0.9681,
+          "ci95": {
+            "hi": 1.0,
+            "lo": 1.0,
+            "method": "percentile",
+            "n": 399,
+            "n_boot": 10000,
+            "seed": 12345
+          },
+          "n": 399
+        }
+      },
+      "pooled_abstain_precision": 0.9993
+    },
+    "exploratory_band": {
+      "coverage": 0.2544,
+      "gate": "exploratory_band",
+      "n_items": 1879,
+      "over_refusal": 0.095,
+      "per_rung": {
+        "1": {
+          "abstain_precision": 0.9975,
+          "auroc_answerable_vs_this_rung": 0.9995,
+          "ci95": {
+            "hi": 1.0,
+            "lo": 0.985,
+            "method": "bca",
+            "n": 400,
+            "n_boot": 10000,
+            "seed": 12345
+          },
+          "n": 400
+        },
+        "2": {
+          "abstain_precision": 0.9107,
+          "auroc_answerable_vs_this_rung": 0.9764,
+          "ci95": {
+            "hi": 0.9357,
+            "lo": 0.8679,
+            "method": "bca",
+            "n": 280,
+            "n_boot": 10000,
+            "seed": 12345
+          },
+          "n": 280
+        },
+        "3": {
+          "abstain_precision": 0.9275,
+          "auroc_answerable_vs_this_rung": 0.9836,
+          "ci95": {
+            "hi": 0.9475,
+            "lo": 0.895,
+            "method": "bca",
+            "n": 400,
+            "n_boot": 10000,
+            "seed": 12345
+          },
+          "n": 400
+        },
+        "4": {
+          "abstain_precision": 0.8471,
+          "auroc_answerable_vs_this_rung": 0.9681,
+          "ci95": {
+            "hi": 0.8772,
+            "lo": 0.8045,
+            "method": "bca",
+            "n": 399,
+            "n_boot": 10000,
+            "seed": 12345
+          },
+          "n": 399
+        }
+      },
+      "pooled_abstain_precision": 0.9216
+    },
+    "exploratory_single": {
+      "coverage": 0.2161,
+      "gate": "exploratory_single",
+      "n_items": 1879,
+      "over_refusal": 0.15,
+      "per_rung": {
+        "1": {
+          "abstain_precision": 1.0,
+          "auroc_answerable_vs_this_rung": 0.9995,
+          "ci95": {
+            "hi": 1.0,
+            "lo": 1.0,
+            "method": "percentile",
+            "n": 400,
+            "n_boot": 10000,
+            "seed": 12345
+          },
+          "n": 400
+        },
+        "2": {
+          "abstain_precision": 0.9429,
+          "auroc_answerable_vs_this_rung": 0.9764,
+          "ci95": {
+            "hi": 0.9643,
+            "lo": 0.9071,
+            "method": "bca",
+            "n": 280,
+            "n_boot": 10000,
+            "seed": 12345
+          },
+          "n": 280
+        },
+        "3": {
+          "abstain_precision": 0.97,
+          "auroc_answerable_vs_this_rung": 0.9836,
+          "ci95": {
+            "hi": 0.9825,
+            "lo": 0.945,
+            "method": "bca",
+            "n": 400,
+            "n_boot": 10000,
+            "seed": 12345
+          },
+          "n": 400
+        },
+        "4": {
+          "abstain_precision": 0.9048,
+          "auroc_answerable_vs_this_rung": 0.9681,
+          "ci95": {
+            "hi": 0.9273,
+            "lo": 0.8697,
+            "method": "bca",
+            "n": 399,
+            "n_boot": 10000,
+            "seed": 12345
+          },
+          "n": 399
+        }
+      },
+      "pooled_abstain_precision": 0.9554
+    },
+    "single_B3": {
+      "coverage": 0.016,
+      "gate": "single_B3_same_features",
+      "n_items": 1879,
+      "over_refusal": 0.9275,
+      "per_rung": {
+        "1": {
+          "abstain_precision": 1.0,
+          "auroc_answerable_vs_this_rung": 0.9995,
+          "ci95": {
+            "hi": 1.0,
+            "lo": 1.0,
+            "method": "percentile",
+            "n": 400,
+            "n_boot": 10000,
+            "seed": 12345
+          },
+          "n": 400
+        },
+        "2": {
+          "abstain_precision": 0.9964,
+          "auroc_answerable_vs_this_rung": 0.9764,
+          "ci95": {
+            "hi": 1.0,
+            "lo": 0.9714,
+            "method": "bca",
+            "n": 280,
+            "n_boot": 10000,
+            "seed": 12345
+          },
+          "n": 280
+        },
+        "3": {
+          "abstain_precision": 1.0,
+          "auroc_answerable_vs_this_rung": 0.9836,
+          "ci95": {
+            "hi": 1.0,
+            "lo": 1.0,
+            "method": "percentile",
+            "n": 400,
+            "n_boot": 10000,
+            "seed": 12345
+          },
+          "n": 400
+        },
+        "4": {
+          "abstain_precision": 1.0,
+          "auroc_answerable_vs_this_rung": 0.9681,
+          "ci95": {
+            "hi": 1.0,
+            "lo": 1.0,
+            "method": "percentile",
+            "n": 399,
+            "n_boot": 10000,
+            "seed": 12345
+          },
+          "n": 399
+        }
+      },
+      "pooled_abstain_precision": 0.9993
+    },
+    "single_matched_recall": {
+      "coverage": 0.0591,
+      "gate": "single_matched_recall",
+      "n_items": 1879,
+      "over_refusal": 0.725,
+      "per_rung": {
+        "1": {
+          "abstain_precision": 1.0,
+          "auroc_answerable_vs_this_rung": 0.9995,
+          "ci95": {
+            "hi": 1.0,
+            "lo": 1.0,
+            "method": "percentile",
+            "n": 400,
+            "n_boot": 10000,
+            "seed": 12345
+          },
+          "n": 400
+        },
+        "2": {
+          "abstain_precision": 0.9964,
+          "auroc_answerable_vs_this_rung": 0.9764,
+          "ci95": {
+            "hi": 1.0,
+            "lo": 0.9714,
+            "method": "bca",
+            "n": 280,
+            "n_boot": 10000,
+            "seed": 12345
+          },
+          "n": 280
+        },
+        "3": {
+          "abstain_precision": 1.0,
+          "auroc_answerable_vs_this_rung": 0.9836,
+          "ci95": {
+            "hi": 1.0,
+            "lo": 1.0,
+            "method": "percentile",
+            "n": 400,
+            "n_boot": 10000,
+            "seed": 12345
+          },
+          "n": 400
+        },
+        "4": {
+          "abstain_precision": 1.0,
+          "auroc_answerable_vs_this_rung": 0.9681,
+          "ci95": {
+            "hi": 1.0,
+            "lo": 1.0,
+            "method": "percentile",
+            "n": 399,
+            "n_boot": 10000,
+            "seed": 12345
+          },
+          "n": 399
+        }
+      },
+      "pooled_abstain_precision": 0.9993
+    }
+  },
+  "thresholds": {
+    "band": {
+      "band_width": 0.040618,
+      "dev_n_refused": 1760,
+      "dev_precision": 0.8369,
+      "dev_recall": 1.0,
+      "feasible": true,
+      "t_hi": 0.947838803928,
+      "t_lo": 0.90722098925
+    },
+    "single": {
+      "dev_n_refused": 1835,
+      "dev_precision": 0.8027,
+      "dev_recall": 1.0,
+      "feasible": true,
+      "t": 0.939398578046
+    },
+    "single_matched_recall": {
+      "dev_n_refused": 1741,
+      "dev_precision": 0.8461,
+      "dev_recall": 1.0,
+      "t": 0.90722098925
+    }
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "data_seed": 20261103,
+  "dataset_facts": {
+    "n_answerable_questions": 5928,
+    "n_articles": 35,
+    "n_paragraphs": 1204,
+    "n_questions": 11873
+  },
+  "design": {
+    "bootstrap_resamples": 10000,
+    "bootstrap_seed": 12345,
+    "n_answerable_per_split": 400,
+    "n_dev_articles": 17,
+    "n_test_articles": 18,
+    "rung2_dropped_dev": 127,
+    "rung2_dropped_total": 247
+  },
+  "generated_by": "04_experiments/src/build_items.py",
+  "inputs": {
+    "dev_v2.0.json": "80a5225e94905956a6446d296ca1093975c4d3b3260f1d6c8f68bc2ab77182d8"
+  },
+  "length_chars": {
+    "0": {
+      "max": 4063,
+      "mean": 821.2,
+      "median": 715.5,
+      "min": 206,
+      "n": 800
+    },
+    "1": {
+      "max": 4063,
+      "mean": 832.3,
+      "median": 736.5,
+      "min": 188,
+      "n": 800
+    },
+    "2": {
+      "max": 4063,
+      "mean": 917.7,
+      "median": 803,
+      "min": 170,
+      "n": 553
+    },
+    "3": {
+      "max": 3167,
+      "mean": 810.9,
+      "median": 717.5,
+      "min": 169,
+      "n": 800
+    },
+    "4": {
+      "max": 4071,
+      "mean": 823.1,
+      "median": 720,
+      "min": 217,
+      "n": 799
+    }
+  },
+  "n_items_total": 3752,
+  "per_split": {
+    "dev": {
+      "drops": {
+        "rung2:no_anchor_candidate": 127
+      },
+      "items_per_rung": {
+        "0": 400,
+        "1": 400,
+        "2": 273,
+        "3": 400,
+        "4": 400
+      },
+      "n_answerable_available": 2965,
+      "n_articles": 17,
+      "n_items": 1873,
+      "n_paragraphs": 608,
+      "n_questions_sampled": 400
+    },
+    "test": {
+      "drops": {
+        "rung2:no_anchor_candidate": 120,
+        "rung4:no_same_type_replacement": 1
+      },
+      "items_per_rung": {
+        "0": 400,
+        "1": 400,
+        "2": 280,
+        "3": 400,
+        "4": 399
+      },
+      "n_answerable_available": 2963,
+      "n_articles": 18,
+      "n_items": 1879,
+      "n_paragraphs": 596,
+      "n_questions_sampled": 400
+    }
+  },
+  "sha256_items_jsonl": "c6f46ad80e7d15f495cd2a4b1e7b5a5556bfa929264c7afabd81826dd8d049d0",
+  "split_seed": 7
+}

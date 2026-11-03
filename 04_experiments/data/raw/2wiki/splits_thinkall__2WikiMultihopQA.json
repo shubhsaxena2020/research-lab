@@ -1,0 +1,11 @@
+{
+ "splits": [
+  {
+   "dataset": "thinkall/2WikiMultihopQA",
+   "config": "default",
+   "split": "train"
+  }
+ ],
+ "pending": [],
+ "failed": []
+}

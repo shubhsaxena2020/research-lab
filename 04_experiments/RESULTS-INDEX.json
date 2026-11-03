@@ -65,8 +65,512 @@
       "run_id": "20261102T221441Z_toy_ours_9dd5764-3",
       "tolerance": 0.0005,
       "toy": true
+    },
+    {
+      "description": "Items in the C1 benchmark (all splits)",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.items.total",
+      "key": "items.n_total",
+      "tolerance": 0,
+      "toy": false
+    },
+    {
+      "description": "Items in the held-out half",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.items.test",
+      "key": "items.n_test",
+      "tolerance": 0,
+      "toy": false
+    },
+    {
+      "description": "Rung-2 items (short rung, \u00a78c)",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.items.rung2.total",
+      "key": "items.per_rung_dev.2",
+      "tolerance": 0,
+      "toy": false
+    },
+    {
+      "description": "Gate AUROC on dev (answerable vs all negatives)",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.auroc.dev",
+      "key": "discrimination.dev_auroc",
+      "tolerance": 0.0005,
+      "toy": false
+    },
+    {
+      "description": "Gate AUROC on the held-out half",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.auroc.test",
+      "key": "discrimination.test_auroc",
+      "tolerance": 0.0005,
+      "toy": false
+    },
+    {
+      "description": "Surface-only AUROC rung 1 (6 features)",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.audit.surface.r1",
+      "key": "audit.dev_auroc_primary.1",
+      "tolerance": 0.0005,
+      "toy": false
+    },
+    {
+      "description": "Surface+overlap AUROC rung 1",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.audit.surface_lex.r1",
+      "key": "audit.dev_auroc_sensitivity_with_lex.1",
+      "tolerance": 0.0005,
+      "toy": false
+    },
+    {
+      "description": "Band gate abstain precision, rung 1 (held-out)",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.band.precision.r1",
+      "key": "test.band_primary.per_rung.1.abstain_precision",
+      "tolerance": 0.0005,
+      "toy": false
+    },
+    {
+      "description": "Band gate n, rung 1",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.band.n.r1",
+      "key": "test.band_primary.per_rung.1.n",
+      "tolerance": 0,
+      "toy": false
+    },
+    {
+      "description": "Exploratory band abstain precision, rung 1",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.expl.precision.r1",
+      "key": "test.exploratory_band.per_rung.1.abstain_precision",
+      "tolerance": 0.0005,
+      "toy": false
+    },
+    {
+      "description": "Dense-cosine baseline abstain precision, rung 1",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.b2.precision.r1",
+      "key": "baselines.B2_dense_top1.test.per_rung.1.abstain_precision",
+      "tolerance": 0.0005,
+      "toy": false
+    },
+    {
+      "description": "Surface-only AUROC rung 2 (6 features)",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.audit.surface.r2",
+      "key": "audit.dev_auroc_primary.2",
+      "tolerance": 0.0005,
+      "toy": false
+    },
+    {
+      "description": "Surface+overlap AUROC rung 2",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.audit.surface_lex.r2",
+      "key": "audit.dev_auroc_sensitivity_with_lex.2",
+      "tolerance": 0.0005,
+      "toy": false
+    },
+    {
+      "description": "Band gate abstain precision, rung 2 (held-out)",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.band.precision.r2",
+      "key": "test.band_primary.per_rung.2.abstain_precision",
+      "tolerance": 0.0005,
+      "toy": false
+    },
+    {
+      "description": "Band gate n, rung 2",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.band.n.r2",
+      "key": "test.band_primary.per_rung.2.n",
+      "tolerance": 0,
+      "toy": false
+    },
+    {
+      "description": "Exploratory band abstain precision, rung 2",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.expl.precision.r2",
+      "key": "test.exploratory_band.per_rung.2.abstain_precision",
+      "tolerance": 0.0005,
+      "toy": false
+    },
+    {
+      "description": "Dense-cosine baseline abstain precision, rung 2",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.b2.precision.r2",
+      "key": "baselines.B2_dense_top1.test.per_rung.2.abstain_precision",
+      "tolerance": 0.0005,
+      "toy": false
+    },
+    {
+      "description": "Surface-only AUROC rung 3 (6 features)",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.audit.surface.r3",
+      "key": "audit.dev_auroc_primary.3",
+      "tolerance": 0.0005,
+      "toy": false
+    },
+    {
+      "description": "Surface+overlap AUROC rung 3",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.audit.surface_lex.r3",
+      "key": "audit.dev_auroc_sensitivity_with_lex.3",
+      "tolerance": 0.0005,
+      "toy": false
+    },
+    {
+      "description": "Band gate abstain precision, rung 3 (held-out)",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.band.precision.r3",
+      "key": "test.band_primary.per_rung.3.abstain_precision",
+      "tolerance": 0.0005,
+      "toy": false
+    },
+    {
+      "description": "Band gate n, rung 3",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.band.n.r3",
+      "key": "test.band_primary.per_rung.3.n",
+      "tolerance": 0,
+      "toy": false
+    },
+    {
+      "description": "Exploratory band abstain precision, rung 3",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.expl.precision.r3",
+      "key": "test.exploratory_band.per_rung.3.abstain_precision",
+      "tolerance": 0.0005,
+      "toy": false
+    },
+    {
+      "description": "Dense-cosine baseline abstain precision, rung 3",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.b2.precision.r3",
+      "key": "baselines.B2_dense_top1.test.per_rung.3.abstain_precision",
+      "tolerance": 0.0005,
+      "toy": false
+    },
+    {
+      "description": "Surface-only AUROC rung 4 (6 features)",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.audit.surface.r4",
+      "key": "audit.dev_auroc_primary.4",
+      "tolerance": 0.0005,
+      "toy": false
+    },
+    {
+      "description": "Surface+overlap AUROC rung 4",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.audit.surface_lex.r4",
+      "key": "audit.dev_auroc_sensitivity_with_lex.4",
+      "tolerance": 0.0005,
+      "toy": false
+    },
+    {
+      "description": "Band gate abstain precision, rung 4 (held-out)",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.band.precision.r4",
+      "key": "test.band_primary.per_rung.4.abstain_precision",
+      "tolerance": 0.0005,
+      "toy": false
+    },
+    {
+      "description": "Band gate n, rung 4",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.band.n.r4",
+      "key": "test.band_primary.per_rung.4.n",
+      "tolerance": 0,
+      "toy": false
+    },
+    {
+      "description": "Exploratory band abstain precision, rung 4",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.expl.precision.r4",
+      "key": "test.exploratory_band.per_rung.4.abstain_precision",
+      "tolerance": 0.0005,
+      "toy": false
+    },
+    {
+      "description": "Dense-cosine baseline abstain precision, rung 4",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.b2.precision.r4",
+      "key": "baselines.B2_dense_top1.test.per_rung.4.abstain_precision",
+      "tolerance": 0.0005,
+      "toy": false
+    },
+    {
+      "description": "Band gate over-refusal rate (held-out)",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.band.over_refusal",
+      "key": "test.band_primary.over_refusal",
+      "tolerance": 0.0005,
+      "toy": false
+    },
+    {
+      "description": "Exploratory band over-refusal rate (held-out)",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.expl.over_refusal",
+      "key": "test.exploratory_band.over_refusal",
+      "tolerance": 0.0005,
+      "toy": false
+    },
+    {
+      "description": "Band gate coverage (held-out)",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.band.coverage",
+      "key": "test.band_primary.coverage",
+      "tolerance": 0.0005,
+      "toy": false
+    },
+    {
+      "description": "Exploratory band coverage (held-out)",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.expl.coverage",
+      "key": "exploratory.H1_sequence.coverage",
+      "tolerance": 0.0005,
+      "toy": false
+    },
+    {
+      "description": "Fitted band lower threshold",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.thr.lo",
+      "key": "thresholds.band.t_lo",
+      "tolerance": 0,
+      "toy": false
+    },
+    {
+      "description": "Fitted band upper threshold",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.thr.hi",
+      "key": "thresholds.band.t_hi",
+      "tolerance": 0,
+      "toy": false
+    },
+    {
+      "description": "Fitted single threshold",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.thr.single",
+      "key": "thresholds.single.t",
+      "tolerance": 0,
+      "toy": false
+    },
+    {
+      "description": "Dev admit mass at the band",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.dev.admit_mass",
+      "key": "placement_diagnostic.dev_admit_mass",
+      "tolerance": 0.0005,
+      "toy": false
+    },
+    {
+      "description": "Dev fraction refused by the lower threshold",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.dev.refused_below_lo",
+      "key": "placement_diagnostic.dev_refused_below_lo",
+      "tolerance": 0.0005,
+      "toy": false
+    },
+    {
+      "description": "BM25-top1 baseline pooled abstain precision",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.b1.pooled",
+      "key": "baselines.B1_bm25_top1.test.pooled_abstain_precision",
+      "tolerance": 0.0005,
+      "toy": false
+    },
+    {
+      "description": "Dense-cosine baseline pooled abstain precision",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.b2.pooled",
+      "key": "baselines.B2_dense_top1.test.pooled_abstain_precision",
+      "tolerance": 0.0005,
+      "toy": false
+    },
+    {
+      "description": "H1 rung1 minus rung3 abstain precision",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.h1.diff",
+      "key": "hypotheses.H1.diff_r1_minus_r3",
+      "tolerance": 0.0005,
+      "toy": false
+    },
+    {
+      "description": "H2 dev-to-test precision loss",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.h2.loss",
+      "key": "hypotheses.H2.loss_points",
+      "tolerance": 0.0005,
+      "toy": false
+    },
+    {
+      "description": "H3 band minus matched single",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.h3.diff",
+      "key": "hypotheses.H3.difference.diff",
+      "tolerance": 0.0005,
+      "toy": false
+    },
+    {
+      "description": "H3 difference, 95% CI lower",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.h3.lo",
+      "key": "hypotheses.H3.difference.lo",
+      "tolerance": 0.0005,
+      "toy": false
+    },
+    {
+      "description": "H3 difference, 95% CI upper",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.h3.hi",
+      "key": "hypotheses.H3.difference.hi",
+      "tolerance": 0.0005,
+      "toy": false
+    },
+    {
+      "description": "Exploratory rung1 minus rung3",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.expl.diff_r1_r3",
+      "key": "exploratory.H1_sequence.diff_r1_minus_r3",
+      "tolerance": 0.0005,
+      "toy": false
+    },
+    {
+      "description": "Items with reader features (dev only)",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.reader.n",
+      "key": "reader_baseline_dev_only.n",
+      "tolerance": 0,
+      "toy": false
+    },
+    {
+      "description": "Reader logprob AUROC on those dev items",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.reader.auroc",
+      "key": "reader_baseline_dev_only.auroc_answerable_vs_negatives",
+      "tolerance": 0.0005,
+      "toy": false
+    },
+    {
+      "description": "Separability gate AUROC threshold (PREREGISTRATION section 8a)",
+      "file": "04_experiments/config/c1_gate.json",
+      "id": "c1.audit.gate",
+      "key": "audit_auroc_gate",
+      "tolerance": 0.0,
+      "toy": false
+    },
+    {
+      "description": "SQuAD 2.0 dev articles",
+      "file": "04_experiments/data/item_stats.json",
+      "id": "c1.data.articles",
+      "key": "dataset_facts.n_articles",
+      "tolerance": 0.0,
+      "toy": false
+    },
+    {
+      "description": "SQuAD 2.0 dev paragraphs",
+      "file": "04_experiments/data/item_stats.json",
+      "id": "c1.data.paragraphs",
+      "key": "dataset_facts.n_paragraphs",
+      "tolerance": 0.0,
+      "toy": false
+    },
+    {
+      "description": "SQuAD 2.0 dev questions",
+      "file": "04_experiments/data/item_stats.json",
+      "id": "c1.data.questions",
+      "key": "dataset_facts.n_questions",
+      "tolerance": 0.0,
+      "toy": false
+    },
+    {
+      "description": "Answerable SQuAD 2.0 dev questions",
+      "file": "04_experiments/data/item_stats.json",
+      "id": "c1.data.answerable",
+      "key": "dataset_facts.n_answerable_questions",
+      "tolerance": 0.0,
+      "toy": false
+    },
+    {
+      "description": "Answerable questions sampled per split",
+      "file": "04_experiments/data/item_stats.json",
+      "id": "c1.design.per_split",
+      "key": "design.n_answerable_per_split",
+      "tolerance": 0.0,
+      "toy": false
+    },
+    {
+      "description": "Articles in the dev split",
+      "file": "04_experiments/data/item_stats.json",
+      "id": "c1.design.dev_articles",
+      "key": "design.n_dev_articles",
+      "tolerance": 0.0,
+      "toy": false
+    },
+    {
+      "description": "Articles in the test split",
+      "file": "04_experiments/data/item_stats.json",
+      "id": "c1.design.test_articles",
+      "key": "design.n_test_articles",
+      "tolerance": 0.0,
+      "toy": false
+    },
+    {
+      "description": "Questions (both splits) with no rung-2 distractor",
+      "file": "04_experiments/data/item_stats.json",
+      "id": "c1.design.rung2_dropped",
+      "key": "design.rung2_dropped_total",
+      "tolerance": 0.0,
+      "toy": false
+    },
+    {
+      "description": "Bootstrap resamples",
+      "file": "04_experiments/data/item_stats.json",
+      "id": "c1.stats.n_boot",
+      "key": "design.bootstrap_resamples",
+      "tolerance": 0.0,
+      "toy": false
+    },
+    {
+      "description": "Bootstrap seed",
+      "file": "04_experiments/data/item_stats.json",
+      "id": "c1.stats.seed",
+      "key": "design.bootstrap_seed",
+      "tolerance": 0.0,
+      "toy": false
+    },
+    {
+      "description": "Ablation without rank features: held-out AUROC",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.ablation.auroc",
+      "key": "ablation_no_rank.auroc_test",
+      "tolerance": 0.0005,
+      "toy": false
+    },
+    {
+      "description": "Ablation without rank features: over-refusal",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.ablation.over_refusal",
+      "key": "ablation_no_rank.test.over_refusal",
+      "tolerance": 0.0005,
+      "toy": false
+    },
+    {
+      "description": "Ablation without rank features: rung-1 precision",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.ablation.precision.r1",
+      "key": "ablation_no_rank.test.per_rung.1.abstain_precision",
+      "tolerance": 0.0005,
+      "toy": false
+    },
+    {
+      "description": "Ablation without rank features: rung-4 precision",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.ablation.precision.r4",
+      "key": "ablation_no_rank.test.per_rung.4.abstain_precision",
+      "tolerance": 0.0005,
+      "toy": false
     }
   ],
-  "updated_at": "2026-11-02T22:14:42Z",
+  "updated_at": "2026-11-03T00:10:27Z",
   "version": 1
 }

@@ -1,0 +1,214 @@
+{
+  "dev_after_rebuild": {
+    "all_pass": true,
+    "failing_rungs": [],
+    "gate_auroc": 0.75,
+    "kept_counts": {
+      "0": 400,
+      "1": 400,
+      "2": 273,
+      "3": 400,
+      "4": 400
+    },
+    "n_answerable": 400,
+    "per_rung": {
+      "1": {
+        "auroc_primary_6": 0.5063,
+        "auroc_with_lex_overlap": 0.9773,
+        "length_chars_neg_median": 715.0,
+        "length_chars_pos_median": 723.0,
+        "n_answerable": 400,
+        "n_negatives": 400,
+        "passes": true,
+        "rebuilds_applied": 0
+      },
+      "2": {
+        "auroc_primary_6": 0.5392,
+        "auroc_with_lex_overlap": 0.8886,
+        "length_chars_neg_median": 780,
+        "length_chars_pos_median": 723.0,
+        "n_answerable": 400,
+        "n_negatives": 273,
+        "passes": true,
+        "rebuilds_applied": 0
+      },
+      "3": {
+        "auroc_primary_6": 0.4881,
+        "auroc_with_lex_overlap": 0.9232,
+        "length_chars_neg_median": 716.5,
+        "length_chars_pos_median": 723.0,
+        "n_answerable": 400,
+        "n_negatives": 400,
+        "passes": true,
+        "rebuilds_applied": 0
+      },
+      "4": {
+        "auroc_primary_6": 0.4151,
+        "auroc_with_lex_overlap": 0.4082,
+        "length_chars_neg_median": 731.5,
+        "length_chars_pos_median": 723.0,
+        "n_answerable": 400,
+        "n_negatives": 400,
+        "passes": true,
+        "rebuilds_applied": 0
+      }
+    },
+    "primary_features": [
+      "n_chars",
+      "n_tokens",
+      "digit_ratio",
+      "upper_ratio",
+      "punct_ratio",
+      "mean_word_len"
+    ],
+    "rebuilt_rungs": {},
+    "sensitivity_features": [
+      "n_chars",
+      "n_tokens",
+      "digit_ratio",
+      "upper_ratio",
+      "punct_ratio",
+      "mean_word_len",
+      "lex_jaccard",
+      "q_len"
+    ],
+    "split": "dev"
+  },
+  "dev_before_rebuild": {
+    "all_pass": true,
+    "failing_rungs": [],
+    "gate_auroc": 0.75,
+    "n_answerable": 400,
+    "per_rung": {
+      "1": {
+        "auroc_primary_6": 0.5063,
+        "auroc_with_lex_overlap": 0.9773,
+        "length_chars_neg_median": 715.0,
+        "length_chars_pos_median": 723.0,
+        "n_answerable": 400,
+        "n_negatives": 400,
+        "passes": true,
+        "rebuilds_applied": 0
+      },
+      "2": {
+        "auroc_primary_6": 0.5392,
+        "auroc_with_lex_overlap": 0.8886,
+        "length_chars_neg_median": 780,
+        "length_chars_pos_median": 723.0,
+        "n_answerable": 400,
+        "n_negatives": 273,
+        "passes": true,
+        "rebuilds_applied": 0
+      },
+      "3": {
+        "auroc_primary_6": 0.4881,
+        "auroc_with_lex_overlap": 0.9232,
+        "length_chars_neg_median": 716.5,
+        "length_chars_pos_median": 723.0,
+        "n_answerable": 400,
+        "n_negatives": 400,
+        "passes": true,
+        "rebuilds_applied": 0
+      },
+      "4": {
+        "auroc_primary_6": 0.4151,
+        "auroc_with_lex_overlap": 0.4082,
+        "length_chars_neg_median": 731.5,
+        "length_chars_pos_median": 723.0,
+        "n_answerable": 400,
+        "n_negatives": 400,
+        "passes": true,
+        "rebuilds_applied": 0
+      }
+    },
+    "primary_features": [
+      "n_chars",
+      "n_tokens",
+      "digit_ratio",
+      "upper_ratio",
+      "punct_ratio",
+      "mean_word_len"
+    ],
+    "rebuilt_rungs": {},
+    "sensitivity_features": [
+      "n_chars",
+      "n_tokens",
+      "digit_ratio",
+      "upper_ratio",
+      "punct_ratio",
+      "mean_word_len",
+      "lex_jaccard",
+      "q_len"
+    ],
+    "split": "dev"
+  },
+  "stopping_rule": "PREREGISTRATION.md \u00a78a/\u00a78b",
+  "test_reference": {
+    "all_pass": true,
+    "failing_rungs": [],
+    "gate_auroc": 0.75,
+    "n_answerable": 400,
+    "per_rung": {
+      "1": {
+        "auroc_primary_6": 0.5199,
+        "auroc_with_lex_overlap": 0.9804,
+        "length_chars_neg_median": 755.0,
+        "length_chars_pos_median": 711.0,
+        "n_answerable": 400,
+        "n_negatives": 400,
+        "passes": true,
+        "rebuilds_applied": 0
+      },
+      "2": {
+        "auroc_primary_6": 0.5867,
+        "auroc_with_lex_overlap": 0.8644,
+        "length_chars_neg_median": 819.5,
+        "length_chars_pos_median": 711.0,
+        "n_answerable": 400,
+        "n_negatives": 280,
+        "passes": true,
+        "rebuilds_applied": 0
+      },
+      "3": {
+        "auroc_primary_6": 0.4895,
+        "auroc_with_lex_overlap": 0.9053,
+        "length_chars_neg_median": 721.0,
+        "length_chars_pos_median": 711.0,
+        "n_answerable": 400,
+        "n_negatives": 400,
+        "passes": true,
+        "rebuilds_applied": 0
+      },
+      "4": {
+        "auroc_primary_6": 0.4259,
+        "auroc_with_lex_overlap": 0.4148,
+        "length_chars_neg_median": 715,
+        "length_chars_pos_median": 711.0,
+        "n_answerable": 400,
+        "n_negatives": 399,
+        "passes": true,
+        "rebuilds_applied": 0
+      }
+    },
+    "primary_features": [
+      "n_chars",
+      "n_tokens",
+      "digit_ratio",
+      "upper_ratio",
+      "punct_ratio",
+      "mean_word_len"
+    ],
+    "rebuilt_rungs": {},
+    "sensitivity_features": [
+      "n_chars",
+      "n_tokens",
+      "digit_ratio",
+      "upper_ratio",
+      "punct_ratio",
+      "mean_word_len",
+      "lex_jaccard",
+      "q_len"
+    ],
+    "split": "test"
+  }
+}

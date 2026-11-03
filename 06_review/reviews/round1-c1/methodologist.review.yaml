@@ -1,0 +1,36 @@
+persona: methodologist
+summary: |
+  The paper builds a four-rung negative-hardness ladder and measures one retrieval-only gate across it.
+  What it shows is that at the pre-registered operating point the gate refuses 75.5% of answerable items,
+  which makes every rung look identical, so H1 and H3 are refuted for a reason the paper explains but does
+  not fix. The central construct is weaker than the title implies: because rung-0 items present the gold
+  paragraph and the gate sees that passage's retrieval rank, the gate can largely answer "is this the
+  retrieved document?" instead of "does this passage support an answer?".
+strengths:
+  - "Pre-registration with a frozen hash and an explicit deviation log (Section 3.3, PREREGISTRATION.md) is unusually disciplined."
+  - "The separability audit (Table 3) is a real gate with a rebuild rule, and the paper reports the variant that fails, not only the one that passes."
+  - "Negative results are reported as negative (H1 and H3), with the exploratory arm kept separate."
+weaknesses:
+  - "Construct validity: rung-0 items present the gold paragraph and bm25_rank_log / dense_rank_log of the presented passage are gate features (Section 3.2); rank 1 is near-guaranteed for answerables, so the 0.9824 held-out AUROC partly encodes the item construction."
+  - "No component ablation, although the title claims retrieval features generally; the audit's sensitivity variant shows overlap alone reaches 0.9773 AUROC on rung 1."
+  - "Rung 2 has 273 dev items against 400 for other rungs (Section 3.1), so rung-2 comparisons rest on a different, non-random subsample."
+  - "Rung 4 substitutions are automatic and unvalidated (Section 5.3) with no quantification of how often they are ungrammatical."
+questions:
+  - "What is the held-out AUROC and per-rung precision with the presented-passage rank features removed?"
+  - "How many rung-4 items were inspected, and what fraction reads as a plausible false premise?"
+must_fix:
+  - claim: "The gate can identify rung-0 items from construction artefacts, so the separation may not measure answerability."
+    where: "Section 3.2, Section 4.2"
+    evidence_needed: "Held-out AUROC and per-rung precision without rank features, plus a variant where every presented passage is the top-1 retrieved document."
+  - claim: "No ablation isolates which retrieval features carry the result."
+    where: "Section 4.2"
+    evidence_needed: "Per-rung abstain precision for leave-one-out variants: without overlap, without ranks, without the cross-encoder."
+  - claim: "Rung 2 is reported at 68% of designed size with no exchangeability check."
+    where: "Section 3.1, Table 1"
+    evidence_needed: "Comparison of question length and answer type between the 273 kept and 127 dropped rung-2 dev questions."
+soundness: 2
+presentation: 3
+contribution: 2
+confidence: 4
+overall: 4
+decision: borderline

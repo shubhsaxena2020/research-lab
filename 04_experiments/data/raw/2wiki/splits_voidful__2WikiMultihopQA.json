@@ -1,0 +1,21 @@
+{
+ "splits": [
+  {
+   "dataset": "voidful/2WikiMultihopQA",
+   "config": "default",
+   "split": "train"
+  },
+  {
+   "dataset": "voidful/2WikiMultihopQA",
+   "config": "default",
+   "split": "validation"
+  },
+  {
+   "dataset": "voidful/2WikiMultihopQA",
+   "config": "default",
+   "split": "test"
+  }
+ ],
+ "pending": [],
+ "failed": []
+}

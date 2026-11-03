@@ -110,10 +110,19 @@ def arxiv_id_of(s: str) -> str | None:
     m = re.search(r"(?:arxiv[:./]|10\.48550/arxiv\.)\s*(\d{4}\.\d{4,6})(v\d+)?", s, re.I)
     if m:
         return m.group(1)
-    m = re.search(r"(\d{4}\.\d{4,6})(v\d+)?", s)
+    m = re.search(r"arxiv\.org/(?:abs|pdf)/(\d{4}\.\d{4,6})(v\d+)?", s, re.I)
     if m:
         return m.group(1)
-    m = re.search(r"([a-z\-]+(?:\.[A-Z]{2})?/\d{7})(v\d+)?", s, re.I)  # old style cs/0701001
+    # A real DOI that is not an arXiv DOI must never be mined for a bare number:
+    # 10.1109/access.2026.3728186 contains "2026.3728", which is not an arXiv id.
+    if doi_of(s) and not re.search(r"10\.48550/arxiv", s, re.I):
+        return None
+    for pat in (r"(?<![\w./])(\d{2})(\d{2})\.(\d{4,6})(v\d+)?(?![\w.])",):
+        for mm in re.finditer(pat, s):
+            yy, mo = int(mm.group(1)), int(mm.group(2))
+            if 7 <= yy <= 99 and 1 <= mo <= 12:          # arXiv YYMM.NNNNN
+                return f"{mm.group(1)}{mm.group(2)}.{mm.group(3)}"
+    m = re.search(r"(?<![\w.])([a-z\-]+(?:\.[A-Z]{2})?/\d{7})(v\d+)?", s, re.I)  # cs/0701001
     if m:
         return m.group(1)
     return None

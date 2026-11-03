@@ -1,0 +1,11 @@
+{
+  "audit_seed": 13,
+  "device": "cpu",
+  "max_failing_rungs": 2,
+  "n_boot": 10000,
+  "name": "c1_gate",
+  "notes": "C1 confirmatory run; frozen in PREREGISTRATION.md, item file sha256 in data/item_stats.json",
+  "seed": 20261103,
+  "target_abstain_precision": 0.8,
+  "toy": false
+}

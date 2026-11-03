@@ -1,0 +1,97 @@
+{
+  "auroc_dev": 0.9875,
+  "auroc_test": 0.9824,
+  "features": [
+    "bm25_presented",
+    "bm25_top1",
+    "bm25_top5_mean",
+    "bm25_margin",
+    "dense_presented",
+    "dense_top1",
+    "dense_margin",
+    "top1_agreement",
+    "ce_presented",
+    "lex_overlap"
+  ],
+  "n_features": 10,
+  "note": "same items, seeds and threshold rule; only the two presented-passage rank features removed",
+  "test": {
+    "coverage": 0.041,
+    "gate": "ablation_no_rank_band",
+    "n_items": 1879,
+    "over_refusal": 0.81,
+    "per_rung": {
+      "1": {
+        "abstain_precision": 1.0,
+        "auroc_answerable_vs_this_rung": 0.9995,
+        "ci95": {
+          "hi": 1.0,
+          "lo": 1.0,
+          "method": "percentile",
+          "n": 400,
+          "n_boot": 10000,
+          "seed": 12345
+        },
+        "n": 400
+      },
+      "2": {
+        "abstain_precision": 0.9964,
+        "auroc_answerable_vs_this_rung": 0.9757,
+        "ci95": {
+          "hi": 1.0,
+          "lo": 0.9714,
+          "method": "bca",
+          "n": 280,
+          "n_boot": 10000,
+          "seed": 12345
+        },
+        "n": 280
+      },
+      "3": {
+        "abstain_precision": 1.0,
+        "auroc_answerable_vs_this_rung": 0.9838,
+        "ci95": {
+          "hi": 1.0,
+          "lo": 1.0,
+          "method": "percentile",
+          "n": 400,
+          "n_boot": 10000,
+          "seed": 12345
+        },
+        "n": 400
+      },
+      "4": {
+        "abstain_precision": 1.0,
+        "auroc_answerable_vs_this_rung": 0.9685,
+        "ci95": {
+          "hi": 1.0,
+          "lo": 1.0,
+          "method": "percentile",
+          "n": 399,
+          "n_boot": 10000,
+          "seed": 12345
+        },
+        "n": 399
+      }
+    },
+    "pooled_abstain_precision": 0.9993
+  },
+  "thresholds": {
+    "band": {
+      "band_width": 0.033023,
+      "dev_n_refused": 1779,
+      "dev_precision": 0.828,
+      "dev_recall": 1.0,
+      "feasible": true,
+      "t_hi": 0.944848276498,
+      "t_lo": 0.911825003477
+    },
+    "single": {
+      "dev_n_refused": 1835,
+      "dev_precision": 0.8027,
+      "dev_recall": 1.0,
+      "feasible": true,
+      "t": 0.938276056745
+    }
+  }
+}

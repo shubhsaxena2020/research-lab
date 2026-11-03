@@ -8,9 +8,12 @@ evaluation methodology 3, memory 2) plus the two measurement halves the veto lis
 on-device, area 5). All five are inference-only, need no training beyond a logistic regression or a ≤110M
 encoder fine-tune, and fit 2–4 systems × 2–4 conditions × 1–3 seeds.
 
-Bibliographic facts are copied from `02_literature/verified_citations.csv` (266 rows). Numbers marked
-**measured** come from `02_literature/staging/_s2_2_data/s2_2_cpu_baselines.json`, taken on this laptop;
-numbers attributed to a paper are the paper's; numbers that are my arithmetic show the arithmetic.
+Bibliographic facts are copied from `02_literature/verified_citations.csv` — **317 data rows, snapshot
+2026-11-03 03:55** (an earlier draft of this file quoted 266, which was the register before the gap-mining
+and novelty-pre-scan batches merged; that count is superseded). Numbers marked **measured** come from
+`02_literature/staging/_s2_2_data/s2_2_cpu_baselines.json`, taken on this laptop in this session; numbers
+labelled "published anchor" or "estimate" are arithmetic from those and from papers, **not** measurements of
+this machine, and hour one of any approved project replaces them with a logged figure.
 
 ## Compute assumptions used in all five
 
@@ -35,11 +38,14 @@ it is only ever a condition.
 **Pitch.** The abstention literature evaluates gates on one kind of negative question and generalises.
 The one paper that varied negative hardness found a 97-point swing — 98% accuracy on random negatives,
 1% on negatives with high semantic overlap, same model, same questions (*Answerability in
-Retrieval-Augmented Open-Domain Question Answering*, 2024). Nobody turned that into a designed
-ablation. We build a four-rung hardness ladder over one fixed reader and corpus, fit two-sided
-admit/refuse thresholds on retrieval features on dev, and report abstain precision and over-refusal at
-every rung. The motivating case is a measured failure: a gate that refused 47 of 82 answerable questions at
-precision 0.30 because its threshold sat outside the observed range of the score feature.
+Retrieval-Augmented Open-Domain Question Answering*, 2024). No paper in our 91-query arXiv sweep turns that
+into a designed ablation with a two-sided policy and a reported false-refusal column
+(`02_literature/NOVELTY-CHECK.md` §1 carries the evidence and the honest verdict: incremental, not novel).
+We build a four-rung hardness ladder over one fixed reader and corpus, fit two-sided admit/refuse thresholds
+on retrieval features on dev, and report abstain precision and over-refusal at every rung. The motivating
+case is an anecdote from the student's private memory system — a single threshold placed outside the range
+of scores the system actually produced — quoted without numbers, used only to explain why threshold
+placement is reported as a diagnostic.
 
 **Research question.** For a fixed 1.5B reader and passage corpus, does a dev-fitted two-sided gate on
 retrieval features hold its abstain precision across a ladder of increasing negative hardness, and does
@@ -56,12 +62,14 @@ its operating point transfer to a held-out corpus?
   paired bootstrap interval contains zero.
 
 **Method.** (1) Build 3,200 items: 800 answerable, 800 per rung. (2) Index the SQuAD 2.0 dev paragraph
-pool with `bm25s` and bge-small dense vectors; cache top-10 per item. (3) Extract eight features in one
-forward pass of Qwen2.5-1.5B-Instruct (Q4_K_M, llama.cpp): top-1 and mean top-5 BM25, top-1 and mean
-top-5 cosine, BM25/dense top-1 agreement, rerank score of top-1, answer-token log-probability, answer
-entropy. (4) Fit logistic regression on dev; grid-search two thresholds for a target abstain precision
-of 0.80. (5) Evaluate on held-out per rung, then on the transfer corpus. (6) Run the separability audit
-and publish it whether or not it flatters the gate.
+pool with `bm25s` and bge-small dense vectors; cache top-10 per item. (3) Extract **six retrieval
+features**: top-1 and mean top-5 BM25, top-1 and mean top-5 cosine, BM25/dense top-1 agreement, rerank score
+of top-1. The gate is retrieval-only by construction — no generator call, no hidden state, no second model.
+The reader's answer-token log-probability and entropy are extracted **only for the separate reader-assisted
+arm (B4/B5)** and never enter the retrieval gate; report the two arms side by side, never pooled. (4) Fit
+logistic regression on the six retrieval features on dev; grid-search two thresholds for a target abstain
+precision of 0.80. (5) Evaluate on held-out per rung, then on the transfer corpus. (6) Run the separability
+audit and publish it whether or not it flatters the gate.
 
 **Datasets.** SQuAD 2.0 (*Know What You Don't Know: Unanswerable Questions for SQuAD*, 2018): 142,192
 rows, 130,319 train / 11,873 dev, CC BY-SA 4.0; dev split, answerable items as the positive class.
@@ -81,11 +89,15 @@ adversary — logistic regression on six surface features, trained per rung, AUR
 0.75 rebuilt rather than shipped; (c) a paraphrase pass on rung 4 so no template is detectable.
 
 **Baselines.** B1 single threshold on max BM25 — the cheapest thing that works and what most deployed
-systems do. B2 single threshold on max dense cosine. B3 logistic regression on all eight features, single
-threshold. B4, the strongest cheap baseline a reviewer will demand: the reader's own answer-token
-log-probability as the gate, which is what "just ask the model how sure it is" reduces to (*Just Ask for
-Calibration: Strategies for Eliciting Calibrated Confidence Scores from Language
-Models Fine-Tuned with Human Feedback*, 2023). Ablation: B3 with the dead zone removed, plus feature-group knockouts.
+systems do. B2 single threshold on max dense cosine. B3 logistic regression on the **six retrieval
+features** with one threshold (isolates "two-sided" from "more features"). B4, the strongest cheap baseline
+a reviewer will demand, is a **separate reader-assisted arm**: the reader's own answer-token log-probability
+as the gate, i.e. what "just ask the model how sure it is" reduces to (*Language Models (Mostly) Know What
+They Know*, 2022, arXiv:2207.05221). B5 is the reader-assisted two-sided band (six retrieval features plus
+log-probability and entropy). B4/B5 are always labelled reader-assisted and never pooled with the
+retrieval-only results; the paper's claim is about the retrieval gate, and the reader arms exist to show
+what a generator call buys at the same operating point. Ablation: B3 with the dead zone removed, plus
+feature-group knockouts.
 
 **Metrics.** Primary: abstain precision = TP/(TP+FP), positive = correctly refused, and over-refusal rate
 = refused answerable / all answerable, at the dev-fitted operating point. Secondary: AURC, mean selective

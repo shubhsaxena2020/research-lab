@@ -1,0 +1,35 @@
+persona: statistician
+summary: |
+  The inferential machinery is pre-registered and mostly well chosen, but the analysis that carries the
+  paper (the exploratory constrained operating point) has no interval, and every interval that exists
+  resamples items while ignoring that items are clustered inside 35 articles. The confirmatory tests are
+  reported as refuted with a CI of exactly [0, 0], which is a property of a degenerate operating point
+  rather than evidence about the world.
+strengths:
+  - "Bootstrap seed, resample count and CI method are fixed before the run (Section 3.5), and pairing is preserved by joint resampling."
+  - "Holm's family size and the reason H2 is excluded are declared (Section 3.5, D1.4)."
+  - "The placement diagnostic reports where the fitted thresholds sit rather than hiding a degenerate fit."
+weaknesses:
+  - "No interval on the exploratory per-rung precisions (Section 4.3), which are the only numbers showing the ladder effect."
+  - "Item-level resampling ignores article clustering: 400 questions come from 17 dev and 18 test articles, so nominal coverage is optimistic."
+  - "H3 matches recall on dev, then compares precision on test, but the achieved test recalls are never reported."
+  - "The reader AUROC 0.4192 is computed on a non-random 553-item dev subset with no interval and no difficulty comparison against the full dev half."
+questions:
+  - "What are the held-out abstain recalls for the band and the matched single threshold, side by side?"
+  - "How much do the primary intervals widen under an article-level cluster bootstrap?"
+must_fix:
+  - claim: "The exploratory per-rung precisions that carry the ladder claim have no uncertainty."
+    where: "Section 4.3"
+    evidence_needed: "BCa intervals at the frozen seed for each exploratory per-rung precision and for the rung 1 minus rung 3 difference."
+  - claim: "Intervals ignore clustering of questions within articles."
+    where: "Section 3.5"
+    evidence_needed: "A cluster bootstrap by article reported alongside the item bootstrap for the primary per-rung precisions."
+  - claim: "'Matched abstain recall' is asserted but the matched test recalls are not shown."
+    where: "Section 4.2"
+    evidence_needed: "A row reporting band recall and matched-single recall on the held-out half."
+soundness: 2
+presentation: 3
+contribution: 2
+confidence: 4
+overall: 4
+decision: borderline

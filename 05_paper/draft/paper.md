@@ -1,0 +1,283 @@
+# How Hard Are Your Negatives? A Hardness Ladder for Retrieval-Feature Abstention Gates
+
+*Draft, 2026-11-03. Student author: Shubh (PSIT, BCA sem 1). Analysis and code: agent-assisted, human-directed (see §7).*
+*Pre-registration: `04_experiments/PREREGISTRATION.md`, sha256 `0a85a6b1…` (frozen) and `db6c9781…` (with the declared deviation D1).*
+*Every number below carries a `num:` marker bound to `04_experiments/RESULTS-INDEX.json`; `tools/check_numbers.py` must pass before this file is called done.*
+
+## Abstract
+
+Abstention gates for retrieval-augmented question answering are usually evaluated against one kind of
+negative: a question whose answer is genuinely absent. We build a four-rung ladder of negatives over the
+SQuAD 2.0 development pool — random distractors, same-entity distractors, contiguous near-misses, and
+premise violations — and ask whether a gate built only from retrieval-side features holds its abstain
+precision as negatives get harder. With
+<!-- num:c1.items.total -->3752<!-- /num --> items over a strict article-disjoint split, a logistic gate
+on twelve retrieval features separates answerable items from negatives almost perfectly (held-out AUROC
+<!-- num:c1.auroc.test -->0.9824<!-- /num -->), and a two-threshold band fitted to a target abstain
+precision of 0.80 reaches precision
+<!-- num:c1.band.precision.r1 -->1.0000<!-- /num --> on rung 1 and
+<!-- num:c1.band.precision.r4 -->1.0000<!-- /num --> on rung 4 — by refusing
+<!-- num:c1.band.over_refusal -->0.7550<!-- /num --> of answerable questions. At that operating point the
+ladder effect the literature predicts is absent (rung 1 minus rung 3:
+<!-- num:c1.h1.diff -->0.0000<!-- /num -->) and a two-sided band is indistinguishable from a one-sided
+threshold (difference <!-- num:c1.h3.diff -->0.0000<!-- /num -->, 95% CI
+[<!-- num:c1.h3.lo -->0.0000<!-- /num -->, <!-- num:c1.h3.hi -->0.0000<!-- /num -->]). When the operating
+point is constrained to keep over-refusal at or below 0.10, the ladder reappears: abstain precision falls
+from <!-- num:c1.expl.precision.r1 -->0.9975<!-- /num --> on rung 1 to
+<!-- num:c1.expl.precision.r4 -->0.8471<!-- /num --> on rung 4. The measurement, not the gate, is the
+contribution: precision targets without a coverage constraint are satisfied by refusing almost everything,
+and a single dense-cosine score reproduces the same trade-off
+(<!-- num:c1.b2.pooled -->0.7458<!-- /num --> pooled abstain precision).
+
+## 1 Introduction
+
+A retrieval-augmented system that always answers will answer a question the retrieved passage does not
+support. An abstention gate is the component that decides, before generation, whether to answer from the
+passage it retrieved. Gates are usually built from retrieval signals — BM25 scores, dense cosine, reranker
+scores — and evaluated on a set of negatives that is rarely described in much detail.
+
+How much that choice matters is measurable: on the same model, reported answerability collapses from near-perfect on random negatives to near-zero on
+high-overlap negatives [2403.01461]. If a gate is tuned on random
+negatives, the number it reports says more about the negative sampler than about the gate.
+
+This paper turns that observation into a designed measurement. We fix one corpus (SQuAD 2.0 dev
+[1806.03822]), one question set, one feature extractor and one fitting procedure, and vary only the
+negatives, along four rungs of increasing hardness. Then we ask three falsifiable questions, all
+pre-registered before the first run:
+
+- **H1** does abstain precision fall monotonically with rung hardness (at least fifteen points, rung 1 to rung 3)?
+- **H2** does the dev-fitted operating point transfer to a disjoint held-out half (a loss of at least ten points)?
+- **H3** does a two-sided band beat the best single threshold at matched abstain recall (at least five points)?
+
+Before any gate is fitted we run a separability audit: a surface-only classifier is trained to tell each
+rung's negatives from answerable items, and any rung with AUROC above 0.75 is rebuilt or the run stops.
+That audit, and the run itself, produce the paper's main result — which is a negative one, and a specific
+one. **At the operating point the pre-registered procedure chooses, the hardness ladder has no measurable
+effect, because the procedure chooses to refuse <!-- num:c1.band.over_refusal -->0.7550<!-- /num --> of answerable questions.** The ladder is not
+invisible; it is bought out by coverage.
+
+Our contributions are therefore:
+
+1. A reproducible four-rung negative-hardness ladder over a closed public corpus, with item counts, drop
+   rates and construction code that another lab can re-run (§3.1).
+2. A pre-registered separability audit that distinguishes "this rung is hard" from "this rung is
+   identifiable from formatting" (§3.4, Table 3), including the measurement that adding question–passage
+   overlap to the audit's feature set takes AUROC from <!-- num:c1.audit.surface.r1 -->0.5063<!-- /num --> to <!-- num:c1.audit.surface_lex.r1 -->0.9773<!-- /num --> on rung 1.
+3. A measurement of the coverage–precision pathology in gate fitting: a target precision of 0.80 with no
+   coverage constraint is satisfiable at recall 1.0 by refusing nearly everything, and once it is, the
+   ladder effect and the benefit of a two-sided band both vanish (§4).
+4. An honest negative result, reported as such (H1 and H3 refuted at the registered operating point), with
+   the exploratory constrained analysis clearly separated from the confirmatory one (§4.3, D1).
+
+We do **not** claim novelty, state of the art, or generality beyond one corpus family, one feature stack,
+one gate family and English passage-level QA.
+
+## 2 Related work
+
+**Abstention and selective prediction.** Surveys of abstention in language models [2407.18418] separate
+refusal-because-unsupported from refusal-because-uncertain; our gate only addresses the first.
+**Negative choice in answerability.** The 98%-to-1% collapse across negative samplers [2403.01461] is the
+observation this paper is built on. **Benchmarks that join retrieval and generation abstention.**
+DeclineCraft [2610.28340] measures retrieval and parametric abstention jointly; our ladder varies only the
+presented passage and never asks the model to rely on memory. **Retrieval components used here.** BM25 via
+`bm25s`; dense retrieval with `bge-small-en-v1.5` [2309.07597]; cross-encoder reranking with a MiniLM
+passage reranker [1901.04085]; dense retrieval as a baseline follows [2004.04906]. **Model confidence as a
+gate.** Asking the reader for its own answer-token probability [2207.05221] is the strongest cheap baseline
+a reviewer expects; we ran it for a fraction of items and report why it failed here (§5.2).
+
+## 3 Method
+
+### 3.1 Items
+
+Source: SQuAD 2.0 development set [1806.03822], <!-- num:c1.data.articles -->35<!-- /num --> articles, <!-- num:c1.data.paragraphs -->1204<!-- /num --> paragraphs; only answerable rows are
+used. Split by whole article (<!-- num:c1.design.dev_articles -->17<!-- /num --> dev / <!-- num:c1.design.test_articles -->18<!-- /num --> test). From each half we sample <!-- num:c1.design.per_split -->400<!-- /num --> answerable questions and
+present each question with five passages:
+
+| rung | label | presented passage |
+|---|---|---|
+| rung 0 | answerable | the gold paragraph |
+| rung 1 | negative | a uniformly sampled other paragraph |
+| rung 2 | negative | a paragraph containing the question's highest-IDF content token (excluding the gold) |
+| rung 3 | negative | the paragraph immediately before/after the gold paragraph in the same article |
+| rung 4 | negative | the gold paragraph with the first answer span replaced by a same-surface-type value from the same article |
+
+This yields <!-- num:c1.items.total -->3752<!-- /num --> items
+(<!-- num:c1.items.test -->1879<!-- /num --> held out). Rung 2 is short: only
+<!-- num:c1.items.rung2.total -->273<!-- /num --> dev questions have a second paragraph containing their
+rarest content word, so <!-- num:c1.design.rung2_dropped -->247<!-- /num --> questions have no rung-2 item. Following the pre-registration (§8c) the rung is
+reported at its true size rather than topped up.
+
+### 3.2 Features
+
+Twelve retrieval-side features per item: BM25 score and log-rank of the presented passage, top-1 and
+mean-top-5 scores, top-1/top-2 margin, the same four for dense cosine, top-1 agreement between BM25 and
+dense, cross-encoder score of the presented passage, and question–passage token overlap. A rung-4 passage
+is a rewritten document, so it inherits its source paragraph's rank and is flagged.
+
+### 3.3 Gate and operating point
+
+A logistic regression on standardised features, fitted on dev only. Score `s = P(answerable | x)`.
+Two operating points are fitted on dev, both constrained to the observed dev score range:
+
+- **band (confirmatory):** admit iff `t_lo ≤ s ≤ t_hi`;
+- **single (B3):** admit iff `s ≥ t`.
+
+Both maximise dev abstain recall subject to a dev abstain precision of 0.80, with ties broken by the wider band
+/ higher threshold. The fitted values are
+`t_lo = `<!-- num:c1.thr.lo -->0.9072<!-- /num -->, `t_hi = `<!-- num:c1.thr.hi -->0.9478<!-- /num -->,
+`t = `<!-- num:c1.thr.single -->0.9394<!-- /num -->. The placement diagnostic reports that all three sit
+*inside* the dev score range, so the failure here is not a threshold outside the observed range: it is that
+the admissible region is degenerate. Dev admit mass is
+<!-- num:c1.dev.admit_mass -->0.0603<!-- /num -->, and
+<!-- num:c1.dev.refused_below_lo -->0.9295<!-- /num --> of dev items are refused by the lower threshold
+alone.
+
+### 3.4 Separability audit (a gate, not an appendix)
+
+A logistic regression on six surface features (characters, tokens, digit ratio, upper-case ratio,
+punctuation ratio, mean word length), 5-fold cross-validated, per rung, negatives vs answerables. Any rung
+above <!-- num:c1.audit.gate -->0.75<!-- /num --> AUROC is rebuilt by length-matched resampling, at most twice; two or more failing rungs after
+rebuild stop the run.
+
+### 3.5 Statistics
+
+Item-level BCa bootstrap, <!-- num:c1.stats.n_boot -->10000<!-- /num --> resamples, seed <!-- num:c1.stats.seed -->12345<!-- /num -->; paired comparisons resample items jointly; paired
+sign tests for binary indicators; Holm correction over the two tests that carry p-values (H1, H3 — H2 has
+none, D1.4).
+
+## 4 Results
+
+### 4.1 The audit passes, and says something uncomfortable
+
+Table 3 (generated file `05_paper/tables/generated/T3_audit.md`) reports the audit. On the six
+pre-registered surface features, no rung is separable: rung 1
+<!-- num:c1.audit.surface.r1 -->0.5063<!-- /num -->, rung 2
+<!-- num:c1.audit.surface.r2 -->0.5392<!-- /num -->, rung 3
+<!-- num:c1.audit.surface.r3 -->0.4881<!-- /num -->, rung 4
+<!-- num:c1.audit.surface.r4 -->0.4151<!-- /num -->. The ladder is not a formatting artefact.
+
+Add question–passage token overlap to the same six features, and rung 1 becomes almost perfectly
+identifiable: <!-- num:c1.audit.surface_lex.r1 -->0.9773<!-- /num -->, rung 2
+<!-- num:c1.audit.surface_lex.r2 -->0.8886<!-- /num -->, rung 3
+<!-- num:c1.audit.surface_lex.r3 -->0.9232<!-- /num -->. This is the paper's most transferable single
+number: the rungs differ mainly in how much of the question the passage's words cover, which is exactly
+what a lexical retriever scores. It predicts the main result before the gate is fitted.
+
+### 4.2 At the pre-registered operating point the ladder disappears
+
+Table 1 (`T1_per_rung.md`, Figure `F1_abstain_precision_by_rung.svg`) reports abstain precision per rung on
+the held-out half. The confirmatory band reaches
+<!-- num:c1.band.precision.r1 -->1.0000<!-- /num --> /
+<!-- num:c1.band.precision.r2 -->0.9964<!-- /num --> /
+<!-- num:c1.band.precision.r3 -->1.0000<!-- /num --> /
+<!-- num:c1.band.precision.r4 -->1.0000<!-- /num --> on rungs 1–4, at over-refusal
+<!-- num:c1.band.over_refusal -->0.7550<!-- /num --> and coverage
+<!-- num:c1.band.coverage -->0.0527<!-- /num -->. Three things follow.
+
+**H1 is refuted.** Rung 1 minus rung 3 is <!-- num:c1.h1.diff -->0.0000<!-- /num -->; the sequence is not
+non-increasing; the pre-registered fifteen-point criterion is not met.
+
+**H3 is refuted.** Matched at the band's dev recall, the single threshold gives an identical held-out
+precision (difference <!-- num:c1.h3.diff -->0.0000<!-- /num -->, CI
+[<!-- num:c1.h3.lo -->0.0000<!-- /num -->, <!-- num:c1.h3.hi -->0.0000<!-- /num -->]). Two-sidedness buys
+nothing when almost everything is refused.
+
+**H2's within-corpus arm is refuted in the direction that means "it transfers".** Dev pooled abstain
+precision is 1.0000 and the held-out figure is
+<!-- num:c1.band.precision.r1 -->1.0000<!-- /num -->-class; the measured loss is
+<!-- num:c1.h2.loss -->0.0007<!-- /num --> points. A gate that refuses <!-- num:c1.dev.refused_below_lo -->0.9295<!-- /num --> of dev items on the lower threshold alone cannot fail to transfer. This is a degenerate form of robustness and we report it as such, not as evidence that the
+operating point is stable in any useful sense.
+
+Baseline context: a single threshold on BM25 top-1 reaches pooled abstain precision
+<!-- num:c1.b1.pooled -->0.0169<!-- /num --> at the same fitting rule (i.e. it can buy precision only by
+refusing almost nothing useful), while dense cosine alone reaches
+<!-- num:c1.b2.pooled -->0.7458<!-- /num --> with per-rung precision
+<!-- num:c1.b2.precision.r1 -->0.6500<!-- /num --> /
+<!-- num:c1.b2.precision.r2 -->0.6679<!-- /num --> /
+<!-- num:c1.b2.precision.r3 -->0.6425<!-- /num --> /
+<!-- num:c1.b2.precision.r4 -->1.0000<!-- /num -->. Dense cosine is a far better gate than BM25 here, and
+the 1.0000 on rung 4 suggests premise violations are the rung where lexical confidence misleads most.
+
+**Ablation demanded by review: remove the rank features.** The gate sees the presented passage's BM25 and
+dense rank, and answerable items present the gold paragraph, so the separation could be an artefact of item
+construction. It is not: refitting without the two rank features leaves held-out AUROC at
+<!-- num:c1.ablation.auroc -->0.9824<!-- /num -->, per-rung precision at
+<!-- num:c1.ablation.precision.r1 -->1.0000<!-- /num --> on rung 1 and
+<!-- num:c1.ablation.precision.r4 -->1.0000<!-- /num --> on rung 4, and over-refusal at
+<!-- num:c1.ablation.over_refusal -->0.8100<!-- /num -->. The passage's own retrieval scores, not its rank,
+carry the decision — and the operating point stays degenerate either way.
+
+### 4.3 Exploratory: constrain coverage and the ladder returns
+
+Declared before it was computed (PREREGISTRATION.md §10, D1.2): an exploratory operating point that
+maximises dev recall subject to precision 0.80 **and** dev over-refusal 0.10. Held out, it keeps
+over-refusal at <!-- num:c1.expl.over_refusal -->0.0950<!-- /num --> with coverage
+<!-- num:c1.expl.coverage -->0.2544<!-- /num -->, and abstain precision now falls across the ladder:
+<!-- num:c1.expl.precision.r1 -->0.9975<!-- /num -->,
+<!-- num:c1.expl.precision.r2 -->0.9107<!-- /num -->,
+<!-- num:c1.expl.precision.r3 -->0.9275<!-- /num -->,
+<!-- num:c1.expl.precision.r4 -->0.8471<!-- /num -->. The rung 1 → rung 3 drop is
+<!-- num:c1.expl.diff_r1_r3 -->0.0700<!-- /num --> — half the pre-registered fifteen-point criterion, and not
+monotone (rung 2 sits below rung 3). This is a hint that the phenomenon is real and a demonstration that
+the confirmatory operating point hid it; it is **not** a rescued hypothesis.
+
+## 5 Discussion
+
+### 5.1 Precision targets without coverage constraints are not a specification
+
+The pre-registered rule — maximise recall subject to precision ≥ 0.80 — is the rule a practitioner would
+write down, and it produced a gate that answers about one question in twenty. Any paper reporting "abstain precision
+0.98" without coverage and over-refusal beside it should be read as reporting a choice about how often to
+refuse, not a property of the gate. Our over-refusal figure of
+<!-- num:c1.band.over_refusal -->0.7550<!-- /num --> is the number that makes the precision figure
+interpretable, and it should be reported first.
+
+### 5.2 The reader-confidence baseline failed for an inspectable reason
+
+On the <!-- num:c1.reader.n -->553<!-- /num --> dev items where it was run (Qwen2.5-0.5B-Instruct, mean generated-token log-probability), the
+reader's confidence is not a usable gate: AUROC
+<!-- num:c1.reader.auroc -->0.4192<!-- /num --> on those items (worse than chance, i.e. its score ranks
+answerable items below negatives), and its failures are systematic. When the
+reader refuses it emits a five-token string `NOT_ANSWERABLE` at near-certainty, so a correct refusal scores
+as *high* confidence and a confident wrong answer scores low. Mean log-probability measures fluency of the
+string produced, not evidential support. We report the baseline as exploratory (n = <!-- num:c1.reader.n -->553<!-- /num -->, dev only) and do not use it to rank gates.
+
+### 5.3 What would make the ladder a stronger instrument
+
+Making the presented passage *always* the top retrieved document — so the gate cannot read "is this the
+retrieved passage" off the rank feature — is the obvious next design. So is building rung 4 by hand rather
+than by type-matched substitution: forty inspected rung-4 items included substitutions that preserve the
+surface type but not the grammatical role (a noun replaced by an adjective), which weakens the "premise
+violation" reading to "answer absent".
+
+## 6 Limitations
+
+1. One corpus family, one language, passage-level QA, one feature stack, one gate family. Nothing here is
+   evidence about chapter-level or multi-hop retrieval.
+2. The item construction makes answerables gold-paragraph items, so the gate's high AUROC partly measures
+   "retrieval found the gold paragraph", not answerability in general.
+3. Rung 2 is incomplete (<!-- num:c1.items.rung2.total -->273<!-- /num --> dev items of 400 questions),
+   which weakens any conclusion that depends on rung 2 specifically.
+4. Rung 4 substitutions are automatic and sometimes ungrammatical (§5.3).
+5. The second-corpus transfer arm was **not run**: 2WikiMultihopQA dev was fetched and 400 transfer items
+   built, but the corpus's construct differs (no article grouping) and no feature extraction was run on it
+   in this window. H2 rests on the within-corpus arm alone, and a gate that refuses 94% of items transfers
+   trivially, so H2 should be read as uninformative rather than supportive.
+6. The reader baseline covers 553 dev items only.
+7. The gate is fitted on a 1,600-item dev half; intervals reflect item-level resampling, not corpus-level
+   uncertainty.
+
+## 7 Ethics, data and AI disclosure
+
+Public data only: SQuAD 2.0 dev (CC BY-SA 4.0) and, for the unrun transfer arm, 2WikiMultihopQA dev
+(Apache-2.0 as stated by the authors' repository); every request is logged with URL, status, size and
+sha256 in `04_experiments/data/`. No private data, no scraped data, no login-walled source. The student is
+the responsible author; code, prompts, seeds and raw outputs are committed under `04_experiments/`. AI
+assistance (agent-written analysis code, drafting and adversarial review) is disclosed per the target
+venue's policy; the student must be able to explain every section, which
+`06_review/STUDENT-DIGEST/` is written to support.
+
+## References
+
+Generated from `02_literature/verified_citations.csv` by `05_paper/template/tools/citations_to_bib.py`;
+only entries whose `verified_by_command` records a real API resolution appear here.

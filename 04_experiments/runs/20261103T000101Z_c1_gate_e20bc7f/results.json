@@ -1,0 +1,34 @@
+{
+  "_meta": {
+    "config_name": "c1_gate",
+    "experiment": "c1",
+    "run_id": "20261103T000101Z_c1_gate_e20bc7f",
+    "seed": 20261103,
+    "split": "test"
+  },
+  "metrics": {
+    "B1_bm25_top1.pooled_precision": 0.0169,
+    "B2_dense_top1.pooled_precision": 0.7458,
+    "band.auroc.r1": 0.9995,
+    "band.auroc.r2": 0.9764,
+    "band.auroc.r3": 0.9836,
+    "band.auroc.r4": 0.9681,
+    "band.over_refusal": 0.755,
+    "band.precision.r1": 1.0,
+    "band.precision.r2": 0.9964,
+    "band.precision.r3": 1.0,
+    "band.precision.r4": 1.0,
+    "expl_band.over_refusal": 0.095,
+    "expl_band.precision.r1": 0.9975,
+    "expl_band.precision.r2": 0.9107,
+    "expl_band.precision.r3": 0.9275,
+    "expl_band.precision.r4": 0.8471,
+    "h1.diff_r1_r3": 0.0,
+    "h2.loss_points": 0.0007,
+    "h3.diff": 0.0,
+    "n_items": 3752,
+    "status_ok": 1,
+    "test_band_roc_auc": 0.9823630831643002
+  },
+  "status": "ok"
+}

@@ -263,8 +263,9 @@ Both are answerer-side, and neither distinguishes the two failure modes a memory
 has: **memory miss** (nothing relevant retrieved) and **memory wrong** (something retrieved that
 contradicts the question). Both justify refusal, and they need opposite repairs — one fixes the
 index, the other fixes the reader — yet they are scored identically. In the student's prior system
-the gate lived in the answerer prompt and refused 47 of 82 answerable questions at precision 0.30,
-because the threshold sat outside the observed range of the score feature: the decision was made
+the gate lived in the answerer prompt and over-refused badly (the private evaluation is contaminated and
+no figure from it is quotable or used here), because the threshold sat outside the observed range of the
+score feature: the decision was made
 where the evidence was not. RAG experience reports reach the same conclusion — validation is only
 feasible during operation, and robustness evolves rather than being designed in [33].
 

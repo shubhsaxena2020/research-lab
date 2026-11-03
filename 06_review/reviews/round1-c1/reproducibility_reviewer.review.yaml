@@ -1,0 +1,30 @@
+persona: reproducibility_reviewer
+summary: |
+  The artefact is in better shape than most: frozen pre-registration, seeds in a config, a harness that
+  records git hash and peak RSS, a rerun check, and a machine-checked number-tracing tool. The gaps are in
+  what the paper itself hands a reader: tables are referenced by file path rather than included, the
+  number-tracing pass is not yet clean, and the second corpus is described but never used.
+strengths:
+  - "Runs carry config hash, git commit, peak RSS, and a --check-repro mode."
+  - "Every numeric claim is meant to be bound to RESULTS-INDEX.json and checked by tools/check_numbers.py; the mechanism exists and is used."
+  - "Data provenance is logged per request with URL, status, byte count and sha256 (Section 7)."
+weaknesses:
+  - "Tables are cited as paths rather than embedded, so the submitted PDF would contain no tables."
+  - "The number-tracing check does not pass cleanly on the draft; remaining untraceable tokens are listed in the audit report."
+  - "The transfer corpus is fetched and described but no transfer numbers exist, so the H2 sentence and Section 6 point at work absent from the artefact."
+questions:
+  - "What command sequence regenerates Table 1 and Figure F1 from a clean checkout?"
+  - "Which numbers-audit findings remain, and are they results or design constants?"
+must_fix:
+  - claim: "The draft references generated tables by path instead of including them, so the paper contains no results tables."
+    where: "Section 4.1, Section 4.2"
+    evidence_needed: "Tables inlined (or \\input in LaTeX) with the generated content and no hand-edited cells."
+  - claim: "The numbers audit does not pass on the draft, which is a hard gate in this project's own rules."
+    where: "Section 4"
+    evidence_needed: "A zero-finding run of tools/check_numbers.py on the draft, or a per-finding justification."
+soundness: 3
+presentation: 2
+contribution: 2
+confidence: 4
+overall: 5
+decision: borderline

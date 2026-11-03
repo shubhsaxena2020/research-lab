@@ -293,7 +293,8 @@ model-specific and a reviewer will ask whether you have just re-plotted the ROC.
 the break-even ratio for at least one non-parametric ranker alongside the parametric one, and show it
 is stable. The cheapest variant of the whole study gives the classifier an abstain action and plots
 coverage against precision on the deferred set: that is the measurement that diagnosed the lab's own
-abstention gate (47 of 82 answerable questions refused at precision 0.30), and human-in-the-loop
+abstention gate (which over-refused on answerable items; a contaminated private evaluation, no figure
+quoted), and human-in-the-loop
 triage work suggests the upside is real — an LLM pre-filter automated 41.5% of a live review queue
 while lifting human precision and recall by 9–11 points absolute (Thomas et al., 2024).
 

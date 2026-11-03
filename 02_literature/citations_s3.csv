@@ -1,0 +1,5 @@
+id,title,authors,year,venue,url,doi_or_arxiv,retrieved_on,verified_by_command
+S3-bge,C-Pack: Packed Resources For General Chinese Embeddings,,,,https://arxiv.org/abs/2309.07597,arXiv:2309.07597,2026-11-03,pending
+S3-ce,Passage Re-ranking with BERT,,,,https://arxiv.org/abs/1901.04085,arXiv:1901.04085,2026-11-03,pending
+S3-2wiki,2WikiMultihopQA: A Dataset for Multi-hop Question Answering,,,,https://arxiv.org/abs/2011.01079,arXiv:2011.01079,2026-11-03,pending
+S3-kadavath,Language Models (Mostly) Know What They Know,,,,https://arxiv.org/abs/2207.05221,arXiv:2207.05221,2026-11-03,pending

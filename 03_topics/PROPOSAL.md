@@ -42,22 +42,32 @@ turned that into a designed ablation with a two-sided policy and a reported fals
    paraphrase pass so no template survives.
 3. **Features (retrieval-side only, cached once).** top-1 and mean top-5 BM25, top-1 and mean top-5 dense
    cosine (bge-small-en-v1.5, 33.4M), BM25/dense top-1 agreement, cross-encoder rerank score of top-1
-   (22.7M), reader answer-token log-probability, reader answer entropy. The last two are the model's own
-   signal and exist so that baseline B4 (below) is a fair comparison, not so the gate can lean on them.
-   Report the ablation with and without them.
-4. **Gate.** Logistic regression on the features, fitted on a dev half; two thresholds grid-searched for a
-   target abstain precision of 0.80, with the admissible band constrained to the observed dev feature
-   range. Report where the fitted thresholds sit relative to that range — this is the diagnostic for the
-   pathology that motivates the paper.
+   (22.7M). **Six retrieval features, no generator call.** The reader's own answer-token log-probability
+   and answer entropy are deliberately NOT in the gate: they are computed only for the separate
+   reader-assisted arm (B4/B5), so that "retrieval-only" means exactly what it says and the comparison
+   between a retrieval gate and an "ask the model how sure it is" gate is a between-arms comparison, not a
+   feature ablation inside one model. §Directives 2026-11-03 flagged the earlier mixed definition; this is
+   the fix.
+4. **Gate.** Logistic regression on the six retrieval features, fitted on a dev half; two thresholds
+   grid-searched for a target abstain precision of 0.80, with the admissible band constrained to the
+   observed dev feature range. Report where the fitted thresholds sit relative to that range — this is the
+   diagnostic for the pathology that motivates the paper.
 5. **Evaluation.** Held-out half, per rung. Then the frozen operating point is applied untouched to 800
    items from 2WikiMultihopQA (400 answerable, 400 rung-3 style) for the transfer test.
 
 ## Baselines
 - **B1** single threshold on max BM25 — what most deployed systems actually do.
 - **B2** single threshold on max dense cosine.
-- **B3** logistic regression on all features with one threshold (the ablation that isolates "two-sided").
-- **B4** the reader's own answer-token log-probability as the gate — i.e. "ask the model how sure it is",
-  the strongest cheap baseline a reviewer will demand (Kadavath et al., "Language Models (Mostly) Know What They Know", arXiv:2207.05221 — head-corrected 2026-11-03: the draft cited 2305.11206, which is LIMA and does not support this claim).
+- **B3** logistic regression on the six retrieval features with **one** threshold (the ablation that
+  isolates "two-sided" from "more features").
+- **B4** reader-assisted arm: the reader's own answer-token log-probability as the gate, i.e. "ask the model
+  how sure it is" (Kadavath et al., *Language Models (Mostly) Know What They Know*, arXiv:2207.05221).
+  Labelled **reader-assisted** everywhere; it is a separate arm, not a feature of the retrieval gate.
+  (Correction on record: the earlier draft cited arXiv:2305.11206, which is LIMA and does not support this
+  claim. The ID resolved; the title did not match the sentence. Caught by head review 2026-11-03.)
+- **B5** reader-assisted two-sided band: B3's six retrieval features **plus** log-probability and entropy,
+  two thresholds. Reported only to answer "does adding the model's own confidence help a two-sided band?",
+  and never pooled with the retrieval-only results.
 Every baseline is run on the same cached features, same items, same seeds.
 
 ## Metrics and statistics
@@ -100,7 +110,9 @@ Then 2–3 weeks of student rewriting, defence rehearsal, and the venue submissi
 - No claim about frontier models: the API run is a robustness check on 400 items, not a benchmark entry.
 - No claim that the ladder's rungs are ordered by "difficulty" in any absolute sense — only that they are
   ordered by construction and audited for surface separability.
-- No claim that the 47-of-82 pathology generalises; it is one measured instrument, disclosed as such.
+- No numbers from the student's private memory-system evaluation. Its held-out set was contaminated, so it
+  is at most one sentence of motivation, quoted without figures, and never a result, a dataset or a
+  reproduced pathology. Everything measured here comes from public data.
 
 ## Disclosure
 Code, prompts, model IDs, seeds and raw outputs are committed under `04_experiments/`. AI assistance

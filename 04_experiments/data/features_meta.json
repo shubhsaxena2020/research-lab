@@ -1,0 +1,27 @@
+{
+  "bm25": "bm25s",
+  "bm25_params": {
+    "b": 0.75,
+    "k1": 1.5,
+    "method": "lucene"
+  },
+  "ce_model": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+  "csv_sha256": "f9de87f699da1e73968dde27c5a55600c23c077ff9e5a446823e05abe0733cbb",
+  "dense_model": "BAAI/bge-small-en-v1.5",
+  "n_items": 3752,
+  "pools": {
+    "dev": 608,
+    "test": 596
+  },
+  "timings": {
+    "dev_ce_s": 76.25,
+    "dev_encode_presented_s": 208.86,
+    "dev_index_s": 51.36,
+    "dev_scoring_s": 0.54,
+    "model_load_s": 3.54,
+    "test_ce_s": 41.16,
+    "test_encode_presented_s": 73.82,
+    "test_index_s": 26.22,
+    "test_scoring_s": 0.43
+  }
+}

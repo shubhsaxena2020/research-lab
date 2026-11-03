@@ -1,0 +1,21 @@
+{
+ "splits": [
+  {
+   "dataset": "ohjoonhee/2WikiMultihopQA",
+   "config": "default",
+   "split": "train"
+  },
+  {
+   "dataset": "ohjoonhee/2WikiMultihopQA",
+   "config": "default",
+   "split": "validation"
+  },
+  {
+   "dataset": "ohjoonhee/2WikiMultihopQA",
+   "config": "default",
+   "split": "test"
+  }
+ ],
+ "pending": [],
+ "failed": []
+}

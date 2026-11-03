@@ -34,10 +34,14 @@ and are flagged where they occur.
 abstain recall ≥ 0.50 on the three hardest rungs of a five-rung negative ladder, retaining ≥ 80% of
 answerables?
 
-**Why it is unanswered:** Searched for by name and not found (D2-2 §3.4). Abdumalikov et al. (2024) report
-classifier accuracy on constructed negatives — not a calibrated policy — and document a 98%→1% collapse on
-high-overlap negatives; Peng et al. (2024) have the right metrics but sweep components, not thresholds; Wagner
-(2026) fits two thresholds on a hidden-state probe without a dev/held-out protocol.
+**Why it is unanswered:** No paper in the 91-query arXiv sweep (`NOVELTY-PRESCAN.md`, `NOVELTY-CHECK.md` §1)
+fits two thresholds on retrieval features with a dev/held-out protocol and reports both directions per rung.
+Abdumalikov et al. (2024) report classifier accuracy on constructed negatives — not a calibrated policy — and
+document a 98%→1% collapse on high-overlap negatives; Peng et al. (2024) have the right metrics but sweep
+components, not thresholds; Wagner (2026) fits two thresholds on a hidden-state probe without a dev/held-out
+protocol; RINSE (2026) gates pre-generation but scores sufficiency rather than fitting a policy band. The
+absence is scoped to one index and must be re-checked against OpenAlex and Semantic Scholar before it is
+written as a gap.
 
 **Why it matters:** If it holds across rungs, refusal is an index-side decision and prompt instructions are
 the wrong layer; if it breaks at premise violation, the gate is a missing-entity detector and the fix is
@@ -45,9 +49,10 @@ premise checking.
 
 **Cheapest honest test:** SQuAD 2.0 validation (11,873 rows; Rajpurkar et al. 2018) plus 20,000 distractors;
 five rungs of 400 negatives (random, same-entity, BM25 near-miss, premise-violating, underspecified) and 2,000
-answerables; features BM25 top-1 and margin, bge-small cosine, MiniLM rerank, rank agreement, answer
-log-probability; fit on half, test on half; report precision and recall per rung, retention, and the feature
-range beside the threshold. **~45 min.**
+answerables; **retrieval-only features** BM25 top-1 and margin, bge-small cosine, MiniLM rerank score,
+BM25/dense rank agreement; fit on half, test on half; report precision and recall per rung, retention, and
+the feature range beside the threshold. A **reader-assisted arm** (the same six features plus answer
+log-probability and entropy) is run separately and never pooled with the retrieval gate. **~45 min.**
 
 **Expected effect and null:** ≥ 0.75 through rung 3, near-chance at rung 4. A flat curve means the ladder
 measures nothing — itself a reportable negative.
@@ -78,8 +83,9 @@ condition. **~3 h.**
 transfer within ±5 points everywhere — is the more surprising paper.
 
 **Failure modes:** Changing k changes the answerability base rate — reweight every condition to a constant
-base rate. Swapping the reader leaves retrieval features untouched — ablate the log-probability feature and
-report both gates.
+base rate. Swapping the reader leaves retrieval features untouched by construction — the reader-aware shift
+is confined to the reader-assisted arm, where the log-probability feature is the only thing that moves; report
+both arms rather than one gate with a swapped component.
 
 **Evidence strength:** medium. **Cost:** M.
 ### GAP-03 — Answerable-side hardness
@@ -484,8 +490,9 @@ with the strongest claim to *carry* a paper are GAP-01 and GAP-06, which is why 
 
 **Paper A — recommended: GAP-01 + GAP-02 + GAP-03 + GAP-05.** One gate, one feature cache, one corpus
 family, four measurements: does it hold on a ladder, does it transfer, does it silence the long tail, in
-what cost regime is it the right gate. About 1.5 days of compute, one day of writing. The lab's measured
-failure (47 of 82 answerables refused at precision 0.30, threshold outside the observed range) becomes the
+what cost regime is it the right gate. About 1.5 days of compute, one day of writing. The lab's private
+anecdote (a single threshold placed outside the observed range, so the gate refused questions it could
+answer — no numbers are quotable and none are used) becomes the
 motivating case rather than a hidden embarrassment, and the paper closes on the diagnostic that would have
 caught it: print the observed feature range beside every fitted threshold. That diagnostic is a line of code
 and the most quotable thing here.

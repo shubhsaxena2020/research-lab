@@ -1,0 +1,28 @@
+{
+  "command": "python.exe 04_experiments/src/run_c1.py",
+  "config_name": "c1_gate",
+  "config_sha256": "897beb4bbf1c6b6f0cc4528f50e9338841eaecd91389fb7e1243c31415c93275",
+  "cpu_count": 14,
+  "device": "cpu",
+  "duration_s": 6.8011,
+  "env": {
+    "PYTHONHASHSEED": "0",
+    "PYTHONIOENCODING": "utf-8",
+    "PYTHONUTF8": "1"
+  },
+  "error": "KeyError: 'auroc_vs_answerable'",
+  "experiment": "c1",
+  "finished_at": "2026-11-02T23:59:26Z",
+  "git_commit": "e20bc7f",
+  "git_dirty": true,
+  "host": "DESKTOP-4INP19J",
+  "notes": "C1 confirmatory run",
+  "peak_rss_mb": 197.062,
+  "platform": "Windows-10-10.0.26300-SP0",
+  "python": "3.11.15",
+  "run_id": "20261102T235919Z_c1_gate_e20bc7f",
+  "schema": "run/1",
+  "seed": 20261103,
+  "started_at": "2026-11-02T23:59:19Z",
+  "status": "error"
+}

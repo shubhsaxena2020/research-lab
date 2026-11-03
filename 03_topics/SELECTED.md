@@ -16,10 +16,12 @@ Why this one wins, in order of weight:
    corpus in 20 s at 600 MB; a cross-encoder rerank costs 361 ms/query and *loses* to plain BM25. The one
    expensive step is generation, and features are cached once and reused across all gate variants, so the
    3,200-item matrix is hours, not days.
-2. **The personal edge is a measured pathology, not a hobby.** A gate that refused 47 of 82 answerable
-   questions at precision 0.30 because its threshold sat outside the observed feature range is exactly
-   what a two-sided band with a reported placement diagnostic repairs. No paper in the sweep reports that
-   pathology; the student can speak to it from his own instrument.
+2. **The personal edge is a real instrument, not a hobby.** The student has built and measured an
+   abstention gate on his own hardware, and watched it over-refuse because its single threshold was placed
+   outside the range of scores the system actually produced. That observation is an anecdote from a private,
+   contaminated evaluation — it motivates the paper and supplies no number — but it is the reason the
+   proposal reports where the fitted thresholds sit relative to the observed dev feature range, a diagnostic
+   no paper in our sweep reports.
 3. **The failure mode is a legitimate result.** If the ladder shows no monotone hardness effect, or the
    band does not beat a single threshold, that is publishable as a negative result — the post-hoc
    calibration literature predicts it, so the null is informative rather than embarrassing.

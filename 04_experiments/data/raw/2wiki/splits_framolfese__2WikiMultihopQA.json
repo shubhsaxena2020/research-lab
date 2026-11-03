@@ -1,0 +1,21 @@
+{
+ "splits": [
+  {
+   "dataset": "framolfese/2WikiMultihopQA",
+   "config": "default",
+   "split": "train"
+  },
+  {
+   "dataset": "framolfese/2WikiMultihopQA",
+   "config": "default",
+   "split": "validation"
+  },
+  {
+   "dataset": "framolfese/2WikiMultihopQA",
+   "config": "default",
+   "split": "test"
+  }
+ ],
+ "pending": [],
+ "failed": []
+}

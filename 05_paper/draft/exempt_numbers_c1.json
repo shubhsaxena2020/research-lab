@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "doc": [
+    "Draft-specific exemptions for tools/check_numbers.py on 05_paper/draft/paper.md.",
+    "Only identifiers (arXiv ids, dataset version, rung labels, cross-references) and protocol",
+    "constants live here. Every measured value in the draft carries a num: marker bound to",
+    "RESULTS-INDEX.json; nothing here may exempt a measurement.",
+    "Use: python tools/check_numbers.py --draft 05_paper/draft/paper.md --exempt 05_paper/draft/exempt_numbers_c1.json"
+  ],
+  "patterns": [
+    "arXiv:\\s*[0-9]{4}\\.[0-9]{4,5}",
+    "\\b[0-9]{4}\\.[0-9]{4,5}\\b",
+    "\\b[0-9a-f]{8}\\s*\\.\\.\\.",
+    "SQuAD\\s*2\\.0",
+    "\\brungs?\\s*[0-9](?:\\s*(?:to|and|-)\\s*[0-9])?\\b",
+    "\\u00a7[0-9]+(?:\\.[0-9]+)*",
+    "\\bSection\\s+[0-9]+(?:\\.[0-9]+)*",
+    "\\bTable\\s+[0-9]\\b",
+    "precision\\s*(?:of|at)\\s*0\\.[0-9]+",
+    "over-refusal\\s*(?:capped at|at or below)\\s*0\\.[0-9]+",
+    "AUROC\\s*(?:above|below|of)\\s*0\\.[0-9]+",
+    "\\b[0-9]+-fold\\b",
+    "Qwen2\\.5-[0-9.]+B-Instruct",
+    "precision\\s+0\\.[0-9]+",
+    "over-refusal\\s+0\\.[0-9]+",
+    "bge-small-en-v1\\.5",
+    "ms-marco-MiniLM-L-6-v2"
+  ]
+}

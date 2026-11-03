@@ -1,0 +1,28 @@
+persona: clarity_reviewer
+summary: |
+  The prose is dense but controlled and the paper is unusually candid. The main readability problem is
+  that the abstract leads with confirmatory numbers that are all 1.0000, so a reader cannot tell what was
+  learned until Section 4.3. Methods is the strongest section; Discussion restates results rather than
+  generalising them.
+strengths:
+  - "The rung table in Section 3.1 lets a reader reconstruct the construction without reading code."
+  - "Confirmatory and exploratory results are consistently distinguished, including in the abstract."
+weaknesses:
+  - "The abstract reports four per-rung precisions that are all 1.0000 or 0.9964, so it reads as a null result with no explanation until later."
+  - "Four-decimal reporting implies precision the intervals do not support."
+  - "Section 5.1 restates Section 4.2 rather than drawing the general lesson."
+questions:
+  - "Can the abstract state the finding in one sentence a non-specialist would repeat correctly?"
+must_fix:
+  - claim: "The abstract's first reported numbers are the degenerate ones, so the finding is invisible to a skimming reader."
+    where: "Abstract"
+    evidence_needed: "An abstract whose first quantitative sentence is the over-refusal figure and its consequence."
+  - claim: "Four-decimal reporting overstates precision relative to the reported intervals."
+    where: "Abstract, Section 4"
+    evidence_needed: "Two decimals for rates and three for AUROC, consistent with Section 6's own rule."
+soundness: 3
+presentation: 3
+contribution: 2
+confidence: 3
+overall: 4
+decision: borderline

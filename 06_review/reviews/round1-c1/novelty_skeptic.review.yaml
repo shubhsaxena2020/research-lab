@@ -1,0 +1,30 @@
+persona: novelty_skeptic
+summary: |
+  The paper is honest that it is incremental, but honesty is not positioning: the related-work section
+  names four areas and cites roughly one paper each, and the closest benchmark (DeclineCraft) is dismissed
+  in a clause. What is genuinely new here is the negative result about precision targets without coverage
+  constraints, and that framing would survive review far better than the ladder framing, which the paper's
+  own confirmatory numbers do not support.
+strengths:
+  - "The paper states plainly what it does not claim (Section 1, Section 6) and never uses the words novel or state of the art."
+  - "The 0.5063 to 0.9773 audit contrast is a concrete, quotable measurement about what makes a negative rung identifiable."
+weaknesses:
+  - "The ladder framing promises a hardness effect the confirmatory analysis refutes; the real contribution is a fitting pathology the title does not mention."
+  - "One corpus, one gate family, one feature stack: nothing shows the pathology generalises."
+  - "Nearest prior work is cited but not compared numerically, so the increment is unmeasurable."
+questions:
+  - "Would the paper be stronger reframed around the coverage-precision finding, with the ladder as one instrument?"
+  - "How does the over-refusal figure compare with abstention rates reported by systems the survey cites?"
+must_fix:
+  - claim: "Title and abstract promise a hardness effect the confirmatory result refutes, while the real finding sits in a deviation log."
+    where: "Title, Abstract, Section 4.3"
+    evidence_needed: "Either a title and abstract leading with the coverage-precision finding, or a second corpus showing the ladder effect at a non-degenerate operating point."
+  - claim: "Prior work is named but not compared."
+    where: "Section 2"
+    evidence_needed: "A table comparing this setup with the closest benchmark on data, metric, negative construction and reported operating point."
+soundness: 3
+presentation: 3
+contribution: 1
+confidence: 3
+overall: 3
+decision: reject

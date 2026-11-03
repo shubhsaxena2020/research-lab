@@ -647,9 +647,10 @@ counterparts, i.e. the training that improves answers degrades the decision to d
 [61] organises the space by query, model, and human values, and flags as open whether abstention can
 be a meta-capability that transfers across domains rather than a per-task threshold.
 
-That last point is the deepest open question, and it is the one that a student's own measured failure
-speaks to directly: a gate that refuses 47 of 82 answerable questions has not learned a capability,
-it has a badly placed threshold on a feature whose range was never checked.
+That last point is the deepest open question, and it is the one a student's own failed gate speaks to
+directly: a gate that refuses questions the corpus can answer has not learned a capability, it has a
+badly placed threshold on a feature whose range was never checked. (Anecdote, not evidence — the
+student's private evaluation is not quoted here.)
 
 **Landmark papers.** [56] established P(True) self-evaluation and format-dependent calibration.
 [57] introduced semantic entropy, an unsupervised single-model uncertainty measure over meaning
@@ -763,10 +764,11 @@ are mid-heat. A student who picks by heat will produce a literature review and n
 ### 13.2 Ranked shortlist — the four areas where a defensible contribution is actually reachable
 
 **1. Uncertainty, calibration and abstention (area 11).** Ranked first because the student already
-owns a *measured failure*: an abstention gate that refused 47 of 82 answerable questions at precision
-0.30, caused by a decision rule living in the answerer prompt with a threshold outside the observed
-feature range. That is not an anecdote to hide; it is a reproducible defect of exactly the kind
-AbstentionBench [60] reports at frontier scale, and the apparatus to study it is sampling plus
+owns an instrument and a failure mode: an abstention gate, built on this class of hardware, that
+over-refused because a single threshold sat outside the range of scores the system actually produced.
+That is an anecdote from a private evaluation — no number from it is quotable and none is used — but the
+defect is of exactly the kind AbstentionBench [60] reports at frontier scale, and the apparatus to study
+it is sampling plus
 arithmetic. The paper writes itself in the honest form: "we reproduce a known abstention failure at
 1–3B scale, show that the threshold does not transfer across models or domains, and evaluate a
 two-stage gate". Every experiment is CPU-minutes; every metric (AUROC, ECE, selective risk/coverage)
@@ -823,8 +825,9 @@ failure, it is being ignored.
 ### 13.4 The one-line summary for a decision
 
 If the goal is a paper that exists in eight weeks and can be defended line by line, take
-**abstention/calibration on a small local model with RAG**, and treat the student's 47-of-82 gate as
-the motivating case study rather than as a failure to conceal. Second choice: **scam detection under
+**abstention/calibration on a small local model with RAG**, and treat the student's over-refusing gate as
+the motivating case study rather than as a failure to conceal (anecdote, no figures). Second choice:
+**scam detection under
 realistic base rates and paraphrase attack**. Both are CPU-only, both have verified literature to
 stand on, and neither requires beating a frontier lab at its own game.
 

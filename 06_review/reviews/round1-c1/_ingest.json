@@ -1,0 +1,204 @@
+{
+  "generated_at": "2026-11-03T00:19:50Z",
+  "directory": "06_review/reviews/round1-c1",
+  "n_reviews": 5,
+  "missing_personas": [
+    "domain_expert"
+  ],
+  "reviews": [
+    {
+      "persona": "methodologist",
+      "summary": "The paper builds a four-rung negative-hardness ladder and measures one retrieval-only gate across it.\nWhat it shows is that at the pre-registered operating point the gate refuses 75.5% of answerable items,\nwhich makes every rung look identical, so H1 and H3 are refuted for a reason the paper explains but does\nnot fix. The central construct is weaker than the title implies: because rung-0 items present the gold\nparagraph and the gate sees that passage's retrieval rank, the gate can largely answer \"is this the\nretrieved document?\" instead of \"does this passage support an answer?\".",
+      "strengths": [
+        "Pre-registration with a frozen hash and an explicit deviation log (Section 3.3, PREREGISTRATION.md) is unusually disciplined.",
+        "The separability audit (Table 3) is a real gate with a rebuild rule, and the paper reports the variant that fails, not only the one that passes.",
+        "Negative results are reported as negative (H1 and H3), with the exploratory arm kept separate."
+      ],
+      "weaknesses": [
+        "Construct validity: rung-0 items present the gold paragraph and bm25_rank_log / dense_rank_log of the presented passage are gate features (Section 3.2); rank 1 is near-guaranteed for answerables, so the 0.9824 held-out AUROC partly encodes the item construction.",
+        "No component ablation, although the title claims retrieval features generally; the audit's sensitivity variant shows overlap alone reaches 0.9773 AUROC on rung 1.",
+        "Rung 2 has 273 dev items against 400 for other rungs (Section 3.1), so rung-2 comparisons rest on a different, non-random subsample.",
+        "Rung 4 substitutions are automatic and unvalidated (Section 5.3) with no quantification of how often they are ungrammatical."
+      ],
+      "questions": [
+        "What is the held-out AUROC and per-rung precision with the presented-passage rank features removed?",
+        "How many rung-4 items were inspected, and what fraction reads as a plausible false premise?"
+      ],
+      "soundness": 2,
+      "presentation": 3,
+      "contribution": 2,
+      "confidence": 4,
+      "overall": 4,
+      "decision": "borderline",
+      "must_fix": [
+        {
+          "claim": "The gate can identify rung-0 items from construction artefacts, so the separation may not measure answerability.",
+          "where": "Section 3.2, Section 4.2",
+          "evidence_needed": "Held-out AUROC and per-rung precision without rank features, plus a variant where every presented passage is the top-1 retrieved document."
+        },
+        {
+          "claim": "No ablation isolates which retrieval features carry the result.",
+          "where": "Section 4.2",
+          "evidence_needed": "Per-rung abstain precision for leave-one-out variants: without overlap, without ranks, without the cross-encoder."
+        },
+        {
+          "claim": "Rung 2 is reported at 68% of designed size with no exchangeability check.",
+          "where": "Section 3.1, Table 1",
+          "evidence_needed": "Comparison of question length and answer type between the 273 kept and 127 dropped rung-2 dev questions."
+        }
+      ],
+      "_file": "methodologist.review.yaml"
+    },
+    {
+      "persona": "statistician",
+      "summary": "The inferential machinery is pre-registered and mostly well chosen, but the analysis that carries the\npaper (the exploratory constrained operating point) has no interval, and every interval that exists\nresamples items while ignoring that items are clustered inside 35 articles. The confirmatory tests are\nreported as refuted with a CI of exactly [0, 0], which is a property of a degenerate operating point\nrather than evidence about the world.",
+      "strengths": [
+        "Bootstrap seed, resample count and CI method are fixed before the run (Section 3.5), and pairing is preserved by joint resampling.",
+        "Holm's family size and the reason H2 is excluded are declared (Section 3.5, D1.4).",
+        "The placement diagnostic reports where the fitted thresholds sit rather than hiding a degenerate fit."
+      ],
+      "weaknesses": [
+        "No interval on the exploratory per-rung precisions (Section 4.3), which are the only numbers showing the ladder effect.",
+        "Item-level resampling ignores article clustering: 400 questions come from 17 dev and 18 test articles, so nominal coverage is optimistic.",
+        "H3 matches recall on dev, then compares precision on test, but the achieved test recalls are never reported.",
+        "The reader AUROC 0.4192 is computed on a non-random 553-item dev subset with no interval and no difficulty comparison against the full dev half."
+      ],
+      "questions": [
+        "What are the held-out abstain recalls for the band and the matched single threshold, side by side?",
+        "How much do the primary intervals widen under an article-level cluster bootstrap?"
+      ],
+      "soundness": 2,
+      "presentation": 3,
+      "contribution": 2,
+      "confidence": 4,
+      "overall": 4,
+      "decision": "borderline",
+      "must_fix": [
+        {
+          "claim": "The exploratory per-rung precisions that carry the ladder claim have no uncertainty.",
+          "where": "Section 4.3",
+          "evidence_needed": "BCa intervals at the frozen seed for each exploratory per-rung precision and for the rung 1 minus rung 3 difference."
+        },
+        {
+          "claim": "Intervals ignore clustering of questions within articles.",
+          "where": "Section 3.5",
+          "evidence_needed": "A cluster bootstrap by article reported alongside the item bootstrap for the primary per-rung precisions."
+        },
+        {
+          "claim": "'Matched abstain recall' is asserted but the matched test recalls are not shown.",
+          "where": "Section 4.2",
+          "evidence_needed": "A row reporting band recall and matched-single recall on the held-out half."
+        }
+      ],
+      "_file": "statistician.review.yaml"
+    },
+    {
+      "persona": "novelty_skeptic",
+      "summary": "The paper is honest that it is incremental, but honesty is not positioning: the related-work section\nnames four areas and cites roughly one paper each, and the closest benchmark (DeclineCraft) is dismissed\nin a clause. What is genuinely new here is the negative result about precision targets without coverage\nconstraints, and that framing would survive review far better than the ladder framing, which the paper's\nown confirmatory numbers do not support.",
+      "strengths": [
+        "The paper states plainly what it does not claim (Section 1, Section 6) and never uses the words novel or state of the art.",
+        "The 0.5063 to 0.9773 audit contrast is a concrete, quotable measurement about what makes a negative rung identifiable."
+      ],
+      "weaknesses": [
+        "The ladder framing promises a hardness effect the confirmatory analysis refutes; the real contribution is a fitting pathology the title does not mention.",
+        "One corpus, one gate family, one feature stack: nothing shows the pathology generalises.",
+        "Nearest prior work is cited but not compared numerically, so the increment is unmeasurable."
+      ],
+      "questions": [
+        "Would the paper be stronger reframed around the coverage-precision finding, with the ladder as one instrument?",
+        "How does the over-refusal figure compare with abstention rates reported by systems the survey cites?"
+      ],
+      "soundness": 3,
+      "presentation": 3,
+      "contribution": 1,
+      "confidence": 3,
+      "overall": 3,
+      "decision": "reject",
+      "must_fix": [
+        {
+          "claim": "Title and abstract promise a hardness effect the confirmatory result refutes, while the real finding sits in a deviation log.",
+          "where": "Title, Abstract, Section 4.3",
+          "evidence_needed": "Either a title and abstract leading with the coverage-precision finding, or a second corpus showing the ladder effect at a non-degenerate operating point."
+        },
+        {
+          "claim": "Prior work is named but not compared.",
+          "where": "Section 2",
+          "evidence_needed": "A table comparing this setup with the closest benchmark on data, metric, negative construction and reported operating point."
+        }
+      ],
+      "_file": "novelty_skeptic.review.yaml"
+    },
+    {
+      "persona": "reproducibility_reviewer",
+      "summary": "The artefact is in better shape than most: frozen pre-registration, seeds in a config, a harness that\nrecords git hash and peak RSS, a rerun check, and a machine-checked number-tracing tool. The gaps are in\nwhat the paper itself hands a reader: tables are referenced by file path rather than included, the\nnumber-tracing pass is not yet clean, and the second corpus is described but never used.",
+      "strengths": [
+        "Runs carry config hash, git commit, peak RSS, and a --check-repro mode.",
+        "Every numeric claim is meant to be bound to RESULTS-INDEX.json and checked by tools/check_numbers.py; the mechanism exists and is used.",
+        "Data provenance is logged per request with URL, status, byte count and sha256 (Section 7)."
+      ],
+      "weaknesses": [
+        "Tables are cited as paths rather than embedded, so the submitted PDF would contain no tables.",
+        "The number-tracing check does not pass cleanly on the draft; remaining untraceable tokens are listed in the audit report.",
+        "The transfer corpus is fetched and described but no transfer numbers exist, so the H2 sentence and Section 6 point at work absent from the artefact."
+      ],
+      "questions": [
+        "What command sequence regenerates Table 1 and Figure F1 from a clean checkout?",
+        "Which numbers-audit findings remain, and are they results or design constants?"
+      ],
+      "soundness": 3,
+      "presentation": 2,
+      "contribution": 2,
+      "confidence": 4,
+      "overall": 5,
+      "decision": "borderline",
+      "must_fix": [
+        {
+          "claim": "The draft references generated tables by path instead of including them, so the paper contains no results tables.",
+          "where": "Section 4.1, Section 4.2",
+          "evidence_needed": "Tables inlined (or \\input in LaTeX) with the generated content and no hand-edited cells."
+        },
+        {
+          "claim": "The numbers audit does not pass on the draft, which is a hard gate in this project's own rules.",
+          "where": "Section 4",
+          "evidence_needed": "A zero-finding run of tools/check_numbers.py on the draft, or a per-finding justification."
+        }
+      ],
+      "_file": "reproducibility_reviewer.review.yaml"
+    },
+    {
+      "persona": "clarity_reviewer",
+      "summary": "The prose is dense but controlled and the paper is unusually candid. The main readability problem is\nthat the abstract leads with confirmatory numbers that are all 1.0000, so a reader cannot tell what was\nlearned until Section 4.3. Methods is the strongest section; Discussion restates results rather than\ngeneralising them.",
+      "strengths": [
+        "The rung table in Section 3.1 lets a reader reconstruct the construction without reading code.",
+        "Confirmatory and exploratory results are consistently distinguished, including in the abstract."
+      ],
+      "weaknesses": [
+        "The abstract reports four per-rung precisions that are all 1.0000 or 0.9964, so it reads as a null result with no explanation until later.",
+        "Four-decimal reporting implies precision the intervals do not support.",
+        "Section 5.1 restates Section 4.2 rather than drawing the general lesson."
+      ],
+      "questions": [
+        "Can the abstract state the finding in one sentence a non-specialist would repeat correctly?"
+      ],
+      "soundness": 3,
+      "presentation": 3,
+      "contribution": 2,
+      "confidence": 3,
+      "overall": 4,
+      "decision": "borderline",
+      "must_fix": [
+        {
+          "claim": "The abstract's first reported numbers are the degenerate ones, so the finding is invisible to a skimming reader.",
+          "where": "Abstract",
+          "evidence_needed": "An abstract whose first quantitative sentence is the over-refusal figure and its consequence."
+        },
+        {
+          "claim": "Four-decimal reporting overstates precision relative to the reported intervals.",
+          "where": "Abstract, Section 4",
+          "evidence_needed": "Two decimals for rates and three for AUROC, consistent with Section 6's own rule."
+        }
+      ],
+      "_file": "clarity_reviewer.review.yaml"
+    }
+  ]
+}
