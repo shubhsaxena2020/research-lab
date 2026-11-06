@@ -286,7 +286,7 @@ def table_arms(r5: dict, tr: dict, t1: dict) -> str:
     pm = cell(REL_T1F, "precision_miss_given_refused",
               t1["operating_points"]["band_target_precision_0.80"]["test"]["precision_miss_given_refused"],
               pct, "c1.t1.precision.miss", "Top-1 variant: P(miss | refused), test half")
-    md.append(f"| Top-1 presented (hit rate {hit}) | {pm} P(miss refused) | not informative | {rh} of hits "
+    md.append(f"| Top-1 presented (hit rate {hit}) | {pm} P(miss | refused) | not informative | {rh} of hits "
               f"refused | {t1a} |")
     md += ["",
            "Every arm here is exploratory. R5 and the top-1 variant are declared deviations (D2, D3). The second-corpus "

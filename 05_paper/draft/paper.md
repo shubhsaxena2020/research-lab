@@ -12,7 +12,7 @@ bound to `04_experiments/RESULTS-INDEX.json`.*
 
 An abstention gate for retrieval-augmented question answering decides whether the retrieved passage
 supports an answer. How hard such a gate looks depends on the negatives it is measured against, and we
-tested that dependence with a pre-registered four-rung ladder over SQuAD v2.0 dev, fitting the gate and
+tested that dependence with a pre-registered four-rung ladder over the SQuAD development set, fitting the gate and
 both of its thresholds on a disjoint half. The result is negative and specific. The registered rule —
 maximise abstain recall subject to a dev abstain precision of
 <!-- num:c1.const.target_precision -->0.80<!-- /num --> — produced a gate that refuses
@@ -66,9 +66,9 @@ measured only on random negatives would look finished. The honest reading of tha
 gates are bad; it is that the negative sampler, not the gate, was doing most of the work in the earlier
 numbers.
 
-So we designed a measurement rather than a method. One corpus (SQuAD v2.0 dev, arXiv:1806.03822), one
+So we designed a measurement rather than a method. One corpus (the SQuAD development set, arXiv:1806.03822), one
 question set, one feature extractor, one fitting procedure, and four rungs of negatives that differ only
-in how they were constructed. Three hypotheses were frozen before the first result-producing run:
+in how they were constructed. Three hypotheses were frozen before any result-producing run:
 
 - **H1 (hardness monotonicity).** Abstain precision is non-increasing across the rungs and falls by at
   least fifteen points from R1 to R3.
@@ -78,31 +78,32 @@ in how they were constructed. Three hypotheses were frozen before the first resu
   score, by at least five points, at matched abstain recall.
 
 The pre-registered analysis refutes H1 and H3 and leaves H2 degenerate, and we say so in the abstract
-rather than in a footnote. That is the first contribution, and it is a negative one: at a precision
+rather than in a footnote. That is the negative contribution, and it is the main one: at a precision
 target without a coverage constraint, a gate can satisfy the target by refusing almost everything, and
 when it does, the quantity the ladder is supposed to measure stops existing.
 
-The second contribution is the instrument that made the negative result legible:
+The instrument that made that negative result legible is itself the contribution:
 
-1. **A reproducible four-rung ladder** over a closed public corpus, with item counts, drop rates and
+- **A reproducible four-rung ladder** over a closed public corpus, with item counts, drop rates and
    construction code another lab can re-run (§3.1).
-2. **A separability audit as a hard gate**, run before any result is reported: a classifier that sees
+- **A separability audit as a hard gate**, run before any result is reported: a classifier that sees
    only surface properties of the text must not be able to tell a rung's negatives from answerable
    items, or the rung is measuring formatting (§3.4, Table 3). Its sensitivity variant — the same
    features plus question–passage overlap — is what turns the audit from a formatting check into a
    measurement of what the rungs actually vary.
-3. **A measurement of the coverage–precision pathology** in gate fitting, with the numbers beside every
-   precision figure, and the observation that a two-sided band buys nothing when the admit region is
-   degenerate (§4.2, Table 2).
-4. **Two control arms that localise the effect**: overlap-matched negatives (R5) and a top-1-presented
+- **A measurement of the coverage–precision pathology** in gate fitting: every refusal rate is reported
+   beside the precision of those refusals, the over-refusal that produced them and the coverage they leave,
+   with the observation that a two-sided band buys nothing when the admit region is degenerate (§4.2,
+   Table 2).
+- **Two control arms that localise the effect**: overlap-matched negatives (R5) and a top-1-presented
    variant in which every item shows the retriever's first choice (§4.4, §4.5, Table 5). Together they
    say what the gate is really measuring.
-5. **An implementation correction, disclosed** (§4.6, Table 4): the frozen run's dense block was
+- **An implementation correction, disclosed** (§4.6, Table 4): the frozen run's dense block was
    degenerate because the presented passage was used as its own dense query. Re-implementing the
    feature as specified lowers held-out AUROC and changes which rung is hard. We report both runs.
 
-We do not claim novelty, state of the art, or generality beyond one corpus family, one feature stack, one
-gate family and English passage-level question answering.
+We claim neither priority nor generality beyond one corpus family, one feature stack, one gate family and
+English passage-level question answering.
 
 ## 2 Related work
 
@@ -152,9 +153,10 @@ hundred answerable questions and present each question with five passages, one p
 | R3 | negative | the paragraph immediately before or after the gold paragraph, in the same article |
 | R4 | negative | the gold paragraph with its first answer span replaced by a same-surface-type value |
 
-The ladder therefore varies the negative along one axis at a time: unrelated text (R1), topically
-anchored text (R2), adjacent text from the same document (R3), and text that is the gold passage except
-for one span (R4). This yields <!-- num:c1.items.total -->3752<!-- /num --> items
+The ladder varies the negative in one *respect* at a time — unrelated text (R1), topically anchored text
+(R2), adjacent text from the same document (R3), and text that is the gold passage except for one span
+(R4) — but not in only one respect: the rungs also differ in length and in provenance, which is why §4.4
+and §4.6 use controls rather than assuming the rungs are otherwise matched. This yields <!-- num:c1.items.total -->3752<!-- /num --> items
 (<!-- num:c1.items.test -->1879<!-- /num --> held out); R2 is short at
 <!-- num:c1.items.rung2.dev -->273<!-- /num --> dev items because most questions have no content word that
 occurs in a paragraph other than their own. Following the pre-registration the rung is reported at its
@@ -197,6 +199,11 @@ variant adds question–passage overlap and question length to the same features
 sensitivity variant, not a surface check, because overlap is a retrieval signal and calling it surface
 would measure whether retrieval works rather than whether a rung leaks its identity through formatting.
 
+The audit is one-sided by design: it flags a rung when surface features separate it from answerable items
+in the expected direction, not when they separate it inverted. R4 comes out at
+<!-- num:c1.audit.surface.r4 -->0.415<!-- /num -->, which is separation of the same magnitude with the
+sign flipped, and is reported as that rather than as a clean pass.
+
 ### 3.5 What the reported numbers are, and a correction to one name
 
 The pre-registration names two quantities and then gives one estimator. It calls the per-rung figure
@@ -220,7 +227,9 @@ are descriptive.
 Item-level BCa bootstrap, <!-- num:c1.stats.n_boot -->10000<!-- /num --> resamples, seed
 <!-- num:c1.stats.seed -->12345<!-- /num -->; paired comparisons resample items jointly; exact sign tests
 for paired binary indicators; Holm correction over the two tests that carry p-values (H1 and H3; H2 has
-none, because one side of it is the fitting half). Rates are reported to two decimals and AUROC to three,
+none, because one side of it is the fitting half). Two intervals in §4.2 are zero-width because every item in that comparison is refused and every paired
+difference is therefore zero; a zero-width interval at a boundary is reported as a boundary, not as
+certainty. Rates are reported to two decimals and AUROC to three,
 in line with the precision the intervals support. AUROC itself carries no interval: the bootstrap used
 here intervals rates, not ranking statistics, and the change from one run to another is reported as a
 difference between two analyses rather than as a tested contrast.
@@ -284,7 +293,11 @@ corrected R4 are visible in it directly.
 
 **H1 is refuted.** R1 minus R3 is <!-- num:c1.h1.diff -->0.00%<!-- /num --> with a 95% CI of
 [<!-- num:c1.h1.lo -->0.00%<!-- /num -->, <!-- num:c1.h1.hi -->0.00%<!-- /num -->]; the sequence is not
-non-increasing and the fifteen-point criterion is not met.
+non-increasing and the fifteen-point criterion is not met. Strictly, this is a criterion not met at an
+operating point that makes the quantity uninformative, and the two readings differ: the criterion is
+refuted, the mechanism it was meant to test is not. §4.3 moves the operating point and finds the effect at
+about half the predicted size, which is why we do not read the refutation as evidence that negative
+hardness does not matter.
 
 **H3 is refuted.** At the band's dev recall the recall-matched single threshold gives an identical
 held-out refusal rate: the difference is <!-- num:c1.h3.diff -->0.00%<!-- /num --> with a 95% CI of
@@ -293,7 +306,9 @@ matched single threshold refuse the same negatives to within
 <!-- num:c1.st.match.maxdiff -->0.00<!-- /num --> points in every rung, and the band's only measurable
 effect is worse over-refusal: <!-- num:c1.st.match.over.band -->75.50%<!-- /num --> against
 <!-- num:c1.st.match.over.matched -->72.50%<!-- /num -->. Two-sidedness buys nothing when almost everything
-is refused on the low side.
+is refused on the low side. The reason is structural: the recall-matched single threshold is the band's own
+lower threshold to five decimal places, so the upper threshold never binds and the two gates are the same
+gate. That degeneracy is the finding, not a flaw in the comparison.
 
 **H2 is degenerate rather than supported.** Dev pooled precision is essentially identical to held-out
 pooled precision, a loss of <!-- num:c1.h2.loss -->0.07%<!-- /num -->, which the pre-registered rule counts
@@ -356,7 +371,7 @@ paragraph's overlap than any other rung.
 | Rung R5, exploratory band | <!-- num:c1.r5.precision.expl -->89.25%<!-- /num --> | [<!-- num:c1.r5.expl.ci.lo -->85.75%<!-- /num -->, <!-- num:c1.r5.expl.ci.hi -->91.75%<!-- /num -->] | matching residue <!-- num:c1.r5.match.mean_absdiff -->10.29%<!-- /num --> | <!-- num:c1.r5.auroc -->0.974<!-- /num --> |
 | Second-corpus arm, confirmatory band | <!-- num:c1.tr.precision.conf -->98.50%<!-- /num --> | not informative | <!-- num:c1.tr.over_refusal.conf -->89.50%<!-- /num --> | <!-- num:c1.tr.auroc -->0.640<!-- /num --> |
 | Second-corpus arm, exploratory band | <!-- num:c1.tr.precision.expl -->85.50%<!-- /num --> | [<!-- num:c1.tr.ci.lo -->79.50%<!-- /num -->, <!-- num:c1.tr.ci.hi -->89.50%<!-- /num -->] | <!-- num:c1.tr.over_refusal.expl -->57.50%<!-- /num --> | <!-- num:c1.tr.auroc -->0.640<!-- /num --> |
-| Top-1 presented (hit rate <!-- num:c1.t1.hit.test -->78.25%<!-- /num -->) | <!-- num:c1.t1.precision.miss -->87.30%<!-- /num --> P(miss refused) | not informative | <!-- num:c1.t1.refuse.hit -->2.56%<!-- /num --> of hits refused | <!-- num:c1.t1.auroc -->0.945<!-- /num --> |
+| Top-1 presented (hit rate <!-- num:c1.t1.hit.test -->78.25%<!-- /num -->) | <!-- num:c1.t1.precision.miss -->87.30%<!-- /num --> P(miss | refused) | not informative | <!-- num:c1.t1.refuse.hit -->2.56%<!-- /num --> of hits refused | <!-- num:c1.t1.auroc -->0.945<!-- /num --> |
 
 Every arm here is exploratory. R5 and the top-1 variant are declared deviations (D2, D3). The second-corpus arm is H2's pre-declared second corpus, but its construct differs (no article grouping, shorter passages, multi-hop questions), so it supports a direction claim only.
 
@@ -369,6 +384,9 @@ items also differ in length (they are the longest negatives in the ladder), and 
 closest to its gate on this rung (<!-- num:c1.r5.audit.surface -->0.721<!-- /num --> on dev) without
 crossing it. The honest reading is that a paragraph drawn from elsewhere in the corpus can be caught by
 several correlated signals, and matching one of them is not enough to hide it.
+
+All numbers in this subsection come from the as-run gate. The spec-corrected gate is at least as strict on
+this arm, so the arm's conclusion does not depend on the dense defect reported in §4.6.
 
 ### 4.5 Control arm: what the gate does when the passage is always the retrieved one
 
@@ -465,7 +483,10 @@ The corrected dense baseline is a real score at a degenerate operating point:
 <!-- num:c1.b2.pooled.corr -->99.73%<!-- /num --> pooled precision at
 <!-- num:c1.b2.coverage.corr -->0.27%<!-- /num --> coverage.
 
-Table 6 names the feature group that carries the corrected result: removing the dense group costs
+No single group carries the corrected result in these point estimates — removing any one group costs less
+than a third of the AUROC margin — but eight point estimates without intervals cannot establish
+equivalence, and we do not claim it. What Table 6 does show is the size of each group's contribution:
+removing the dense group costs
 <!-- num:c1.abl.no_dense.test -->0.862<!-- /num --> held-out AUROC against
 <!-- num:c1.abl.all_12.test -->0.874<!-- /num --> for the full set, and overlap alone reaches
 <!-- num:c1.abl.lex_overlap_only.test -->0.811<!-- /num -->. No single group carries the result; the
@@ -507,7 +528,12 @@ support. We report the baseline as exploratory and do not use it to rank gates.
 
 ### 4.8 Second corpus: direction only
 
-The lower rows of Table 5 are the second-corpus arm. The pre-declared second corpus (the multi-hop corpus described in §3.1 of the pre-registration;
+The lower rows of Table 5 are the second-corpus arm. Scored against the registered rule, the arm's exploratory loss is neither the ten-point failure nor
+inside the plus-or-minus-five-point refutation band; the pre-registration defines no verdict for a
+five-to-ten-point loss, so H2's second arm is recorded as **inconclusive by the registered rule** rather
+than claimed as either.
+
+The pre-declared second corpus (the multi-hop corpus described in §3.1 of the pre-registration;
 <!-- num:c1.data.transfer.items -->400<!-- /num --> items built, half answerable and half drawn from the
 same question's non-supporting article pool) is evaluated with the frozen operating point. At the
 confirmatory point the arm reports <!-- num:c1.tr.precision.conf -->98.50%<!-- /num --> precision at an
@@ -616,10 +642,17 @@ python 04_experiments/src/build_items_top1.py && python 04_experiments/src/featu
   && python 04_experiments/src/eval_top1.py         # top-1 control arm
 python 04_experiments/src/ablation_corrected.py     # Table 6
 python 04_experiments/src/stats_addendum.py         # §4.7 numbers
+python 04_experiments/src/build_transfer_items.py  # the second-corpus items (§4.8)
+python 04_experiments/src/reader_logprob.py        # the reader baseline (§4.7, dev only)
+python 04_experiments/src/precision_metrics.py     # the refusal/precision split (Table 1)
 python 04_experiments/src/make_paper_assets.py      # tables + index entries
 python 05_paper/build_draft.py                      # this file, from the template
 python tools/check_numbers.py --draft 05_paper/draft/paper.md
 ```
+
+The frozen run records its pre-registration hash as a single `#` character: the line that reads the hash
+file splits on whitespace and takes the first token of a comment line. The four real hashes are intact in
+`PREREGISTRATION.sha256`, and this is a defect in the reporting line, not in the freeze.
 
 There is no lockfile. The interpreter and library versions used for every number above are recorded in the
 session status file beside the results, and the model versions are pinned in the pre-registration; a
