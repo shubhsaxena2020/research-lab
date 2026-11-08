@@ -38,3 +38,15 @@ RESULT: H1 refuted (precision 1.0 on all rungs), H3 refuted, H2 degenerate. SELE
 - Do NOT silently switch and do NOT hide it. Keep C1 but REFRAME it as an honest negative-result / benchmark-audit paper: "negatives built by paragraph substitution are trivially separable (surface features alone ~0.5 AUROC, but adding question-passage overlap gives 0.89-0.98), so retrieval-feature gates look perfect on them" — with the audit procedure as the contribution. This is legitimate only if stated plainly as a negative result in title/abstract (workshop negative-results tracks, arXiv).
 - C3 (scam operating points) stays documented as the alternative if the student prefers a positive-result paper; the decision is the student's to confirm.
 Next work for S3 (S3b), in priority order: (1) tools\check_numbers.py must PASS on the draft (26 findings: fix or index every number; no exemptions that hide real numbers); (2) exploratory rung 5 "overlap-matched negatives" (negatives chosen to match answerable items' question-passage overlap) as a DECLARED exploratory deviation — does any retrieval-only gate survive when overlap is controlled?; (3) H2 transfer: extract features for the 400 2WikiMultihopQA items, run the FROZEN operating point; resolve the correct citation for 2WikiMultihopQA (Ho et al., COLING 2020 — resolve it properly; arXiv 2011.01079 is NOT it); (4) review round 2, answer all 12 must-fix items or rebut with evidence; (5) originality check (deposit sources), fix draft to say NEGATIVE RESULT honestly. Never claim more than measured.
+
+## Checkpoint 5 — ROUND 3 START — 2026-11-08 (head)
+Owner decisions (Shubh, 2026-11-08): keep C1 as the honest negative-result / audit paper (C3 stays documented, not started);
+all Hermes on `nilabh/Deepseek-v4.1-Flash` via 9Router; 7 lead sessions (4 main laptop, 3 laptop 2), each running
+at least 3 parallel subagents per batch.
+- Round 3 = answer all 44 round-2 must-fix items (06_review/reviews/round2-c1/AGGREGATE.md), plus the S3 student digest,
+  related-work/novelty refresh and a real PDF build. Lane cards: sessions/R3-*/TASK.md; triage: sessions/R3/TRIAGE.md;
+  shared rules: sessions/R3/COMMON.md.
+- orchestration/DIRECTIVES.md (Codex, 2026-11-03) is SUPERSEDED for round 3. Follow RULES.md, this file, COMMON.md, your TASK.md.
+- Frozen confirmatory run is immutable: never refit, never overwrite any existing file in 04_experiments/results/ or runs/.
+  New numbers go in new files under 04_experiments/results/c1/r3/<lane>/.
+- No lead commits to git. The head commits at checkpoints.
