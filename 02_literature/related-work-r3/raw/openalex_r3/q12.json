@@ -1,0 +1,5826 @@
+{
+  "meta": {
+    "notice": "No API key, so this request shares one free daily budget ($0.10) with everyone on your network's IP address. The mailto parameter doesn't raise this limit. Get a free key with its own $1/day at https://openalex.org/settings/api and add api_key=YOUR_KEY to your requests. An AI agent can get one for its user in one call: POST https://api.openalex.org/api-keys with {\"email\": \"<your user's email>\"}; we email them a link, and the key works once they click it. Docs for agents: https://help.openalex.org/llms.txt",
+    "count": 1361,
+    "db_response_time_ms": 103,
+    "page": 1,
+    "per_page": 5,
+    "groups_count": null,
+    "x_query": {
+      "oql": "get works with (retrieval-only features abstention calibration) in the title, abstract, or full text",
+      "x_new_oql": "get works with (retrieval-only features abstention calibration) in the title, abstract, or full text",
+      "oqo": {
+        "get_rows": "works",
+        "filter_rows": [
+          {
+            "column_id": "fulltext.search",
+            "value": "retrieval-only features abstention calibration",
+            "operator": "has"
+          }
+        ]
+      },
+      "url": "/works?filter=fulltext.search:retrieval-only features abstention calibration&per_page=5",
+      "order": "best matches first",
+      "order_default": true
+    },
+    "cost_usd": 0.001
+  },
+  "results": [
+    {
+      "id": "https://openalex.org/W7220973612",
+      "doi": "https://doi.org/10.48550/arxiv.2610.07570",
+      "title": "Unanimously Wrong: Certified Abstention from How Medical LLM Consensus Forms",
+      "display_name": "Unanimously Wrong: Certified Abstention from How Medical LLM Consensus Forms",
+      "relevance_score": 40.91228,
+      "publication_year": 2026,
+      "publication_date": "2026-10-06",
+      "ids": {
+        "openalex": "https://openalex.org/W7220973612",
+        "doi": "https://doi.org/10.48550/arxiv.2610.07570"
+      },
+      "language": "en",
+      "primary_location": {
+        "id": "pmh:oai:arXiv.org:2610.07570",
+        "doi": null,
+        "is_oa": true,
+        "landing_page_url": "https://arxiv.org/abs/2610.07570",
+        "pdf_url": "https://arxiv.org/pdf/2610.07570",
+        "source": {
+          "id": "https://openalex.org/S4306400194",
+          "display_name": "arXiv (Cornell University)",
+          "issn_l": "2331-8422",
+          "issn": [
+            "2331-8422"
+          ],
+          "is_oa": true,
+          "is_in_doaj": false,
+          "is_core": false,
+          "listed_in": [],
+          "host_organization": "https://openalex.org/I205783295",
+          "host_organization_name": "Cornell University",
+          "host_organization_lineage": [
+            "https://openalex.org/I205783295"
+          ],
+          "host_organization_lineage_names": [],
+          "type": "repository"
+        },
+        "license": null,
+        "license_id": null,
+        "version": "submittedVersion",
+        "is_accepted": false,
+        "is_published": false,
+        "raw_source_name": null,
+        "raw_type": "text"
+      },
+      "volume": null,
+      "type": "preprint",
+      "is_traditional": true,
+      "indexed_in": [
+        "arxiv",
+        "datacite"
+      ],
+      "open_access": {
+        "is_oa": true,
+        "oa_status": "green",
+        "oa_url": "https://arxiv.org/pdf/2610.07570",
+        "any_repository_has_fulltext": true
+      },
+      "authorships": [
+        {
+          "author_position": "first",
+          "author": {
+            "id": "https://openalex.org/A5157910254",
+            "display_name": "Xiaoyang Wang",
+            "orcid": null,
+            "observed_orcids": []
+          },
+          "institutions": [
+            {
+              "id": "https://openalex.org/I72816309",
+              "display_name": "Drexel University",
+              "ror": "https://ror.org/04bdffz58",
+              "country_code": "US",
+              "type": "education",
+              "lineage": [
+                "https://openalex.org/I72816309"
+              ]
+            }
+          ],
+          "countries": [
+            "US"
+          ],
+          "is_corresponding": false,
+          "raw_author_name": "Wang, Xiaoyang",
+          "raw_affiliation_strings": [
+            "Drexel University"
+          ],
+          "raw_orcid": null,
+          "affiliations": [
+            {
+              "raw_affiliation_string": "Drexel University",
+              "institution_ids": [
+                "https://openalex.org/I72816309"
+              ]
+            }
+          ]
+        },
+        {
+          "author_position": "middle",
+          "author": {
+            "id": "https://openalex.org/A5157976891",
+            "display_name": "Tianrui Wang",
+            "orcid": null,
+            "observed_orcids": []
+          },
+          "institutions": [
+            {
+              "id": "https://openalex.org/I27837315",
+              "display_name": "University of Michigan",
+              "ror": "https://ror.org/00jmfr291",
+              "country_code": "US",
+              "type": "education",
+              "lineage": [
+                "https://openalex.org/I27837315"
+              ]
+            }
+          ],
+          "countries": [
+            "US"
+          ],
+          "is_corresponding": false,
+          "raw_author_name": "Wang, Tianrui",
+          "raw_affiliation_strings": [
+            "University of Michigan , Ann Arbor"
+          ],
+          "raw_orcid": null,
+          "affiliations": [
+            {
+              "raw_affiliation_string": "University of Michigan , Ann Arbor",
+              "institution_ids": [
+                "https://openalex.org/I27837315"
+              ]
+            }
+          ]
+        },
+        {
+          "author_position": "last",
+          "author": {
+            "id": "https://openalex.org/A5157900130",
+            "display_name": "Christopher C. Yang",
+            "orcid": null,
+            "observed_orcids": []
+          },
+          "institutions": [
+            {
+              "id": "https://openalex.org/I72816309",
+              "display_name": "Drexel University",
+              "ror": "https://ror.org/04bdffz58",
+              "country_code": "US",
+              "type": "education",
+              "lineage": [
+                "https://openalex.org/I72816309"
+              ]
+            }
+          ],
+          "countries": [
+            "US"
+          ],
+          "is_corresponding": false,
+          "raw_author_name": "Yang, Christopher C.",
+          "raw_affiliation_strings": [
+            "Drexel University"
+          ],
+          "raw_orcid": null,
+          "affiliations": [
+            {
+              "raw_affiliation_string": "Drexel University",
+              "institution_ids": [
+                "https://openalex.org/I72816309"
+              ]
+            }
+          ]
+        }
+      ],
+      "institutions": [],
+      "countries_distinct_count": 1,
+      "institutions_distinct_count": 2,
+      "corresponding_author_ids": [],
+      "corresponding_institution_ids": [],
+      "apc_list": null,
+      "apc_paid": null,
+      "fwci": null,
+      "has_fulltext": true,
+      "cited_by_count": 0,
+      "citation_normalized_percentile": null,
+      "cited_by_percentile_year": null,
+      "biblio": {
+        "volume": null,
+        "issue": null,
+        "first_page": null,
+        "last_page": null
+      },
+      "is_retracted": false,
+      "is_paratext": false,
+      "is_xpac": false,
+      "primary_topic": {
+        "id": "https://openalex.org/T11636",
+        "display_name": "Artificial Intelligence in Healthcare and Education",
+        "score": 0.44850000739097595,
+        "subfield": {
+          "id": "https://openalex.org/subfields/2718",
+          "display_name": "Health Informatics"
+        },
+        "field": {
+          "id": "https://openalex.org/fields/27",
+          "display_name": "Medicine"
+        },
+        "domain": {
+          "id": "https://openalex.org/domains/4",
+          "display_name": "Health Sciences"
+        }
+      },
+      "topics": [
+        {
+          "id": "https://openalex.org/T11636",
+          "display_name": "Artificial Intelligence in Healthcare and Education",
+          "score": 0.44850000739097595,
+          "subfield": {
+            "id": "https://openalex.org/subfields/2718",
+            "display_name": "Health Informatics"
+          },
+          "field": {
+            "id": "https://openalex.org/fields/27",
+            "display_name": "Medicine"
+          },
+          "domain": {
+            "id": "https://openalex.org/domains/4",
+            "display_name": "Health Sciences"
+          }
+        },
+        {
+          "id": "https://openalex.org/T12026",
+          "display_name": "Explainable Artificial Intelligence (XAI)",
+          "score": 0.15639999508857727,
+          "subfield": {
+            "id": "https://openalex.org/subfields/1702",
+            "display_name": "Artificial Intelligence"
+          },
+          "field": {
+            "id": "https://openalex.org/fields/17",
+            "display_name": "Computer Science"
+          },
+          "domain": {
+            "id": "https://openalex.org/domains/3",
+            "display_name": "Physical Sciences"
+          }
+        },
+        {
+          "id": "https://openalex.org/T11689",
+          "display_name": "Adversarial Robustness in Machine Learning",
+          "score": 0.149399995803833,
+          "subfield": {
+            "id": "https://openalex.org/subfields/1702",
+            "display_name": "Artificial Intelligence"
+          },
+          "field": {
+            "id": "https://openalex.org/fields/17",
+            "display_name": "Computer Science"
+          },
+          "domain": {
+            "id": "https://openalex.org/domains/3",
+            "display_name": "Physical Sciences"
+          }
+        }
+      ],
+      "keywords": [
+        {
+          "id": "https://openalex.org/keywords/medical-question-answering",
+          "display_name": "medical question answering",
+          "score": 0.6159999966621399
+        },
+        {
+          "id": "https://openalex.org/keywords/retrieval-augmented-generation",
+          "display_name": "retrieval-augmented generation",
+          "score": 0.9200000166893005
+        },
+        {
+          "id": "https://openalex.org/keywords/calibration",
+          "display_name": "calibration",
+          "score": 0.48100000619888306
+        },
+        {
+          "id": "https://openalex.org/keywords/semantic-entropy",
+          "display_name": "semantic entropy",
+          "score": 0.49900001287460327
+        }
+      ],
+      "concepts": [
+        {
+          "id": "https://openalex.org/C2780148112",
+          "wikidata": "https://www.wikidata.org/wiki/Q1432581",
+          "display_name": "Proxy (statistics)",
+          "level": 2,
+          "score": 0.5956000089645386
+        },
+        {
+          "id": "https://openalex.org/C46304622",
+          "wikidata": "https://www.wikidata.org/wiki/Q374814",
+          "display_name": "Certification",
+          "level": 2,
+          "score": 0.5074999928474426
+        },
+        {
+          "id": "https://openalex.org/C15744967",
+          "wikidata": "https://www.wikidata.org/wiki/Q9418",
+          "display_name": "Psychology",
+          "level": 0,
+          "score": 0.42089998722076416
+        },
+        {
+          "id": "https://openalex.org/C3017605391",
+          "wikidata": "https://www.wikidata.org/wiki/Q1021509",
+          "display_name": "Consensus conference",
+          "level": 2,
+          "score": 0.3824999928474426
+        },
+        {
+          "id": "https://openalex.org/C41008148",
+          "wikidata": "https://www.wikidata.org/wiki/Q21198",
+          "display_name": "Computer science",
+          "level": 0,
+          "score": 0.37139999866485596
+        },
+        {
+          "id": "https://openalex.org/C162118730",
+          "wikidata": "https://www.wikidata.org/wiki/Q1128453",
+          "display_name": "Actuarial science",
+          "level": 1,
+          "score": 0.335099995136261
+        },
+        {
+          "id": "https://openalex.org/C198531522",
+          "wikidata": "https://www.wikidata.org/wiki/Q485146",
+          "display_name": "Sample (material)",
+          "level": 2,
+          "score": 0.33169999718666077
+        },
+        {
+          "id": "https://openalex.org/C17744445",
+          "wikidata": "https://www.wikidata.org/wiki/Q36442",
+          "display_name": "Political science",
+          "level": 0,
+          "score": 0.3124000132083893
+        },
+        {
+          "id": "https://openalex.org/C48103436",
+          "wikidata": "https://www.wikidata.org/wiki/Q599031",
+          "display_name": "State (computer science)",
+          "level": 2,
+          "score": 0.3122999966144562
+        },
+        {
+          "id": "https://openalex.org/C2776818064",
+          "wikidata": "https://www.wikidata.org/wiki/Q829903",
+          "display_name": "Agreement",
+          "level": 2,
+          "score": 0.2987000048160553
+        },
+        {
+          "id": "https://openalex.org/C98045186",
+          "wikidata": "https://www.wikidata.org/wiki/Q205663",
+          "display_name": "Process (computing)",
+          "level": 2,
+          "score": 0.28769999742507935
+        },
+        {
+          "id": "https://openalex.org/C106301342",
+          "wikidata": "https://www.wikidata.org/wiki/Q4117933",
+          "display_name": "Entropy (arrow of time)",
+          "level": 2,
+          "score": 0.2816999852657318
+        },
+        {
+          "id": "https://openalex.org/C38652104",
+          "wikidata": "https://www.wikidata.org/wiki/Q3510521",
+          "display_name": "Computer security",
+          "level": 1,
+          "score": 0.2727999985218048
+        },
+        {
+          "id": "https://openalex.org/C80966040",
+          "wikidata": "https://www.wikidata.org/wiki/Q7885028",
+          "display_name": "Uniform consensus",
+          "level": 4,
+          "score": 0.26499998569488525
+        },
+        {
+          "id": "https://openalex.org/C77805123",
+          "wikidata": "https://www.wikidata.org/wiki/Q161272",
+          "display_name": "Social psychology",
+          "level": 1,
+          "score": 0.2612000107765198
+        },
+        {
+          "id": "https://openalex.org/C199539241",
+          "wikidata": "https://www.wikidata.org/wiki/Q7748",
+          "display_name": "Law",
+          "level": 1,
+          "score": 0.25619998574256897
+        },
+        {
+          "id": "https://openalex.org/C124056412",
+          "wikidata": "https://www.wikidata.org/wiki/Q3320364",
+          "display_name": "Scientific evidence",
+          "level": 2,
+          "score": 0.25270000100135803
+        },
+        {
+          "id": "https://openalex.org/C71924100",
+          "wikidata": "https://www.wikidata.org/wiki/Q11190",
+          "display_name": "Medicine",
+          "level": 0,
+          "score": 0.25049999356269836
+        }
+      ],
+      "mesh": [],
+      "locations_count": 2,
+      "locations": [
+        {
+          "id": "pmh:oai:arXiv.org:2610.07570",
+          "doi": null,
+          "is_oa": true,
+          "landing_page_url": "https://arxiv.org/abs/2610.07570",
+          "pdf_url": "https://arxiv.org/pdf/2610.07570",
+          "source": {
+            "id": "https://openalex.org/S4306400194",
+            "display_name": "arXiv (Cornell University)",
+            "issn_l": "2331-8422",
+            "issn": [
+              "2331-8422"
+            ],
+            "is_oa": true,
+            "is_in_doaj": false,
+            "is_core": false,
+            "listed_in": [],
+            "host_organization": "https://openalex.org/I205783295",
+            "host_organization_name": "Cornell University",
+            "host_organization_lineage": [
+              "https://openalex.org/I205783295"
+            ],
+            "host_organization_lineage_names": [],
+            "type": "repository"
+          },
+          "license": null,
+          "license_id": null,
+          "version": "submittedVersion",
+          "is_accepted": false,
+          "is_published": false,
+          "raw_source_name": null,
+          "raw_type": "text"
+        },
+        {
+          "id": "doi:10.48550/arxiv.2610.07570",
+          "doi": "https://doi.org/10.48550/arxiv.2610.07570",
+          "is_oa": true,
+          "landing_page_url": "https://doi.org/10.48550/arxiv.2610.07570",
+          "pdf_url": null,
+          "source": {
+            "id": "https://openalex.org/S4306400194",
+            "display_name": "arXiv (Cornell University)",
+            "issn_l": "2331-8422",
+            "issn": [
+              "2331-8422"
+            ],
+            "is_oa": true,
+            "is_in_doaj": false,
+            "is_core": false,
+            "listed_in": [],
+            "host_organization": "https://openalex.org/I205783295",
+            "host_organization_name": "Cornell University",
+            "host_organization_lineage": [
+              "https://openalex.org/I205783295"
+            ],
+            "host_organization_lineage_names": [],
+            "type": "repository"
+          },
+          "license": "cc-by",
+          "license_id": "https://openalex.org/licenses/cc-by",
+          "version": null,
+          "is_accepted": false,
+          "is_published": false,
+          "raw_source_name": null,
+          "raw_type": "Preprint"
+        }
+      ],
+      "best_oa_location": {
+        "id": "pmh:oai:arXiv.org:2610.07570",
+        "doi": null,
+        "is_oa": true,
+        "landing_page_url": "https://arxiv.org/abs/2610.07570",
+        "pdf_url": "https://arxiv.org/pdf/2610.07570",
+        "source": {
+          "id": "https://openalex.org/S4306400194",
+          "display_name": "arXiv (Cornell University)",
+          "issn_l": "2331-8422",
+          "issn": [
+            "2331-8422"
+          ],
+          "is_oa": true,
+          "is_in_doaj": false,
+          "is_core": false,
+          "listed_in": [],
+          "host_organization": "https://openalex.org/I205783295",
+          "host_organization_name": "Cornell University",
+          "host_organization_lineage": [
+            "https://openalex.org/I205783295"
+          ],
+          "host_organization_lineage_names": [],
+          "type": "repository"
+        },
+        "license": null,
+        "license_id": null,
+        "version": "submittedVersion",
+        "is_accepted": false,
+        "is_published": false,
+        "raw_source_name": null,
+        "raw_type": "text"
+      },
+      "sustainable_development_goals": [],
+      "study_designs": [],
+      "awards": [],
+      "funders": [],
+      "has_content": {
+        "grobid_xml": true,
+        "pdf": true
+      },
+      "content_urls": {
+        "pdf": "https://content.openalex.org/works/W7220973612.pdf",
+        "grobid_xml": "https://content.openalex.org/works/W7220973612.grobid-xml"
+      },
+      "referenced_works_count": 34,
+      "referenced_works": [
+        "https://openalex.org/W3033187248",
+        "https://openalex.org/W3162922479",
+        "https://openalex.org/W4221154592",
+        "https://openalex.org/W4221161695",
+        "https://openalex.org/W4285429195",
+        "https://openalex.org/W4290055968",
+        "https://openalex.org/W4381551003",
+        "https://openalex.org/W4384071683",
+        "https://openalex.org/W4388409299",
+        "https://openalex.org/W4389518686",
+        "https://openalex.org/W4391988394",
+        "https://openalex.org/W4396763774",
+        "https://openalex.org/W4399803256",
+        "https://openalex.org/W4402670290",
+        "https://openalex.org/W4405901456",
+        "https://openalex.org/W4407012395",
+        "https://openalex.org/W4410803261",
+        "https://openalex.org/W4411121371",
+        "https://openalex.org/W4412875472",
+        "https://openalex.org/W4414588074",
+        "https://openalex.org/W4414939355",
+        "https://openalex.org/W4415269912",
+        "https://openalex.org/W4415796274",
+        "https://openalex.org/W4415796875",
+        "https://openalex.org/W4415798433",
+        "https://openalex.org/W6966365241",
+        "https://openalex.org/W7055216282",
+        "https://openalex.org/W7080313807",
+        "https://openalex.org/W7083814847",
+        "https://openalex.org/W7133823998",
+        "https://openalex.org/W7140075378",
+        "https://openalex.org/W7140135941",
+        "https://openalex.org/W7155392592",
+        "https://openalex.org/W7164037938"
+      ],
+      "related_works": [
+        "https://openalex.org/W7164037938",
+        "https://openalex.org/W4417100132",
+        "https://openalex.org/W7171929337",
+        "https://openalex.org/W7140841187",
+        "https://openalex.org/W7133823998",
+        "https://openalex.org/W7166801951",
+        "https://openalex.org/W7125350789",
+        "https://openalex.org/W4416609120",
+        "https://openalex.org/W7164850105",
+        "https://openalex.org/W7214276344"
+      ],
+      "abstract_inverted_index": {
+        "In": [
+          0
+        ],
+        "clinical": [
+          1
+        ],
+        "practice,": [
+          2
+        ],
+        "agreement": [
+          3,
+          50,
+          115,
+          148
+        ],
+        "among": [
+          4,
+          45
+        ],
+        "independent": [
+          5
+        ],
+        "experts": [
+          6
+        ],
+        "is": [
+          7,
+          41,
+          51,
+          82,
+          130
+        ],
+        "treated": [
+          8
+        ],
+        "as": [
+          9
+        ],
+        "evidence": [
+          10,
+          108
+        ],
+        "of": [
+          11,
+          21,
+          91,
+          222,
+          239,
+          263
+        ],
+        "reliability,": [
+          12
+        ],
+        "and": [
+          13,
+          71,
+          94,
+          152,
+          169,
+          175,
+          204,
+          227,
+          265
+        ],
+        "multi-round": [
+          14,
+          211
+        ],
+        "consensus": [
+          15,
+          93,
+          143,
+          179,
+          243
+        ],
+        "has": [
+          16
+        ],
+        "become": [
+          17
+        ],
+        "a": [
+          18,
+          28,
+          52,
+          131,
+          190,
+          205,
+          209
+        ],
+        "core": [
+          19
+        ],
+        "mechanism": [
+          20
+        ],
+        "agentic": [
+          22,
+          212
+        ],
+        "medical": [
+          23,
+          201
+        ],
+        "question-answering": [
+          24
+        ],
+        "systems.": [
+          25
+        ],
+        "When": [
+          26
+        ],
+        "such": [
+          27
+        ],
+        "system": [
+          29,
+          58
+        ],
+        "must": [
+          30
+        ],
+        "decide": [
+          31
+        ],
+        "whether": [
+          32,
+          162,
+          177
+        ],
+        "to": [
+          33,
+          114,
+          246
+        ],
+        "trust": [
+          34
+        ],
+        "its": [
+          35
+        ],
+        "own": [
+          36
+        ],
+        "answer,": [
+          37
+        ],
+        "the": [
+          38,
+          46,
+          64,
+          88,
+          92,
+          112,
+          120,
+          137,
+          142,
+          163,
+          166,
+          178,
+          237
+        ],
+        "prevailing": [
+          39
+        ],
+        "signal": [
+          40,
+          230
+        ],
+        "again": [
+          42
+        ],
+        "agreement,": [
+          43
+        ],
+        "now": [
+          44
+        ],
+        "sampled": [
+          47
+        ],
+        "answers.": [
+          48
+        ],
+        "But": [
+          49
+        ],
+        "fragile": [
+          53
+        ],
+        "proxy": [
+          54
+        ],
+        "for": [
+          55
+        ],
+        "correctness.": [
+          56
+        ],
+        "A": [
+          57,
+          181
+        ],
+        "can": [
+          59,
+          231
+        ],
+        "be": [
+          60
+        ],
+        "unanimously": [
+          61
+        ],
+        "wrong,": [
+          62,
+          226
+        ],
+        "returning": [
+          63
+        ],
+        "same": [
+          65
+        ],
+        "incorrect": [
+          66,
+          242
+        ],
+        "answer": [
+          67
+        ],
+        "on": [
+          68,
+          72,
+          140,
+          193,
+          199
+        ],
+        "every": [
+          69,
+          124
+        ],
+        "sample,": [
+          70
+        ],
+        "these": [
+          73,
+          84,
+          187
+        ],
+        "questions": [
+          74,
+          257
+        ],
+        "agreement-based": [
+          75,
+          229
+        ],
+        "signals": [
+          76,
+          85,
+          235
+        ],
+        "carry": [
+          77
+        ],
+        "no": [
+          78,
+          228
+        ],
+        "information.": [
+          79
+        ],
+        "The": [
+          80,
+          249
+        ],
+        "cause": [
+          81
+        ],
+        "that": [
+          83,
+          101,
+          116,
+          135
+        ],
+        "read": [
+          86
+        ],
+        "only": [
+          87
+        ],
+        "final": [
+          89
+        ],
+        "state": [
+          90
+        ],
+        "discard": [
+          95
+        ],
+        "how": [
+          96,
+          141
+        ],
+        "it": [
+          97
+        ],
+        "was": [
+          98,
+          102,
+          117
+        ],
+        "reached.": [
+          99
+        ],
+        "Agreement": [
+          100
+        ],
+        "reached": [
+          103
+        ],
+        "by": [
+          104
+        ],
+        "resolving": [
+          105
+        ],
+        "disagreement": [
+          106
+        ],
+        "with": [
+          107,
+          208
+        ],
+        "looks": [
+          109
+        ],
+        "identical,": [
+          110
+        ],
+        "at": [
+          111,
+          258
+        ],
+        "end,": [
+          113
+        ],
+        "present": [
+          118
+        ],
+        "from": [
+          119,
+          241,
+          244
+        ],
+        "first": [
+          121
+        ],
+        "sample": [
+          122,
+          125
+        ],
+        "because": [
+          123
+        ],
+        "shares": [
+          126
+        ],
+        "one": [
+          127
+        ],
+        "misconception.": [
+          128
+        ],
+        "ProbeGuard": [
+          129,
+          198
+        ],
+        "certified": [
+          132,
+          250
+        ],
+        "abstention": [
+          133,
+          138,
+          217
+        ],
+        "framework": [
+          134
+        ],
+        "bases": [
+          136
+        ],
+        "decision": [
+          139
+        ],
+        "formed.": [
+          144
+        ],
+        "Process": [
+          145,
+          234
+        ],
+        "features": [
+          146
+        ],
+        "trace": [
+          147
+        ],
+        "trajectories,": [
+          149
+        ],
+        "minority": [
+          150
+        ],
+        "persistence,": [
+          151
+        ],
+        "retrieval": [
+          153
+        ],
+        "saturation.": [
+          154
+        ],
+        "For": [
+          155
+        ],
+        "unanimous": [
+          156,
+          223
+        ],
+        "votes,": [
+          157
+        ],
+        "rationale": [
+          158
+        ],
+        "semantic": [
+          159
+        ],
+        "entropy": [
+          160
+        ],
+        "checks": [
+          161
+        ],
+        "reasons": [
+          164
+        ],
+        "behind": [
+          165
+        ],
+        "vote": [
+          167
+        ],
+        "cohere,": [
+          168
+        ],
+        "an": [
+          170,
+          259
+        ],
+        "active": [
+          171
+        ],
+        "probe": [
+          172
+        ],
+        "retrieves": [
+          173
+        ],
+        "counter-evidence": [
+          174
+        ],
+        "measures": [
+          176
+        ],
+        "survives.": [
+          180
+        ],
+        "stratified": [
+          182
+        ],
+        "Learn-then-Test": [
+          183
+        ],
+        "calibration": [
+          184,
+          271
+        ],
+        "then": [
+          185
+        ],
+        "converts": [
+          186
+        ],
+        "scores": [
+          188
+        ],
+        "into": [
+          189
+        ],
+        "distribution-free": [
+          191
+        ],
+        "bound": [
+          192
+        ],
+        "selective": [
+          194,
+          261
+        ],
+        "risk.": [
+          195
+        ],
+        "We": [
+          196
+        ],
+        "evaluate": [
+          197
+        ],
+        "three": [
+          200
+        ],
+        "QA": [
+          202
+        ],
+        "benchmarks": [
+          203
+        ],
+        "hard-frontier": [
+          206
+        ],
+        "reference,": [
+          207
+        ],
+        "published": [
+          210
+        ],
+        "RAG": [
+          213
+        ],
+        "substrate,": [
+          214
+        ],
+        "against": [
+          215
+        ],
+        "six": [
+          216,
+          253
+        ],
+        "baselines.": [
+          218
+        ],
+        "On": [
+          219
+        ],
+        "MedQA,": [
+          220
+        ],
+        "13.4%": [
+          221
+        ],
+        "votes": [
+          224
+        ],
+        "are": [
+          225
+        ],
+        "flag": [
+          232
+        ],
+        "them.": [
+          233
+        ],
+        "raise": [
+          236
+        ],
+        "discrimination": [
+          238
+        ],
+        "correct": [
+          240
+        ],
+        "chance": [
+          245
+        ],
+        "0.696": [
+          247
+        ],
+        "AUROC.": [
+          248
+        ],
+        "rule": [
+          251
+        ],
+        "answers": [
+          252
+        ],
+        "in": [
+          254,
+          267
+        ],
+        "ten": [
+          255,
+          268
+        ],
+        "unanimous-layer": [
+          256
+        ],
+        "observed": [
+          260
+        ],
+        "risk": [
+          262
+        ],
+        "9.0%,": [
+          264
+        ],
+        "nine": [
+          266
+        ],
+        "once": [
+          269
+        ],
+        "in-domain": [
+          270
+        ],
+        "data": [
+          272
+        ],
+        "accumulate.": [
+          273
+        ]
+      },
+      "counts_by_year": [],
+      "updated_date": "2026-11-07T11:25:07.637180",
+      "created_date": "2026-10-09T00:00:00"
+    },
+    {
+      "id": "https://openalex.org/W7159578267",
+      "doi": "https://doi.org/10.48550/arxiv.2604.27914",
+      "title": "Geometry-Calibrated Conformal Abstention for Language Models",
+      "display_name": "Geometry-Calibrated Conformal Abstention for Language Models",
+      "relevance_score": 38.241207,
+      "publication_year": 2026,
+      "publication_date": "2026-04-30",
+      "ids": {
+        "openalex": "https://openalex.org/W7159578267",
+        "doi": "https://doi.org/10.48550/arxiv.2604.27914"
+      },
+      "language": "en",
+      "primary_location": {
+        "id": "pmh:oai:arXiv.org:2604.27914",
+        "doi": null,
+        "is_oa": true,
+        "landing_page_url": "https://arxiv.org/abs/2604.27914",
+        "pdf_url": "https://arxiv.org/pdf/2604.27914",
+        "source": {
+          "id": "https://openalex.org/S4306400194",
+          "display_name": "arXiv (Cornell University)",
+          "issn_l": "2331-8422",
+          "issn": [
+            "2331-8422"
+          ],
+          "is_oa": true,
+          "is_in_doaj": false,
+          "is_core": false,
+          "listed_in": [],
+          "host_organization": "https://openalex.org/I205783295",
+          "host_organization_name": "Cornell University",
+          "host_organization_lineage": [
+            "https://openalex.org/I205783295"
+          ],
+          "host_organization_lineage_names": [],
+          "type": "repository"
+        },
+        "license": "cc-by",
+        "license_id": "https://openalex.org/licenses/cc-by",
+        "version": "submittedVersion",
+        "is_accepted": false,
+        "is_published": false,
+        "raw_source_name": null,
+        "raw_type": "text"
+      },
+      "volume": null,
+      "type": "preprint",
+      "is_traditional": true,
+      "indexed_in": [
+        "arxiv",
+        "datacite"
+      ],
+      "open_access": {
+        "is_oa": true,
+        "oa_status": "green",
+        "oa_url": "https://arxiv.org/pdf/2604.27914",
+        "any_repository_has_fulltext": true
+      },
+      "authorships": [
+        {
+          "author_position": "first",
+          "author": {
+            "id": "https://openalex.org/A5134933713",
+            "display_name": "Rui Xu",
+            "orcid": null,
+            "observed_orcids": []
+          },
+          "institutions": [
+            {
+              "id": "https://openalex.org/I4405261251",
+              "display_name": "The Hong Kong University of Science and Technology (Guangzhou)",
+              "ror": "https://ror.org/050h0vm43",
+              "country_code": "CN",
+              "type": "education",
+              "lineage": [
+                "https://openalex.org/I4405261251"
+              ]
+            }
+          ],
+          "countries": [
+            "CN"
+          ],
+          "is_corresponding": false,
+          "raw_author_name": "Xu, Rui",
+          "raw_affiliation_strings": [
+            "Information Hub , AI Thrust Hong Kong University of Science and Technology (Guangzhou) Guangzhou , Guangdong , China"
+          ],
+          "raw_orcid": null,
+          "affiliations": [
+            {
+              "raw_affiliation_string": "Information Hub , AI Thrust Hong Kong University of Science and Technology (Guangzhou) Guangzhou , Guangdong , China",
+              "institution_ids": [
+                "https://openalex.org/I4405261251"
+              ]
+            }
+          ]
+        },
+        {
+          "author_position": "middle",
+          "author": {
+            "id": "https://openalex.org/A5134991905",
+            "display_name": "Yi Chen",
+            "orcid": null,
+            "observed_orcids": []
+          },
+          "institutions": [
+            {
+              "id": "https://openalex.org/I4405261251",
+              "display_name": "The Hong Kong University of Science and Technology (Guangzhou)",
+              "ror": "https://ror.org/050h0vm43",
+              "country_code": "CN",
+              "type": "education",
+              "lineage": [
+                "https://openalex.org/I4405261251"
+              ]
+            }
+          ],
+          "countries": [
+            "CN"
+          ],
+          "is_corresponding": false,
+          "raw_author_name": "Chen, Yi",
+          "raw_affiliation_strings": [
+            "Information Hub , AI Thrust Hong Kong University of Science and Technology (Guangzhou) Guangzhou , Guangdong , China"
+          ],
+          "raw_orcid": null,
+          "affiliations": [
+            {
+              "raw_affiliation_string": "Information Hub , AI Thrust Hong Kong University of Science and Technology (Guangzhou) Guangzhou , Guangdong , China",
+              "institution_ids": [
+                "https://openalex.org/I4405261251"
+              ]
+            }
+          ]
+        },
+        {
+          "author_position": "middle",
+          "author": {
+            "id": "https://openalex.org/A5102861459",
+            "display_name": "Sihong Xie",
+            "orcid": "https://orcid.org/0000-0001-5741-9740",
+            "observed_orcids": [
+              "https://orcid.org/0000-0001-5741-9740"
+            ]
+          },
+          "institutions": [
+            {
+              "id": "https://openalex.org/I4405261251",
+              "display_name": "The Hong Kong University of Science and Technology (Guangzhou)",
+              "ror": "https://ror.org/050h0vm43",
+              "country_code": "CN",
+              "type": "education",
+              "lineage": [
+                "https://openalex.org/I4405261251"
+              ]
+            }
+          ],
+          "countries": [
+            "CN"
+          ],
+          "is_corresponding": false,
+          "raw_author_name": "Xie, Sihong",
+          "raw_affiliation_strings": [
+            "Information Hub , AI Thrust Hong Kong University of Science and Technology (Guangzhou) Guangzhou , Guangdong , China"
+          ],
+          "raw_orcid": null,
+          "affiliations": [
+            {
+              "raw_affiliation_string": "Information Hub , AI Thrust Hong Kong University of Science and Technology (Guangzhou) Guangzhou , Guangdong , China",
+              "institution_ids": [
+                "https://openalex.org/I4405261251"
+              ]
+            }
+          ]
+        },
+        {
+          "author_position": "last",
+          "author": {
+            "id": "https://openalex.org/A5101862104",
+            "display_name": "Hui Xiong",
+            "orcid": "https://orcid.org/0000-0001-6016-6465",
+            "observed_orcids": [
+              "https://orcid.org/0000-0001-6016-6465",
+              "https://orcid.org/0000-0002-4665-9850",
+              "https://orcid.org/0000-0001-5759-3001"
+            ]
+          },
+          "institutions": [
+            {
+              "id": "https://openalex.org/I4405261251",
+              "display_name": "The Hong Kong University of Science and Technology (Guangzhou)",
+              "ror": "https://ror.org/050h0vm43",
+              "country_code": "CN",
+              "type": "education",
+              "lineage": [
+                "https://openalex.org/I4405261251"
+              ]
+            }
+          ],
+          "countries": [
+            "CN"
+          ],
+          "is_corresponding": false,
+          "raw_author_name": "Xiong, Hui",
+          "raw_affiliation_strings": [
+            "Information Hub , AI Thrust Hong Kong University of Science and Technology (Guangzhou) Guangzhou , Guangdong , China"
+          ],
+          "raw_orcid": null,
+          "affiliations": [
+            {
+              "raw_affiliation_string": "Information Hub , AI Thrust Hong Kong University of Science and Technology (Guangzhou) Guangzhou , Guangdong , China",
+              "institution_ids": [
+                "https://openalex.org/I4405261251"
+              ]
+            }
+          ]
+        }
+      ],
+      "institutions": [],
+      "countries_distinct_count": 1,
+      "institutions_distinct_count": 1,
+      "corresponding_author_ids": [],
+      "corresponding_institution_ids": [
+        "https://openalex.org/I4405261251"
+      ],
+      "apc_list": null,
+      "apc_paid": null,
+      "fwci": null,
+      "has_fulltext": true,
+      "cited_by_count": 5,
+      "citation_normalized_percentile": null,
+      "cited_by_percentile_year": null,
+      "biblio": {
+        "volume": null,
+        "issue": null,
+        "first_page": null,
+        "last_page": null
+      },
+      "is_retracted": false,
+      "is_paratext": false,
+      "is_xpac": false,
+      "primary_topic": {
+        "id": "https://openalex.org/T10028",
+        "display_name": "Topic Modeling",
+        "score": 0.4081999957561493,
+        "subfield": {
+          "id": "https://openalex.org/subfields/1702",
+          "display_name": "Artificial Intelligence"
+        },
+        "field": {
+          "id": "https://openalex.org/fields/17",
+          "display_name": "Computer Science"
+        },
+        "domain": {
+          "id": "https://openalex.org/domains/3",
+          "display_name": "Physical Sciences"
+        }
+      },
+      "topics": [
+        {
+          "id": "https://openalex.org/T10028",
+          "display_name": "Topic Modeling",
+          "score": 0.4081999957561493,
+          "subfield": {
+            "id": "https://openalex.org/subfields/1702",
+            "display_name": "Artificial Intelligence"
+          },
+          "field": {
+            "id": "https://openalex.org/fields/17",
+            "display_name": "Computer Science"
+          },
+          "domain": {
+            "id": "https://openalex.org/domains/3",
+            "display_name": "Physical Sciences"
+          }
+        },
+        {
+          "id": "https://openalex.org/T11689",
+          "display_name": "Adversarial Robustness in Machine Learning",
+          "score": 0.3433000147342682,
+          "subfield": {
+            "id": "https://openalex.org/subfields/1702",
+            "display_name": "Artificial Intelligence"
+          },
+          "field": {
+            "id": "https://openalex.org/fields/17",
+            "display_name": "Computer Science"
+          },
+          "domain": {
+            "id": "https://openalex.org/domains/3",
+            "display_name": "Physical Sciences"
+          }
+        },
+        {
+          "id": "https://openalex.org/T10181",
+          "display_name": "Natural Language Processing Techniques",
+          "score": 0.1242000013589859,
+          "subfield": {
+            "id": "https://openalex.org/subfields/1702",
+            "display_name": "Artificial Intelligence"
+          },
+          "field": {
+            "id": "https://openalex.org/fields/17",
+            "display_name": "Computer Science"
+          },
+          "domain": {
+            "id": "https://openalex.org/domains/3",
+            "display_name": "Physical Sciences"
+          }
+        }
+      ],
+      "keywords": [
+        {
+          "id": "https://openalex.org/keywords/conformal-prediction",
+          "display_name": "conformal prediction",
+          "score": 0.8220000267028809
+        },
+        {
+          "id": "https://openalex.org/keywords/abstention",
+          "display_name": "abstention",
+          "score": 0.7089999914169312
+        },
+        {
+          "id": "https://openalex.org/keywords/language-models",
+          "display_name": "language models",
+          "score": 0.746999979019165
+        },
+        {
+          "id": "https://openalex.org/keywords/hallucinations",
+          "display_name": "hallucinations",
+          "score": 0.7670000195503235
+        },
+        {
+          "id": "https://openalex.org/keywords/prediction-confidence",
+          "display_name": "prediction confidence",
+          "score": 0.48100000619888306
+        },
+        {
+          "id": "https://openalex.org/keywords/calibration",
+          "display_name": "calibration",
+          "score": 0.5429999828338623
+        },
+        {
+          "id": "https://openalex.org/keywords/representational-geometry",
+          "display_name": "representational geometry",
+          "score": 0.9739999771118164
+        },
+        {
+          "id": "https://openalex.org/keywords/finite-sample-guarantees",
+          "display_name": "finite-sample guarantees",
+          "score": 0.6579999923706055
+        }
+      ],
+      "concepts": [
+        {
+          "id": "https://openalex.org/C177148314",
+          "wikidata": "https://www.wikidata.org/wiki/Q170084",
+          "display_name": "Generalization",
+          "level": 2,
+          "score": 0.6086000204086304
+        },
+        {
+          "id": "https://openalex.org/C41008148",
+          "wikidata": "https://www.wikidata.org/wiki/Q21198",
+          "display_name": "Computer science",
+          "level": 0,
+          "score": 0.5726000070571899
+        },
+        {
+          "id": "https://openalex.org/C154945302",
+          "wikidata": "https://www.wikidata.org/wiki/Q11660",
+          "display_name": "Artificial intelligence",
+          "level": 1,
+          "score": 0.5212000012397766
+        },
+        {
+          "id": "https://openalex.org/C2778732403",
+          "wikidata": "https://www.wikidata.org/wiki/Q815577",
+          "display_name": "Ignorance",
+          "level": 2,
+          "score": 0.5076000094413757
+        },
+        {
+          "id": "https://openalex.org/C44291984",
+          "wikidata": "https://www.wikidata.org/wiki/Q1074173",
+          "display_name": "Question answering",
+          "level": 2,
+          "score": 0.459199994802475
+        },
+        {
+          "id": "https://openalex.org/C2780009758",
+          "wikidata": "https://www.wikidata.org/wiki/Q6804172",
+          "display_name": "Measure (data warehouse)",
+          "level": 2,
+          "score": 0.4514999985694885
+        },
+        {
+          "id": "https://openalex.org/C2776359362",
+          "wikidata": "https://www.wikidata.org/wiki/Q2145286",
+          "display_name": "Representation (politics)",
+          "level": 3,
+          "score": 0.43529999256134033
+        },
+        {
+          "id": "https://openalex.org/C137293760",
+          "wikidata": "https://www.wikidata.org/wiki/Q3621696",
+          "display_name": "Language model",
+          "level": 2,
+          "score": 0.4334999918937683
+        },
+        {
+          "id": "https://openalex.org/C119857082",
+          "wikidata": "https://www.wikidata.org/wiki/Q2539",
+          "display_name": "Machine learning",
+          "level": 1,
+          "score": 0.39410001039505005
+        },
+        {
+          "id": "https://openalex.org/C21031990",
+          "wikidata": "https://www.wikidata.org/wiki/Q355020",
+          "display_name": "Probability measure",
+          "level": 2,
+          "score": 0.3921000063419342
+        },
+        {
+          "id": "https://openalex.org/C204321447",
+          "wikidata": "https://www.wikidata.org/wiki/Q30642",
+          "display_name": "Natural language processing",
+          "level": 1,
+          "score": 0.3741999864578247
+        },
+        {
+          "id": "https://openalex.org/C44492722",
+          "wikidata": "https://www.wikidata.org/wiki/Q327069",
+          "display_name": "Conditional probability",
+          "level": 2,
+          "score": 0.33250001072883606
+        },
+        {
+          "id": "https://openalex.org/C2777601683",
+          "wikidata": "https://www.wikidata.org/wiki/Q6499736",
+          "display_name": "Vocabulary",
+          "level": 2,
+          "score": 0.31709998846054077
+        },
+        {
+          "id": "https://openalex.org/C165838908",
+          "wikidata": "https://www.wikidata.org/wiki/Q736777",
+          "display_name": "Calibration",
+          "level": 2,
+          "score": 0.31529998779296875
+        },
+        {
+          "id": "https://openalex.org/C2164484",
+          "wikidata": "https://www.wikidata.org/wiki/Q5170150",
+          "display_name": "Core (optical fiber)",
+          "level": 2,
+          "score": 0.29159998893737793
+        },
+        {
+          "id": "https://openalex.org/C114289077",
+          "wikidata": "https://www.wikidata.org/wiki/Q3284399",
+          "display_name": "Statistical model",
+          "level": 2,
+          "score": 0.2847999930381775
+        },
+        {
+          "id": "https://openalex.org/C98214594",
+          "wikidata": "https://www.wikidata.org/wiki/Q850275",
+          "display_name": "Conformal map",
+          "level": 2,
+          "score": 0.27129998803138733
+        },
+        {
+          "id": "https://openalex.org/C33923547",
+          "wikidata": "https://www.wikidata.org/wiki/Q395",
+          "display_name": "Mathematics",
+          "level": 0,
+          "score": 0.2678000032901764
+        },
+        {
+          "id": "https://openalex.org/C130648207",
+          "wikidata": "https://www.wikidata.org/wiki/Q6007562",
+          "display_name": "Imprecise probability",
+          "level": 3,
+          "score": 0.25690001249313354
+        }
+      ],
+      "mesh": [],
+      "locations_count": 2,
+      "locations": [
+        {
+          "id": "pmh:oai:arXiv.org:2604.27914",
+          "doi": null,
+          "is_oa": true,
+          "landing_page_url": "https://arxiv.org/abs/2604.27914",
+          "pdf_url": "https://arxiv.org/pdf/2604.27914",
+          "source": {
+            "id": "https://openalex.org/S4306400194",
+            "display_name": "arXiv (Cornell University)",
+            "issn_l": "2331-8422",
+            "issn": [
+              "2331-8422"
+            ],
+            "is_oa": true,
+            "is_in_doaj": false,
+            "is_core": false,
+            "listed_in": [],
+            "host_organization": "https://openalex.org/I205783295",
+            "host_organization_name": "Cornell University",
+            "host_organization_lineage": [
+              "https://openalex.org/I205783295"
+            ],
+            "host_organization_lineage_names": [],
+            "type": "repository"
+          },
+          "license": "cc-by",
+          "license_id": "https://openalex.org/licenses/cc-by",
+          "version": "submittedVersion",
+          "is_accepted": false,
+          "is_published": false,
+          "raw_source_name": null,
+          "raw_type": "text"
+        },
+        {
+          "id": "doi:10.48550/arxiv.2604.27914",
+          "doi": "https://doi.org/10.48550/arxiv.2604.27914",
+          "is_oa": true,
+          "landing_page_url": "https://doi.org/10.48550/arxiv.2604.27914",
+          "pdf_url": null,
+          "source": {
+            "id": "https://openalex.org/S4306400194",
+            "display_name": "arXiv (Cornell University)",
+            "issn_l": "2331-8422",
+            "issn": [
+              "2331-8422"
+            ],
+            "is_oa": true,
+            "is_in_doaj": false,
+            "is_core": false,
+            "listed_in": [],
+            "host_organization": "https://openalex.org/I205783295",
+            "host_organization_name": "Cornell University",
+            "host_organization_lineage": [
+              "https://openalex.org/I205783295"
+            ],
+            "host_organization_lineage_names": [],
+            "type": "repository"
+          },
+          "license": "cc-by",
+          "license_id": "https://openalex.org/licenses/cc-by",
+          "version": null,
+          "is_accepted": false,
+          "is_published": false,
+          "raw_source_name": null,
+          "raw_type": "Preprint"
+        }
+      ],
+      "best_oa_location": {
+        "id": "pmh:oai:arXiv.org:2604.27914",
+        "doi": null,
+        "is_oa": true,
+        "landing_page_url": "https://arxiv.org/abs/2604.27914",
+        "pdf_url": "https://arxiv.org/pdf/2604.27914",
+        "source": {
+          "id": "https://openalex.org/S4306400194",
+          "display_name": "arXiv (Cornell University)",
+          "issn_l": "2331-8422",
+          "issn": [
+            "2331-8422"
+          ],
+          "is_oa": true,
+          "is_in_doaj": false,
+          "is_core": false,
+          "listed_in": [],
+          "host_organization": "https://openalex.org/I205783295",
+          "host_organization_name": "Cornell University",
+          "host_organization_lineage": [
+            "https://openalex.org/I205783295"
+          ],
+          "host_organization_lineage_names": [],
+          "type": "repository"
+        },
+        "license": "cc-by",
+        "license_id": "https://openalex.org/licenses/cc-by",
+        "version": "submittedVersion",
+        "is_accepted": false,
+        "is_published": false,
+        "raw_source_name": null,
+        "raw_type": "text"
+      },
+      "sustainable_development_goals": [],
+      "study_designs": [],
+      "awards": [],
+      "funders": [],
+      "has_content": {
+        "grobid_xml": true,
+        "pdf": true
+      },
+      "content_urls": {
+        "pdf": "https://content.openalex.org/works/W7159578267.pdf",
+        "grobid_xml": "https://content.openalex.org/works/W7159578267.grobid-xml"
+      },
+      "referenced_works_count": 16,
+      "referenced_works": [
+        "https://openalex.org/W2971569798",
+        "https://openalex.org/W3089746993",
+        "https://openalex.org/W3210904070",
+        "https://openalex.org/W4285429195",
+        "https://openalex.org/W4290055968",
+        "https://openalex.org/W4321594373",
+        "https://openalex.org/W4378942327",
+        "https://openalex.org/W4381551003",
+        "https://openalex.org/W4383472635",
+        "https://openalex.org/W4385574263",
+        "https://openalex.org/W4391988394",
+        "https://openalex.org/W4392271152",
+        "https://openalex.org/W4403365408",
+        "https://openalex.org/W4415285811",
+        "https://openalex.org/W4415829728",
+        "https://openalex.org/W6910706269"
+      ],
+      "related_works": [
+        "https://openalex.org/W4396763774",
+        "https://openalex.org/W4381551003",
+        "https://openalex.org/W4416852270",
+        "https://openalex.org/W7163396943",
+        "https://openalex.org/W7221568421",
+        "https://openalex.org/W4416716572",
+        "https://openalex.org/W3199958362",
+        "https://openalex.org/W7159929207",
+        "https://openalex.org/W7163991108",
+        "https://openalex.org/W4412945608"
+      ],
+      "abstract_inverted_index": {
+        "When": [
+          0
+        ],
+        "language": [
+          1
+        ],
+        "models": [
+          2,
+          28
+        ],
+        "lack": [
+          3
+        ],
+        "relevant": [
+          4
+        ],
+        "knowledge": [
+          5,
+          136
+        ],
+        "for": [
+          6,
+          111
+        ],
+        "a": [
+          7,
+          49,
+          68,
+          125
+        ],
+        "given": [
+          8
+        ],
+        "query,": [
+          9
+        ],
+        "they": [
+          10
+        ],
+        "frequently": [
+          11
+        ],
+        "generate": [
+          12
+        ],
+        "plausible": [
+          13
+        ],
+        "responses": [
+          14
+        ],
+        "that": [
+          15,
+          86,
+          144
+        ],
+        "can": [
+          16,
+          33
+        ],
+        "be": [
+          17
+        ],
+        "hallucinations,": [
+          18
+        ],
+        "rather": [
+          19,
+          100
+        ],
+        "than": [
+          20,
+          101
+        ],
+        "admitting": [
+          21,
+          31
+        ],
+        "being": [
+          22
+        ],
+        "agnostic": [
+          23
+        ],
+        "about": [
+          24
+        ],
+        "the": [
+          25,
+          76,
+          84,
+          87,
+          93,
+          102,
+          120,
+          132,
+          140
+        ],
+        "answer.": [
+          26
+        ],
+        "Retraining": [
+          27
+        ],
+        "to": [
+          29,
+          35,
+          43,
+          61,
+          64,
+          134
+        ],
+        "reward": [
+          30
+        ],
+        "ignorance": [
+          32
+        ],
+        "lead": [
+          34
+        ],
+        "overly": [
+          36
+        ],
+        "conservative": [
+          37
+        ],
+        "behaviors": [
+          38
+        ],
+        "and": [
+          39,
+          83
+        ],
+        "poor": [
+          40
+        ],
+        "generalization": [
+          41
+        ],
+        "due": [
+          42
+        ],
+        "scarce": [
+          44
+        ],
+        "evaluation": [
+          45
+        ],
+        "benchmarks.": [
+          46
+        ],
+        "We": [
+          47
+        ],
+        "propose": [
+          48
+        ],
+        "post": [
+          50
+        ],
+        "hoc": [
+          51
+        ],
+        "framework,": [
+          52
+        ],
+        "Conformal": [
+          53
+        ],
+        "Abstention": [
+          54
+        ],
+        "(CA),": [
+          55
+        ],
+        "adapted": [
+          56
+        ],
+        "from": [
+          57,
+          66
+        ],
+        "conformal": [
+          58
+        ],
+        "prediction": [
+          59,
+          98,
+          117
+        ],
+        "(CP)": [
+          60
+        ],
+        "determine": [
+          62
+        ],
+        "whether": [
+          63
+        ],
+        "abstain": [
+          65
+        ],
+        "answering": [
+          67,
+          148
+        ],
+        "query.": [
+          69
+        ],
+        "CA": [
+          70
+        ],
+        "provides": [
+          71
+        ],
+        "finite-sample": [
+          72
+        ],
+        "guarantees": [
+          73
+        ],
+        "on": [
+          74,
+          97
+        ],
+        "both": [
+          75
+        ],
+        "probability": [
+          77,
+          85
+        ],
+        "of": [
+          78
+        ],
+        "participation": [
+          79
+        ],
+        "(i.e.,": [
+          80
+        ],
+        "not": [
+          81
+        ],
+        "abstaining)": [
+          82
+        ],
+        "generated": [
+          88
+        ],
+        "response": [
+          89
+        ],
+        "is": [
+          90
+        ],
+        "correct.": [
+          91
+        ],
+        "Importantly,": [
+          92
+        ],
+        "abstention": [
+          94
+        ],
+        "decision": [
+          95
+        ],
+        "relies": [
+          96
+        ],
+        "confidence": [
+          99,
+          118
+        ],
+        "non-conformity": [
+          103
+        ],
+        "scores": [
+          104
+        ],
+        "used": [
+          105
+        ],
+        "in": [
+          106,
+          138
+        ],
+        "CP,": [
+          107
+        ],
+        "which": [
+          108
+        ],
+        "are": [
+          109
+        ],
+        "intractable": [
+          110
+        ],
+        "open-ended": [
+          112
+        ],
+        "generation.": [
+          113
+        ],
+        "To": [
+          114
+        ],
+        "better": [
+          115
+        ],
+        "align": [
+          116
+        ],
+        "with": [
+          119,
+          150
+        ],
+        "model's": [
+          121
+        ],
+        "ignorance,": [
+          122
+        ],
+        "we": [
+          123,
+          145
+        ],
+        "introduce": [
+          124
+        ],
+        "calibration": [
+          126
+        ],
+        "strategy": [
+          127
+        ],
+        "using": [
+          128
+        ],
+        "representation": [
+          129
+        ],
+        "geometry": [
+          130
+        ],
+        "within": [
+          131
+        ],
+        "model": [
+          133
+        ],
+        "measure": [
+          135
+        ],
+        "involvement": [
+          137
+        ],
+        "shaping": [
+          139
+        ],
+        "response.": [
+          141
+        ],
+        "Experiments": [
+          142
+        ],
+        "demonstrate": [
+          143
+        ],
+        "improve": [
+          146
+        ],
+        "selective": [
+          147
+        ],
+        "significantly": [
+          149
+        ],
+        "75": [
+          151
+        ],
+        "percent": [
+          152
+        ],
+        "conditional": [
+          153
+        ],
+        "correctness.": [
+          154
+        ]
+      },
+      "counts_by_year": [
+        {
+          "year": 2026,
+          "cited_by_count": 5
+        }
+      ],
+      "updated_date": "2026-11-07T11:25:07.637180",
+      "created_date": "2026-05-02T00:00:00"
+    },
+    {
+      "id": "https://openalex.org/W7172134512",
+      "doi": "https://doi.org/10.61424/33995e23",
+      "title": "Beyond Cultural Trivia: Calibrated Exemplar Retrieval, Mode-Aware Routing, and Selective Abstention for Cross-Cultural LLM Services",
+      "display_name": "Beyond Cultural Trivia: Calibrated Exemplar Retrieval, Mode-Aware Routing, and Selective Abstention for Cross-Cultural LLM Services",
+      "relevance_score": 36.75173,
+      "publication_year": 2026,
+      "publication_date": "2026-01-20",
+      "ids": {
+        "openalex": "https://openalex.org/W7172134512",
+        "doi": "https://doi.org/10.61424/33995e23"
+      },
+      "language": "en",
+      "primary_location": {
+        "id": "doi:10.61424/33995e23",
+        "doi": "https://doi.org/10.61424/33995e23",
+        "is_oa": true,
+        "landing_page_url": "https://doi.org/10.61424/33995e23",
+        "pdf_url": "https://stoutjournals.org/index.php/shss/article/download/76/74",
+        "source": {
+          "id": "https://openalex.org/S7407062571",
+          "display_name": "Stout in Humanities and Social Sciences",
+          "issn_l": "2979-2797",
+          "issn": [
+            "2979-2797"
+          ],
+          "is_oa": false,
+          "is_in_doaj": false,
+          "is_core": false,
+          "listed_in": [],
+          "host_organization": null,
+          "host_organization_name": null,
+          "host_organization_lineage": [],
+          "host_organization_lineage_names": [],
+          "type": "journal"
+        },
+        "license": "cc-by-nc-sa",
+        "license_id": "https://openalex.org/licenses/cc-by-nc-sa",
+        "version": "publishedVersion",
+        "is_accepted": true,
+        "is_published": true,
+        "raw_source_name": "Stout in Humanities and Social Sciences",
+        "raw_type": "journal-article"
+      },
+      "volume": null,
+      "type": "article",
+      "is_traditional": true,
+      "indexed_in": [
+        "crossref"
+      ],
+      "open_access": {
+        "is_oa": true,
+        "oa_status": "hybrid",
+        "oa_url": "https://stoutjournals.org/index.php/shss/article/download/76/74",
+        "any_repository_has_fulltext": false
+      },
+      "authorships": [
+        {
+          "author_position": "first",
+          "author": {
+            "id": "https://openalex.org/A5144182731",
+            "display_name": "Daisy Zhu",
+            "orcid": null,
+            "observed_orcids": []
+          },
+          "institutions": [
+            {
+              "id": "https://openalex.org/I12912129",
+              "display_name": "Northeastern University",
+              "ror": "https://ror.org/04t5xt781",
+              "country_code": "US",
+              "type": "education",
+              "lineage": [
+                "https://openalex.org/I12912129"
+              ]
+            }
+          ],
+          "countries": [
+            "US"
+          ],
+          "is_corresponding": true,
+          "raw_author_name": "Daisy Zhu",
+          "raw_affiliation_strings": [
+            "Computer Science, Northeastern University, Boston, MA, USA"
+          ],
+          "raw_orcid": null,
+          "affiliations": [
+            {
+              "raw_affiliation_string": "Computer Science, Northeastern University, Boston, MA, USA",
+              "institution_ids": [
+                "https://openalex.org/I12912129"
+              ]
+            }
+          ]
+        }
+      ],
+      "institutions": [],
+      "countries_distinct_count": 1,
+      "institutions_distinct_count": 1,
+      "corresponding_author_ids": [
+        "https://openalex.org/A5144182731"
+      ],
+      "corresponding_institution_ids": [
+        "https://openalex.org/I12912129"
+      ],
+      "apc_list": null,
+      "apc_paid": null,
+      "fwci": 0.0,
+      "has_fulltext": true,
+      "cited_by_count": 0,
+      "citation_normalized_percentile": {
+        "value": 0.47807987,
+        "is_in_top_1_percent": false,
+        "is_in_top_10_percent": false
+      },
+      "cited_by_percentile_year": null,
+      "biblio": {
+        "volume": "2",
+        "issue": "1",
+        "first_page": "24",
+        "last_page": "42"
+      },
+      "is_retracted": false,
+      "is_paratext": false,
+      "is_xpac": false,
+      "primary_topic": {
+        "id": "https://openalex.org/T10028",
+        "display_name": "Topic Modeling",
+        "score": 0.888700008392334,
+        "subfield": {
+          "id": "https://openalex.org/subfields/1702",
+          "display_name": "Artificial Intelligence"
+        },
+        "field": {
+          "id": "https://openalex.org/fields/17",
+          "display_name": "Computer Science"
+        },
+        "domain": {
+          "id": "https://openalex.org/domains/3",
+          "display_name": "Physical Sciences"
+        }
+      },
+      "topics": [
+        {
+          "id": "https://openalex.org/T10028",
+          "display_name": "Topic Modeling",
+          "score": 0.888700008392334,
+          "subfield": {
+            "id": "https://openalex.org/subfields/1702",
+            "display_name": "Artificial Intelligence"
+          },
+          "field": {
+            "id": "https://openalex.org/fields/17",
+            "display_name": "Computer Science"
+          },
+          "domain": {
+            "id": "https://openalex.org/domains/3",
+            "display_name": "Physical Sciences"
+          }
+        },
+        {
+          "id": "https://openalex.org/T10181",
+          "display_name": "Natural Language Processing Techniques",
+          "score": 0.028300000354647636,
+          "subfield": {
+            "id": "https://openalex.org/subfields/1702",
+            "display_name": "Artificial Intelligence"
+          },
+          "field": {
+            "id": "https://openalex.org/fields/17",
+            "display_name": "Computer Science"
+          },
+          "domain": {
+            "id": "https://openalex.org/domains/3",
+            "display_name": "Physical Sciences"
+          }
+        },
+        {
+          "id": "https://openalex.org/T11689",
+          "display_name": "Adversarial Robustness in Machine Learning",
+          "score": 0.025800000876188278,
+          "subfield": {
+            "id": "https://openalex.org/subfields/1702",
+            "display_name": "Artificial Intelligence"
+          },
+          "field": {
+            "id": "https://openalex.org/fields/17",
+            "display_name": "Computer Science"
+          },
+          "domain": {
+            "id": "https://openalex.org/domains/3",
+            "display_name": "Physical Sciences"
+          }
+        }
+      ],
+      "keywords": [
+        {
+          "id": "https://openalex.org/keywords/exemplar-retrieval",
+          "display_name": "exemplar retrieval",
+          "score": 0.7179999947547913
+        },
+        {
+          "id": "https://openalex.org/keywords/selective-abstention",
+          "display_name": "selective abstention",
+          "score": 0.8629999756813049
+        },
+        {
+          "id": "https://openalex.org/keywords/temperature-scaling",
+          "display_name": "temperature scaling",
+          "score": 0.7950000166893005
+        },
+        {
+          "id": "https://openalex.org/keywords/calibration",
+          "display_name": "calibration",
+          "score": 0.7149999737739563
+        },
+        {
+          "id": "https://openalex.org/keywords/uncertainty-estimation",
+          "display_name": "uncertainty estimation",
+          "score": 0.4970000088214874
+        },
+        {
+          "id": "https://openalex.org/keywords/regional-coverage",
+          "display_name": "regional coverage",
+          "score": 0.35600000619888306
+        },
+        {
+          "id": "https://openalex.org/keywords/score-level-fusion",
+          "display_name": "score-level fusion",
+          "score": 0.3709999918937683
+        },
+        {
+          "id": "https://openalex.org/keywords/underrepresented-regions",
+          "display_name": "underrepresented regions",
+          "score": 0.4560000002384186
+        }
+      ],
+      "concepts": [
+        {
+          "id": "https://openalex.org/C165838908",
+          "wikidata": "https://www.wikidata.org/wiki/Q736777",
+          "display_name": "Calibration",
+          "level": 2,
+          "score": 0.6656000018119812
+        },
+        {
+          "id": "https://openalex.org/C2776214188",
+          "wikidata": "https://www.wikidata.org/wiki/Q408386",
+          "display_name": "Inference",
+          "level": 2,
+          "score": 0.6287000179290771
+        },
+        {
+          "id": "https://openalex.org/C41008148",
+          "wikidata": "https://www.wikidata.org/wiki/Q21198",
+          "display_name": "Computer science",
+          "level": 0,
+          "score": 0.6064000129699707
+        },
+        {
+          "id": "https://openalex.org/C4679612",
+          "wikidata": "https://www.wikidata.org/wiki/Q866298",
+          "display_name": "Aggregate (composite)",
+          "level": 2,
+          "score": 0.5372999906539917
+        },
+        {
+          "id": "https://openalex.org/C2775896111",
+          "wikidata": "https://www.wikidata.org/wiki/Q642560",
+          "display_name": "Router",
+          "level": 2,
+          "score": 0.4867999851703644
+        },
+        {
+          "id": "https://openalex.org/C99844830",
+          "wikidata": "https://www.wikidata.org/wiki/Q102441924",
+          "display_name": "Scaling",
+          "level": 2,
+          "score": 0.48260000348091125
+        },
+        {
+          "id": "https://openalex.org/C198082294",
+          "wikidata": "https://www.wikidata.org/wiki/Q3399648",
+          "display_name": "Position (finance)",
+          "level": 2,
+          "score": 0.45399999618530273
+        },
+        {
+          "id": "https://openalex.org/C2164484",
+          "wikidata": "https://www.wikidata.org/wiki/Q5170150",
+          "display_name": "Core (optical fiber)",
+          "level": 2,
+          "score": 0.43380001187324524
+        },
+        {
+          "id": "https://openalex.org/C149782125",
+          "wikidata": "https://www.wikidata.org/wiki/Q160039",
+          "display_name": "Econometrics",
+          "level": 1,
+          "score": 0.4052000045776367
+        },
+        {
+          "id": "https://openalex.org/C12725497",
+          "wikidata": "https://www.wikidata.org/wiki/Q810247",
+          "display_name": "Baseline (sea)",
+          "level": 2,
+          "score": 0.39719998836517334
+        },
+        {
+          "id": "https://openalex.org/C48372109",
+          "wikidata": "https://www.wikidata.org/wiki/Q3913",
+          "display_name": "Binary number",
+          "level": 2,
+          "score": 0.39629998803138733
+        },
+        {
+          "id": "https://openalex.org/C105795698",
+          "wikidata": "https://www.wikidata.org/wiki/Q12483",
+          "display_name": "Statistics",
+          "level": 1,
+          "score": 0.3840999901294708
+        },
+        {
+          "id": "https://openalex.org/C2777267654",
+          "wikidata": "https://www.wikidata.org/wiki/Q3519023",
+          "display_name": "Test (biology)",
+          "level": 2,
+          "score": 0.3790000081062317
+        },
+        {
+          "id": "https://openalex.org/C44249647",
+          "wikidata": "https://www.wikidata.org/wiki/Q208498",
+          "display_name": "Confidence interval",
+          "level": 2,
+          "score": 0.34769999980926514
+        },
+        {
+          "id": "https://openalex.org/C124101348",
+          "wikidata": "https://www.wikidata.org/wiki/Q172491",
+          "display_name": "Data mining",
+          "level": 1,
+          "score": 0.29429998993873596
+        },
+        {
+          "id": "https://openalex.org/C119857082",
+          "wikidata": "https://www.wikidata.org/wiki/Q2539",
+          "display_name": "Machine learning",
+          "level": 1,
+          "score": 0.28769999742507935
+        },
+        {
+          "id": "https://openalex.org/C32848918",
+          "wikidata": "https://www.wikidata.org/wiki/Q845789",
+          "display_name": "Observable",
+          "level": 2,
+          "score": 0.2838999927043915
+        },
+        {
+          "id": "https://openalex.org/C154945302",
+          "wikidata": "https://www.wikidata.org/wiki/Q11660",
+          "display_name": "Artificial intelligence",
+          "level": 1,
+          "score": 0.2777999937534332
+        },
+        {
+          "id": "https://openalex.org/C112930515",
+          "wikidata": "https://www.wikidata.org/wiki/Q4389547",
+          "display_name": "Risk analysis (engineering)",
+          "level": 1,
+          "score": 0.27649998664855957
+        },
+        {
+          "id": "https://openalex.org/C149629883",
+          "wikidata": "https://www.wikidata.org/wiki/Q660926",
+          "display_name": "Fraction (chemistry)",
+          "level": 2,
+          "score": 0.27320000529289246
+        },
+        {
+          "id": "https://openalex.org/C200601418",
+          "wikidata": "https://www.wikidata.org/wiki/Q2193887",
+          "display_name": "Reliability engineering",
+          "level": 1,
+          "score": 0.26739999651908875
+        },
+        {
+          "id": "https://openalex.org/C149810388",
+          "wikidata": "https://www.wikidata.org/wiki/Q5374873",
+          "display_name": "Emulation",
+          "level": 2,
+          "score": 0.2646999955177307
+        },
+        {
+          "id": "https://openalex.org/C2778058735",
+          "wikidata": "https://www.wikidata.org/wiki/Q4692253",
+          "display_name": "Aggregate data",
+          "level": 2,
+          "score": 0.26159998774528503
+        },
+        {
+          "id": "https://openalex.org/C134261354",
+          "wikidata": "https://www.wikidata.org/wiki/Q938438",
+          "display_name": "Statistical inference",
+          "level": 2,
+          "score": 0.25450000166893005
+        },
+        {
+          "id": "https://openalex.org/C26517878",
+          "wikidata": "https://www.wikidata.org/wiki/Q228039",
+          "display_name": "Key (lock)",
+          "level": 2,
+          "score": 0.25099998712539673
+        }
+      ],
+      "mesh": [],
+      "locations_count": 1,
+      "locations": [
+        {
+          "id": "doi:10.61424/33995e23",
+          "doi": "https://doi.org/10.61424/33995e23",
+          "is_oa": true,
+          "landing_page_url": "https://doi.org/10.61424/33995e23",
+          "pdf_url": "https://stoutjournals.org/index.php/shss/article/download/76/74",
+          "source": {
+            "id": "https://openalex.org/S7407062571",
+            "display_name": "Stout in Humanities and Social Sciences",
+            "issn_l": "2979-2797",
+            "issn": [
+              "2979-2797"
+            ],
+            "is_oa": false,
+            "is_in_doaj": false,
+            "is_core": false,
+            "listed_in": [],
+            "host_organization": null,
+            "host_organization_name": null,
+            "host_organization_lineage": [],
+            "host_organization_lineage_names": [],
+            "type": "journal"
+          },
+          "license": "cc-by-nc-sa",
+          "license_id": "https://openalex.org/licenses/cc-by-nc-sa",
+          "version": "publishedVersion",
+          "is_accepted": true,
+          "is_published": true,
+          "raw_source_name": "Stout in Humanities and Social Sciences",
+          "raw_type": "journal-article"
+        }
+      ],
+      "best_oa_location": {
+        "id": "doi:10.61424/33995e23",
+        "doi": "https://doi.org/10.61424/33995e23",
+        "is_oa": true,
+        "landing_page_url": "https://doi.org/10.61424/33995e23",
+        "pdf_url": "https://stoutjournals.org/index.php/shss/article/download/76/74",
+        "source": {
+          "id": "https://openalex.org/S7407062571",
+          "display_name": "Stout in Humanities and Social Sciences",
+          "issn_l": "2979-2797",
+          "issn": [
+            "2979-2797"
+          ],
+          "is_oa": false,
+          "is_in_doaj": false,
+          "is_core": false,
+          "listed_in": [],
+          "host_organization": null,
+          "host_organization_name": null,
+          "host_organization_lineage": [],
+          "host_organization_lineage_names": [],
+          "type": "journal"
+        },
+        "license": "cc-by-nc-sa",
+        "license_id": "https://openalex.org/licenses/cc-by-nc-sa",
+        "version": "publishedVersion",
+        "is_accepted": true,
+        "is_published": true,
+        "raw_source_name": "Stout in Humanities and Social Sciences",
+        "raw_type": "journal-article"
+      },
+      "sustainable_development_goals": [],
+      "study_designs": [],
+      "awards": [],
+      "funders": [],
+      "has_content": {
+        "grobid_xml": true,
+        "pdf": true
+      },
+      "content_urls": {
+        "pdf": "https://content.openalex.org/works/W7172134512.pdf",
+        "grobid_xml": "https://content.openalex.org/works/W7172134512.grobid-xml"
+      },
+      "referenced_works_count": 87,
+      "referenced_works": [
+        "https://openalex.org/W28412257",
+        "https://openalex.org/W1978394996",
+        "https://openalex.org/W1995945562",
+        "https://openalex.org/W2025720061",
+        "https://openalex.org/W2084413241",
+        "https://openalex.org/W2798935874",
+        "https://openalex.org/W4287891464",
+        "https://openalex.org/W4385570481",
+        "https://openalex.org/W4389520749",
+        "https://openalex.org/W4401618965",
+        "https://openalex.org/W4402387163",
+        "https://openalex.org/W4402670429",
+        "https://openalex.org/W4402671169",
+        "https://openalex.org/W4402671575",
+        "https://openalex.org/W4403884201",
+        "https://openalex.org/W4404782164",
+        "https://openalex.org/W4411120467",
+        "https://openalex.org/W4415797205",
+        "https://openalex.org/W7119530428",
+        "https://openalex.org/W7131376316",
+        "https://openalex.org/W7131384866",
+        "https://openalex.org/W7131472642",
+        "https://openalex.org/W7131623283",
+        "https://openalex.org/W7147503912",
+        "https://openalex.org/W7149958370",
+        "https://openalex.org/W7149994534",
+        "https://openalex.org/W7149999573",
+        "https://openalex.org/W7154899371",
+        "https://openalex.org/W7160823158",
+        "https://openalex.org/W7160827730",
+        "https://openalex.org/W7160834842",
+        "https://openalex.org/W7160843197",
+        "https://openalex.org/W7160863387",
+        "https://openalex.org/W7161156960",
+        "https://openalex.org/W7162628337",
+        "https://openalex.org/W7162659391",
+        "https://openalex.org/W7164009662",
+        "https://openalex.org/W7164487964",
+        "https://openalex.org/W7164489596",
+        "https://openalex.org/W7164514533",
+        "https://openalex.org/W7164519794",
+        "https://openalex.org/W7164520853",
+        "https://openalex.org/W7164558802",
+        "https://openalex.org/W7164564277",
+        "https://openalex.org/W7164570951",
+        "https://openalex.org/W7164575788",
+        "https://openalex.org/W7164577025",
+        "https://openalex.org/W7164903780",
+        "https://openalex.org/W7165527264",
+        "https://openalex.org/W7165529367",
+        "https://openalex.org/W7165533940",
+        "https://openalex.org/W7165534746",
+        "https://openalex.org/W7165537008",
+        "https://openalex.org/W7165540342",
+        "https://openalex.org/W7165540909",
+        "https://openalex.org/W7165541365",
+        "https://openalex.org/W7165542210",
+        "https://openalex.org/W7165543889",
+        "https://openalex.org/W7165554372",
+        "https://openalex.org/W7165558335",
+        "https://openalex.org/W7165568394",
+        "https://openalex.org/W7165572977",
+        "https://openalex.org/W7165574888",
+        "https://openalex.org/W7165575799",
+        "https://openalex.org/W7165876721",
+        "https://openalex.org/W7166328140",
+        "https://openalex.org/W7166841995",
+        "https://openalex.org/W7167466118",
+        "https://openalex.org/W7167474438",
+        "https://openalex.org/W7167481359",
+        "https://openalex.org/W7167499230",
+        "https://openalex.org/W7167509827",
+        "https://openalex.org/W7167517229",
+        "https://openalex.org/W7167519159",
+        "https://openalex.org/W7172498455",
+        "https://openalex.org/W7203530287",
+        "https://openalex.org/W7203738849",
+        "https://openalex.org/W7203744038",
+        "https://openalex.org/W7203748659",
+        "https://openalex.org/W7203758266",
+        "https://openalex.org/W7203760115",
+        "https://openalex.org/W7203762774",
+        "https://openalex.org/W7203770164",
+        "https://openalex.org/W7203782906",
+        "https://openalex.org/W7203792085",
+        "https://openalex.org/W7203796262",
+        "https://openalex.org/W7212042470"
+      ],
+      "related_works": [
+        "https://openalex.org/W7167107109",
+        "https://openalex.org/W4403884201",
+        "https://openalex.org/W7092288349",
+        "https://openalex.org/W7166852783",
+        "https://openalex.org/W7125139850",
+        "https://openalex.org/W7161167000",
+        "https://openalex.org/W7162500993",
+        "https://openalex.org/W7223083881",
+        "https://openalex.org/W4416034364",
+        "https://openalex.org/W7166854363"
+      ],
+      "abstract_inverted_index": {
+        "Cross-cultural": [
+          0
+        ],
+        "language-model": [
+          1,
+          233
+        ],
+        "services": [
+          2
+        ],
+        "need": [
+          3,
+          10
+        ],
+        "more": [
+          4
+        ],
+        "than": [
+          5
+        ],
+        "high": [
+          6,
+          206
+        ],
+        "average": [
+          7
+        ],
+        "accuracy:": [
+          8
+        ],
+        "they": [
+          9
+        ],
+        "inference": [
+          11
+        ],
+        "procedures": [
+          12,
+          31
+        ],
+        "that": [
+          13
+        ],
+        "recognize": [
+          14
+        ],
+        "ambiguous": [
+          15
+        ],
+        "answer": [
+          16
+        ],
+        "structures,": [
+          17
+        ],
+        "communicate": [
+          18
+        ],
+        "uncertainty,": [
+          19
+        ],
+        "and": [
+          20,
+          43,
+          66,
+          75,
+          79,
+          94,
+          113,
+          125,
+          139,
+          156,
+          170,
+          186,
+          197,
+          220
+        ],
+        "avoid": [
+          21
+        ],
+        "concentrating": [
+          22
+        ],
+        "errors": [
+          23
+        ],
+        "in": [
+          24,
+          70
+        ],
+        "underrepresented": [
+          25
+        ],
+        "regions.": [
+          26,
+          52
+        ],
+        "This": [
+          27
+        ],
+        "study": [
+          28
+        ],
+        "evaluates": [
+          29
+        ],
+        "such": [
+          30
+        ],
+        "on": [
+          32,
+          111,
+          118,
+          154,
+          158,
+          184,
+          191
+        ],
+        "the": [
+          33,
+          145,
+          163
+        ],
+        "2024": [
+          34
+        ],
+        "public": [
+          35
+        ],
+        "release": [
+          36
+        ],
+        "of": [
+          37
+        ],
+        "CulturalBench,": [
+          38
+        ],
+        "comprising": [
+          39
+        ],
+        "1,227": [
+          40
+        ],
+        "multiple-choice": [
+          41
+        ],
+        "questions": [
+          42
+        ],
+        "4,908": [
+          44
+        ],
+        "option-level": [
+          45
+        ],
+        "binary": [
+          46
+        ],
+        "judgments": [
+          47
+        ],
+        "from": [
+          48,
+          68,
+          180,
+          187
+        ],
+        "45": [
+          49
+        ],
+        "countries": [
+          50
+        ],
+        "or": [
+          51
+        ],
+        "A": [
+          53,
+          120
+        ],
+        "deterministic": [
+          54
+        ],
+        "decision-layer": [
+          55
+        ],
+        "test": [
+          56
+        ],
+        "bed": [
+          57
+        ],
+        "was": [
+          58
+        ],
+        "used": [
+          59
+        ],
+        "to": [
+          60,
+          137,
+          152,
+          182,
+          189
+        ],
+        "isolate": [
+          61
+        ],
+        "retrieval,": [
+          62,
+          82
+        ],
+        "score": [
+          63,
+          83
+        ],
+        "verification,": [
+          64
+        ],
+        "calibration,": [
+          65,
+          196
+        ],
+        "abstention": [
+          67,
+          198
+        ],
+        "changes": [
+          69
+        ],
+        "proprietary": [
+          71
+        ],
+        "model": [
+          72
+        ],
+        "checkpoints.": [
+          73
+        ],
+        "Word-": [
+          74
+        ],
+        "character-ngram": [
+          76
+        ],
+        "scorers,": [
+          77
+        ],
+        "global": [
+          78
+        ],
+        "country": [
+          80
+        ],
+        "exemplar": [
+          81
+        ],
+        "fusion,": [
+          84
+        ],
+        "a": [
+          85
+        ],
+        "score-stack": [
+          86
+        ],
+        "verifier,": [
+          87
+        ],
+        "an": [
+          88
+        ],
+        "observable": [
+          89
+        ],
+        "mode-aware": [
+          90,
+          132
+        ],
+        "router,": [
+          91
+        ],
+        "temperature": [
+          92,
+          142
+        ],
+        "scaling,": [
+          93
+        ],
+        "confidence-based": [
+          95
+        ],
+        "selective": [
+          96
+        ],
+        "prediction": [
+          97
+        ],
+        "were": [
+          98
+        ],
+        "evaluated": [
+          99
+        ],
+        "with": [
+          100
+        ],
+        "country-stratified,": [
+          101
+        ],
+        "question-grouped": [
+          102
+        ],
+        "five-fold": [
+          103
+        ],
+        "cross-validation.": [
+          104
+        ],
+        "The": [
+          105,
+          131
+        ],
+        "text-only": [
+          106
+        ],
+        "scorer": [
+          107
+        ],
+        "achieved": [
+          108,
+          166
+        ],
+        "40.51%": [
+          109
+        ],
+        "accuracy": [
+          110,
+          169
+        ],
+        "CulturalBench-Easy": [
+          112
+        ],
+        "9.70%": [
+          114
+        ],
+        "question-level": [
+          115
+        ],
+        "exact": [
+          116,
+          173
+        ],
+        "match": [
+          117
+        ],
+        "CulturalBench-Hard.": [
+          119
+        ],
+        "position-only": [
+          121
+        ],
+        "shortcut": [
+          122
+        ],
+        "reached": [
+          123
+        ],
+        "53.63%": [
+          124
+        ],
+        "51.75%,": [
+          126
+        ],
+        "exposing": [
+          127
+        ],
+        "substantial": [
+          128
+        ],
+        "answer-position": [
+          129
+        ],
+        "regularity.": [
+          130
+        ],
+        "router": [
+          133,
+          165
+        ],
+        "increased": [
+          134
+        ],
+        "these": [
+          135
+        ],
+        "scores": [
+          136,
+          178
+        ],
+        "54.69%": [
+          138
+        ],
+        "52.32%,": [
+          140
+        ],
+        "respectively;": [
+          141
+        ],
+        "scaling": [
+          143,
+          194
+        ],
+        "preserved": [
+          144
+        ],
+        "predictions": [
+          146
+        ],
+        "while": [
+          147
+        ],
+        "reducing": [
+          148
+        ],
+        "expected": [
+          149
+        ],
+        "calibration": [
+          150
+        ],
+        "error": [
+          151
+        ],
+        "0.0234": [
+          153
+        ],
+        "Easy": [
+          155,
+          168,
+          185
+        ],
+        "0.0131": [
+          157
+        ],
+        "Hard.": [
+          159,
+          192
+        ],
+        "At": [
+          160
+        ],
+        "80%": [
+          161
+        ],
+        "coverage,": [
+          162,
+          203
+        ],
+        "calibrated": [
+          164,
+          176
+        ],
+        "56.62%": [
+          167
+        ],
+        "54.79%": [
+          171
+        ],
+        "Hard": [
+          172
+        ],
+        "match.": [
+          174
+        ],
+        "Nevertheless,": [
+          175
+        ],
+        "regional": [
+          177
+        ],
+        "ranged": [
+          179
+        ],
+        "44.09%": [
+          181
+        ],
+        "70.37%": [
+          183
+        ],
+        "40.16%": [
+          188
+        ],
+        "66.67%": [
+          190
+        ],
+        "Temperature": [
+          193
+        ],
+        "improved": [
+          195
+        ],
+        "lowered": [
+          199
+        ],
+        "risk": [
+          200
+        ],
+        "at": [
+          201
+        ],
+        "intermediate": [
+          202
+        ],
+        "but": [
+          204
+        ],
+        "neither": [
+          205
+        ],
+        "confidence": [
+          207
+        ],
+        "nor": [
+          208
+        ],
+        "aggregate": [
+          209
+        ],
+        "performance": [
+          210
+        ],
+        "established": [
+          211
+        ],
+        "cross-cultural": [
+          212,
+          232
+        ],
+        "robustness.": [
+          213
+        ],
+        "Position": [
+          214
+        ],
+        "balance,": [
+          215
+        ],
+        "multi-answer": [
+          216
+        ],
+        "sensitivity,": [
+          217
+        ],
+        "worst-region": [
+          218
+        ],
+        "reporting,": [
+          219
+        ],
+        "group-aware": [
+          221
+        ],
+        "coverage": [
+          222
+        ],
+        "should": [
+          223
+        ],
+        "therefore": [
+          224
+        ],
+        "be": [
+          225
+        ],
+        "treated": [
+          226
+        ],
+        "as": [
+          227
+        ],
+        "core": [
+          228
+        ],
+        "requirements": [
+          229
+        ],
+        "for": [
+          230
+        ],
+        "evaluating": [
+          231
+        ],
+        "services.": [
+          234
+        ]
+      },
+      "counts_by_year": [],
+      "updated_date": "2026-11-04T10:54:05.112534",
+      "created_date": "2026-08-02T00:00:00"
+    },
+    {
+      "id": "https://openalex.org/W7172261375",
+      "doi": "https://doi.org/10.60087/jklst.vol5.n2.006",
+      "title": "Budgeted Multi-Hop Retrieval Agents with Evidence-Chain Reliability and Cost-Aware Abstention",
+      "display_name": "Budgeted Multi-Hop Retrieval Agents with Evidence-Chain Reliability and Cost-Aware Abstention",
+      "relevance_score": 36.44792,
+      "publication_year": 2026,
+      "publication_date": "2026-06-25",
+      "ids": {
+        "openalex": "https://openalex.org/W7172261375",
+        "doi": "https://doi.org/10.60087/jklst.vol5.n2.006"
+      },
+      "language": "en",
+      "primary_location": {
+        "id": "doi:10.60087/jklst.vol5.n2.006",
+        "doi": "https://doi.org/10.60087/jklst.vol5.n2.006",
+        "is_oa": true,
+        "landing_page_url": "https://doi.org/10.60087/jklst.vol5.n2.006",
+        "pdf_url": "https://jklst.org/index.php/home/article/download/385/338",
+        "source": {
+          "id": "https://openalex.org/S4387291064",
+          "display_name": "Journal of Knowledge Learning and Science Technology",
+          "issn_l": "2959-6386",
+          "issn": [
+            "2959-6386"
+          ],
+          "is_oa": false,
+          "is_in_doaj": false,
+          "is_core": false,
+          "listed_in": [],
+          "host_organization": "https://openalex.org/I4210096066",
+          "host_organization_name": "Open Knowledge (United Kingdom)",
+          "host_organization_lineage": [
+            "https://openalex.org/I4210096066"
+          ],
+          "host_organization_lineage_names": [],
+          "type": "journal"
+        },
+        "license": "cc-by",
+        "license_id": "https://openalex.org/licenses/cc-by",
+        "version": "publishedVersion",
+        "is_accepted": true,
+        "is_published": true,
+        "raw_source_name": "Journal of Knowledge Learning and Science Technology ISSN: 2959-6386 (online)",
+        "raw_type": "journal-article"
+      },
+      "volume": null,
+      "type": "article",
+      "is_traditional": true,
+      "indexed_in": [
+        "crossref"
+      ],
+      "open_access": {
+        "is_oa": true,
+        "oa_status": "hybrid",
+        "oa_url": "https://jklst.org/index.php/home/article/download/385/338",
+        "any_repository_has_fulltext": false
+      },
+      "authorships": [
+        {
+          "author_position": "first",
+          "author": {
+            "id": "https://openalex.org/A5144269903",
+            "display_name": "Caleb Kong",
+            "orcid": null,
+            "observed_orcids": []
+          },
+          "institutions": [
+            {
+              "id": "https://openalex.org/I57206974",
+              "display_name": "New York University",
+              "ror": "https://ror.org/0190ak572",
+              "country_code": "US",
+              "type": "education",
+              "lineage": [
+                "https://openalex.org/I57206974"
+              ]
+            }
+          ],
+          "countries": [
+            "US"
+          ],
+          "is_corresponding": true,
+          "raw_author_name": "Caleb Kong",
+          "raw_affiliation_strings": [
+            "New York University"
+          ],
+          "raw_orcid": null,
+          "affiliations": [
+            {
+              "raw_affiliation_string": "New York University",
+              "institution_ids": [
+                "https://openalex.org/I57206974"
+              ]
+            }
+          ]
+        }
+      ],
+      "institutions": [],
+      "countries_distinct_count": 1,
+      "institutions_distinct_count": 1,
+      "corresponding_author_ids": [
+        "https://openalex.org/A5144269903"
+      ],
+      "corresponding_institution_ids": [
+        "https://openalex.org/I57206974"
+      ],
+      "apc_list": null,
+      "apc_paid": null,
+      "fwci": 0.0,
+      "has_fulltext": true,
+      "cited_by_count": 0,
+      "citation_normalized_percentile": {
+        "value": 0.53573917,
+        "is_in_top_1_percent": false,
+        "is_in_top_10_percent": false
+      },
+      "cited_by_percentile_year": null,
+      "biblio": {
+        "volume": "5",
+        "issue": "2",
+        "first_page": "79",
+        "last_page": "102"
+      },
+      "is_retracted": false,
+      "is_paratext": false,
+      "is_xpac": false,
+      "primary_topic": {
+        "id": "https://openalex.org/T10286",
+        "display_name": "Information Retrieval and Search Behavior",
+        "score": 0.8916000127792358,
+        "subfield": {
+          "id": "https://openalex.org/subfields/1710",
+          "display_name": "Information Systems"
+        },
+        "field": {
+          "id": "https://openalex.org/fields/17",
+          "display_name": "Computer Science"
+        },
+        "domain": {
+          "id": "https://openalex.org/domains/3",
+          "display_name": "Physical Sciences"
+        }
+      },
+      "topics": [
+        {
+          "id": "https://openalex.org/T10286",
+          "display_name": "Information Retrieval and Search Behavior",
+          "score": 0.8916000127792358,
+          "subfield": {
+            "id": "https://openalex.org/subfields/1710",
+            "display_name": "Information Systems"
+          },
+          "field": {
+            "id": "https://openalex.org/fields/17",
+            "display_name": "Computer Science"
+          },
+          "domain": {
+            "id": "https://openalex.org/domains/3",
+            "display_name": "Physical Sciences"
+          }
+        },
+        {
+          "id": "https://openalex.org/T10028",
+          "display_name": "Topic Modeling",
+          "score": 0.1005999967455864,
+          "subfield": {
+            "id": "https://openalex.org/subfields/1702",
+            "display_name": "Artificial Intelligence"
+          },
+          "field": {
+            "id": "https://openalex.org/fields/17",
+            "display_name": "Computer Science"
+          },
+          "domain": {
+            "id": "https://openalex.org/domains/3",
+            "display_name": "Physical Sciences"
+          }
+        },
+        {
+          "id": "https://openalex.org/T10181",
+          "display_name": "Natural Language Processing Techniques",
+          "score": 0.0010000000474974513,
+          "subfield": {
+            "id": "https://openalex.org/subfields/1702",
+            "display_name": "Artificial Intelligence"
+          },
+          "field": {
+            "id": "https://openalex.org/fields/17",
+            "display_name": "Computer Science"
+          },
+          "domain": {
+            "id": "https://openalex.org/domains/3",
+            "display_name": "Physical Sciences"
+          }
+        }
+      ],
+      "keywords": [
+        {
+          "id": "https://openalex.org/keywords/multi-hop-retrieval",
+          "display_name": "multi-hop retrieval",
+          "score": 0.796999990940094
+        },
+        {
+          "id": "https://openalex.org/keywords/isotonic-calibration",
+          "display_name": "isotonic calibration",
+          "score": 0.777999997138977
+        },
+        {
+          "id": "https://openalex.org/keywords/null-detection",
+          "display_name": "null detection",
+          "score": 0.39100000262260437
+        },
+        {
+          "id": "https://openalex.org/keywords/re-ranking",
+          "display_name": "re-ranking",
+          "score": 0.621999979019165
+        },
+        {
+          "id": "https://openalex.org/keywords/bm25",
+          "display_name": "BM25",
+          "score": 0.6439999938011169
+        },
+        {
+          "id": "https://openalex.org/keywords/reciprocal-rank-fusion",
+          "display_name": "reciprocal rank fusion",
+          "score": 0.9229999780654907
+        },
+        {
+          "id": "https://openalex.org/keywords/cost-quality-trade-off",
+          "display_name": "cost-quality trade-off",
+          "score": 0.7739999890327454
+        }
+      ],
+      "concepts": [
+        {
+          "id": "https://openalex.org/C41008148",
+          "wikidata": "https://www.wikidata.org/wiki/Q21198",
+          "display_name": "Computer science",
+          "level": 0,
+          "score": 0.5976999998092651
+        },
+        {
+          "id": "https://openalex.org/C165838908",
+          "wikidata": "https://www.wikidata.org/wiki/Q736777",
+          "display_name": "Calibration",
+          "level": 2,
+          "score": 0.5511000156402588
+        },
+        {
+          "id": "https://openalex.org/C2779343474",
+          "wikidata": "https://www.wikidata.org/wiki/Q3109175",
+          "display_name": "Context (archaeology)",
+          "level": 2,
+          "score": 0.5307000279426575
+        },
+        {
+          "id": "https://openalex.org/C43214815",
+          "wikidata": "https://www.wikidata.org/wiki/Q7310987",
+          "display_name": "Reliability (semiconductor)",
+          "level": 3,
+          "score": 0.48330000042915344
+        },
+        {
+          "id": "https://openalex.org/C154945302",
+          "wikidata": "https://www.wikidata.org/wiki/Q11660",
+          "display_name": "Artificial intelligence",
+          "level": 1,
+          "score": 0.4052000045776367
+        },
+        {
+          "id": "https://openalex.org/C176217482",
+          "wikidata": "https://www.wikidata.org/wiki/Q860554",
+          "display_name": "Metric (unit)",
+          "level": 2,
+          "score": 0.39739999175071716
+        },
+        {
+          "id": "https://openalex.org/C2777742833",
+          "wikidata": "https://www.wikidata.org/wiki/Q1964083",
+          "display_name": "Reciprocal",
+          "level": 2,
+          "score": 0.3840999901294708
+        },
+        {
+          "id": "https://openalex.org/C105795698",
+          "wikidata": "https://www.wikidata.org/wiki/Q12483",
+          "display_name": "Statistics",
+          "level": 1,
+          "score": 0.3709000051021576
+        },
+        {
+          "id": "https://openalex.org/C2778067643",
+          "wikidata": "https://www.wikidata.org/wiki/Q166507",
+          "display_name": "Interval (graph theory)",
+          "level": 2,
+          "score": 0.3617999851703644
+        },
+        {
+          "id": "https://openalex.org/C124101348",
+          "wikidata": "https://www.wikidata.org/wiki/Q172491",
+          "display_name": "Data mining",
+          "level": 1,
+          "score": 0.3434999883174896
+        },
+        {
+          "id": "https://openalex.org/C28719098",
+          "wikidata": "https://www.wikidata.org/wiki/Q44946",
+          "display_name": "Point (geometry)",
+          "level": 2,
+          "score": 0.3357999920845032
+        },
+        {
+          "id": "https://openalex.org/C33923547",
+          "wikidata": "https://www.wikidata.org/wiki/Q395",
+          "display_name": "Mathematics",
+          "level": 0,
+          "score": 0.3357999920845032
+        },
+        {
+          "id": "https://openalex.org/C43521106",
+          "wikidata": "https://www.wikidata.org/wiki/Q2165493",
+          "display_name": "Pipeline (software)",
+          "level": 2,
+          "score": 0.32739999890327454
+        },
+        {
+          "id": "https://openalex.org/C189430467",
+          "wikidata": "https://www.wikidata.org/wiki/Q7293293",
+          "display_name": "Ranking (information retrieval)",
+          "level": 2,
+          "score": 0.2930000126361847
+        },
+        {
+          "id": "https://openalex.org/C86037889",
+          "wikidata": "https://www.wikidata.org/wiki/Q4330127",
+          "display_name": "Learning to rank",
+          "level": 3,
+          "score": 0.29170000553131104
+        },
+        {
+          "id": "https://openalex.org/C111335779",
+          "wikidata": "https://www.wikidata.org/wiki/Q3454686",
+          "display_name": "Reduction (mathematics)",
+          "level": 2,
+          "score": 0.29170000553131104
+        },
+        {
+          "id": "https://openalex.org/C99498987",
+          "wikidata": "https://www.wikidata.org/wiki/Q2210247",
+          "display_name": "Noise (video)",
+          "level": 3,
+          "score": 0.27970001101493835
+        },
+        {
+          "id": "https://openalex.org/C17418463",
+          "wikidata": "https://www.wikidata.org/wiki/Q3455874",
+          "display_name": "Isotonic regression",
+          "level": 3,
+          "score": 0.27959999442100525
+        },
+        {
+          "id": "https://openalex.org/C200601418",
+          "wikidata": "https://www.wikidata.org/wiki/Q2193887",
+          "display_name": "Reliability engineering",
+          "level": 1,
+          "score": 0.2775000035762787
+        },
+        {
+          "id": "https://openalex.org/C152124472",
+          "wikidata": "https://www.wikidata.org/wiki/Q1204361",
+          "display_name": "Redundancy (engineering)",
+          "level": 2,
+          "score": 0.2752000093460083
+        },
+        {
+          "id": "https://openalex.org/C134448949",
+          "wikidata": "https://www.wikidata.org/wiki/Q1384274",
+          "display_name": "Expediting",
+          "level": 2,
+          "score": 0.27459999918937683
+        },
+        {
+          "id": "https://openalex.org/C164226766",
+          "wikidata": "https://www.wikidata.org/wiki/Q7293202",
+          "display_name": "Rank (graph theory)",
+          "level": 2,
+          "score": 0.2736999988555908
+        },
+        {
+          "id": "https://openalex.org/C191988596",
+          "wikidata": "https://www.wikidata.org/wiki/Q628374",
+          "display_name": "Null hypothesis",
+          "level": 2,
+          "score": 0.2624000012874603
+        },
+        {
+          "id": "https://openalex.org/C61797465",
+          "wikidata": "https://www.wikidata.org/wiki/Q1188986",
+          "display_name": "Term (time)",
+          "level": 2,
+          "score": 0.2623000144958496
+        },
+        {
+          "id": "https://openalex.org/C49937458",
+          "wikidata": "https://www.wikidata.org/wiki/Q2599292",
+          "display_name": "Probabilistic logic",
+          "level": 2,
+          "score": 0.2614000141620636
+        },
+        {
+          "id": "https://openalex.org/C44083865",
+          "wikidata": "https://www.wikidata.org/wiki/Q3853443",
+          "display_name": "Mean reciprocal rank",
+          "level": 2,
+          "score": 0.26030001044273376
+        },
+        {
+          "id": "https://openalex.org/C44291984",
+          "wikidata": "https://www.wikidata.org/wiki/Q1074173",
+          "display_name": "Question answering",
+          "level": 2,
+          "score": 0.25929999351501465
+        },
+        {
+          "id": "https://openalex.org/C68387754",
+          "wikidata": "https://www.wikidata.org/wiki/Q7271585",
+          "display_name": "Schedule",
+          "level": 2,
+          "score": 0.2583000063896179
+        },
+        {
+          "id": "https://openalex.org/C126042441",
+          "wikidata": "https://www.wikidata.org/wiki/Q1324888",
+          "display_name": "Frame (networking)",
+          "level": 2,
+          "score": 0.25699999928474426
+        },
+        {
+          "id": "https://openalex.org/C12725497",
+          "wikidata": "https://www.wikidata.org/wiki/Q810247",
+          "display_name": "Baseline (sea)",
+          "level": 2,
+          "score": 0.2549999952316284
+        },
+        {
+          "id": "https://openalex.org/C119857082",
+          "wikidata": "https://www.wikidata.org/wiki/Q2539",
+          "display_name": "Machine learning",
+          "level": 1,
+          "score": 0.25369998812675476
+        }
+      ],
+      "mesh": [],
+      "locations_count": 1,
+      "locations": [
+        {
+          "id": "doi:10.60087/jklst.vol5.n2.006",
+          "doi": "https://doi.org/10.60087/jklst.vol5.n2.006",
+          "is_oa": true,
+          "landing_page_url": "https://doi.org/10.60087/jklst.vol5.n2.006",
+          "pdf_url": "https://jklst.org/index.php/home/article/download/385/338",
+          "source": {
+            "id": "https://openalex.org/S4387291064",
+            "display_name": "Journal of Knowledge Learning and Science Technology",
+            "issn_l": "2959-6386",
+            "issn": [
+              "2959-6386"
+            ],
+            "is_oa": false,
+            "is_in_doaj": false,
+            "is_core": false,
+            "listed_in": [],
+            "host_organization": "https://openalex.org/I4210096066",
+            "host_organization_name": "Open Knowledge (United Kingdom)",
+            "host_organization_lineage": [
+              "https://openalex.org/I4210096066"
+            ],
+            "host_organization_lineage_names": [],
+            "type": "journal"
+          },
+          "license": "cc-by",
+          "license_id": "https://openalex.org/licenses/cc-by",
+          "version": "publishedVersion",
+          "is_accepted": true,
+          "is_published": true,
+          "raw_source_name": "Journal of Knowledge Learning and Science Technology ISSN: 2959-6386 (online)",
+          "raw_type": "journal-article"
+        }
+      ],
+      "best_oa_location": {
+        "id": "doi:10.60087/jklst.vol5.n2.006",
+        "doi": "https://doi.org/10.60087/jklst.vol5.n2.006",
+        "is_oa": true,
+        "landing_page_url": "https://doi.org/10.60087/jklst.vol5.n2.006",
+        "pdf_url": "https://jklst.org/index.php/home/article/download/385/338",
+        "source": {
+          "id": "https://openalex.org/S4387291064",
+          "display_name": "Journal of Knowledge Learning and Science Technology",
+          "issn_l": "2959-6386",
+          "issn": [
+            "2959-6386"
+          ],
+          "is_oa": false,
+          "is_in_doaj": false,
+          "is_core": false,
+          "listed_in": [],
+          "host_organization": "https://openalex.org/I4210096066",
+          "host_organization_name": "Open Knowledge (United Kingdom)",
+          "host_organization_lineage": [
+            "https://openalex.org/I4210096066"
+          ],
+          "host_organization_lineage_names": [],
+          "type": "journal"
+        },
+        "license": "cc-by",
+        "license_id": "https://openalex.org/licenses/cc-by",
+        "version": "publishedVersion",
+        "is_accepted": true,
+        "is_published": true,
+        "raw_source_name": "Journal of Knowledge Learning and Science Technology ISSN: 2959-6386 (online)",
+        "raw_type": "journal-article"
+      },
+      "sustainable_development_goals": [],
+      "study_designs": [],
+      "awards": [],
+      "funders": [],
+      "has_content": {
+        "grobid_xml": true,
+        "pdf": true
+      },
+      "content_urls": {
+        "pdf": "https://content.openalex.org/works/W7172261375.pdf",
+        "grobid_xml": "https://content.openalex.org/works/W7172261375.grobid-xml"
+      },
+      "referenced_works_count": 82,
+      "referenced_works": [
+        "https://openalex.org/W2069870183",
+        "https://openalex.org/W2104770855",
+        "https://openalex.org/W2148972377",
+        "https://openalex.org/W2889787757",
+        "https://openalex.org/W2909544278",
+        "https://openalex.org/W2963748441",
+        "https://openalex.org/W3015883388",
+        "https://openalex.org/W3035441651",
+        "https://openalex.org/W3115947671",
+        "https://openalex.org/W3153833878",
+        "https://openalex.org/W3179867916",
+        "https://openalex.org/W3190126809",
+        "https://openalex.org/W4252076394",
+        "https://openalex.org/W4376122773",
+        "https://openalex.org/W4385571271",
+        "https://openalex.org/W4385573082",
+        "https://openalex.org/W4389519118",
+        "https://openalex.org/W4389520468",
+        "https://openalex.org/W4389520670",
+        "https://openalex.org/W4396903438",
+        "https://openalex.org/W4400431155",
+        "https://openalex.org/W4401042753",
+        "https://openalex.org/W4401042808",
+        "https://openalex.org/W4401618965",
+        "https://openalex.org/W4402387163",
+        "https://openalex.org/W4402671152",
+        "https://openalex.org/W4404782834",
+        "https://openalex.org/W4411630045",
+        "https://openalex.org/W4415366360",
+        "https://openalex.org/W7111223159",
+        "https://openalex.org/W7125641442",
+        "https://openalex.org/W7125647109",
+        "https://openalex.org/W7129945706",
+        "https://openalex.org/W7131472642",
+        "https://openalex.org/W7131623283",
+        "https://openalex.org/W7133195493",
+        "https://openalex.org/W7147503912",
+        "https://openalex.org/W7149958370",
+        "https://openalex.org/W7154899371",
+        "https://openalex.org/W7154986364",
+        "https://openalex.org/W7161156960",
+        "https://openalex.org/W7161163722",
+        "https://openalex.org/W7162628337",
+        "https://openalex.org/W7164009662",
+        "https://openalex.org/W7164489596",
+        "https://openalex.org/W7164506419",
+        "https://openalex.org/W7164514533",
+        "https://openalex.org/W7164558802",
+        "https://openalex.org/W7164564277",
+        "https://openalex.org/W7164570951",
+        "https://openalex.org/W7164575788",
+        "https://openalex.org/W7164577025",
+        "https://openalex.org/W7164903780",
+        "https://openalex.org/W7165529367",
+        "https://openalex.org/W7165533940",
+        "https://openalex.org/W7165537008",
+        "https://openalex.org/W7165540342",
+        "https://openalex.org/W7165540909",
+        "https://openalex.org/W7165541365",
+        "https://openalex.org/W7165542210",
+        "https://openalex.org/W7165543889",
+        "https://openalex.org/W7165554372",
+        "https://openalex.org/W7165558335",
+        "https://openalex.org/W7165568394",
+        "https://openalex.org/W7165572977",
+        "https://openalex.org/W7165574888",
+        "https://openalex.org/W7165575799",
+        "https://openalex.org/W7165876721",
+        "https://openalex.org/W7166328140",
+        "https://openalex.org/W7166841995",
+        "https://openalex.org/W7172498455",
+        "https://openalex.org/W7203530287",
+        "https://openalex.org/W7203738849",
+        "https://openalex.org/W7203744038",
+        "https://openalex.org/W7203748659",
+        "https://openalex.org/W7203760115",
+        "https://openalex.org/W7203762774",
+        "https://openalex.org/W7203770164",
+        "https://openalex.org/W7203782906",
+        "https://openalex.org/W7203792085",
+        "https://openalex.org/W7203796262",
+        "https://openalex.org/W7212042470"
+      ],
+      "related_works": [
+        "https://openalex.org/W7165542210",
+        "https://openalex.org/W7213239148",
+        "https://openalex.org/W7126281897",
+        "https://openalex.org/W7160855233",
+        "https://openalex.org/W7220200098",
+        "https://openalex.org/W7219583088",
+        "https://openalex.org/W7220650482",
+        "https://openalex.org/W7167492461",
+        "https://openalex.org/W7222519220",
+        "https://openalex.org/W7215043874"
+      ],
+      "abstract_inverted_index": {
+        "Fixed": [
+          0
+        ],
+        "top-k": [
+          1
+        ],
+        "retrieval": [
+          2,
+          190
+        ],
+        "spends": [
+          3
+        ],
+        "the": [
+          4,
+          119,
+          138
+        ],
+        "same": [
+          5
+        ],
+        "context": [
+          6
+        ],
+        "budget": [
+          7
+        ],
+        "on": [
+          8,
+          26
+        ],
+        "every": [
+          9
+        ],
+        "question": [
+          10
+        ],
+        "without": [
+          11
+        ],
+        "indicating": [
+          12
+        ],
+        "whether": [
+          13
+        ],
+        "a": [
+          14,
+          23,
+          102,
+          130,
+          182
+        ],
+        "multi-document": [
+          15
+        ],
+        "evidence": [
+          16,
+          41
+        ],
+        "chain": [
+          17
+        ],
+        "is": [
+          18
+        ],
+        "complete.": [
+          19
+        ],
+        "This": [
+          20
+        ],
+        "study": [
+          21
+        ],
+        "evaluates": [
+          22
+        ],
+        "budgeted": [
+          24
+        ],
+        "agent": [
+          25,
+          100
+        ],
+        "MultiHop-RAG": [
+          27
+        ],
+        "using": [
+          28
+        ],
+        "all": [
+          29
+        ],
+        "609": [
+          30
+        ],
+        "documents": [
+          31
+        ],
+        "and": [
+          32,
+          54,
+          63,
+          72,
+          80,
+          94,
+          107,
+          115,
+          162,
+          168,
+          186
+        ],
+        "2,556": [
+          33
+        ],
+        "questions.": [
+          34
+        ],
+        "The": [
+          35,
+          46,
+          98,
+          179
+        ],
+        "1,534/511/511": [
+          36
+        ],
+        "train/validation/test": [
+          37
+        ],
+        "split": [
+          38
+        ],
+        "kept": [
+          39
+        ],
+        "each": [
+          40
+        ],
+        "group": [
+          42
+        ],
+        "in": [
+          43
+        ],
+        "one": [
+          44
+        ],
+        "partition.": [
+          45
+        ],
+        "pipeline": [
+          47
+        ],
+        "compared": [
+          48,
+          111
+        ],
+        "BM25,": [
+          49
+        ],
+        "256-dimensional": [
+          50
+        ],
+        "latent-semantic": [
+          51
+        ],
+        "retrieval,": [
+          52
+        ],
+        "equal": [
+          53
+        ],
+        "weighted": [
+          55
+        ],
+        "reciprocal": [
+          56
+        ],
+        "rank": [
+          57
+        ],
+        "fusion,": [
+          58
+        ],
+        "supervised": [
+          59
+        ],
+        "reranking,": [
+          60
+        ],
+        "fixed": [
+          61
+        ],
+        "depth,": [
+          62
+        ],
+        "calibrated": [
+          64
+        ],
+        "dynamic": [
+          65,
+          99
+        ],
+        "stopping.": [
+          66
+        ],
+        "A": [
+          67
+        ],
+        "sparse": [
+          68
+        ],
+        "reader,": [
+          69
+        ],
+        "null": [
+          70
+        ],
+        "detector,": [
+          71
+        ],
+        "isotonic": [
+          73
+        ],
+        "calibration": [
+          74,
+          147,
+          150
+        ],
+        "supported": [
+          75
+        ],
+        "answer,": [
+          76
+        ],
+        "evidence,": [
+          77
+        ],
+        "citation,": [
+          78
+        ],
+        "cost,": [
+          79
+        ],
+        "abstention": [
+          81
+        ],
+        "evaluation.": [
+          82
+        ],
+        "On": [
+          83
+        ],
+        "451": [
+          84
+        ],
+        "answerable": [
+          85
+        ],
+        "test": [
+          86
+        ],
+        "questions,": [
+          87
+        ],
+        "reranking": [
+          88
+        ],
+        "achieved": [
+          89
+        ],
+        "0.9069": [
+          90
+        ],
+        "Recall@10,": [
+          91
+        ],
+        "0.8064": [
+          92
+        ],
+        "nDCG@10,": [
+          93
+        ],
+        "0.7428": [
+          95
+        ],
+        "complete-chain": [
+          96
+        ],
+        "retrieval.": [
+          97
+        ],
+        "used": [
+          101
+        ],
+        "mean": [
+          103
+        ],
+        "of": [
+          104,
+          134
+        ],
+        "544.16": [
+          105
+        ],
+        "tokens": [
+          106,
+          114
+        ],
+        "obtained": [
+          108
+        ],
+        "0.6184": [
+          109
+        ],
+        "F1,": [
+          110
+        ],
+        "with": [
+          112,
+          129
+        ],
+        "666.29": [
+          113
+        ],
+        "0.6243": [
+          116
+        ],
+        "F1": [
+          117,
+          125
+        ],
+        "for": [
+          118
+        ],
+        "null-gated": [
+          120
+        ],
+        "Reranker-8": [
+          121
+        ],
+        "policy.": [
+          122
+        ],
+        "Its": [
+          123
+        ],
+        "paired": [
+          124
+        ],
+        "difference": [
+          126
+        ],
+        "was": [
+          127
+        ],
+        "-0.0059": [
+          128
+        ],
+        "95%": [
+          131
+        ],
+        "cluster-bootstrap": [
+          132
+        ],
+        "interval": [
+          133
+        ],
+        "[-0.0246,": [
+          135
+        ],
+        "0.0115],": [
+          136
+        ],
+        "while": [
+          137
+        ],
+        "122.13-token": [
+          139
+        ],
+        "reduction": [
+          140
+        ],
+        "remained": [
+          141
+        ],
+        "significant": [
+          142
+        ],
+        "after": [
+          143
+        ],
+        "Holm": [
+          144
+        ],
+        "adjustment.": [
+          145
+        ],
+        "Isotonic": [
+          146
+        ],
+        "reduced": [
+          148
+        ],
+        "expected": [
+          149
+        ],
+        "error": [
+          151
+        ],
+        "from": [
+          152
+        ],
+        "0.2671": [
+          153
+        ],
+        "to": [
+          154,
+          193
+        ],
+        "0.0321.": [
+          155
+        ],
+        "Selective": [
+          156
+        ],
+        "answering": [
+          157
+        ],
+        "operated": [
+          158
+        ],
+        "at": [
+          159
+        ],
+        "0.3326": [
+          160
+        ],
+        "coverage": [
+          161
+        ],
+        "0.2200": [
+          163
+        ],
+        "exact-match": [
+          164
+        ],
+        "risk.": [
+          165
+        ],
+        "Snippet": [
+          166
+        ],
+        "retention": [
+          167
+        ],
+        "citation": [
+          169
+        ],
+        "precision,": [
+          170
+        ],
+        "rather": [
+          171
+        ],
+        "than": [
+          172
+        ],
+        "candidate": [
+          173
+        ],
+        "generation": [
+          174
+        ],
+        "alone,": [
+          175
+        ],
+        "limited": [
+          176
+        ],
+        "joint": [
+          177
+        ],
+        "reliability.": [
+          178
+        ],
+        "results": [
+          180
+        ],
+        "establish": [
+          181
+        ],
+        "measured": [
+          183
+        ],
+        "quality-cost": [
+          184
+        ],
+        "trade-off": [
+          185
+        ],
+        "identify": [
+          187
+        ],
+        "where": [
+          188
+        ],
+        "deeper": [
+          189
+        ],
+        "still": [
+          191
+        ],
+        "fails": [
+          192
+        ],
+        "improve": [
+          194
+        ],
+        "answers.": [
+          195
+        ]
+      },
+      "counts_by_year": [],
+      "updated_date": "2026-11-04T10:54:05.112534",
+      "created_date": "2026-08-04T00:00:00"
+    },
+    {
+      "id": "https://openalex.org/W7131412174",
+      "doi": "https://doi.org/10.69987/jacs.2023.30102",
+      "title": "Claim-Aware Scientific RAG: Evidence-First Retrieval and Abstention for Scientific Fact Responses on SciFact",
+      "display_name": "Claim-Aware Scientific RAG: Evidence-First Retrieval and Abstention for Scientific Fact Responses on SciFact",
+      "relevance_score": 35.85083,
+      "publication_year": 2023,
+      "publication_date": "2023-01-07",
+      "ids": {
+        "openalex": "https://openalex.org/W7131412174",
+        "doi": "https://doi.org/10.69987/jacs.2023.30102"
+      },
+      "language": "en",
+      "primary_location": {
+        "id": "doi:10.69987/jacs.2023.30102",
+        "doi": "https://doi.org/10.69987/jacs.2023.30102",
+        "is_oa": true,
+        "landing_page_url": "https://doi.org/10.69987/jacs.2023.30102",
+        "pdf_url": "https://scipublication.com/index.php/JACS/article/download/315/286",
+        "source": {
+          "id": "https://openalex.org/S5407048776",
+          "display_name": "Journal of Advanced Computing Systems",
+          "issn_l": "3066-3962",
+          "issn": [
+            "3066-3962"
+          ],
+          "is_oa": true,
+          "is_in_doaj": true,
+          "is_core": false,
+          "listed_in": [
+            "doaj"
+          ],
+          "host_organization": null,
+          "host_organization_name": null,
+          "host_organization_lineage": [],
+          "host_organization_lineage_names": [],
+          "type": "journal"
+        },
+        "license": "cc-by",
+        "license_id": "https://openalex.org/licenses/cc-by",
+        "version": "publishedVersion",
+        "is_accepted": true,
+        "is_published": true,
+        "raw_source_name": "Journal of Advanced Computing Systems",
+        "raw_type": "journal-article"
+      },
+      "volume": null,
+      "type": "article",
+      "is_traditional": true,
+      "indexed_in": [
+        "crossref",
+        "doaj"
+      ],
+      "open_access": {
+        "is_oa": true,
+        "oa_status": "diamond",
+        "oa_url": "https://scipublication.com/index.php/JACS/article/download/315/286",
+        "any_repository_has_fulltext": false
+      },
+      "authorships": [
+        {
+          "author_position": "first",
+          "author": {
+            "id": "https://openalex.org/A5126846253",
+            "display_name": "Jing Chen",
+            "orcid": null,
+            "observed_orcids": []
+          },
+          "institutions": [
+            {
+              "id": "https://openalex.org/I95457486",
+              "display_name": "University of California, Berkeley",
+              "ror": "https://ror.org/01an7q238",
+              "country_code": "US",
+              "type": "education",
+              "lineage": [
+                "https://openalex.org/I95457486"
+              ]
+            }
+          ],
+          "countries": [
+            "US"
+          ],
+          "is_corresponding": false,
+          "raw_author_name": "Jing Chen",
+          "raw_affiliation_strings": [
+            "Industrial Engineering and Operations Research, UCB, CA, USA"
+          ],
+          "raw_orcid": null,
+          "affiliations": [
+            {
+              "raw_affiliation_string": "Industrial Engineering and Operations Research, UCB, CA, USA",
+              "institution_ids": [
+                "https://openalex.org/I95457486"
+              ]
+            }
+          ]
+        },
+        {
+          "author_position": "middle",
+          "author": {
+            "id": "https://openalex.org/A5122347693",
+            "display_name": "Xinzhuo Sun",
+            "orcid": null,
+            "observed_orcids": []
+          },
+          "institutions": [
+            {
+              "id": "https://openalex.org/I4405261073",
+              "display_name": "Cornell Tech",
+              "ror": "https://ror.org/04qscbg47",
+              "country_code": "US",
+              "type": "education",
+              "lineage": [
+                "https://openalex.org/I205783295",
+                "https://openalex.org/I4405261073"
+              ]
+            }
+          ],
+          "countries": [
+            "US"
+          ],
+          "is_corresponding": false,
+          "raw_author_name": "Xinzhuo Sun",
+          "raw_affiliation_strings": [
+            "Computer Science, Cornell Tech, NY, USA"
+          ],
+          "raw_orcid": null,
+          "affiliations": [
+            {
+              "raw_affiliation_string": "Computer Science, Cornell Tech, NY, USA",
+              "institution_ids": [
+                "https://openalex.org/I4405261073"
+              ]
+            }
+          ]
+        },
+        {
+          "author_position": "last",
+          "author": {
+            "id": "https://openalex.org/A5126783959",
+            "display_name": "Vincent Brown",
+            "orcid": null,
+            "observed_orcids": []
+          },
+          "institutions": [
+            {
+              "id": "https://openalex.org/I180949307",
+              "display_name": "Illinois Institute of Technology",
+              "ror": "https://ror.org/037t3ry66",
+              "country_code": "US",
+              "type": "education",
+              "lineage": [
+                "https://openalex.org/I180949307"
+              ]
+            }
+          ],
+          "countries": [
+            "US"
+          ],
+          "is_corresponding": false,
+          "raw_author_name": "Vincent Brown",
+          "raw_affiliation_strings": [
+            "Information Technology, Illinois Tech, IL, USA"
+          ],
+          "raw_orcid": null,
+          "affiliations": [
+            {
+              "raw_affiliation_string": "Information Technology, Illinois Tech, IL, USA",
+              "institution_ids": [
+                "https://openalex.org/I180949307"
+              ]
+            }
+          ]
+        }
+      ],
+      "institutions": [],
+      "countries_distinct_count": 1,
+      "institutions_distinct_count": 3,
+      "corresponding_author_ids": [],
+      "corresponding_institution_ids": [],
+      "apc_list": null,
+      "apc_paid": null,
+      "fwci": 2.5739,
+      "has_fulltext": true,
+      "cited_by_count": 14,
+      "citation_normalized_percentile": {
+        "value": 0.90314244,
+        "is_in_top_1_percent": false,
+        "is_in_top_10_percent": true
+      },
+      "cited_by_percentile_year": {
+        "min": 93,
+        "max": 99
+      },
+      "biblio": {
+        "volume": "3",
+        "issue": "1",
+        "first_page": "16",
+        "last_page": "30"
+      },
+      "is_retracted": false,
+      "is_paratext": false,
+      "is_xpac": false,
+      "primary_topic": {
+        "id": "https://openalex.org/T10286",
+        "display_name": "Information Retrieval and Search Behavior",
+        "score": 0.8633000254631042,
+        "subfield": {
+          "id": "https://openalex.org/subfields/1710",
+          "display_name": "Information Systems"
+        },
+        "field": {
+          "id": "https://openalex.org/fields/17",
+          "display_name": "Computer Science"
+        },
+        "domain": {
+          "id": "https://openalex.org/domains/3",
+          "display_name": "Physical Sciences"
+        }
+      },
+      "topics": [
+        {
+          "id": "https://openalex.org/T10286",
+          "display_name": "Information Retrieval and Search Behavior",
+          "score": 0.8633000254631042,
+          "subfield": {
+            "id": "https://openalex.org/subfields/1710",
+            "display_name": "Information Systems"
+          },
+          "field": {
+            "id": "https://openalex.org/fields/17",
+            "display_name": "Computer Science"
+          },
+          "domain": {
+            "id": "https://openalex.org/domains/3",
+            "display_name": "Physical Sciences"
+          }
+        },
+        {
+          "id": "https://openalex.org/T10028",
+          "display_name": "Topic Modeling",
+          "score": 0.11649999767541885,
+          "subfield": {
+            "id": "https://openalex.org/subfields/1702",
+            "display_name": "Artificial Intelligence"
+          },
+          "field": {
+            "id": "https://openalex.org/fields/17",
+            "display_name": "Computer Science"
+          },
+          "domain": {
+            "id": "https://openalex.org/domains/3",
+            "display_name": "Physical Sciences"
+          }
+        },
+        {
+          "id": "https://openalex.org/T11714",
+          "display_name": "Multimodal Machine Learning Applications",
+          "score": 0.002400000113993883,
+          "subfield": {
+            "id": "https://openalex.org/subfields/1707",
+            "display_name": "Computer Vision and Pattern Recognition"
+          },
+          "field": {
+            "id": "https://openalex.org/fields/17",
+            "display_name": "Computer Science"
+          },
+          "domain": {
+            "id": "https://openalex.org/domains/3",
+            "display_name": "Physical Sciences"
+          }
+        }
+      ],
+      "keywords": [
+        {
+          "id": "https://openalex.org/keywords/retrieval-augmented-generation",
+          "display_name": "retrieval-augmented generation",
+          "score": 0.9750000238418579
+        },
+        {
+          "id": "https://openalex.org/keywords/scifact",
+          "display_name": "SciFact",
+          "score": 0.7239999771118164
+        },
+        {
+          "id": "https://openalex.org/keywords/hallucination-mitigation",
+          "display_name": "hallucination mitigation",
+          "score": 0.718999981880188
+        },
+        {
+          "id": "https://openalex.org/keywords/bm25-retrieval",
+          "display_name": "BM25 retrieval",
+          "score": 0.6669999957084656
+        },
+        {
+          "id": "https://openalex.org/keywords/reciprocal-rank-fusion",
+          "display_name": "reciprocal rank fusion",
+          "score": 0.9580000042915344
+        },
+        {
+          "id": "https://openalex.org/keywords/re-ranking",
+          "display_name": "re-ranking",
+          "score": 0.8489999771118164
+        }
+      ],
+      "concepts": [
+        {
+          "id": "https://openalex.org/C44083865",
+          "wikidata": "https://www.wikidata.org/wiki/Q3853443",
+          "display_name": "Mean reciprocal rank",
+          "level": 2,
+          "score": 0.6668000221252441
+        },
+        {
+          "id": "https://openalex.org/C41008148",
+          "wikidata": "https://www.wikidata.org/wiki/Q21198",
+          "display_name": "Computer science",
+          "level": 0,
+          "score": 0.6407999992370605
+        },
+        {
+          "id": "https://openalex.org/C23123220",
+          "wikidata": "https://www.wikidata.org/wiki/Q816826",
+          "display_name": "Information retrieval",
+          "level": 1,
+          "score": 0.6313999891281128
+        },
+        {
+          "id": "https://openalex.org/C2780451532",
+          "wikidata": "https://www.wikidata.org/wiki/Q759676",
+          "display_name": "Task (project management)",
+          "level": 2,
+          "score": 0.5580999851226807
+        },
+        {
+          "id": "https://openalex.org/C2777267654",
+          "wikidata": "https://www.wikidata.org/wiki/Q3519023",
+          "display_name": "Test (biology)",
+          "level": 2,
+          "score": 0.5511000156402588
+        },
+        {
+          "id": "https://openalex.org/C12725497",
+          "wikidata": "https://www.wikidata.org/wiki/Q810247",
+          "display_name": "Baseline (sea)",
+          "level": 2,
+          "score": 0.5117999911308289
+        },
+        {
+          "id": "https://openalex.org/C154945302",
+          "wikidata": "https://www.wikidata.org/wiki/Q11660",
+          "display_name": "Artificial intelligence",
+          "level": 1,
+          "score": 0.46650001406669617
+        },
+        {
+          "id": "https://openalex.org/C44291984",
+          "wikidata": "https://www.wikidata.org/wiki/Q1074173",
+          "display_name": "Question answering",
+          "level": 2,
+          "score": 0.4542999863624573
+        },
+        {
+          "id": "https://openalex.org/C158154518",
+          "wikidata": "https://www.wikidata.org/wiki/Q7310970",
+          "display_name": "Relevance (law)",
+          "level": 2,
+          "score": 0.4474000036716461
+        },
+        {
+          "id": "https://openalex.org/C2777742833",
+          "wikidata": "https://www.wikidata.org/wiki/Q1964083",
+          "display_name": "Reciprocal",
+          "level": 2,
+          "score": 0.41690000891685486
+        },
+        {
+          "id": "https://openalex.org/C2775924081",
+          "wikidata": "https://www.wikidata.org/wiki/Q55608371",
+          "display_name": "Control (management)",
+          "level": 2,
+          "score": 0.38609999418258667
+        },
+        {
+          "id": "https://openalex.org/C204321447",
+          "wikidata": "https://www.wikidata.org/wiki/Q30642",
+          "display_name": "Natural language processing",
+          "level": 1,
+          "score": 0.38350000977516174
+        },
+        {
+          "id": "https://openalex.org/C164226766",
+          "wikidata": "https://www.wikidata.org/wiki/Q7293202",
+          "display_name": "Rank (graph theory)",
+          "level": 2,
+          "score": 0.3555999994277954
+        },
+        {
+          "id": "https://openalex.org/C2778067643",
+          "wikidata": "https://www.wikidata.org/wiki/Q166507",
+          "display_name": "Interval (graph theory)",
+          "level": 2,
+          "score": 0.314300000667572
+        },
+        {
+          "id": "https://openalex.org/C2776285698",
+          "wikidata": "https://www.wikidata.org/wiki/Q2642214",
+          "display_name": "Exposition (narrative)",
+          "level": 2,
+          "score": 0.28949999809265137
+        },
+        {
+          "id": "https://openalex.org/C13424479",
+          "wikidata": "https://www.wikidata.org/wiki/Q5687237",
+          "display_name": "Haystack",
+          "level": 2,
+          "score": 0.28940001130104065
+        },
+        {
+          "id": "https://openalex.org/C86037889",
+          "wikidata": "https://www.wikidata.org/wiki/Q4330127",
+          "display_name": "Learning to rank",
+          "level": 3,
+          "score": 0.28760001063346863
+        },
+        {
+          "id": "https://openalex.org/C119857082",
+          "wikidata": "https://www.wikidata.org/wiki/Q2539",
+          "display_name": "Machine learning",
+          "level": 1,
+          "score": 0.27309998869895935
+        },
+        {
+          "id": "https://openalex.org/C124056412",
+          "wikidata": "https://www.wikidata.org/wiki/Q3320364",
+          "display_name": "Scientific evidence",
+          "level": 2,
+          "score": 0.27309998869895935
+        },
+        {
+          "id": "https://openalex.org/C2778805511",
+          "wikidata": "https://www.wikidata.org/wiki/Q1713",
+          "display_name": "Citation",
+          "level": 2,
+          "score": 0.266400009393692
+        }
+      ],
+      "mesh": [],
+      "locations_count": 2,
+      "locations": [
+        {
+          "id": "doi:10.69987/jacs.2023.30102",
+          "doi": "https://doi.org/10.69987/jacs.2023.30102",
+          "is_oa": true,
+          "landing_page_url": "https://doi.org/10.69987/jacs.2023.30102",
+          "pdf_url": "https://scipublication.com/index.php/JACS/article/download/315/286",
+          "source": {
+            "id": "https://openalex.org/S5407048776",
+            "display_name": "Journal of Advanced Computing Systems",
+            "issn_l": "3066-3962",
+            "issn": [
+              "3066-3962"
+            ],
+            "is_oa": true,
+            "is_in_doaj": true,
+            "is_core": false,
+            "listed_in": [
+              "doaj"
+            ],
+            "host_organization": null,
+            "host_organization_name": null,
+            "host_organization_lineage": [],
+            "host_organization_lineage_names": [],
+            "type": "journal"
+          },
+          "license": "cc-by",
+          "license_id": "https://openalex.org/licenses/cc-by",
+          "version": "publishedVersion",
+          "is_accepted": true,
+          "is_published": true,
+          "raw_source_name": "Journal of Advanced Computing Systems",
+          "raw_type": "journal-article"
+        },
+        {
+          "id": "pmh:oai:ojs2.scipublication.com:article/315",
+          "doi": null,
+          "is_oa": true,
+          "landing_page_url": "https://scipublication.com/index.php/JACS/article/view/315",
+          "pdf_url": null,
+          "source": {
+            "id": "https://openalex.org/S5407048776",
+            "display_name": "Journal of Advanced Computing Systems",
+            "issn_l": "3066-3962",
+            "issn": [
+              "3066-3962"
+            ],
+            "is_oa": true,
+            "is_in_doaj": true,
+            "is_core": false,
+            "listed_in": [
+              "doaj"
+            ],
+            "host_organization": null,
+            "host_organization_name": null,
+            "host_organization_lineage": [],
+            "host_organization_lineage_names": [],
+            "type": "journal"
+          },
+          "license": "cc-by",
+          "license_id": "https://openalex.org/licenses/cc-by",
+          "version": "publishedVersion",
+          "is_accepted": true,
+          "is_published": true,
+          "raw_source_name": "3066-3962",
+          "raw_type": "info:eu-repo/semantics/article"
+        }
+      ],
+      "best_oa_location": {
+        "id": "doi:10.69987/jacs.2023.30102",
+        "doi": "https://doi.org/10.69987/jacs.2023.30102",
+        "is_oa": true,
+        "landing_page_url": "https://doi.org/10.69987/jacs.2023.30102",
+        "pdf_url": "https://scipublication.com/index.php/JACS/article/download/315/286",
+        "source": {
+          "id": "https://openalex.org/S5407048776",
+          "display_name": "Journal of Advanced Computing Systems",
+          "issn_l": "3066-3962",
+          "issn": [
+            "3066-3962"
+          ],
+          "is_oa": true,
+          "is_in_doaj": true,
+          "is_core": false,
+          "listed_in": [
+            "doaj"
+          ],
+          "host_organization": null,
+          "host_organization_name": null,
+          "host_organization_lineage": [],
+          "host_organization_lineage_names": [],
+          "type": "journal"
+        },
+        "license": "cc-by",
+        "license_id": "https://openalex.org/licenses/cc-by",
+        "version": "publishedVersion",
+        "is_accepted": true,
+        "is_published": true,
+        "raw_source_name": "Journal of Advanced Computing Systems",
+        "raw_type": "journal-article"
+      },
+      "sustainable_development_goals": [],
+      "study_designs": [],
+      "awards": [],
+      "funders": [],
+      "has_content": {
+        "grobid_xml": true,
+        "pdf": true
+      },
+      "content_urls": {
+        "pdf": "https://content.openalex.org/works/W7131412174.pdf",
+        "grobid_xml": "https://content.openalex.org/works/W7131412174.grobid-xml"
+      },
+      "referenced_works_count": 13,
+      "referenced_works": [
+        "https://openalex.org/W2909544278",
+        "https://openalex.org/W2951534261",
+        "https://openalex.org/W2965373594",
+        "https://openalex.org/W4310923309",
+        "https://openalex.org/W4320813768",
+        "https://openalex.org/W4386576685",
+        "https://openalex.org/W4392832708",
+        "https://openalex.org/W4402387163",
+        "https://openalex.org/W7118987944",
+        "https://openalex.org/W7119492048",
+        "https://openalex.org/W7119530428",
+        "https://openalex.org/W7131437448",
+        "https://openalex.org/W7216030070"
+      ],
+      "related_works": [
+        "https://openalex.org/W7220309414",
+        "https://openalex.org/W7163576638",
+        "https://openalex.org/W7214777989",
+        "https://openalex.org/W7221663322",
+        "https://openalex.org/W7125712972",
+        "https://openalex.org/W7196958363",
+        "https://openalex.org/W7220134839",
+        "https://openalex.org/W7208836251",
+        "https://openalex.org/W7219980338",
+        "https://openalex.org/W4415883171"
+      ],
+      "abstract_inverted_index": {
+        "Retrieval-augmented": [
+          0
+        ],
+        "generation": [
+          1
+        ],
+        "(RAG)": [
+          2
+        ],
+        "is": [
+          3,
+          35,
+          124
+        ],
+        "widely": [
+          4
+        ],
+        "adopted": [
+          5
+        ],
+        "to": [
+          6,
+          37,
+          120,
+          147,
+          154,
+          197,
+          219
+        ],
+        "reduce": [
+          7
+        ],
+        "hallucinations,": [
+          8
+        ],
+        "yet": [
+          9
+        ],
+        "most": [
+          10
+        ],
+        "systems": [
+          11
+        ],
+        "still": [
+          12
+        ],
+        "answer": [
+          13,
+          38,
+          121,
+          201
+        ],
+        "even": [
+          14
+        ],
+        "when": [
+          15,
+          40,
+          122,
+          164
+        ],
+        "retrieval": [
+          16,
+          55,
+          212
+        ],
+        "fails,": [
+          17
+        ],
+        "producing": [
+          18
+        ],
+        "fluent": [
+          19
+        ],
+        "but": [
+          20,
+          142
+        ],
+        "unsupported": [
+          21
+        ],
+        "\u201cscientific": [
+          22
+        ],
+        "facts\u201d.": [
+          23
+        ],
+        "This": [
+          24
+        ],
+        "paper": [
+          25
+        ],
+        "studies": [
+          26
+        ],
+        "a": [
+          27,
+          72,
+          76,
+          81,
+          109,
+          150,
+          171,
+          206
+        ],
+        "claim-aware": [
+          28
+        ],
+        "scientific": [
+          29,
+          53,
+          223
+        ],
+        "RAG": [
+          30
+        ],
+        "design": [
+          31
+        ],
+        "principle:": [
+          32
+        ],
+        "the": [
+          33,
+          51,
+          58,
+          127,
+          179,
+          184,
+          193
+        ],
+        "system": [
+          34
+        ],
+        "allowed": [
+          36
+        ],
+        "only": [
+          39
+        ],
+        "it": [
+          41
+        ],
+        "can": [
+          42,
+          216
+        ],
+        "cite": [
+          43
+        ],
+        "evidence.": [
+          44
+        ],
+        "We": [
+          45,
+          70,
+          94
+        ],
+        "conduct": [
+          46
+        ],
+        "full": [
+          47
+        ],
+        "experimental": [
+          48
+        ],
+        "evaluations": [
+          49
+        ],
+        "on": [
+          50
+        ],
+        "SciFact": [
+          52,
+          60,
+          128
+        ],
+        "claim": [
+          54
+        ],
+        "task": [
+          56
+        ],
+        "using": [
+          57,
+          84
+        ],
+        "BEIR-style": [
+          59
+        ],
+        "split": [
+          61
+        ],
+        "(5,183": [
+          62
+        ],
+        "abstracts;": [
+          63
+        ],
+        "809": [
+          64
+        ],
+        "training": [
+          65
+        ],
+        "claims;": [
+          66
+        ],
+        "300": [
+          67
+        ],
+        "test": [
+          68,
+          129
+        ],
+        "claims).": [
+          69
+        ],
+        "compare": [
+          71
+        ],
+        "sparse": [
+          73
+        ],
+        "BM25": [
+          74,
+          131,
+          181
+        ],
+        "retriever,": [
+          75
+        ],
+        "contrastive": [
+          77
+        ],
+        "dense": [
+          78,
+          137
+        ],
+        "dual-encoder,": [
+          79
+        ],
+        "and": [
+          80,
+          105,
+          112,
+          134,
+          149,
+          213
+        ],
+        "hybrid": [
+          82,
+          143
+        ],
+        "retriever": [
+          83,
+          138
+        ],
+        "reciprocal": [
+          85
+        ],
+        "rank": [
+          86
+        ],
+        "fusion": [
+          87
+        ],
+        "(RRF),": [
+          88
+        ],
+        "followed": [
+          89
+        ],
+        "by": [
+          90,
+          178
+        ],
+        "an": [
+          91,
+          97,
+          115
+        ],
+        "interaction-based": [
+          92
+        ],
+        "reranker.": [
+          93
+        ],
+        "then": [
+          95
+        ],
+        "add": [
+          96
+        ],
+        "evidence": [
+          98,
+          157,
+          160
+        ],
+        "layer": [
+          99
+        ],
+        "that": [
+          100,
+          118
+        ],
+        "extracts": [
+          101
+        ],
+        "candidate": [
+          102
+        ],
+        "citation": [
+          103
+        ],
+        "sentences": [
+          104
+        ],
+        "scores": [
+          106
+        ],
+        "them": [
+          107
+        ],
+        "with": [
+          108
+        ],
+        "lightweight": [
+          110
+        ],
+        "verifier,": [
+          111
+        ],
+        "we": [
+          113,
+          169
+        ],
+        "enforce": [
+          114
+        ],
+        "abstention": [
+          116
+        ],
+        "gate": [
+          117
+        ],
+        "refuses": [
+          119
+        ],
+        "confidence": [
+          123
+        ],
+        "low.": [
+          125
+        ],
+        "On": [
+          126
+        ],
+        "set,": [
+          130
+        ],
+        "achieves": [
+          132
+        ],
+        "nDCG@10=0.662": [
+          133
+        ],
+        "Recall@100=0.883.": [
+          135
+        ],
+        "The": [
+          136
+        ],
+        "alone": [
+          139
+        ],
+        "underperforms": [
+          140
+        ],
+        "(nDCG@10=0.537),": [
+          141
+        ],
+        "RRF": [
+          144
+        ],
+        "improves": [
+          145
+        ],
+        "Recall@100": [
+          146
+        ],
+        "0.923": [
+          148
+        ],
+        "reranker": [
+          151
+        ],
+        "recovers": [
+          152
+        ],
+        "nDCG@10": [
+          153
+        ],
+        "0.659.": [
+          155
+        ],
+        "For": [
+          156
+        ],
+        "extraction,": [
+          158
+        ],
+        "token-level": [
+          159
+        ],
+        "F1": [
+          161
+        ],
+        "reaches": [
+          162
+        ],
+        "0.190": [
+          163
+        ],
+        "selecting": [
+          165
+        ],
+        "two": [
+          166
+        ],
+        "sentences.": [
+          167
+        ],
+        "Finally,": [
+          168
+        ],
+        "quantify": [
+          170
+        ],
+        "refusal\u2013hallucination": [
+          172
+        ],
+        "tradeoff": [
+          173
+        ],
+        "via": [
+          174
+        ],
+        "confidence-based": [
+          175
+        ],
+        "abstention:": [
+          176
+        ],
+        "gating": [
+          177
+        ],
+        "top-1": [
+          180
+        ],
+        "score": [
+          182
+        ],
+        "reduces": [
+          183
+        ],
+        "rate": [
+          185
+        ],
+        "of": [
+          186
+        ],
+        "answers": [
+          187
+        ],
+        "without": [
+          188
+        ],
+        "any": [
+          189
+        ],
+        "relevant": [
+          190
+        ],
+        "abstract": [
+          191
+        ],
+        "in": [
+          192,
+          222
+        ],
+        "top-10": [
+          194
+        ],
+        "from": [
+          195
+        ],
+        "0.193": [
+          196
+        ],
+        "0.047": [
+          198
+        ],
+        "at": [
+          199
+        ],
+        "28.3%": [
+          200
+        ],
+        "coverage.": [
+          202
+        ],
+        "These": [
+          203
+        ],
+        "results": [
+          204
+        ],
+        "provide": [
+          205
+        ],
+        "reproducible": [
+          207
+        ],
+        "baseline": [
+          208
+        ],
+        "showing": [
+          209
+        ],
+        "how": [
+          210
+        ],
+        "evidence-first": [
+          211
+        ],
+        "calibrated": [
+          214
+        ],
+        "refusal": [
+          215
+        ],
+        "be": [
+          217
+        ],
+        "combined": [
+          218
+        ],
+        "control": [
+          220
+        ],
+        "hallucinations": [
+          221
+        ],
+        "RAG.": [
+          224
+        ]
+      },
+      "counts_by_year": [
+        {
+          "year": 2026,
+          "cited_by_count": 6
+        },
+        {
+          "year": 2025,
+          "cited_by_count": 3
+        },
+        {
+          "year": 2024,
+          "cited_by_count": 2
+        },
+        {
+          "year": 2023,
+          "cited_by_count": 3
+        }
+      ],
+      "updated_date": "2026-11-04T10:54:05.112534",
+      "created_date": "2026-02-26T00:00:00"
+    }
+  ],
+  "group_by": []
+}

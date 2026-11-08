@@ -1,0 +1,1126 @@
+{
+  "command": "python 04_experiments/src/r3_metrics_rung2.py",
+  "exchangeability": {
+    "definition": "Per split, the 400 sampled questions are the rung-0 rows of items.jsonl. A question is 'dropped' for rung 2 when items.jsonl has no rung-2 row with its qid (build_items.py drop reason 'no_anchor_candidate': no content token of the question occurs in any non-gold paragraph of the split pool). Variables are measured on the rung-0 row.",
+    "min_p": {
+      "value": 0.052366,
+      "variable": "dev/q_chars"
+    },
+    "significant_at_0.05": [],
+    "splits": {
+      "dev": {
+        "n_dropped": 127,
+        "n_kept": 273,
+        "share_kept": 0.6825,
+        "variables": {
+          "answer_type": {
+            "counts": {
+              "date": {
+                "dropped": 1,
+                "kept": 7
+              },
+              "name": {
+                "dropped": 47,
+                "kept": 76
+              },
+              "number": {
+                "dropped": 11,
+                "kept": 27
+              },
+              "other": {
+                "dropped": 62,
+                "kept": 149
+              },
+              "year": {
+                "dropped": 6,
+                "kept": 14
+              }
+            },
+            "dropped_share": {
+              "date": 0.0079,
+              "name": 0.3701,
+              "number": 0.0866,
+              "other": 0.4882,
+              "year": 0.0472
+            },
+            "fisher_collapsed": {
+              "name_vs_other": {
+                "dropped_share": 0.3701,
+                "kept_share": 0.2784,
+                "odds_ratio": 0.6567,
+                "p_value": 0.080542,
+                "table": {
+                  "dropped": [
+                    47,
+                    80
+                  ],
+                  "kept": [
+                    76,
+                    197
+                  ]
+                },
+                "test": "fisher_exact_two_sided"
+              },
+              "numeric_vs_other": {
+                "dropped_share": 0.1417,
+                "kept_share": 0.1758,
+                "odds_ratio": 1.2919,
+                "p_value": 0.469841,
+                "table": {
+                  "dropped": [
+                    18,
+                    109
+                  ],
+                  "kept": [
+                    48,
+                    225
+                  ]
+                },
+                "test": "fisher_exact_two_sided"
+              }
+            },
+            "kept_share": {
+              "date": 0.0256,
+              "name": 0.2784,
+              "number": 0.0989,
+              "other": 0.5458,
+              "year": 0.0513
+            },
+            "min_expected": 2.54,
+            "n_perm": 10000,
+            "p_value": 0.354065,
+            "reason": "at least one expected cell < 5 (scipy.stats.fisher_exact is 2x2 only, so the 5x2 table uses the exact-conditional permutation version)",
+            "seed": 12345,
+            "statistic": 4.449,
+            "test": "monte_carlo_permutation_chi2"
+          },
+          "gold_chars": {
+            "dropped": {
+              "max": 4063.0,
+              "mean": 951.4882,
+              "median": 753.0,
+              "min": 271.0,
+              "n": 127,
+              "sd": 679.9758
+            },
+            "kept": {
+              "max": 4063.0,
+              "mean": 782.8681,
+              "median": 717.0,
+              "min": 206.0,
+              "n": 273,
+              "sd": 363.4299
+            },
+            "median_diff_kept_minus_dropped": -36.0,
+            "p_value": 0.087968,
+            "test": "mann_whitney_u_two_sided"
+          },
+          "n_paragraphs": {
+            "dropped": {
+              "max": 49.0,
+              "mean": 39.1024,
+              "median": 43.0,
+              "min": 22.0,
+              "n": 127,
+              "sd": 9.152
+            },
+            "kept": {
+              "max": 49.0,
+              "mean": 39.4579,
+              "median": 43.0,
+              "min": 22.0,
+              "n": 273,
+              "sd": 8.9705
+            },
+            "median_diff_kept_minus_dropped": 0.0,
+            "p_value": 0.924249,
+            "test": "mann_whitney_u_two_sided"
+          },
+          "q_chars": {
+            "dropped": {
+              "max": 131.0,
+              "mean": 67.8819,
+              "median": 65.0,
+              "min": 13.0,
+              "n": 127,
+              "sd": 23.4844
+            },
+            "kept": {
+              "max": 155.0,
+              "mean": 63.7143,
+              "median": 60.0,
+              "min": 18.0,
+              "n": 273,
+              "sd": 22.4848
+            },
+            "median_diff_kept_minus_dropped": -5.0,
+            "p_value": 0.052366,
+            "test": "mann_whitney_u_two_sided"
+          },
+          "q_tokens": {
+            "dropped": {
+              "max": 23.0,
+              "mean": 11.189,
+              "median": 10.0,
+              "min": 3.0,
+              "n": 127,
+              "sd": 3.8436
+            },
+            "kept": {
+              "max": 26.0,
+              "mean": 10.8425,
+              "median": 10.0,
+              "min": 4.0,
+              "n": 273,
+              "sd": 3.8099
+            },
+            "median_diff_kept_minus_dropped": 0.0,
+            "p_value": 0.362028,
+            "test": "mann_whitney_u_two_sided"
+          }
+        }
+      },
+      "test": {
+        "n_dropped": 120,
+        "n_kept": 280,
+        "share_kept": 0.7,
+        "variables": {
+          "answer_type": {
+            "counts": {
+              "date": {
+                "dropped": 2,
+                "kept": 4
+              },
+              "name": {
+                "dropped": 41,
+                "kept": 78
+              },
+              "number": {
+                "dropped": 8,
+                "kept": 40
+              },
+              "other": {
+                "dropped": 62,
+                "kept": 142
+              },
+              "year": {
+                "dropped": 7,
+                "kept": 16
+              }
+            },
+            "dropped_share": {
+              "date": 0.0167,
+              "name": 0.3417,
+              "number": 0.0667,
+              "other": 0.5167,
+              "year": 0.0583
+            },
+            "fisher_collapsed": {
+              "name_vs_other": {
+                "dropped_share": 0.3417,
+                "kept_share": 0.2786,
+                "odds_ratio": 0.744,
+                "p_value": 0.232892,
+                "table": {
+                  "dropped": [
+                    41,
+                    79
+                  ],
+                  "kept": [
+                    78,
+                    202
+                  ]
+                },
+                "test": "fisher_exact_two_sided"
+              },
+              "numeric_vs_other": {
+                "dropped_share": 0.1417,
+                "kept_share": 0.2143,
+                "odds_ratio": 1.6524,
+                "p_value": 0.098295,
+                "table": {
+                  "dropped": [
+                    17,
+                    103
+                  ],
+                  "kept": [
+                    60,
+                    220
+                  ]
+                },
+                "test": "fisher_exact_two_sided"
+              }
+            },
+            "kept_share": {
+              "date": 0.0143,
+              "name": 0.2786,
+              "number": 0.1429,
+              "other": 0.5071,
+              "year": 0.0571
+            },
+            "min_expected": 1.8,
+            "n_perm": 10000,
+            "p_value": 0.262774,
+            "reason": "at least one expected cell < 5 (scipy.stats.fisher_exact is 2x2 only, so the 5x2 table uses the exact-conditional permutation version)",
+            "seed": 12345,
+            "statistic": 5.2363,
+            "test": "monte_carlo_permutation_chi2"
+          },
+          "gold_chars": {
+            "dropped": {
+              "max": 1941.0,
+              "mean": 839.9,
+              "median": 766.0,
+              "min": 503.0,
+              "n": 120,
+              "sd": 307.5798
+            },
+            "kept": {
+              "max": 1992.0,
+              "mean": 791.5143,
+              "median": 703.0,
+              "min": 349.0,
+              "n": 280,
+              "sd": 283.2398
+            },
+            "median_diff_kept_minus_dropped": -63.0,
+            "p_value": 0.210955,
+            "test": "mann_whitney_u_two_sided"
+          },
+          "n_paragraphs": {
+            "dropped": {
+              "max": 47.0,
+              "mean": 35.9083,
+              "median": 39.0,
+              "min": 21.0,
+              "n": 120,
+              "sd": 8.739
+            },
+            "kept": {
+              "max": 47.0,
+              "mean": 35.2321,
+              "median": 39.0,
+              "min": 21.0,
+              "n": 280,
+              "sd": 8.9806
+            },
+            "median_diff_kept_minus_dropped": 0.0,
+            "p_value": 0.442933,
+            "test": "mann_whitney_u_two_sided"
+          },
+          "q_chars": {
+            "dropped": {
+              "max": 139.0,
+              "mean": 61.2833,
+              "median": 58.0,
+              "min": 21.0,
+              "n": 120,
+              "sd": 23.9962
+            },
+            "kept": {
+              "max": 129.0,
+              "mean": 59.45,
+              "median": 57.0,
+              "min": 21.0,
+              "n": 280,
+              "sd": 19.3955
+            },
+            "median_diff_kept_minus_dropped": -1.0,
+            "p_value": 0.69666,
+            "test": "mann_whitney_u_two_sided"
+          },
+          "q_tokens": {
+            "dropped": {
+              "max": 23.0,
+              "mean": 10.5583,
+              "median": 10.0,
+              "min": 3.0,
+              "n": 120,
+              "sd": 4.0101
+            },
+            "kept": {
+              "max": 22.0,
+              "mean": 10.3179,
+              "median": 10.0,
+              "min": 4.0,
+              "n": 280,
+              "sd": 3.482
+            },
+            "median_diff_kept_minus_dropped": 0.0,
+            "p_value": 0.620548,
+            "test": "mann_whitney_u_two_sided"
+          }
+        }
+      }
+    },
+    "tests": {
+      "categorical": "Pearson chi-square on the 5x2 answer-type table; when any expected cell < 5, a Monte Carlo permutation of the answer-type labels with fixed margins (10,000 draws, seed 12345) is used instead and named in 'answer_type_test'",
+      "continuous": "two-sided Mann-Whitney U (scipy.stats.mannwhitneyu, no continuity correction), exact only when n<8"
+    },
+    "verdict": "No variable differs between kept and dropped questions at the 0.05 level in either split (smallest p = 0.052, dev/q_chars), so on these five variables the rung-2 subsample is exchangeable with the sampled questions and rung-2 figures can be read as describing the sampled question set rather than a selected subset. Caveat: dev/q_chars (p=0.052), dev/answer_type:name_vs_other (p=0.081), dev/gold_chars (p=0.088), test/answer_type:numeric_vs_other (p=0.098) sit between 0.05 and 0.10, so the null is not comfortable either."
+  },
+  "generated_by": "04_experiments/src/r3_metrics_rung2.py",
+  "held_out_split": "test",
+  "inputs": {
+    "build_items_py": "d5ce3f0175f8ce8aeb52bb4bcbfa2836709b30492104e3b66abea88276006611",
+    "dev_v2_0_json": "80a5225e94905956a6446d296ca1093975c4d3b3260f1d6c8f68bc2ab77182d8",
+    "items_jsonl": "c6f46ad80e7d15f495cd2a4b1e7b5a5556bfa929264c7afabd81826dd8d049d0",
+    "stats_addendum_py": "327eb8ae7b7746624f8ec22654ee0ccc01939900dada6e9165736861107cfabf"
+  },
+  "min_p": {
+    "value": 0.052366,
+    "variable": "dev/q_chars"
+  },
+  "n_boot": 10000,
+  "n_dropped": 120,
+  "n_kept": 280,
+  "p_values": {
+    "dev": {
+      "answer_type": 0.354065,
+      "gold_chars": 0.087968,
+      "n_paragraphs": 0.924249,
+      "q_chars": 0.052366,
+      "q_tokens": 0.362028
+    },
+    "test": {
+      "answer_type": 0.262774,
+      "gold_chars": 0.210955,
+      "n_paragraphs": 0.442933,
+      "q_chars": 0.69666,
+      "q_tokens": 0.620548
+    }
+  },
+  "per_split": {
+    "dev": {
+      "n_dropped": 127,
+      "n_kept": 273,
+      "n_sampled": 400,
+      "p_values": {
+        "answer_type": 0.354065,
+        "gold_chars": 0.087968,
+        "n_paragraphs": 0.924249,
+        "q_chars": 0.052366,
+        "q_tokens": 0.362028
+      },
+      "share_kept": 0.6825,
+      "variables": {
+        "answer_type": {
+          "counts": {
+            "date": {
+              "dropped": 1,
+              "kept": 7
+            },
+            "name": {
+              "dropped": 47,
+              "kept": 76
+            },
+            "number": {
+              "dropped": 11,
+              "kept": 27
+            },
+            "other": {
+              "dropped": 62,
+              "kept": 149
+            },
+            "year": {
+              "dropped": 6,
+              "kept": 14
+            }
+          },
+          "dropped_share": {
+            "date": 0.0079,
+            "name": 0.3701,
+            "number": 0.0866,
+            "other": 0.4882,
+            "year": 0.0472
+          },
+          "fisher_collapsed": {
+            "name_vs_other": {
+              "dropped_share": 0.3701,
+              "kept_share": 0.2784,
+              "odds_ratio": 0.6567,
+              "p_value": 0.080542,
+              "table": {
+                "dropped": [
+                  47,
+                  80
+                ],
+                "kept": [
+                  76,
+                  197
+                ]
+              },
+              "test": "fisher_exact_two_sided"
+            },
+            "numeric_vs_other": {
+              "dropped_share": 0.1417,
+              "kept_share": 0.1758,
+              "odds_ratio": 1.2919,
+              "p_value": 0.469841,
+              "table": {
+                "dropped": [
+                  18,
+                  109
+                ],
+                "kept": [
+                  48,
+                  225
+                ]
+              },
+              "test": "fisher_exact_two_sided"
+            }
+          },
+          "kept_share": {
+            "date": 0.0256,
+            "name": 0.2784,
+            "number": 0.0989,
+            "other": 0.5458,
+            "year": 0.0513
+          },
+          "min_expected": 2.54,
+          "n_perm": 10000,
+          "p_value": 0.354065,
+          "reason": "at least one expected cell < 5 (scipy.stats.fisher_exact is 2x2 only, so the 5x2 table uses the exact-conditional permutation version)",
+          "seed": 12345,
+          "statistic": 4.449,
+          "test": "monte_carlo_permutation_chi2"
+        },
+        "gold_chars": {
+          "dropped": {
+            "max": 4063.0,
+            "mean": 951.4882,
+            "median": 753.0,
+            "min": 271.0,
+            "n": 127,
+            "sd": 679.9758
+          },
+          "kept": {
+            "max": 4063.0,
+            "mean": 782.8681,
+            "median": 717.0,
+            "min": 206.0,
+            "n": 273,
+            "sd": 363.4299
+          },
+          "median_diff_kept_minus_dropped": -36.0,
+          "p_value": 0.087968,
+          "test": "mann_whitney_u_two_sided"
+        },
+        "n_paragraphs": {
+          "dropped": {
+            "max": 49.0,
+            "mean": 39.1024,
+            "median": 43.0,
+            "min": 22.0,
+            "n": 127,
+            "sd": 9.152
+          },
+          "kept": {
+            "max": 49.0,
+            "mean": 39.4579,
+            "median": 43.0,
+            "min": 22.0,
+            "n": 273,
+            "sd": 8.9705
+          },
+          "median_diff_kept_minus_dropped": 0.0,
+          "p_value": 0.924249,
+          "test": "mann_whitney_u_two_sided"
+        },
+        "q_chars": {
+          "dropped": {
+            "max": 131.0,
+            "mean": 67.8819,
+            "median": 65.0,
+            "min": 13.0,
+            "n": 127,
+            "sd": 23.4844
+          },
+          "kept": {
+            "max": 155.0,
+            "mean": 63.7143,
+            "median": 60.0,
+            "min": 18.0,
+            "n": 273,
+            "sd": 22.4848
+          },
+          "median_diff_kept_minus_dropped": -5.0,
+          "p_value": 0.052366,
+          "test": "mann_whitney_u_two_sided"
+        },
+        "q_tokens": {
+          "dropped": {
+            "max": 23.0,
+            "mean": 11.189,
+            "median": 10.0,
+            "min": 3.0,
+            "n": 127,
+            "sd": 3.8436
+          },
+          "kept": {
+            "max": 26.0,
+            "mean": 10.8425,
+            "median": 10.0,
+            "min": 4.0,
+            "n": 273,
+            "sd": 3.8099
+          },
+          "median_diff_kept_minus_dropped": 0.0,
+          "p_value": 0.362028,
+          "test": "mann_whitney_u_two_sided"
+        }
+      }
+    },
+    "test": {
+      "n_dropped": 120,
+      "n_kept": 280,
+      "n_sampled": 400,
+      "p_values": {
+        "answer_type": 0.262774,
+        "gold_chars": 0.210955,
+        "n_paragraphs": 0.442933,
+        "q_chars": 0.69666,
+        "q_tokens": 0.620548
+      },
+      "share_kept": 0.7,
+      "variables": {
+        "answer_type": {
+          "counts": {
+            "date": {
+              "dropped": 2,
+              "kept": 4
+            },
+            "name": {
+              "dropped": 41,
+              "kept": 78
+            },
+            "number": {
+              "dropped": 8,
+              "kept": 40
+            },
+            "other": {
+              "dropped": 62,
+              "kept": 142
+            },
+            "year": {
+              "dropped": 7,
+              "kept": 16
+            }
+          },
+          "dropped_share": {
+            "date": 0.0167,
+            "name": 0.3417,
+            "number": 0.0667,
+            "other": 0.5167,
+            "year": 0.0583
+          },
+          "fisher_collapsed": {
+            "name_vs_other": {
+              "dropped_share": 0.3417,
+              "kept_share": 0.2786,
+              "odds_ratio": 0.744,
+              "p_value": 0.232892,
+              "table": {
+                "dropped": [
+                  41,
+                  79
+                ],
+                "kept": [
+                  78,
+                  202
+                ]
+              },
+              "test": "fisher_exact_two_sided"
+            },
+            "numeric_vs_other": {
+              "dropped_share": 0.1417,
+              "kept_share": 0.2143,
+              "odds_ratio": 1.6524,
+              "p_value": 0.098295,
+              "table": {
+                "dropped": [
+                  17,
+                  103
+                ],
+                "kept": [
+                  60,
+                  220
+                ]
+              },
+              "test": "fisher_exact_two_sided"
+            }
+          },
+          "kept_share": {
+            "date": 0.0143,
+            "name": 0.2786,
+            "number": 0.1429,
+            "other": 0.5071,
+            "year": 0.0571
+          },
+          "min_expected": 1.8,
+          "n_perm": 10000,
+          "p_value": 0.262774,
+          "reason": "at least one expected cell < 5 (scipy.stats.fisher_exact is 2x2 only, so the 5x2 table uses the exact-conditional permutation version)",
+          "seed": 12345,
+          "statistic": 5.2363,
+          "test": "monte_carlo_permutation_chi2"
+        },
+        "gold_chars": {
+          "dropped": {
+            "max": 1941.0,
+            "mean": 839.9,
+            "median": 766.0,
+            "min": 503.0,
+            "n": 120,
+            "sd": 307.5798
+          },
+          "kept": {
+            "max": 1992.0,
+            "mean": 791.5143,
+            "median": 703.0,
+            "min": 349.0,
+            "n": 280,
+            "sd": 283.2398
+          },
+          "median_diff_kept_minus_dropped": -63.0,
+          "p_value": 0.210955,
+          "test": "mann_whitney_u_two_sided"
+        },
+        "n_paragraphs": {
+          "dropped": {
+            "max": 47.0,
+            "mean": 35.9083,
+            "median": 39.0,
+            "min": 21.0,
+            "n": 120,
+            "sd": 8.739
+          },
+          "kept": {
+            "max": 47.0,
+            "mean": 35.2321,
+            "median": 39.0,
+            "min": 21.0,
+            "n": 280,
+            "sd": 8.9806
+          },
+          "median_diff_kept_minus_dropped": 0.0,
+          "p_value": 0.442933,
+          "test": "mann_whitney_u_two_sided"
+        },
+        "q_chars": {
+          "dropped": {
+            "max": 139.0,
+            "mean": 61.2833,
+            "median": 58.0,
+            "min": 21.0,
+            "n": 120,
+            "sd": 23.9962
+          },
+          "kept": {
+            "max": 129.0,
+            "mean": 59.45,
+            "median": 57.0,
+            "min": 21.0,
+            "n": 280,
+            "sd": 19.3955
+          },
+          "median_diff_kept_minus_dropped": -1.0,
+          "p_value": 0.69666,
+          "test": "mann_whitney_u_two_sided"
+        },
+        "q_tokens": {
+          "dropped": {
+            "max": 23.0,
+            "mean": 10.5583,
+            "median": 10.0,
+            "min": 3.0,
+            "n": 120,
+            "sd": 4.0101
+          },
+          "kept": {
+            "max": 22.0,
+            "mean": 10.3179,
+            "median": 10.0,
+            "min": 4.0,
+            "n": 280,
+            "sd": 3.482
+          },
+          "median_diff_kept_minus_dropped": 0.0,
+          "p_value": 0.620548,
+          "test": "mann_whitney_u_two_sided"
+        }
+      }
+    }
+  },
+  "seed": 12345,
+  "shortfall": {
+    "dropped": 120,
+    "kept": 280,
+    "population": 400,
+    "reason": "no_anchor_candidate"
+  },
+  "significant_at_0.05": [],
+  "splits": {
+    "dev": {
+      "n_dropped": 127,
+      "n_kept": 273,
+      "n_sampled": 400,
+      "p_values": {
+        "answer_type": 0.354065,
+        "gold_chars": 0.087968,
+        "n_paragraphs": 0.924249,
+        "q_chars": 0.052366,
+        "q_tokens": 0.362028
+      },
+      "share_kept": 0.6825,
+      "variables": {
+        "answer_type": {
+          "counts": {
+            "date": {
+              "dropped": 1,
+              "kept": 7
+            },
+            "name": {
+              "dropped": 47,
+              "kept": 76
+            },
+            "number": {
+              "dropped": 11,
+              "kept": 27
+            },
+            "other": {
+              "dropped": 62,
+              "kept": 149
+            },
+            "year": {
+              "dropped": 6,
+              "kept": 14
+            }
+          },
+          "dropped_share": {
+            "date": 0.0079,
+            "name": 0.3701,
+            "number": 0.0866,
+            "other": 0.4882,
+            "year": 0.0472
+          },
+          "fisher_collapsed": {
+            "name_vs_other": {
+              "dropped_share": 0.3701,
+              "kept_share": 0.2784,
+              "odds_ratio": 0.6567,
+              "p_value": 0.080542,
+              "table": {
+                "dropped": [
+                  47,
+                  80
+                ],
+                "kept": [
+                  76,
+                  197
+                ]
+              },
+              "test": "fisher_exact_two_sided"
+            },
+            "numeric_vs_other": {
+              "dropped_share": 0.1417,
+              "kept_share": 0.1758,
+              "odds_ratio": 1.2919,
+              "p_value": 0.469841,
+              "table": {
+                "dropped": [
+                  18,
+                  109
+                ],
+                "kept": [
+                  48,
+                  225
+                ]
+              },
+              "test": "fisher_exact_two_sided"
+            }
+          },
+          "kept_share": {
+            "date": 0.0256,
+            "name": 0.2784,
+            "number": 0.0989,
+            "other": 0.5458,
+            "year": 0.0513
+          },
+          "min_expected": 2.54,
+          "n_perm": 10000,
+          "p_value": 0.354065,
+          "reason": "at least one expected cell < 5 (scipy.stats.fisher_exact is 2x2 only, so the 5x2 table uses the exact-conditional permutation version)",
+          "seed": 12345,
+          "statistic": 4.449,
+          "test": "monte_carlo_permutation_chi2"
+        },
+        "gold_chars": {
+          "dropped": {
+            "max": 4063.0,
+            "mean": 951.4882,
+            "median": 753.0,
+            "min": 271.0,
+            "n": 127,
+            "sd": 679.9758
+          },
+          "kept": {
+            "max": 4063.0,
+            "mean": 782.8681,
+            "median": 717.0,
+            "min": 206.0,
+            "n": 273,
+            "sd": 363.4299
+          },
+          "median_diff_kept_minus_dropped": -36.0,
+          "p_value": 0.087968,
+          "test": "mann_whitney_u_two_sided"
+        },
+        "n_paragraphs": {
+          "dropped": {
+            "max": 49.0,
+            "mean": 39.1024,
+            "median": 43.0,
+            "min": 22.0,
+            "n": 127,
+            "sd": 9.152
+          },
+          "kept": {
+            "max": 49.0,
+            "mean": 39.4579,
+            "median": 43.0,
+            "min": 22.0,
+            "n": 273,
+            "sd": 8.9705
+          },
+          "median_diff_kept_minus_dropped": 0.0,
+          "p_value": 0.924249,
+          "test": "mann_whitney_u_two_sided"
+        },
+        "q_chars": {
+          "dropped": {
+            "max": 131.0,
+            "mean": 67.8819,
+            "median": 65.0,
+            "min": 13.0,
+            "n": 127,
+            "sd": 23.4844
+          },
+          "kept": {
+            "max": 155.0,
+            "mean": 63.7143,
+            "median": 60.0,
+            "min": 18.0,
+            "n": 273,
+            "sd": 22.4848
+          },
+          "median_diff_kept_minus_dropped": -5.0,
+          "p_value": 0.052366,
+          "test": "mann_whitney_u_two_sided"
+        },
+        "q_tokens": {
+          "dropped": {
+            "max": 23.0,
+            "mean": 11.189,
+            "median": 10.0,
+            "min": 3.0,
+            "n": 127,
+            "sd": 3.8436
+          },
+          "kept": {
+            "max": 26.0,
+            "mean": 10.8425,
+            "median": 10.0,
+            "min": 4.0,
+            "n": 273,
+            "sd": 3.8099
+          },
+          "median_diff_kept_minus_dropped": 0.0,
+          "p_value": 0.362028,
+          "test": "mann_whitney_u_two_sided"
+        }
+      }
+    },
+    "test": {
+      "n_dropped": 120,
+      "n_kept": 280,
+      "n_sampled": 400,
+      "p_values": {
+        "answer_type": 0.262774,
+        "gold_chars": 0.210955,
+        "n_paragraphs": 0.442933,
+        "q_chars": 0.69666,
+        "q_tokens": 0.620548
+      },
+      "share_kept": 0.7,
+      "variables": {
+        "answer_type": {
+          "counts": {
+            "date": {
+              "dropped": 2,
+              "kept": 4
+            },
+            "name": {
+              "dropped": 41,
+              "kept": 78
+            },
+            "number": {
+              "dropped": 8,
+              "kept": 40
+            },
+            "other": {
+              "dropped": 62,
+              "kept": 142
+            },
+            "year": {
+              "dropped": 7,
+              "kept": 16
+            }
+          },
+          "dropped_share": {
+            "date": 0.0167,
+            "name": 0.3417,
+            "number": 0.0667,
+            "other": 0.5167,
+            "year": 0.0583
+          },
+          "fisher_collapsed": {
+            "name_vs_other": {
+              "dropped_share": 0.3417,
+              "kept_share": 0.2786,
+              "odds_ratio": 0.744,
+              "p_value": 0.232892,
+              "table": {
+                "dropped": [
+                  41,
+                  79
+                ],
+                "kept": [
+                  78,
+                  202
+                ]
+              },
+              "test": "fisher_exact_two_sided"
+            },
+            "numeric_vs_other": {
+              "dropped_share": 0.1417,
+              "kept_share": 0.2143,
+              "odds_ratio": 1.6524,
+              "p_value": 0.098295,
+              "table": {
+                "dropped": [
+                  17,
+                  103
+                ],
+                "kept": [
+                  60,
+                  220
+                ]
+              },
+              "test": "fisher_exact_two_sided"
+            }
+          },
+          "kept_share": {
+            "date": 0.0143,
+            "name": 0.2786,
+            "number": 0.1429,
+            "other": 0.5071,
+            "year": 0.0571
+          },
+          "min_expected": 1.8,
+          "n_perm": 10000,
+          "p_value": 0.262774,
+          "reason": "at least one expected cell < 5 (scipy.stats.fisher_exact is 2x2 only, so the 5x2 table uses the exact-conditional permutation version)",
+          "seed": 12345,
+          "statistic": 5.2363,
+          "test": "monte_carlo_permutation_chi2"
+        },
+        "gold_chars": {
+          "dropped": {
+            "max": 1941.0,
+            "mean": 839.9,
+            "median": 766.0,
+            "min": 503.0,
+            "n": 120,
+            "sd": 307.5798
+          },
+          "kept": {
+            "max": 1992.0,
+            "mean": 791.5143,
+            "median": 703.0,
+            "min": 349.0,
+            "n": 280,
+            "sd": 283.2398
+          },
+          "median_diff_kept_minus_dropped": -63.0,
+          "p_value": 0.210955,
+          "test": "mann_whitney_u_two_sided"
+        },
+        "n_paragraphs": {
+          "dropped": {
+            "max": 47.0,
+            "mean": 35.9083,
+            "median": 39.0,
+            "min": 21.0,
+            "n": 120,
+            "sd": 8.739
+          },
+          "kept": {
+            "max": 47.0,
+            "mean": 35.2321,
+            "median": 39.0,
+            "min": 21.0,
+            "n": 280,
+            "sd": 8.9806
+          },
+          "median_diff_kept_minus_dropped": 0.0,
+          "p_value": 0.442933,
+          "test": "mann_whitney_u_two_sided"
+        },
+        "q_chars": {
+          "dropped": {
+            "max": 139.0,
+            "mean": 61.2833,
+            "median": 58.0,
+            "min": 21.0,
+            "n": 120,
+            "sd": 23.9962
+          },
+          "kept": {
+            "max": 129.0,
+            "mean": 59.45,
+            "median": 57.0,
+            "min": 21.0,
+            "n": 280,
+            "sd": 19.3955
+          },
+          "median_diff_kept_minus_dropped": -1.0,
+          "p_value": 0.69666,
+          "test": "mann_whitney_u_two_sided"
+        },
+        "q_tokens": {
+          "dropped": {
+            "max": 23.0,
+            "mean": 10.5583,
+            "median": 10.0,
+            "min": 3.0,
+            "n": 120,
+            "sd": 4.0101
+          },
+          "kept": {
+            "max": 22.0,
+            "mean": 10.3179,
+            "median": 10.0,
+            "min": 4.0,
+            "n": 280,
+            "sd": 3.482
+          },
+          "median_diff_kept_minus_dropped": 0.0,
+          "p_value": 0.620548,
+          "test": "mann_whitney_u_two_sided"
+        }
+      }
+    }
+  },
+  "verdict": "No variable differs between kept and dropped questions at the 0.05 level in either split (smallest p = 0.052, dev/q_chars), so on these five variables the rung-2 subsample is exchangeable with the sampled questions and rung-2 figures can be read as describing the sampled question set rather than a selected subset. Caveat: dev/q_chars (p=0.052), dev/answer_type:name_vs_other (p=0.081), dev/gold_chars (p=0.088), test/answer_type:numeric_vs_other (p=0.098) sit between 0.05 and 0.10, so the null is not comfortable either."
+}

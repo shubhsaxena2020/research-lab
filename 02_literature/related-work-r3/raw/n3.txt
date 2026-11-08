@@ -1,0 +1,1876 @@
+                                                                             Tech Science Press
+
+https://doi.org/10.32604/cmc.2026.088937  Published Online: 16 October 2026
+
+ARTICLE
+
+Sufficiency-Gated Retrieval-Augmented Generation: Reducing Hallucination
+via Context Adequacy Estimation
+
+Hasanur Rahman Shishir1, Nazmun Nahar1, Rahat Uddin Azad2, Tanjim Mahmud3,*, Mohammad
+Shahadat Hossain4,5 and Karl Andersson5
+
+1Institute of Information Technology, Noakhali Science and Technology University, Sonapur Road, Noakhali, Bangladesh
+2Department of Software Engineering, Daffodil International University, Dhaka, Bangladesh
+3Department of Computer Science and Engineering, Rangamati Science and Technology University, Rangamati, Bangladesh
+4Department of Computer Science and Engineering, University of Chittagong, Chittagong, Bangladesh
+5Cybersecurity Laboratory, Luleå University of Technology, Skellefteå, Sweden
+
+*Corresponding Author: Tanjim Mahmud. Email: tanjim.cse@rmstu.ac.bd
+
+Received: 11 July 2026; Accepted: 22 September 2026
+
+ABSTRACT: Retrieval-Augmented Generation (RAG) ranks passages by their relevance to a question and passes the
+top ones to the generator whether or not they contain the answer. Relevance, however, does not imply sufficiency:
+a passage can be on topic and still lack the fact the question asks for. We place a sufficiency gate between retriever
+and generator that judges whether the retrieved context is adequate and then answers, abstains, or retrieves more,
+and we compare four scorers built without any sufficiency-labelled training data--a simple heuristic, a single-passage
+cross-encoder, a set-level cross-encoder that scores the retrieved passages jointly, and the generator itself prompted
+as a judge--on 500 HotpotQA and 500 MuSiQue multi-hop questions with Flan-T5-Large. An answer is counted as
+unsupported when no retrieved passage entails it according to a natural language inference model (DeBERTa-large-
+MNLI) at a threshold fixed once on held-out data. Because abstaining lowers any error count that ignores unanswered
+questions, we report the unsupported rate among answered questions alongside coverage. Vanilla RAG is unsupported
+on 26.2% of HotpotQA and 30.8% of MuSiQue answers. At their calibrated operating points the set-level cross-encoder
+is the best gate on HotpotQA (17.1% unsupported at 57.2% coverage, with 7.0% of sufficient contexts wrongly refused) and
+the generator-as-judge on MuSiQue (27.0% at 71.0% coverage, none wrongly refused). Only the judge beats a random
+abstainer matched to its own coverage on both datasets (both p < 0.01), and only the judge ranks best at every threshold.
+Reliability is paid for in usefulness: on HotpotQA, Exact Match rises from 32.0% to 43.9% among answered questions
+but falls from 32.0% to 25.0% when abstentions are scored as wrong. Both cross-encoders identify insufficient context
+better than the heuristic by the area under the receiver operating characteristic curve, decisively on HotpotQA (0.775
+and 0.675 against 0.521) but within the noise on MuSiQue (0.738 and 0.717 against 0.658); by selective risk across all
+operating points the heuristic is worse than not gating at all. Replacing the retrieved context with the gold supporting
+passages removes about two thirds of the answer-quality failures and between a third and a half of the unsupported
+answers, so much of the failure, though not all, originates in retrieval rather than the generator. Repeating the evaluation
+with Qwen2.5-3B-Instruct shifts the absolute rates but preserves the ordering of the scorers.
+
+KEYWORDS: Retrieval-augmented generation; context sufficiency; hallucination; selective generation; abstention;
+multi-hop question answering; cross-encoder
+
+Copyright © 2026 The Authors. Published by Tech Science Press. This work is licensed under a Creative Commons Attribution 4.0 International
+License, which permits unrestricted use, distribution, and reproduction in any medium, provided the original work is properly cited.
+2  Comput Mater Contin. 2026
+
+1 Introduction
+
+     Retrieval-Augmented Generation (RAG) grounds language model outputs in external knowledge by
+retrieving passages and conditioning the generator on them [1­3]. One assumption in that pipeline remains
+unexamined: that the retrieved passages are sufficient to answer the query. Retrievers rank by relevance--
+similarity to the query--and return the top-k without assessing completeness, yet a passage on topic can
+score highly while lacking the fact the question asks for. Better embeddings and reranking improve relevance;
+nothing addresses sufficiency.
+
+     We measure the resulting failure as the unsupported-answer rate, the share of generated answers not
+entailed by any retrieved passage under a natural language inference model, at a threshold fixed once on
+held-out data (Section 4.4). Vanilla RAG is unsupported on 26.2% of HotpotQA and 30.8% of MuSiQue
+answers. Such rates do not identify a cause: unsupported answers can also arise from reasoning errors,
+conflicting evidence, prompt sensitivity, failed evidence integration, or the generator itself. We therefore
+test attribution by intervention. Holding generator, prompt and decoding fixed and replacing the retrieved
+context with the gold supporting passages removes 68.9% of answer-quality failures on HotpotQA and 68.2%
+on MuSiQue, and 48.1% and 34.4% of unsupported answers (Section 5.1). Insufficient context is therefore a
+major contributor on both measures and the dominant one for answer quality; what remains survives perfect
+evidence and belongs to the generator.
+
+     Rather than improving what is retrieved, we ask whether it is enough. The Sufficiency Gate sits between
+retriever and generator, estimates context adequacy before generation, and on judging the context inadequate
+either abstains or expands retrieval to a higher k. No sufficiency-labelled data enters the gate. Scoring
+sufficiency with a cross-encoder trained for passage relevance on MS MARCO is not a claim that the two
+properties coincide, but a use of relevance as a proxy feature, tested against gold supporting-fact labels
+rather than assumed. A single-passage relevance score separates sufficient from insufficient contexts with
+an area under the receiver operating characteristic curve (AUROC) of 0.675 on HotpotQA and 0.717 on
+MuSiQue; scoring the retrieved set jointly instead of taking the best single passage--the same model, only
+the aggregation changed--raises this to 0.775 and 0.738 (Section 5.3). Relevance therefore carries real but
+partial signal, which is why we also report a generator-as-judge scorer with no relevance training.
+
+     Because a gate can lower the unsupported rate simply by abstaining, we report reliability and usefulness
+together: coverage, abstention and false-abstention rates, the unsupported rate among answered queries as
+well as with abstentions credited as supported, Exact Match over answered and over all queries, and risk­
+coverage curves. The gate is also compared with generator confidence, with classical query-performance
+predictors, and with a Self-RAG-style pipeline (Sections 3.5 and 5.9). The contributions are as follows:
+
+1. We separate retrieval relevance from context sufficiency and measure, by intervention, how much of the
+     failure each explains.
+
+2. We specify the Sufficiency Gate, an inference-time module that needs no retraining and no sufficiency
+     labels, and state what a deployment must supply to run it.
+
+3. We compare four scorers under one protocol: set-level aggregation gains +0.100 AUROC on HotpotQA
+     (95% CI [+0.069, +0.132]), and the generator-as-judge alone beats a random abstainer matched to its
+     own rate on both datasets.
+
+4. We show that crediting abstentions as non-hallucinations inflates the apparent reduction, and give the
+     protocol that separates artefact from effect.
+
+5. We report the negative results: by selective risk the heuristic is worse than not gating on both datasets, its
+     context-length term reduces discrimination monotonically, and the calibration percentile is a coverage
+     control, not a learned boundary.
+Comput Mater Contin. 2026  3
+
+     Findings are reported for Flan-T5-Large and repeated with Qwen2.5-3B-Instruct and Qwen2.5-7B-
+Instruct (Section 5.9); other generators and retrieval settings are not covered here.
+
+2 Related Work
+
+2.1 Retrieval-Augmented Generation
+
+     Every component of a modern RAG pipeline is a transformer [4]: the encoder that embeds queries
+and passages, the cross-encoder that scores them jointly, and the generator that conditions on the result.
+Bidirectional and sequence-to-sequence pre-training [5,6] is what allows a model to be conditioned at
+inference time on arbitrary passages, and is therefore the precondition for retrieval augmentation rather
+than an implementation detail. The gate studied here inherits the same lineage: its scorers are transformer
+rerankers, and its strongest variant is the generator itself.
+
+     RAG was formalised by Lewis et al. [1], who trained a dense retriever and a sequence-to-sequence
+generator end to end; REALM [7] pre-trains a retriever jointly with a masked language model, and Atlas [8]
+scales joint retriever­generator training to few-shot knowledge-intensive tasks. A parallel line improves
+retrieval alone--better encoders [9], zero-shot dense retrieval [10], hybrid sparse­dense search [11] and
+multi-stage reranking [12]--while others restructure what is retrieved, or how often: GraphRAG [13]
+organises the corpus as a knowledge graph, RAPTOR [14] retrieves over a recursive summary tree, and
+IRCoT [15] interleaves retrieval with chain-of-thought reasoning, with toolkits such as FlashRAG [16]
+standardising pipeline construction.
+
+     These approaches all treat retrieval as a ranking problem and pass the result to the generator without an
+explicit adequacy check, so none establishes that the retrieved evidence is enough. The gate is orthogonal to
+this line rather than in competition with it: any retriever above can sit upstream of it unchanged.
+
+2.2 Hallucination and its Measurement
+
+     The generation of fluent but factually incorrect text has been studied extensively [17­19], including
+through internal signals such as semantic entropy, which detects confabulated outputs from the model's
+own uncertainty [20]. FActScore [21] decomposes long-form generations into atomic facts and verifies each
+against a knowledge source. Measures of this kind act after generation rather than intervening before it.
+
+     In the retrieval setting, grounding a generator in retrieved evidence reduces hallucination relative to
+parametric-only generation [2], but that result presumes the evidence is adequate. RAGTruth [22] documents
+the residual case directly, annotating spans of RAG output that the retrieved content does not support. What
+such corpora leave open--whether the retrieved passages were adequate to begin with--is the question this
+paper takes up. Our measurement follows the same evidence-grounded principle--an answer is unsupported
+when no retrieved passage entails it (Section 4.4)--so that reliability is judged against what the system
+actually retrieved rather than against a reference string.
+
+2.3 Selective Generation and Abstention
+
+     Abstaining when a model is uncertain is a long-standing idea in machine learning [23]. In question
+answering, Kamath et al. [24] abstain on generator confidence, and Mallen et al. [25] invoke retrieval only
+when parametric confidence falls below a calibrated threshold.
+
+     Self-RAG [26] takes the stronger route of retraining the generator. The model learns to emit special
+reflection tokens: a retrieval token that calls the retriever on demand, and critique tokens that rate whether
+a retrieved passage is relevant, whether the generated text is supported by it, and how useful the response is;
+these tokens then weigh candidate continuations during decoding, so retrieval and self-assessment become
+4                                                                        Comput Mater Contin. 2026
+
+part of generation itself. The supervision for them is distilled from a separate critic model, so the capability
+arrives with a retraining cost. We compare against it empirically in Section 5.9. FLARE [27] needs no training
+and works during generation instead: it drafts the upcoming sentence and re-retrieves when that draft
+contains low-confidence tokens.
+
+     Three systems bracket the position our gate occupies. Corrective RAG [28] is the closest architecturally,
+placing a retrieval evaluator between retrieval and generation, mapping its confidence onto correct, incorrect
+and ambiguous actions, and expanding retrieval through web search when the set is judged inadequate--
+the same slot in the pipeline and the same repertoire of actions, but with an evaluator fine-tuned for the
+role. Adaptive-RAG [29] also decides before generation, yet routes on predicted question complexity rather
+than on evidence adequacy. HALT-RAG [30] acts afterwards, flagging unsupported outputs with a calibrated
+ensemble of frozen NLI models.
+
+     What separates the present work is not where it acts but what it requires. Corrective RAG fine-tunes
+an evaluator, Adaptive-RAG trains a router, Self-RAG retrains the generator, and the selective-generation
+method of Joren et al. [31] fits a trained head over an autorater; each needs a trained component and labelled
+data to fit it. The gate evaluated here needs neither, and its strongest variant is a prompt issued to the generator
+already present in the pipeline. Table 1 places these systems side by side.
+
+   Table 1: Inference-time reliability methods: where they act and what they require.
+
+        Method                 Acts              Decision Signal            Trained Component
+                       During generation  Learned reflection tokens for   Generator retrained from
+    Self-RAG [26]      During generation
+                       Before generation     retrieval, relevance and        critic-distilled data
+     FLARE [27]                                       support                         None
+                        Before retrieval
+      Corrective        After generation    Token confidence in the         Fine-tuned evaluator
+       RAG [28]        Before generation      drafted next sentence
+       Adaptive-       Before generation                                      Complexity router
+       RAG [29]                                 Retrieval evaluator      Calibrated meta-classifier
+   HALT-RAG [30]                          confidence, mapped to three    Autorater and trained head
+                                                                         None; threshold calibrated
+    Joren et al. [31]                                  actions
+   Sufficiency Gate                                                            on held-out data
+                                                Predicted question
+      (this work)                                   complexity
+
+                                             NLI ensemble over the
+                                                generated answer
+
+                                           Autorater sufficiency label
+                                           with model self-confidence
+
+                                            Context sufficiency score
+                                             from an existing model
+
+2.4 Context Sufficiency and the Relevance Gap
+
+     Several studies examine the adequacy of retrieved evidence without gating on it. Adlakha et al. [32]
+relate context faithfulness to answer quality, and Yoran et al. [33] show that retrieval can actively harm multi-
+hop accuracy when irrelevant passages are blended with relevant ones, testing an NLI entailment filter as one
+mitigation. RAGAS [34] and ARES [35] score pipelines post hoc along axes such as context relevance and
+faithfulness, as diagnostic frameworks rather than inference-time interventions.
+Comput Mater Contin. 2026                  5
+
+     Our gate differs from the NLI line in what the scorer is asked to judge. An NLI model is trained on
+declarative premise­hypothesis pairs [36]. A generated answer is such a hypothesis, which is why entailment
+serves well as our hallucination measure; a question is not, so asking an NLI model whether a passage entails
+a question puts it outside the distribution it was trained on. A cross-encoder trained for passage relevance,
+by contrast, takes exactly the question­passage input the gate has available. Relevance is therefore used as a
+proxy feature for sufficiency, never as a measure of it, and Section 5.3 reports how far that proxy carries.
+
+     Joren et al. [31] is the work closest to ours in framing. It defines context sufficiency--whether the
+context contains enough information to give a definitive answer, a criterion that does not require the gold
+answer to apply--and classifies it before generation with an LLM autorater prompted to reason step by
+step, alongside cheaper alternatives including an entailment-based rater and fine-tuned open models. Their
+selective generation combines the sufficiency label with the model's self-rated confidence through a trained
+head, improving the fraction of correct answers among answered queries by 2 to 10 points across proprietary
+and open generators.
+
+     We adopt that notion of sufficiency and ask what remains of it when the trained parts are removed. Three
+consequences follow. The sufficiency signal comes from the generator already in the pipeline rather than from
+a separate rater, so no labelled sufficiency data is needed anywhere. The scoring model is held fixed while
+only the aggregation changes, which isolates what set-level scoring contributes. And every gate is measured
+against a random abstainer matched to its own coverage, which establishes whether a gate discriminates at
+all rather than which of two gates is better. The generators evaluated here are also an order of magnitude
+smaller than those in that work.
+
+     The gap is especially consequential in three settings: multi-hop questions, where the answer must
+be assembled across passages and no single one holds it; long-tail queries, where the corpus discusses
+an entity at length without stating the date, quantity or relation requested; and distractor pools such as
+HotpotQA's [37], seeded with high-similarity passages that do not contain the answer. In each the generator
+receives a plausible-looking context, answers confidently, and gives the user no signal that it is unreliable.
+
+     A better retriever narrows this gap without closing it: when the corpus does not hold the fact, a stronger
+encoder still returns the best available passages, which may be relevant and still insufficient. The problem
+also survives successful retrieval, since models underuse relevant information placed in the middle of long
+contexts [38], and context compression [39] is itself motivated by the observation that more retrieved text
+does not become better-used context. The complementary intervention is to detect that retrieval has failed
+and withhold generation, rather than assume it always succeeds.
+
+3 Materials and Methods
+
+     Let q be a query and C = {p1, . . . , pk} the passages a retriever R returns from corpus D, so that a standard
+pipeline produces a = G(q, C) for a generator G. We call C sufficient for q when it contains the information
+needed to answer q, and insufficient otherwise. Nothing in the standard pipeline tests that property before
+invoking G, so an insufficient context is passed on unchallenged. We therefore insert a sufficiency gate.
+
+f  (q, C)  {sufficient, insufficient}      (1)
+
+and route generation through it:
+
+a = G,(q, C),  if f (q, C) = sufficient    (2)
+               if f (q, C) = insufficient
+6                                                  Comput Mater Contin. 2026
+
+where is abstention, recorded as [ABSTAIN] in place of an answer. Before abstaining the pipeline may
+instead expand retrieval to C = R(q, k) with k > k and re-evaluate f ; Fig. 1 shows the full control flow. Four
+
+interchangeable scorers occupy the gate slot, developed in turn below. Each returns one score s tested against
+
+one threshold, and none is trained on sufficiency labels.
+
+Figure 1: The sufficiency gate pipeline. Retrieval and generation are unchanged from standard RAG and the gate is the
+only added component: it scores the retrieved set once, routing to generation when s   and to abstention otherwise.
+The re-retrieve variant (purple) first repeats retrieval at k = 6 and re-scores, abstaining only if the score is still below .
+
+3.1 Heuristic Gate
+     The cheapest possible gate combines two signals that retrieval has already produced:
+
+sheuristic = 0.6 × si¯m(q, C) × 0.4 × len_norm(C)                                          (3)
+
+where si¯m is the mean cosine similarity between the query and the retrieved passages as returned by the
+retriever, and len_norm(C) = min(w, 512)/512 with w the number of whitespace-delimited tokens in C; the
+score is clipped to [0, 1]. Both terms are already on a fixed scale, so the threshold is fixed at  = 0.50 for both
+datasets and never calibrated, and the gate adds no model call at all. It is reported as a floor rather than a
+recommendation: Section 5.8 shows the length term makes it worse at every weight tested.
+
+3.2 Single-Passage Cross-Encoder Gate (MS-MARCO)
+
+     The first learned scorer replaces that heuristic with relevance from cross-encoder/ms-marco-
+MiniLM-L-6-v2, a 6-layer cross-encoder trained on question­passage pairs labelled for relevance on MS
+MARCO [40]. Each passage is truncated to 512 characters, encoded jointly with the query, and scored; the
+gate takes the maximum:
+
+sgate = max CrossEncoder(q, pi )                                                           (4)
+   i  {1,...,k}
+
+     The maximum carries over from single-hop retrieval an assumption we do not defend, that one highly
+rated passage is all the generator needs; Section 3.3 tests it directly. Scores are used as raw logits, since sigmoid
+Comput Mater Contin. 2026                                       7
+
+or softmax normalisation compresses them into a range where good and poor contexts are hard to separate
+by a threshold.
+
+     Relevance is used as a proxy feature for sufficiency, never as a measure of it. An NLI model is not the
+alternative it appears to be, since it expects a declarative hypothesis and a question is not one; that is why NLI
+scores our generated answers instead (Section 4.4) while the gate uses a scorer built for question­passage
+input. Whether a relevance-trained scorer can separate irrelevant, relevant but incomplete, and genuinely
+sufficient contexts is settled against gold supporting-fact labels in Section 5.3.
+
+3.3 Set-Level Cross-Encoder Gate (Concat-CE)
+
+     Multi-hop evidence is spread across passages, so a maximum reports the best fragment rather than
+the adequacy of the set. The set-level variant scores the passages together, as one string, which is what the
+generator will actually see:
+
+sgate = CrossEncoder (q, p1  p2      pk)                        (5)
+
+where  is concatenation and the joined context is truncated to 1500 characters. The model is unchanged
+and only the granularity of its input differs, so any change in behaviour is attributable to aggregation rather
+than to the scorer.
+
+     This also repairs a structural weakness in the expansion path. A maximum over a larger set cannot fall,
+so a single-passage gate can never register that expanding retrieval added nothing useful. A set-level score
+can fall, because irrelevant material dilutes the concatenated context, which allows an expanded context to
+stay below threshold.
+
+3.4 Generator-as-Judge Gate (LLM-Judge)
+
+     Both cross-encoders score relevance, because that is what their training objective provides. The fourth
+scorer asks about sufficiency directly, of the model that will have to use the context. The retrieved passages,
+truncated to 2000 characters, are presented with the query and the instruction "Does the context contain ALL
+the information needed to answer the question? Answer yes or no." One token is decoded and the gate score is
+the probability of yes renormalised over the yes and no logits at that position:
+
+sgate  =       exp zyes       ,  z = logits(q, p1  p2      pk)  (6)
+          exp zyes + exp zno
+
+     No model is loaded that the pipeline does not already host and no training data is required, so the cost
+is one extra forward pass. What separates this scorer from the cross-encoders is therefore what it measures,
+not how it aggregates.
+
+Truncation budgets.
+
+     The three learned scorers intentionally see different amounts of text: Max-CE truncates each passage
+to 512 characters, Concat-CE the joined context to 1500, and the LLM-judge the joined context to 2000.
+These budgets follow each scorer's input format rather than a shared length. A shared-budget sweep at
+L  {512, 1500, 2000} is reported with the second-generator checks in Section 5.9: at the paper's operating
+lengths the scorer ordering is stable, while a short budget (L = 512) hurts the judge on MuSiQue, which is
+why it is given the longer context.
+8  Comput Mater Contin. 2026
+
+3.5 Baselines and Controls
+
+Generator confidence.
+
+     Thresholding the generator's own confidence is the standard baseline in selective prediction and an
+essential comparison for this work: if a score the generator already produces buys the same reliability, a
+separate gate must justify its cost. The answer is generated first under the same four-beam decoding as every
+other configuration, scored by the length-normalised log-probability of the returned beam, and withdrawn
+below the 40th percentile of its own score distribution. That scale is not comparable with a cross-encoder
+logit, so every comparison against it in Section 5.5 is made at matched coverage. It is a filter on the output,
+not a gate on the input, so it saves no generation cost.
+
+Query-performance predictors.
+
+     Information retrieval has asked a related question since long before RAG: given a query, will this
+retrieval go well? Its predictors [41] are training-free and nearly costless, so they set the bar a sufficiency
+scorer must clear. Pre-retrieval predictors see only the query and collection statistics (average and maximum
+inverse document frequency, simplified clarity score, average and maximum collection query similarity,
+query length); post-retrieval predictors also see the retrieved list (mean and maximum similarity, score
+standard deviation, clarity [42], weighted information gain [43], normalised query commitment [44], score
+magnitude and variance). All are computed on the same queries and labels as the gates. Three approximations
+bound their interpretation: term statistics come from the union of retrieved passages rather than the full
+index, the background estimate for weighted information gain and normalised query commitment is the top
+six passages, and clarity uses Jelinek­Mercer smoothing at  = 0.6 over the top three. The first two make
+these predictors conservative rather than flattered.
+
+Random abstention.
+
+     Every gate is also compared against a control withholding the same number of queries, chosen at random
+rather than by score. A gate that does not discriminate lands on this control however much it abstains, so
+clearing it is the minimum evidence that sufficiency estimation is doing any work; the construction and
+permutation test are given in Section 4.4.
+
+Oracle context.
+
+     A difference in failure between sufficient and insufficient contexts is an association: the generator might
+be failing because evidence was missing, or failing on those same queries for its own reasons. Separating the
+two requires an intervention, so the generator is run twice on every query--once on the retrieved passages
+and once on the gold supporting passages with retrieval bypassed--holding generator, prompt and decoding
+fixed. Because retrieval is the only thing that changes, the difference is the share of failure attributable to it,
+and what remains belongs to the generator. We report the decomposition on both failure measures, since
+they do not give the same share.
+
+Controlled Self-RAG implementation.
+
+     The Self-RAG comparison in Section 5.9 uses the released 7B checkpoint at k = 3 in 4-bit quantisation,
+confounding gating strategy with model size and precision. We therefore reimplemented Self-RAG's critique-
+and-select mechanism on Flan-T5-Large in FP16 at k = 6, changing only the gating strategy. Results are
+reported in Section 5.12.
+
+3.6 Threshold Calibration
+
+     Cross-encoder logit scales shift with the query distribution, so a fixed threshold does not transfer
+between datasets. Each scorer is therefore calibrated separately: its scores are computed on a held-out set of
+200 queries disjoint from the evaluation set, and the threshold is the 40th percentile of that distribution,
+Comput Mater Contin. 2026                9
+
+ = Percentile40({sg(aj)te}2j=010)        (7)
+
+so each gate carries its own threshold on its own scale--a logit for the two relevance gates, a probability
+for the judge--with the heuristic the one exception at its fixed  = 0.50, and the same percentile lands at
+different points of each score scale (Fig. 2). The 40th percentile is a mid-range operating point rather than
+an optimum: Section 5.8 shows it fixes how often the system declines to answer while leaving the conditional
+unsupported-answer rate almost unchanged, making it a coverage dial, not a learned boundary.
+
+Figure 2: MS-MARCO cross-encoder scores on the held-out calibration set (n = 200 per dataset, disjoint from the
+
+evaluation queries). The dashed line is the 40th percentile, carried unchanged to the evaluation set. The two datasets
+occupy different parts of the logit scale, so the same percentile gives  = 3.78 on HotpotQA and 0.14 on MuSiQue: the
+
+threshold cannot be transferred between corpora.
+
+3.7 Re-Retrieve Strategy
+
+     Rather than abstain immediately, the gate may expand retrieval once. The re-retrieve variant doubles
+the budget to k = 6, re-scores the expanded context C = R(q, 6), and invokes the generator only if that score
+clears the same , with no extra margin demanded of the second look:
+
+a = G,(q, C),  if f (q, C) = sufficient  (8)
+               otherwise
+
+     A worked case makes the branches of Fig. 1 concrete. For a two-hop question asking which of two
+magazines was founded first, suppose the top three passages cover only the first magazine. The gate scores
+that set once and falls below , the second founding date being absent. The abstain-only configuration stops
+there and never invokes the generator. The re-retrieve configuration retrieves again at k = 6 and re-scores: if
+the missing article arrived, generation proceeds on all six passages; if not, the system abstains, having spent
+one retrieval and one gate call but no generation. Section 5.8 reports how often each branch is taken and how
+often a reversal is warranted.
+
+4 Experimental Setup
+
+4.1 Datasets and Corpora
+     Both benchmarks are multi-hop, which is the setting in which relevance and sufficiency come apart most
+
+sharply. HotpotQA [37] requires reasoning over two Wikipedia passages; we use the distractor configuration
+10  Comput Mater Contin. 2026
+
+of the validation split, in which ten passages, only two of them supporting, accompany each question.
+MuSiQue [45] requires two to four hops and is constructed to eliminate questions answerable from a single
+passage; we use the answerable validation split.
+
+     Each corpus is built deterministically from the benchmark's own material. For each dataset we take the
+first 700 validation queries, pool every passage the benchmark distributes with them--all ten paragraphs
+per HotpotQA question with the title prepended, every paragraph in the MuSiQue paragraph list--then
+deduplicate, sort lexicographically and keep the first 5000 entries. Sorting before truncation is what makes the
+corpus reproducible, since set iteration order is not stable across runs even under a fixed seed. No chunking
+is applied: each passage is one benchmark paragraph, indexed whole. Nothing is added to either corpus--no
+external text, no answer strings, no generated material--so the only contamination risk runs the other way,
+the 5000-passage cap discarding gold evidence, which Section 5.8 quantifies.
+
+     The two datasets are not equally hard, and the gap should be read before any result. Under an identical
+pipeline, vanilla RAG reaches 32.0% Exact Match on HotpotQA and 8.4% on MuSiQue. MuSiQue's longer
+chains mean more passages must all be present, its construction removes exactly the single-passage cases a
+top-k retriever handles well, and its wider answer space makes a partially correct chain less likely to land
+on the reference string. Sufficiency rates follow: at k = 3, 22.6% of HotpotQA contexts are sufficient against
+5.0% of MuSiQue. Absolute values should therefore never be compared across datasets; only the ordering of
+methods within a dataset is meaningful.
+
+Corpus size and sample size.
+     The evaluation samples n = 500 questions per dataset, a scale consistent with the validation-set
+
+evaluations reported for the underlying benchmarks [37,45]. It gives adequate precision on the primary
+reliability measure: 95% confidence intervals on the unsupported-answer rate span roughly ±2­5 percentage
+points throughout Section 5.2. Depth was preferred to size at this scale--stratifying by retrieval quality and
+by oracle-evidence availability within the corpus (Section 5.10), and adding two out-of-domain datasets, MS
+MARCO and SQuAD 2.0 (Section 5.11). Section 4.6 reports the power this sample size affords.
+
+4.2 Models and Infrastructure
+
+     Table 2 lists every component. Retrieval uses FAISS IndexFlatIP, an exact inner-product index
+with no quantisation, so retrieval introduces no approximation error. The generator decodes with four
+beams (num_beams = 4) and early stopping to a maximum of 64 tokens. Four-beam search is not greedy
+decoding, and the distinction matters because the generator-confidence baseline of Section 3.5 scores the
+length-normalised log-probability of the returned beam. The LLM-judge decodes differently--one beam and
+one token--since it reads the probability of yes against no at the first position rather than generating text.
+
+4.3 Pipeline Configurations
+
+     Seven pipeline configurations are evaluated, plus the generator-confidence baseline (Table 3). Because
+that baseline filters answers after generation rather than gating before it, and because its score is on an
+incomparable scale, it appears in the discrimination and matched-coverage analyses rather than as a row in
+the main tables.
+
+4.4 Evaluation Metrics
+
+     Several metrics below are defined against the gold answer, a term used loosely in this literature, so we
+fix it. The gold answer is the short reference string the benchmark ships with each question--the answer
+field--written by the annotator who wrote the question: a span of a few tokens, one per question, compared
+Comput Mater Contin. 2026                                                     11
+
+after lower-casing, stripping articles and punctuation, and collapsing whitespace. It is distinct from the gold
+supporting facts, the annotated sentences a reader needs to reach that answer, which are used only for the
+sufficiency labels of Section 4.5.
+
+Component                  Table 2: Model components and experimental setup.
+
+ Embedder                                                                     Details
+Gate Model
+ Generator                                          all-MiniLM-L6-v2 (384-dim dense retrieval)
+                                                ms-marco-MiniLM-L-6-v2 (6-layer cross-encoder)
+    Index
+Corpus Size                                             flan-t5-large (780M params, seq2seq)
+                                                  FAISS IndexFlatIP (exact cosine, no quantisation)
+  Datasets
+Calibration                                                        5000 passages per dataset
+                                             HotpotQA (n = 500) and MuSiQue (n = 500), validation splits
+
+                                                         200 held-out samples;  = 40th percentile
+
+                                 Table 3: Pipeline configurations evaluated.
+
+          Configuration                                             Description
+           Vanilla RAG
+    Heuristic Gate (Abstain)               Retrieve top-k = 3 passages, always generate. Baseline.
+  MS-MARCO Gate (Abstain)                   Score = 0.6 × cosine +0.4 × length. Abstain if <0.50.
+MS-MARCO Gate (Re-retrieve)
+   Concat-CE Gate (Abstain)                        Cross-encoder max score; abstain if <.
+ Concat-CE Gate (Re-retrieve)                If gate fires at k = 3, expand to k = 6 and re-score.
+                                      Cross-encoder over the concatenated top-k set; abstain if <.
+   LLM-Judge Gate (Abstain)         Set-level score; if gate fires at k = 3, expand to k = 6 and re-score.
+                                  Generator is asked whether the context suffices; gate score is P(yes);
+Generator confidence (baseline)
+                                                                   abstain if <.
+
+                                   Answer generated first, then scored by length-normalised sequence
+                                 log-probability; withdrawn if <. Evaluated at matched coverage only.
+
+     Five quantities are reported per configuration. Exact Match and Token F1 compare the predicted answer
+with the gold answer; both are reported twice, over answered queries and over all 500 with abstentions scored
+incorrect, because a gated and an ungated pipeline do not answer the same set. The unsupported-answer
+rate is the share of generated answers that no retrieved passage entails, judged by DeBERTa-large-MNLI with
+each passage as premise and the answer as hypothesis; an answer counts as supported when the maximum
+entailment probability across passages exceeds 0.250, a threshold fixed once on the calibration set and never
+retuned. The answer-quality failure rate is the share of answers scoring Token F1 below 0.10. The abstention
+rate is the share of queries the gate declines.
+
+     We deliberately do not call the answer-quality failure rate a hallucination rate. Low overlap with a
+reference means disagreement with that reference, which is not the same as an ungrounded answer: an
+answer faithful to the retrieved passages can score poorly against the reference, and an answer overlapping
+the reference can be supported by nothing retrieved. Since the claim of this paper concerns grounding, the
+entailment measure is primary and Token F1 is kept as a separate answer-quality measure. One definition,
+one threshold and one procedure are applied to every configuration, vanilla RAG included.
+12                                                                      Comput Mater Contin. 2026
+
+     The two disagree often enough that the choice changes conclusions. Vanilla RAG is unsupported on
+26.2% of HotpotQA and 30.8% of MuSiQue answers while the same outputs fail Token F1 at 50.8% and 78.0%,
+and the measures return the same verdict on only 55.0% and 44.0% of queries (Table 4).
+
+          Table 4: Agreement between hallucination measures (vanilla RAG, n = 500 per dataset).
+
+ Dataset  Unsupported (NLI) (%)  Answer-Quality Failure (Token F1) (%)  Agreement (%)
+
+HotpotQA              26.2                            50.8                     55.0
+MuSiQue               30.8                            78.0                    44.0
+
+Note: Agreement indicates the percentage of queries on which both measures return the same verdict. They differ on
+almost half of the MuSiQue queries. The prevailing disagreement is an answer that is entailed by a retrieved passage
+but does not match the gold answer, which the entailment measure treats as supported and Token F1 treats as a failure;
+this case accounts for 34.8% of HotpotQA and 51.6% of MuSiQue queries. The converse case--an answer matching the
+reference but entailed by no retrieved passage--is far rarer (10.2% and 4.4% respectively).
+
+     No single number summarises a gated pipeline, so each configuration is reported as a block: coverage;
+the unsupported rate conditional on answering, which is our primary reliability measure; the credited rate
+that counts abstentions as supported, retained in one marked column so the effect of that convention stays
+visible; Exact Match over answered queries and over all 500; and the false-abstention rate, the share of
+abstained queries whose context was in fact sufficient. Because those describe a single threshold while a gate
+is a family of systems indexed by its threshold, we also report the risk­coverage curve and summarise it by
+the area beneath (AURC, lower is better). A scorer with no discriminative power yields a flat curve at the
+base rate, so its AURC equals the vanilla unsupported rate--the reference against which every scorer should
+be read.
+
+4.5 Sufficiency Labels
+
+     Judging whether a gate estimates sufficiency requires ground truth for the question did retrieval return
+the evidence a reader would need? We label a retrieved set sufficient when it contains every gold supporting
+sentence the benchmark's annotators marked for that query, and for MuSiQue when every single-hop
+decomposition step is covered as well. Sufficiency is thus a property of the set rather than of any passage,
+which is what a multi-hop benchmark is built to test.
+
+     The obvious alternative, answer-string containment, is rejected. It cannot certify that a full evidence
+chain is present, and it misclassifies paraphrased, implicit and compositional evidence--the cases MuSiQue
+is made of. The two criteria disagree substantially: answer-string containment calls twice as many HotpotQA
+contexts and more than three times as many MuSiQue contexts sufficient, at only fair agreement (Table 5).
+Every sufficiency computation in this paper uses supporting-fact labels.
+
+     What the labels mean should be read precisely. Supporting facts are the sentences from which the
+gold answer follows, annotated with the answer in view but not the answer itself, so a set can contain
+every supporting sentence and no answer string--common when the answer must be composed across
+hops or inferred from a date or comparison. The labels therefore record whether the evidence was retrieved,
+not whether the answer was. Being derived from an annotation of what is needed rather than from an
+independent rating, they inherit that annotation's incompleteness; Section 6.3 reports their agreement with
+direct human judgement.
+Comput Mater Contin. 2026                                                                             13
+
+          Table 5: Agreement between sufficiency labelling criteria (n = 500 per dataset).
+
+ Dataset  Supporting-Fact  Answer-String         Raw                                        Cohen's 
+           Sufficient (%)  Sufficient (%)  Agreement (%)
+HotpotQA                                                                                      0.388
+MuSiQue          22.6            50.6             69.2                                        0.418
+                  5.0            16.6             88.4
+
+Note: The answer-string criterion labels a context sufficient if the gold answer string appears in any retrieved passage;
+the supporting-fact criterion requires the retrieved set to cover every human-annotated supporting fact. Kappa values
+in this range indicate only fair agreement, so results computed against one criterion cannot be transferred to the other.
+
+4.6 Statistical Procedure
+
+     Neither a paired t-test nor McNemar's test is used, and both omissions are deliberate. A t-test is
+inappropriate on a binary indicator. McNemar's test, the conventional choice for paired binary outcomes, is
+degenerate here: in an abstain-only configuration an answered query receives exactly the ungated response,
+so its label cannot change, and a query can change status only by being abstained from. One discordant cell is
+therefore zero by construction--c = 0 in all twelve gated configurations, with b between 58 and 86--leaving
+the statistic equal to the abstention count, which would declare significance for a gate abstaining at random.
+
+     We therefore test what distinguishes a gate from a coin: whether the queries it withholds contain
+more unsupported answers than a random set of the same size. That is a one-sided permutation test over
+10,000 draws, reported per configuration in Section 5.5. Scorer-to-scorer comparisons use paired bootstrap
+confidence intervals over 5000 stratified resamples, since a difference in AUROC needs an interval to
+be interpretable.
+
+Confidence intervals.
+
+     Section 5.2 and the analyses of Sections 5.10­5.12 report 95% confidence intervals for the unsupported-
+answer rate and other proportions: Wilson-score where only a percentage and its answered-query count
+are needed, bootstrap (10,000 resamples) where per-record values are available. These quantify estimation
+precision independently of the permutation test's significance verdict.
+
+Statistical power.
+
+     A post-hoc power analysis, treating each gate-vanilla comparison on the unsupported-answer rate as a
+two-proportion test, finds low power at n = 500: Cohen's h ranges from 0.02 (Max-CE) to 0.08 (LLM-judge)
+on MuSiQue, an average power of 14% against the conventional 80% threshold, with a minimum detectable
+effect of approximately 4.1 percentage points at a 30% baseline rate. The MuSiQue reductions observed here
+(0.9­3.8pp) sit at or below that, while HotpotQA's larger reductions fare better. This is why the significance
+claims do not rest on that test: the one-sided permutation test above compares a gate's selection against a
+size-matched random abstainer directly, rather than relying on the normal approximation such a calculation
+assumes, and it returns p = 0.0034 for the LLM-judge on MuSiQue and p < 0.001 on HotpotQA (Section 5.5).
+The power figures bound that test's sensitivity, not the permutation result.
+
+Effect sizes.
+
+     Hedge's g (bias-corrected Cohen's d) was also computed for each learned gate's answered-subset
+outcomes against vanilla RAG at k = 3. On MuSiQue the magnitudes are small: g = 0.02­0.08 for the
+unsupported-answer rate and g = 0.07­0.10 for Exact Match. On HotpotQA the unsupported-rate effects
+are larger (g = 0.20­0.22) while remaining inside Cohen's small band; Exact Match spans g = 0.08­0.25.
+A small standardised effect size and a significant permutation test are not in tension: the former measures a
+mean difference against within-group variance on a noisy binary outcome, while the latter asks whether the
+14  Comput Mater Contin. 2026
+
+gate's chosen subset differs from a random one of the same size. We do not claim the hallucination reduction
+is large; we claim, per Section 5.5, that it is not attributable to withholding an arbitrary subset of queries.
+
+4.7 Reproducibility
+
+     The 700 queries per dataset are split once: the first 500 form the evaluation set and the remaining
+200 the calibration set. Every threshold in this paper is fixed on the calibration set--the 40th-percentile
+gate thresholds and the 0.250 entailment threshold alike--then applied unchanged to the evaluation set. No
+threshold is tuned on evaluation data at any point. The global seed is 42.
+
+     The generator prompt is "Answer the question using only the context.\n\
+nContext: {context}\n\nQuestion: {question}\n\nAnswer:" and the judge prompt
+is "Context: {context}\n\nQuestion: {question}\n\nDoes the context contain
+ALL the information needed to answer the question? Answer yes or no." In
+both, the concatenated context is truncated to 2000 characters and the tokenised input to 768 tokens; for
+the entailment metric each premise passage is truncated to 1200 characters and 512 tokens.
+
+     The generator runs in half precision on the GPU while the entailment model is held in single precision,
+because half precision shifts its entailment probabilities enough to move the calibrated threshold. All
+experiments ran on one NVIDIA T4 (Google Colab Pro) with PyTorch 2.11.0 and CUDA 12.8 under Linux.
+
+5 Results
+
+     The evaluation is organised as twelve findings. The first locates where the failure originates and the
+second how much of the apparent remedy is real; Findings 3 to 7 test the four scorers as rankers and then
+as gates, against the free alternatives retrieval already provides and against matched controls; Findings 8 and
+9 cover the design variants and the external checks; Findings 10 to 12 ask where inside the corpus the gate
+acts, what survives a change of domain, and how the gate compares against a trained system under matched
+conditions. Findings 1 to 9 use the primary retrieval depth k = 3; Findings 10 to 12 read the expanded k = 6
+field and state that depth where they report rates. All values are computed over 500 queries per dataset under
+the protocol of Section 4.
+
+5.1 Finding 1: Insufficient Retrieval Accounts for Most of the Failure
+
+     Vanilla RAG leaves 26.2% of HotpotQA and 30.8% of MuSiQue answers unsupported, and it fails more
+often when the retrieved context is insufficient (Fig. 3). That association does not establish a cause, since
+the same queries may be harder for the generator in their own right, so it is replaced by an intervention:
+generator, prompt and decoding are held fixed while the retrieved context is swapped for the gold supporting
+passages (Section 3.5).
+
+     Gold context moves everything. Answer-quality failure falls from 50.8% to 15.8% on HotpotQA and
+from 78.0% to 24.8% on MuSiQue, with Exact Match rising from 32.0% to 62.0% and from 8.4% to 54.4%.
+The unsupported rate falls more modestly, from 26.2% to 13.6% and from 30.8% to 20.2%. As shares (Table 6),
+the substitution removes 68.9% and 68.2% of answer-quality failure and 48.1% and 34.4% of unsupported
+answers. Retrieval is therefore the largest single source of failure, which is what recommends a gate at that
+point in the pipeline; and because 13.6% and 20.2% of answers remain unentailed with the gold evidence in
+the prompt, a gate that judged sufficiency perfectly would still leave roughly a third of the failures (Fig. 4).
+That residue bounds every result below.
+Comput Mater Contin. 2026                                                                            15
+
+Figure 3: Answer-quality failure rate (Token F1 < 0.10) of vanilla RAG, split by whether the retrieved context is sufficient
+under gold supporting-fact labels (113 of 500 sufficient on HotpotQA, 25 of 500 on MuSiQue, so the MuSiQue sufficient
+bar rests on a small sample). The gap () is an association, not a cause.
+
+                           Table 6: Oracle-context decomposition of failure.
+
+ Dataset          Condition         Answer-Quality Failure (%)                Unsupported (%)  EM (%)
+
+HotpotQA      Retrieved context                   50.8                                26.2       32.0
+HotpotQA  Gold supporting passages                15.8                                13.6       62.0
+
+MuSiQue   Retrieved context         78.0                                      30.8             8.4
+
+MuSiQue Gold supporting passages    24.8                                      20.2             54.4
+
+Note: Generator, prompt and decoding are identical in both conditions; only the context differs. The retrieval-
+attributable share is the fraction of failure removed by gold context: 68.9% and 68.2% of answer-quality failure, and
+48.1% and 34.4% of unsupported answers. Bold marks the gold supporting-passages condition.
+
+Figure 4: Answer-quality failure under retrieved context against gold supporting passages, with generator, prompt and
+decoding held fixed. The shaded portion is removed by gold context and is attributable to retrieval; the solid remainder
+persists under perfect evidence and is attributable to the generator.
+16                                                                                               Comput Mater Contin. 2026
+
+5.2 Finding 2: Most of the Apparent Reduction is an Accounting Effect
+
+     Tables 7 and 8 report all seven configurations under the metric block of Section 4.4, and Fig. 5 plots the
+same decomposition. Coverage differs between rows, so only three columns are comparable across them.
+Each table also carries a random-abstention row, which withholds as many queries as the gate does but
+chooses them at random.
+
+                              Table 7: Results on HotpotQA (distractor setting, n = 500).
+
+    Method                    Cov. (%) Unsupcond (%)  Unsupcred (%) EMans (%) EMall (%) F1all (%) FAR (%)
+
+    Vanilla RAG               100.0 26.2 [22.5, 30.2]     26.2  32.0                       32.0  42.2  0.0
+
+Random Abstention (matched) -- 26.2 [22.4, 30.1]          --    --                         --    --    --
+
+    Heuristic Gate (Abstain)  51.8 25.5n.s. [20.6, 31.1]  13.2  30.9                       16.0  20.6 22.0
+
+    MS-MARCO Gate (Abstain) 57.8 18.0 [14.0, 22.8]        10.4  35.6                       20.6  28.2  10.0
+
+MS-MARCO Gate (Re-retrieve) 59.6 17.8 [13.9, 22.5]        10.6  35.6                       21.2  29.1  14.9
+
+    Concat-CE Gate (Abstain)  57.2 17.1 [13.2, 21.9]      9.8   37.4                       21.4  28.4  7.0
+
+Concat-CE Gate (Re-retrieve) 58.6 17.1 [13.2, 21.8]       10.0  36.9                       21.6  29.2  11.6
+
+    LLM-Judge Gate (Abstain)  57.0 17.2 [13.3, 22.0]      9.8   43.9                       25.0  31.9  4.2
+
+Note: Unsupcond is the unsupported-answer rate over generated answers, with 95% Wilson-score confidence intervals
+in brackets computed from each row's answered-query count; Unsupcred is the same quantity over all 500 queries with
+abstentions counted as supported. EMans is over answered queries; EMall and F1all score abstentions as zero over all 500.
+FAR is the false-abstention rate. Only Unsupcond, EMall and F1all are comparable across rows, since coverage varies.
+Random Abstention withholds the same number of queries at random (mean of 1000 draws, 95% percentile interval).
+ indicates that lower values are better. marks a one-sided permutation test of the gate's selection against random
+
+selection (10,000 draws) at p < 0.0083, the Bonferroni threshold for six configurations; n.s. denotes no significant
+
+difference. Bold indicates the best value in each column.
+
+                              Table 8: Results on MuSiQue (answerable split, n = 500).
+
+    Method                    Cov. (%) Unsupcond (%)  Unsupcred (%) EMans (%) EMall (%) F1all (%) FAR (%)
+
+    Vanilla RAG               100.0 30.8 [26.9, 35.0]     30.8  8.4                        8.4   14.5  0.0
+
+Random Abstention (matched) --  30.8 [25.5, 35.9]         --    --                         --    --    --
+
+    Heuristic Gate (Abstain)  36.8 37.0n.s. [30.4, 44.2]  13.6  13.0                       4.8   7.3   3.5
+
+    MS-MARCO Gate (Abstain) 62.2 29.9n.s. [25.1, 35.2]    18.6  10.9                       6.8   11.0  1.1
+
+MS-MARCO Gate (Re-retrieve) 64.2 29.9n.s. [25.2, 35.1]    19.2  11.2                       7.2   11.4  2.2
+
+    Concat-CE Gate (Abstain)  63.6 28.0n.s. [23.4, 33.2]  17.8  10.4                       6.6   10.6  1.1
+
+Concat-CE Gate (Re-retrieve) 64.8 28.7n.s. [24.0, 33.9]   18.6  10.2                       6.6   10.8  1.7
+
+    LLM-Judge Gate (Abstain)  71.0 27.0 [22.6, 31.8]      19.2  11.3                       8.0   13.5  0.0
+
+Note:  indicates that lower values are better. marks a one-sided permutation test of the gate's selection against random
+selection (10,000 draws) at p < 0.0083, the Bonferroni threshold for six configurations; n.s. denotes no significant
+difference. Bold indicates the best value in each column; Unsupcond brackets are 95% Wilson-score confidence intervals
+computed from each row's answered-query count. The heuristic shows the crediting effect most clearly: 13.6% credited
+against vanilla RAG's 30.8%, while the answers it does give are unsupported 37.0% of the time. Only the LLM-judge
+clears the control (p = 0.0034); set-level scoring reaches p = 0.044, which does not survive correction. Bold indicates
+the best value in each column.
+Comput Mater Contin. 2026  17
+
+Figure 5: Main results on HotpotQA (top) and MuSiQue (bottom). Solid bars are conditional metrics (unsupported
+rate over generated answers; EM over answered queries), pale bars their credited counterparts (abstentions counted as
+supported; EM over all 500). The dashed line marks vanilla RAG, and the gap between solid and pale unsupported bars
+is the crediting artefact.  indicates that lower values are better;  indicates that higher values are better.
+
+     The two unsupported columns tell different stories. Credited, with abstentions counted as supported,
+every gate improves on vanilla RAG: 26.2% falls to between 9.8% and 13.2% on HotpotQA, and 30.8% to
+between 13.6% and 19.2% on MuSiQue. That fall follows from the convention alone, since an abstention
+lowers the rate without any generated answer being improved. The heuristic on MuSiQue shows how large
+the effect can be: 13.6% credited against 30.8% ungated, while the answers it does give are unsupported 37.0%
+of the time.
+
+     Measured conditionally, over generated answers only, the reductions are modest. On HotpotQA the MS-
+MARCO gate lowers the rate from 26.2% to 18.0% at 57.8% coverage and the LLM-judge to 17.2% at 57.0%,
+while the heuristic reaches 25.5%, within a point of the ungated pipeline. On MuSiQue the reductions are
+smaller: 27.0% for the judge and 28.0% for set-level scoring against 30.8% ungated, 29.9% for single-passage
+scoring, and 37.0% for the heuristic, which exceeds the ungated rate. Of these, only the judge's reduction
+clears the random-abstention control (Section 5.5). Conditional rates and matched controls are therefore
+used throughout what follows.
+
+     Exact Match has to be read twice for the same reason. Over answered queries on HotpotQA it rises with
+the quality of the scorer--32.0% for vanilla RAG, 35.6% for single-passage scoring, 37.4% for set-level scoring
+and 43.9% for the judge--with the heuristic the exception at 30.9%, below the ungated baseline. Over all
+500 queries, with abstentions scored wrong, the order reverses and no gate beats vanilla RAG: 25.0% against
+32.0% on HotpotQA and 8.0% against 8.4% on MuSiQue. A withheld answer forfeits any chance of matching
+the gold string, so gating buys reliability and per-answer accuracy and pays for both in questions answered.
+18                                                                Comput Mater Contin. 2026
+
+5.3 Finding 3: Scoring the Retrieved Set Jointly is the Largest Single Gain
+
+     Sufficiency is estimated here without any sufficiency-labelled training data, so the first question is
+whether it can be estimated at all. Discrimination is measured against gold supporting-fact labels. Holding
+the scoring model fixed and changing only the aggregation, set-level scoring raises AUROC on HotpotQA
+from 0.675 to 0.775 (Table 9, Fig. 6), a gain of 0.100 with 95% CI [0.069, 0.132] and p < 0.001. Because the
+model is identical, aggregation is the only possible cause. The gain appears at the operating point too: the
+conditional unsupported rate falls from 18.0% to 17.1%, false abstention from 10.0% to 7.0%, and Exact Match
+on answered queries rises from 35.6% to 37.4%.
+
+Table 9: Sufficiency classification against gold supporting-fact labels (AUROC with 95% bootstrap confidence intervals,
+n = 500).
+
+                 Scorer           HotpotQA AUROC     95% CI       MuSiQue AUROC     95% CI
+
+               Heuristic                   0.521  [0.464, 0.579]          0.658  [0.548, 0.766]
+MS-MARCO (single-passage max)              0.675  [0.625, 0.721]          0.717  [0.641, 0.789]
+                                           0.775  [0.728, 0.817]          0.738  [0.663, 0.809]
+       Concat-CE (set-level)              0.786   [0.741, 0.826]          0.774  [0.700, 0.841]
+ LLM-Judge (generator-as-judge)
+                                           0.633  [0.576, 0.689]          0.441  [0.326, 0.562]
+ Generator confidence (baseline)
+
+Note: Stratified bootstrap, 5000 resamples, computed on unrounded scores. The judge's advantage over set-level scoring
+is small and not significant on either dataset (+0.011 and +0.035), so most of the gain comes from scoring the set jointly
+rather than from asking a sufficiency question. Generator confidence is weakest; its MuSiQue point estimate of 0.441
+falls below chance, though the interval contains 0.5, so it is best read as carrying no sufficiency signal there. MuSiQue's
+25 sufficient contexts widen every interval on that dataset. Bold indicates the best value in each column.
+
+Figure 6: ROC curves against gold supporting-fact sufficiency labels. MS-MARCO and Concat-CE share a scoring
+model and differ only in aggregation, so the separation between their curves isolates set-level scoring. The heuristic is
+near chance on HotpotQA (AUC 0.521). AUROC for every curve, with confidence intervals, is given in Table 9.
+
+     It does not carry to MuSiQue, where set-level scoring reaches 0.738 against 0.717 and the difference is
+not significant. That dataset has only 25 sufficient contexts in 500 queries, so the comparison has little power,
+and its longer chains may be too long to summarise in one concatenated pass. The benefit is therefore claimed
+for two-hop questions and left unconfirmed beyond them.
+Comput Mater Contin. 2026                                                                     19
+
+     Read as a classifier at each dataset's calibrated threshold, the same scorers look very different
+(Table 10, Fig. 7). On HotpotQA the ordering survives, with the judge leading every column (F1 0.523,
+withholding only 8.0% of genuinely sufficient contexts) and the heuristic last at 0.323. On MuSiQue the table
+says almost nothing: F1 spans 0.132 to 0.137 across all four gates while their AUROCs span 0.658 to 0.774,
+and precision never exceeds 0.076. With only 5.0% of contexts sufficient, any scorer answering most queries
+must admit far more insufficient contexts than sufficient ones, whatever its ranking. That is a property of
+where the threshold sits, which is why AUROC and the risk­coverage curve are the primary discrimination
+measures here.
+
+Table 10: Sufficiency classification at each dataset's calibrated threshold.
+
+        Scorer                           HotpotQA                             MuSiQue
+
+      Heuristic            P      R      F1 FSR FIR P                  R F1 FSR FIR
+MS-MARCO (max)
+                           0.232  0.531  0.323  0.514  0.469    0.076  0.560  0.134    0.358  0.440
+     Concat-CE             0.318  0.814  0.458  0.509  0.186    0.074  0.920  0.137    0.606  0.080
+     LLM-Judge             0.343  0.867  0.491  0.486  0.133    0.072  0.920  0.134    0.621  0.080
+                           0.365  0.920  0.523  0.468  0.080    0.070  1.000  0.132    0.695  0.000
+
+Generator confidence 0.280 0.743 0.407 0.558 0.257 0.033 0.400 0.062 0.611 0.600
+
+Note: P, R and F1 treat "sufficient" as the positive class. FSR is the share of insufficient contexts admitted, FIR the share of
+sufficient contexts withheld. Thresholds are the calibrated values, not tuned for classification; the base rate of sufficient
+contexts caps achievable precision at these coverage levels. Bold indicates the best value in each column.
+
+                                         Figure 7: (Continued)
+20                                                                Comput Mater Contin. 2026
+
+Figure 7: Confusion matrices for all four gates against gold supporting-fact labels, at each dataset's calibrated threshold.
+Cells report raw counts and row-normalised rates; precision, recall and F1 appear in each panel title.
+
+5.4 Finding 4: Free Retrieval Predictors Rank Well but Do Not Survive as Gates
+
+     A sufficiency scorer should be measured against what retrieval already gives away. Thirteen query-
+performance predictors (Section 3.5) split sharply, as Table 11 shows. Pre-retrieval predictors, which see only
+the query and collection statistics, are near chance everywhere: 0.442 to 0.602 on HotpotQA and 0.471 to
+0.516 on MuSiQue. That is itself a result, and it supports the framing of this paper--sufficiency is not a
+property of the question, so no analysis of the question alone can anticipate it.
+
+Table 11: Query-performance predictors as sufficiency scorers, against gold supporting-fact labels (AUROC, n = 500).
+
+    Scorer                                    HotpotQA            MuSiQue
+
+            Pre-retrieval (query and collection statistics only)
+
+    Average inverse document frequency        0.602               0.495
+            Simplified clarity score          0.586               0.471
+                                              0.602               0.516
+    Best of the six pre-retrieval predictors
+
+            Post-retrieval (retrieved list and scores)
+
+          Mean retrieval score                0.695               0.731
+       Maximum retrieval score                0.670               0.736
+        Score standard deviation              0.610               0.634
+      Weighted information gain               0.723               0.741
+    Normalised query commitment               0.589               0.610
+
+                                                                           (Continued)
+Comput Mater Contin. 2026                                                                                  21
+
+Table 11 (continued)
+
+Scorer                                           HotpotQA                       MuSiQue
+
+Score magnitude and variance                     0.606                          0.631
+              Clarity                            0.642                          0.510
+
+                                     Sufficiency gates evaluated in this paper
+
+               Heuristic                         0.521                          0.658
+MS-MARCO (single-passage max)                    0.675                          0.717
+                                                 0.775                          0.738
+       Concat-CE (set-level)                     0.786                          0.774
+ LLM-Judge (generator-as-judge)
+
+Note: Predictors are oriented so that a higher value predicts a sufficient context; query length is informative only when
+inverted (0.558 on HotpotQA), so the family row reports the better direction. Term statistics come from the union
+of retrieved passages and the background estimate is the top six passages, both of which understate these predictors.
+Gate rows repeat Table 9. Bold indicates the best value in each column.
+
+     Post-retrieval predictors, which see the retrieved list, do carry signal. Weighted information gain reaches
+0.723 and 0.741, beating the heuristic and single-passage cross-encoder scoring on both datasets; it stays
+below set-level scoring on HotpotQA (0.775) and matches it on MuSiQue (0.738), where the difference is
+well inside the noise of 25 positives.
+
+     Whether a ranking advantage of that size survives a threshold is a separate question. Weighted
+information gain was therefore run as a gate, thresholded to answer exactly as many queries as each published
+operating point, which removes coverage as a confound and spares it the calibration transfer the gates pay
+for. It does not survive (Table 12). At the coverage of set-level scoring it leaves 24.5% of HotpotQA answers
+unsupported against that gate's 17.1%, and 28.6% against 28.0% on MuSiQue, landing inside its own random-
+abstention interval both times (p = 0.18 and p = 0.10). At no operating point on either dataset does it clear
+the control.
+
+Table 12: Weighted information gain run as a gate, at coverage matched to each published operating point.
+
+          Gate             Cov. (%)  Unsup. (%)  Random Control (%)             EMans (%)  FAR (%)
+
+Concat-CE (set-level)                HotpotQA (ungated: 26.2% unsupported)          37.4      7.0
+ Weighted info. gain                                                                35.7      9.8
+                           57.2      17.1        26.2 [23.1, 29.4]                 43.9       4.2
+      LLM-Judge                                                                     35.8      9.8
+ Weighted info. gain       57.2      24.5        26.3 [23.1, 29.7] n.s.
+                                                                                    10.4      1.1
+Concat-CE (set-level)      57.0      17.2        26.2 [22.8, 29.5]                  9.1       0.5
+ Weighted info. gain                                                                11.3      0.0
+                           57.0      24.6        26.2 [22.8, 29.8] n.s.             8.7       0.0
+      LLM-Judge
+ Weighted info. gain                 MuSiQue (ungated: 30.8% unsupported)
+
+                           63.6      28.0        30.9 [27.7, 33.6] n.s.
+
+                           63.6      28.6        30.8 [27.7, 33.6] n.s.
+
+                           71.0      27.0        30.9 [28.2, 33.5]
+
+                           71.0      29.9        30.8 [28.2, 33.5] n.s.
+
+Note: The predictor's threshold is set on the evaluation set to answer as many queries as its paired gate, so coverage is
+
+identical within each pair. Unsup. is the unsupported-answer rate over answered queries; FAR is the share of abstentions
+whose context was in fact sufficient. marks a one-sided permutation test of the gate's selection against random
+selection (10,000 draws) at p < 0.0083, the Bonferroni threshold for six configurations; n.s. denotes no significant
+
+difference. Bold indicates the best value in each column.
+22  Comput Mater Contin. 2026
+
+     The reason is structural. Weighted information gain compares the top three retrieval scores with the
+top six, so it measures how sharply retrieval concentrated, not whether what it concentrated on contains the
+requested fact; the two agree well enough to rank and come apart at a boundary. Its false abstention confirms
+this, at 9.8% against 7.0% for set-level scoring and 4.2% for the judge.
+
+5.5 Finding 5: Only the Generator-as-Judge Beats Matched Random Abstention
+
+     Whether a gate discriminates at all is tested against an abstainer of the same size choosing at random,
+by the one-sided permutation test of Section 4.6. The judge reaches 17.2% against a control of 26.2% with a
+95% interval of [22.8, 29.5] on HotpotQA (p < 0.001), and 27.0% against 30.8% with [28.2, 33.2] on MuSiQue
+(p = 0.0034). It is the only configuration clearing the control on both: the cross-encoders clear it on HotpotQA
+only, and the heuristic on neither.
+
+     False abstention agrees. On HotpotQA the judge refuses 4.2% of queries whose context was in fact
+sufficient, against 7.0% for set-level scoring, 10.0% for single-passage scoring and 22.0% for the heuristic; on
+MuSiQue it refuses none. Its advantage therefore comes from which queries it withholds rather than from
+withholding more of them: on HotpotQA it abstains on 43.0% of queries against 42.8% for set-level scoring
+and 48.2% for the heuristic.
+
+5.6 Finding 6: Generator Confidence Does Not Substitute for a Sufficiency Gate
+
+     Confidence-based selective prediction is nearly free, so it sets a second bar the gate must clear. At
+matched 60% coverage on HotpotQA it leaves 20.7% of returned answers unsupported against 17.0% for the
+judge, and wrongly withholds 14.5% of sufficient contexts against 4.0%; on MuSiQue, 27.7% against 26.0%
+with false abstention 7.5% against 0.5%. Its AUROC is 0.633 on HotpotQA and 0.441 on MuSiQue, where
+the point estimate falls below chance on an interval of [0.326, 0.562] that contains it, so on MuSiQue the
+generator's confidence carries no usable signal about sufficiency in either direction. One result runs the other
+way: on HotpotQA confidence gives the highest Exact Match among answered queries, 44.3% against 42.3%.
+Confidence tracks whether an answer is right, not whether it is grounded.
+
+     Because a single threshold can favour a scorer by chance, the comparison is repeated at 50%, 60% and
+70% coverage (Table 13, Fig. 8). The judge wins five of the six unsupported-rate columns and varies by only 0.2
+points on HotpotQA and 1.1 on MuSiQue across the sweep. The ordering is stable on HotpotQA throughout
+and on MuSiQue except at the lowest coverage, where confidence reaches 24.4% against the judge's 26.4%--
+one cell of the sweep, from a scorer whose MuSiQue ranking is indistinguishable from chance and which
+fails the random control.
+
+5.7 Finding 7: The Ordering Holds at Every Threshold
+
+     Integrating over all thresholds removes the last dependence on a chosen operating point
+(Table 14, Fig. 9). On HotpotQA every learned scorer falls below the random-abstention reference of 26.2--
+the judge at 17.54, confidence 18.50, set-level 18.67, single-passage 18.89--while the heuristic reaches 28.49,
+worse than choosing at random. On MuSiQue, against 30.8: judge 24.29, confidence 27.35, set-level 28.89,
+single-passage 30.71, heuristic 33.34. Two conclusions follow that no single operating point can give: the
+judge is the strongest scorer at every threshold on both datasets, and the heuristic has no usable operating
+point at all.
+Comput Mater Contin. 2026                                                                         23
+
+Table 13: Matched-coverage comparison: conditional unsupported-answer rate at 50%, 60% and 70% coverage, with
+exact match and false abstention at 60%.
+
+Scorer                         HotpotQA                 MuSiQue
+
+                           50% 60% 70% EM60 FAR60 50% 60% 70% EM60 FAR60
+
+Heuristic                  26.0 25.3 25.4 31.7 21.0 34.8 34.3 32.0 10.3 3.5
+
+MS-MARCO (max) 18.8 18.0 18.0 35.7 8.5 30.0 30.0 29.4 10.7 1.0
+
+Concat-CE (set-level) 18.4 17.7 19.1 36.7 7.0 29.2 29.0 29.1 10.0 1.0
+
+LLM-Judge                  17.2 17.0 17.1 42.3 4.0 26.4 26.0 27.1 12.3 0.5
+
+Generator confidence 17.6 20.7 21.4 44.3 14.5 24.4 27.7 27.4 10.3 7.5
+
+Note: Each scorer is thresholded at the stated percentile of its own score distribution, so every row in a column answers
+the same number of queries, unlike Tables 7 and 8 where each gate runs at its natural coverage. The 50/60/70 columns
+give the conditional unsupported rate; EM60 and FAR60 are Exact Match over answered queries and the false-abstention
+rate at 60% coverage. Bold indicates the best value in each column.
+
+Figure 8: Conditional unsupported-answer rate across the coverage sweep. Solid series are gates, the dashed series
+generator confidence, the dotted line vanilla RAG. The judge is flat on both datasets; confidence degrades sharply on
+HotpotQA as coverage rises.  indicates that lower values are better.
+
+                           Table 14: Area under the risk­coverage curve (AURC), lower is better.
+
+              Scorer                     HotpotQA AURC                                            MuSiQue AURC
+
+Random abstention (reference)                   26.20                                                    30.80
+
+             Heuristic                          28.49                                                    33.34
+      MS-MARCO (max)                             18.89                                                   30.71
+     Concat-CE (set-level)                       18.67                                                   28.89
+     Generator confidence                        18.50                                                   27.35
+                                                 17.54                                                  24.29
+           LLM-Judge
+
+Note: AURC integrates the conditional unsupported-answer rate across the full coverage range. A scorer with no
+discriminative power yields the base rate, shown as the random-abstention reference, so values above it indicate
+selection worse than chance. Bold indicates the best value in each column.
+24  Comput Mater Contin. 2026
+
+Figure 9: Risk­coverage curves for all five scorers. The dotted horizontal line is the base rate a scorer with no
+discriminative power would produce. Curves are truncated below 10% coverage, where the risk estimate rests on too
+few queries to be informative. AURC values appear in the legend.
+
+5.8 Finding 8: Three Design Choices That Do Not Behave as Intended
+
+The threshold sets coverage, not a sufficiency boundary.
+
+     Sweeping the percentile from the 25th to the 55th for both cross-encoder gates moves two columns and
+leaves one flat (Table 15). Coverage tracks the percentile almost perfectly (correlation -0.99 or stronger in
+all four series), and the credited rate nearly halves with it, from 13.2% to 7.0% on HotpotQA and 23.0% to
+15.6% on MuSiQue. The conditional rate barely moves: 1.6 points on HotpotQA and 0.7 on MuSiQue, against
+coverage swings of 30.2 and 24.0. Since raising the percentile reorders no scores, discrimination is untouched
+and only the crediting convention responds. The 40th percentile is therefore a coverage setting, not a learned
+boundary, and gates must be compared at matched coverage rather than at a matched percentile.
+
+The length term in the heuristic score is harmful.
+
+     Sweeping wcos from 0.0 (length only) to 1.0 (similarity only) with everything else fixed raises AUROC
+at every step, from 0.378 to 0.695 on HotpotQA and 0.559 to 0.731 on MuSiQue (Table 16). Length alone
+scores 0.378, an inverted ranking, so longer contexts are if anything less likely to be sufficient. At wcos = 0.6,
+the setting used elsewhere in this paper, AUROC is 0.521 and 0.658, so the length term costs roughly 0.17
+and 0.07 and should be removed. Because the control, permutation test and risk­coverage analysis were not
+repeated at wcos = 1.0, the claim concerns the length term rather than the merits of pure similarity as a gate.
+
+Re-retrieval recovers almost nothing, and the corpus explains why.
+
+     Expanding from k = 3 to k = 6 before deciding leaves the conditional unsupported rate essentially
+unchanged--17.8% against 18.0% for single-passage scoring on HotpotQA, 17.1% against 17.1% for set-level
+scoring, and 29.9% against 29.9% on MuSiQue--while coverage rises by about two points. Table 17 shows
+why. Only some scorers can register a useless expansion at all: the top-6 set contains the whole top-3 set on
+all 500 queries of both datasets, so maximum aggregation is monotone and single-passage scores never fall,
+whereas set-level scores fall on 30.0% and 32.4% of queries and the judge on 42.0% and 46.2%--the property
+argued for in Section 3.3. Nor are the reversals warranted: set-level scoring flips on 3.3% of below-threshold
+HotpotQA queries and is right 57.1% of the time, while the heuristic flips on 92.5% and is right 4.9%, treating
+any new text as sufficient. On MuSiQue no scorer flips usefully.
+Comput Mater Contin. 2026                                                                                        25
+
+Table 15: Percentile sensitivity of the calibration threshold: coverage tracks the percentile, the conditional rate does not.
+
+Scorer  Pct                      HotpotQA                           MuSiQue
+
+                           Cov. (%) Cond. (%) Cred. (%) Cov. (%) Cond. (%) Cred. (%)
+
+        25                 71.0      18.6        13.2         76.6  30.0                                   23.0
+
+        30                 68.4      17.5        12.0         69.6  29.6                                   20.6
+
+        35                 62.2      18.0        11.2         65.6  30.2                                   19.8
+
+MS-MARCO 40                57.8      18.0        10.4         62.2  29.9                                   18.6
+
+        45                 53.4      18.4        9.8          59.0  30.2                                   17.8
+
+        50                 48.0      18.8        9.0          55.0  29.5                                   16.2
+
+        55                 40.8      17.2        7.0          52.6  29.7                                   15.6
+
+        25                 71.6      19.8        14.2         73.8  29.0                                   21.4
+
+        30                 68.4      19.0        13.0         68.8  29.4                                   20.2
+
+        35                 61.6      18.2        11.2         66.0  28.8                                   19.0
+
+Concat-CE 40               57.2      17.1        9.8          63.6  28.0                                   17.8
+
+        45                 52.8      18.2        9.6          58.4  28.8                                   16.8
+
+        50                 50.2      18.3        9.2          55.6  28.1                                   15.6
+
+        55                 45.8      18.8        8.6          50.4  29.0                                   14.6
+
+Note: "Pct" is the percentile of the per-dataset score distribution at which  is placed; the 40th, in bold, is used
+throughout the paper. "Cond." is the unsupported-answer rate over generated answers and "Cred." the same rate over
+all 500 queries with abstentions credited as supported.
+
+      Table 16: Heuristic weight ablation: sweeping wcos from length-only (0.0) to similarity-only (1.0).
+
+wcos                       HotpotQA                                 MuSiQue
+
+        AUROC  Cov. (%) Cond. (%)  AUROC  Cov. (%) Cond. (%) 
+
+0.0     0.378              42.6            29.6        0.559        35.0                                   37.7
+
+0.1     0.389              43.2            29.6        0.570        34.6                                   37.6
+
+0.2     0.402              44.0            29.1        0.582        34.6                                   37.6
+
+0.3     0.421              45.6            28.5        0.596        35.0                                   37.1
+
+0.4     0.447              47.8            27.2        0.614        35.8                                   36.9
+
+0.5     0.480              48.8            25.8        0.635        36.0                                   36.1
+
+0.6     0.521              51.8            25.5        0.658        36.8                                   37.0
+
+0.7     0.574              55.2            24.6        0.683        36.8                                   34.2
+
+0.8     0.626              58.2            24.1        0.709        38.8                                   34.0
+
+0.9     0.669              58.8            22.8        0.725        43.2                                   32.4
+
+1.0     0.695              57.0            22.1        0.731        45.6                                   30.7
+
+Note: wcos is the weight on the cosine-similarity term and 1 - wcos the weight on context length.  indicates that higher
+values are better;  indicates that lower values are better. The bold wcos = 0.6 row is the configuration used elsewhere
+in this paper; bold cell values mark the best entry in each column. AUROC is measured against gold supporting-fact
+labels. The threshold is recalibrated at each weight, so coverage is not held fixed across rows and AUROC is the only
+operating-point-independent column.
+26                                                                    Comput Mater Contin. 2026
+
+Table 17: Re-retrieval flip diagnostics: how often a below-threshold gate reverses on expansion from k = 3 to k = 6, and
+how often that reversal is warranted.
+
+    Gate                        HotpotQA                        MuSiQue
+
+                     n below  Flipped (%) Justified (%)  n below  Flipped (%) Justified (%) 
+
+    Heuristic        241        92.5            4.9        316  75.0       1.7
+
+MS-MARCO (max) 211              4.3             33.3       189  5.3        0.0
+
+    Concat-CE (set)  214        3.3             57.1       182  3.3        0.0
+
+    LLM-Judge        215        11.2            20.8       145  21.4       3.2
+
+Note: "n below " is the number of queries the gate would have refused at k = 3, "Flipped" the share of those whose score
+rose above threshold on expansion to k = 6, and "Justified" the share of flips the gold supporting-fact labels confirm as
+sufficient. Maximum aggregation is monotone under expansion, so its flips run only from insufficient to sufficient. 
+indicates that higher values are better. Bold indicates the best value in each column.
+
+     Depth does not rescue it either: beyond k = 6, Exact Match and failure rate plateau while sufficiency
+keeps climbing (Table 18). The corpus is the binding constraint. Each index holds only the passages the
+benchmark ships, deduplicated and capped at 5000, and complete gold evidence survives that cap for just
+52.4% of HotpotQA and 31.6% of MuSiQue queries (at least one gold passage for 91.0% and 81.0%). That
+MuSiQue figure is an index-coverage rate, not the HotpotQA k = 6 sufficiency rate of 31.6% in Table 18. For
+half of one dataset and two thirds of the other the evidence is unreachable at any depth, which caps what any
+gate can achieve and makes expansion a poor substitute for abstention.
+
+Table 18: Effect of retrieval depth k on exact match, answer-quality failure, and supporting-fact sufficiency (Vanilla
+RAG, No Gate).
+
+k                    HotpotQA                                   MuSiQue
+
+    EM (%)           Fail (%)         Suff. (%)       EM (%)    Fail (%)   Suff. (%)
+
+1         25.0            58.8            0.0         4.0       81.0       0.0
+
+3         32.0            50.8        22.6            8.4       78.0            5.0
+
+6         32.8            49.2            31.6        8.8       76.0       8.4
+
+9         32.8            49.2        36.2            8.6       76.4       10.2
+
+12        32.8            49.2        38.2            8.6       76.4       11.6
+
+Note: All quantities computed on the full population (n = 500). "Fail" is the answer-quality failure rate (Token F1 < 0.10);
+"Suff." is the share of retrieved contexts sufficient under gold supporting-fact labels.  indicates that lower values are
+better. Bold indicates the best value in each column.
+
+5.9 Finding 9: The Ordering Replicates on a Second Generator and against a Trained Baseline
+
+A second generator.
+
+     Flan-T5-Large is not a state-of-the-art model, so the whole evaluation was repeated with Qwen2.5-
+3B-Instruct, a different architecture family and instruction-tuning lineage, holding retriever, gates, labels
+and metric fixed. Absolute rates shift and the ordering does not (Table 19). Qwen's ungated baseline is
+worse on both datasets (38.6% and 53.2% unsupported, against 26.2% and 30.8%), but at matched coverage
+the LLM-judge is again best (22.4% on HotpotQA, 36.5% on MuSiQue), the two cross-encoders follow,
+and the heuristic again fails--39.9% on HotpotQA is worse than not gating at all. The random-abstention
+control returns the same verdict: every learned gate clears it on HotpotQA and the heuristic does not, and
+on MuSiQue the heuristic sits inside the control interval (51.3% against 53.3%). The oracle decomposition
+Comput Mater Contin. 2026                                                                      27
+
+also replicates, with retrieval accounting for 69.4% of answer-quality failure on HotpotQA and 60.4% on
+MuSiQue, against 68.9% and 68.2% for Flan-T5.
+
+Table 19: Replication with a second generator (Qwen2.5-3B-Instruct) at matched coverage.
+
+  Configuration                  HotpotQA                   MuSiQue
+
+   Vanilla RAG             Unsup. (%)      EMans (%)  Unsup. (%)                          EMans (%)
+  Heuristic Gate
+MS-MARCO Gate                   38.6          28.6         53.2                               5.2
+ Concat-CE Gate                 39.9          28.3         51.3                               6.3
+ LLM-Judge Gate                 26.2           32.9        41.5                               7.2
+                                27.3          36.4         42.5                               6.9
+                                22.4           37.8        36.5                               7.9
+
+Generator confidence       24.1            42.3       41.2                                7.9
+
+Note: We evaluate all gated configurations at 57.2% coverage on HotpotQA and 63.6% on MuSiQue so that the rows
+are comparable.  indicates that lower values are better. Bold indicates the best value in each column.
+
+A larger generator.
+
+     Scale remains an open question beyond a single architecture family, so the same cached k = 3 passages
+were re-answered with Qwen2.5-7B-Instruct in 4-bit precision, regenerating answers, the entailment labels
+and the LLM-judge while holding Max-CE, Concat-CE and heuristic scores fixed. At matched 60% coverage
+the ordering again survives: on HotpotQA the unsupported rate falls from 33.2% ungated to 23.0% for both
+cross-encoders and to 19.3% for the judge, while the heuristic stays near the baseline at 33.0%; on MuSiQue
+the figures are 42.6% ungated, 32.3% for either cross-encoder, 30.0% for the judge and 41.3% for the heuristic.
+The judge's AUROC against supporting-fact labels is 0.823 and 0.883. Absolute rates are not comparable
+with Table 19 because the threshold is taken on the evaluation scores themselves, but the ranking claim does
+not depend on that. What remains open is whether the same ordering holds above 7B.
+
+Shared truncation.
+
+     The same records were also re-scored with Max-CE, Concat-CE and the LLM-judge forced to a shared
+character budget L  {512, 1500, 2000}, holding Flan-T5 answers and unsupported labels fixed. At the paper's
+operating lengths the ranking is stable: on HotpotQA at L = 2000 the judge reaches AUROC 0.786 against
+0.784 for Concat-CE and 0.660 for Max-CE, and on MuSiQue at L = 1500 the values are 0.783, 0.738 and 0.714.
+A short shared budget (L = 512) is the one case that hurts the judge on MuSiQue (AUROC 0.669, below both
+cross-encoders), which is why the paper gives that scorer the longer window rather than a uniform length.
+Truncation asymmetry is therefore a real design choice, but not one that overturns the scorer ordering at the
+lengths used in the main tables.
+
+A trained baseline.
+
+     Self-RAG [26] is the most directly comparable published system with a released checkpoint, and was
+run at 7B. As a sufficiency scorer it is the weaker of the two (Table 20). Treating its reflection tokens as a
+gate score and evaluating them against the same gold supporting-fact labels--only the score changes--the
+LLM-judge reaches AUROC 0.786 on HotpotQA against Self-RAG's 0.681, a difference of 0.105 with 95% CI
+[0.035, 0.174] and p = 0.0040. On MuSiQue the values are 0.774 and 0.694, but that interval spans zero, so
+only the HotpotQA result is claimed.
+28                                                                            Comput Mater Contin. 2026
+
+                       Table 20: Self-RAG baseline, both scoring conditions.
+
+    System             HotpotQA                                               MuSiQue
+
+                       EM F1 Uns. AUROC EM F1 Uns. AUROC
+
+Self-RAG, per-passage  12.2 23.9 47.8  0.662  2.8 10.4 67.2                                    0.692
+  Self-RAG, set-level  11.6 22.7 40.6  0.681  4.2 12.7 39.8                                    0.694
+
+Ours (ungated answers) 32.0 42.2 26.2  0.786  8.4 14.5 30.8                                    0.774
+
+Note: Self-RAG uses the released 7B checkpoint in 4-bit quantisation. The per-passage condition follows its released
+implementation; the set-level condition supplies all k = 3 passages jointly with a short-answer instruction. Self-RAG
+answers every query, so for comparability this row reports our pipeline answering every query as well: EM, F1 and
+the unsupported rate are the ungated values of Tables 7 and 8, and the AUROC column evaluates the LLM-judge as a
+sufficiency scorer against the same labels. The gated operating points are reported in the same two tables. Bold marks
+our ungated reference row.
+
+     The end-to-end comparison also favours the pipeline studied here, but it is not a controlled one: the two
+systems differ in generator size and in answer format as well as in how they decide when to answer. Self-RAG
+leaves 40.6% of HotpotQA and 39.8% of MuSiQue answers unsupported against 26.2% and 30.8%, with Token
+F1 of 22.7 and 12.7 against 42.2 and 14.5, from a checkpoint roughly nine times larger than the generator used
+here. Two of those differences were tested rather than assumed away: its released implementation scores one
+passage at a time, a handicap on multi-hop questions, and it answers in full sentences, which depresses Exact
+Match even when the answer is correct. Supplying all k = 3 passages jointly with a short-answer instruction
+improved the grounding substantially--unsupported answers fell from 47.8% to 40.6% on HotpotQA and
+67.2% to 39.8% on MuSiQue--but left the sufficiency signal untouched (AUROC 0.662 to 0.681 and 0.692 to
+0.694, neither significant). All figures above use that set-level condition, the more favourable of the two for
+Self-RAG.
+
+5.10 Finding 10: The Gate Abstains Most Where the Evidence is Weakest
+
+     An aggregate rate says nothing about which queries a gate withholds, so the 500 HotpotQA queries are
+split two ways and the judge is read within each half. Unlike Findings 1 to 9, both splits use the expanded
+retrieval depth k = 6, so the absolute rates are not those of Table 7; the claim is about where the gate abstains,
+not about the size of the reduction.
+
+By retrieval quality.
+
+     Queries are ordered by the mean cosine similarity between the question and its k = 6 passages under the
+retriever of Table 2, then halved at the median (Table 21). The conditional unsupported rate falls 10.8 points
+on the low-similarity half against 3.9 on the high-similarity half, and coverage there is 20.4 points lower. The
+gate withholds more, and buys more, where retrieval is weaker.
+
+    Table 21: HotpotQA split at the median of retrieval similarity (k = 6, n = 250 per half).
+
+Retrieval Quality      Unsupcond (pp)      Cov. (%)                                            EMans (pp)
+
+ High similarity              -3.9     68.8 [62.8, 74.2]                                            +8.6
+  Low similarity              -10.8    48.4 [42.3, 54.6]                                           +10.1
+
+Note: Both halves use k = 6 passages and the LLM-judge at the HotpotQA threshold of Table 7. The  columns give the
+change against ungated RAG at the same k within each half. Coverage brackets are 95% Wilson-score intervals. Bold
+indicates the best value in each column.
+Comput Mater Contin. 2026                                                               29
+
+By oracle evidence.
+
+     The same queries are split by whether the k = 6 retrieved passages in fact contain the gold supporting
+facts (Table 22). At this depth 31.6% of contexts are sufficient, against 22.6% at the primary k = 3 of Table 5.
+Coverage falls from 86.1% to 45.9% when that evidence is absent, a drop of 40.2 points, so the gate responds
+to the evidence situation rather than answering regardless of it. Among the queries it still answers the
+unsupported rate rises from 10.3% to 17.8%, which is what an imperfect gate should do: it withholds more
+where the corpus lacks the answer, but not on every such query.
+
+                            Table 22: HotpotQA split by oracle evidence at k = 6.
+
+Oracle Evidence (k = 6)         Cov. (%)                                                Unsupcond (%)
+Present (31.6% of queries)  86.1 [79.8, 90.6]                                           10.3 [6.2, 16.5]
+Absent (68.4% of queries)   45.9 [40.7, 51.2]                                           17.8 [12.6, 24.5]
+
+         Difference             -40.2pp                                                      +7.5pp
+
+Note: Sufficiency is the k = 6 supporting-fact rate (158 of 500), not the k = 3 rate of Table 5. Brackets are 95% Wilson-
+score intervals, computed on n = 158 and n = 342 queries for coverage and on the n = 136 and n = 157 queries answered
+in each stratum for the unsupported rate.
+
+     Both splits read the same way, and both come from the same evaluation corpus at k = 6 rather than new
+data, so they corroborate the main results of Section 5.2 without extending their claim beyond it.
+
+5.11 Finding 11: The Calibrated Threshold Does Not Transfer across Domains
+
+     Both evaluation datasets are Wikipedia-derived, so two further datasets test what carries out-
+side that domain: MS MARCO Passages, a web-scale collection with short factoid answers, and the
+unanswerable split of SQuAD 2.0. Each contributes 500 queries, run ungated and then under the
+MuSiQue-calibrated judge threshold without recalibration (Table 23). These runs use Flan-T5-Large at k = 6
+with facebook/contriever retrieval, not the all-MiniLM-L6-v2 retriever of the main tables, so
+absolute rates are not compared with MuSiQue; the test is whether the fixed threshold still behaves sensibly.
+
+                           Table 23: Ungated generation quality on out-of-domain data.
+
+           Dataset                 Domain         Unsupcond (%)                          EMans (%)
+
+        MS MARCO               Web documents      29.8 [26.0, 33.8]                     4.0 [2.4, 5.8]
+SQuAD 2.0 (unanswerable)    Wikipedia, no answer  36.2 [32.0, 40.6]                          0.0
+
+Note: Both rows are ungated over n = 500 queries at k = 6 with Flan-T5-Large and Contriever retrieval. Brackets are
+95% bootstrap intervals (10,000 resamples). Rates are not compared with the MiniLM MuSiQue baseline of Table 8. 
+indicates that lower values are better.
+
+The threshold does not transfer.
+
+     Applied unchanged to MS MARCO, the MuSiQue-calibrated judge answers 4.2% [2.8, 6.3] of queries, 21
+of 500, against the 71.0% it answers on MuSiQue (Table 8). Scores assigned to web passages sit systematically
+below those assigned to Wikipedia passages, so a fixed percentile withholds far more than intended; on the
+21 answers that remain the unsupported rate is 28.6% and Exact Match 23.8%, both on intervals too wide to
+read at n = 21. Whether this is appropriate caution on genuinely poorer evidence or a miscalibrated scorer
+cannot be settled without sufficiency labels in the target domain, so it is reported as a limitation rather than
+a capability (Section 6.3).
+30                                                                       Comput Mater Contin. 2026
+
+Unanswerable questions.
+
+     SQuAD 2.0's unanswerable split puts the question directly: no answer is supportable, so a gate that
+detects insufficiency should refuse. Under the same unmodified threshold it abstains on 498 of 500 queries
+(99.6%, [98.6, 99.9]), and neither of the two answers it returns is flagged unsupported. Ungated, the pipeline
+answers all 500, of which 36.2% [32.0, 40.6] are flagged--and because none of these questions has a correct
+answer, every answer it gives is unjustified whether the entailment model catches it or not. The improvement
+here is measured on abstention itself rather than inferred from a hallucination rate.
+
+     The sufficiency signal therefore moves in the right direction out of domain while the threshold placed
+on it does not: the operating point has to be re-calibrated per domain.
+
+5.12 Finding 12: Under a Matched Comparison, Self-RAG's Critique Buys No More Than the Judge
+
+     The comparison against the released Self-RAG checkpoint in Table 20 varies base model and precision
+at once, so the gating strategy cannot be read off it. Its critique-and-select mechanism was therefore
+reimplemented on Flan-T5-Large at k = 6 in FP16, leaving that strategy as the only difference: for each
+retrieved passage the model produces a candidate answer with a relevance and a support critique, and the
+candidate scoring highest on the two combined is returned. All rows of Table 24 come from that one shared
+set of generations over the 500 MuSiQue queries. The head-to-head comparison is restricted to the 357
+queries the judge answers, so both methods are scored on the same set.
+
+    Table 24: Self-RAG and the judge on the same 357 MuSiQue queries the gate answers (k = 6).
+
+                Method             Unsupcond (%)        EMans (%)        F1ans (%)  Fwd. Passes
+
+       Vanilla RAG (all 500)       27.0 [23.0, 30.8]   8.8 [6.4, 11.4]      15.9          1
+  Self-RAG (controlled, n = 357)    23.0 [18.8, 27.5]  11.8 [8.4, 15.4]     20.2         18
+LLM-Judge Gate (Abstain, n = 357)  24.4 [19.9, 28.9]   11.8 [8.4, 15.1]     19.8         1
+
+Note: Brackets are 95% bootstrap intervals (10,000 resamples). The Self-RAG and judge rows are restricted to the 71.4%
+of queries (n = 357) the gate answers; on that matched set their unsupported rates differ by +1.4pp (judge higher), paired
+t = -0.58, p = 0.56. Forward-pass counts are approximate: Self-RAG runs one generation and two critiques on each of
+k = 6 passages (18 calls); the judge scores the concatenated context once. Ungated k = 6 baseline over all 500 from
+the same shared generation set; it is not the k = 3 rate of 30.8% in Table 8, nor the LLM-judge's 27.0% at k = 3 in that
+table.  indicates that lower values are better. Bold indicates the best value in each column.
+
+     Self-RAG's per-passage critique moves the unsupported rate from 27.0% over all 500 queries at k = 6 to
+23.0% on the 357 the judge answers. On those same 357 the judge reaches 24.4%, a difference of 1.4 points that
+is not significant (p = 0.56). Exact Match ties at 11.8% and Token F1 is within half a point (20.2% against 19.8%).
+Where an unadjusted read of Table 20 could suggest an advantage for Self-RAG, the matched comparison
+returns parity on hallucination and on accuracy.
+
+     Cost separates them instead. Self-RAG runs a generation and two critiques for each of the k = 6
+passages--about 18 forward passes against one for a gate that scores the concatenated context once. The claim
+is not that the judge beats Self-RAG but that it matches it far more cheaply.
+
+6 Discussion
+
+6.1 What the Findings Support
+     Three claims follow from the findings above, and each carries a boundary. The first is that the reduction
+
+usually visible in a gated pipeline is largely an accounting effect. Crediting abstentions as supported moves
+Comput Mater Contin. 2026  31
+
+the unsupported rate by 13 to 17 points on these datasets; measured over the answers actually given, the same
+gates move it by at most 9 points on HotpotQA and 4 on MuSiQue, and the heuristic moves it the wrong
+way. Reporting the conditional rate against a matched random control is what separates the two, and on that
+test only the generator prompted as a judge survives on both datasets.
+
+     The second is that sufficiency can be estimated without any sufficiency-labelled data. Relevance is a
+partial proxy: a cross-encoder trained for passage ranking separates sufficient from insufficient contexts
+well above chance, and how its scores are aggregated matters more than which model produces them. The
+generator's own judgement is better still and costs one forward pass, but it needs token-probability access, so
+the set-level cross-encoder is the portable choice; the two differ by 0.011 and 0.035 AUROC and by more than
+an order of magnitude in latency. Reading the same scorers by area under the risk­coverage curve rather
+than at one operating point guards against a scorer that happens to look best where the threshold was placed;
+the two views agree here, with the single exception of generator confidence on MuSiQue, second-best by
+AURC despite an AUROC no better than chance.
+
+     The third is that the ceiling is set by retrieval and by the corpus rather than by the gate, so the levels
+reported here are properties of this setup while the ordering of the scorers is the part expected to transfer.
+Whether the trade is worth making--more reliable answers, fewer of them--is a deployment question rather
+than an empirical one, which the next section makes concrete.
+
+6.2 Deployment Requirements and Measured Cost
+
+     The gate is a stateless scoring function inserted between retrieval and generation. It changes neither the
+vector database, nor the retriever, nor the language model. It is not, however, free of prerequisites, and four
+should be stated plainly:
+
+· A calibration set from production traffic. The threshold is a percentile of an observed score distri-
+     bution, so it transfers neither from this paper nor from another corpus, and per Section 5.8 the value
+     chosen fixes how often the system declines.
+
+· A stated price for a refusal relative to a wrong answer. The gate implements an operating point; it does
+     not choose one. Population-level Exact Match falls even as the answers given get more accurate.
+
+· A downstream path for abstentions--escalation, live search, a clarifying question. A refusal with no
+     fallback converts a wrong answer into a dead end.
+
+· Token-probability access, if the judge is used. A hosted endpoint returning only text cannot produce
+     P(yes); the set-level cross-encoder is then the strongest remaining option.
+
+     Costs are measured rather than estimated (Table 25). The cross-encoders cost about 3% of a generation
+call and are effectively free, which makes them the portable choice despite discriminating less well. The judge
+adds roughly 40% to the time to answer and is the least predictable gate, but that figure prices the gate as
+though generation always followed it. It does not: abstention skips generation entirely, so at the coverage levels
+reported here the judge's added cost and the generation it avoids nearly cancel. Operationally, the abstention
+rate is worth monitoring in production: a rise above the calibration level means the corpus has drifted from
+the query distribution, and the threshold should be recalibrated rather than the gate removed.
+32                                                    Comput Mater Contin. 2026
+
+    Table 25: Measured per-query latency and peak memory on an NVIDIA T4.
+
+       Component        Mean (ms)  SD (ms)  p95 (ms)                       % of Generation
+     Retrieval (k = 3)      6.63     0.86      7.59                                2.5
+
+      Heuristic gate       0.06      0.01      0.08                               0.02
+     Concat-CE gate         6.99     0.52      7.71                                2.6
+MS-MARCO gate (max)         8.74     0.86      9.56                                3.3
+     LLM-Judge gate        107.62    18.81   135.06                               40.3
+
+   Generation (k = 3)      267.16    98.91   425.98                               100.0
+
+Note: Timings are per query, measured on a Tesla T4 with the models and settings of Table 2. The final column expresses
+each component as a percentage of a single generation call, which is the only cost the ungated pipeline already pays.
+Peak resident memory ranges from 3678 MB for retrieval and the heuristic gate to 3843 MB during generation, so no
+gate materially changes the memory footprint. Bold indicates the best value in each column.
+
+6.3 Limitations
+
+     Labels. The sufficiency labels are not direct human sufficiency ratings but human-annotated supporting
+facts (Section 4.5). Validated against human judgement on a 175-query subsample (100 HotpotQA, 75
+MuSiQue), annotators judged 75.0% of HotpotQA and 46.7% of MuSiQue contexts sufficient, against 22.6%
+and 5.0% under the supporting-fact criterion, so human judgement is markedly more lenient than either
+automatic criterion. Pooled over the subsample, agreement is fair for supporting-fact coverage (Cohen's
+ = 0.416) and moderate for answer-string containment ( = 0.568), but weaker on HotpotQA taken alone
+( = 0.300 and 0.358). Supporting-fact coverage is retained because it is deterministic, reproducible from
+the datasets' own annotations and conservative, but no criterion achieves strong agreement with human
+judgement, and results in this literature should be read as conditional on the criterion used.
+
+     Statistical scope. The testing addresses selection rather than effect size. The permutation test establishes
+whether a gate withholds queries better than chance and the bootstrap intervals whether one scorer ranks
+contexts better than another; neither establishes that the resulting reduction is large enough to matter
+operationally. On MuSiQue the LLM-judge clears the control at p = 0.0034 while reducing the conditional
+unsupported rate by only 3.8 points, and those two facts should be weighed together.
+
+     Measurement. The hallucination measure is automated, not human verified. Entailment models may
+miss valid paraphrases or be misled by answers appearing in unrelated contexts, so both false alarms and
+missed hallucinations are possible; this is why an unsupported-answer rate is reported rather than a direct
+count of hallucinations. Establishing the measure's precision would require supportedness annotation on a
+further subsample.
+
+     Corpus size. The 5000-passage corpus is small compared with production deployments, and Section 5.8
+shows how much this constrains the study: complete gold evidence is present in the index for only 52.4% of
+HotpotQA and 31.6% of MuSiQue queries (again an index-coverage rate, distinct from the HotpotQA k = 6
+sufficiency share of 31.6%). This caps what any gate can achieve, it is the main reason the re-retrieve variant
+recovers so little, and it means the absolute rates should not be read as estimates of what the same gates would
+do over a corpus that contains the answers.
+
+     Scorer design. None of the scorers tested estimates collective sufficiency in the sense the task requires.
+The heuristic has no representation of what several passages contribute jointly, and single-passage cross-
+encoder scoring takes a maximum and is therefore structurally blind to evidence spread across passages.
+Set-level scoring and the LLM-judge see the concatenated context and can in principle reason over it, but
+Comput Mater Contin. 2026  33
+
+both are still trained or prompted for a different objective than the one being measured. A scorer trained
+directly on multi-hop sufficiency labels remains untested here.
+
+     Generator scale. Flan-T5-Large is small by current standards, so the evaluation was repeated with
+Qwen2.5-3B-Instruct and with Qwen2.5-7B-Instruct (Section 5.9). At both scales the scorer ordering sur-
+vives: the LLM-judge remains best, the cross-encoders follow, and the heuristic stays near the ungated
+baseline. Absolute unsupported rates still shift with the generator, and whether the same ordering holds
+above 7B is not established here.
+
+     Truncation asymmetry. Max-CE, Concat-CE and the LLM-judge use different character budgets
+(512/1500/2000). A shared-budget sweep shows the main ranking is stable at the paper's operating lengths,
+while a short shared budget (L = 512) weakens the judge on MuSiQue. The asymmetry is therefore disclosed
+as a design choice tied to each scorer's input format, not claimed to be irrelevant.
+
+     External validity. All evaluation is on English text: Wikipedia-derived multi-hop QA (HotpotQA,
+MuSiQue), plus MS MARCO web passages and the unanswerable split of SQuAD 2.0 (Sections 5.10 and 5.11).
+The out-of-domain runs use Contriever retrieval at k = 6 rather than the MiniLM retriever of the main tables,
+so absolute rates are not compared across pipelines. The judge's calibrated threshold does not transfer, and
+these data cannot separate appropriately conservative behaviour from miscalibration on an unfamiliar score
+distribution. Deploying outside the calibration domain would therefore require re-calibrating  on a small
+held-out sample from the target domain, which is not attempted here. Non-English text, non-encyclopedic
+writing and larger corpora remain untested.
+
+     Self-RAG comparison scope. The controlled comparison (Section 5.12) runs at one model scale on one
+dataset, so it does not establish whether the parity it returns holds at Self-RAG's original 7B scale (Section 5.9)
+or on HotpotQA. On the matched 357 queries the gate answers, the interval is wide enough to be consistent
+with either method being modestly better on hallucination.
+
+6.4 Future Work
+
+     Four directions follow directly from the findings above, each addressing a specific limit encoun-
+tered here.
+
+     Separate joint encoding from the training objective. Set-level scoring lets the scorer see the whole context,
+but the model is still trained for relevance, so this design cannot say which factor produced the +0.100
+AUROC gain: the set-level and single-passage scorers share an objective, while the judge differs in encoding
+and objective at once. A scorer trained directly on multi-hop sufficiency labels would isolate it.
+
+     Give re-retrieval somewhere to look. Expansion recovered almost nothing because the missing evidence
+is frequently absent from the index at any depth. Routing an insufficiency signal to live search rather than to
+a refusal would test the mechanism where the evidence can actually be found.
+
+     Make the operating point per-query. The threshold is currently one fixed percentile for all queries.
+Adapting it to an estimate of what a wrong answer would cost on that particular query is the natural extension
+of the risk­coverage view.
+
+     Separate "no evidence" from "not sure". The metric asks whether an answer is entailed by its context,
+which is weaker than asking whether it is correct. Pairing the gate with a calibrated correctness estimate
+would let a system distinguish refusing because the evidence is missing from refusing because the model is
+uncertain--two cases that warrant different fallbacks.
+34  Comput Mater Contin. 2026
+
+7 Conclusion
+
+     We have studied the Sufficiency Gate, a module placed between the retriever and the generator that
+estimates whether the retrieved context is adequate before generation is invoked, and we have measured
+what it delivers when nothing in the pipeline is trained. The central result is a correction to how such gates
+are scored. Counting abstentions as non-hallucinations takes the unsupported-answer rate from 26.2% to as
+little as 9.8% on HotpotQA and from 30.8% to 13.6% on MuSiQue, but measured over the answers a system
+actually gives, the best gate reaches 17.1% and 27.0%, and the heuristic that appears to more than halve the
+MuSiQue rate is in fact worse than not gating at all (37.0% conditional against 30.8%). Reporting conditional
+rates against a random abstainer withholding at the same rate is what separates selection from accounting.
+
+     What survives that test is specific. Of the four scorers compared under one protocol, only the generator
+prompted as a sufficiency judge beats its matched random control on both datasets, reaching 17.2% against
+26.2% at 57.0% coverage on HotpotQA and 27.0% against 30.8% at 71.0% coverage on MuSiQue, and it leads at
+every threshold by area under the risk­coverage curve. Scoring the retrieved set jointly rather than taking its
+best single passage is the largest single design change we identify, worth +0.100 AUROC on HotpotQA. The
+training-free heuristic fails outright, and the query-performance predictors that retrieval already computes
+rank sufficiency well without surviving as gates. An oracle-context substitution removes roughly two thirds of
+answer-quality failure and between a third and a half of unsupported answers, so a gate placed here addresses
+the largest single source of failure even though the gains available without training are modest. The ordering
+of the scorers replicates on a second generator; the absolute levels belong to this corpus and should not be
+read as estimates for a larger one.
+
+     The contribution is therefore a measurement rather than a mechanism: the untrained ceiling
+of sufficiency-guided selective generation, together with the protocol that makes such measurements
+interpretable--conditional rather than credited rates, a matched random-abstention control, a permutation
+test on selection, and risk­coverage curves in place of a single operating point. On the evidence here, the
+most valuable component of a sufficiency gate is not the gate but the generator's own judgement of whether
+it has been given enough to work with.
+
+Acknowledgement: An AI-assisted writing tool was used solely for grammar checking and language refinement
+during the preparation of this manuscript. It was not used to design the study, to generate or analyse data, or to draw
+conclusions. The research conception, methodology, experimental design, implementation, data analysis, interpretation
+of results and scientific conclusions are the original intellectual contributions of the authors. All AI-assisted suggestions
+were reviewed and verified by the authors, who take full responsibility for the accuracy, originality and integrity of
+the manuscript. Separately, and not to be confused with the above, a large language model is a component of the
+system under study: Flan-T5-Large, Qwen2.5-3B-Instruct and Qwen2.5-7B-Instruct are the generators evaluated in the
+experiments, and the LLM-judge gate of Section 3.4 prompts the generator itself. That use is a research object of this
+paper, not a writing aid, and is documented in Sections 3 and 4.
+
+Funding Statement: The authors received no specific funding for this study.
+
+Author Contributions: The authors confirm contribution to the paper as follows: conceptualization, Hasanur Rahman
+Shishir and Nazmun Nahar; methodology, Hasanur Rahman Shishir; software, Hasanur Rahman Shishir and Rahat
+Uddin Azad; validation, Hasanur Rahman Shishir, Nazmun Nahar and Tanjim Mahmud; formal analysis, Hasanur Rah-
+man Shishir; investigation, Hasanur Rahman Shishir; data curation, Hasanur Rahman Shishir and Rahat Uddin Azad;
+writing--original draft preparation, Hasanur Rahman Shishir; writing--review and editing, Nazmun Nahar, Tanjim
+Mahmud, Mohammad Shahadat Hossain and Karl Andersson; visualization, Hasanur Rahman Shishir; supervision,
+Nazmun Nahar and Tanjim Mahmud; project administration, Nazmun Nahar. All authors reviewed and approved the
+final version of the manuscript.
+Comput Mater Contin. 2026  35
+
+Availability of Data and Materials: The datasets analysed in this study are openly available. HotpotQA is available at
+https://hotpotqa.github.io/ and MuSiQue at https://github.com/StonyBrookNLP/musique; both are used unmodified,
+in the validation splits described in Section 4.1. The experimental code, the configuration, the exact prompts and the
+per-query result files that generate every table and figure in this article are available from the Corresponding Author,
+T.M., upon reasonable request.
+
+Ethics Approval: This study did not involve human participants or animal subjects. It uses only publicly released
+question answering benchmarks. Not applicable.
+
+Conflicts of Interest: The authors declare no conflicts of interest.
+
+References
+
+1. Lewis P, Perez E, Piktus A, Petroni F, Karpukhin V, Goyal N, et al. Retrieval-augmented generation for knowledge-
+     intensive NLP tasks. In: Proceedings of the 34th International Conference on Neural Information Processing
+     Systems; 2020 Dec 6­12; Vancouver, BC, Canada. p. 9459­74.
+
+2. Shuster K, Poff S, Chen M, Kiela D, Weston J. Retrieval augmentation reduces hallucination in conversation. In:
+     Proceedings of the Findings of the Association for Computational Linguistics: EMNLP 2021; 2021 Nov 16­20; Punta
+     Cana, Dominican. p. 3784­803.
+
+3. Gao Y, Xiong Y, Gao X, Jia K, Pan J, Bi Y, et al. Retrieval-augmented generation for large language models: a survey.
+     arXiv:2312.10997. 2024. doi:10.2139/ssrn.4895062.
+
+4. Vaswani A, Shazeer N, Parmar N, Uszkoreit J, Jones L, Gomez AN, et al. Attention is all you need. In: Proceedings
+     of the 31st International Conference on Neural Information Processing Systems; 2017 Dec 4­9; Long Beach, CA,
+     USA. p. 6000­10.
+
+5. Devlin J, Chang MW, Lee K, Toutanova K. BERT: pre-training of deep bidirectional Transformers for language
+     understanding. In: Proceedings of the 2019 Conference of the North American Chapter of the Association for
+     Computational Linguistics (NAACL-HLT), Volume 1: Long and Short Papers; 2019 Jun 2­7; Minneapolis, MN,
+     USA. p. 4171­86.
+
+6. Raffel C, Shazeer N, Roberts A, Lee K, Narang S, Matena M, et al. Exploring the limits of transfer learning with a
+     unified text-to-text transformer. J Mach Learn Res. 2020;21(140):1­67. doi:10.18653/v1/2021.inlg-1.38.
+
+7. Guu K, Lee K, Tung Z, Pasupat P, Chang MW. REALM: retrieval-augmented language model pre-training. In:
+     Proceedings of the 37th International Conference on Machine Learning (ICML); 2020 Jul 12­18; Vienna, Austria.
+     p. 3929­38.
+
+8. Izacard G, Lewis P, Lomeli M, Hosseini L, Petroni F, Schick T, et al. Atlas: few-shot learning with retrieval
+     augmented language models. J Mach Learn Res. 2023;24(251):1­43.
+
+9. Reimers N, Gurevych I. Sentence-BERT: sentence embeddings using siamese BERT-networks. In: Proceedings of
+     the 2019 Conference on Empirical Methods in Natural Language Processing (EMNLP); 2019 Nov 3­7; Hong Kong,
+     China. p. 3982­92.
+
+10. Gao L, Ma X, Lin J, Callan J. Precise zero-shot dense retrieval without relevance labels. In: Proceedings of the 61st
+     Annual Meeting of the Association for Computational Linguistics (ACL); 2023 Jul 9­14; Toronto, ON, Canada.
+     p. 1762­77.
+
+11. Chen J, Xiao S, Zhang P, Luo K, Lian D, Liu Z. BGE M3-embedding: multi-lingual, multi-functionality, multi-
+     granularity text embeddings through self-knowledge distillation. arXiv:2402.03216. 2024. doi:10.18653/v1/2024.
+     findings-acl.137.
+
+12. Khattab O, Zaharia M. ColBERT: efficient and effective passage search via contextualized late interaction over
+     BERT. In: Proceedings of the 43rd International ACM SIGIR Conference on Research and Development in
+     Information Retrieval; 2020 Jul 25­30; Virtual. p. 39­48.
+
+13. Edge D, Trinh H, Cheng N, Bradley J, Chao A, Mody A, et al. From local to global: a graph RAG approach to
+     query-focused summarization. arXiv:2404.16130. 2024.
+36  Comput Mater Contin. 2026
+
+14. Sarthi P, Abdullah S, Tuli A, Khanna S, Goldie A, Manning CD. RAPTOR: recursive abstractive processing for
+     tree-organized retrieval. In: Proceedings of the International Conference on Learning Representations (ICLR);
+     2024 May 7­11; Vienna, Austria.
+
+15. Trivedi H, Balasubramanian N, Khot T, Sabharwal A. Interleaving retrieval with chain-of-thought reasoning for
+     knowledge-intensive multi-step questions. In: Proceedings of the 61st Annual Meeting of the Association for
+     Computational Linguistics (ACL), Volume 1: Long Papers; 2023 Jul 9­14; Toronto, ON, Canada. p. 10014­37.
+
+16. Jin J, Zhu Y, Dou Z, Dong G, Yang X, Zhang C, et al. FlashRAG: a modular toolkit for efficient retrieval-augmented
+     generation research. In: Proceedings of the Companion Proceedings of the ACM on Web Conference 2025; 2025
+     Apr 28­May 2; Sydney, Australia. p. 737­40.
+
+17. Ji Z, Lee N, Frieske R, Yu T, Su D, Xu Y, et al. Survey of hallucination in natural language generation. ACM Comput
+     Surv. 2023;55(12):1­38. doi:10.1145/3571730.
+
+18. Huang L, Yu W, Ma W, Zhong W, Feng Z, Wang H, et al. A survey on hallucination in large language models:
+     principles, taxonomy, challenges, and open questions. ACM Trans Inf Syst. 2025;43(2):1­55. doi:10.1145/3703155.
+
+19. Zhang Y, Li Y, Cui L, Cai D, Liu L, Fu T, et al. Siren's song in the AI ocean: a survey on Hallucination in large
+     language models. Comput Linguist. 2025;51(4):1373­418. doi:10.1162/coli_a_00557.
+
+20. Farquhar S, Kossen J, Kuhn L, Gal Y. Detecting hallucinations in large language models using semantic entropy.
+     Nature. 2024;630(8017):625­30. doi:10.1038/s41586-024-07421-0.
+
+21. Min S, Krishna K, Lyu X, Lewis M, Yih W, Koh P, et al. FActScore: fine-grained atomic evaluation of Factual
+     precision in long form text generation. In: Proceedings of the 2023 Conference on Empirical Methods in Natural
+     Language Processing (EMNLP); 2023 Dec 6­10; Singapore. p. 12076­100.
+
+22. Niu C, Wu Y, Zhu J, Xu S, Shum KS, Zhong R, et al. RAGTruth: a hallucination corpus for developing Trustworthy
+     retrieval-augmented language models. In: Proceedings of the 62nd Annual Meeting of the Association for
+     Computational Linguistics (ACL), Volume 1: Long Papers; 2024 Aug 11­14; Bangkok, Thailand. p. 10862­78.
+
+23. Feng S, Shi W, Wang Y, Ding W, Balachandran V, Tsvetkov Y. Don't hallucinate, abstain: identifying LLM
+     knowledge gaps via multi-LLM collaboration. In: Proceedings of the 62nd Annual Meeting of the Association for
+     Computational Linguistics (ACL), Volume 1: Long Papers; 2024 Aug 11­14; Bangkok, Thailand. p. 14664­90.
+
+24. Kamath A, Jia R, Liang P. Selective question answering under domain shift. In: Proceedings of the 58th Annual
+     Meeting of the Association for Computational Linguistics; 2020 Jul 5­10; Virtual. p. 5684­96.
+
+25. Mallen A, Asai A, Zhong V, Das R, Khashabi D, Hajishirzi H. When not to trust language models: investigating
+     effectiveness of parametric and non-parametric memories. In: Proceedings of the 61st Annual Meeting of the
+     Association for Computational Linguistics (ACL), Volume 1: Long Papers; 2023 Jul 9­14; Toronto, ON, Canada.
+     p. 9802­22.
+
+26. Asai A, Wu Z, Wang Y, Sil A, Hajishirzi H. Self-RAG: learning to retrieve, generate, and critique through self-
+     reflection. In: Proceedings of the International Conference on Learning Representations (ICLR); 2024 May 7­11;
+     Vienna, Austria.
+
+27. Jiang Z, Xu F, Gao L, Sun Z, Liu Q, Dwivedi-Yu J, et al. Active retrieval augmented generation. In: Proceedings of
+     the 2023 Conference on Empirical Methods in Natural Language Processing (EMNLP); 2023 Dec 6­10; Singapore.
+     p. 7969­92.
+
+28. Yan SQ, Gu JC, Zhu Y, Ling ZH. Corrective retrieval augmented generation. In: Proceedings of the International
+     Conference on Learning Representations (ICLR); 2024 May 7­11; Vienna, Austria.
+
+29. Jeong S, Baek J, Cho S, Hwang SJ, Park JC. Adaptive-RAG: learning to adapt retrieval-augmented large language
+     models through question complexity. In: Proceedings of the 2024 Conference of the North American Chapter of
+     the Association for Computational Linguistics: Human Language Technologies (NAACL-HLT); 2024 Jun 16­21;
+     Mexico City, Mexico. p. 7036­50.
+
+30. Goswami S, Kurra S. HALT-RAG: a task-adaptable framework for hallucination detection with calibrated NLI
+     ensembles and abstention. arXiv:2509.07475. 2025.
+
+31. Joren H, Zhang J, Ferng CS, Juan DC, Taly A, Rashtchian C. Sufficient context: a new lens on retrieval-augmented
+     generation systems. In: Proceedings of the International Conference on Learning Representations (ICLR); 2025
+     Apr 24­28; Singapore.
+Comput Mater Contin. 2026  37
+
+32. Adlakha V, BehnamGhader P, Lu X, Meade N, Reddy S. Evaluating correctness and faithfulness of instruction-
+     following models for question answering. Trans Assoc Comput Linguist. 2024;12(1):681­99. doi:10.1162/tacl_a_
+     00637.
+
+33. Yoran O, Wolfson T, Ram O, Berant J. Making retrieval-augmented language models robust to irrelevant context.
+     In: Proceedings of the International Conference on Learning Representations (ICLR); 2024 May 7­11; Vienna,
+     Austria.
+
+34. Es S, James J, Espinosa Anke L, Schockaert S. RAGAs: automated evaluation of retrieval augmented generation.
+     In: Proceedings of the 18th Conference of the European Chapter of the Association for Computational Linguistics:
+     System Demonstrations; 2024 Mar 17­22; St. Julians, Malta. p. 150­8.
+
+35. Saad-Falcon J, Khattab O, Potts C, Zaharia M. ARES: an automated evaluation framework for retrieval-augmented
+     generation systems. In: Proceedings of the 2024 Conference of the North American Chapter of the Association
+     for Computational Linguistics (NAACL-HLT), Volume 1: Long Papers; 2024 Jun 16­21; Mexico City, Mexico.
+     p. 338­54.
+
+36. Williams A, Nangia N, Bowman S. A broad-coverage challenge corpus for sentence understanding through infer-
+     ence. In: Proceedings of the 2018 Conference of the North American Chapter of the Association for Computational
+     Linguistics: Human Language Technologies (NAACL-HLT); 2018 Jun 1­6; New Orleans, LA, USA.
+
+37. Yang Z, Qi P, Zhang S, Bengio Y, Cohen W, Salakhutdinov R, et al. HotpotQA: a dataset for diverse, explainable
+     multi-hop question answering. In: Proceedings of the 2018 Conference on Empirical Methods in Natural Language
+     Processing (EMNLP); 2018 Oct 31­Nov 4; Brussels, Belgium. p. 2369­80.
+
+38. Liu NF, Lin K, Hewitt J, Paranjape A, Bevilacqua M, Petroni F, et al. Lost in the middle: how language models use
+     long contexts. Trans Assoc Comput Linguist. 2024;12(5):157­73. doi:10.1162/tacl_a_00638.
+
+39. Xu F, Shi W, Choi E. RECOMP: improving retrieval-augmented LMs with context compression and selective
+     augmentation. In: Proceedings of the International Conference on Learning Representations (ICLR); 2024 May
+     7­11; Vienna, Austria.
+
+40. Nguyen T, Rosenberg M, Xia S, Gao J, Tiwary S, Majumder R, et al. MS MARCO: a human generated machine
+     reading comprehension dataset. In: Proceedings of the Workshop Cognitive Computation: Integrating Neural and
+     Symbolic Approaches (NIPS); 2016 Dec 5­10; Barcelona, Spain.
+
+41. Carmel D, Yom-Tov E. Estimating the query difficulty for information retrieval. San Rafael, CA, USA: Morgan &
+     Claypool; 2010.
+
+42. Cronen-Townsend S, Zhou Y, Croft WB. Predicting query performance. In: Proceedings of the 25th Annual
+     International ACM SIGIR Conference on Research and Development in Information Retrieval; 2002 Aug 11­15;
+     Tampere Finland. p. 299­306.
+
+43. Zhou Y, Croft WB. Query performance prediction in web search environments. In: Proceedings of the 30th Annual
+     International ACM SIGIR Conference on Research and Development in Information Retrieval (SIGIR); 2007 Jul
+     23­27; Amsterdam, The Netherlands. p. 543­50.
+
+44. Shtok A, Kurland O, Carmel D, Raiber F, Markovits G. Predicting query performance by query-Drift estimation.
+     ACM Trans Inf Syst. 2012;30(2):1­35. doi:10.1007/978-3-642-04417-5_30.
+
+45. Trivedi H, Balasubramanian N, Khot T, Sabharwal A. MuSiQue: multihop questions via single-hop question
+     composition. Trans Assoc Comput Linguist. 2022;10:539­54. doi:10.1162/tacl_a_00475.
+

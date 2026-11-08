@@ -182,15 +182,20 @@ def table_audit(r: dict, r5: dict) -> str:
 
 
 def table_frozen_vs_corrected(fz: dict, cx: dict) -> str:
-    md = ["| Quantity | As run (frozen, D1) | Spec-corrected (D4) |", "|---|---:|---:|"]
+    md = ["| Quantity | Frozen run | Spec-corrected (D4) |", "|---|---:|---:|"]
 
     def row(label, key, fmt, base_id, tol=0.0005):
         a = cell(REL, key, dig(fz, key), fmt, f"{base_id}.run", f"{label} (as run)", tol)
         b = cell(REL_X, key, dig(cx, key), fmt, f"{base_id}.corr", f"{label} (spec-corrected, D4)", tol)
         md.append(f"| {label} | {a} | {b} |")
 
+    def thr(x):
+        return f"{float(x):.4f}"
+
     row("Gate AUROC, dev", "discrimination.dev_auroc", auc, "c1.auroc.dev")
     row("Gate AUROC, held out", "discrimination.test_auroc", auc, "c1.auroc.test")
+    row("Band lower threshold (t_lo)", "thresholds.band.t_lo", thr, "c1.thr.lo")
+    row("Band upper threshold (t_hi)", "thresholds.band.t_hi", thr, "c1.thr.hi")
     for k in ("1", "2", "3", "4"):
         row(f"Band abstain precision, R{k}", f"test.band_primary.per_rung.{k}.abstain_precision", pct,
             f"c1.band.precision.r{k}")
@@ -200,6 +205,7 @@ def table_frozen_vs_corrected(fz: dict, cx: dict) -> str:
         row(f"Exploratory precision, R{k}", f"test.exploratory_band.per_rung.{k}.abstain_precision", pct,
             f"c1.expl.precision.r{k}")
     row("Exploratory over-refusal", "test.exploratory_band.over_refusal", pct, "c1.expl.over_refusal")
+    row("Exploratory coverage", "test.exploratory_band.coverage", pct, "c1.expl.coverage")
     row("H3 band minus matched single", "hypotheses.H3.difference.diff", pct, "c1.h3.diff")
     row("Dense-cosine (B2) pooled precision", "baselines.B2_dense_top1.test.pooled_abstain_precision", pct,
         "c1.b2.pooled")
@@ -314,19 +320,41 @@ def table_ablations(abl: dict) -> str:
     return "\n".join(md) + "\n"
 
 
-def table_prior_work() -> str:
-    return "\n".join([
-        "| Work | Data | Negatives | Metric | Operating point reported |",
-        "|---|---|---|---|---|",
-        "| Abdumalikov et al., arXiv:2403.01461 | ODQA corpora, SQuAD v2.0 pairs for repair | random text "
-        "excerpts versus excerpts with high semantic overlap | answerability accuracy | one accuracy figure "
-        "per sampler; coverage not reported |",
-        "| DeclineCraft, arXiv:2610.28340 | retrieval and parametric abstention suite | several unanswerable "
-        "classes | joint abstention metrics | per category, retrieval and memory reported separately |",
-        "| This paper | SQuAD v2.0 dev, article-disjoint split | four constructed rungs, plus overlap-matched "
-        "and top-1-presented variants | abstain precision, over-refusal, coverage | every precision reported "
-        "with over-refusal and coverage beside it |",
-    ]) + "\n"
+TABLE7_PATH = ROOT / "05_paper" / "tables" / "table7_data.json"
+
+TABLE7_SEED = [
+    {"work": "Abdumalikov et al., arXiv:2403.01461",
+     "data": "ODQA corpora, SQuAD v2.0 pairs for repair",
+     "negatives": "random text excerpts versus excerpts with high semantic overlap",
+     "metric": "answerability accuracy",
+     "operating_point": "one accuracy figure per sampler; coverage not reported",
+     "citation": "answerability-in-retrieval-augmented-open-domain-question-an"},
+    {"work": "DeclineCraft, arXiv:2610.28340",
+     "data": "retrieval and parametric abstention suite",
+     "negatives": "several unanswerable classes",
+     "metric": "joint abstention metrics",
+     "operating_point": "per category, retrieval and memory reported separately",
+     "citation": "declinecraft-a-rag-abstention-benchmark-for-jointly-measurin"},
+    {"work": "This paper",
+     "data": "SQuAD v2.0 dev, article-disjoint split",
+     "negatives": "four constructed rungs, plus overlap-matched and top-1-presented variants",
+     "metric": "abstain precision, over-refusal, coverage",
+     "operating_point": "every precision reported with over-refusal and coverage beside it",
+     "citation": "this_paper"},
+]
+
+
+def table_prior_work(path: Path = TABLE7_PATH) -> str:
+    if path.exists():
+        rows = json.loads(path.read_text(encoding="utf-8"))
+    else:
+        rows = TABLE7_SEED
+    md = ["| Work | Data | Negatives | Metric | Operating point reported |",
+          "|---|---|---|---|---|"]
+    for r in rows:
+        md.append(
+            f"| {r['work']} | {r['data']} | {r['negatives']} | {r['metric']} | {r['operating_point']} |")
+    return "\n".join(md) + "\n"
 
 
 def figure_svg(fz: dict, cx: dict) -> str:
@@ -375,6 +403,70 @@ def figure_svg(fz: dict, cx: dict) -> str:
     return "\n".join(parts) + "\n"
 
 
+def figure_f2(pm: dict) -> str:
+    band = pm["operating_points"]["band"]
+    expl = pm["operating_points"]["exploratory_band"]
+    # coverage is the answer rate reported in precision_metrics.json
+    b_cov, e_cov = float(band["answer_rate"]), float(expl["answer_rate"])
+    b_prec, e_prec = float(band["pooled"]["precision"]), float(expl["pooled"]["precision"])
+    b_over, e_over = float(band["over_refusal"]), float(expl["over_refusal"])
+
+    W, H, L, B, T, Rgt = 560, 340, 62, 46, 18, 170
+    pw, ph = W - L - Rgt, H - B - T
+
+    def x(v):
+        return L + v * pw
+
+    def y(v):
+        return T + (1.0 - v) * ph
+
+    parts = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" '
+             f'font-family="Helvetica, Arial, sans-serif" font-size="11">',
+             f'<rect width="{W}" height="{H}" fill="white"/>']
+    for tick in (0.0, 0.25, 0.5, 0.75, 1.0):
+        parts.append(f'<line x1="{L}" y1="{y(tick):.1f}" x2="{L + pw}" y2="{y(tick):.1f}" stroke="#dddddd"/>')
+        parts.append(f'<text x="{L - 6}" y="{y(tick) + 4:.1f}" text-anchor="end">{int(tick * 100)}</text>')
+    for tick in (0.0, 0.25, 0.5, 0.75, 1.0):
+        parts.append(f'<line x1="{x(tick):.1f}" y1="{T + ph}" x2="{x(tick):.1f}" y2="{T + ph + 4}" stroke="#333"/>')
+        parts.append(f'<text x="{x(tick):.1f}" y="{T + ph + 16}" text-anchor="middle">{int(tick * 100)}</text>')
+    parts.append(f'<line x1="{L}" y1="{T}" x2="{L}" y2="{T + ph}" stroke="#333"/>')
+    parts.append(f'<line x1="{L}" y1="{T + ph}" x2="{L + pw}" y2="{T + ph}" stroke="#333"/>')
+    parts.append(f'<text x="{L - 44}" y="{T + ph / 2}" transform="rotate(-90 {L - 44} {T + ph / 2})" '
+                 f'text-anchor="middle">rate (%)</text>')
+    parts.append(f'<text x="{L + pw / 2}" y="{H - 6}" text-anchor="middle">coverage (%)</text>')
+
+    # precision series
+    prec_pts = [(x(b_cov), y(b_prec)), (x(e_cov), y(e_prec))]
+    parts.append('<polyline fill="none" stroke="#1f77b4" stroke-width="2" points="%s"/>'
+                 % " ".join(f"{a:.1f},{b:.1f}" for a, b in prec_pts))
+    # over-refusal series
+    over_pts = [(x(b_cov), y(b_over)), (x(e_cov), y(e_over))]
+    parts.append('<polyline fill="none" stroke="#d62728" stroke-width="2" stroke-dasharray="5,3" points="%s"/>'
+                 % " ".join(f"{a:.1f},{b:.1f}" for a, b in over_pts))
+
+    # points
+    for cov, prec, over, registered in ((b_cov, b_prec, b_over, True), (e_cov, e_prec, e_over, False)):
+        r = 5.0 if registered else 3.0
+        sw = ' stroke="#000" stroke-width="1.5"' if registered else ''
+        parts.append(f'<circle cx="{x(cov):.1f}" cy="{y(prec):.1f}" r="{r}" fill="#1f77b4"{sw}/>')
+        parts.append(f'<circle cx="{x(cov):.1f}" cy="{y(over):.1f}" r="{r}" fill="#d62728"{sw}/>')
+    # registered vertical marker
+    parts.append(f'<line x1="{x(b_cov):.1f}" y1="{T}" x2="{x(b_cov):.1f}" y2="{T + ph}" '
+                 f'stroke="#555" stroke-dasharray="2,2"/>')
+    parts.append(f'<text x="{x(b_cov) + 4:.1f}" y="{T + 10}" font-size="10">registered</text>')
+
+    # legend
+    for i, (name, colour) in enumerate((("pooled abstain precision", "#1f77b4"),
+                                        ("over-refusal", "#d62728"))):
+        yy = T + 10 + i * 16
+        parts.append(f'<rect x="{L + pw + 12}" y="{yy - 7}" width="9" height="9" fill="{colour}"/>')
+        parts.append(f'<text x="{L + pw + 26}" y="{yy}">{name}</text>')
+    yy = T + 10 + 2 * 16
+    parts.append(f'<text x="{L + pw + 12}" y="{yy}" font-size="10">filled = registered point</text>')
+    parts.append(f'<text x="{L}" y="{H - 8}" font-size="10">two operating points from precision_metrics.json; '
+                 f'registered point marked</text>')
+    parts.append("</svg>")
+    return "\n".join(parts) + "\n"
 def const_entries() -> None:
     def reg(entry_id, file, key, desc, tol=0.0):
         ENTRIES[entry_id] = {"id": entry_id, "description": desc, "file": file, "key": key,
@@ -501,6 +593,7 @@ def main() -> int:
     (TAB / "T6_ablations_corrected.md").write_text(table_ablations(abl), encoding="utf-8")
     (TAB / "T7_prior_work.md").write_text(table_prior_work(), encoding="utf-8")
     (FIG / "F1_abstain_precision_by_rung.svg").write_text(figure_svg(fz, cx), encoding="utf-8")
+    (FIG / "F2_precision_overrefusal_vs_coverage.svg").write_text(figure_f2(pm), encoding="utf-8")
 
     const_entries()
 

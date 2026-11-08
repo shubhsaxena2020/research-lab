@@ -49,24 +49,6 @@
       "toy": true
     },
     {
-      "description": "accuracy for config 'toy_baseline' of experiment 'toy': mean over 3 run(s), seeds [0, 1, 2] [TOY - NOT A RESULT]",
-      "file": "04_experiments/results/summary_toy.json",
-      "id": "toy.accuracy.toy_baseline",
-      "key": "stats.toy_baseline.mean",
-      "run_id": "20261102T221441Z_toy_baseline_9dd5764",
-      "tolerance": 0.0005,
-      "toy": true
-    },
-    {
-      "description": "accuracy for config 'toy_ours' of experiment 'toy': mean over 3 run(s), seeds [0, 1, 2] [TOY - NOT A RESULT]",
-      "file": "04_experiments/results/summary_toy.json",
-      "id": "toy.accuracy.toy_ours",
-      "key": "stats.toy_ours.mean",
-      "run_id": "20261102T221441Z_toy_ours_9dd5764-3",
-      "tolerance": 0.0005,
-      "toy": true
-    },
-    {
       "description": "Dev AUROC, ablation all_12",
       "file": "04_experiments/results/c1_corrected/ablations.json",
       "id": "c1.abl.all_12.dev",
@@ -800,6 +782,14 @@
       "id": "c1.dev.refused_below_lo",
       "key": "placement_diagnostic.dev_refused_below_lo",
       "tolerance": 0.0,
+      "toy": false
+    },
+    {
+      "description": "Exploratory coverage (spec-corrected, D4)",
+      "file": "04_experiments/results/c1_corrected/results_full.json",
+      "id": "c1.expl.coverage.corr",
+      "key": "test.exploratory_band.coverage",
+      "tolerance": 0.0005,
       "toy": false
     },
     {
@@ -1539,6 +1529,14 @@
       "toy": false
     },
     {
+      "description": "Band upper threshold (t_hi) (as run)",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.thr.hi.run",
+      "key": "thresholds.band.t_hi",
+      "tolerance": 0.0005,
+      "toy": false
+    },
+    {
       "description": "Fitted band lower threshold (as run)",
       "file": "04_experiments/results/c1/results_full.json",
       "id": "c1.thr.lo",
@@ -1552,6 +1550,14 @@
       "id": "c1.thr.lo.corr",
       "key": "thresholds.band.t_lo",
       "tolerance": 0.0,
+      "toy": false
+    },
+    {
+      "description": "Band lower threshold (t_lo) (as run)",
+      "file": "04_experiments/results/c1/results_full.json",
+      "id": "c1.thr.lo.run",
+      "key": "thresholds.band.t_lo",
+      "tolerance": 0.0005,
       "toy": false
     },
     {
@@ -1633,8 +1639,26 @@
       "key": "transfer.operating_points.exploratory_band.per_rung.3.abstain_precision",
       "tolerance": 0.0005,
       "toy": false
+    },
+    {
+      "description": "accuracy for config 'toy_baseline' of experiment 'toy': mean over 3 run(s), seeds [0, 1, 2] [TOY - NOT A RESULT]",
+      "file": "04_experiments/results/summary_toy.json",
+      "id": "toy.accuracy.toy_baseline",
+      "key": "stats.toy_baseline.mean",
+      "run_id": "20261108T112314Z_toy_baseline_76c6796-2",
+      "tolerance": 0.0005,
+      "toy": true
+    },
+    {
+      "description": "accuracy for config 'toy_ours' of experiment 'toy': mean over 3 run(s), seeds [0, 1, 2] [TOY - NOT A RESULT]",
+      "file": "04_experiments/results/summary_toy.json",
+      "id": "toy.accuracy.toy_ours",
+      "key": "stats.toy_ours.mean",
+      "run_id": "20261108T112316Z_toy_ours_76c6796",
+      "tolerance": 0.0005,
+      "toy": true
     }
   ],
-  "updated_at": "2026-11-03T02:19:05Z",
+  "updated_at": "2026-11-08T11:23:17Z",
   "version": 1
 }

@@ -1,0 +1,1076 @@
+{
+  "checks": [
+    {
+      "actual": 0.9823630831643002,
+      "check_id": "frozen_test_auroc_vs_stored_0.9824",
+      "diff": 3.691683569984061e-05,
+      "expected": 0.9824,
+      "group": "auroc_ci",
+      "kind": "numeric",
+      "status": "PASS",
+      "tolerance": 5e-05
+    },
+    {
+      "actual": 0.8738488843813388,
+      "check_id": "corrected_test_auroc_vs_stored_0.8738",
+      "diff": 4.888438133876516e-05,
+      "expected": 0.8738,
+      "group": "auroc_ci",
+      "kind": "numeric",
+      "status": "PASS",
+      "tolerance": 5e-05
+    },
+    {
+      "actual": 0.9823630831643002,
+      "check_id": "frozen_test_vs_discrimination",
+      "diff": 3.691683569984061e-05,
+      "expected": 0.9824,
+      "group": "auroc_ci",
+      "kind": "numeric",
+      "status": "PASS",
+      "tolerance": 5e-05
+    },
+    {
+      "actual": 0.8738488843813388,
+      "check_id": "corrected_test_vs_discrimination",
+      "diff": 4.888438133876516e-05,
+      "expected": 0.8738,
+      "group": "auroc_ci",
+      "kind": "numeric",
+      "status": "PASS",
+      "tolerance": 5e-05
+    },
+    {
+      "actual": 0.10851419878296142,
+      "check_id": "paired_diff_vs_0.1085",
+      "diff": 1.419878296142485e-05,
+      "expected": 0.1085,
+      "group": "auroc_ci",
+      "kind": "numeric",
+      "status": "PASS",
+      "tolerance": 5e-05
+    },
+    {
+      "actual": 0.0,
+      "check_id": "paired_diff_item_ci_[0.0950,0.1227]",
+      "diff": 0.0,
+      "expected": 0.0,
+      "group": "auroc_ci",
+      "kind": "numeric",
+      "status": "PASS",
+      "tolerance": 0.0
+    },
+    {
+      "actual": false,
+      "check_id": "paired_diff_excludes_zero",
+      "expected": false,
+      "group": "auroc_ci",
+      "kind": "bool",
+      "status": "PASS",
+      "tolerance": 0.0
+    },
+    {
+      "actual": 0.10851419878296142,
+      "check_id": "paired_point_equals_auroc_difference",
+      "diff": 0.0,
+      "expected": 0.10851419878296142,
+      "group": "auroc_ci",
+      "kind": "numeric",
+      "status": "PASS",
+      "tolerance": 1e-09
+    },
+    {
+      "actual": 0.407,
+      "check_id": "r4_primary6_dev_0.407",
+      "diff": 0.0,
+      "expected": 0.407,
+      "group": "audit_twosided",
+      "kind": "numeric",
+      "status": "PASS",
+      "tolerance": 5e-05
+    },
+    {
+      "actual": "inverted",
+      "check_id": "r4_primary6_dev_inverted",
+      "expected": "inverted",
+      "group": "audit_twosided",
+      "kind": "str",
+      "status": "PASS",
+      "tolerance": 0.0
+    },
+    {
+      "actual": true,
+      "check_id": "r4_primary6_dev_passes_twosided",
+      "expected": true,
+      "group": "audit_twosided",
+      "kind": "bool",
+      "status": "PASS",
+      "tolerance": 0.0
+    },
+    {
+      "actual": 0.4047,
+      "check_id": "r4_withlex_dev_0.4047",
+      "diff": 0.0,
+      "expected": 0.4047,
+      "group": "audit_twosided",
+      "kind": "numeric",
+      "status": "PASS",
+      "tolerance": 5e-05
+    },
+    {
+      "actual": 0.4047,
+      "check_id": "r4_withlex_dev_0.405_3dp",
+      "diff": 0.00030000000000002247,
+      "expected": 0.405,
+      "group": "audit_twosided",
+      "kind": "numeric",
+      "status": "PASS",
+      "tolerance": 0.0005
+    },
+    {
+      "actual": 0.7156,
+      "check_id": "top1_withlex_dev_0.7156",
+      "diff": 0.0,
+      "expected": 0.7156,
+      "group": "audit_twosided",
+      "kind": "numeric",
+      "status": "PASS",
+      "tolerance": 5e-05
+    },
+    {
+      "actual": 0.7156,
+      "check_id": "top1_withlex_dev_0.716_3dp",
+      "diff": 0.00039999999999995595,
+      "expected": 0.716,
+      "group": "audit_twosided",
+      "kind": "numeric",
+      "status": "PASS",
+      "tolerance": 0.0005
+    },
+    {
+      "actual": 0.7381,
+      "check_id": "top1_withlex_test_0.7381",
+      "diff": 0.0,
+      "expected": 0.7381,
+      "group": "audit_twosided",
+      "kind": "numeric",
+      "status": "PASS",
+      "tolerance": 5e-05
+    },
+    {
+      "actual": 0.7381,
+      "check_id": "top1_withlex_test_0.738_3dp",
+      "diff": 9.999999999998899e-05,
+      "expected": 0.738,
+      "group": "audit_twosided",
+      "kind": "numeric",
+      "status": "PASS",
+      "tolerance": 0.0005
+    },
+    {
+      "actual": 1.0,
+      "check_id": "gold_indicator_1.0_all_cells",
+      "diff": 0.0,
+      "expected": 1.0,
+      "group": "audit_twosided",
+      "kind": "numeric",
+      "status": "PASS",
+      "tolerance": 0.0
+    },
+    {
+      "actual": 0.9762,
+      "check_id": "r1_withlex_dev",
+      "diff": 0.0,
+      "expected": 0.9762,
+      "group": "audit_twosided_supporting",
+      "kind": "numeric",
+      "status": "PASS",
+      "tolerance": 5e-05
+    },
+    {
+      "actual": false,
+      "check_id": "r1_withlex_fails_twosided",
+      "expected": false,
+      "group": "audit_twosided_supporting",
+      "kind": "bool",
+      "status": "PASS",
+      "tolerance": 0.0
+    },
+    {
+      "actual": 0.8901,
+      "check_id": "r2_withlex_dev",
+      "diff": 0.0,
+      "expected": 0.8901,
+      "group": "audit_twosided_supporting",
+      "kind": "numeric",
+      "status": "PASS",
+      "tolerance": 5e-05
+    },
+    {
+      "actual": false,
+      "check_id": "r2_withlex_fails_twosided",
+      "expected": false,
+      "group": "audit_twosided_supporting",
+      "kind": "bool",
+      "status": "PASS",
+      "tolerance": 0.0
+    },
+    {
+      "actual": 0.9235,
+      "check_id": "r3_withlex_dev",
+      "diff": 0.0,
+      "expected": 0.9235,
+      "group": "audit_twosided_supporting",
+      "kind": "numeric",
+      "status": "PASS",
+      "tolerance": 5e-05
+    },
+    {
+      "actual": false,
+      "check_id": "r3_withlex_fails_twosided",
+      "expected": false,
+      "group": "audit_twosided_supporting",
+      "kind": "bool",
+      "status": "PASS",
+      "tolerance": 0.0
+    },
+    {
+      "actual": 0.23172608610948767,
+      "check_id": "auroc_0.2317",
+      "diff": 2.6086109487677422e-05,
+      "expected": 0.2317,
+      "group": "ptruth",
+      "kind": "numeric",
+      "status": "PASS",
+      "tolerance": 5e-05
+    },
+    {
+      "actual": 553,
+      "check_id": "n_scored_553",
+      "expected": 553,
+      "group": "ptruth",
+      "kind": "int",
+      "status": "PASS",
+      "tolerance": 0.0
+    },
+    {
+      "actual": false,
+      "check_id": "threshold_infeasible",
+      "expected": false,
+      "group": "ptruth",
+      "kind": "bool",
+      "status": "PASS",
+      "tolerance": 0.0
+    },
+    {
+      "actual": true,
+      "check_id": "model_differs_disclosure",
+      "expected": true,
+      "group": "ptruth",
+      "kind": "bool",
+      "status": "PASS",
+      "tolerance": 0.0
+    },
+    {
+      "actual": 0.8925,
+      "check_id": "frozen_rung5_exploratory_0.8925",
+      "diff": 0.0,
+      "expected": 0.8925,
+      "group": "both_runs",
+      "kind": "numeric",
+      "status": "PASS",
+      "tolerance": 5e-05
+    },
+    {
+      "actual": 0.9375,
+      "check_id": "corrected_rung5_exploratory_0.9375",
+      "diff": 0.0,
+      "expected": 0.9375,
+      "group": "both_runs",
+      "kind": "numeric",
+      "status": "PASS",
+      "tolerance": 5e-05
+    },
+    {
+      "actual": 0.855,
+      "check_id": "frozen_transfer_exploratory_0.855",
+      "diff": 0.0,
+      "expected": 0.855,
+      "group": "both_runs",
+      "kind": "numeric",
+      "status": "PASS",
+      "tolerance": 5e-05
+    },
+    {
+      "actual": 0.975,
+      "check_id": "corrected_transfer_exploratory_0.975",
+      "diff": 0.0,
+      "expected": 0.975,
+      "group": "both_runs",
+      "kind": "numeric",
+      "status": "PASS",
+      "tolerance": 5e-05
+    },
+    {
+      "actual": 0.6402,
+      "check_id": "frozen_transfer_auroc_0.6402",
+      "diff": 0.0,
+      "expected": 0.6402,
+      "group": "both_runs",
+      "kind": "numeric",
+      "status": "PASS",
+      "tolerance": 5e-05
+    },
+    {
+      "actual": 0.7059,
+      "check_id": "corrected_transfer_auroc_0.7059",
+      "diff": 0.0,
+      "expected": 0.7059,
+      "group": "both_runs",
+      "kind": "numeric",
+      "status": "PASS",
+      "tolerance": 5e-05
+    },
+    {
+      "actual": true,
+      "check_id": "all_match_stored_frozen",
+      "expected": true,
+      "group": "both_runs",
+      "kind": "bool",
+      "status": "PASS",
+      "tolerance": 0.0
+    },
+    {
+      "actual": true,
+      "check_id": "all_match_stored_corrected",
+      "expected": true,
+      "group": "both_runs",
+      "kind": "bool",
+      "status": "PASS",
+      "tolerance": 0.0
+    },
+    {
+      "actual": 0.8925,
+      "check_id": "frozen_rung5_stored_exploratory",
+      "diff": 0.0,
+      "expected": 0.8925,
+      "group": "both_runs",
+      "kind": "numeric",
+      "status": "PASS",
+      "tolerance": 5e-05
+    },
+    {
+      "actual": 0.9375,
+      "check_id": "corrected_rung5_stored_exploratory",
+      "diff": 0.0,
+      "expected": 0.9375,
+      "group": "both_runs",
+      "kind": "numeric",
+      "status": "PASS",
+      "tolerance": 5e-05
+    },
+    {
+      "actual": 7.25,
+      "check_id": "frozen_exploratory_7.25pp",
+      "diff": 0.0,
+      "expected": 7.25,
+      "group": "h2_verdict",
+      "kind": "numeric",
+      "status": "PASS",
+      "tolerance": 0.0
+    },
+    {
+      "actual": "UNDEFINED",
+      "check_id": "frozen_exploratory_UNDEFINED",
+      "expected": "UNDEFINED",
+      "group": "h2_verdict",
+      "kind": "str",
+      "status": "PASS",
+      "tolerance": 0.0
+    },
+    {
+      "actual": -2.0,
+      "check_id": "corrected_exploratory_-2.0pp",
+      "diff": 0.0,
+      "expected": -2.0,
+      "group": "h2_verdict",
+      "kind": "numeric",
+      "status": "PASS",
+      "tolerance": 0.0
+    },
+    {
+      "actual": "REFUTED",
+      "check_id": "corrected_exploratory_REFUTED",
+      "expected": "REFUTED",
+      "group": "h2_verdict",
+      "kind": "str",
+      "status": "PASS",
+      "tolerance": 0.0
+    },
+    {
+      "actual": "REFUTED",
+      "check_id": "frozen_confirmatory_REFUTED",
+      "expected": "REFUTED",
+      "group": "h2_verdict",
+      "kind": "str",
+      "status": "PASS",
+      "tolerance": 0.0
+    },
+    {
+      "actual": "REFUTED",
+      "check_id": "corrected_confirmatory_REFUTED",
+      "expected": "REFUTED",
+      "group": "h2_verdict",
+      "kind": "str",
+      "status": "PASS",
+      "tolerance": 0.0
+    },
+    {
+      "actual": 0.8471,
+      "check_id": "registered_exploratory_0.8471",
+      "diff": 0.0,
+      "expected": 0.8471,
+      "group": "r4_robustness",
+      "kind": "numeric",
+      "status": "PASS",
+      "tolerance": 5e-05
+    },
+    {
+      "actual": 0.1253,
+      "check_id": "corrected_exploratory_0.1253",
+      "diff": 0.0,
+      "expected": 0.1253,
+      "group": "r4_robustness",
+      "kind": "numeric",
+      "status": "PASS",
+      "tolerance": 5e-05
+    },
+    {
+      "actual": true,
+      "check_id": "registered_matches_stored",
+      "expected": true,
+      "group": "r4_robustness",
+      "kind": "bool",
+      "status": "PASS",
+      "tolerance": 0.0
+    },
+    {
+      "actual": true,
+      "check_id": "corrected_matches_stored",
+      "expected": true,
+      "group": "r4_robustness",
+      "kind": "bool",
+      "status": "PASS",
+      "tolerance": 0.0
+    },
+    {
+      "actual": 0.8471,
+      "check_id": "registered_table_eq_recomputed",
+      "diff": 0.0,
+      "expected": 0.8471,
+      "group": "r4_robustness",
+      "kind": "numeric",
+      "status": "PASS",
+      "tolerance": 0.0
+    },
+    {
+      "actual": 0.1253,
+      "check_id": "corrected_table_eq_recomputed",
+      "diff": 0.0,
+      "expected": 0.1253,
+      "group": "r4_robustness",
+      "kind": "numeric",
+      "status": "PASS",
+      "tolerance": 0.0
+    }
+  ],
+  "command": "python 04_experiments/src/r3_exp_verify_batch1.py",
+  "commands": [
+    "python 04_experiments/src/r3_exp_verify_batch1.py",
+    "python 04_experiments/src/r3_exp_verify_batch1.py --check-repro"
+  ],
+  "experiment": "c1",
+  "exploratory": true,
+  "generated_by": "04_experiments/src/r3_exp_verify_batch1.py",
+  "groups": {
+    "audit_twosided": {
+      "checks": [
+        {
+          "actual": 0.407,
+          "check_id": "r4_primary6_dev_0.407",
+          "diff": 0.0,
+          "expected": 0.407,
+          "group": "audit_twosided",
+          "kind": "numeric",
+          "status": "PASS",
+          "tolerance": 5e-05
+        },
+        {
+          "actual": "inverted",
+          "check_id": "r4_primary6_dev_inverted",
+          "expected": "inverted",
+          "group": "audit_twosided",
+          "kind": "str",
+          "status": "PASS",
+          "tolerance": 0.0
+        },
+        {
+          "actual": true,
+          "check_id": "r4_primary6_dev_passes_twosided",
+          "expected": true,
+          "group": "audit_twosided",
+          "kind": "bool",
+          "status": "PASS",
+          "tolerance": 0.0
+        },
+        {
+          "actual": 0.4047,
+          "check_id": "r4_withlex_dev_0.4047",
+          "diff": 0.0,
+          "expected": 0.4047,
+          "group": "audit_twosided",
+          "kind": "numeric",
+          "status": "PASS",
+          "tolerance": 5e-05
+        },
+        {
+          "actual": 0.4047,
+          "check_id": "r4_withlex_dev_0.405_3dp",
+          "diff": 0.00030000000000002247,
+          "expected": 0.405,
+          "group": "audit_twosided",
+          "kind": "numeric",
+          "status": "PASS",
+          "tolerance": 0.0005
+        },
+        {
+          "actual": 0.7156,
+          "check_id": "top1_withlex_dev_0.7156",
+          "diff": 0.0,
+          "expected": 0.7156,
+          "group": "audit_twosided",
+          "kind": "numeric",
+          "status": "PASS",
+          "tolerance": 5e-05
+        },
+        {
+          "actual": 0.7156,
+          "check_id": "top1_withlex_dev_0.716_3dp",
+          "diff": 0.00039999999999995595,
+          "expected": 0.716,
+          "group": "audit_twosided",
+          "kind": "numeric",
+          "status": "PASS",
+          "tolerance": 0.0005
+        },
+        {
+          "actual": 0.7381,
+          "check_id": "top1_withlex_test_0.7381",
+          "diff": 0.0,
+          "expected": 0.7381,
+          "group": "audit_twosided",
+          "kind": "numeric",
+          "status": "PASS",
+          "tolerance": 5e-05
+        },
+        {
+          "actual": 0.7381,
+          "check_id": "top1_withlex_test_0.738_3dp",
+          "diff": 9.999999999998899e-05,
+          "expected": 0.738,
+          "group": "audit_twosided",
+          "kind": "numeric",
+          "status": "PASS",
+          "tolerance": 0.0005
+        },
+        {
+          "actual": 1.0,
+          "check_id": "gold_indicator_1.0_all_cells",
+          "diff": 0.0,
+          "expected": 1.0,
+          "group": "audit_twosided",
+          "kind": "numeric",
+          "status": "PASS",
+          "tolerance": 0.0
+        }
+      ],
+      "n": 10,
+      "n_pass": 10
+    },
+    "audit_twosided_supporting": {
+      "checks": [
+        {
+          "actual": 0.9762,
+          "check_id": "r1_withlex_dev",
+          "diff": 0.0,
+          "expected": 0.9762,
+          "group": "audit_twosided_supporting",
+          "kind": "numeric",
+          "status": "PASS",
+          "tolerance": 5e-05
+        },
+        {
+          "actual": false,
+          "check_id": "r1_withlex_fails_twosided",
+          "expected": false,
+          "group": "audit_twosided_supporting",
+          "kind": "bool",
+          "status": "PASS",
+          "tolerance": 0.0
+        },
+        {
+          "actual": 0.8901,
+          "check_id": "r2_withlex_dev",
+          "diff": 0.0,
+          "expected": 0.8901,
+          "group": "audit_twosided_supporting",
+          "kind": "numeric",
+          "status": "PASS",
+          "tolerance": 5e-05
+        },
+        {
+          "actual": false,
+          "check_id": "r2_withlex_fails_twosided",
+          "expected": false,
+          "group": "audit_twosided_supporting",
+          "kind": "bool",
+          "status": "PASS",
+          "tolerance": 0.0
+        },
+        {
+          "actual": 0.9235,
+          "check_id": "r3_withlex_dev",
+          "diff": 0.0,
+          "expected": 0.9235,
+          "group": "audit_twosided_supporting",
+          "kind": "numeric",
+          "status": "PASS",
+          "tolerance": 5e-05
+        },
+        {
+          "actual": false,
+          "check_id": "r3_withlex_fails_twosided",
+          "expected": false,
+          "group": "audit_twosided_supporting",
+          "kind": "bool",
+          "status": "PASS",
+          "tolerance": 0.0
+        }
+      ],
+      "n": 6,
+      "n_pass": 6
+    },
+    "auroc_ci": {
+      "checks": [
+        {
+          "actual": 0.9823630831643002,
+          "check_id": "frozen_test_auroc_vs_stored_0.9824",
+          "diff": 3.691683569984061e-05,
+          "expected": 0.9824,
+          "group": "auroc_ci",
+          "kind": "numeric",
+          "status": "PASS",
+          "tolerance": 5e-05
+        },
+        {
+          "actual": 0.8738488843813388,
+          "check_id": "corrected_test_auroc_vs_stored_0.8738",
+          "diff": 4.888438133876516e-05,
+          "expected": 0.8738,
+          "group": "auroc_ci",
+          "kind": "numeric",
+          "status": "PASS",
+          "tolerance": 5e-05
+        },
+        {
+          "actual": 0.9823630831643002,
+          "check_id": "frozen_test_vs_discrimination",
+          "diff": 3.691683569984061e-05,
+          "expected": 0.9824,
+          "group": "auroc_ci",
+          "kind": "numeric",
+          "status": "PASS",
+          "tolerance": 5e-05
+        },
+        {
+          "actual": 0.8738488843813388,
+          "check_id": "corrected_test_vs_discrimination",
+          "diff": 4.888438133876516e-05,
+          "expected": 0.8738,
+          "group": "auroc_ci",
+          "kind": "numeric",
+          "status": "PASS",
+          "tolerance": 5e-05
+        },
+        {
+          "actual": 0.10851419878296142,
+          "check_id": "paired_diff_vs_0.1085",
+          "diff": 1.419878296142485e-05,
+          "expected": 0.1085,
+          "group": "auroc_ci",
+          "kind": "numeric",
+          "status": "PASS",
+          "tolerance": 5e-05
+        },
+        {
+          "actual": 0.0,
+          "check_id": "paired_diff_item_ci_[0.0950,0.1227]",
+          "diff": 0.0,
+          "expected": 0.0,
+          "group": "auroc_ci",
+          "kind": "numeric",
+          "status": "PASS",
+          "tolerance": 0.0
+        },
+        {
+          "actual": false,
+          "check_id": "paired_diff_excludes_zero",
+          "expected": false,
+          "group": "auroc_ci",
+          "kind": "bool",
+          "status": "PASS",
+          "tolerance": 0.0
+        },
+        {
+          "actual": 0.10851419878296142,
+          "check_id": "paired_point_equals_auroc_difference",
+          "diff": 0.0,
+          "expected": 0.10851419878296142,
+          "group": "auroc_ci",
+          "kind": "numeric",
+          "status": "PASS",
+          "tolerance": 1e-09
+        }
+      ],
+      "n": 8,
+      "n_pass": 8
+    },
+    "both_runs": {
+      "checks": [
+        {
+          "actual": 0.8925,
+          "check_id": "frozen_rung5_exploratory_0.8925",
+          "diff": 0.0,
+          "expected": 0.8925,
+          "group": "both_runs",
+          "kind": "numeric",
+          "status": "PASS",
+          "tolerance": 5e-05
+        },
+        {
+          "actual": 0.9375,
+          "check_id": "corrected_rung5_exploratory_0.9375",
+          "diff": 0.0,
+          "expected": 0.9375,
+          "group": "both_runs",
+          "kind": "numeric",
+          "status": "PASS",
+          "tolerance": 5e-05
+        },
+        {
+          "actual": 0.855,
+          "check_id": "frozen_transfer_exploratory_0.855",
+          "diff": 0.0,
+          "expected": 0.855,
+          "group": "both_runs",
+          "kind": "numeric",
+          "status": "PASS",
+          "tolerance": 5e-05
+        },
+        {
+          "actual": 0.975,
+          "check_id": "corrected_transfer_exploratory_0.975",
+          "diff": 0.0,
+          "expected": 0.975,
+          "group": "both_runs",
+          "kind": "numeric",
+          "status": "PASS",
+          "tolerance": 5e-05
+        },
+        {
+          "actual": 0.6402,
+          "check_id": "frozen_transfer_auroc_0.6402",
+          "diff": 0.0,
+          "expected": 0.6402,
+          "group": "both_runs",
+          "kind": "numeric",
+          "status": "PASS",
+          "tolerance": 5e-05
+        },
+        {
+          "actual": 0.7059,
+          "check_id": "corrected_transfer_auroc_0.7059",
+          "diff": 0.0,
+          "expected": 0.7059,
+          "group": "both_runs",
+          "kind": "numeric",
+          "status": "PASS",
+          "tolerance": 5e-05
+        },
+        {
+          "actual": true,
+          "check_id": "all_match_stored_frozen",
+          "expected": true,
+          "group": "both_runs",
+          "kind": "bool",
+          "status": "PASS",
+          "tolerance": 0.0
+        },
+        {
+          "actual": true,
+          "check_id": "all_match_stored_corrected",
+          "expected": true,
+          "group": "both_runs",
+          "kind": "bool",
+          "status": "PASS",
+          "tolerance": 0.0
+        },
+        {
+          "actual": 0.8925,
+          "check_id": "frozen_rung5_stored_exploratory",
+          "diff": 0.0,
+          "expected": 0.8925,
+          "group": "both_runs",
+          "kind": "numeric",
+          "status": "PASS",
+          "tolerance": 5e-05
+        },
+        {
+          "actual": 0.9375,
+          "check_id": "corrected_rung5_stored_exploratory",
+          "diff": 0.0,
+          "expected": 0.9375,
+          "group": "both_runs",
+          "kind": "numeric",
+          "status": "PASS",
+          "tolerance": 5e-05
+        }
+      ],
+      "n": 10,
+      "n_pass": 10
+    },
+    "h2_verdict": {
+      "checks": [
+        {
+          "actual": 7.25,
+          "check_id": "frozen_exploratory_7.25pp",
+          "diff": 0.0,
+          "expected": 7.25,
+          "group": "h2_verdict",
+          "kind": "numeric",
+          "status": "PASS",
+          "tolerance": 0.0
+        },
+        {
+          "actual": "UNDEFINED",
+          "check_id": "frozen_exploratory_UNDEFINED",
+          "expected": "UNDEFINED",
+          "group": "h2_verdict",
+          "kind": "str",
+          "status": "PASS",
+          "tolerance": 0.0
+        },
+        {
+          "actual": -2.0,
+          "check_id": "corrected_exploratory_-2.0pp",
+          "diff": 0.0,
+          "expected": -2.0,
+          "group": "h2_verdict",
+          "kind": "numeric",
+          "status": "PASS",
+          "tolerance": 0.0
+        },
+        {
+          "actual": "REFUTED",
+          "check_id": "corrected_exploratory_REFUTED",
+          "expected": "REFUTED",
+          "group": "h2_verdict",
+          "kind": "str",
+          "status": "PASS",
+          "tolerance": 0.0
+        },
+        {
+          "actual": "REFUTED",
+          "check_id": "frozen_confirmatory_REFUTED",
+          "expected": "REFUTED",
+          "group": "h2_verdict",
+          "kind": "str",
+          "status": "PASS",
+          "tolerance": 0.0
+        },
+        {
+          "actual": "REFUTED",
+          "check_id": "corrected_confirmatory_REFUTED",
+          "expected": "REFUTED",
+          "group": "h2_verdict",
+          "kind": "str",
+          "status": "PASS",
+          "tolerance": 0.0
+        }
+      ],
+      "n": 6,
+      "n_pass": 6
+    },
+    "ptruth": {
+      "checks": [
+        {
+          "actual": 0.23172608610948767,
+          "check_id": "auroc_0.2317",
+          "diff": 2.6086109487677422e-05,
+          "expected": 0.2317,
+          "group": "ptruth",
+          "kind": "numeric",
+          "status": "PASS",
+          "tolerance": 5e-05
+        },
+        {
+          "actual": 553,
+          "check_id": "n_scored_553",
+          "expected": 553,
+          "group": "ptruth",
+          "kind": "int",
+          "status": "PASS",
+          "tolerance": 0.0
+        },
+        {
+          "actual": false,
+          "check_id": "threshold_infeasible",
+          "expected": false,
+          "group": "ptruth",
+          "kind": "bool",
+          "status": "PASS",
+          "tolerance": 0.0
+        },
+        {
+          "actual": true,
+          "check_id": "model_differs_disclosure",
+          "expected": true,
+          "group": "ptruth",
+          "kind": "bool",
+          "status": "PASS",
+          "tolerance": 0.0
+        }
+      ],
+      "n": 4,
+      "n_pass": 4
+    },
+    "r4_robustness": {
+      "checks": [
+        {
+          "actual": 0.8471,
+          "check_id": "registered_exploratory_0.8471",
+          "diff": 0.0,
+          "expected": 0.8471,
+          "group": "r4_robustness",
+          "kind": "numeric",
+          "status": "PASS",
+          "tolerance": 5e-05
+        },
+        {
+          "actual": 0.1253,
+          "check_id": "corrected_exploratory_0.1253",
+          "diff": 0.0,
+          "expected": 0.1253,
+          "group": "r4_robustness",
+          "kind": "numeric",
+          "status": "PASS",
+          "tolerance": 5e-05
+        },
+        {
+          "actual": true,
+          "check_id": "registered_matches_stored",
+          "expected": true,
+          "group": "r4_robustness",
+          "kind": "bool",
+          "status": "PASS",
+          "tolerance": 0.0
+        },
+        {
+          "actual": true,
+          "check_id": "corrected_matches_stored",
+          "expected": true,
+          "group": "r4_robustness",
+          "kind": "bool",
+          "status": "PASS",
+          "tolerance": 0.0
+        },
+        {
+          "actual": 0.8471,
+          "check_id": "registered_table_eq_recomputed",
+          "diff": 0.0,
+          "expected": 0.8471,
+          "group": "r4_robustness",
+          "kind": "numeric",
+          "status": "PASS",
+          "tolerance": 0.0
+        },
+        {
+          "actual": 0.1253,
+          "check_id": "corrected_table_eq_recomputed",
+          "diff": 0.0,
+          "expected": 0.1253,
+          "group": "r4_robustness",
+          "kind": "numeric",
+          "status": "PASS",
+          "tolerance": 0.0
+        }
+      ],
+      "n": 6,
+      "n_pass": 6
+    }
+  },
+  "input_paths": {
+    "audit_twosided": "04_experiments/results/c1/r3/exp/audit_twosided.json",
+    "auroc_ci": "04_experiments/results/c1/r3/exp/auroc_ci.json",
+    "both_runs": "04_experiments/results/c1/r3/exp/both_runs.json",
+    "corrected_results_full": "04_experiments/results/c1_corrected/results_full.json",
+    "corrected_rung5": "04_experiments/results/c1_corrected/rung5.json",
+    "corrected_transfer": "04_experiments/results/c1_corrected/transfer.json",
+    "frozen_results_full": "04_experiments/results/c1/results_full.json",
+    "frozen_rung5": "04_experiments/results/c1/rung5.json",
+    "frozen_transfer": "04_experiments/results/c1/transfer.json",
+    "h2_verdict": "04_experiments/results/c1/r3/exp/h2_verdict.json",
+    "ptruth_summary": "04_experiments/results/c1/r3/exp/ptruth_summary.json",
+    "r4_robustness": "04_experiments/results/c1/r3/exp/r4_robustness.json"
+  },
+  "inputs": {
+    "audit_twosided": "1233ef6afcbe0d2586596dee095289e6aacffa03f97f19166796cbae82708115",
+    "auroc_ci": "015fcf5d2e9fac5dcb27d5ca93d6e665650b5ac433d81e779ff5d9cde677bf47",
+    "both_runs": "f32371795752cef96742b8166b2bc3e2ab1dc49330eda02aca677f5473c9ff7c",
+    "corrected_results_full": "936ce0b89e2231092b9fd71243db9456c267208376ea580c888ee4d0dfcc6ff6",
+    "corrected_rung5": "157639c74db1c0b8de254194ead886f25d90b870fba756447fe3aa881ea3076c",
+    "corrected_transfer": "d48645abc99316222fc213692301282ae4800a22e3e04cac47f5f3586c623db9",
+    "frozen_results_full": "e4cf65cb0b2bae52e4ee4b379e0c4e66450ed21474d71b57e49e8d4218c36b35",
+    "frozen_rung5": "bfa34e57937a1b98e5a6155bf2c6f2acdf44658740c0953678065de9c8d9b955",
+    "frozen_transfer": "690278824756a208309e10a65f7cf231fb26b67cf5ab0a104d1069c985d3d614",
+    "h2_verdict": "da31a5bc60f914d68185d4f153e9348fbc0d1655ffff0cd1be501f58d261b625",
+    "ptruth_summary": "187d52d632642c4083f15b08f86fad392eb23882940bb6558b86df70b9c81bab",
+    "r4_robustness": "f71af67b417018a596f2aba310643ca62a9af5d599efbdd7e413ad50b8136df9"
+  },
+  "label": "exploratory/post-hoc verification (no new numbers)",
+  "n_checks": 50,
+  "n_fail": 0,
+  "n_pass": 50,
+  "overall": "PASS",
+  "post_hoc": true,
+  "sha256_inputs": {
+    "audit_twosided": "1233ef6afcbe0d2586596dee095289e6aacffa03f97f19166796cbae82708115",
+    "auroc_ci": "015fcf5d2e9fac5dcb27d5ca93d6e665650b5ac433d81e779ff5d9cde677bf47",
+    "both_runs": "f32371795752cef96742b8166b2bc3e2ab1dc49330eda02aca677f5473c9ff7c",
+    "corrected_results_full": "936ce0b89e2231092b9fd71243db9456c267208376ea580c888ee4d0dfcc6ff6",
+    "corrected_rung5": "157639c74db1c0b8de254194ead886f25d90b870fba756447fe3aa881ea3076c",
+    "corrected_transfer": "d48645abc99316222fc213692301282ae4800a22e3e04cac47f5f3586c623db9",
+    "frozen_results_full": "e4cf65cb0b2bae52e4ee4b379e0c4e66450ed21474d71b57e49e8d4218c36b35",
+    "frozen_rung5": "bfa34e57937a1b98e5a6155bf2c6f2acdf44658740c0953678065de9c8d9b955",
+    "frozen_transfer": "690278824756a208309e10a65f7cf231fb26b67cf5ab0a104d1069c985d3d614",
+    "h2_verdict": "da31a5bc60f914d68185d4f153e9348fbc0d1655ffff0cd1be501f58d261b625",
+    "ptruth_summary": "187d52d632642c4083f15b08f86fad392eb23882940bb6558b86df70b9c81bab",
+    "r4_robustness": "f71af67b417018a596f2aba310643ca62a9af5d599efbdd7e413ad50b8136df9"
+  },
+  "stage": "r3_exp_verify_batch1",
+  "tolerances": {
+    "TOL_3DP": 0.0005,
+    "TOL_4DP": 5e-05,
+    "TOL_EXACT": 0.0
+  }
+}

@@ -1,0 +1,4 @@
+﻿started 2026-11-08T13:57:10.8951441+05:30 wt=C:\Users\shubh\research-lab profile=res-s2 provider=default
+rate-limited (attempt 0, exit 1) 2026-11-08T14:15:08.5262109+05:30; waiting 300 s then resuming local-c7cecbe6414b8220d93f4b95b096dd265b4eee66cc26a9889e48d3759d7dd68e
+rate-limited (attempt 1, exit 1) 2026-11-08T14:20:29.7775028+05:30; waiting 300 s then resuming local-c7cecbe6414b8220d93f4b95b096dd265b4eee66cc26a9889e48d3759d7dd68e
+exited 0 2026-11-08T14:38:37.8246001+05:30 attempts=2

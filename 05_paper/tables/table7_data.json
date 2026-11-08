@@ -1,0 +1,26 @@
+[
+  {
+    "work": "Abdumalikov et al., arXiv:2403.01461",
+    "data": "ODQA corpora, SQuAD v2.0 pairs for repair",
+    "negatives": "random text excerpts versus excerpts with high semantic overlap",
+    "metric": "answerability accuracy",
+    "operating_point": "one accuracy figure per sampler; coverage not reported",
+    "citation": "answerability-in-retrieval-augmented-open-domain-question-an"
+  },
+  {
+    "work": "DeclineCraft, arXiv:2610.28340",
+    "data": "retrieval and parametric abstention suite",
+    "negatives": "several unanswerable classes",
+    "metric": "joint abstention metrics",
+    "operating_point": "per category, retrieval and memory reported separately",
+    "citation": "declinecraft-a-rag-abstention-benchmark-for-jointly-measurin"
+  },
+  {
+    "work": "This paper",
+    "data": "SQuAD v2.0 dev, article-disjoint split",
+    "negatives": "four constructed rungs, plus overlap-matched and top-1-presented variants",
+    "metric": "abstain precision, over-refusal, coverage",
+    "operating_point": "every precision reported with over-refusal and coverage beside it",
+    "citation": "this_paper"
+  }
+]

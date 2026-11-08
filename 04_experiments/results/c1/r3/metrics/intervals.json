@@ -1,0 +1,238 @@
+{
+  "H1": {
+    "clopper_pearson": {
+      "alpha": 0.05,
+      "hi": 0.0092,
+      "lo": 0.0,
+      "method": "clopper_pearson_exact_binomial",
+      "n": 400,
+      "x": 0
+    },
+    "discordant_pairs": 0,
+    "discordant_rate": 0.0,
+    "explanation": "The percentile bootstrap interval [0,0] is degenerate because every paired difference is zero (all items refused under both conditions), so the resampling distribution has zero variance. It is a boundary artefact, not evidence of zero uncertainty. The discordant pair count (0 of 400) is the primary evidence; exact binomial intervals give a non-zero upper bound.",
+    "hypothesis": "H1",
+    "n_pairs": 400,
+    "primary_evidence": "0 of 400 discordant pairs (sign test n_eff=0)",
+    "wilson": {
+      "alpha": 0.05,
+      "hi": 0.0095,
+      "lo": 0.0,
+      "method": "wilson_score",
+      "n": 400,
+      "x": 0
+    },
+    "zero_width_boundary_artefact": true
+  },
+  "H3": {
+    "clopper_pearson": {
+      "alpha": 0.05,
+      "hi": 0.0025,
+      "lo": 0.0,
+      "method": "clopper_pearson_exact_binomial",
+      "n": 1479,
+      "x": 0
+    },
+    "discordant_pairs": 0,
+    "discordant_rate": 0.0,
+    "explanation": "Same boundary artefact as H1: all 1479 paired differences are zero, so the percentile bootstrap interval collapses to [0,0]. Exact Clopper-Pearson and Wilson intervals bound the discordant-pair proportion away from zero only by their upper limits.",
+    "hypothesis": "H3",
+    "n_pairs": 1479,
+    "primary_evidence": "0 of 1479 discordant pairs",
+    "wilson": {
+      "alpha": 0.05,
+      "hi": 0.0026,
+      "lo": 0.0,
+      "method": "wilson_score",
+      "n": 1479,
+      "x": 0
+    },
+    "zero_width_boundary_artefact": true
+  },
+  "auroc_intervals": {
+    "audit_sensitivity_0.977": {
+      "caveat": "Bootstrap is over OOF predictions; folds are fixed, so this understates model-selection uncertainty.",
+      "ci95": {
+        "hi": 0.9855,
+        "lo": 0.9679
+      },
+      "computed_auroc": 0.9773,
+      "feasible": true,
+      "method": "item bootstrap, percentile 2.5/97.5",
+      "n_boot": 10000,
+      "n_items": 800,
+      "n_valid_draws": 10000,
+      "seed": 12345,
+      "source": "Recomputed 5-fold CV OOF on dev items (surface 8 features, sensitivity variant); bootstrap items",
+      "value_reported": 0.977
+    },
+    "top1_0.945": {
+      "ci95": {
+        "hi": 0.9663,
+        "lo": 0.9211
+      },
+      "computed_auroc": 0.9453,
+      "feasible": true,
+      "method": "item bootstrap, percentile 2.5/97.5",
+      "n_boot": 10000,
+      "n_items": 400,
+      "n_valid_draws": 10000,
+      "seed": 12345,
+      "source": "features_top1.csv + items_top1.jsonl (refit gate on dev, score test, bootstrap items)",
+      "value_reported": 0.945
+    },
+    "transfer_0.640": {
+      "ci95": {
+        "hi": 0.6944,
+        "lo": 0.5852
+      },
+      "computed_auroc": 0.6402,
+      "feasible": true,
+      "method": "item bootstrap, percentile 2.5/97.5",
+      "n_boot": 10000,
+      "n_items": 400,
+      "n_valid_draws": 10000,
+      "seed": 12345,
+      "source": "features_transfer.csv scored by frozen dev-fitted gate; bootstrap items",
+      "value_reported": 0.64
+    }
+  },
+  "cluster_bootstrap": {
+    "all_finite_ratios": [
+      {
+        "group": "per_rung",
+        "ratio": 0.4521,
+        "rung": "2"
+      },
+      {
+        "group": "exploratory_band",
+        "ratio": 0.5435,
+        "rung": "1"
+      },
+      {
+        "group": "exploratory_band",
+        "ratio": 0.8511,
+        "rung": "2"
+      },
+      {
+        "group": "exploratory_band",
+        "ratio": 0.9034,
+        "rung": "3"
+      },
+      {
+        "group": "exploratory_band",
+        "ratio": 1.1658,
+        "rung": "4"
+      }
+    ],
+    "min_width_ratio_archive": 0.4521,
+    "min_width_ratio_corrected_value": 0.4521,
+    "min_width_ratio_note": "The archive's smallest finite width ratio is 0.4521 (confirmatory rung 2), not 0.851. The 0.851 figure corresponds to the exploratory rung-2 cell.",
+    "n_articles_test": 18,
+    "n_articles_verified": true,
+    "rung1_cluster_ci95": {
+      "hi": 1.0,
+      "lo": 1.0
+    },
+    "rung1_n_items": 400,
+    "rung3_cluster_ci95": {
+      "hi": 1.0,
+      "lo": 1.0
+    },
+    "rung3_n_items": 400,
+    "unit": "article (items.jsonl 'title'; whole SQuAD articles are never split)"
+  },
+  "command": "python 04_experiments/src/r3_metrics_intervals.py",
+  "equivalence": {
+    "all_12_auroc": 0.8738,
+    "all_12_vs_dense_only": {
+      "contains_zero": true,
+      "diff": 0.0043,
+      "hi": 0.0161,
+      "lo": -0.0078,
+      "method": "paired item bootstrap, percentile 2.5/97.5",
+      "n_boot": 10000,
+      "n_items": 1879,
+      "n_valid_draws": 10000,
+      "seed": 12345
+    },
+    "all_12_vs_no_dense": {
+      "contains_zero": false,
+      "diff": 0.0116,
+      "hi": 0.0196,
+      "lo": 0.0038,
+      "method": "paired item bootstrap, percentile 2.5/97.5",
+      "n_boot": 10000,
+      "n_items": 1879,
+      "n_valid_draws": 10000,
+      "seed": 12345
+    },
+    "dense_only_auroc": 0.8695,
+    "feature_set": "corrected (features_corrected.csv)",
+    "frozen_vs_corrected": {
+      "contains_zero": false,
+      "corrected_auroc": 0.8738,
+      "diff": 0.1085,
+      "frozen_auroc": 0.9824,
+      "hi": 0.1228,
+      "lo": 0.0951,
+      "method": "paired item bootstrap, percentile 2.5/97.5",
+      "n_boot": 10000,
+      "n_items": 1879,
+      "n_valid_draws": 10000,
+      "seed": 12345
+    },
+    "n_test_items": 1879,
+    "no_dense_auroc": 0.8623,
+    "reading": "Point estimates show no single group carrying the result, but intervals must be reported; if an interval for all_12 vs no_dense excludes zero, the 'no single group' wording needs narrowing."
+  },
+  "feasibility": {
+    "audit_sensitivity_0.977": {
+      "feasible": true,
+      "note": "Feasible via saved items.jsonl + audit.py surface features."
+    },
+    "top1_0.945": {
+      "feasible": true,
+      "note": "Computed from saved features_top1.csv."
+    },
+    "transfer_0.640": {
+      "feasible": true,
+      "note": "Computed from saved features_transfer.csv."
+    }
+  },
+  "generated_by": "04_experiments/src/r3_metrics_intervals.py",
+  "inputs": {
+    "ablations_json": "2b6c29c0e21133375f2ee027980a8ca90d467482f5b1c8e43189d9d4cf32c193",
+    "audit_json": "c1ad496e07cc9ac0ec2c85f1f83c65f6c0cb7a09b840dd4da1f194673cb07489",
+    "features_corrected_csv": "1d7f1b3aa16234168d1801565bf5c0f074d7260f2006574505fcee725fdd2fa6",
+    "features_csv": "f9de87f699da1e73968dde27c5a55600c23c077ff9e5a446823e05abe0733cbb",
+    "features_top1_csv": "3d22e100c1991ed63b3155ef6f0f66a873377d410ce0b9d629346ed4185e4a5c",
+    "features_transfer_csv": "f7c70b07edae77a3126a39d04addb1753e85717ab83c43b9c2d706141dbe8582",
+    "items_jsonl": "c6f46ad80e7d15f495cd2a4b1e7b5a5556bfa929264c7afabd81826dd8d049d0",
+    "predictions_csv": "154ed6df4756ae28a13823ffdf6811db0e7c6809d5d23498cb799e24ccd03133",
+    "results_full_json": "e4cf65cb0b2bae52e4ee4b379e0c4e66450ed21474d71b57e49e8d4218c36b35",
+    "stats_addendum_json": "9c3d20d161191bfaa62e4c93d8071532e5541bb93474c28e2cc27a9558dde4a6",
+    "top1_variant_json": "299c3e0569b4cef98342ac57930ce2b12398f00a7810a5b4bb80df7af7b65117",
+    "transfer_json": "690278824756a208309e10a65f7cf231fb26b67cf5ab0a104d1069c985d3d614"
+  },
+  "interval_method_check": {
+    "archive_file": "04_experiments/results/c1/results_full.json",
+    "archive_per_rung_method": {
+      "1": "percentile",
+      "2": "bca",
+      "3": "percentile",
+      "4": "percentile"
+    },
+    "mismatch": true,
+    "mismatched_rungs": [
+      "1",
+      "3",
+      "4"
+    ],
+    "note": "The paper states BCa intervals, but results_full.json records 'percentile' for rungs 1, 3, 4 and 'bca' only for rung 2 (zero-variance / boundary fallback). This is a documented mismatch; the archive's recorded method should be quoted, or the intervals recomputed as BCa where feasible.",
+    "paper_stated_method": "bca",
+    "paper_stated_section": "3.5/3.6 (BCa bootstrap)"
+  },
+  "n_boot": 10000,
+  "seed": 12345
+}

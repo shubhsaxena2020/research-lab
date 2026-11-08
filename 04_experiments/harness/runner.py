@@ -178,6 +178,41 @@ def git_dirty(root: Optional[Path] = None) -> Optional[bool]:
     return None if out is None else bool(out.strip())
 
 
+def git_diff(root: Optional[Path] = None) -> str:
+    """Capture a textual snapshot of the working-tree state.
+
+    Combines ``git diff HEAD`` (tracked changes vs. HEAD), ``git diff --cached``
+    (staged changes) and the list of untracked files.  Returns text even when git
+    is unavailable.
+    """
+    root_path = Path(root) if root else repo_root()
+    parts: List[str] = []
+    head_diff = _git(["diff", "HEAD"], root_path)
+    parts.append("===== git diff HEAD =====")
+    parts.append(head_diff.rstrip(chr(10)) if head_diff is not None else "")
+    cached_diff = _git(["diff", "--cached"], root_path)
+    parts.append("===== git diff --cached =====")
+    parts.append(cached_diff.rstrip(chr(10)) if cached_diff is not None else "")
+    untracked_out = _git(["ls-files", "--others", "--exclude-standard"], root_path)
+    untracked_files = [line for line in (untracked_out or "").splitlines() if line.strip()]
+    parts.append("===== untracked files =====")
+    parts.append(chr(10).join(untracked_files))
+    return chr(10).join(parts).rstrip(chr(10)) + chr(10)
+
+
+def git_preregistration_sha256(root: Optional[Path] = None) -> Optional[str]:
+    """SHA-256 of ``04_experiments/PREREGISTRATION.md`` (None if absent)."""
+    root_path = Path(root) if root else repo_root()
+    path = root_path / "04_experiments" / "PREREGISTRATION.md"
+    if not path.is_file():
+        return None
+    h = hashlib.sha256()
+    with open(path, "rb") as fh:
+        for chunk in iter(lambda: fh.read(65536), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
 def capture_env() -> Dict[str, str]:
     return {k: os.environ[k] for k in ENV_KEYS if os.environ.get(k) is not None}
 
@@ -460,9 +495,18 @@ def run(config: Any, experiment: str, fn: Callable[[Dict[str, Any]], Dict[str, A
     config_sha = sha256_canonical(resolved)
     commit = git_commit(root)
     dirty = git_dirty(root)
+    diff_text = git_diff(root)
+    _untracked_out = _git(["ls-files", "--others", "--exclude-standard"], root)
+    untracked_files = [line for line in (_untracked_out or "").splitlines() if line.strip()] if _untracked_out is not None else []
+    prereg_path = root / "04_experiments" / "PREREGISTRATION.md"
+    prereg_sha = git_preregistration_sha256(root)
 
     run_id, run_dir = _make_run_dir(parent, _slug(name), commit)
     (run_dir / "artifacts").mkdir(exist_ok=True)
+    for _fname in ("git_diff.patch", "git_diff.txt", "git-diff.patch", "git-diff.txt"):
+        for _target in (run_dir / "artifacts" / _fname, run_dir / _fname):
+            with open(_target, "w", encoding="utf-8", newline="\n") as _fh:
+                _fh.write(diff_text)
     with open(run_dir / "config.json", "w", encoding="utf-8", newline="\n") as fh:
         fh.write(config_text)
 
@@ -499,6 +543,12 @@ def run(config: Any, experiment: str, fn: Callable[[Dict[str, Any]], Dict[str, A
         "config_sha256": config_sha,
         "git_commit": commit,
         "git_dirty": dirty,
+        "git_diff": diff_text,
+        "git_diff_sha256": hashlib.sha256(diff_text.encode("utf-8")).hexdigest(),
+        "git_diff_path": str((run_dir / "artifacts" / "git_diff.patch").resolve()),
+        "git_untracked": untracked_files,
+        "preregistration_sha256": prereg_sha,
+        "preregistration_path": str(prereg_path.resolve() if prereg_path.is_file() else prereg_path),
         "python": platform.python_version(),
         "platform": platform.platform(),
         "command": command if command is not None else command_line(),

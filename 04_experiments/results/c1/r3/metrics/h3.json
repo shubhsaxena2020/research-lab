@@ -1,0 +1,134 @@
+{
+  "command": "python 04_experiments/src/r3_metrics_h3.py",
+  "config_seed": 20261103,
+  "constrained_search": {
+    "closest_feasible_threshold": {
+      "dev_n_refused": 1796,
+      "dev_over_refusal": 0.8975,
+      "dev_precision": 0.8001113585746102,
+      "dev_recall": 0.9755600814663951,
+      "t": 0.5872602362485023
+    },
+    "constrained_threshold_exists": false,
+    "exact_recall_match_threshold": {
+      "dev_n_refused": 1840,
+      "dev_precision": 0.7923913043478261,
+      "dev_recall": 0.9898167006109979,
+      "precision_constraint_satisfied": false,
+      "t": 0.6208113228035785
+    },
+    "exhaustive_feasible_count": 1790,
+    "grid_feasible_count": 95,
+    "max_feasible_recall": 0.9755600814663951,
+    "precision_constraint": 0.8,
+    "statement": "No single threshold satisfies both the 0.80 abstain-precision constraint and a dev abstain recall of 0.9898: the highest recall attainable by any precision-compliant single threshold is 0.9756, below the band's 0.9898. The threshold that genuinely matches the band's dev recall (0.989817) has dev precision 0.7924, which violates the 0.80 constraint.",
+    "target_recall": 0.9898
+  },
+  "degenerate_check": {
+    "band_t_hi": 0.537011889113,
+    "band_t_lo": 0.52318216643,
+    "equal": false,
+    "n_heldout_above_t_hi": 222,
+    "n_heldout_below_t_lo": 1585,
+    "n_heldout_between": 72,
+    "note": "In the frozen run single_matched_recall.t == band.t_lo (degenerate: only the upper cut can differ). In the corrected run this equality does NOT hold, so the construction is not degenerate in that sense; the matched threshold sits above the band's upper threshold instead.",
+    "single_matched_recall_t": 0.636224300244
+  },
+  "dev_recalls": {
+    "from_corrected_results_full": {
+      "band_dev_recall": 0.9898,
+      "matched_single_dev_precision": 0.7886,
+      "matched_single_dev_recall": 0.9925
+    },
+    "recomputed": {
+      "band_dev_recall": 0.9898,
+      "matched_single_dev_precision": 0.7886,
+      "matched_single_dev_recall": 0.9925
+    }
+  },
+  "experiment": "c1",
+  "feasible_highest_recall": {
+    "dev_precision": 0.8001113585746102,
+    "dev_recall": 0.9755600814663951,
+    "difference": {
+      "contains_zero": true,
+      "diff": -0.0034,
+      "hi": 0.0081,
+      "lo": -0.0142,
+      "method": "paired percentile bootstrap over negative items",
+      "n": 1479,
+      "n_boot": 10000,
+      "seed": 12345
+    },
+    "heldout_abstain_precision": 0.9776876267748479,
+    "threshold": 0.5872602362485023
+  },
+  "generated_by": "04_experiments/src/r3_metrics_h3.py",
+  "input_paths": {
+    "features_corrected_csv": "04_experiments/data/features_corrected.csv",
+    "gate_py": "04_experiments/src/gate.py",
+    "items_jsonl": "04_experiments/data/items.jsonl",
+    "results_full_corrected": "04_experiments/results/c1_corrected/results_full.json"
+  },
+  "inputs": {
+    "features_corrected_csv": "1d7f1b3aa16234168d1801565bf5c0f074d7260f2006574505fcee725fdd2fa6",
+    "gate_py": "33a34d6997ac2658578bcc87004dc9900bd3e312e78f847ef4182eb019749f57",
+    "items_jsonl": "c6f46ad80e7d15f495cd2a4b1e7b5a5556bfa929264c7afabd81826dd8d049d0",
+    "results_full_corrected": "936ce0b89e2231092b9fd71243db9456c267208376ea580c888ee4d0dfcc6ff6"
+  },
+  "n_boot": 10000,
+  "original_matched_grid": {
+    "dev_precision": 0.7886,
+    "dev_recall": 0.9925,
+    "difference": {
+      "contains_zero": false,
+      "diff": -0.0223,
+      "hi": -0.0135,
+      "lo": -0.0311,
+      "method": "paired percentile bootstrap over negative items",
+      "n": 1479,
+      "n_boot": 10000,
+      "seed": 12345
+    },
+    "heldout_abstain_precision": 0.9966193373901284,
+    "threshold": 0.636224300244
+  },
+  "over_refusal_arm": {
+    "corrected_exploratory_band": {
+      "breached_on_dev": false,
+      "breached_on_held_out": true,
+      "cap_binds_on": "dev (fit_band_constrained enforces dev over-refusal <= cap during threshold search)",
+      "dev_over_refusal": 0.095,
+      "dev_over_refusal_reported": 0.095,
+      "held_out_over_refusal": 0.11,
+      "held_out_over_refusal_reported": 0.11,
+      "max_over_refusal_cap": 0.1,
+      "statement": "The declared 0.10 cap binds on dev by construction. Corrected dev over-refusal is 0.0950 (<= 0.10, not breached on dev). Held-out over-refusal is 0.1100 (> 0.10), so the cap is breached on the held-out half even though it holds on dev."
+    }
+  },
+  "re_matched_recall": {
+    "band_heldout_precision": 0.9743069641649763,
+    "dev_precision": 0.7923913043478261,
+    "dev_recall": 0.9898167006109979,
+    "difference": {
+      "contains_zero": false,
+      "diff": -0.0169,
+      "hi": -0.0074,
+      "lo": -0.0264,
+      "method": "paired percentile bootstrap over negative items",
+      "n": 1479,
+      "n_boot": 10000,
+      "seed": 12345
+    },
+    "heldout_abstain_precision": 0.991210277214334,
+    "method": "single threshold minimizing |dev recall - band dev recall| over all unique scores",
+    "threshold": 0.6208113228035785
+  },
+  "seed": 12345,
+  "target_precision": 0.8,
+  "verdicts": {
+    "MF_19": "Corrected dev recalls are not matched (band 0.9898 vs matched single 0.9925); matched single dev precision 0.7886 < 0.80. No precision-compliant single threshold reaches the band's dev recall. Re-matching on recall (t=0.620811) gives held-out precision 0.9912 vs band 0.9743, difference -0.0169 [-0.0264, -0.0074].",
+    "MF_20": "Cap binds on dev. Corrected dev over-refusal 0.0950 <= 0.10 (not breached on dev); held-out over-refusal 0.1100 > 0.10 (breached on held-out).",
+    "MF_29": "On the corrected run single_matched_recall.t (0.636224) != band.t_lo (0.523182), so the frozen-run degeneracy does not apply. Held-out items scoring above t_hi: 222."
+  }
+}

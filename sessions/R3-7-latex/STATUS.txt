@@ -1,0 +1,2 @@
+﻿started 2026-11-08T14:31:19.6239045+05:30 wt=C:\Users\admin\research-lab profile=res-s7 provider=default
+exited 0 2026-11-08T16:14:03.7766076+05:30 attempts=0

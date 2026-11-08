@@ -1,0 +1,101 @@
+item_id,label,notes
+dev:5710968aa58dae1900cd6a89:r1,0,agreed label (A and B agree)
+dev:5725ca4389a1e219009abeb5:r1,0,agreed label (A and B agree)
+dev:57265200708984140094c23a:r1,0,agreed label (A and B agree)
+dev:5726b929f1498d1400e8e8e9:r1,0,agreed label (A and B agree)
+test:57297547af94a219006aa45b:r1,0,agreed label (A and B agree)
+test:5729506d6aef051400154caf:r1,0,agreed label (A and B agree)
+dev:571cd703dd7acb1400e4c184:r1,0,agreed label (A and B agree)
+dev:570967c4ed30961900e840be:r1,0,agreed label (A and B agree)
+test:5728128cff5b5019007d9c78:r1,0,agreed label (A and B agree)
+dev:5729e4291d04691400779651:r1,0,agreed label (A and B agree)
+test:572818f54b864d190016446d:r1,0,agreed label (A and B agree)
+test:57309bfb8ab72b1400f9c5e8:r1,0,agreed label (A and B agree)
+test:572ff56304bcaa1900d76f31:r1,0,agreed label (A and B agree)
+test:57300761947a6a140053cf9d:r1,0,agreed label (A and B agree)
+test:572758e0f1498d1400e8f6b1:r1,0,agreed label (A and B agree)
+dev:571c7abfdd7acb1400e4c0bd:r1,0,agreed label (A and B agree)
+dev:57268882f1498d1400e8e309:r1,0,agreed label (A and B agree)
+test:5725fb8138643c19005acf40:r1,0,agreed label (A and B agree)
+test:573750f61c4567190057446b:r1,0,agreed label (A and B agree)
+dev:5726a46cdd62a815002e8bd0:r1,0,agreed label (A and B agree)
+dev:572fd1c4947a6a140053cd06:r1,0,agreed label (A and B agree)
+test:572a005f1d046914007796ba:r1,0,agreed label (A and B agree)
+test:57274f49f1498d1400e8f61e:r1,0,agreed label (A and B agree)
+dev:5726926a5951b619008f770a:r1,0,agreed label (A and B agree)
+dev:572fc043a23a5019007fc95d:r1,0,agreed label (A and B agree)
+test:57265746dd62a815002e8219:r2,0,resolver qwen2.5:1.5b-instruct (strict explicit-span rubric). The passage does not mention any specific body parts or structures on Pleurobrachia.
+test:572f64ccb2c2fd14005680b7:r2,0,agreed label (A and B agree)
+test:572750df5951b619008f8830:r2,0,agreed label (A and B agree)
+test:572f609ca23a5019007fc5b3:r2,1,agreed label (A and B agree)
+dev:572fb059947a6a140053cb84:r2,0,agreed label (A and B agree)
+dev:5733a5f54776f41900660f44:r2,0,agreed label (A and B agree)
+test:5737821cc3c5551400e51f1c:r2,0,agreed label (A and B agree)
+dev:572699db5951b619008f779c:r2,0,agreed label (A and B agree)
+dev:570607f575f01819005e78b6:r2,0,agreed label (A and B agree)
+dev:5711163bb654c5140001fb13:r2,0,resolver qwen2.5:1.5b-instruct (strict explicit-span rubric). The passage does not provide an explicit answer to the question about which present-day county New Rochelle is in.
+test:57264991f1498d1400e8db30:r2,0,agreed label (A and B agree)
+dev:572fd6aa04bcaa1900d76da0:r2,0,agreed label (A and B agree)
+test:573749741c4567190057445f:r2,0,agreed label (A and B agree)
+test:57300200b2c2fd1400568729:r2,0,agreed label (A and B agree)
+dev:573330444776f41900660758:r2,0,agreed label (A and B agree)
+dev:572657d9dd62a815002e8231:r2,0,agreed label (A and B agree)
+test:572885023acd2414000dfa84:r2,0,agreed label (A and B agree)
+test:572821274b864d1900164512:r2,0,agreed label (A and B agree)
+dev:57096b66200fba1400367fa8:r2,0,agreed label (A and B agree)
+dev:571cb27fdd7acb1400e4c132:r2,0,agreed label (A and B agree)
+test:5730040f947a6a140053cf4f:r2,0,resolver qwen2.5:1.5b-instruct (strict explicit-span rubric). The passage does not contain an explicit answer to the question 'When was the Brotherhood first banned in Egypt?'.
+dev:5726e5c95951b619008f81ce:r2,0,agreed label (A and B agree)
+dev:572fac17947a6a140053cb55:r2,0,agreed label (A and B agree)
+test:57115ff82419e314009555c3:r2,0,agreed label (A and B agree)
+dev:5733fe73d058e614000b673e:r2,0,agreed label (A and B agree)
+dev:57092322efce8f15003a7db0:r3,0,agreed label (A and B agree)
+test:572881704b864d1900164a54:r3,0,agreed label (A and B agree)
+dev:571a4ead10f8ca1400304fde:r3,0,agreed label (A and B agree)
+dev:57332e48d058e614000b5763:r3,0,agreed label (A and B agree)
+dev:5726eb4b5951b619008f826d:r3,0,agreed label (A and B agree)
+test:5725c69738643c19005accbc:r3,0,agreed label (A and B agree)
+test:573749741c4567190057445d:r3,1,agreed label (A and B agree)
+dev:5727e9523acd2414000def99:r3,0,agreed label (A and B agree)
+test:5730b8ca8ab72b1400f9c706:r3,0,agreed label (A and B agree)
+test:57265d86f1498d1400e8dd54:r3,0,agreed label (A and B agree)
+dev:56e1efa0e3433e140042321a:r3,0,agreed label (A and B agree)
+test:572a0bebaf94a219006aa76f:r3,0,agreed label (A and B agree)
+test:5728dddc2ca10214002da9d3:r3,0,"resolver qwen2.5:1.5b-instruct (strict explicit-span rubric). The passage does not provide an explicit answer to the question 'What is necessary to disobey?'. The passage discusses various aspects of civil disobedience, including non-violence, but does not specify what is necessary to disobey."
+test:5727478cf1498d1400e8f59a:r3,0,agreed label (A and B agree)
+dev:572657d9dd62a815002e8230:r3,0,agreed label (A and B agree)
+test:57308cf88ab72b1400f9c576:r3,0,agreed label (A and B agree)
+dev:5706074552bb8914006897d7:r3,0,agreed label (A and B agree)
+dev:571cdcb85efbb31900334e10:r3,0,agreed label (A and B agree)
+test:572754dd708984140094dc3b:r3,0,agreed label (A and B agree)
+dev:571a4b0f10f8ca1400304fd8:r3,0,agreed label (A and B agree)
+test:573007fab2c2fd140056876e:r3,0,agreed label (A and B agree)
+test:571142b3a58dae1900cd6d5e:r3,0,resolver qwen2.5:1.5b-instruct (strict explicit-span rubric). The passage does not explicitly answer the question about the type of power generated by steam turbines today.
+test:572ffd75b2c2fd14005686e7:r3,0,resolver qwen2.5:1.5b-instruct (strict explicit-span rubric). The passage does not explicitly answer the question about the direction of the Rhine during the last cold phase.
+test:5727dc473acd2414000dee44:r3,0,agreed label (A and B agree)
+dev:57111713a58dae1900cd6c01:r3,0,agreed label (A and B agree)
+test:57293b843f37b31900478133:r4,0,resolver qwen2.5:1.5b-instruct (strict explicit-span rubric). The passage does not explicitly state what organization the IPCC is part of.
+dev:573368e54776f41900660a56:r4,0,resolver qwen2.5:1.5b-instruct (strict explicit-span rubric). The passage does not explicitly answer the question about which forest is by Warsaw's southern border.
+test:572a064a3f37b3190047865e:r4,0,agreed label (A and B agree)
+dev:571cb27fdd7acb1400e4c134:r4,0,resolver qwen2.5:1.5b-instruct (strict explicit-span rubric). The passage does not provide an explicit answer to the question 'How much heavier is oxygen 18 than oxygen 16?'
+dev:57267ebfdd62a815002e872f:r4,0,resolver qwen2.5:1.5b-instruct (strict explicit-span rubric). The passage does not provide an explicit definition of 'critically tapered.'
+test:572f5703a23a5019007fc577:r4,0,agreed label (A and B agree)
+dev:572fd8efb2c2fd14005684fc:r4,0,resolver qwen2.5:1.5b-instruct (strict explicit-span rubric). The passage does not provide an explicit answer to the question about the current number of electors in a Scottish Parliament constituency.
+dev:57096e1ced30961900e84103:r4,0,resolver qwen2.5:1.5b-instruct (strict explicit-span rubric). The passage does not provide an explicit answer to the question 'Who were the current rights holders for the Primer League?'. The question is not directly addressed in the text.
+dev:5726fa525951b619008f83fa:r4,0,resolver qwen2.5:1.5b-instruct (strict explicit-span rubric). The passage does not explicitly answer the question about countries that use a red stylized A to signify pharmacy.
+test:5727afa82ca10214002d93c6:r4,1,agreed label (A and B agree)
+test:5711651050c2381900b54acf:r4,0,resolver qwen2.5:1.5b-instruct (strict explicit-span rubric). The passage does not explicitly state the mechanism that moves coal from a bunker to the firebox.
+dev:570963a5200fba1400367f34:r4,0,resolver qwen2.5:1.5b-instruct (strict explicit-span rubric). The passage does not explicitly state what kind of company Sky UK Limited is.
+dev:573383d0d058e614000b5c37:r4,0,resolver qwen2.5:1.5b-instruct (strict explicit-span rubric). The passage does not contain an explicit answer to the question about which South Korean car manufacturer purchased the factory in 1995.
+dev:5729e02f1d0469140077963b:r4,0,resolver qwen2.5:1.5b-instruct (strict explicit-span rubric). The passage does not explicitly mention what can result in more equal distribution of income.
+test:5728d6f02ca10214002da910:r4,0,resolver qwen2.5:1.5b-instruct (strict explicit-span rubric). The passage does not provide an explicit answer to the question about how civil disobedience has evolved in current times.
+dev:572751b4708984140094dc1f:r4,0,"resolver qwen2.5:1.5b-instruct (strict explicit-span rubric). The passage does not explicitly answer the question 'What leads to confusion and collapse?'. It discusses the importance of clear contracts and paths to accomplishing expectations, but does not mention confusion or collapse as a result of these factors."
+test:57299326af94a219006aa519:r4,0,resolver qwen2.5:1.5b-instruct (strict explicit-span rubric). The passage does not explicitly answer the question about what type of number generators use prime numbers.
+test:57300a25a23a5019007fcc98:r4,0,resolver qwen2.5:1.5b-instruct (strict explicit-span rubric). The passage does not explicitly answer the question about a long-term goal of French foreign policy along the Rhine.
+test:57309564069b5314008321a5:r4,0,resolver qwen2.5:1.5b-instruct (strict explicit-span rubric). The passage does not contain an explicit answer to the question 'When was John Gallagher born?'.
+dev:572fcd86947a6a140053ccde:r4,0,"resolver qwen2.5:1.5b-instruct (strict explicit-span rubric). The passage does not provide an explicit answer to the question 'How do bills pass through Parliament?'. Instead, it describes the various ways bills can be introduced to Parliament and the process of bills passing through Parliament."
+test:57286f373acd2414000df9dd:r4,0,resolver qwen2.5:1.5b-instruct (strict explicit-span rubric). The passage does not contain an explicit answer to the question 'Who mentored Buyantu?'.
+test:5725e45689a1e219009ac04c:r4,1,agreed label (A and B agree)
+test:5730126ba23a5019007fcd0b:r4,0,resolver qwen2.5:1.5b-instruct (strict explicit-span rubric). The passage does not explicitly state which leaders the Islamic extremists attacked.
+test:5727478cf1498d1400e8f59a:r4,0,resolver qwen2.5:1.5b-instruct (strict explicit-span rubric). The passage does not mention year 12 or any other term for year 12 of education.
+test:572881d34b864d1900164a5c:r4,1,agreed label (A and B agree)

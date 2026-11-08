@@ -1,0 +1,60 @@
+{
+  "baseline": "P(True)-style reader baseline (Kadavath et al. 2207.05221)",
+  "exploratory_post_hoc": true,
+  "model_ollama": "qwen2.5:1.5b-instruct",
+  "model_differs_from_paper_reader": true,
+  "paper_reader": "Qwen/Qwen2.5-0.5B-Instruct",
+  "ollama_endpoint": "http://127.0.0.1:11434/api/generate",
+  "n_dev_items_with_reader_scores": 553,
+  "n_scored": 553,
+  "auroc_answerable_vs_negative": 0.23172608610948767,
+  "threshold_080_rule": {
+    "threshold": 0.999984,
+    "abstain_precision": null,
+    "abstain_recall": 0.0,
+    "over_refusal": 0.0,
+    "coverage": 1.0,
+    "n_refused": 0,
+    "n_refused_neg": 0,
+    "feasible": false,
+    "target_precision": 0.8
+  },
+  "per_rung_auroc": {
+    "0": {
+      "n": 118,
+      "n_answerable": 118,
+      "n_negative": 0,
+      "auroc": null
+    },
+    "1": {
+      "n": 118,
+      "n_answerable": 0,
+      "n_negative": 118,
+      "auroc": null
+    },
+    "2": {
+      "n": 81,
+      "n_answerable": 0,
+      "n_negative": 81,
+      "auroc": null
+    },
+    "3": {
+      "n": 118,
+      "n_answerable": 0,
+      "n_negative": 118,
+      "auroc": null
+    },
+    "4": {
+      "n": 118,
+      "n_answerable": 0,
+      "n_negative": 118,
+      "auroc": null
+    }
+  },
+  "stopped_reason": "completed",
+  "n_scored_this_run": 175,
+  "n_errors_this_run": 0,
+  "output_csv": "C:\\Users\\shubh\\research-lab\\04_experiments\\results\\c1\\r3\\exp\\ptruth_scores.csv",
+  "errors_csv": "C:\\Users\\shubh\\research-lab\\04_experiments\\results\\c1\\r3\\exp\\ptruth_errors.csv",
+  "disclosure": "Exploratory/post-hoc, dev-only. Reader model is Qwen2.5-1.5B-Instruct via Ollama, not the paper's pinned Qwen2.5-0.5B-Instruct. Ollama /api/generate logprobs verified (see results/c1/r3/exp/COMPUTE.md)."
+}

@@ -1,0 +1,57 @@
+{
+  "mf10": {
+    "status": "resolved",
+    "title": "MF-10 disagreement resolution (third labeller)",
+    "n_items": 100,
+    "n_disagreements_resolved": 26,
+    "agreement": {
+      "n_agree": 74,
+      "po": 0.74,
+      "pe": 0.676,
+      "kappa": 0.1975,
+      "contingency": {
+        "both_0": 69,
+        "both_1": 5,
+        "A1_B0": 25,
+        "A0_B1": 1
+      }
+    },
+    "per_rung_answerable_shares": {
+      "1": {"A": 0.0, "B": 0.0, "resolved": 0.0, "counts": {"A": 0, "B": 0, "resolved": 0, "n": 25}},
+      "2": {"A": 0.16, "B": 0.04, "resolved": 0.04, "counts": {"A": 4, "B": 1, "resolved": 1, "n": 25}},
+      "3": {"A": 0.16, "B": 0.04, "resolved": 0.04, "counts": {"A": 4, "B": 1, "resolved": 1, "n": 25}},
+      "4": {"A": 0.88, "B": 0.16, "resolved": 0.12, "counts": {"A": 22, "B": 4, "resolved": 3, "n": 25}}
+    },
+    "overall_share_answer": {
+      "resolved": 0.05,
+      "resolved_n": 5,
+      "n": 100,
+      "A": 0.30,
+      "B": 0.06
+    },
+    "resolver_outcomes_on_disagreements": {
+      "n": 26,
+      "resolved_1": 0,
+      "resolved_0": 26,
+      "by_rung": {
+        "2": {"n": 3, "label_1": 0, "label_0": 3},
+        "3": {"n": 3, "label_1": 0, "label_0": 3},
+        "4": {"n": 20, "label_1": 0, "label_0": 20}
+      }
+    },
+    "disclosure": {
+      "labellers": {
+        "A": {"model": "qwen2.5:1.5b (as recorded upstream)", "n_answerable": 30},
+        "B": {"model": "qwen3:1.7b (as recorded upstream)", "n_answerable": 6},
+        "R_resolver": {"model": "qwen2.5:1.5b-instruct", "role": "third labeller / resolver", "runtime": "Ollama"}
+      },
+      "stricter_rubric": "label 1 requires an explicit verbatim answer span in the passage (quoted in evidence field); topical overlap, background facts, paraphrase of question, partial/indirect hints count as 0; external knowledge forbidden; temperature 0; JSON {label, evidence, rationale} output.",
+      "caveat": "All three labellers are LLMs, not human gold standards; resolver decisions are post-hoc exploratory, disclosed here, and any contradiction with the source dataset requires human adjudication. Resolver agreed with B on all 26 disagreements (B's stricter decisions upheld in every case) — treat with caution: qwen2.5 shares family bias with A, yet sided fully with B, suggesting the strict prompt, not model family, drove outcomes.",
+      "outputs": [
+        "resolve.csv (100 rows: agreed labels copied, disagreements by resolver)",
+        "adjudication.json (this file)",
+        "_resolver_tmp/resolver_raw.json (full raw resolver outputs + prompt, audit trail)"
+      ]
+    }
+  }
+}

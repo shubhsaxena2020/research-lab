@@ -1,0 +1,386 @@
+{
+  "arms": {
+    "corrected": {
+      "band_primary": {
+        "coverage": 0.0383,
+        "gate": "band_primary",
+        "n_items": 1879,
+        "over_refusal": 0.915,
+        "per_rung_abstain_precision": {
+          "1": 1.0,
+          "2": 0.9964,
+          "3": 1.0,
+          "4": 0.9073
+        },
+        "pooled_abstain_precision": 0.9743
+      },
+      "exploratory_band": {
+        "coverage": 0.396,
+        "gate": "exploratory_band",
+        "n_items": 1879,
+        "over_refusal": 0.11,
+        "per_rung_abstain_precision": {
+          "1": 0.9975,
+          "2": 0.9286,
+          "3": 0.955,
+          "4": 0.1253
+        },
+        "pooled_abstain_precision": 0.7377
+      },
+      "exploratory_single": {
+        "coverage": 0.3757,
+        "gate": "exploratory_single",
+        "n_items": 1879,
+        "over_refusal": 0.1325,
+        "per_rung_abstain_precision": {
+          "1": 0.9975,
+          "2": 0.9429,
+          "3": 0.9625,
+          "4": 0.1805
+        },
+        "pooled_abstain_precision": 0.7573
+      },
+      "single_B3": {
+        "coverage": 0.0495,
+        "gate": "single_B3_same_features",
+        "n_items": 1879,
+        "over_refusal": 0.8725,
+        "per_rung_abstain_precision": {
+          "1": 1.0,
+          "2": 0.9893,
+          "3": 0.9975,
+          "4": 0.9048
+        },
+        "pooled_abstain_precision": 0.9716
+      },
+      "single_matched_recall": {
+        "coverage": 0.0059,
+        "gate": "single_matched_recall",
+        "n_items": 1879,
+        "over_refusal": 0.985,
+        "per_rung_abstain_precision": {
+          "1": 1.0,
+          "2": 1.0,
+          "3": 1.0,
+          "4": 0.9875
+        },
+        "pooled_abstain_precision": 0.9966
+      }
+    },
+    "frozen": {
+      "band_primary": {
+        "coverage": 0.0527,
+        "gate": "band_primary",
+        "n_items": 1879,
+        "over_refusal": 0.755,
+        "per_rung_abstain_precision": {
+          "1": 1.0,
+          "2": 0.9964,
+          "3": 1.0,
+          "4": 1.0
+        },
+        "pooled_abstain_precision": 0.9993
+      },
+      "exploratory_band": {
+        "coverage": 0.2544,
+        "gate": "exploratory_band",
+        "n_items": 1879,
+        "over_refusal": 0.095,
+        "per_rung_abstain_precision": {
+          "1": 0.9975,
+          "2": 0.9107,
+          "3": 0.9275,
+          "4": 0.8471
+        },
+        "pooled_abstain_precision": 0.9216
+      },
+      "exploratory_single": {
+        "coverage": 0.2161,
+        "gate": "exploratory_single",
+        "n_items": 1879,
+        "over_refusal": 0.15,
+        "per_rung_abstain_precision": {
+          "1": 1.0,
+          "2": 0.9429,
+          "3": 0.97,
+          "4": 0.9048
+        },
+        "pooled_abstain_precision": 0.9554
+      },
+      "single_B3": {
+        "coverage": 0.016,
+        "gate": "single_B3_same_features",
+        "n_items": 1879,
+        "over_refusal": 0.9275,
+        "per_rung_abstain_precision": {
+          "1": 1.0,
+          "2": 0.9964,
+          "3": 1.0,
+          "4": 1.0
+        },
+        "pooled_abstain_precision": 0.9993
+      },
+      "single_matched_recall": {
+        "coverage": 0.0591,
+        "gate": "single_matched_recall",
+        "n_items": 1879,
+        "over_refusal": 0.725,
+        "per_rung_abstain_precision": {
+          "1": 1.0,
+          "2": 0.9964,
+          "3": 1.0,
+          "4": 1.0
+        },
+        "pooled_abstain_precision": 0.9993
+      }
+    }
+  },
+  "command": "python 04_experiments/src/r3_metrics_core.py",
+  "definitions": {
+    "abstain_recall": "P(refused | negative) pooled = n_refused_negatives / n_negatives",
+    "coverage_item": "1 - mean(refused) over all items = admitted items / all items",
+    "coverage_question": "(# qids whose rung-0 item is not refused) / (# qids)",
+    "over_refusal": "P(refused | answerable) = n_refused_answerable / n_answerable",
+    "pooled_precision": "P(negative | refused) over all items = n_refused_negatives / (n_refused_negatives + n_refused_answerable)",
+    "precision_k": "P(negative of rung k | refused) = n_refused_rung_k / (n_refused_rung_k + n_refused_answerable)",
+    "refusal_rate_k": "P(refused | negative of rung k) = n_refused_rung_k / n_rung_k"
+  },
+  "experiment": "c1",
+  "generated_by": "04_experiments/src/r3_metrics_core.py",
+  "input_paths": {
+    "corrected_predictions": "04_experiments/results/c1_corrected/predictions.csv",
+    "corrected_results_full": "04_experiments/results/c1_corrected/results_full.json",
+    "frozen_predictions": "04_experiments/results/c1/predictions.csv",
+    "frozen_results_full": "04_experiments/results/c1/results_full.json",
+    "top1_variant": "04_experiments/results/c1/top1_variant.json"
+  },
+  "inputs": {
+    "corrected_predictions": "95eac015e11cca67141e3139f28cd9a49b39adf9a6ccd55935d2d70ae6632393",
+    "corrected_results_full": "936ce0b89e2231092b9fd71243db9456c267208376ea580c888ee4d0dfcc6ff6",
+    "frozen_predictions": "154ed6df4756ae28a13823ffdf6811db0e7c6809d5d23498cb799e24ccd03133",
+    "frozen_results_full": "e4cf65cb0b2bae52e4ee4b379e0c4e66450ed21474d71b57e49e8d4218c36b35",
+    "top1_variant": "299c3e0569b4cef98342ac57930ce2b12398f00a7810a5b4bb80df7af7b65117"
+  },
+  "runs": {
+    "corrected": {
+      "operating_points": {
+        "band": {
+          "answerable": {
+            "label": "P(refused | answerable) = over_refusal",
+            "n": 400,
+            "n_refused": 366,
+            "refusal_rate": 0.915,
+            "rung": 0
+          },
+          "coverage_item": 0.0383182543906333,
+          "coverage_question": 0.085,
+          "coverage_question_n_answered": 34,
+          "coverage_question_n_qids": 400,
+          "n_items": 1879,
+          "over_refusal": 0.915,
+          "per_rung": {
+            "1": {
+              "abstain_precision": 0.5221932114882507,
+              "n": 400,
+              "n_refused": 400,
+              "refusal_rate": 1.0
+            },
+            "2": {
+              "abstain_precision": 0.4325581395348837,
+              "n": 280,
+              "n_refused": 279,
+              "refusal_rate": 0.9964285714285714
+            },
+            "3": {
+              "abstain_precision": 0.5221932114882507,
+              "n": 400,
+              "n_refused": 400,
+              "refusal_rate": 1.0
+            },
+            "4": {
+              "abstain_precision": 0.49725274725274726,
+              "n": 399,
+              "n_refused": 362,
+              "refusal_rate": 0.9072681704260651
+            }
+          },
+          "pooled": {
+            "abstain_recall_negatives": 0.9743069641649763,
+            "n_negatives": 1479,
+            "n_refused_answerable": 366,
+            "n_refused_negatives": 1441,
+            "pooled_abstain_precision": 0.7974543442169342
+          },
+          "refusal_column": "band_refused"
+        },
+        "exploratory_band": {
+          "answerable": {
+            "label": "P(refused | answerable) = over_refusal",
+            "n": 400,
+            "n_refused": 44,
+            "refusal_rate": 0.11,
+            "rung": 0
+          },
+          "coverage_item": 0.3959552953698776,
+          "coverage_question": 0.89,
+          "coverage_question_n_answered": 356,
+          "coverage_question_n_qids": 400,
+          "n_items": 1879,
+          "over_refusal": 0.11,
+          "per_rung": {
+            "1": {
+              "abstain_precision": 0.9006772009029346,
+              "n": 400,
+              "n_refused": 399,
+              "refusal_rate": 0.9975
+            },
+            "2": {
+              "abstain_precision": 0.8552631578947368,
+              "n": 280,
+              "n_refused": 260,
+              "refusal_rate": 0.9285714285714286
+            },
+            "3": {
+              "abstain_precision": 0.8967136150234741,
+              "n": 400,
+              "n_refused": 382,
+              "refusal_rate": 0.955
+            },
+            "4": {
+              "abstain_precision": 0.5319148936170213,
+              "n": 399,
+              "n_refused": 50,
+              "refusal_rate": 0.12531328320802004
+            }
+          },
+          "pooled": {
+            "abstain_recall_negatives": 0.7376605814739688,
+            "n_negatives": 1479,
+            "n_refused_answerable": 44,
+            "n_refused_negatives": 1091,
+            "pooled_abstain_precision": 0.9612334801762115
+          },
+          "refusal_column": "expl_band_refused"
+        }
+      },
+      "source_predictions": "04_experiments/results/c1_corrected/predictions.csv"
+    },
+    "frozen": {
+      "operating_points": {
+        "band": {
+          "answerable": {
+            "label": "P(refused | answerable) = over_refusal",
+            "n": 400,
+            "n_refused": 302,
+            "refusal_rate": 0.755,
+            "rung": 0
+          },
+          "coverage_item": 0.05268759978712079,
+          "coverage_question": 0.245,
+          "coverage_question_n_answered": 98,
+          "coverage_question_n_qids": 400,
+          "n_items": 1879,
+          "over_refusal": 0.755,
+          "per_rung": {
+            "1": {
+              "abstain_precision": 0.5698005698005698,
+              "n": 400,
+              "n_refused": 400,
+              "refusal_rate": 1.0
+            },
+            "2": {
+              "abstain_precision": 0.4802065404475043,
+              "n": 280,
+              "n_refused": 279,
+              "refusal_rate": 0.9964285714285714
+            },
+            "3": {
+              "abstain_precision": 0.5698005698005698,
+              "n": 400,
+              "n_refused": 400,
+              "refusal_rate": 1.0
+            },
+            "4": {
+              "abstain_precision": 0.5691868758915835,
+              "n": 399,
+              "n_refused": 399,
+              "refusal_rate": 1.0
+            }
+          },
+          "pooled": {
+            "abstain_recall_negatives": 0.9993238674780257,
+            "n_negatives": 1479,
+            "n_refused_answerable": 302,
+            "n_refused_negatives": 1478,
+            "pooled_abstain_precision": 0.8303370786516854
+          },
+          "refusal_column": "band_refused"
+        },
+        "exploratory_band": {
+          "answerable": {
+            "label": "P(refused | answerable) = over_refusal",
+            "n": 400,
+            "n_refused": 38,
+            "refusal_rate": 0.095,
+            "rung": 0
+          },
+          "coverage_item": 0.2543906333155934,
+          "coverage_question": 0.905,
+          "coverage_question_n_answered": 362,
+          "coverage_question_n_qids": 400,
+          "n_items": 1879,
+          "over_refusal": 0.095,
+          "per_rung": {
+            "1": {
+              "abstain_precision": 0.9130434782608695,
+              "n": 400,
+              "n_refused": 399,
+              "refusal_rate": 0.9975
+            },
+            "2": {
+              "abstain_precision": 0.8703071672354948,
+              "n": 280,
+              "n_refused": 255,
+              "refusal_rate": 0.9107142857142857
+            },
+            "3": {
+              "abstain_precision": 0.9070904645476773,
+              "n": 400,
+              "n_refused": 371,
+              "refusal_rate": 0.9275
+            },
+            "4": {
+              "abstain_precision": 0.898936170212766,
+              "n": 399,
+              "n_refused": 338,
+              "refusal_rate": 0.8471177944862155
+            }
+          },
+          "pooled": {
+            "abstain_recall_negatives": 0.9215686274509803,
+            "n_negatives": 1479,
+            "n_refused_answerable": 38,
+            "n_refused_negatives": 1363,
+            "pooled_abstain_precision": 0.9728765167737331
+          },
+          "refusal_column": "expl_band_refused"
+        }
+      },
+      "source_predictions": "04_experiments/results/c1/predictions.csv"
+    }
+  },
+  "seed": 20261103,
+  "top1": {
+    "coverage": 0.8425,
+    "n_hits": 313,
+    "n_misses": 87,
+    "n_refused": 63,
+    "n_refused_hits": 8,
+    "n_refused_misses": 55,
+    "operating_point": "band_target_precision_0.80",
+    "over_refusal": 0.0256,
+    "precision_miss_given_refused": 0.873,
+    "refuse_miss": 0.6322,
+    "split": "test"
+  }
+}

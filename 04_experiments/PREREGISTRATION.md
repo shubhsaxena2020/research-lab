@@ -268,3 +268,26 @@ Consequences, fixed now and not later:
 5. This deviation is also the reason the paper reports leave-one-group-out ablations on the corrected
    features (`ablation_corrected.py`) rather than on the frozen ones: an ablation of a degenerate column
    would have been uninterpretable.
+
+### D5 — 2026-11-08 — POST-HOC clarification: D4 was recorded after the corrected run existed
+
+Recorded 2026-11-08 as a post-hoc disclosure; no earlier text is edited.
+
+Facts (IST unless noted):
+- `results/c1_corrected/` outputs carry mtimes 2026-11-03 06:54:23 (audit.json 06:54:22.94, predictions.csv 06:54:22.94, results_full.json 06:54, run_return.json 06:54).
+- The D4 section above is dated 2026-11-03T07:05+05:30, i.e. 11 minutes after those files existed.
+- D4's hash line was added to `PREREGISTRATION.sha256` in commit b2d3055 at 2026-11-03 07:47:05 +0530 (~42 min after the D4 timestamp, ~53 min after the corrected run).
+- The frozen run (`results/c1`, commit 4cd9275) started 2026-11-03T02:21:40Z = 07:51:40 IST, i.e. after both the corrected run and D4.
+
+Consequence: D4 cannot be read as a pre-registered deviation in the strict sense; it is a post-hoc disclosure that the dense block was degenerate and was recomputed. It does not alter any pre-registered verdict (D4 states so), and this clarification adds no new analysis. The corrected run remains exploratory (`c1_corrected`, `D4`). Future runs must record deviation timestamps before, not after, the affected run's first output.
+
+### D6 — 2026-11-08 — overlap-augmented surface audit is an exploratory post-hoc sensitivity, not a stopping rule
+
+The `auroc_with_lex_overlap` column (0.9773 / 0.8886 / 0.9232 on dev rungs 1-3; test 0.9804 / 0.8644 / 0.9053) appears in D2's motivation and in `audit.json`, but §4 lists `lex_overlap` as a gate feature and §8's stopping rule (§8a/§8b) is defined on the six primary surface features only (`n_chars, n_tokens, digit_ratio, upper_ratio, punct_ratio, mean_word_len`). The overlap-augmented variant is computed by `audit.surface_features(..., with_lex=True)` and is labelled a sensitivity analysis in `audit.py`'s docstring; it was never a pre-registered procedure and cannot trigger a rebuild or a stop.
+
+Facts:
+- First on-disk run containing these numbers: run `20261102T235524Z_c1_gate_e20bc7f`, started 2026-11-02T23:55:24Z = 2026-11-03 05:25:24 IST (commit e20bc7f, git_dirty true); D2 was written at 2026-11-03T05:58+05:30, after that run.
+- Earliest `results/.../audit.json` mtime: 2026-11-03 06:54:23 IST (`results/c1_corrected/audit.json`); `results/c1/audit.json` 07:51:48 IST.
+- All rungs pass the primary-6 audit (AUROC <= 0.75) on both splits; no rebuild was triggered by either variant. The overlap numbers are therefore reported as descriptive sensitivity only, never as a §8 outcome.
+
+Consequence: no change to any hypothesis verdict; the overlap-augmented audit remains EXPLORATORY and is not cited as evidence that a rung failed the stopping rule.

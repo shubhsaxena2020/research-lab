@@ -1,0 +1,2 @@
+﻿started 2026-11-08T13:56:52.4858695+05:30 wt=C:\Users\admin\research-lab profile=res-s5 provider=default
+exited 0 2026-11-08T14:53:30.2426693+05:30 attempts=0

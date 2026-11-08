@@ -1,0 +1,216 @@
+{
+  "command": "python 04_experiments/src/r3_exp_h2_verdict.py",
+  "commands": [
+    "python 04_experiments/src/r3_exp_h2_verdict.py",
+    "python 04_experiments/src/r3_exp_h2_verdict.py --check-repro"
+  ],
+  "construct_note": "DIRECTION TEST ONLY. The transfer corpus is 2WikiMultihopQA dev (Ho et al., COLING 2020), not SQuAD 2.0, and three construct differences prevent magnitude equivalence. (1) No article grouping: each 2Wiki item ships `context` as independent Wikipedia articles, so the rung-3 negative is another paragraph from the same question's article set, not a same-document neighbour as in the dev arm. (2) Passage length: corpus median paragraph 203 chars vs 712 for SQuAD 2.0 dev; the 400 presented transfer pa",
+  "experiment": "c1",
+  "exploratory": true,
+  "gap_interpretation": {
+    "gap_rule": "The preregistered rule is binary and leaves (5, 10) points undefined: a 7.25pp drop is neither >= 10pp (not SUPPORTED) nor within +-5pp (not REFUTED). Symmetrically, a gain steeper than -5pp (loss < -5) is also not classified by the \u00b15 refutation rule. This file therefore reports UNDEFINED for such drops and does not treat them as support.",
+    "h2_verbatim": "- **H2 (operating-point transfer).** The dev-fitted operating point, applied frozen to a\n  disjoint-article held-out half *and* to a second corpus, loses \u2265 10 points of abstain precision at\n  equal abstain recall relative to the dev figure.\n  *Refuted if* the loss is within \u00b15 points (i.e. it transfers), or if the second corpus is unavailable\n  (then H2 is reported as PARTIAL: within-corpus transfer only, and the second-corpus arm as NOT RUN).",
+    "note": "D1.4: H2 gets no p-value. Holm family is H1 and H3 only. The second-corpus construct differs from SQuAD (2WikiMultihopQA: no article grouping, shorter passages, multi-hop questions), so the second-corpus arm is a direction test only (see transfer.json construct_note).",
+    "quote_source": "04_experiments/PREREGISTRATION.md section 1 (frozen; hash in PREREGISTRATION.sha256)",
+    "refuted_rule": "loss is within +-5 points (i.e. it transfers)",
+    "supported_rule": "losses >= 10 points of abstain precision"
+  },
+  "generated_by": "04_experiments/src/r3_exp_h2_verdict.py",
+  "h2_verbatim": "- **H2 (operating-point transfer).** The dev-fitted operating point, applied frozen to a\n  disjoint-article held-out half *and* to a second corpus, loses \u2265 10 points of abstain precision at\n  equal abstain recall relative to the dev figure.\n  *Refuted if* the loss is within \u00b15 points (i.e. it transfers), or if the second corpus is unavailable\n  (then H2 is reported as PARTIAL: within-corpus transfer only, and the second-corpus arm as NOT RUN).",
+  "input_paths": {
+    "corrected_results_full": "04_experiments/results/c1_corrected/results_full.json",
+    "corrected_transfer": "04_experiments/results/c1_corrected/transfer.json",
+    "frozen_results_full": "04_experiments/results/c1/results_full.json",
+    "frozen_transfer": "04_experiments/results/c1/transfer.json"
+  },
+  "inputs": {
+    "corrected_results_full": "936ce0b89e2231092b9fd71243db9456c267208376ea580c888ee4d0dfcc6ff6",
+    "corrected_transfer": "d48645abc99316222fc213692301282ae4800a22e3e04cac47f5f3586c623db9",
+    "frozen_results_full": "e4cf65cb0b2bae52e4ee4b379e0c4e66450ed21474d71b57e49e8d4218c36b35",
+    "frozen_transfer": "690278824756a208309e10a65f7cf231fb26b67cf5ab0a104d1069c985d3d614"
+  },
+  "label": "exploratory/post-hoc",
+  "note": "Post-hoc application of the preregistered H2 criterion to the frozen and corrected second-corpus drops stored in transfer.json (D1.2 exploratory operating point, D4 corrected sensitivity analysis). The corrected confirmatory-band numbers are exploratory sensitivity only and cannot overturn the frozen confirmatory verdict.",
+  "post_hoc": true,
+  "runs": {
+    "corrected": {
+      "confirmatory": {
+        "criterion": "SUPPORTED if drop >= 10pp; REFUTED if drop within +-5pp; else UNDEFINED",
+        "direction": "no_change",
+        "drop_points": 0.0,
+        "drop_pp": 0.0,
+        "equal_recall_check": {
+          "abs_recall_gap_pp": 0.0,
+          "holds": true,
+          "note": "H2 requires equal abstain recall. equal_recall_check.holds reports whether this operating point meets it; the verdict is a frozen-threshold precision-drop verdict, not a recall-matched one unless holds is true."
+        },
+        "main_auroc_answerable_vs_rung3": 0.9817,
+        "main_recall_at_frozen_thresholds": 1.0,
+        "main_ref_over_refusal_check": 0.915,
+        "main_test_rung3_precision": 1.0,
+        "over_refusal_main": 0.915,
+        "over_refusal_transfer": 0.965,
+        "recall_main_note": "Per PREREGISTRATION.md section 6, abstain recall is the same mean as abstain precision (fraction refused on rung-3 negatives).",
+        "recomputed_drop_pp": 0.0,
+        "results_full_over_refusal": 0.915,
+        "results_full_over_refusal_matches": true,
+        "stored_drop_matches": true,
+        "stored_drop_pp": 0.0,
+        "t_hi": 0.537011889113,
+        "t_lo": 0.52318216643,
+        "transfer_auroc_answerable_vs_rung3": 0.7059,
+        "transfer_ci95": {
+          "hi": 1.0,
+          "lo": 1.0,
+          "method": "percentile",
+          "n": 200,
+          "n_boot": 10000,
+          "seed": 12345
+        },
+        "transfer_coverage": 0.0175,
+        "transfer_recall_at_frozen_thresholds": 1.0,
+        "transfer_rung3_precision": 1.0,
+        "verdict": "REFUTED"
+      },
+      "exploratory": {
+        "criterion": "SUPPORTED if drop >= 10pp; REFUTED if drop within +-5pp; else UNDEFINED",
+        "direction": "gain",
+        "drop_points": -0.02,
+        "drop_pp": -2.0,
+        "equal_recall_check": {
+          "abs_recall_gap_pp": 2.0,
+          "holds": false,
+          "note": "H2 requires equal abstain recall. equal_recall_check.holds reports whether this operating point meets it; the verdict is a frozen-threshold precision-drop verdict, not a recall-matched one unless holds is true."
+        },
+        "main_auroc_answerable_vs_rung3": 0.9817,
+        "main_recall_at_frozen_thresholds": 0.955,
+        "main_ref_over_refusal_check": 0.11,
+        "main_test_rung3_precision": 0.955,
+        "over_refusal_main": 0.11,
+        "over_refusal_transfer": 0.7,
+        "recall_main_note": "Per PREREGISTRATION.md section 6, abstain recall is the same mean as abstain precision (fraction refused on rung-3 negatives).",
+        "recomputed_drop_pp": -2.0,
+        "results_full_over_refusal": 0.11,
+        "results_full_over_refusal_matches": true,
+        "stored_drop_matches": true,
+        "stored_drop_pp": -2.0,
+        "t_hi": 0.636224300244,
+        "t_lo": 0.303228201895,
+        "transfer_auroc_answerable_vs_rung3": 0.7059,
+        "transfer_ci95": {
+          "hi": 0.99,
+          "lo": 0.94,
+          "method": "bca",
+          "n": 200,
+          "n_boot": 10000,
+          "seed": 12345
+        },
+        "transfer_coverage": 0.1625,
+        "transfer_recall_at_frozen_thresholds": 0.975,
+        "transfer_rung3_precision": 0.975,
+        "verdict": "REFUTED"
+      },
+      "label": "corrected D4 sensitivity analysis (exploratory; cannot rescue H2)"
+    },
+    "frozen": {
+      "confirmatory": {
+        "criterion": "SUPPORTED if drop >= 10pp; REFUTED if drop within +-5pp; else UNDEFINED",
+        "direction": "loss",
+        "drop_points": 0.015,
+        "drop_pp": 1.5,
+        "equal_recall_check": {
+          "abs_recall_gap_pp": 1.5,
+          "holds": false,
+          "note": "H2 requires equal abstain recall. equal_recall_check.holds reports whether this operating point meets it; the verdict is a frozen-threshold precision-drop verdict, not a recall-matched one unless holds is true."
+        },
+        "main_auroc_answerable_vs_rung3": 0.9836,
+        "main_recall_at_frozen_thresholds": 1.0,
+        "main_ref_over_refusal_check": 0.755,
+        "main_test_rung3_precision": 1.0,
+        "over_refusal_main": 0.755,
+        "over_refusal_transfer": 0.895,
+        "recall_main_note": "Per PREREGISTRATION.md section 6, abstain recall is the same mean as abstain precision (fraction refused on rung-3 negatives).",
+        "recomputed_drop_pp": 1.5,
+        "results_full_over_refusal": 0.755,
+        "results_full_over_refusal_matches": true,
+        "stored_drop_matches": true,
+        "stored_drop_pp": 1.5,
+        "t_hi": 0.947838803928,
+        "t_lo": 0.90722098925,
+        "transfer_auroc_answerable_vs_rung3": 0.6402,
+        "transfer_ci95": {
+          "hi": 0.995,
+          "lo": 0.95,
+          "method": "bca",
+          "n": 200,
+          "n_boot": 10000,
+          "seed": 12345
+        },
+        "transfer_coverage": 0.06,
+        "transfer_recall_at_frozen_thresholds": 0.985,
+        "transfer_rung3_precision": 0.985,
+        "verdict": "REFUTED"
+      },
+      "exploratory": {
+        "criterion": "SUPPORTED if drop >= 10pp; REFUTED if drop within +-5pp; else UNDEFINED",
+        "direction": "loss",
+        "drop_points": 0.0725,
+        "drop_pp": 7.25,
+        "equal_recall_check": {
+          "abs_recall_gap_pp": 7.25,
+          "holds": false,
+          "note": "H2 requires equal abstain recall. equal_recall_check.holds reports whether this operating point meets it; the verdict is a frozen-threshold precision-drop verdict, not a recall-matched one unless holds is true."
+        },
+        "main_auroc_answerable_vs_rung3": 0.9836,
+        "main_recall_at_frozen_thresholds": 0.9275,
+        "main_ref_over_refusal_check": 0.095,
+        "main_test_rung3_precision": 0.9275,
+        "over_refusal_main": 0.095,
+        "over_refusal_transfer": 0.575,
+        "recall_main_note": "Per PREREGISTRATION.md section 6, abstain recall is the same mean as abstain precision (fraction refused on rung-3 negatives).",
+        "recomputed_drop_pp": 7.25,
+        "results_full_over_refusal": 0.095,
+        "results_full_over_refusal_matches": true,
+        "stored_drop_matches": true,
+        "stored_drop_pp": 7.25,
+        "t_hi": 0.947838803928,
+        "t_lo": 0.297426271744,
+        "transfer_auroc_answerable_vs_rung3": 0.6402,
+        "transfer_ci95": {
+          "hi": 0.895,
+          "lo": 0.795,
+          "method": "bca",
+          "n": 200,
+          "n_boot": 10000,
+          "seed": 12345
+        },
+        "transfer_coverage": 0.285,
+        "transfer_recall_at_frozen_thresholds": 0.855,
+        "transfer_rung3_precision": 0.855,
+        "verdict": "UNDEFINED"
+      },
+      "label": "frozen (pre-registered gate; transfer.json frozen)"
+    }
+  },
+  "sha256_inputs": {
+    "corrected_results_full": "936ce0b89e2231092b9fd71243db9456c267208376ea580c888ee4d0dfcc6ff6",
+    "corrected_transfer": "d48645abc99316222fc213692301282ae4800a22e3e04cac47f5f3586c623db9",
+    "frozen_results_full": "e4cf65cb0b2bae52e4ee4b379e0c4e66450ed21474d71b57e49e8d4218c36b35",
+    "frozen_transfer": "690278824756a208309e10a65f7cf231fb26b67cf5ab0a104d1069c985d3d614"
+  },
+  "stage": "r3_exp_h2_verdict",
+  "table": {
+    "corrected": {
+      "confirmatory_drop_pp": 0.0,
+      "confirmatory_verdict": "REFUTED",
+      "exploratory_drop_pp": -2.0,
+      "exploratory_verdict": "REFUTED"
+    },
+    "frozen": {
+      "confirmatory_drop_pp": 1.5,
+      "confirmatory_verdict": "REFUTED",
+      "exploratory_drop_pp": 7.25,
+      "exploratory_verdict": "UNDEFINED"
+    }
+  }
+}

@@ -1,0 +1,614 @@
+[
+  {
+    "idx": 1,
+    "query": "abstention gate retrieval features two thresholds",
+    "index": "OpenAlex",
+    "date": "2026-11-08",
+    "count": 765,
+    "top": [
+      [
+        "Selection Is Retrieval, Abstention Is Not: On-Device Tool Routing over 70 Korean-English Actions",
+        2026,
+        "https://openalex.org/W7213563825"
+      ],
+      [
+        "DeclineCraft: A RAG Abstention Benchmark for Jointly Measuring Combined Retrieval and Parametric Knowledge",
+        2026,
+        "https://openalex.org/W7223089569"
+      ],
+      [
+        "Claim-Aware Scientific RAG: Evidence-First Retrieval and Abstention for Scientific Fact Responses on SciFact",
+        2023,
+        "https://openalex.org/W7131412174"
+      ],
+      [
+        "Budgeted Multi-Hop Retrieval Agents with Evidence-Chain Reliability and Cost-Aware Abstention",
+        2026,
+        "https://openalex.org/W7172261375"
+      ],
+      [
+        "BALANGAY-RAG: Adaptive Pre-Generation Retrieval and Abstention for Filipino-English Code-Switched Queries",
+        2026,
+        "https://openalex.org/W7214216599"
+      ]
+    ]
+  },
+  {
+    "idx": 2,
+    "query": "retrieval feature abstention both directions per rung",
+    "index": "OpenAlex",
+    "date": "2026-11-08",
+    "count": 20,
+    "top": [
+      [
+        "RETRACTED ARTICLE: A survey of group decision making methods in Healthcare Industry 4.0: bibliometrics, applications, and directions",
+        2022,
+        "https://openalex.org/W4205741662"
+      ],
+      [
+        "Locating Failure in Multi-Page Visually Rich Document Understanding Systems: An Empirical Attribution",
+        2026,
+        "https://openalex.org/W7202181206"
+      ],
+      [
+        "Metadata Reconstruction from Values Alone: Recovering Column Semantics in Undocumented Warehouses",
+        2026,
+        "https://openalex.org/W7202191551"
+      ],
+      [
+        "Noctif3R: Feed-Forward Monocular Real-Time SLAM for Photon-Limited Scenes on Embedded Hardware",
+        2026,
+        "https://openalex.org/W7213910328"
+      ],
+      [
+        "MuninAI: A Self-Hosted Agentic Framework for Independent Research Groups",
+        2026,
+        "https://openalex.org/W7222982477"
+      ]
+    ]
+  },
+  {
+    "idx": 3,
+    "query": "hard negative ladder abstention precision false refusal",
+    "index": "OpenAlex",
+    "date": "2026-11-08",
+    "count": 57,
+    "top": [
+      [
+        "Better Retrievers, Worse Labels: How Incomplete Relevance Judgments Distort Abstention Evaluation in Conversational RAG",
+        2026,
+        "https://openalex.org/W7225120617"
+      ],
+      [
+        "ACT, WAIT, or EXPERIMENT: A Causal Governance Framework for Retail Price Optimization Under Abstentions",
+        2026,
+        "https://openalex.org/W7212230585"
+      ],
+      [
+        "Silence over Error: Risk-Averse Navigation Landmark Extraction via Progressive MLLM Alignment",
+        2026,
+        "https://openalex.org/W7224498120"
+      ],
+      [
+        "Metadata Reconstruction from Values Alone: Recovering Column Semantics in Undocumented Warehouses",
+        2026,
+        "https://openalex.org/W7202191551"
+      ],
+      [
+        "From Facts to Conclusions : Integrating Deductive Reasoning in Retrieval-Augmented LLMs",
+        2025,
+        "https://openalex.org/W4417531132"
+      ]
+    ]
+  },
+  {
+    "idx": 4,
+    "query": "negative hardness ladder retrieval gate",
+    "index": "OpenAlex",
+    "date": "2026-11-08",
+    "count": 66,
+    "top": [
+      [
+        "MUSES: A Benchmark for Prospective Intellectual-Roots Retrieval",
+        2026,
+        "https://openalex.org/W7206151925"
+      ],
+      [
+        "QuPID: Quantum Parameter-Efficient Input-Dependent Retrieval Adaptation for Medical RAG",
+        2026,
+        "https://openalex.org/W7214774432"
+      ],
+      [
+        "Evidence Before Sampling: Interpretable Implicit Negative Candidate Discovery for Recommendation",
+        2026,
+        "https://openalex.org/W7220975350"
+      ],
+      [
+        "Locally Coherent, Globally Incoherent: Bounding Compositional Incoherence in Multi-Component LLM Agents",
+        2026,
+        "https://openalex.org/W7162757601"
+      ],
+      [
+        "Water resources thesaurus: A vocabulary for indexing and retrieving the literature of water resources research and development",
+        1980,
+        "https://openalex.org/W4255149294"
+      ]
+    ]
+  },
+  {
+    "idx": 5,
+    "query": "two threshold abstention band retrieval",
+    "index": "OpenAlex",
+    "date": "2026-11-08",
+    "count": 639,
+    "top": [
+      [
+        "Selection Is Retrieval, Abstention Is Not: On-Device Tool Routing over 70 Korean-English Actions",
+        2026,
+        "https://openalex.org/W7213563825"
+      ],
+      [
+        "Where Abstention Lives: A Pre-Registered Four-Way Comparison of Abstention Interfaces in a Small Language Model with Versioned Memory",
+        2026,
+        "https://openalex.org/W7204496982"
+      ],
+      [
+        "HALT-RAG: A Task-Adaptable Framework for Hallucination Detection with Calibrated NLI Ensembles and Abstention",
+        2025,
+        "https://openalex.org/W4416066396"
+      ],
+      [
+        "SAGE: State-Grounded, Abstention-Aware Evaluation of Task-Oriented Dialogue Agents",
+        2026,
+        "https://openalex.org/W7206175081"
+      ],
+      [
+        "Causal Abstention for Cost-Aware Language-Agent Collaboration",
+        2026,
+        "https://openalex.org/W7224203859"
+      ]
+    ]
+  },
+  {
+    "idx": 6,
+    "query": "abstain precision abstain recall false refusal rung",
+    "index": "OpenAlex",
+    "date": "2026-11-08",
+    "count": 38,
+    "top": [
+      [
+        "Locating Failure in Multi-Page Visually Rich Document Understanding Systems: An Empirical Attribution",
+        2026,
+        "https://openalex.org/W7202181206"
+      ],
+      [
+        "Metadata Reconstruction from Values Alone: Recovering Column Semantics in Undocumented Warehouses",
+        2026,
+        "https://openalex.org/W7202191551"
+      ],
+      [
+        "MuninAI: A Self-Hosted Agentic Framework for Independent Research Groups",
+        2026,
+        "https://openalex.org/W7222982477"
+      ],
+      [
+        "BioFirewall: A genome-writing-native governance layer for design-stage biosecurity screening of agentic AI",
+        2026,
+        "https://openalex.org/W7204104516"
+      ],
+      [
+        "Picture Fuzzy Soft Matrices and Application of Their Distance Measures to Supervised Learning: Picture Fuzzy Soft k-Nearest Neighbor (PFS-kNN)",
+        2023,
+        "https://openalex.org/W4387322407"
+      ]
+    ]
+  },
+  {
+    "idx": 7,
+    "query": "overlap matched negatives abstention gate",
+    "index": "OpenAlex",
+    "date": "2026-11-08",
+    "count": 1526,
+    "top": [
+      [
+        "Abstention and Noise Filtering: Two Missing Primitives of Softmax Attention",
+        2026,
+        "https://openalex.org/W7213907401"
+      ],
+      [
+        "Bandits with Abstention under Expert Advice",
+        2024,
+        "https://openalex.org/W4415795294"
+      ],
+      [
+        "Controlled Acquisition and Abstention in Three-Channel Score Conflicts",
+        2026,
+        "https://openalex.org/W7221066293"
+      ],
+      [
+        "Evidential Rule Learning for Interpretable Classification with Abstention",
+        2026,
+        "https://openalex.org/W7201883441"
+      ],
+      [
+        "When Are Aggregate Agent Traces Diagnosable? Traffic-Governed Interpretation and Calibrated Abstention",
+        2026,
+        "https://openalex.org/W7214246003"
+      ]
+    ]
+  },
+  {
+    "idx": 8,
+    "query": "surface features abstention audit AUROC",
+    "index": "OpenAlex",
+    "date": "2026-11-08",
+    "count": 180,
+    "top": [
+      [
+        "Cost-Aware Abstention for LLM-Based IT Ticket Classification",
+        2026,
+        "https://openalex.org/W7223406000"
+      ],
+      [
+        "Two Axes of LLM Abstention: Answer Correctness and Question Answerability",
+        2026,
+        "https://openalex.org/W7167933819"
+      ],
+      [
+        "Unanimously Wrong: Certified Abstention from How Medical LLM Consensus Forms",
+        2026,
+        "https://openalex.org/W7220973612"
+      ],
+      [
+        "TwistedMerge: Certified Higher-Order Diagnostics and Abstention for Model Merging",
+        2026,
+        "https://openalex.org/W7170397247"
+      ],
+      [
+        "Probe Before you Answer! Answerability Probing for Abstention in Cross-Lingual Context-Based Question Answering",
+        2026,
+        "https://openalex.org/W7224176505"
+      ]
+    ]
+  },
+  {
+    "idx": 9,
+    "query": "retrieval score gate answerability ladder",
+    "index": "OpenAlex",
+    "date": "2026-11-08",
+    "count": 118,
+    "top": [
+      [
+        "Capability-Routed Visual Retrieval and Evidence Threading for Long-Context Document Question Answering",
+        2026,
+        "https://openalex.org/W7213278378"
+      ],
+      [
+        "BM25 Wins at Scale: A Scaling Study of Retrieval-Augmented Generation Paradigms",
+        2026,
+        "https://openalex.org/W7171819157"
+      ],
+      [
+        "Context as Infrastructure: Knowledge Compilation for Retrieval in Agentic Systems with Harnesses",
+        2026,
+        "https://openalex.org/W7225116045"
+      ],
+      [
+        "GEMS-RAG: Graph-grounded Engineering Multimodal Standards Retrieval-Augmented Generation",
+        2026,
+        "https://openalex.org/W7223997389"
+      ],
+      [
+        "EdgeMem: LLM-Free Agent Memory Construction and Retrieval via Evidence-Preserving Multi-Anchor Hypergraph",
+        2026,
+        "https://openalex.org/W7212079526"
+      ]
+    ]
+  },
+  {
+    "idx": 10,
+    "query": "dead zone abstention retrieval",
+    "index": "OpenAlex",
+    "date": "2026-11-08",
+    "count": 83,
+    "top": [
+      [
+        "Abstention as an Action Can Kill Both the Reward Gradient and the KL Anchor: Collapse Law and Repair for Error-Penalized Reinforcement Learning",
+        2026,
+        "https://openalex.org/W7172402395"
+      ],
+      [
+        "A Systematic Literature Review of Retrieval-Augmented Generation: Techniques, Metrics, and Challenges",
+        2025,
+        "https://openalex.org/W7114889968"
+      ],
+      [
+        "Evaluation of Candidates for Sperm Retrieval",
+        2021,
+        "https://openalex.org/W3154547670"
+      ],
+      [
+        "CARRE: Counterfactual Action Retrieval and Reason Evaluation for Explainable Churn Prescription",
+        2026,
+        "https://openalex.org/W7212189965"
+      ],
+      [
+        "CoSense-LLM: Semantics at the Edge with Cost- and Uncertainty-Aware Cloud-Edge Cooperation",
+        2025,
+        "https://openalex.org/W4416439858"
+      ]
+    ]
+  },
+  {
+    "idx": 11,
+    "query": "per rung abstention precision coverage",
+    "index": "OpenAlex",
+    "date": "2026-11-08",
+    "count": 67,
+    "top": [
+      [
+        "Hallucinate Less by Thinking More: Aspect-Based Causal Abstention for Large Language Models",
+        2025,
+        "https://openalex.org/W4416595860"
+      ],
+      [
+        "When Benign Is Unverified: Label-Signal Mismatch and Abstention-First Triage in Graph-Based Memory Forensics",
+        2026,
+        "https://openalex.org/W7225201460"
+      ],
+      [
+        "Availability before precision: how the quality of inbound information governs the aircraft turnaround departure-delay decision",
+        2026,
+        "https://openalex.org/W7225202930"
+      ],
+      [
+        "Metadata Reconstruction from Values Alone: Recovering Column Semantics in Undocumented Warehouses",
+        2026,
+        "https://openalex.org/W7202191551"
+      ],
+      [
+        "Locating Failure in Multi-Page Visually Rich Document Understanding Systems: An Empirical Attribution",
+        2026,
+        "https://openalex.org/W7202181206"
+      ]
+    ]
+  },
+  {
+    "idx": 12,
+    "query": "retrieval-only features abstention calibration",
+    "index": "OpenAlex",
+    "date": "2026-11-08",
+    "count": 1361,
+    "top": [
+      [
+        "Unanimously Wrong: Certified Abstention from How Medical LLM Consensus Forms",
+        2026,
+        "https://openalex.org/W7220973612"
+      ],
+      [
+        "Geometry-Calibrated Conformal Abstention for Language Models",
+        2026,
+        "https://openalex.org/W7159578267"
+      ],
+      [
+        "Beyond Cultural Trivia: Calibrated Exemplar Retrieval, Mode-Aware Routing, and Selective Abstention for Cross-Cultural LLM Services",
+        2026,
+        "https://openalex.org/W7172134512"
+      ],
+      [
+        "Budgeted Multi-Hop Retrieval Agents with Evidence-Chain Reliability and Cost-Aware Abstention",
+        2026,
+        "https://openalex.org/W7172261375"
+      ],
+      [
+        "Claim-Aware Scientific RAG: Evidence-First Retrieval and Abstention for Scientific Fact Responses on SciFact",
+        2023,
+        "https://openalex.org/W7131412174"
+      ]
+    ]
+  },
+  {
+    "idx": 13,
+    "query": "hardness ladder negatives abstention",
+    "index": "OpenAlex",
+    "date": "2026-11-08",
+    "count": 103,
+    "top": [
+      [
+        "Solver-Hard Is Not Model-Hard: A Hardness-Controlled Diagnostic for LLM Constraint Reasoning",
+        2026,
+        "https://openalex.org/W7169879145"
+      ],
+      [
+        "CausalDS: Benchmarking Causal Reasoning in Data-Science Agents",
+        2026,
+        "https://openalex.org/W7167894926"
+      ],
+      [
+        "Scientific Policy Committee - Three-Hundred-and-Fortieth Meeting",
+        2024,
+        "https://openalex.org/W7163726326"
+      ],
+      [
+        "Image classification with deep learning in the presence of noisy labels: A survey",
+        2021,
+        "https://openalex.org/W2996060033"
+      ],
+      [
+        "Post-Quantum Digital Security: Cryptographic Mathematics, Intelligent Networks, and the Future of Trust",
+        2026,
+        "https://openalex.org/W7130848173"
+      ]
+    ]
+  },
+  {
+    "idx": 14,
+    "query": "answerability gate retrieval features false refusal",
+    "index": "OpenAlex",
+    "date": "2026-11-08",
+    "count": 127,
+    "top": [
+      [
+        "Search Engines Never Say No: How Frozen Agents React When the Retrieval Tool Refuses",
+        2026,
+        "https://openalex.org/W7220704958"
+      ],
+      [
+        "An LLM-Based Multi-Path Question Answering System with XGBoost Routing and Threshold-Based Refusal",
+        2026,
+        "https://openalex.org/W7156988325"
+      ],
+      [
+        "Semantic Flip: Synthetic OOD Generation for Robust Refusal in Embodied Question Answering and Spatial Localization",
+        2026,
+        "https://openalex.org/W7164892487"
+      ],
+      [
+        "Graded Entity-Familiarity Readouts in Language Models: Polish Adaptation, Cross-Language Robustness, and Refusal Steering",
+        2026,
+        "https://openalex.org/W7168849706"
+      ],
+      [
+        "DeclineCraft: A RAG Abstention Benchmark for Jointly Measuring Combined Retrieval and Parametric Knowledge",
+        2026,
+        "https://openalex.org/W7223089569"
+      ]
+    ]
+  },
+  {
+    "idx": 15,
+    "query": "negative construction abstention gate both directions",
+    "index": "OpenAlex",
+    "date": "2026-11-08",
+    "count": 1100,
+    "top": [
+      [
+        "Where Abstention Lives: A Pre-Registered Four-Way Comparison of Abstention Interfaces in a Small Language Model with Versioned Memory",
+        2026,
+        "https://openalex.org/W7204496982"
+      ],
+      [
+        "Abstention and Noise Filtering: Two Missing Primitives of Softmax Attention",
+        2026,
+        "https://openalex.org/W7213907401"
+      ],
+      [
+        "When Are Aggregate Agent Traces Diagnosable? Traffic-Governed Interpretation and Calibrated Abstention",
+        2026,
+        "https://openalex.org/W7214246003"
+      ],
+      [
+        "Two Axes of LLM Abstention: Answer Correctness and Question Answerability",
+        2026,
+        "https://openalex.org/W7167933819"
+      ],
+      [
+        "Probe Before you Answer! Answerability Probing for Abstention in Cross-Lingual Context-Based Question Answering",
+        2026,
+        "https://openalex.org/W7224176505"
+      ]
+    ]
+  },
+  {
+    "idx": 16,
+    "query": "separability audit retrieval features",
+    "index": "OpenAlex",
+    "date": "2026-11-08",
+    "count": 2830,
+    "top": [
+      [
+        "Separability Is Not Alignability: Representations for Spectrum-to-Molecule Retrieval",
+        2026,
+        "https://openalex.org/W7224826875"
+      ],
+      [
+        "Retriever or reasoner? Decomposing retrieval-augmented generation performance in external audit supervision",
+        2026,
+        "https://openalex.org/W7166087419"
+      ],
+      [
+        "cure2fewshot: converting a public pill image collection into an audited few shot retrieval benchmark",
+        2026,
+        "https://openalex.org/W7220851221"
+      ],
+      [
+        "Reliable Evaluation of Automated Resume Screening Through Leakage Control, Information Retrieval, and Bias Auditing",
+        2026,
+        "https://openalex.org/W7223890926"
+      ],
+      [
+        "Persona Conditioning of Brand Recommendations in Retrieval-Augmented Commercial Chat: A Prominence-Stratified Cross-Provider Audit",
+        2026,
+        "https://openalex.org/W7162771241"
+      ]
+    ]
+  },
+  {
+    "idx": 17,
+    "query": "overlap matched negatives retrieval abstention",
+    "index": "OpenAlex",
+    "date": "2026-11-08",
+    "count": 1384,
+    "top": [
+      [
+        "Claim-Aware Scientific RAG: Evidence-First Retrieval and Abstention for Scientific Fact Responses on SciFact",
+        2023,
+        "https://openalex.org/W7131412174"
+      ],
+      [
+        "Budgeted Multi-Hop Retrieval Agents with Evidence-Chain Reliability and Cost-Aware Abstention",
+        2026,
+        "https://openalex.org/W7172261375"
+      ],
+      [
+        "Evidence-Aware Abstention in Low-Resource Scientific RAG: A Persian Retrieval-Stage Study",
+        2026,
+        "https://openalex.org/W7214777989"
+      ],
+      [
+        "BALANGAY-RAG: Adaptive Pre-Generation Retrieval and Abstention for Filipino-English Code-Switched Queries",
+        2026,
+        "https://openalex.org/W7214216599"
+      ],
+      [
+        "Reliable Text-to-SQL with Adaptive Abstention",
+        2025,
+        "https://openalex.org/W4407356147"
+      ]
+    ]
+  },
+  {
+    "idx": 18,
+    "query": "two thresholds retrieval features abstention gate",
+    "index": "OpenAlex",
+    "date": "2026-11-08",
+    "count": 765,
+    "top": [
+      [
+        "Selection Is Retrieval, Abstention Is Not: On-Device Tool Routing over 70 Korean-English Actions",
+        2026,
+        "https://openalex.org/W7213563825"
+      ],
+      [
+        "DeclineCraft: A RAG Abstention Benchmark for Jointly Measuring Combined Retrieval and Parametric Knowledge",
+        2026,
+        "https://openalex.org/W7223089569"
+      ],
+      [
+        "Claim-Aware Scientific RAG: Evidence-First Retrieval and Abstention for Scientific Fact Responses on SciFact",
+        2023,
+        "https://openalex.org/W7131412174"
+      ],
+      [
+        "Budgeted Multi-Hop Retrieval Agents with Evidence-Chain Reliability and Cost-Aware Abstention",
+        2026,
+        "https://openalex.org/W7172261375"
+      ],
+      [
+        "BALANGAY-RAG: Adaptive Pre-Generation Retrieval and Abstention for Filipino-English Code-Switched Queries",
+        2026,
+        "https://openalex.org/W7214216599"
+      ]
+    ]
+  }
+]

@@ -1,0 +1,1 @@
+Retrieval-Augmented Generation (RAG) ranks passages by their relevance to a question and passes the top ones to the generator whether or not they contain the answer. Relevance, however, does not imply sufficiency: a passage c... | Find, read and cite all the research you need on Tech Science Press
