@@ -1,0 +1,101 @@
+item_id,label,notes
+dev:5710968aa58dae1900cd6a89:r1,0,The passage does not mention any characteristic that identifies French ancestry in South Africa.
+dev:5725ca4389a1e219009abeb5:r1,0,The passage does not mention any regions where the Treaty of European Union excludes from jurisdiction.
+dev:57265200708984140094c23a:r1,1,"The passage states that Warsaw has seen many improvements due to solid economic growth, an increase in foreign investment, and funding from the European Union. This indicates that the city has alienated those who were previously disadvantaged due to the Eastern Bloc economy and the subsequent improvements."
+dev:5726b929f1498d1400e8e8e9:r1,0,"The passage does not contain an answer to the question. The question asks about which country Rewe-Zentrale AG wished to import from, but the passage does not mention any country or country-specific information."
+test:57297547af94a219006aa45b:r1,0,"The passage does not contain an answer to the question. The question asks about what number early Greeks did not regard as a true number, but the passage discusses Isiah Bowman and his role in the American Geographical Society's inquiry, which is unrelated to the topic of early Greeks and numbers."
+test:5729506d6aef051400154caf:r1,1,"The passage directly states that Shi Tianze commanded the 3 Tumens in the Mongol army, which includes Liu Heima and Shi Tianxiang. Therefore, the passage contains an answer to the question."
+dev:571cd703dd7acb1400e4c184:r1,0,The passage does not contain an answer to the question 'What is the mineral wustite?'.
+dev:570967c4ed30961900e840be:r1,0,The passage does not contain an answer to the question.
+test:5728128cff5b5019007d9c78:r1,0,"The passage does not mention any battle or Jacksonville. The context discusses a case of dynamic equilibrium in constant velocity motion, which is unrelated to the question about Union forces returning to and occupying Jacksonville."
+dev:5729e4291d04691400779651:r1,1,The passage directly states that Jake Rosenfield is a computational problem.
+test:572818f54b864d190016446d:r1,0,"The passage does not contain an answer to the question. The question asks why show public civil disobedience instead of what is a better idea, but the passage discusses steam turbines and their components, which are unrelated to the topic of civil disobedience."
+test:57309bfb8ab72b1400f9c5e8:r1,1,"The passage does not contain an answer to the question, but it does not contradict or omit the topic. The question asks about the idealized value of imperialism, which is not mentioned in the passage."
+test:572ff56304bcaa1900d76f31:r1,0,The passage does not mention the Nederrijn or its name change.
+test:57300761947a6a140053cf9d:r1,0,The passage does not contain an answer to the question.
+test:572758e0f1498d1400e8f6b1:r1,0,"The passage does not contain an answer to the question. The question asks about private non-religious schools receiving public funds, but the passage discusses Saudi Arabia's efforts to compensate for its loss of prestige and increase aid to Islamic groups, which is unrelated to the question."
+dev:571c7abfdd7acb1400e4c0bd:r1,0,The passage does not contain an answer to the question.
+dev:57268882f1498d1400e8e309:r1,0,"The passage does not mention any theory about Earth's features remaining unchanged after forming in a single catastrophic event. The passage discusses the vBNS network and its engineering features, but does not provide any information related to the theory in question."
+test:5725fb8138643c19005acf40:r1,0,The passage does not contain an answer to the question.
+test:573750f61c4567190057446b:r1,0,"The passage does not contain an answer to the question. The question asks about the units of mass and force in relation to microscales, but the passage discusses historical events and political ideologies in Pakistan, which are unrelated to the units of measurement."
+dev:5726a46cdd62a815002e8bd0:r1,0,"The passage does not contain an answer to the question. The question asks about the number of member states that adopted the Social Charter in 1989, but the passage discusses the Social Charter in general and does not provide any specific information about the adoption of the Social Charter in 1989."
+dev:572fd1c4947a6a140053cd06:r1,0,The passage does not contain an answer to the question.
+test:572a005f1d046914007796ba:r1,1,"The passage states that the area includes many homes from different architectural styles, including California Bungalow, American Craftsman, Spanish Colonial Revival, Mediterranean Revival, Mission Revival, and Storybook houses. This information directly answers the question about the rate of deforestation."
+test:57274f49f1498d1400e8f61e:r1,0,"The passage does not mention any school or its affiliation with a denomination. The context discusses Aristotle's cosmology and motion, but does not provide any information about the Diocesan School for Girls in Auckland."
+dev:5726926a5951b619008f770a:r1,1,"The passage states that the censuring of the Santer Commission resulted in the main case, which is the NP-hard problems."
+dev:572fc043a23a5019007fc95d:r1,0,The passage does not mention any specific day of the week for the Time for Reflection event.
+test:57265746dd62a815002e8219:r2,1,The passage states that Pleurobrachia has a pair of tentacles on each side of its body.
+test:572f64ccb2c2fd14005680b7:r2,1,"The passage states that Harvard has been ranked highly in various university rankings, including the QS and Times World University Rankings, and consistently at the top of the U.S. News & World Report's undergraduate program rankings. This directly answers the question about the century when there was a program to straighten the Rhine."
+test:572750df5951b619008f8830:r2,1,"The passage states that authors should give priority to peer-reviewed sources, which is relevant to the stipend students enrolled in priority courses receive."
+test:572f609ca23a5019007fc5b3:r2,1,"The passage directly states that the 'Rhine knee' is located in the centre of Basel, which is the correct answer to the question."
+dev:572fb059947a6a140053cb84:r2,0,The passage does not mention any hall used as Parliament's principle committee room.
+dev:5733a5f54776f41900660f44:r2,1,"The passage states that Warsaw was the most diverse city in Poland, with a significant Jewish minority. This directly answers the question of who was one of the most famous people born in Warsaw."
+test:5737821cc3c5551400e51f1c:r2,1,"The passage directly states that Einstein failed to make a type of physics model, specifically a safety valve for steam engines."
+dev:572699db5951b619008f779c:r2,0,The passage does not mention any cases where the EU can override German law.
+dev:570607f575f01819005e78b6:r2,0,"The passage does not contain an answer to the question. The question asks about cities in southern California with over 200,000 residents, but the passage discusses the history of the mayor of Warsaw, Poland, which is unrelated to the question."
+dev:5711163bb654c5140001fb13:r2,1,The passage directly states that New Rochelle is a present-day county.
+test:57264991f1498d1400e8db30:r2,0,"The passage does not contain an answer to the question 'How did the plague infiltrate Alexandria?'. The passage discusses the history of the steam engine and mentions various inventors and inventions, but does not provide any information about the plague or its infiltration into Alexandria."
+dev:572fd6aa04bcaa1900d76da0:r2,0,"The passage does not contain an answer to the question. The question asks about the month of general elections every four years, but the passage discusses the events of the Second World War and the Warsaw Ghetto Uprising, which are unrelated to the month of general elections."
+test:573749741c4567190057445f:r2,0,The passage does not contain an answer to the question.
+test:57300200b2c2fd1400568729:r2,0,The passage does not contain an answer to the question.
+dev:573330444776f41900660758:r2,1,"The passage states that Andrew Lortie, a leading Huguenot theologian and writer who led the exiled community in London, became known for articulating their criticism of the Pope and the doctrine of transubstantiation during Mass. This directly answers the question about the pope who was a native of Poland."
+dev:572657d9dd62a815002e8231:r2,0,The passage does not contain an answer to the question.
+test:572885023acd2414000dfa84:r2,1,"The passage directly states that the Koreans were ranked last in the class system, which is the part of China that the question is asking about."
+test:572821274b864d1900164512:r2,1,The passage directly states that the Bank of America Tower is 550 feet tall.
+dev:57096b66200fba1400367fa8:r2,0,"The passage does not mention Setanta Sports or its subscription service. The question is about Setanta Sports' launch as a subscription service, which is not addressed in the passage."
+dev:571cb27fdd7acb1400e4c132:r2,0,"The passage does not mention any group of scientists specifically seeking to measure the amounts of oxygen in marine animals. The passage discusses legal requirements and zoning, but does not provide any information about scientists or their work related to marine animals."
+test:5730040f947a6a140053cf4f:r2,1,"The passage states that HT is banned in both Egypt and Jordan, which directly answers the question of when the Brotherhood was first banned in Egypt."
+dev:5726e5c95951b619008f81ce:r2,1,"The passage states that cost engineers and estimators apply expertise to relate the work and materials involved to a proper valuation, which is a factor a pharmacist must monitor."
+dev:572fac17947a6a140053cb55:r2,1,"The passage states that the European Parliament and the Council of the European Union are the main sources of secondary law, which includes regulations and directives. These regulations and directives are based on the Treaties, and the Treaties establish the European Union's powers as a devolved legislature. Therefore, the passage directly answers the question."
+test:57115ff82419e314009555c3:r2,0,"The passage does not contain an answer to the question 'What is another term for rotors?'. The passage discusses the difficulty of sealing rotors in a pistonless rotary engine and mentions that rotors are not another term for rotors, but rather a specific design feature. The passage does not provide any alternative terms for rotors."
+dev:5733fe73d058e614000b673e:r2,0,"The passage does not contain an answer to the question. The question asks about the purpose of Loudoun's troops at Fort Henry, but the passage does not mention any specific purpose or location."
+dev:57092322efce8f15003a7db0:r3,0,The passage does not mention any company formed by the merger of Sky Television and British Satellite Broadcasting.
+test:572881704b864d1900164a54:r3,0,"The passage does not contain an answer to the question 'When did Wei Yilin die?'. The question is about Wei Yilin, but the passage does not mention any information about his death or any person named Wei Yilin."
+dev:571a4ead10f8ca1400304fde:r3,0,"The passage does not mention any Greek writer or Pneumatica. The context discusses Priestley's experiments with mercury oxide and air, but does not provide any information about a Greek writer or Pneumatica."
+dev:57332e48d058e614000b5763:r3,0,"The passage does not contain an answer to the question. The question asks about the exiled Polish government in London ordering the underground Home Army to seize control of Warsaw, but the passage discusses the Jewish resistance in the Warsaw Ghetto and the events leading up to the Warsaw Ghetto Uprising. There is no mention of the exiled Polish government or the Underground Home Army."
+dev:5726eb4b5951b619008f826d:r3,1,"The passage states that consultant pharmacists are increasingly branching into other institutions and non-institutional settings, which includes internet pharmacies. This directly answers the question."
+test:5725c69738643c19005accbc:r3,1,The passage explicitly states that ctenophores can be found in large numbers in the planktonic stage of their life cycle.
+test:573749741c4567190057445d:r3,1,"The passage directly states that inertia applies equally well to constant velocity motion as it does to rest, which explains why objects continue in constant motion."
+dev:5727e9523acd2414000def99:r3,1,"The passage directly states that the top 400 richest Americans have more wealth than half of all Americans combined, which is an answer to the question of how income is determined in a market with variously skilled workers."
+test:5730b8ca8ab72b1400f9c706:r3,1,The passage states that Woodrow Wilson himself had the idea for the inquiry.
+test:57265d86f1498d1400e8dd54:r3,1,The passage states that the beroids have tentilla instead of feeding appendages.
+dev:56e1efa0e3433e140042321a:r3,1,The passage explicitly states that complement problems of NP problems exist in the complexity class NL.
+test:572a0bebaf94a219006aa76f:r3,1,"The passage directly states that parts of the Amazon basin experienced the worst drought in one hundred years in 2005, which may have been more extreme than in 2006."
+test:5728dddc2ca10214002da9d3:r3,1,The passage directly states that civil disobedience does not necessarily have to be non-violent.
+test:5727478cf1498d1400e8f59a:r3,1,The passage directly states that 'year 12 of education' is another term for 'year 12 of education'.
+dev:572657d9dd62a815002e8230:r3,0,"The passage does not mention any igneous rocks or the process of crystallization. The context discusses plate tectonics and mantle convection, but does not provide information about igneous rocks."
+test:57308cf88ab72b1400f9c576:r3,1,"The passage directly states that the concept of Terra nullius was used by the British Empire, which implies that people in the tropics were considered uncivilized."
+dev:5706074552bb8914006897d7:r3,1,"The passage states that southern California has a population of 22,680,010, which is the population of the El Centro metropolitan area and San Diego-Carslbad-San Marcos metropolitan area combined."
+dev:571cdcb85efbb31900334e10:r3,1,The passage directly states that compounds containing oxygen are considered in commerce.
+test:572754dd708984140094dc3b:r3,0,"The passage does not contain an answer to the question. The question asks about the percentage of Swedish students attending private schools in 2008, but the passage discusses apartheid-era schools in South Africa and does not mention any Swedish schools or the year 2008."
+dev:571a4b0f10f8ca1400304fd8:r3,1,"The passage states that oxygen is used in cellular respiration and released by photosynthesis, which uses the energy of sunlight to produce oxygen from water. It also mentions that most of the mass of living organisms is oxygen. Therefore, the passage directly answers the question."
+test:573007fab2c2fd140056876e:r3,1,"The passage directly states that the upper Rhine and upper Danube are crossed by the Romans' legions, which are stationed along the Rhine. This directly answers the question."
+test:571142b3a58dae1900cd6d5e:r3,1,"The passage states that steam turbines are the dominant source of power until the early 20th century, and it mentions that steam engines were the dominant source of power before that. Therefore, the passage contains an answer to the question."
+test:572ffd75b2c2fd14005686e7:r3,1,"The passage explicitly states that the Rhine flowed through the English Channel during the Anglian glaciation, which is the relevant time period for the question."
+test:5727dc473acd2414000dee44:r3,1,"The passage states that Harvard fields top teams in several sports, including rowing, which is a primary recreational sport. The mention of rowing aligns with the question about the name of Harvard's primary recreational sports facility."
+dev:57111713a58dae1900cd6c01:r3,1,"The passage directly states that the Huguenot settlers were assimilated into North American society at large through their settlement in New Rochelle, New York."
+test:57293b843f37b31900478133:r4,1,The passage explicitly states that the IPCC is a part of the United Nations.
+dev:573368e54776f41900660a56:r4,1,The passage explicitly states that the forest by Warsaw's southern border is Kabaty.
+test:572a064a3f37b3190047865e:r4,1,The passage explicitly states that 'community-based conservation' is gaining attention in the Amazon.
+dev:571cb27fdd7acb1400e4c134:r4,1,The passage directly states that oxygen-18 is 12% heavier than oxygen-16.
+dev:57267ebfdd62a815002e872f:r4,1,"The passage states that 'all angles remain the same' in the context of the critically tapered orogenic wedge, which is the definition of the term 'critically tapered'."
+test:572f5703a23a5019007fc577:r4,1,The passage explicitly states that the Rhine separates Switzerland from Austria.
+dev:572fd8efb2c2fd14005684fc:r4,1,"The passage directly states the current number of electors in a Scottish Parliament constituency as 55,000."
+dev:57096e1ced30961900e84103:r4,1,The passage directly states that ITV was the current rights holders for the Premier League.
+dev:5726fa525951b619008f83fa:r4,1,The passage explicitly states that Germany and Austria use a red stylized A to signify pharmacy.
+test:5727afa82ca10214002d93c6:r4,1,The passage explicitly states that the charter for Harvard Corporation was granted in 1875.
+test:5711651050c2381900b54acf:r4,1,The passage explicitly states that a chain or screw isothermal mechanism and its drive engine or motor may be included to move the fuel from a supply bin (bunker) to the firebox. This directly answers the question.
+dev:570963a5200fba1400367f34:r4,1,The passage states that Sky UK Limited is a British company that provides television and broadband internet services and fixed line telephone services to consumers and businesses in the United Kingdom. This directly answers the question about the kind of company Sky UK Limited is.
+dev:573383d0d058e614000b5c37:r4,1,The passage explicitly states that the factory was purchased by the South Korean car manufacturer Saxon Garden in 1995.
+dev:5729e02f1d0469140077963b:r4,1,The passage explicitly states that a steeper tax rate can result in a more equal distribution of income.
+test:5728d6f02ca10214002da910:r4,0,The passage does not contain an answer to the question. The gold answer provided in the reference dataset is not present in the passage.
+dev:572751b4708984140094dc1f:r4,1,The passage directly states that poorly drafted contracts lead to confusion and collapse.
+test:57299326af94a219006aa519:r4,1,"The passage states that prime numbers are used for public key cryptography algorithms, which is an answer to the question."
+test:57300a25a23a5019007fcc98:r4,1,"The passage states that the Confederation of the Rhine was established by Napoleon in 1806 and lasted until 1814, serving as a significant source of resources and military manpower for the First French Empire. This directly answers the question about a long-term goal of French foreign policy along the Rhine."
+test:57309564069b5314008321a5:r4,1,The passage directly states that John Gallagher was born in 1884.
+dev:572fcd86947a6a140053ccde:r4,1,"The passage states that bills pass through Parliament in a number of stages, which directly answers the question."
+test:57286f373acd2414000df9dd:r4,1,"The passage directly states that Buyantu Khan was mentored by the Song dynasty, which is the correct answer."
+test:5725e45689a1e219009ac04c:r4,1,The passage directly states that the Tower District is known as the center for the heavy metal community.
+test:5730126ba23a5019007fcd0b:r4,1,"The passage directly states that the Islamic extremists attacked 'political' leaders of Muslim states, which aligns with the gold answer 'apostate'."
+test:5727478cf1498d1400e8f59a:r4,1,"The passage directly states that 'year 12 is known as traditional private' and provides additional context about the secondary education level, which includes year 13 (upper sixth). The gold answer 'lower sixth' is a partial answer that is also mentioned in the passage."
+test:572881d34b864d1900164a5c:r4,1,"The passage explicitly states that the Office of Western Medicine was founded in 1251, which is the year Kublai Khan ruled. The question asks for the founding year, and the passage provides the exact year."

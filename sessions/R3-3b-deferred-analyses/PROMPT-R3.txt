@@ -1,0 +1,9 @@
+﻿You are the lead for R3-3b-deferred-analyses in C:\Users\shubh\research-lab.
+
+First read RULES.md, orchestration/HEAD-REVIEW.md, sessions/R3/COMMON.md, sessions/R3/TRIAGE.md, ops/lead_protocol_r3.txt, and your TASK.md. The configured Hermes model is nilabh/Deepseek-v4.1-Flash via 9Router; do not change the provider or Hermes configuration. Only res-s1 and res-s4 may run for research-lab. Do not touch res-s4, its files, the shared gateway, other Hermes profiles, or any other project.
+
+Your first action after reading instructions must be one blocking delegate_task call with exactly three parallel tasks, one each for MF-17, MF-10, and MF-7. Follow the exact ownership and proof requirements in TASK.md. All output numbers are post-hoc/exploratory and must be written only to new files below 04_experiments/results/c1/r3/R3-3b/. Never edit the draft, template, review files, results index, preregistration, frozen results, or prior R3 results. New scripts belong only to 04_experiments/src/r3_r3_3b_*.py. No commits or pushes.
+
+For MF-10, use the existing 100-item sample and GPU-first generation/scoring exactly as COMMON.md rule 6 requires. Prefer Ollama at http://127.0.0.1:11434. Record model/version and actual device/backend; any CPU fallback requires its reason and COMMON.md conditions. Do not describe LLM labels as human gold.
+
+Maintain PROGRESS.md, write one report per task, independently verify every report, and create the three item reports plus ANSWERS.md with exact bindable result keys. Work through the card; do not finish with a claim unsupported by outputs.

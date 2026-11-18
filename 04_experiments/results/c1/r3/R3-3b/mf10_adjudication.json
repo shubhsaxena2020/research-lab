@@ -1,0 +1,282 @@
+{
+  "mf10": {
+    "status": "completed",
+    "title": "MF-10 answerability adjudication (R3-3b, post-hoc/exploratory)",
+    "post_hoc_exploratory": true,
+    "exploratory_status": "post-hoc / exploratory repeated LLM judgement; NOT human gold",
+    "n_items": 100,
+    "sample_path": "04_experiments/results/c1/r3/exp/adjudication/sample.csv",
+    "sample_sha256": "f48eb24238f67e55d210d3382dffa3beeeaf45b371cc8ee2d2097e2e50e385ae",
+    "sample_seed": 20261103,
+    "rubric_source": "04_experiments/results/c1/r3/exp/adjudication/rubric.md",
+    "rubric_source_sha256": "15419fe5d47d43b42641a6c66ab6b0735f4a2e3dde41e9f96db644c38b7423aa",
+    "rubric_copy": "04_experiments/results/c1/r3/R3-3b/mf10_rubric.md",
+    "rubric_copy_sha256": "15419fe5d47d43b42641a6c66ab6b0735f4a2e3dde41e9f96db644c38b7423aa",
+    "ollama": {
+      "base_url": "http://127.0.0.1:11434",
+      "version": "0.40.16",
+      "backend": "llamacpp",
+      "device": "Intel Arc 130T iGPU Vulkan (OLLAMA_IGPU_ENABLE=1)",
+      "cpu_fallback_reason": null,
+      "models": {
+        "A": {
+          "name": "qwen2.5:1.5b-instruct",
+          "digest": "65ec06548149b04c096a120e4a6da9d4017ea809c91734ea5631e89f96ddc57b",
+          "size_vram": 1367049502,
+          "runner": "llamacpp",
+          "role": "labeller A"
+        },
+        "B": {
+          "name": "qwen3:1.7b",
+          "digest": "8f68893c685c3ddff2aa3fffce2aa60a30bb2da65ca488b61fff134a4d1730e7",
+          "size_vram": 2243680009,
+          "runner": "llamacpp",
+          "role": "labeller B (think=false)"
+        },
+        "resolver": {
+          "name": "qwen3:1.7b",
+          "digest": "8f68893c685c3ddff2aa3fffce2aa60a30bb2da65ca488b61fff134a4d1730e7",
+          "size_vram": 2243680009,
+          "runner": "llamacpp",
+          "role": "resolver (strict, think=false)"
+        }
+      }
+    },
+    "labellers": {
+      "A": {
+        "model": "qwen2.5:1.5b-instruct",
+        "digest": "65ec06548149b04c096a120e4a6da9d4017ea809c91734ea5631e89f96ddc57b",
+        "counts": {
+          "1": 62,
+          "0": 38,
+          "ambiguous": 0
+        },
+        "n_answerable": 62,
+        "n_not_answerable": 38,
+        "n_ambiguous": 0
+      },
+      "B": {
+        "model": "qwen3:1.7b",
+        "digest": "8f68893c685c3ddff2aa3fffce2aa60a30bb2da65ca488b61fff134a4d1730e7",
+        "counts": {
+          "1": 21,
+          "0": 79,
+          "ambiguous": 0
+        },
+        "n_answerable": 21,
+        "n_not_answerable": 79,
+        "n_ambiguous": 0
+      },
+      "resolver": {
+        "model": "qwen3:1.7b",
+        "digest": "8f68893c685c3ddff2aa3fffce2aa60a30bb2da65ca488b61fff134a4d1730e7",
+        "counts": {
+          "1": 35,
+          "0": 6,
+          "ambiguous": 0
+        },
+        "scope": "disagreements only"
+      }
+    },
+    "agreement": {
+      "n_common": 100,
+      "n_agreed": 59,
+      "n_disagreed": 41,
+      "po": 0.59,
+      "kappa": 0.2801966292134831,
+      "contingency": {
+        "both_0": 38,
+        "both_1": 21,
+        "A1_B0": 41,
+        "A0_B1": 0,
+        "ambiguous_any": 0
+      }
+    },
+    "per_rung": {
+      "1": {
+        "n": 25,
+        "n_disagreed": 6,
+        "kappa": 0.0,
+        "A_answerable": 6,
+        "B_answerable": 0,
+        "resolved_answerable": 3
+      },
+      "2": {
+        "n": 25,
+        "n_disagreed": 9,
+        "kappa": 0.29906542056074775,
+        "A_answerable": 13,
+        "B_answerable": 4,
+        "resolved_answerable": 13
+      },
+      "3": {
+        "n": 25,
+        "n_disagreed": 18,
+        "kappa": 0.025974025974026038,
+        "A_answerable": 19,
+        "B_answerable": 1,
+        "resolved_answerable": 18
+      },
+      "4": {
+        "n": 25,
+        "n_disagreed": 8,
+        "kappa": 0.13793103448275895,
+        "A_answerable": 24,
+        "B_answerable": 16,
+        "resolved_answerable": 22
+      }
+    },
+    "per_rung_resolved": {
+      "1": {
+        "n": 25,
+        "resolved_answerable": 3,
+        "resolved_share": 0.12
+      },
+      "2": {
+        "n": 25,
+        "resolved_answerable": 13,
+        "resolved_share": 0.52
+      },
+      "3": {
+        "n": 25,
+        "resolved_answerable": 18,
+        "resolved_share": 0.72
+      },
+      "4": {
+        "n": 25,
+        "resolved_answerable": 22,
+        "resolved_share": 0.88
+      }
+    },
+    "resolved": {
+      "overall_answerable_n": 56,
+      "overall_answerable_share": 0.56,
+      "by_rung": {
+        "1": {
+          "n": 25,
+          "resolved_answerable": 3,
+          "resolved_share": 0.12
+        },
+        "2": {
+          "n": 25,
+          "resolved_answerable": 13,
+          "resolved_share": 0.52
+        },
+        "3": {
+          "n": 25,
+          "resolved_answerable": 18,
+          "resolved_share": 0.72
+        },
+        "4": {
+          "n": 25,
+          "resolved_answerable": 22,
+          "resolved_share": 0.88
+        }
+      }
+    },
+    "disagreement_resolution": {
+      "n": 41,
+      "resolved_1": 35,
+      "resolved_0": 6,
+      "resolved_ambiguous": 0,
+      "resolver_equals_A": 35,
+      "resolver_equals_B": 6,
+      "by_rung": {
+        "1": {
+          "n": 6,
+          "label_1": 3,
+          "label_0": 3,
+          "label_ambiguous": 0
+        },
+        "2": {
+          "n": 9,
+          "label_1": 9,
+          "label_0": 0,
+          "label_ambiguous": 0
+        },
+        "3": {
+          "n": 18,
+          "label_1": 17,
+          "label_0": 1,
+          "label_ambiguous": 0
+        },
+        "4": {
+          "n": 8,
+          "label_1": 6,
+          "label_0": 2,
+          "label_ambiguous": 0
+        }
+      }
+    },
+    "item_counts_by_rung": {
+      "1": 25,
+      "2": 25,
+      "3": 25,
+      "4": 25
+    },
+    "comparison_with_prior_llm_adjudication": {
+      "prior_path": "04_experiments/results/c1/r3/exp/adjudication/adjudication.json",
+      "prior_kappa": 0.1975,
+      "prior_labeller_A_answerable": 0.3,
+      "prior_labeller_B_answerable": 0.06,
+      "prior_resolved_answerable_share": 0.05,
+      "prior_resolved_answerable_n": 5,
+      "note": "Prior adjudication used qwen2.5:1.5b-instruct as labeller A and qwen3:1.7b as labeller B with a third qwen2.5:1.5b-instruct resolver; the present run re-derives labels with GPU-first Ollama provenance, records digests/device/backend, and a qwen3:1.7b strict resolver. Numbers are post-hoc exploratory LLM judgements, not human gold; compare cautiously."
+    },
+    "outputs": {
+      "label_A": "04_experiments/results/c1/r3/R3-3b/mf10_label_A.csv",
+      "label_B": "04_experiments/results/c1/r3/R3-3b/mf10_label_B.csv",
+      "resolve": "04_experiments/results/c1/r3/R3-3b/mf10_resolve.csv",
+      "raw_responses": "04_experiments/results/c1/r3/R3-3b/mf10_raw_responses.jsonl",
+      "rubric": "04_experiments/results/c1/r3/R3-3b/mf10_rubric.md"
+    },
+    "command": "python 04_experiments/src/r3_r3_3b_mf10.py"
+  },
+  "results": {
+    "c1.r3_3b.mf10.n_items": 100,
+    "c1.r3_3b.mf10.n_items_by_rung": {
+      "1": 25,
+      "2": 25,
+      "3": 25,
+      "4": 25
+    },
+    "c1.r3_3b.mf10.raw_agreement_po": 0.59,
+    "c1.r3_3b.mf10.n_agreed": 59,
+    "c1.r3_3b.mf10.n_disagreed": 41,
+    "c1.r3_3b.mf10.cohen_kappa_overall": 0.2802,
+    "c1.r3_3b.mf10.labeller_A_answerable_n": 62,
+    "c1.r3_3b.mf10.labeller_A_answerable_share": 0.62,
+    "c1.r3_3b.mf10.labeller_B_answerable_n": 21,
+    "c1.r3_3b.mf10.labeller_B_answerable_share": 0.21,
+    "c1.r3_3b.mf10.resolved_answerable_n": 56,
+    "c1.r3_3b.mf10.resolved_answerable_share": 0.56,
+    "c1.r3_3b.mf10.resolver_on_disagreements_n": 41,
+    "c1.r3_3b.mf10.resolver_resolved_1_n": 35,
+    "c1.r3_3b.mf10.resolver_resolved_0_n": 6,
+    "c1.r3_3b.mf10.resolver_resolved_ambiguous_n": 0,
+    "c1.r3_3b.mf10.rung1.n": 25,
+    "c1.r3_3b.mf10.rung1.n_disagreed": 6,
+    "c1.r3_3b.mf10.rung1.kappa": 0.0,
+    "c1.r3_3b.mf10.rung1.A_answerable_n": 6,
+    "c1.r3_3b.mf10.rung1.B_answerable_n": 0,
+    "c1.r3_3b.mf10.rung1.resolved_answerable_n": 3,
+    "c1.r3_3b.mf10.rung2.n": 25,
+    "c1.r3_3b.mf10.rung2.n_disagreed": 9,
+    "c1.r3_3b.mf10.rung2.kappa": 0.2991,
+    "c1.r3_3b.mf10.rung2.A_answerable_n": 13,
+    "c1.r3_3b.mf10.rung2.B_answerable_n": 4,
+    "c1.r3_3b.mf10.rung2.resolved_answerable_n": 13,
+    "c1.r3_3b.mf10.rung3.n": 25,
+    "c1.r3_3b.mf10.rung3.n_disagreed": 18,
+    "c1.r3_3b.mf10.rung3.kappa": 0.026,
+    "c1.r3_3b.mf10.rung3.A_answerable_n": 19,
+    "c1.r3_3b.mf10.rung3.B_answerable_n": 1,
+    "c1.r3_3b.mf10.rung3.resolved_answerable_n": 18,
+    "c1.r3_3b.mf10.rung4.n": 25,
+    "c1.r3_3b.mf10.rung4.n_disagreed": 8,
+    "c1.r3_3b.mf10.rung4.kappa": 0.1379,
+    "c1.r3_3b.mf10.rung4.A_answerable_n": 24,
+    "c1.r3_3b.mf10.rung4.B_answerable_n": 16,
+    "c1.r3_3b.mf10.rung4.resolved_answerable_n": 22
+  }
+}
