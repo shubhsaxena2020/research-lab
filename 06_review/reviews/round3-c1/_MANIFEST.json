@@ -1,7 +1,7 @@
 {
   "tool": "simulate_review.py",
   "tool_version": "1.0.0",
-  "generated_at": "2026-11-08T11:35:55Z",
+  "generated_at": "2026-11-18T15:33:35Z",
   "round": 3,
   "draft": "05_paper/draft/paper.md",
   "draft_sha256": "9194a481c8c0c29738a1c449883dadc5751d3eb382da81c117c22fed3a03ba6b",
@@ -10,42 +10,42 @@
     {
       "persona": "methodologist",
       "prompt_file": "methodologist.PROMPT.md",
-      "prompt_sha256": "96d6aa3173ce67eceb1b200cad95b8efa2e31c613e849228182e807b4d621efa",
+      "prompt_sha256": "661131264175c52b745f6c6880155bfc1ec196352fc6bc41ae73b6e43ef23cb9",
       "review_file": "methodologist.review.yaml",
       "persona_file": "06_review/personas/methodologist.md"
     },
     {
       "persona": "domain_expert",
       "prompt_file": "domain_expert.PROMPT.md",
-      "prompt_sha256": "5ce7e04c07e89035b070739c9d81e21f6af49a85a11e6d5c50117120403674ac",
+      "prompt_sha256": "30fab472a71b6f05c9c82aa0c008bd822d69a6999bf7b2e01fe9f48c3538328e",
       "review_file": "domain_expert.review.yaml",
       "persona_file": "06_review/personas/domain_expert.md"
     },
     {
       "persona": "statistician",
       "prompt_file": "statistician.PROMPT.md",
-      "prompt_sha256": "8330d8abd1b75b065bb08d40bf15c821b21ebccd05215abce9e4a3bfaacde52a",
+      "prompt_sha256": "84203bf4864b8073081060768034d3d6cb3526cdffae942f914a6232c9356b68",
       "review_file": "statistician.review.yaml",
       "persona_file": "06_review/personas/statistician.md"
     },
     {
       "persona": "novelty_skeptic",
       "prompt_file": "novelty_skeptic.PROMPT.md",
-      "prompt_sha256": "c81d9738657d0dd6178953166d07767dd2a7df3a6529fdd34cafd37801d780e1",
+      "prompt_sha256": "cb7d603def262c35c5411868dc3210eaf9545d469487cf1a94866538eeafbf43",
       "review_file": "novelty_skeptic.review.yaml",
       "persona_file": "06_review/personas/novelty_skeptic.md"
     },
     {
       "persona": "reproducibility_reviewer",
       "prompt_file": "reproducibility_reviewer.PROMPT.md",
-      "prompt_sha256": "ac0f4b9c57ee406a15e1dd602b5ae6ab48e64a964cb0058ade959a1898b1d6f8",
+      "prompt_sha256": "686b9566e97e8ac30e953dba26ef85f91ecf4651d971708a300f42e38c8af5f7",
       "review_file": "reproducibility_reviewer.review.yaml",
       "persona_file": "06_review/personas/reproducibility_reviewer.md"
     },
     {
       "persona": "clarity_reviewer",
       "prompt_file": "clarity_reviewer.PROMPT.md",
-      "prompt_sha256": "38f60b8a717f71fbe8c17bdd4d6cee54dd769c2b9b2e397691cea16d824adc62",
+      "prompt_sha256": "9dd51042b4d9ddc44b9c57f070da9ed0273f42766aed80507879dbd5c29777af",
       "review_file": "clarity_reviewer.review.yaml",
       "persona_file": "06_review/personas/clarity_reviewer.md"
     }

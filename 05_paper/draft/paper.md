@@ -5,8 +5,8 @@ Draft generated from `05_paper/template/draft_template.md` by `05_paper/build_dr
 below is written by `04_experiments/src/make_paper_assets.py` from a results file, and every numeral is
 bound to `04_experiments/RESULTS-INDEX.json`.*
 
-*Pre-registration: the pre-registration file in the experiments directory, whose three recorded hashes
-(frozen, then two amendments) cover the declared deviations D1–D3.*
+*Pre-registration: the pre-registration file in the experiments directory, whose six recorded hashes
+(frozen, then five amendments) cover the declared deviations D1–D6.*
 
 ## Abstract
 
@@ -14,7 +14,7 @@ An abstention gate for retrieval-augmented question answering decides whether th
 supports an answer. How hard such a gate looks depends on the negatives it is measured against, and we
 tested that dependence with a pre-registered four-rung ladder over the SQuAD development set, fitting the gate and
 both of its thresholds on a disjoint half. The result is negative and specific. The registered rule —
-maximise abstain recall subject to a dev abstain precision of
+maximise abstain recall (the refusal rate, P(refused | negative)) subject to a dev abstain precision of
 <!-- num:c1.const.target_precision -->0.80<!-- /num --> — produced a gate that refuses
 <!-- num:c1.band.over_refusal.run -->75.50%<!-- /num --> of answerable questions, so it answers only
 <!-- num:c1.pm.band.answer_rate -->24.50%<!-- /num --> of the questions it is asked, and the precision of
@@ -30,23 +30,24 @@ threshold it was meant to beat (H3 criterion not exercisable at this operating p
 [<!-- num:c1.h3.lo -->0.00%<!-- /num -->, <!-- num:c1.h3.hi -->0.00%<!-- /num -->]), and dev-to-held-out
 transfer is trivial rather than informative (H2 degenerate, loss
 <!-- num:c1.h2.loss -->0.07%<!-- /num -->). The audit that produced that verdict is the useful part. Six
-surface features separate no rung from answerable items (AUROC
+surface features separate no rung from answerable items in the expected direction (AUROC
 <!-- num:c1.audit.surface.r1 -->0.506<!-- /num -->, <!-- num:c1.audit.surface.r2 -->0.539<!-- /num -->,
-<!-- num:c1.audit.surface.r3 -->0.488<!-- /num -->, <!-- num:c1.audit.surface.r4 -->0.415<!-- /num -->);
+<!-- num:c1.audit.surface.r3 -->0.488<!-- /num -->, <!-- num:c1.audit.surface.r4 -->0.415<!-- /num -->; R4 is
+inverted separation of equal magnitude);
 adding question–passage overlap to the same six features separates the first three almost perfectly
 (<!-- num:c1.audit.surface_lex.r1 -->0.977<!-- /num -->, <!-- num:c1.audit.surface_lex.r2 -->0.889<!-- /num -->,
-<!-- num:c1.audit.surface_lex.r3 -->0.923<!-- /num -->). The refusals are mostly answerable questions, which
-is what an over-refusal of <!-- num:c1.band.over_refusal.run -->75.50%<!-- /num --> means: the band's
+<!-- num:c1.audit.surface_lex.r3 -->0.923<!-- /num -->). An over-refusal of
+<!-- num:c1.band.over_refusal.run -->75.50%<!-- /num --> means that many answerable questions are refused, while the band's
 precision is
 <!-- num:c1.pm.band.precision.r1 -->56.98%<!-- /num --> on R1 and
-<!-- num:c1.pm.band.precision.r2 -->48.02%<!-- /num --> on R2. Overlap separates each rung from answerable items, and the exploratory refusal rates invert between R2 (<!-- num:c1.expl.precision.r2.run -->91.07%<!-- /num -->) and R3 (<!-- num:c1.expl.precision.r3.run -->92.75%<!-- /num -->), with the overlap-matched R5 (<!-- num:c1.r5.precision.expl -->89.25%<!-- /num -->) between them. Two control arms make that
+<!-- num:c1.pm.band.precision.r2 -->48.02%<!-- /num --> on R2. Overlap separates each rung from answerable items, and the exploratory refusal rates invert between R2 (<!-- num:c1.expl.precision.r2.run -->91.07%<!-- /num -->) and R3 (<!-- num:c1.expl.precision.r3.run -->92.75%<!-- /num -->); the overlap-matched R5 (<!-- num:c1.r5.precision.expl -->89.25%<!-- /num -->) sits below R2 (§4.4). Two control arms make that
 concrete: an overlap-matched rung (R5, exploratory) is still refused at
 <!-- num:c1.r5.precision.expl -->89.25%<!-- /num -->, while the rung that changes what the passage *says*
 rather than how much of it overlaps (R4, one answer span replaced inside the gold passage) breaks the gate
 once the dense features are implemented as specified — refusal on R4 falls to
 <!-- num:c1.expl.precision.r4.corr -->12.53%<!-- /num --> and discrimination from
 <!-- num:c1.auroc.test.run -->0.982<!-- /num --> to <!-- num:c1.auroc.test.corr -->0.874<!-- /num --> AUROC.
-We report this as a negative result for the gate and a positive one for the audit: an abstention precision
+We report this as a negative result for this gate and a positive one for the audit: on this corpus, feature stack and gate family, an abstention precision
 is not interpretable without its coverage, and a negative-ladder result is not interpretable without an
 overlap control.
 
@@ -175,7 +176,7 @@ document, so it inherits its source paragraph's rank and is flagged.
 A logistic regression on standardised features, fitted on dev only, gives a score that is meant to read
 as the probability that the presented passage answers the question. Two operating points are fitted on
 dev, both constrained to the observed dev score range: a band that admits only inside two thresholds, and
-a single threshold that admits above one. Both maximise dev abstain recall subject to a dev abstain
+a single threshold that admits above one. Both maximise dev abstain recall (the refusal rate, P(refused | negative)) subject to a dev abstain
 precision of <!-- num:c1.const.target_precision -->0.80<!-- /num -->. The fitted band is
 [<!-- num:c1.thr.lo -->0.9072<!-- /num -->, <!-- num:c1.thr.hi -->0.9478<!-- /num -->], width
 <!-- num:c1.band.width -->0.0406<!-- /num -->; the fitted single threshold is
@@ -214,7 +215,7 @@ contradiction, and it matters: at the registered operating point the per-rung re
 <!-- num:c1.pm.band.precision.r1 -->56.98%<!-- /num -->, because three quarters of the answerable questions
 are refused alongside the negatives. We therefore report both, always labelled: **refusal rate** for
 P(refused | negative), which is the quantity H1 and H3 are stated over and the one the pre-registration
-called abstain precision, and **precision** for P(negative | refused), computed over the rung's items and
+called abstain precision (its 'abstain recall' is the same refusal rate), and **precision** for P(negative | refused), computed over the rung's items and
 the answerable items together. Pooled precision is
 <!-- num:c1.pm.band.pooled_precision -->83.03%<!-- /num --> at the registered point and
 <!-- num:c1.pm.expl.pooled_precision -->97.29%<!-- /num --> at the exploratory point. No hypothesis is
@@ -273,9 +274,9 @@ Refusal rate is P(refused | a negative of that rung) — a recall on the rung, a
 
 | Hypothesis | Pre-registered criterion | Observed | Verdict |
 |---|---|---|---|
-| H1 hardness monotonicity | R1 − R3 at least <!-- num:c1.crit.h1 -->15<!-- /num --> points, non-increasing | difference <!-- num:c1.h1.diff -->0.00%<!-- /num -->, 95% CI [<!-- num:c1.h1.lo -->0.00%<!-- /num -->, <!-- num:c1.h1.hi -->0.00%<!-- /num -->]; sequence is not non-increasing | REFUTED |
+| H1 hardness monotonicity | R1 − R3 at least <!-- num:c1.crit.h1 -->15<!-- /num --> points, non-increasing | difference <!-- num:c1.h1.diff -->0.00%<!-- /num -->, 95% CI [<!-- num:c1.h1.lo -->0.00%<!-- /num -->, <!-- num:c1.h1.hi -->0.00%<!-- /num -->]; sequence is not non-increasing | criterion not exercisable (see §4.2) |
 | H2 transfer | loss at least <!-- num:c1.crit.h2 -->10<!-- /num --> points; refuted if within <!-- num:c1.crit.h2.slack -->5<!-- /num --> points | dev-to-test loss <!-- num:c1.h2.loss -->0.07%<!-- /num --> | REFUTED (it transfers, degenerately) |
-| H3 two-sided vs one-sided | band at least <!-- num:c1.crit.h3 -->5<!-- /num --> points ahead at matched recall | difference <!-- num:c1.h3.diff -->0.00%<!-- /num -->, 95% CI [<!-- num:c1.h3.lo -->0.00%<!-- /num -->, <!-- num:c1.h3.hi -->0.00%<!-- /num -->] | REFUTED |
+| H3 two-sided vs one-sided | band at least <!-- num:c1.crit.h3 -->5<!-- /num --> points ahead at matched recall | difference <!-- num:c1.h3.diff -->0.00%<!-- /num -->, 95% CI [<!-- num:c1.h3.lo -->0.00%<!-- /num -->, <!-- num:c1.h3.hi -->0.00%<!-- /num -->] | criterion not exercisable (see §4.2) |
 
 Table 3 reports the refusal rate and the precision of those refusals per rung, for both operating points.
 The band refuses <!-- num:c1.band.precision.r1.run -->100.00%<!-- /num -->,
@@ -292,9 +293,7 @@ corrected R4 are visible in it directly.
 
 ![Figure 1](05_paper/figures/generated/F1_abstain_precision_by_rung.svg)
 
-*Figure 1. Abstain precision (%) by rung (R1–R4) for the as-run confirmatory and exploratory bands and the
-spec-corrected confirmatory and exploratory bands, on the held-out half (<!-- num:c1.items.test -->1879<!-- /num --> items); flat as-run curves
-and the collapsed corrected R4 are visible directly.*
+*Figure 1. Abstain precision (%) by rung (R1–R4) for the as-run confirmatory and exploratory bands on the held-out half (<!-- num:c1.items.test -->1879<!-- /num --> items); flat as-run curves are visible directly. Spec-corrected bands are introduced in §4.6.*
 
 ![Figure 2](05_paper/figures/generated/F2_precision_overrefusal_vs_coverage.svg)
 
@@ -377,7 +376,7 @@ exact — the mean absolute overlap difference is
 <!-- num:c1.r5.match.contrast -->42.08%<!-- /num --> for a random negative, so R5 is closer to the gold
 paragraph's overlap than any other rung.
 
-**Table 5.** Control arms (all exploratory): refusal rates, 95% CI, over-refusal and discrimination (held-out half; percentages; AUROC unitless). Precision is reported for the main ladder only (Table 3).
+**Table 5.** Control arms (all exploratory): refusal rates, 95% CI, over-refusal and discrimination (held-out half; percentages; AUROC unitless). The column headed 'Abstain precision' reports refusal rates P(refused | negative) and P(miss | refused), not precision; precision is reported for the main ladder only (Table 3).
 
 | Arm (all exploratory) | Abstain precision | 95% CI | Over-refusal | Discrimination |
 |---|---:|---|---:|---:|
@@ -434,7 +433,7 @@ columns, not twelve, and the dense-cosine baseline in §4.2 was a constant score
 
 We did not refit the registered analysis: the frozen run is reported exactly as it was produced. Instead
 we implemented the feature as §3.2 specifies — a question-to-passage cosine — and re-ran the whole
-analysis through the same code path as a declared sensitivity analysis (deviation D4). Table 6 puts the
+analysis through the same code path as a declared, post-hoc sensitivity analysis (deviation D4). Table 6 puts the
 two side by side, and Table 7 reports leave-one-group-out ablations on the corrected features.
 
 **Table 6.** The pre-registered (frozen, D1) run versus the spec-corrected re-implementation (D4), side by side (dev and held-out halves; AUROC unitless, rates percent). The two runs refit their thresholds on different dev score distributions, so precision and coverage rows compare two operating points; AUROC rows are threshold-free.
@@ -516,7 +515,7 @@ Four checks a reviewer asked for, all of them cheap and all of them reported as 
 
 **Is the short rung a biased subsample?** Of the four hundred sampled questions per split,
 <!-- num:c1.st.exch.kept.dev -->273<!-- /num --> kept an R2 item and
-<!-- num:c1.st.exch.dropped.dev -->127<!-- /num --> did not. Comparing the two groups on question length,
+<!-- num:c1.st.exch.dropped.dev -->127<!-- /num --> did not on dev; on the held-out half <!-- num:c1.pm.n.r2 -->280<!-- /num --> kept an item and the rest did not. Comparing the two groups on question length,
 answer surface type, gold paragraph length and article size, no variable differs at the five-percent level in
 either split; the smallest p-value is <!-- num:c1.st.exch.p -->0.052<!-- /num -->, on dev question
 length. So the R2 figures describe the sampled question set rather than a selected subset, with the caveat
@@ -669,11 +668,12 @@ python tools/check_numbers.py --draft 05_paper/draft/paper.md
 
 The frozen run records its pre-registration hash as a single `#` character: the line that reads the hash
 file splits on whitespace and takes the first token of a comment line. The four real hashes are intact in
-`PREREGISTRATION.sha256`, and this is a defect in the reporting line, not in the freeze.
+`PREREGISTRATION.sha256`, and this is a defect in the reporting line, not in the freeze. The hash in force
+at run time is recorded as D4; the harness now records the sha256 of `PREREGISTRATION.md` directly. The
+frozen run was produced from a dirty working tree with no stored diff; later runs store
+`artifacts/git_diff.patch` and its sha256 in `meta.json`.
 
-There is no lockfile. The interpreter and library versions used for every number above are recorded in the
-session status file beside the results, and the model versions are pinned in the pre-registration; a
-requirements file with exact pins is the obvious next step and is not in this draft.
+The environment is pinned in `04_experiments/requirements-lock.txt` and `04_experiments/ENVIRONMENT.md`.
 
 ## 9 References
 

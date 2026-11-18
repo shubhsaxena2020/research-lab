@@ -1,0 +1,19 @@
+## Round-3 findings
+
+The six simulated reviews scored the pre-fold draft **5.67/10 on average**; all six were borderline. They raised **41 distinct must-fix items**:
+
+- **22 persisted themes:** gold-paragraph confounding; D4 preregistration consistency; incomparable frozen/corrected cuts; H1/H3 verdict wording; mixed-run abstract values; held-out R2 and exchangeability reporting; SQuAD unanswerables; missing answerability baseline and companion metric; missing uncertainty intervals; reader-subset reporting; small cluster counts; novelty-search documentation; DeclineCraft coverage; the `#` preregistration hash; abstract separation, ordering, and terminology errors; and Table 5 conditional labels.
+- **19 new items:** fixed-capacity ablation control; IDF leakage disclosure; R4 label validation; sampling and article counts; answerability/selective-classification related work; control-arm sample sizes and intervals; explicit novelty delta and audit-contribution support; citation hygiene; split and sampling seeds; pinned environment and hardware details; number-to-run traceability; code license; model hyperparameters; smoke-test/resource documentation; R4 replacement rule and reader model; scope limits; and Figure 1 caption order.
+
+The full item inventory is in [REPORT-pass1.md](C:/Users/shubh/research-lab/sessions/R3-4c-fold/REPORT-pass1.md).
+
+## Completed
+
+- Read the required rules, shared round-3 instructions, and head review, along with the existing comparison, response letter, lane protocol, and two persona reviews.
+- Created [TASK.md](C:/Users/shubh/research-lab/sessions/R3-4c-fold/TASK.md) and [PROMPT-R3.txt](C:/Users/shubh/research-lab/sessions/R3-4c-fold/PROMPT-R3.txt). The lane covers the 26 outstanding round-2 items and the 41 round-3 items, excludes the res-s1 LaTeX build paths, and explicitly forbids another review round or new experiments. The prompt has **no double quotes**.
+- Appended Checkpoint 6 to [HEAD-REVIEW.md](C:/Users/shubh/research-lab/orchestration/HEAD-REVIEW.md). It corrects the stale-pack claim: the newline-normalized hash `9194a481` and byte hash `e346271e` identify the same draft, so the existing reviews are valid for the pre-fold draft.
+- Launched the res-s4 runner with a **10,800-second budget**. Confirmed Hermes PIDs: res-s1 `4568`, res-s4 `27668`—two sessions total.
+
+## Risks and next checkpoint
+
+The fold still needs to meet its gates: draft SHA changed, `check_numbers.py` reports 0 findings, and `check_all.py` reports 4/4 PASS. Claude Code should check the lane’s `PROGRESS.md`, confirm comparison scores remain labeled as pre-fold, verify response-letter coverage of all 44 round-2 and 41 round-3 items, and rerun both gates before resuming Codex.

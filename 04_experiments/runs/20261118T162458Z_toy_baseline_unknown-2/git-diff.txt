@@ -1,0 +1,5 @@
+===== git diff HEAD =====
+
+===== git diff --cached =====
+
+===== untracked files =====

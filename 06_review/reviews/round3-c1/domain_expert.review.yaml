@@ -1,0 +1,48 @@
+persona: domain_expert
+summary: |
+  The paper audits how negative construction affects a retrieval-feature abstention gate on SQuAD v2.0 dev, reporting a negative result: at a precision target without a coverage constraint the gate refuses 75.50% of answerable questions and the per-rung refusal rates saturate. The audit's transferable finding is that question-passage overlap separates constructed negatives from answerable items almost perfectly (AUROC 0.977 on R1), and the disclosed dense-feature defect in section 4.6 is handled honestly. My main reservation is construct validity: the study uses only SQuAD's answerable rows and never evaluates on the field's own unanswerable questions, and rung R4's labels are produced by automatic span substitution with no human verification, so the "negative hardness" conclusion may not transfer to real unanswerable passages.
+strengths:
+  - "Pre-registration with three recorded hashes and declared deviations D1-D4, plus a disclosed implementation defect in section 4.6, is unusual transparency for this kind of study."
+  - "The separability audit in section 3.4 is run as a hard gate before any result is reported, with a stated 0.750 AUROC threshold and a length-matched rebuild rule."
+  - "Over-refusal and coverage are reported beside every precision figure (Tables 3-6), which is the companion reporting the field needs."
+  - "Control arms R5 (overlap-matched) and the top-1-presented variant (sections 4.4-4.5) localise what the gate is actually measuring."
+  - "The dataset counts match SQuAD v2.0 dev exactly: 35 articles, 1204 paragraphs, 11873 questions, 5928 answerable."
+weaknesses:
+  - "Construct validity gap: section 3.1 excludes SQuAD v2.0's own unanswerable questions ('impossible rows are a different kind of negative and are out of scope'), yet those adversarially authored questions are the field's standard construct for unanswerability; the gate is never tested on them."
+  - "Rung R4 labels are produced by automatic span substitution with no human verification; section 5.4 admits forty inspected items preserved surface type but not grammatical role, so the 'R4 breaks the gate' claim rests on unverified labels."
+  - "No field-standard baseline: the SQuAD 2.0 answerability approach (a fine-tuned reader with a no-answer threshold) is absent; the reader baseline used (mean generated-token log-probability, section 4.7) is a weak proxy and reaches 0.419 AUROC."
+  - "No field companion metric: SQuAD-style F1/EM with no-answer prediction and selective-prediction risk at coverage (or AURC) are not reported; AUROC is reported without intervals."
+  - "Sampling of the 400 answerable questions per half is not specified as random or stratified, and article counts per split are not reported (section 3.1)."
+  - "Related work (section 2) does not engage the unanswerable-question-detection / answerability-prediction literature or selective-classification work (e.g. El-Yaniv and Wiener) that already studied coverage-precision tradeoffs."
+  - "The term 'support' is used for span presence (Abstract, section 1); SQuAD's construct is answerability, not passage support, and the two are not identical."
+questions:
+  - "Why are SQuAD v2.0's own unanswerable questions excluded, and would the ladder's conclusions hold on them?"
+  - "What is the sampling procedure for the 400 questions per half, and how many articles fall in each split?"
+  - "Has rung R4 been human-checked for actual unanswerability, and at what rate do substitutions fail to create an unanswerable item?"
+  - "Would a fine-tuned SQuAD 2.0 answerability classifier change the paper's conclusion about retrieval-feature gates?"
+  - "Can the gate be reported on selective risk at a fixed coverage and AURC, and on SQuAD-style F1?"
+soundness: 3
+presentation: 3
+contribution: 3
+confidence: 4
+overall: 6
+decision: borderline
+must_fix:
+  - claim: "The study never evaluates on SQuAD v2.0's own unanswerable questions, which are the field's standard construct for unanswerability."
+    where: "Section 3.1, 'Only the answerable rows are used'"
+    evidence_needed: "Either run the ladder on the 5945 SQuAD v2.0 dev unanswerable questions or state and justify why constructed negatives substitute for them."
+  - claim: "Rung R4 labels are produced by automatic span substitution with no human verification or agreement statistic."
+    where: "Section 3.1 table, R4 row; section 5.4"
+    evidence_needed: "A label-quality audit of R4 reporting how many of N substituted items are genuinely unanswerable, or a reframing of R4 as answer-substituted rather than unanswerable."
+  - claim: "The field-standard answerability baseline (a fine-tuned reader with a no-answer threshold) is absent."
+    where: "Section 2, 'Model confidence as a gate'; section 4.2 baselines B1 and B2"
+    evidence_needed: "Add a fine-tuned SQuAD 2.0 answerability classifier baseline (or justify scoping the comparison to retrieval features only) and report whether the gate survives."
+  - claim: "No field companion metric is reported: SQuAD-style F1/EM or selective-prediction risk at coverage (AURC) is missing."
+    where: "Sections 4.2-4.3, Tables 3-4"
+    evidence_needed: "Report selective risk at the registered coverage and an AURC, or justify the metric choice against the field standard."
+  - claim: "The sampling procedure for the 400 answerable questions per half and the article counts per split are not stated."
+    where: "Section 3.1"
+    evidence_needed: "State whether sampling is random or stratified, by article, and report the number of articles per split."
+  - claim: "Related work does not engage the answerability-detection or selective-classification literature that already studied this problem."
+    where: "Section 2"
+    evidence_needed: "Add at least one body of work (e.g. SQuAD 2.0 answerability baselines or El-Yaniv and Wiener on selective classification) and state what the paper argues against it."

@@ -1,0 +1,18 @@
+{
+  "_meta": {
+    "config_name": "toy_ours",
+    "experiment": "toy",
+    "n": 90,
+    "run_id": "20261118T160214Z_toy_ours_unknown",
+    "seed": 1,
+    "split": "test",
+    "toy": true
+  },
+  "accuracy": 0.888889,
+  "accuracy_train": 0.838095,
+  "f1_macro": 0.888393,
+  "loss": 0.315546,
+  "model": "logistic",
+  "n_test": 90,
+  "n_train": 210
+}

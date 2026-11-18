@@ -1,0 +1,57 @@
+persona: clarity_reviewer
+summary: |
+  The paper claims a negative result for a retrieval-feature abstention gate and a positive one for a
+  four-rung negative ladder plus a separability audit, reporting that a precision target without a
+  coverage constraint refuses 75.50% of answerable questions. The evidence largely supports the negative
+  verdict, and the paper's self-disclosure of the misnamed quantity and the degenerate dense block is a
+  genuine strength. The score reflects an abstract that overstates both the surface-feature separation
+  and the generality of its takeaways, plus a Table 5 column header that reuses "abstain precision"
+  for quantities that are not precision.
+strengths:
+  - "Section 3.5 renames the pre-registered quantity and reports both refusal rate and precision with distinct labels (Section 3.5, Table 3)."
+  - "Section 4.6 discloses the degenerate dense block and reports frozen and spec-corrected runs side by side (Table 6)."
+  - "Figure 2 caption is self-contained, giving coverage, pooled precision and over-refusal for both operating points (Section 4.2)."
+  - "Section 6 lists eight concrete threats to validity, including the dense-block defect and the incomplete R2 rung (Section 6)."
+  - "Tables 3 and 7 carry per-rung n denominators, so refusal rates are checkable from the page (Tables 3, 7)."
+weaknesses:
+  - "Abstract says 'Six surface features separate no rung' while reporting R4 AUROC 0.415, which Section 3.4 calls separation of equal magnitude with the sign flipped (Abstract, Table 2)."
+  - "Abstract places overlap-matched R5 (89.25%) 'between' R2 (91.07%) and R3 (92.75%); 89.25% is below R2, not between them (Abstract; Tables 3, 5)."
+  - "Abstract conflates over-refusal with per-rung precision: 'the refusals are mostly answerable questions... the band's precision is 56.98% on R1', but 56.98% negatives is not 'mostly answerable' (Abstract; Table 3)."
+  - "Table 5's column header 'Abstain precision' holds refusal rates and P(miss | refused), while its caption says precision is reported only in Table 3 (Section 4.4, Table 5)."
+  - "'abstain recall' is used in the abstract and Section 3.3 but never defined; Section 3.5's naming correction covers only refusal rate and precision (Abstract, Sections 3.3, 3.5)."
+  - "The abstract's closing sentences generalise beyond the paper's stated scope ('We claim neither priority nor generality beyond one corpus family...') (Abstract; Section 1)."
+  - "Figure 1's caption in Section 4.2 references 'spec-corrected' bands before Section 4.6 introduces the correction (Section 4.2, Figure 1)."
+  - "No section is titled 'Limitations'; Section 6 is 'Threats to validity' and Section 5.4 reads as future work (Sections 5.4, 6)."
+questions:
+  - "Can the abstract's surface-feature claim be rewritten as 'no rung exceeds the 0.750 gate on the six pre-registered surface features, including R4's inverted separation of 0.415'?"
+  - "Should Table 5 be relabelled 'Refusal rate / P(miss | refused)' with precision confined to Table 3?"
+  - "Will the authors add a one-line definition of 'abstain recall' (or rename it to the quantity actually maximised)?"
+  - "Can the abstract's final two sentences be scoped to 'in this corpus, feature stack and gate family'?"
+soundness: 3
+presentation: 3
+contribution: 3
+confidence: 4
+overall: 6
+decision: borderline
+must_fix:
+  - claim: "The abstract states that six surface features 'separate no rung' while reporting R4 AUROC 0.415, which the paper itself calls separation of equal magnitude with the sign flipped."
+    where: "Abstract, Table 2"
+    evidence_needed: "Section 3.4 and Table 2 reporting R4 AUROC 0.415 and its inverted separation, with the 0.750 one-sided gate."
+  - claim: "The abstract places overlap-matched R5 (89.25%) between R2 (91.07%) and R3 (92.75%), but 89.25% is below R2."
+    where: "Abstract"
+    evidence_needed: "Table 3 R2 91.07% and R3 92.75%; Table 5 R5 89.25% and Section 4.4's ordering between R2 and R4."
+  - claim: "The abstract conflates over-refusal (75.50%) with per-rung precision (56.98% on R1), incorrectly summarising R1's refusals as 'mostly answerable'."
+    where: "Abstract"
+    evidence_needed: "Table 3: R1 precision 56.98% (majority negatives) and over-refusal 75.50% (answerable questions refused)."
+  - claim: "Table 5's column header 'Abstain precision' is used for refusal rates and P(miss | refused), contradicting its own caption."
+    where: "Section 4.4, Table 5"
+    evidence_needed: "Table 5 caption 'Precision is reported for the main ladder only (Table 3)' alongside the 'Abstain precision' header."
+  - claim: "The undefined term 'abstain recall' appears in the abstract and Section 3.3, while Section 3.5 defines only refusal rate and precision."
+    where: "Abstract, Section 3.3"
+    evidence_needed: "Section 3.5 naming correction, which does not define abstain recall."
+  - claim: "The abstract's closing generalisations exceed the paper's stated scope of one corpus family, one feature stack and one gate family."
+    where: "Abstract, final sentence"
+    evidence_needed: "Section 1's scope disclaimer ('We claim neither priority nor generality beyond...')."
+  - claim: "Figure 1's caption in Section 4.2 references spec-corrected bands before the correction is introduced in Section 4.6."
+    where: "Section 4.2, Figure 1"
+    evidence_needed: "Figure 1 caption mentioning spec-corrected bands; correction introduced in Section 4.6."

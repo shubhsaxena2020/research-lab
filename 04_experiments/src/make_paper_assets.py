@@ -152,11 +152,11 @@ def table_hypotheses(r: dict) -> str:
                integer, "c1.crit.h3", "H3 criterion: minimum band gain in points", 0)
     md = ["| Hypothesis | Pre-registered criterion | Observed | Verdict |", "|---|---|---|---|",
           f"| H1 hardness monotonicity | R1 − R3 at least {c1p} points, non-increasing | difference {d1}, "
-          f"95% CI [{lo1}, {hi1}]; sequence is not non-increasing | REFUTED |",
+          f"95% CI [{lo1}, {hi1}]; sequence is not non-increasing | criterion not exercisable (see §4.2) |",
           f"| H2 transfer | loss at least {c2p} points; refuted if within {c2s} points | dev-to-test loss "
           f"{l2} | REFUTED (it transfers, degenerately) |",
           f"| H3 two-sided vs one-sided | band at least {c3p} points ahead at matched recall | difference "
-          f"{d3}, 95% CI [{lo3}, {hi3}] | REFUTED |"]
+          f"{d3}, 95% CI [{lo3}, {hi3}] | criterion not exercisable (see §4.2) |"]
     return "\n".join(md) + "\n"
 
 

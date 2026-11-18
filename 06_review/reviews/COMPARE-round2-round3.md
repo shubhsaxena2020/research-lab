@@ -1,41 +1,47 @@
 # Round comparison - 06_review/reviews/round2-c1 -> 06_review/reviews/round3-c1 / current draft
 
-- Generated: 2026-11-08 (integrator, R3-4; corrected 2026-11-08 audit)
-- Reviews: round 2 = 6 personas (mean overall 4.67/10, 3 rejects), round 3 simulation = **not yet run**
-- Distinct must-fix items: round 2 = 44, round 3 = 0 (no reviewer output yet)
-- Draft under revision: `05_paper/draft/paper.md` (generated from `05_paper/template/draft_template.md` by `05_paper/build_draft.py`)
+- Generated: 2026-11-18 (regenerated with real round-3 scores and decisions)
+- Reviews: round 2 = 6 personas (mean overall 4.67/10, 3 reject / 3 borderline / 0 accept, 44 must-fix); round 3 = 6 personas (mean overall 5.67/10, 0 reject / 6 borderline / 0 accept, 41 must-fix)
+- Distinct must-fix items: round 2 = 44, round 3 = 41
+- Draft under revision: `05_paper/draft/paper.md` (round-3 draft sha256 `9194a481c8c0`)
+- Round-3 sources: `06_review/reviews/round3-c1/AGGREGATE.md`, `06_review/reviews/round3-c1/INGEST.md`
 
-> **Round 3 status:** At the time of writing, `06_review/reviews/round3-c1/` contains only
-> prompt packs (`_MANIFEST.json` generated 2026-11-08T11:35:55Z, plus six `*.PROMPT.md` files —
-> methodologist, domain_expert, statistician, novelty_skeptic, reproducibility_reviewer,
-> clarity_reviewer). **No `*.review.yaml`, no `AGGREGATE.md`, no `INGEST.md` exist.** There are
-> therefore no round-3 scores, no decision distribution, and no "raised again" evidence. This
-> comparison is **round2 findings vs current-draft status** (evidence files from lanes R3-1, R3-2,
-> R3-3, R3-5 + direct draft inspection). All 44 verdicts below are marked as **round3-gap**
-> pending a later reviewer batch that fills in the review yamls and runs
-> `tools/simulate_review.py ingest/aggregate/compare`.
->
-> A **resolved** verdict below means the draft now contains the change (with file/section evidence).
-> **Partial** means evidence exists in an ANSWERS/result file but the draft still lacks part of it,
-> or the draft contradicts it. **Deferred** means the evidence exists (or is designed) but nothing
-> is in the draft yet. Pair every row with the concrete change in
-> `06_review/RESPONSE-LETTER-R3.md`.
+> **Timing note (R3-4c-fold).** Round 3 reviewed the *pre-fold* draft (sha256 `9194a481c8c0`). All fold edits made in R3-4c-fold are *post-review*: they do not invalidate the round-3 scores, which remain diagnostics on the pre-fold draft. No new review round was run.
+
+> Round 3 is now ingested (6/6 personas, none missing). Real scores and decisions above.
+> "Resolved / Partial / Deferred" below describe the current draft against the
+> round-2 must-fix list (unchanged: 18 / 21 / 5). "Persisted" and "New in round 3"
+> classify the 41 round-3 must-fix items against round-2 themes.
 
 ## Totals
 
-| Metric | Round 2 | Round 3 (current) | Delta |
+| Metric | Round 2 | Round 3 | Delta |
 |---|---:|---:|---:|
-| Mean overall (1-10) | 4.67 | — (no reviews) | — |
-| Reject / borderline / accept | 3 / 3 / 0 | — | — |
-| Must-fix items (distinct) | 44 | 0 observed | — |
-| Resolved (draft contains change) | - | 18 | — |
-| Partial (evidence exists, draft incomplete/stale) | - | 21 | — |
-| Deferred (evidence exists, not folded) | - | 5 | — |
-| Persisted (raised again in round 3) | - | 0 observed (round3-gap) | — |
-| New in round 3 | - | 0 observed (round3-gap) | — |
+| Mean overall (1-10) | 4.67 | 5.67 | +1.00 |
+| Reject / borderline / accept | 3 / 3 / 0 | 0 / 6 / 0 | -3 reject, +3 borderline |
+| Must-fix items (distinct) | 44 | 41 | -3 |
+| Resolved (draft contains change) | - | 18 | - |
+| Partial (evidence exists, draft incomplete/stale) | - | 21 | - |
+| Deferred (evidence exists, not folded) | - | 5 | - |
+| Persisted (raised again in round 3) | - | 22 | - |
+| New in round 3 | - | 19 | - |
 
-**Headline: 18 resolved, 21 partial, 5 deferred. Round-3 reviewer verdicts are a gap — no round-3
-simulation output exists yet.**
+**Headline: mean rose from 4.67 to 5.67; all six personas now borderline (0 rejects); 22 of 41 round-3 must-fix items overlap round-2 themes, 19 are new.**
+
+## Per-persona overall score
+
+| Persona | Round 2 overall | Round 2 decision | Round 3 overall | Round 3 decision |
+|---|---:|---|---:|---|
+| methodologist | 5 | borderline | 5 | borderline |
+| domain_expert | 4 | reject | 6 | borderline |
+| statistician | 5 | borderline | 6 | borderline |
+| novelty_skeptic | 4 | reject | 6 | borderline |
+| reproducibility_reviewer | 6 | borderline | 5 | borderline |
+| clarity_reviewer | 4 | reject | 6 | borderline |
+| **Mean** | **4.67** | - | **5.67** | - |
+
+Round-2 detail: soundness 2.17, presentation 2.67, contribution 2.33, confidence 4.00.
+Round-3 detail: soundness 2.67, presentation 3.00, contribution 3.00, confidence 4.00.
 
 ## Resolved in current draft (18)
 
@@ -99,18 +105,61 @@ Round-3 confirmation (reviewer not re-raising) is still outstanding for all of t
 | MF-23 | novelty_skeptic | `02_literature/related-work-r3/table7.json` (12 rows incl. N1 arXiv:2502.07255, N2 2609.22056, N3 doi:10.32604/cmc.2026.088937, N4 2609.32269, N10 doi:10.5281/zenodo.20547014) + `NOVELTY-R3.md` search record (18 OpenAlex + prior 91 arXiv) | Draft Table 1 still 3 rows; no differentiating paragraph; no search-record pointer |
 | MF-28 | novelty_skeptic | `02_literature/related-work-r3/table7.json` DeclineCraft row (CAR + Answerable Attempt Rate, arXiv:2610.28340) | Draft Table 1 DeclineCraft row still "several unanswerable classes / retrieval and memory reported separately" |
 
-## Persisted (raised in both rounds)
-0 observed — round3-gap (no round-3 reviews exist to re-raise anything).
+## Persisted (raised again in round 3) — 22 items
 
-## New in round 3
-0 observed — round3-gap.
+Round-3 must-fix items whose theme overlaps a round-2 must-fix item.
 
-## Per-persona overall score
-Round 2: methodologist 5, domain_expert 4, statistician 5, novelty_skeptic 4,
-reproducibility_reviewer 6, clarity_reviewer 4 (mean 4.67).
-Round 3: — (no scores; prompt packs only).
+| R3 # | Reviewer | Round-3 claim (short) | Overlaps round-2 |
+|---:|---|---|---|
+| 1 | methodologist | rung-separability headline (0.977) computed vs answerable items that always present gold paragraph | MF-7 |
+| 2 | methodologist | corrected run labelled declared deviation although hash chain stops at D3 | MF-4, MF-32 |
+| 3 | methodologist | Table 6 compares frozen/corrected at different dev-fitted operating points; omits corrected exploratory coverage row | MF-2, MF-34 |
+| 4 | methodologist | H1/H3 verdicted REFUTED while text calls criterion not exercisable | MF-5, MF-25 |
+| 5 | methodologist | abstract mixes frozen and corrected numbers in one comparison (R5 89.25 frozen, R4 12.53 corrected) | MF-3 |
+| 7 | methodologist | held-out R2 n=280 of 400; exchangeability check reports only dev split | MF-22 |
+| 9 | domain_expert | study never evaluates on SQuAD v2.0's own unanswerable questions | MF-10 |
+| 11 | domain_expert | field-standard answerability baseline (fine-tuned reader) absent | MF-12 |
+| 12 | domain_expert | no field companion metric (SQuAD F1/EM or AURC) | MF-9 |
+| 15 | statistician | headline over-refusal/coverage reported without uncertainty | MF-16, MF-17 |
+| 16 | statistician | AUROC comparisons across runs/ablations rest on point estimates | MF-17, MF-21 |
+| 17 | statistician | reader baseline AUROC on non-random 553-item subset, no interval | MF-17, MF-22 |
+| 18 | statistician | cluster bootstrap uses only 17 dev / 18 test articles | MF-18 |
+| 20 | statistician | exploratory per-rung precisions in Table 3 lack per-cell intervals | MF-16 |
+| 21 | novelty_skeptic | draft claims novelty but contains no documented novelty search | MF-23 |
+| 25 | novelty_skeptic | DeclineCraft dismissed without stating whether its taxonomy subsumes any rung | MF-28 |
+| 31 | reproducibility_reviewer | frozen run records pre-registration hash as '#' | MF-31 |
+| 35 | clarity_reviewer | abstract states six surface features 'separate no rung' while reporting R4 AUROC 0.415 | MF-13, MF-26 |
+| 36 | clarity_reviewer | abstract places overlap-matched R5 (89.25%) between R2 (91.07%) and R3 (92.75%) | MF-27 |
+| 37 | clarity_reviewer | abstract conflates over-refusal (75.50%) with per-rung precision (56.98% R1) | MF-38, MF-39 |
+| 38 | clarity_reviewer | Table 5 header 'Abstain precision' used for refusal rates and P(miss\|refused) | MF-39, MF-43 |
+| 39 | clarity_reviewer | undefined term 'abstain recall' appears in abstract/§3.3 | MF-39 |
+
+## New in round 3 — 19 items
+
+Round-3 must-fix items not overlapping a round-2 theme.
+
+| R3 # | Reviewer | Claim (short) |
+|---:|---|---|
+| 6 | methodologist | Table 7 leave-one-group-out ablations refit threshold per subset, confounding group contribution with model capacity |
+| 8 | methodologist | whether IDF anchoring R2 was computed within split or corpus-wide is unstated (leakage path) |
+| 10 | domain_expert | R4 labels produced by automatic span substitution with no human verification or agreement statistic |
+| 13 | domain_expert | sampling procedure for the 400 answerable questions per half and article counts per split not stated |
+| 14 | domain_expert | related work does not engage answerability-detection / selective-classification literature |
+| 19 | statistician | Table 5 control arms omit sample sizes and several intervals |
+| 22 | novelty_skeptic | delta over closest prior work (Abdumalikov et al.) never stated as a single sentence |
+| 23 | novelty_skeptic | related work may omit primary selective-classification / coverage-risk literature |
+| 24 | novelty_skeptic | 'audit as hard gate' presented as instrument contribution but is a standard surface-leakage check |
+| 26 | novelty_skeptic | citation hygiene defects (Ho et al. arXiv:2011.01079 resolves to unrelated paper; survey entry lacks authors) |
+| 27 | reproducibility_reviewer | article-disjoint split and per-rung sampling have no stated seed |
+| 28 | reproducibility_reviewer | no lockfile or pinned requirements shipped |
+| 29 | reproducibility_reviewer | headline numbers bound to RESULTS-INDEX.json but no run id or output file given |
+| 30 | reproducibility_reviewer | code licence not stated |
+| 32 | reproducibility_reviewer | logistic-regression and gate hyperparameters unspecified |
+| 33 | reproducibility_reviewer | no smoke test or minimum configuration; full run resource needs unstated |
+| 34 | reproducibility_reviewer | R4 answer-span replacement rule and reader model for §4.7 baseline unnamed |
+| 40 | clarity_reviewer | abstract's closing generalisations exceed stated scope (one corpus family, one feature stack, one gate family) |
+| 41 | clarity_reviewer | Figure 1 caption references spec-corrected bands before correction introduced in §4.6 |
 
 ---
-_Type: round2-vs-current-draft comparison. Round-3 scores/decisions are a genuine gap
-until the six review yamls are filled and ingested. Do not read "resolved" above as
-"reviewer accepted"._
+
+_Type: round2-vs-round3 comparison with real round-3 scores/decisions (INGEST.md, AGGREGATE.md). "Resolved/Partial/Deferred" describe the current draft against the round-2 must-fix list; "Persisted/New" classify round-3 must-fix items._

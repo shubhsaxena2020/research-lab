@@ -23,11 +23,21 @@ Round 3 answers every one of them: fix with evidence, or rebut with evidence. Ne
    in so many words. Never back-date a deviation.
 5. **Numbers:** two decimals for rates, three for AUROC. Every number you put in prose for the draft must point to a
    results-file key (the integrator binds it with `<!-- num:... -->` markers and `tools/check_numbers.py` must PASS).
-6. **Compute: GPU first, then CPU, gently.** This laptop's Arc 130T iGPU is reached through Ollama (Vulkan, already
-   enabled, http://127.0.0.1:11434). Any local LLM generation/scoring: try the Ollama route first; if it cannot give what
-   is needed (e.g. token log-probabilities), fall back to CPU torch with `torch.set_num_threads(4)` and the heavy lock
-   (`ops/HEAVY.lock` semantics in RULES.md #10). Only one heavy job at a time on the whole laptop. Never while free RAM < 8 GB.
-   Embedding/BM25 passes are minutes; do not parallelise them across subagents.
+6. **Compute: GPU first, CPU only as spill or fallback (owner rule, = ai-memory-core decision D10; updated 2026-11-18).**
+   The Arc 130T iGPU shares system RAM, so the rule is about where model COMPUTE runs. Every model job goes to the GPU:
+   - Embeddings: Ollama `POST http://127.0.0.1:11434/api/embed` (Vulkan GPU; bge-m3, embeddinggemma, nomic-embed-text),
+     batches of >= 16 texts per call; or ONNX on DirectML with
+     `C:\Users\shubh\ai-memory-core\.venv\Scripts\python.exe` (has onnxruntime `DmlExecutionProvider`; run that interpreter
+     only, never edit anything in ai-memory-core). The Hermes venv has NO onnxruntime, so sentence-transformers there is CPU.
+   - Generation/scoring: Ollama (e.g. qwen3:1.7b) at 127.0.0.1 (never `localhost`: IPv6 fallback adds ~2 s per call).
+   - CPU torch is allowed only (a) when the GPU path cannot give what is needed (e.g. token log-probabilities of a model
+     Ollama does not serve) or errors, or (b) as spill when the GPU is already saturated (3D load >= 90% in
+     `logs/governor-main.csv`). Then use `torch.set_num_threads(4)` and the heavy lock (RULES.md #10).
+   - Never swap the model of a pre-registered or frozen pipeline just to reach the GPU; if the registered model only runs on
+     CPU here, CPU is correct. Record in PROGRESS.md the device each model job ran on, and why when it was CPU.
+   - Non-model work (pytest, TeX, plain Python) is CPU by nature; the governor keeps it at BelowNormal priority.
+   Only one heavy job at a time on the whole laptop. Never while free RAM < 8 GB. Do not parallelise embedding passes
+   across subagents.
 7. **Public APIs** (OpenAlex, Crossref, arXiv, Semantic Scholar): cache in `02_literature/raw/`, polite rate (<=1 req/s),
    User-Agent with mailto shubh.saxena2020@gmail.com, back off 30/60/120 s on 429. Do not sign up for keys.
 8. **Python:** inside Hermes, `python` is the Hermes venv (3.11, torch CPU, bm25s, sentence-transformers, sklearn,

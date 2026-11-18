@@ -50,3 +50,17 @@ at least 3 parallel subagents per batch.
 - Frozen confirmatory run is immutable: never refit, never overwrite any existing file in 04_experiments/results/ or runs/.
   New numbers go in new files under 04_experiments/results/c1/r3/<lane>/.
 - No lead commits to git. The head commits at checkpoints.
+
+## Checkpoint 6 — Codex orchestration and R3-4c fold — 2026-11-18
+
+Codex is orchestrating the research-lab paper pass from 2026-11-18; Claude Code coordinates checkpoint resumes. Laptop 2 is offline. Only Hermes profiles res-s4 and res-s1 may run, using the configured nilabh/Deepseek-v4.1-Flash route. The res-s1 R3-7b-latex-main lane is running and owns `05_paper/latex-build/**`; leave it untouched.
+
+Correction to the prior checkpoint: the 11-08 round-3 prompt packs were not stale. `tools/simulate_review.py` hashes the draft after newline normalization; tool hash `9194a481` and byte hash `e346271e` identify the same draft. The six persona reviews, INGEST, and AGGREGATE in `06_review/reviews/round3-c1/` are a valid simulated review of that pre-fold draft. Round-3 scores must remain labelled as pre-fold scores.
+
+R3-4b-review was stopped because it skipped deliverable 1: it did not fold the 21 partial and 5 deferred round-2 items into `05_paper/template/draft_template.md`; the template and draft hash were unchanged. Its review outputs are retained as valid review evidence. Round-3 aggregate: six borderline, mean 5.67/10, 41 distinct must-fix items (22 persisted themes, 19 new).
+
+R3-4c-fold plan: res-s4 will use existing evidence to fold the 26 remaining round-2 items and the 41 round-3 must-fix items where support permits; mark unsupported items honestly unresolved; rebuild the generated draft; regenerate the round comparison with an explicit pre-fold label and update the response letter for both rounds. Do not run another review round or new experiments. Required gates are a changed draft SHA, `check_numbers.py` at 0 findings, and `check_all.py` at 4/4 PASS. R3-4c excludes `05_paper/latex-build/**`.
+
+## Checkpoint 7 — R3-7c LaTeX citations — 2026-11-18
+
+R3-7b is complete. Claude Code verified the main-laptop Tectonic build, but identified transient Windows file-mapping failures, no emitted citations despite a populated `refs.bib`, and three duplicate `fig:main-accuracy` labels. R3-7c-latex-citations is assigned to the now-idle res-s1, owning only `05_paper/latex-build/**` and its lane folder. It will add bounded transient-error handling / safe output promotion, map explicit draft DOI/arXiv markers only to existing BibTeX keys, preserve and report unmatched markers, make figure labels unique, rebuild both PDFs, run converter/PDF checks, and update BUILD-REPORT. It must not edit the draft/template owned by res-s4. Do not restart the shared gateway or touch the separate InMobi research project; research-lab remains capped at res-s1 and res-s4. Updated round-3 compute policy is GPU first for model jobs; no model work is planned in this TeX lane.

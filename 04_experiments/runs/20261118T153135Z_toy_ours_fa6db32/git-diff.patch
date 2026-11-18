@@ -1,0 +1,76 @@
+===== git diff HEAD =====
+diff --git a/06_review/audits/numbers-audit.md b/06_review/audits/numbers-audit.md
+index 967212b..3da1da2 100644
+--- a/06_review/audits/numbers-audit.md
++++ b/06_review/audits/numbers-audit.md
+@@ -5,7 +5,7 @@
+ 
+ Draft: `05_paper/draft/paper.md`  
+ Index: `04_experiments/RESULTS-INDEX.json`  
+-Generated: 2026-11-08T11:38:53Z  
++Generated: 2026-11-18T15:29:35Z  
+ Toy numbers allowed: False
+ 
+ **PASS** — 0 finding(s) over 1 file(s).
+diff --git a/ops/hermes_runner.ps1 b/ops/hermes_runner.ps1
+index 4fc8f1b..b8e63e9 100644
+--- a/ops/hermes_runner.ps1
++++ b/ops/hermes_runner.ps1
+@@ -23,7 +23,7 @@ $prompt = Get-Content $PromptFile -Raw
+ $sid = if ($ResumeSession) { $ResumeSession } else { $null }
+ $continues = 0
+ $progress = Join-Path $OutDir 'PROGRESS.md'
+-$contPrompt = 'You ended your turn but your card is NOT complete (PROGRESS.md has no final CARD COMPLETE or CARD BLOCKED line). A oneshot session that ends its turn exits, so keep going in THIS turn: re-read PROGRESS.md, then immediately make the next blocking delegate_task call (at least 3 parallel tasks) and continue batch after batch. Write CARD COMPLETE (or CARD BLOCKED: reason) as the last line of PROGRESS.md only when the card is really finished.'
++$contPrompt = 'You ended your turn but your card is NOT complete (PROGRESS.md has no final CARD COMPLETE or CARD BLOCKED line). A oneshot session that ends its turn exits, so keep going in THIS turn: re-read PROGRESS.md, then immediately make the next blocking delegate_task call (exactly 3 parallel tasks) and continue batch after batch. Write CARD COMPLETE (or CARD BLOCKED: reason) as the last line of PROGRESS.md only when the card is really finished.'
+ for ($attempt = 0; $attempt -le ($MaxRetries + 8); $attempt++) {
+   $log = if ($attempt -eq 0) { Join-Path $OutDir 'run.log' } else { Join-Path $OutDir "run.r$attempt.log" }
+   if ($attempt -eq 0 -and $ResumeSession) { $args2 = $base + @('--resume', $sid, '-q', 'The gateway disconnected and the turn outcome was unknown. Check your existing session and PROGRESS.md, then continue from its last completed step. Do not repeat a completed batch.') }
+diff --git a/ops/lead_protocol_r3.txt b/ops/lead_protocol_r3.txt
+index 44ddf5b..5557de6 100644
+--- a/ops/lead_protocol_r3.txt
++++ b/ops/lead_protocol_r3.txt
+@@ -1 +1 @@
+-LEAD PROTOCOL (mandatory, owner instruction): you are a LEAD, not a worker. Work in batches; every batch is ONE delegate_task call with AT LEAST 3 parallel tasks (3-4 per batch; split the work into at least 3 independent parts every time: separate deliverables, separate files, separate checks), each a self-contained brief (goal, the exact files it may write — only files your TASK.md marks OWNED, the inputs it must read, the command that proves the result, and the path of its report under your lane's reports/ folder). Your FIRST action must be that delegate_task call. From the second batch on, one of the tasks reviews and re-runs the previous batch's output and reports mismatches. Between batches you only read the child reports, verify the key claims yourself (open the file, run the command, compare the number), decide the next batch and update PROGRESS.md; you do not do the work yourself. ALWAYS call delegate_task in blocking mode (background=false, the default) so it returns the results in this same turn; NEVER set background=true and NEVER end your turn or say you are waiting while subagents run: a oneshot session that ends its turn exits and kills its subagents. Keep working batch after batch until the card is complete. FINISH MARKER: when the card is truly finished write the line CARD COMPLETE (or CARD BLOCKED: <reason>) as the LAST line of PROGRESS.md; if you end your turn without it you will be resumed and told to continue.
++LEAD PROTOCOL (mandatory, owner instruction): you are a LEAD, not a worker. Work in batches; every batch is ONE delegate_task call with EXACTLY 3 parallel tasks (the subagent limit is 3; split the work into 3 independent parts every time: separate deliverables, separate files, separate checks), each a self-contained brief (goal, the exact files it may write — only files your TASK.md marks OWNED, the inputs it must read, the command that proves the result, and the path of its report under your lane's reports/ folder). Your FIRST action must be that delegate_task call. From the second batch on, one of the tasks reviews and re-runs the previous batch's output and reports mismatches. Between batches you only read the child reports, verify the key claims yourself (open the file, run the command, compare the number), decide the next batch and update PROGRESS.md; you do not do the work yourself. ALWAYS call delegate_task in blocking mode (background=false, the default) so it returns the results in this same turn; NEVER set background=true and NEVER end your turn or say you are waiting while subagents run: a oneshot session that ends its turn exits and kills its subagents. Keep working batch after batch until the card is complete. FINISH MARKER: when the card is truly finished write the line CARD COMPLETE (or CARD BLOCKED: <reason>) as the LAST line of PROGRESS.md; if you end your turn without it you will be resumed and told to continue.
+===== git diff --cached =====
+
+===== untracked files =====
+04_experiments/runs/20261118T153133Z_toy_baseline_fa6db32/artifacts/git-diff.patch
+04_experiments/runs/20261118T153133Z_toy_baseline_fa6db32/artifacts/git-diff.txt
+04_experiments/runs/20261118T153133Z_toy_baseline_fa6db32/artifacts/git_diff.patch
+04_experiments/runs/20261118T153133Z_toy_baseline_fa6db32/artifacts/git_diff.txt
+04_experiments/runs/20261118T153133Z_toy_baseline_fa6db32/config.json
+04_experiments/runs/20261118T153133Z_toy_baseline_fa6db32/git-diff.patch
+04_experiments/runs/20261118T153133Z_toy_baseline_fa6db32/git-diff.txt
+04_experiments/runs/20261118T153133Z_toy_baseline_fa6db32/git_diff.patch
+04_experiments/runs/20261118T153133Z_toy_baseline_fa6db32/git_diff.txt
+04_experiments/runs/20261118T153133Z_toy_baseline_fa6db32/meta.json
+04_experiments/runs/20261118T153133Z_toy_baseline_fa6db32/results.json
+04_experiments/runs/20261118T153134Z_toy_baseline_fa6db32-2/artifacts/git-diff.patch
+04_experiments/runs/20261118T153134Z_toy_baseline_fa6db32-2/artifacts/git-diff.txt
+04_experiments/runs/20261118T153134Z_toy_baseline_fa6db32-2/artifacts/git_diff.patch
+04_experiments/runs/20261118T153134Z_toy_baseline_fa6db32-2/artifacts/git_diff.txt
+04_experiments/runs/20261118T153134Z_toy_baseline_fa6db32-2/config.json
+04_experiments/runs/20261118T153134Z_toy_baseline_fa6db32-2/git-diff.patch
+04_experiments/runs/20261118T153134Z_toy_baseline_fa6db32-2/git-diff.txt
+04_experiments/runs/20261118T153134Z_toy_baseline_fa6db32-2/git_diff.patch
+04_experiments/runs/20261118T153134Z_toy_baseline_fa6db32-2/git_diff.txt
+04_experiments/runs/20261118T153134Z_toy_baseline_fa6db32-2/meta.json
+04_experiments/runs/20261118T153134Z_toy_baseline_fa6db32-2/results.json
+04_experiments/runs/20261118T153134Z_toy_baseline_fa6db32/artifacts/git-diff.patch
+04_experiments/runs/20261118T153134Z_toy_baseline_fa6db32/artifacts/git-diff.txt
+04_experiments/runs/20261118T153134Z_toy_baseline_fa6db32/artifacts/git_diff.patch
+04_experiments/runs/20261118T153134Z_toy_baseline_fa6db32/artifacts/git_diff.txt
+04_experiments/runs/20261118T153134Z_toy_baseline_fa6db32/config.json
+04_experiments/runs/20261118T153134Z_toy_baseline_fa6db32/git-diff.patch
+04_experiments/runs/20261118T153134Z_toy_baseline_fa6db32/git-diff.txt
+04_experiments/runs/20261118T153134Z_toy_baseline_fa6db32/git_diff.patch
+04_experiments/runs/20261118T153134Z_toy_baseline_fa6db32/git_diff.txt
+04_experiments/runs/20261118T153134Z_toy_baseline_fa6db32/meta.json
+04_experiments/runs/20261118T153134Z_toy_baseline_fa6db32/results.json
+sessions/R3-4b-review/PROMPT-R3.txt
+sessions/R3-4b-review/STATUS.txt
+sessions/R3-4b-review/TASK.md
+sessions/R3-7b-latex-main/PROMPT-R3.txt
+sessions/R3-7b-latex-main/STATUS.txt
+sessions/R3-7b-latex-main/TASK.md

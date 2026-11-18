@@ -1645,7 +1645,7 @@
       "file": "04_experiments/results/summary_toy.json",
       "id": "toy.accuracy.toy_baseline",
       "key": "stats.toy_baseline.mean",
-      "run_id": "20261118T151328Z_toy_baseline_d334cf7-2",
+      "run_id": "20261118T164252Z_toy_baseline_fa6db32",
       "tolerance": 0.0005,
       "toy": true
     },
@@ -1654,11 +1654,11 @@
       "file": "04_experiments/results/summary_toy.json",
       "id": "toy.accuracy.toy_ours",
       "key": "stats.toy_ours.mean",
-      "run_id": "20261118T151331Z_toy_ours_d334cf7",
+      "run_id": "20261118T164306Z_toy_ours_fa6db32",
       "tolerance": 0.0005,
       "toy": true
     }
   ],
-  "updated_at": "2026-11-18T15:13:36Z",
+  "updated_at": "2026-11-18T16:43:08Z",
   "version": 1
 }

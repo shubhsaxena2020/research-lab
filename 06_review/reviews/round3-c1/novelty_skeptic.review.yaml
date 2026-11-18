@@ -1,0 +1,45 @@
+persona: novelty_skeptic
+summary: |
+  The paper claims a reproducible four-rung negative ladder, a surface-separability audit gate, a coverage-precision pathology measurement, two control arms, and a disclosed implementation correction for a retrieval-feature abstention gate on SQuAD. It honestly shows that at a precision target without a coverage constraint the gate refuses ~75% of answerable questions and the ladder becomes uninformative, with the audit's overlap sensitivity as the most transferable measurement. The score reflects a clear but incremental delta over Abdumalikov et al.'s two-condition collapse: no documented novelty search exists anywhere in the draft, and the closest work is compared in a table but never reduced to a one-sentence, adjective-free delta.
+strengths:
+  - "Table 1 sets the closest work beside this one on data, negatives, metric and operating point, more comparison than most papers offer (§2)."
+  - "The abstract and §1 explicitly disclaim priority and generality, avoiding 'first to'/'novel' language despite the instrument framing (§1 final paragraph)."
+  - "§4.6 discloses a degenerate dense block and reports both the frozen and spec-corrected runs instead of quietly refitting."
+  - "The audit's sensitivity variant (surface features plus overlap, Table 2) is a genuinely transferable measurement that predicts the main result before fitting (§4.1)."
+weaknesses:
+  - "No documented novelty search (queries, databases, date, results) anywhere in the draft; 'not reported' is not a search and is a must-fix under this persona's protocol (§2, §9)."
+  - "The delta over Abdumalikov et al. (arXiv:2403.01461) reduces largely to more rungs plus pre-registration and controls; the four rungs are an experimental design, not a demonstrated mechanism change, and the one-sentence adjective-free delta is never stated (§1, §2, Table 1)."
+  - "Related work represents primary selective-classification / coverage-risk literature only through a survey (arXiv:2407.18418), so the obvious competing line for an abstention gate may be omitted (§2)."
+  - "The 'audit as hard gate' is a standard surface-leakage check; no evidence shows the ladder + audit + controls combination is non-obvious rather than engineering (§1 second bullet; §3.4)."
+  - "Concurrent work DeclineCraft (arXiv:2610.28340) is dismissed as 'complementary rather than nested' in one clause without stating whether its negative taxonomy subsumes any of R1-R4 (§2)."
+  - "Citation hygiene: Ho et al. arXiv:2011.01079 is self-flagged as resolving to an unrelated paper, and the abstention survey entry has no authors (§9)."
+questions:
+  - "What queries, databases, date and result counts constitute the novelty search, and where is the record?"
+  - "What is the one-sentence delta over Abdumalikov et al. that survives without adjectives?"
+  - "Does DeclineCraft's negative taxonomy subsume any of R1-R4, and if so on which axis?"
+  - "Which primary selective-classification / coverage-risk baselines were considered before framing the gate as novel?"
+soundness: 3
+presentation: 3
+contribution: 3
+confidence: 4
+overall: 6
+decision: borderline
+must_fix:
+  - claim: "The draft claims novelty for the ladder and audit but contains no documented novelty search (queries, databases, date, results)."
+    where: "§2, §9 (no search record present)"
+    evidence_needed: "An appendix or section listing search queries, databases searched, date, and counts of candidate papers found and excluded."
+  - claim: "The delta over the closest prior work (Abdumalikov et al., arXiv:2403.01461) is never stated as a single sentence without adjectives."
+    where: "§1 contribution bullets; §2; Table 1"
+    evidence_needed: "One sentence of the form 'Compared to Abdumalikov et al., this paper adds <delta>' placed in §1 or §2, where the delta is a mechanism or design change rather than more rungs."
+  - claim: "Related work may omit the obvious competing line: primary selective-classification / coverage-risk literature is represented only by a survey."
+    where: "§2"
+    evidence_needed: "Either cite primary selective-classification (coverage-risk / reject-option) work or state explicitly why it is out of scope for a retrieval-feature gate."
+  - claim: "The 'audit as hard gate' is presented as an instrument contribution but is a standard surface-leakage check; no evidence shows the ladder + audit + controls combination is non-obvious."
+    where: "§1 (second bullet); §3.4"
+    evidence_needed: "An ablation or argument showing which design component (rungs, audit, controls) is necessary for the verdict, beyond the feature-level ablations in Table 7."
+  - claim: "Concurrent work DeclineCraft is dismissed as 'complementary rather than nested' without stating whether its negative taxonomy subsumes any rung."
+    where: "§2, Table 1"
+    evidence_needed: "A sentence stating what DeclineCraft's negative classes are and which of R1-R4 they do or do not cover."
+  - claim: "Citation hygiene defects: Ho et al. arXiv:2011.01079 resolves to an unrelated paper, and the abstention survey entry lacks authors."
+    where: "§9"
+    evidence_needed: "Corrected/verified identifiers and full author lists in the reference list."

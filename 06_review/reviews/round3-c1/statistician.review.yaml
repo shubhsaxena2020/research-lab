@@ -1,0 +1,55 @@
+persona: statistician
+summary: |
+  The paper pre-registers three hypotheses over a four-rung negative ladder on SQuAD and reports a
+  negative result: at a precision-only operating point the gate refuses about 75% of answerable
+  questions, collapsing the ladder to a constant. The inferential machinery (BCa bootstrap with fixed
+  seed and resample count, paired sign tests, Holm correction over two tests, declared deviations
+  D1-D4, and a disclosed implementation correction) is unusually transparent, and the main contrasts
+  carry paired intervals. Residual concerns are that headline rates such as over-refusal and coverage
+  carry no interval, AUROC comparisons across runs and ablations rest on point estimates, the reader
+  baseline is computed on a non-random 553-item subset without an interval, and the cluster bootstrap
+  rests on only 17-18 articles. I score it borderline on the strength of the disclosed correction and
+  the remaining untested comparisons.
+strengths:
+  - "Hypotheses, criteria and deviations are frozen before results, with Holm correction over H1 and H3 and a stated reason H2 is excluded (Section 3.6, Table 4)."
+  - "Paired bootstrap intervals on the main contrasts, including the R1 minus R3 drop at the exploratory point (4.50 to 9.75 points, Section 4.3)."
+  - "Zero-width intervals at a degenerate operating point are reported as boundaries rather than certainty (Section 3.6)."
+  - "Per-rung sample sizes are shown in Table 3 (400/280/400/399 held out), and the short R2 rung is kept at its true size with an exchangeability check (Sections 3.1 and 4.7)."
+  - "The dense-feature defect is disclosed with both runs reported side by side (Section 4.6, Table 6)."
+weaknesses:
+  - "Over-refusal (75.50%) and coverage (24.50%) are headline rates with no interval (Section 4.2, Figure 2)."
+  - "AUROC is reported without intervals by design, yet runs and ablations are compared on point estimates (Section 4.6, Tables 6 and 7)."
+  - "Reader baseline AUROC 0.419 is computed on a non-random 553-item dev subset with no interval or difficulty comparison (Section 4.7)."
+  - "Cluster bootstrap rests on 17 dev and 18 test articles, which is too few clusters for reliable cluster-level inference (Section 4.7)."
+  - "Figures 1 and 2 show point estimates with no error bars and undefined uncertainty (Section 4.2)."
+  - "Table 5 omits sample sizes and gives 'not informative' in place of several intervals."
+questions:
+  - "What are paired bootstrap 95% CIs on over-refusal and coverage at both operating points?"
+  - "How much do the frozen-vs-corrected AUROC gap and the Table 7 ablation gaps move under bootstrap?"
+  - "What is the selection rule for the 553 reader items, and how does that subset compare to the full dev half?"
+  - "Does the cluster bootstrap change under a wild-cluster or t(G minus 1) correction?"
+soundness: 3
+presentation: 3
+contribution: 3
+confidence: 4
+overall: 6
+decision: borderline
+must_fix:
+  - claim: "Headline over-refusal and coverage rates are reported without uncertainty."
+    where: "Section 4.2 and Figure 2"
+    evidence_needed: "Paired bootstrap 95% CIs on over-refusal and coverage at the registered and exploratory operating points, over the 400 held-out answerable items."
+  - claim: "AUROC comparisons across runs and ablations rest on point estimates with no interval."
+    where: "Section 4.6, Tables 6 and 7"
+    evidence_needed: "Bootstrap 95% CIs on dev and held-out AUROC for the frozen and corrected runs, and on at least the all_12, no_dense and lex_overlap_only ablation AUROCs."
+  - claim: "The reader baseline AUROC is computed on a non-random 553-item subset with no interval."
+    where: "Section 4.7"
+    evidence_needed: "The selection rule and denominator for the 553 items, a bootstrap 95% CI on the 0.419 AUROC, and a comparison of subset difficulty to the full dev half."
+  - claim: "The cluster bootstrap uses only 17 dev and 18 test articles."
+    where: "Section 4.7"
+    evidence_needed: "Report the cluster count, and either a wild-cluster or t(G minus 1) interval, or justify article-level resampling with so few clusters."
+  - claim: "Table 5 control arms omit sample sizes and several intervals."
+    where: "Sections 4.4 to 4.5, Table 5"
+    evidence_needed: "Add n per arm and replace 'not informative' with intervals or a stated reason."
+  - claim: "Exploratory per-rung precisions in Table 3 lack per-cell intervals."
+    where: "Section 4.3, Table 3"
+    evidence_needed: "BCa 95% CIs for each exploratory per-rung precision at the frozen seed."

@@ -1,0 +1,427 @@
+{
+  "generated_at": "2026-11-18T15:46:41Z",
+  "directory": "06_review/reviews/round3-c1",
+  "n_reviews": 6,
+  "missing_personas": [],
+  "reviews": [
+    {
+      "persona": "methodologist",
+      "summary": "The paper measures a four-rung negative ladder with one retrieval-feature abstention\ngate on SQuAD v2.0 dev, pre-registers three hypotheses, and reports that at the\nregistered operating point the gate refuses 75.50% of answerable questions so the\nladder disappears (H1 and H3 reported refuted) while H2 transfers only degenerately.\nThe instrument around that result - the surface audit, the overlap sensitivity variant,\nthe overlap-matched and top-1 control arms, and the disclosed dense-feature defect - is\nthe part worth reading. I score it borderline rather than accept because the\nrung-separability headline (0.977 AUROC) is computed against answerable items that\nalways present the gold paragraph, the corrected run carrying the R4 collapse (12.53%)\nsits outside the pre-registration hash chain (D4), and Table 6 compares that run with\nthe frozen one at different dev-fitted operating points.",
+      "strengths": [
+        "Article-disjoint split with both thresholds fitted on dev only (Sections 3.1, 3.3); Section 3.3's check that all three thresholds sit inside the observed dev score range is the right diagnostic for a degenerate admissible region.",
+        "The separability audit is a real gate with a rebuild rule and a published failure path (Section 3.4), and R5 is reported honestly at 0.721 against the 0.750 gate rather than dropped (Table 2).",
+        "Round-1 defects are answered with new experiments rather than prose: the top-1-presented arm (Section 4.5), the leave-one-group-out ablation (Table 7), and the exchangeability and cluster checks (Section 4.7).",
+        "The dense-feature defect is disclosed with both runs' numbers and the frozen run left unchanged (Section 4.6), which is the behaviour a pre-registered paper should show when the frozen code is wrong.",
+        "The refusal-rate versus precision distinction is now defined explicitly, with both quantities always labelled (Section 3.5), fixing the earlier mislabelling."
+      ],
+      "weaknesses": [
+        "The audit's 0.977 AUROC (Table 2) separates each rung from answerable items that always present the gold paragraph, so it cannot distinguish rung hardness from 'is this the gold paragraph'; the objection the paper makes for R4 applies to R1-R3 and is not made there (Sections 4.1, 4.5).",
+        "The corrected run carrying the R4 collapse (12.53% refusal, 0.874 AUROC) is labelled deviation D4 while the pre-registration hash chain covers only D1-D3 (Sections 1, 4.6, 5.3).",
+        "Table 6 compares frozen and corrected bands at different dev-fitted operating points (thresholds [0.9072, 0.9478] vs [0.5232, 0.5370]; over-refusal 75.50% vs 91.50%) and omits the corrected exploratory coverage row (25.44% to 39.60%), so the precision and coverage rows are not the same cut on two feature sets (Section 4.6).",
+        "H1 and H3 are verdicted REFUTED in Table 4 while the text calls them 'criterion not exercisable at this operating point'; the exploratory arm shows a 7.00-point R1-R3 drop in H1's predicted direction (95% CI [4.50, 9.75]), so 'refuted' and 'not exercisable' are conflated (Abstract, Table 4, Section 4.2).",
+        "The abstract mixes runs inside one comparison, quoting R5 at 89.25% (frozen) and R4 at 12.53% (corrected) in the same sentence (Abstract, Sections 4.4, 4.6).",
+        "Table 7's leave-one-group-out ablations refit the threshold for each subset and vary feature count with group size, so a group's contribution is confounded with model capacity; no control holds feature count fixed (Section 4.6, Table 7).",
+        "Held-out R2 has n=280 of 400 and the exchangeability check reports only the dev split (273 kept, 127 dropped, smallest p=0.052) while claiming coverage of 'either split' (Sections 3.1, 4.7).",
+        "Whether the IDF used to anchor rung R2 was computed within each split pool or over the full corpus is not stated, leaving a possible leakage path in item construction (Sections 3.1, 3.2)."
+      ],
+      "questions": [
+        "If the six-surface-plus-overlap audit were re-run inside the D3 top-1-presented items, where rung 0 is not always the gold paragraph, would R1 still separate at about 0.977?",
+        "Under the corrected features, what is R5's refusal rate, and does the 'between R2 and R3' ordering still hold?",
+        "Was the IDF for R2 computed within each split pool or over the full corpus, and were the 40 inspected R4 items sampled at random?",
+        "Can H1 and H3 be re-stated as 'not exercisable' rather than 'refuted' without changing the registered tests?",
+        "Does the corrected band's R4 collapse survive a matched-coverage comparison with the frozen band?"
+      ],
+      "soundness": 2,
+      "presentation": 3,
+      "contribution": 3,
+      "confidence": 4,
+      "overall": 5,
+      "decision": "borderline",
+      "must_fix": [
+        {
+          "claim": "The rung-separability headline (0.977 AUROC) is computed against answerable items that always present the gold paragraph, so it cannot separate rung hardness from gold-paragraph identity.",
+          "where": "Section 4.1, Table 2",
+          "evidence_needed": "Re-run the six-surface-plus-overlap audit inside the D3 top-1-presented items, where rung 0 is not always gold, and report R1-R3 AUROCs beside the current 0.977 / 0.889 / 0.923."
+        },
+        {
+          "claim": "The corrected run that carries the R4 collapse (12.53% refusal, 0.874 AUROC) is labelled a declared deviation although the pre-registration hash chain stops at D3.",
+          "where": "Section 1, Section 4.6, Section 5.3",
+          "evidence_needed": "PREREGISTRATION.sha256 records three hashes (frozen, D1, D2+D3) and Section 1 ends the deviation list at D3; either add the D4 hash or stop calling it declared and stop recommending its numbers in Section 5.3."
+        },
+        {
+          "claim": "Table 6 compares the frozen and corrected bands at different dev-fitted operating points and omits the corrected exploratory coverage row.",
+          "where": "Section 4.6, Table 6",
+          "evidence_needed": "Add the corrected thresholds ([0.5232, 0.5370] against [0.9072, 0.9478]) and the exploratory coverage row (25.44% to 39.60%) to Table 6, or report R4 at matched coverage and state that the precision rows are not the same cut on two feature sets."
+        },
+        {
+          "claim": "H1 and H3 are verdicted REFUTED in Table 4 while the text calls them 'criterion not exercisable at this operating point', conflating 'criterion not met' with 'hypothesis false'.",
+          "where": "Abstract, Table 4, Section 4.2",
+          "evidence_needed": "Distinguish degenerate from refuted as Section 4.2 already does for H2, and reconcile a flat 'H1 refuted' with the exploratory arm's 7.00-point R1-R3 drop in the predicted direction (95% CI [4.50, 9.75])."
+        },
+        {
+          "claim": "The abstract mixes frozen and corrected numbers in one comparison, quoting R5 at 89.25% (frozen) and R4 at 12.53% (corrected) in the same sentence.",
+          "where": "Abstract, Sections 4.4 and 4.6",
+          "evidence_needed": "Label every mixed number with its run, or report both R5 and R4 under the same run (frozen exploratory R4 84.71%; corrected exploratory R5 93.75%)."
+        },
+        {
+          "claim": "Table 7's leave-one-group-out ablations refit the threshold per subset and vary feature count with group size, confounding a group's contribution with model capacity.",
+          "where": "Section 4.6, Table 7",
+          "evidence_needed": "Add a control that holds feature count fixed (e.g. replace the removed group with permuted features of the same dimension) and report held-out AUROC and over-refusal, or state that the ablation is descriptive."
+        },
+        {
+          "claim": "Held-out R2 has n=280 of 400 and the exchangeability check reports only the dev split while claiming coverage of 'either split'.",
+          "where": "Sections 3.1 and 4.7",
+          "evidence_needed": "Report the held-out kept/dropped counts and their p-values beside the dev 273/127 split (smallest p=0.052), or restrict the exchangeability claim to dev."
+        },
+        {
+          "claim": "Whether the IDF used to anchor rung R2 was computed within each split pool or over the full corpus is not stated, leaving a possible leakage path in item construction.",
+          "where": "Sections 3.1 and 3.2",
+          "evidence_needed": "State whether R2's highest-IDF content token was selected using within-split or corpus-wide IDF and whether any held-out article contributed to that statistic."
+        }
+      ],
+      "_file": "methodologist.review.yaml"
+    },
+    {
+      "persona": "domain_expert",
+      "summary": "The paper audits how negative construction affects a retrieval-feature abstention gate on SQuAD v2.0 dev, reporting a negative result: at a precision target without a coverage constraint the gate refuses 75.50% of answerable questions and the per-rung refusal rates saturate. The audit's transferable finding is that question-passage overlap separates constructed negatives from answerable items almost perfectly (AUROC 0.977 on R1), and the disclosed dense-feature defect in section 4.6 is handled honestly. My main reservation is construct validity: the study uses only SQuAD's answerable rows and never evaluates on the field's own unanswerable questions, and rung R4's labels are produced by automatic span substitution with no human verification, so the \"negative hardness\" conclusion may not transfer to real unanswerable passages.",
+      "strengths": [
+        "Pre-registration with three recorded hashes and declared deviations D1-D4, plus a disclosed implementation defect in section 4.6, is unusual transparency for this kind of study.",
+        "The separability audit in section 3.4 is run as a hard gate before any result is reported, with a stated 0.750 AUROC threshold and a length-matched rebuild rule.",
+        "Over-refusal and coverage are reported beside every precision figure (Tables 3-6), which is the companion reporting the field needs.",
+        "Control arms R5 (overlap-matched) and the top-1-presented variant (sections 4.4-4.5) localise what the gate is actually measuring.",
+        "The dataset counts match SQuAD v2.0 dev exactly: 35 articles, 1204 paragraphs, 11873 questions, 5928 answerable."
+      ],
+      "weaknesses": [
+        "Construct validity gap: section 3.1 excludes SQuAD v2.0's own unanswerable questions ('impossible rows are a different kind of negative and are out of scope'), yet those adversarially authored questions are the field's standard construct for unanswerability; the gate is never tested on them.",
+        "Rung R4 labels are produced by automatic span substitution with no human verification; section 5.4 admits forty inspected items preserved surface type but not grammatical role, so the 'R4 breaks the gate' claim rests on unverified labels.",
+        "No field-standard baseline: the SQuAD 2.0 answerability approach (a fine-tuned reader with a no-answer threshold) is absent; the reader baseline used (mean generated-token log-probability, section 4.7) is a weak proxy and reaches 0.419 AUROC.",
+        "No field companion metric: SQuAD-style F1/EM with no-answer prediction and selective-prediction risk at coverage (or AURC) are not reported; AUROC is reported without intervals.",
+        "Sampling of the 400 answerable questions per half is not specified as random or stratified, and article counts per split are not reported (section 3.1).",
+        "Related work (section 2) does not engage the unanswerable-question-detection / answerability-prediction literature or selective-classification work (e.g. El-Yaniv and Wiener) that already studied coverage-precision tradeoffs.",
+        "The term 'support' is used for span presence (Abstract, section 1); SQuAD's construct is answerability, not passage support, and the two are not identical."
+      ],
+      "questions": [
+        "Why are SQuAD v2.0's own unanswerable questions excluded, and would the ladder's conclusions hold on them?",
+        "What is the sampling procedure for the 400 questions per half, and how many articles fall in each split?",
+        "Has rung R4 been human-checked for actual unanswerability, and at what rate do substitutions fail to create an unanswerable item?",
+        "Would a fine-tuned SQuAD 2.0 answerability classifier change the paper's conclusion about retrieval-feature gates?",
+        "Can the gate be reported on selective risk at a fixed coverage and AURC, and on SQuAD-style F1?"
+      ],
+      "soundness": 3,
+      "presentation": 3,
+      "contribution": 3,
+      "confidence": 4,
+      "overall": 6,
+      "decision": "borderline",
+      "must_fix": [
+        {
+          "claim": "The study never evaluates on SQuAD v2.0's own unanswerable questions, which are the field's standard construct for unanswerability.",
+          "where": "Section 3.1, 'Only the answerable rows are used'",
+          "evidence_needed": "Either run the ladder on the 5945 SQuAD v2.0 dev unanswerable questions or state and justify why constructed negatives substitute for them."
+        },
+        {
+          "claim": "Rung R4 labels are produced by automatic span substitution with no human verification or agreement statistic.",
+          "where": "Section 3.1 table, R4 row; section 5.4",
+          "evidence_needed": "A label-quality audit of R4 reporting how many of N substituted items are genuinely unanswerable, or a reframing of R4 as answer-substituted rather than unanswerable."
+        },
+        {
+          "claim": "The field-standard answerability baseline (a fine-tuned reader with a no-answer threshold) is absent.",
+          "where": "Section 2, 'Model confidence as a gate'; section 4.2 baselines B1 and B2",
+          "evidence_needed": "Add a fine-tuned SQuAD 2.0 answerability classifier baseline (or justify scoping the comparison to retrieval features only) and report whether the gate survives."
+        },
+        {
+          "claim": "No field companion metric is reported: SQuAD-style F1/EM or selective-prediction risk at coverage (AURC) is missing.",
+          "where": "Sections 4.2-4.3, Tables 3-4",
+          "evidence_needed": "Report selective risk at the registered coverage and an AURC, or justify the metric choice against the field standard."
+        },
+        {
+          "claim": "The sampling procedure for the 400 answerable questions per half and the article counts per split are not stated.",
+          "where": "Section 3.1",
+          "evidence_needed": "State whether sampling is random or stratified, by article, and report the number of articles per split."
+        },
+        {
+          "claim": "Related work does not engage the answerability-detection or selective-classification literature that already studied this problem.",
+          "where": "Section 2",
+          "evidence_needed": "Add at least one body of work (e.g. SQuAD 2.0 answerability baselines or El-Yaniv and Wiener on selective classification) and state what the paper argues against it."
+        }
+      ],
+      "_file": "domain_expert.review.yaml"
+    },
+    {
+      "persona": "statistician",
+      "summary": "The paper pre-registers three hypotheses over a four-rung negative ladder on SQuAD and reports a\nnegative result: at a precision-only operating point the gate refuses about 75% of answerable\nquestions, collapsing the ladder to a constant. The inferential machinery (BCa bootstrap with fixed\nseed and resample count, paired sign tests, Holm correction over two tests, declared deviations\nD1-D4, and a disclosed implementation correction) is unusually transparent, and the main contrasts\ncarry paired intervals. Residual concerns are that headline rates such as over-refusal and coverage\ncarry no interval, AUROC comparisons across runs and ablations rest on point estimates, the reader\nbaseline is computed on a non-random 553-item subset without an interval, and the cluster bootstrap\nrests on only 17-18 articles. I score it borderline on the strength of the disclosed correction and\nthe remaining untested comparisons.",
+      "strengths": [
+        "Hypotheses, criteria and deviations are frozen before results, with Holm correction over H1 and H3 and a stated reason H2 is excluded (Section 3.6, Table 4).",
+        "Paired bootstrap intervals on the main contrasts, including the R1 minus R3 drop at the exploratory point (4.50 to 9.75 points, Section 4.3).",
+        "Zero-width intervals at a degenerate operating point are reported as boundaries rather than certainty (Section 3.6).",
+        "Per-rung sample sizes are shown in Table 3 (400/280/400/399 held out), and the short R2 rung is kept at its true size with an exchangeability check (Sections 3.1 and 4.7).",
+        "The dense-feature defect is disclosed with both runs reported side by side (Section 4.6, Table 6)."
+      ],
+      "weaknesses": [
+        "Over-refusal (75.50%) and coverage (24.50%) are headline rates with no interval (Section 4.2, Figure 2).",
+        "AUROC is reported without intervals by design, yet runs and ablations are compared on point estimates (Section 4.6, Tables 6 and 7).",
+        "Reader baseline AUROC 0.419 is computed on a non-random 553-item dev subset with no interval or difficulty comparison (Section 4.7).",
+        "Cluster bootstrap rests on 17 dev and 18 test articles, which is too few clusters for reliable cluster-level inference (Section 4.7).",
+        "Figures 1 and 2 show point estimates with no error bars and undefined uncertainty (Section 4.2).",
+        "Table 5 omits sample sizes and gives 'not informative' in place of several intervals."
+      ],
+      "questions": [
+        "What are paired bootstrap 95% CIs on over-refusal and coverage at both operating points?",
+        "How much do the frozen-vs-corrected AUROC gap and the Table 7 ablation gaps move under bootstrap?",
+        "What is the selection rule for the 553 reader items, and how does that subset compare to the full dev half?",
+        "Does the cluster bootstrap change under a wild-cluster or t(G minus 1) correction?"
+      ],
+      "soundness": 3,
+      "presentation": 3,
+      "contribution": 3,
+      "confidence": 4,
+      "overall": 6,
+      "decision": "borderline",
+      "must_fix": [
+        {
+          "claim": "Headline over-refusal and coverage rates are reported without uncertainty.",
+          "where": "Section 4.2 and Figure 2",
+          "evidence_needed": "Paired bootstrap 95% CIs on over-refusal and coverage at the registered and exploratory operating points, over the 400 held-out answerable items."
+        },
+        {
+          "claim": "AUROC comparisons across runs and ablations rest on point estimates with no interval.",
+          "where": "Section 4.6, Tables 6 and 7",
+          "evidence_needed": "Bootstrap 95% CIs on dev and held-out AUROC for the frozen and corrected runs, and on at least the all_12, no_dense and lex_overlap_only ablation AUROCs."
+        },
+        {
+          "claim": "The reader baseline AUROC is computed on a non-random 553-item subset with no interval.",
+          "where": "Section 4.7",
+          "evidence_needed": "The selection rule and denominator for the 553 items, a bootstrap 95% CI on the 0.419 AUROC, and a comparison of subset difficulty to the full dev half."
+        },
+        {
+          "claim": "The cluster bootstrap uses only 17 dev and 18 test articles.",
+          "where": "Section 4.7",
+          "evidence_needed": "Report the cluster count, and either a wild-cluster or t(G minus 1) interval, or justify article-level resampling with so few clusters."
+        },
+        {
+          "claim": "Table 5 control arms omit sample sizes and several intervals.",
+          "where": "Sections 4.4 to 4.5, Table 5",
+          "evidence_needed": "Add n per arm and replace 'not informative' with intervals or a stated reason."
+        },
+        {
+          "claim": "Exploratory per-rung precisions in Table 3 lack per-cell intervals.",
+          "where": "Section 4.3, Table 3",
+          "evidence_needed": "BCa 95% CIs for each exploratory per-rung precision at the frozen seed."
+        }
+      ],
+      "_file": "statistician.review.yaml"
+    },
+    {
+      "persona": "novelty_skeptic",
+      "summary": "The paper claims a reproducible four-rung negative ladder, a surface-separability audit gate, a coverage-precision pathology measurement, two control arms, and a disclosed implementation correction for a retrieval-feature abstention gate on SQuAD. It honestly shows that at a precision target without a coverage constraint the gate refuses ~75% of answerable questions and the ladder becomes uninformative, with the audit's overlap sensitivity as the most transferable measurement. The score reflects a clear but incremental delta over Abdumalikov et al.'s two-condition collapse: no documented novelty search exists anywhere in the draft, and the closest work is compared in a table but never reduced to a one-sentence, adjective-free delta.",
+      "strengths": [
+        "Table 1 sets the closest work beside this one on data, negatives, metric and operating point, more comparison than most papers offer (§2).",
+        "The abstract and §1 explicitly disclaim priority and generality, avoiding 'first to'/'novel' language despite the instrument framing (§1 final paragraph).",
+        "§4.6 discloses a degenerate dense block and reports both the frozen and spec-corrected runs instead of quietly refitting.",
+        "The audit's sensitivity variant (surface features plus overlap, Table 2) is a genuinely transferable measurement that predicts the main result before fitting (§4.1)."
+      ],
+      "weaknesses": [
+        "No documented novelty search (queries, databases, date, results) anywhere in the draft; 'not reported' is not a search and is a must-fix under this persona's protocol (§2, §9).",
+        "The delta over Abdumalikov et al. (arXiv:2403.01461) reduces largely to more rungs plus pre-registration and controls; the four rungs are an experimental design, not a demonstrated mechanism change, and the one-sentence adjective-free delta is never stated (§1, §2, Table 1).",
+        "Related work represents primary selective-classification / coverage-risk literature only through a survey (arXiv:2407.18418), so the obvious competing line for an abstention gate may be omitted (§2).",
+        "The 'audit as hard gate' is a standard surface-leakage check; no evidence shows the ladder + audit + controls combination is non-obvious rather than engineering (§1 second bullet; §3.4).",
+        "Concurrent work DeclineCraft (arXiv:2610.28340) is dismissed as 'complementary rather than nested' in one clause without stating whether its negative taxonomy subsumes any of R1-R4 (§2).",
+        "Citation hygiene: Ho et al. arXiv:2011.01079 is self-flagged as resolving to an unrelated paper, and the abstention survey entry has no authors (§9)."
+      ],
+      "questions": [
+        "What queries, databases, date and result counts constitute the novelty search, and where is the record?",
+        "What is the one-sentence delta over Abdumalikov et al. that survives without adjectives?",
+        "Does DeclineCraft's negative taxonomy subsume any of R1-R4, and if so on which axis?",
+        "Which primary selective-classification / coverage-risk baselines were considered before framing the gate as novel?"
+      ],
+      "soundness": 3,
+      "presentation": 3,
+      "contribution": 3,
+      "confidence": 4,
+      "overall": 6,
+      "decision": "borderline",
+      "must_fix": [
+        {
+          "claim": "The draft claims novelty for the ladder and audit but contains no documented novelty search (queries, databases, date, results).",
+          "where": "§2, §9 (no search record present)",
+          "evidence_needed": "An appendix or section listing search queries, databases searched, date, and counts of candidate papers found and excluded."
+        },
+        {
+          "claim": "The delta over the closest prior work (Abdumalikov et al., arXiv:2403.01461) is never stated as a single sentence without adjectives.",
+          "where": "§1 contribution bullets; §2; Table 1",
+          "evidence_needed": "One sentence of the form 'Compared to Abdumalikov et al., this paper adds <delta>' placed in §1 or §2, where the delta is a mechanism or design change rather than more rungs."
+        },
+        {
+          "claim": "Related work may omit the obvious competing line: primary selective-classification / coverage-risk literature is represented only by a survey.",
+          "where": "§2",
+          "evidence_needed": "Either cite primary selective-classification (coverage-risk / reject-option) work or state explicitly why it is out of scope for a retrieval-feature gate."
+        },
+        {
+          "claim": "The 'audit as hard gate' is presented as an instrument contribution but is a standard surface-leakage check; no evidence shows the ladder + audit + controls combination is non-obvious.",
+          "where": "§1 (second bullet); §3.4",
+          "evidence_needed": "An ablation or argument showing which design component (rungs, audit, controls) is necessary for the verdict, beyond the feature-level ablations in Table 7."
+        },
+        {
+          "claim": "Concurrent work DeclineCraft is dismissed as 'complementary rather than nested' without stating whether its negative taxonomy subsumes any rung.",
+          "where": "§2, Table 1",
+          "evidence_needed": "A sentence stating what DeclineCraft's negative classes are and which of R1-R4 they do or do not cover."
+        },
+        {
+          "claim": "Citation hygiene defects: Ho et al. arXiv:2011.01079 resolves to an unrelated paper, and the abstention survey entry lacks authors.",
+          "where": "§9",
+          "evidence_needed": "Corrected/verified identifiers and full author lists in the reference list."
+        }
+      ],
+      "_file": "novelty_skeptic.review.yaml"
+    },
+    {
+      "persona": "reproducibility_reviewer",
+      "summary": "The paper reports a pre-registered negative result on a four-rung negative ladder for a retrieval-feature abstention gate over SQuAD v2.0, with public data, an end-to-end command block, and disclosed defects. Reproducibility is above average in intent but blocked on execution: no seed is given for the article split or item sampling, no lockfile or hardware note exists, no run id maps a headline number to a logged output, and the code licence is unstated. The frozen run's pre-registration hash is also recorded as a single '#' character, which breaks audit of the freeze from the paper alone.",
+      "strengths": [
+        "§8 gives a literal, end-to-end command sequence covering every table, figure, control arm and ablation, including the spec-corrected re-run.",
+        "Public data with stated licences and per-request URL/status/size/checksum logs in 04_experiments/data/TRANSFER-DATA.md (§7).",
+        "Bootstrap seed (12345), 10000 resamples, BCa method, paired joint resampling and article-level clustering cross-check are all stated (§3.6, §4.7).",
+        "The paper names its own irreproducible/degenerate parts — the dense-block defect (§4.6), the '#' hash defect (§8), R2 incompleteness and the exploratory over-refusal breach — which strengthens it.",
+        "Numerals are bound to 04_experiments/RESULTS-INDEX.json and tables are generated by make_paper_assets.py rather than hand-typed (title block)."
+      ],
+      "weaknesses": [
+        "No seed is given for the article-disjoint dev/held-out split or for the 400-question per-rung sampling, so the 1873/1879 item sets cannot be regenerated (§3.1, §8).",
+        "No lockfile or pinned requirements; interpreter and library versions live only in an unspecified 'session status file beside the results' (§8).",
+        "No run id or output file maps any headline number to a logged run, despite the claim that every numeral is bound to RESULTS-INDEX.json (§8; Abstract; Tables 3-7).",
+        "Code licence is not stated even though data licences are, so the artifact's release terms are undefined (§7).",
+        "The frozen run records its pre-registration hash as a single '#' character because the hash-reading line splits on whitespace and takes the first token of a comment line (§8).",
+        "Logistic-regression and gate hyperparameters (penalty, C, solver, threshold search) are unspecified (§3.3, §3.4).",
+        "No smoke test or minimum configuration is documented, and the full run's hardware requirement is unstated (§8).",
+        "R4's answer-span replacement rule ('same-surface-type value') and the reader model used for the §4.7 baseline are unnamed (§3.1, §4.7)."
+      ],
+      "questions": [
+        "What is the article-split seed, and where is the committed split file with its checksum?",
+        "Will a pinned requirements file and a hardware/CUDA/OS note be added before submission?",
+        "Can run ids or results-file paths be added beside each command in §8?",
+        "Under what licence will the code be released, and is a LICENSE file committed?",
+        "Has the '#' hash-reading defect been fixed in the current repository state?",
+        "What are the exact logistic-regression hyperparameters in gate.py?"
+      ],
+      "soundness": 2,
+      "presentation": 3,
+      "contribution": 3,
+      "confidence": 4,
+      "overall": 5,
+      "decision": "borderline",
+      "must_fix": [
+        {
+          "claim": "The article-disjoint dev/held-out split and the per-rung item sampling have no stated seed, so the 1873/1879 item sets cannot be regenerated.",
+          "where": "§3.1, §8 (build_items.py, 'seeds fixed')",
+          "evidence_needed": "The integer seed(s) for article splitting and for the 400-question sampling per split, plus the committed split file path and sha256 and the sampling script's RNG call."
+        },
+        {
+          "claim": "No lockfile or pinned requirements are shipped; library and interpreter versions live only in an unspecified session status file.",
+          "where": "§8, final paragraph",
+          "evidence_needed": "A requirements.txt or lockfile with exact pins committed in the repo, plus OS, CPU/GPU model and count, driver/CUDA versions, and the Python interpreter version recorded in §8."
+        },
+        {
+          "claim": "Headline numbers are bound to RESULTS-INDEX.json but no run id or output file is given, so a rerun cannot be checked against the reported value.",
+          "where": "§8 command block; Abstract; Tables 3-7",
+          "evidence_needed": "For each table, the run id or results JSON path and the command that produced it, listed beside the command in §8."
+        },
+        {
+          "claim": "The code licence is not stated even though data licences are, so the artifact's release terms are undefined.",
+          "where": "§7",
+          "evidence_needed": "A LICENSE file in the repository root and a one-line licence statement in §7 naming it."
+        },
+        {
+          "claim": "The frozen run records its pre-registration hash as a single '#' character, so the freeze cannot be audited from the paper's reported line.",
+          "where": "§8, penultimate paragraph",
+          "evidence_needed": "The corrected hash-reading line (or the four hashes from PREREGISTRATION.sha256 printed in §8) and a re-run showing the recorded hash matches."
+        },
+        {
+          "claim": "Logistic-regression and gate hyperparameters are unspecified.",
+          "where": "§3.3, §3.4",
+          "evidence_needed": "The exact model configuration (penalty, C, solver, max_iter, standardisation) and threshold-search procedure as committed in gate.py, quoted in §3.3."
+        },
+        {
+          "claim": "No smoke test or minimum configuration is provided, and the full run's resource needs are unstated, so a reviewer cannot check the artifact in minutes.",
+          "where": "§8",
+          "evidence_needed": "A documented smoke-test command on a small config (single CPU, under ten minutes) and the hardware requirement for the full run."
+        },
+        {
+          "claim": "R4's answer-span replacement rule and the reader model used for the §4.7 baseline are unnamed, so those two results cannot be reproduced.",
+          "where": "§3.1, §4.7",
+          "evidence_needed": "The type-matching rule and any inspected examples for R4 substitutions, and the reader model name and version, in §3.1 and §4.7 respectively."
+        }
+      ],
+      "_file": "reproducibility_reviewer.review.yaml"
+    },
+    {
+      "persona": "clarity_reviewer",
+      "summary": "The paper claims a negative result for a retrieval-feature abstention gate and a positive one for a\nfour-rung negative ladder plus a separability audit, reporting that a precision target without a\ncoverage constraint refuses 75.50% of answerable questions. The evidence largely supports the negative\nverdict, and the paper's self-disclosure of the misnamed quantity and the degenerate dense block is a\ngenuine strength. The score reflects an abstract that overstates both the surface-feature separation\nand the generality of its takeaways, plus a Table 5 column header that reuses \"abstain precision\"\nfor quantities that are not precision.",
+      "strengths": [
+        "Section 3.5 renames the pre-registered quantity and reports both refusal rate and precision with distinct labels (Section 3.5, Table 3).",
+        "Section 4.6 discloses the degenerate dense block and reports frozen and spec-corrected runs side by side (Table 6).",
+        "Figure 2 caption is self-contained, giving coverage, pooled precision and over-refusal for both operating points (Section 4.2).",
+        "Section 6 lists eight concrete threats to validity, including the dense-block defect and the incomplete R2 rung (Section 6).",
+        "Tables 3 and 7 carry per-rung n denominators, so refusal rates are checkable from the page (Tables 3, 7)."
+      ],
+      "weaknesses": [
+        "Abstract says 'Six surface features separate no rung' while reporting R4 AUROC 0.415, which Section 3.4 calls separation of equal magnitude with the sign flipped (Abstract, Table 2).",
+        "Abstract places overlap-matched R5 (89.25%) 'between' R2 (91.07%) and R3 (92.75%); 89.25% is below R2, not between them (Abstract; Tables 3, 5).",
+        "Abstract conflates over-refusal with per-rung precision: 'the refusals are mostly answerable questions... the band's precision is 56.98% on R1', but 56.98% negatives is not 'mostly answerable' (Abstract; Table 3).",
+        "Table 5's column header 'Abstain precision' holds refusal rates and P(miss | refused), while its caption says precision is reported only in Table 3 (Section 4.4, Table 5).",
+        "'abstain recall' is used in the abstract and Section 3.3 but never defined; Section 3.5's naming correction covers only refusal rate and precision (Abstract, Sections 3.3, 3.5).",
+        "The abstract's closing sentences generalise beyond the paper's stated scope ('We claim neither priority nor generality beyond one corpus family...') (Abstract; Section 1).",
+        "Figure 1's caption in Section 4.2 references 'spec-corrected' bands before Section 4.6 introduces the correction (Section 4.2, Figure 1).",
+        "No section is titled 'Limitations'; Section 6 is 'Threats to validity' and Section 5.4 reads as future work (Sections 5.4, 6)."
+      ],
+      "questions": [
+        "Can the abstract's surface-feature claim be rewritten as 'no rung exceeds the 0.750 gate on the six pre-registered surface features, including R4's inverted separation of 0.415'?",
+        "Should Table 5 be relabelled 'Refusal rate / P(miss | refused)' with precision confined to Table 3?",
+        "Will the authors add a one-line definition of 'abstain recall' (or rename it to the quantity actually maximised)?",
+        "Can the abstract's final two sentences be scoped to 'in this corpus, feature stack and gate family'?"
+      ],
+      "soundness": 3,
+      "presentation": 3,
+      "contribution": 3,
+      "confidence": 4,
+      "overall": 6,
+      "decision": "borderline",
+      "must_fix": [
+        {
+          "claim": "The abstract states that six surface features 'separate no rung' while reporting R4 AUROC 0.415, which the paper itself calls separation of equal magnitude with the sign flipped.",
+          "where": "Abstract, Table 2",
+          "evidence_needed": "Section 3.4 and Table 2 reporting R4 AUROC 0.415 and its inverted separation, with the 0.750 one-sided gate."
+        },
+        {
+          "claim": "The abstract places overlap-matched R5 (89.25%) between R2 (91.07%) and R3 (92.75%), but 89.25% is below R2.",
+          "where": "Abstract",
+          "evidence_needed": "Table 3 R2 91.07% and R3 92.75%; Table 5 R5 89.25% and Section 4.4's ordering between R2 and R4."
+        },
+        {
+          "claim": "The abstract conflates over-refusal (75.50%) with per-rung precision (56.98% on R1), incorrectly summarising R1's refusals as 'mostly answerable'.",
+          "where": "Abstract",
+          "evidence_needed": "Table 3: R1 precision 56.98% (majority negatives) and over-refusal 75.50% (answerable questions refused)."
+        },
+        {
+          "claim": "Table 5's column header 'Abstain precision' is used for refusal rates and P(miss | refused), contradicting its own caption.",
+          "where": "Section 4.4, Table 5",
+          "evidence_needed": "Table 5 caption 'Precision is reported for the main ladder only (Table 3)' alongside the 'Abstain precision' header."
+        },
+        {
+          "claim": "The undefined term 'abstain recall' appears in the abstract and Section 3.3, while Section 3.5 defines only refusal rate and precision.",
+          "where": "Abstract, Section 3.3",
+          "evidence_needed": "Section 3.5 naming correction, which does not define abstain recall."
+        },
+        {
+          "claim": "The abstract's closing generalisations exceed the paper's stated scope of one corpus family, one feature stack and one gate family.",
+          "where": "Abstract, final sentence",
+          "evidence_needed": "Section 1's scope disclaimer ('We claim neither priority nor generality beyond...')."
+        },
+        {
+          "claim": "Figure 1's caption in Section 4.2 references spec-corrected bands before the correction is introduced in Section 4.6.",
+          "where": "Section 4.2, Figure 1",
+          "evidence_needed": "Figure 1 caption mentioning spec-corrected bands; correction introduced in Section 4.6."
+        }
+      ],
+      "_file": "clarity_reviewer.review.yaml"
+    }
+  ]
+}

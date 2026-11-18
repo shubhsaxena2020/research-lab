@@ -4,3 +4,5 @@ __pycache__/
 .venv/
 ops/.nilabh_env
 02_literature/related-work-r3/raw/*.pdf
+
+tools/tectonic/

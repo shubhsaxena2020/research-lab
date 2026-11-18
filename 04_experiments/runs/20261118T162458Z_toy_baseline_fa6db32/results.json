@@ -1,0 +1,17 @@
+{
+  "_meta": {
+    "config_name": "toy_baseline",
+    "experiment": "toy",
+    "n": 90,
+    "run_id": "20261118T162458Z_toy_baseline_fa6db32",
+    "seed": 0,
+    "split": "test",
+    "toy": true
+  },
+  "accuracy": 0.877778,
+  "accuracy_train": 0.838095,
+  "f1_macro": 0.876543,
+  "model": "centroid",
+  "n_test": 90,
+  "n_train": 210
+}

@@ -1,0 +1,9 @@
+## Pass 2 complete
+
+I assigned idle res-s1 to **R3-7c-latex-citations**, which targets the three verified build issues: transient Windows file-mapping failures, missing LaTeX citations, and duplicate figure labels.
+
+- Created [TASK.md](C:/Users/shubh/research-lab/sessions/R3-7c-latex-citations/TASK.md) and [PROMPT-R3.txt](C:/Users/shubh/research-lab/sessions/R3-7c-latex-citations/PROMPT-R3.txt). The prompt has no double quotes. The lane owns only `05_paper/latex-build/**` and its lane folder; it must leave the draft and template to res-s4.
+- Appended Checkpoint 7 to [HEAD-REVIEW.md](C:/Users/shubh/research-lab/orchestration/HEAD-REVIEW.md).
+- Launched the runner on res-s1 with budget 10800. Confirmed Hermes PID **18000**; the two active research-lab profiles are res-s1 and res-s4. I did not inspect or modify res-s4.
+
+The lane will use only existing BibTeX keys for citation markers, report unmatched citations without inventing entries, rebuild both PDFs, run the converter and PDF checks, and update `BUILD-REPORT.md`. Claude Code should independently verify those checks and confirm the lane did not touch draft/template files. Full notes are in [REPORT-pass2.md](C:/Users/shubh/research-lab/sessions/R3-7c-latex-citations/REPORT-pass2.md).

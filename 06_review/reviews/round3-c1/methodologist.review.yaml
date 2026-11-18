@@ -1,0 +1,65 @@
+persona: methodologist
+summary: |
+  The paper measures a four-rung negative ladder with one retrieval-feature abstention
+  gate on SQuAD v2.0 dev, pre-registers three hypotheses, and reports that at the
+  registered operating point the gate refuses 75.50% of answerable questions so the
+  ladder disappears (H1 and H3 reported refuted) while H2 transfers only degenerately.
+  The instrument around that result - the surface audit, the overlap sensitivity variant,
+  the overlap-matched and top-1 control arms, and the disclosed dense-feature defect - is
+  the part worth reading. I score it borderline rather than accept because the
+  rung-separability headline (0.977 AUROC) is computed against answerable items that
+  always present the gold paragraph, the corrected run carrying the R4 collapse (12.53%)
+  sits outside the pre-registration hash chain (D4), and Table 6 compares that run with
+  the frozen one at different dev-fitted operating points.
+strengths:
+  - "Article-disjoint split with both thresholds fitted on dev only (Sections 3.1, 3.3); Section 3.3's check that all three thresholds sit inside the observed dev score range is the right diagnostic for a degenerate admissible region."
+  - "The separability audit is a real gate with a rebuild rule and a published failure path (Section 3.4), and R5 is reported honestly at 0.721 against the 0.750 gate rather than dropped (Table 2)."
+  - "Round-1 defects are answered with new experiments rather than prose: the top-1-presented arm (Section 4.5), the leave-one-group-out ablation (Table 7), and the exchangeability and cluster checks (Section 4.7)."
+  - "The dense-feature defect is disclosed with both runs' numbers and the frozen run left unchanged (Section 4.6), which is the behaviour a pre-registered paper should show when the frozen code is wrong."
+  - "The refusal-rate versus precision distinction is now defined explicitly, with both quantities always labelled (Section 3.5), fixing the earlier mislabelling."
+weaknesses:
+  - "The audit's 0.977 AUROC (Table 2) separates each rung from answerable items that always present the gold paragraph, so it cannot distinguish rung hardness from 'is this the gold paragraph'; the objection the paper makes for R4 applies to R1-R3 and is not made there (Sections 4.1, 4.5)."
+  - "The corrected run carrying the R4 collapse (12.53% refusal, 0.874 AUROC) is labelled deviation D4 while the pre-registration hash chain covers only D1-D3 (Sections 1, 4.6, 5.3)."
+  - "Table 6 compares frozen and corrected bands at different dev-fitted operating points (thresholds [0.9072, 0.9478] vs [0.5232, 0.5370]; over-refusal 75.50% vs 91.50%) and omits the corrected exploratory coverage row (25.44% to 39.60%), so the precision and coverage rows are not the same cut on two feature sets (Section 4.6)."
+  - "H1 and H3 are verdicted REFUTED in Table 4 while the text calls them 'criterion not exercisable at this operating point'; the exploratory arm shows a 7.00-point R1-R3 drop in H1's predicted direction (95% CI [4.50, 9.75]), so 'refuted' and 'not exercisable' are conflated (Abstract, Table 4, Section 4.2)."
+  - "The abstract mixes runs inside one comparison, quoting R5 at 89.25% (frozen) and R4 at 12.53% (corrected) in the same sentence (Abstract, Sections 4.4, 4.6)."
+  - "Table 7's leave-one-group-out ablations refit the threshold for each subset and vary feature count with group size, so a group's contribution is confounded with model capacity; no control holds feature count fixed (Section 4.6, Table 7)."
+  - "Held-out R2 has n=280 of 400 and the exchangeability check reports only the dev split (273 kept, 127 dropped, smallest p=0.052) while claiming coverage of 'either split' (Sections 3.1, 4.7)."
+  - "Whether the IDF used to anchor rung R2 was computed within each split pool or over the full corpus is not stated, leaving a possible leakage path in item construction (Sections 3.1, 3.2)."
+questions:
+  - "If the six-surface-plus-overlap audit were re-run inside the D3 top-1-presented items, where rung 0 is not always the gold paragraph, would R1 still separate at about 0.977?"
+  - "Under the corrected features, what is R5's refusal rate, and does the 'between R2 and R3' ordering still hold?"
+  - "Was the IDF for R2 computed within each split pool or over the full corpus, and were the 40 inspected R4 items sampled at random?"
+  - "Can H1 and H3 be re-stated as 'not exercisable' rather than 'refuted' without changing the registered tests?"
+  - "Does the corrected band's R4 collapse survive a matched-coverage comparison with the frozen band?"
+soundness: 2
+presentation: 3
+contribution: 3
+confidence: 4
+overall: 5
+decision: borderline
+must_fix:
+  - claim: "The rung-separability headline (0.977 AUROC) is computed against answerable items that always present the gold paragraph, so it cannot separate rung hardness from gold-paragraph identity."
+    where: "Section 4.1, Table 2"
+    evidence_needed: "Re-run the six-surface-plus-overlap audit inside the D3 top-1-presented items, where rung 0 is not always gold, and report R1-R3 AUROCs beside the current 0.977 / 0.889 / 0.923."
+  - claim: "The corrected run that carries the R4 collapse (12.53% refusal, 0.874 AUROC) is labelled a declared deviation although the pre-registration hash chain stops at D3."
+    where: "Section 1, Section 4.6, Section 5.3"
+    evidence_needed: "PREREGISTRATION.sha256 records three hashes (frozen, D1, D2+D3) and Section 1 ends the deviation list at D3; either add the D4 hash or stop calling it declared and stop recommending its numbers in Section 5.3."
+  - claim: "Table 6 compares the frozen and corrected bands at different dev-fitted operating points and omits the corrected exploratory coverage row."
+    where: "Section 4.6, Table 6"
+    evidence_needed: "Add the corrected thresholds ([0.5232, 0.5370] against [0.9072, 0.9478]) and the exploratory coverage row (25.44% to 39.60%) to Table 6, or report R4 at matched coverage and state that the precision rows are not the same cut on two feature sets."
+  - claim: "H1 and H3 are verdicted REFUTED in Table 4 while the text calls them 'criterion not exercisable at this operating point', conflating 'criterion not met' with 'hypothesis false'."
+    where: "Abstract, Table 4, Section 4.2"
+    evidence_needed: "Distinguish degenerate from refuted as Section 4.2 already does for H2, and reconcile a flat 'H1 refuted' with the exploratory arm's 7.00-point R1-R3 drop in the predicted direction (95% CI [4.50, 9.75])."
+  - claim: "The abstract mixes frozen and corrected numbers in one comparison, quoting R5 at 89.25% (frozen) and R4 at 12.53% (corrected) in the same sentence."
+    where: "Abstract, Sections 4.4 and 4.6"
+    evidence_needed: "Label every mixed number with its run, or report both R5 and R4 under the same run (frozen exploratory R4 84.71%; corrected exploratory R5 93.75%)."
+  - claim: "Table 7's leave-one-group-out ablations refit the threshold per subset and vary feature count with group size, confounding a group's contribution with model capacity."
+    where: "Section 4.6, Table 7"
+    evidence_needed: "Add a control that holds feature count fixed (e.g. replace the removed group with permuted features of the same dimension) and report held-out AUROC and over-refusal, or state that the ablation is descriptive."
+  - claim: "Held-out R2 has n=280 of 400 and the exchangeability check reports only the dev split while claiming coverage of 'either split'."
+    where: "Sections 3.1 and 4.7"
+    evidence_needed: "Report the held-out kept/dropped counts and their p-values beside the dev 273/127 split (smallest p=0.052), or restrict the exchangeability claim to dev."
+  - claim: "Whether the IDF used to anchor rung R2 was computed within each split pool or over the full corpus is not stated, leaving a possible leakage path in item construction."
+    where: "Sections 3.1 and 3.2"
+    evidence_needed: "State whether R2's highest-IDF content token was selected using within-split or corpus-wide IDF and whether any held-out article contributed to that statistic."
