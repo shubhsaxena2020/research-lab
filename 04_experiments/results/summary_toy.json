@@ -4,7 +4,7 @@
     "toy_ours"
   ],
   "experiment": "toy",
-  "generated_at": "2026-11-08T11:23:16Z",
+  "generated_at": "2026-11-18T15:13:36Z",
   "metric": "accuracy",
   "n_runs": 6,
   "n_seeds": 3,
@@ -63,8 +63,8 @@
     ]
   },
   "run_ids": {
-    "toy_baseline": "20261108T112314Z_toy_baseline_76c6796-2",
-    "toy_ours": "20261108T112316Z_toy_ours_76c6796"
+    "toy_baseline": "20261118T151328Z_toy_baseline_d334cf7-2",
+    "toy_ours": "20261118T151331Z_toy_ours_d334cf7"
   },
   "seeds": [
     0,

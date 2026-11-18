@@ -1,0 +1,29 @@
+===== git diff HEAD =====
+diff --git a/06_review/audits/numbers-audit.md b/06_review/audits/numbers-audit.md
+index aae07da..58c5fea 100644
+--- a/06_review/audits/numbers-audit.md
++++ b/06_review/audits/numbers-audit.md
+@@ -5,7 +5,7 @@
+ 
+ Draft: `05_paper/draft/paper.md`  
+ Index: `04_experiments/RESULTS-INDEX.json`  
+-Generated: 2026-11-08T09:09:02Z  
++Generated: 2026-11-08T11:27:59Z  
+ Toy numbers allowed: False
+ 
+ **PASS** — 0 finding(s) over 1 file(s).
+===== git diff --cached =====
+
+===== untracked files =====
+04_experiments/runs/20261108T112815Z_toy_baseline_d334cf7/artifacts/git-diff.patch
+04_experiments/runs/20261108T112815Z_toy_baseline_d334cf7/artifacts/git-diff.txt
+04_experiments/runs/20261108T112815Z_toy_baseline_d334cf7/artifacts/git_diff.patch
+04_experiments/runs/20261108T112815Z_toy_baseline_d334cf7/artifacts/git_diff.txt
+04_experiments/runs/20261108T112815Z_toy_baseline_d334cf7/config.json
+04_experiments/runs/20261108T112815Z_toy_baseline_d334cf7/git-diff.patch
+04_experiments/runs/20261108T112815Z_toy_baseline_d334cf7/git-diff.txt
+04_experiments/runs/20261108T112815Z_toy_baseline_d334cf7/git_diff.patch
+04_experiments/runs/20261108T112815Z_toy_baseline_d334cf7/git_diff.txt
+04_experiments/runs/20261108T112815Z_toy_baseline_d334cf7/meta.json
+04_experiments/runs/20261108T112815Z_toy_baseline_d334cf7/results.json
+05_paper/latex-build/paper-acl.blg

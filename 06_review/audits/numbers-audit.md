@@ -5,7 +5,7 @@
 
 Draft: `05_paper/draft/paper.md`  
 Index: `04_experiments/RESULTS-INDEX.json`  
-Generated: 2026-11-08T09:09:02Z  
+Generated: 2026-11-08T11:38:53Z  
 Toy numbers allowed: False
 
 **PASS** — 0 finding(s) over 1 file(s).

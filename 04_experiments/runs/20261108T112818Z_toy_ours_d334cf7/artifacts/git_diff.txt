@@ -1,0 +1,214 @@
+===== git diff HEAD =====
+diff --git a/04_experiments/RESULTS-INDEX.json b/04_experiments/RESULTS-INDEX.json
+index 93b4a00..bff200c 100644
+--- a/04_experiments/RESULTS-INDEX.json
++++ b/04_experiments/RESULTS-INDEX.json
+@@ -1645,7 +1645,7 @@
+       "file": "04_experiments/results/summary_toy.json",
+       "id": "toy.accuracy.toy_baseline",
+       "key": "stats.toy_baseline.mean",
+-      "run_id": "20261108T112314Z_toy_baseline_76c6796-2",
++      "run_id": "20261108T112816Z_toy_baseline_d334cf7",
+       "tolerance": 0.0005,
+       "toy": true
+     },
+@@ -1654,11 +1654,11 @@
+       "file": "04_experiments/results/summary_toy.json",
+       "id": "toy.accuracy.toy_ours",
+       "key": "stats.toy_ours.mean",
+-      "run_id": "20261108T112316Z_toy_ours_76c6796",
++      "run_id": "20261108T112816Z_toy_ours_d334cf7-3",
+       "tolerance": 0.0005,
+       "toy": true
+     }
+   ],
+-  "updated_at": "2026-11-08T11:23:17Z",
++  "updated_at": "2026-11-08T11:28:17Z",
+   "version": 1
+ }
+diff --git a/04_experiments/results/summary_toy.json b/04_experiments/results/summary_toy.json
+index 5ed5f63..4d67f29 100644
+--- a/04_experiments/results/summary_toy.json
++++ b/04_experiments/results/summary_toy.json
+@@ -4,7 +4,7 @@
+     "toy_ours"
+   ],
+   "experiment": "toy",
+-  "generated_at": "2026-11-08T11:23:16Z",
++  "generated_at": "2026-11-08T11:28:17Z",
+   "metric": "accuracy",
+   "n_runs": 6,
+   "n_seeds": 3,
+@@ -63,8 +63,8 @@
+     ]
+   },
+   "run_ids": {
+-    "toy_baseline": "20261108T112314Z_toy_baseline_76c6796-2",
+-    "toy_ours": "20261108T112316Z_toy_ours_76c6796"
++    "toy_baseline": "20261108T112816Z_toy_baseline_d334cf7",
++    "toy_ours": "20261108T112816Z_toy_ours_d334cf7-3"
+   },
+   "seeds": [
+     0,
+diff --git a/04_experiments/toy/toy_runs.json b/04_experiments/toy/toy_runs.json
+index 9e0e685..894d838 100644
+--- a/04_experiments/toy/toy_runs.json
++++ b/04_experiments/toy/toy_runs.json
+@@ -5,7 +5,7 @@
+     "toy_ours"
+   ],
+   "experiment": "toy",
+-  "generated_at": "2026-11-08T11:23:16Z",
++  "generated_at": "2026-11-08T11:28:17Z",
+   "n_runs": 6,
+   "runs": [
+     {
+@@ -13,8 +13,8 @@
+       "config_name": "toy_baseline",
+       "f1_macro": 0.876543,
+       "loss": null,
+-      "results": "04_experiments/runs/20261108T112313Z_toy_baseline_76c6796/results.json",
+-      "run_id": "20261108T112313Z_toy_baseline_76c6796",
++      "results": "04_experiments/runs/20261108T112815Z_toy_baseline_d334cf7/results.json",
++      "run_id": "20261108T112815Z_toy_baseline_d334cf7",
+       "seed": 0
+     },
+     {
+@@ -22,8 +22,8 @@
+       "config_name": "toy_baseline",
+       "f1_macro": 0.866403,
+       "loss": null,
+-      "results": "04_experiments/runs/20261108T112314Z_toy_baseline_76c6796/results.json",
+-      "run_id": "20261108T112314Z_toy_baseline_76c6796",
++      "results": "04_experiments/runs/20261108T112815Z_toy_baseline_d334cf7-2/results.json",
++      "run_id": "20261108T112815Z_toy_baseline_d334cf7-2",
+       "seed": 1
+     },
+     {
+@@ -31,8 +31,8 @@
+       "config_name": "toy_baseline",
+       "f1_macro": 0.866071,
+       "loss": null,
+-      "results": "04_experiments/runs/20261108T112314Z_toy_baseline_76c6796-2/results.json",
+-      "run_id": "20261108T112314Z_toy_baseline_76c6796-2",
++      "results": "04_experiments/runs/20261108T112816Z_toy_baseline_d334cf7/results.json",
++      "run_id": "20261108T112816Z_toy_baseline_d334cf7",
+       "seed": 2
+     },
+     {
+@@ -40,8 +40,8 @@
+       "config_name": "toy_ours",
+       "f1_macro": 0.876543,
+       "loss": 0.262707,
+-      "results": "04_experiments/runs/20261108T112315Z_toy_ours_76c6796/results.json",
+-      "run_id": "20261108T112315Z_toy_ours_76c6796",
++      "results": "04_experiments/runs/20261108T112816Z_toy_ours_d334cf7/results.json",
++      "run_id": "20261108T112816Z_toy_ours_d334cf7",
+       "seed": 0
+     },
+     {
+@@ -49,8 +49,8 @@
+       "config_name": "toy_ours",
+       "f1_macro": 0.888393,
+       "loss": 0.315546,
+-      "results": "04_experiments/runs/20261108T112315Z_toy_ours_76c6796-2/results.json",
+-      "run_id": "20261108T112315Z_toy_ours_76c6796-2",
++      "results": "04_experiments/runs/20261108T112816Z_toy_ours_d334cf7-2/results.json",
++      "run_id": "20261108T112816Z_toy_ours_d334cf7-2",
+       "seed": 1
+     },
+     {
+@@ -58,8 +58,8 @@
+       "config_name": "toy_ours",
+       "f1_macro": 0.888004,
+       "loss": 0.293577,
+-      "results": "04_experiments/runs/20261108T112316Z_toy_ours_76c6796/results.json",
+-      "run_id": "20261108T112316Z_toy_ours_76c6796",
++      "results": "04_experiments/runs/20261108T112816Z_toy_ours_d334cf7-3/results.json",
++      "run_id": "20261108T112816Z_toy_ours_d334cf7-3",
+       "seed": 2
+     }
+   ],
+diff --git a/06_review/audits/numbers-audit.md b/06_review/audits/numbers-audit.md
+index aae07da..58c5fea 100644
+--- a/06_review/audits/numbers-audit.md
++++ b/06_review/audits/numbers-audit.md
+@@ -5,7 +5,7 @@
+ 
+ Draft: `05_paper/draft/paper.md`  
+ Index: `04_experiments/RESULTS-INDEX.json`  
+-Generated: 2026-11-08T09:09:02Z  
++Generated: 2026-11-08T11:27:59Z  
+ Toy numbers allowed: False
+ 
+ **PASS** — 0 finding(s) over 1 file(s).
+===== git diff --cached =====
+
+===== untracked files =====
+04_experiments/runs/20261108T112815Z_toy_baseline_d334cf7-2/artifacts/git-diff.patch
+04_experiments/runs/20261108T112815Z_toy_baseline_d334cf7-2/artifacts/git-diff.txt
+04_experiments/runs/20261108T112815Z_toy_baseline_d334cf7-2/artifacts/git_diff.patch
+04_experiments/runs/20261108T112815Z_toy_baseline_d334cf7-2/artifacts/git_diff.txt
+04_experiments/runs/20261108T112815Z_toy_baseline_d334cf7-2/config.json
+04_experiments/runs/20261108T112815Z_toy_baseline_d334cf7-2/git-diff.patch
+04_experiments/runs/20261108T112815Z_toy_baseline_d334cf7-2/git-diff.txt
+04_experiments/runs/20261108T112815Z_toy_baseline_d334cf7-2/git_diff.patch
+04_experiments/runs/20261108T112815Z_toy_baseline_d334cf7-2/git_diff.txt
+04_experiments/runs/20261108T112815Z_toy_baseline_d334cf7-2/meta.json
+04_experiments/runs/20261108T112815Z_toy_baseline_d334cf7-2/results.json
+04_experiments/runs/20261108T112815Z_toy_baseline_d334cf7/artifacts/git-diff.patch
+04_experiments/runs/20261108T112815Z_toy_baseline_d334cf7/artifacts/git-diff.txt
+04_experiments/runs/20261108T112815Z_toy_baseline_d334cf7/artifacts/git_diff.patch
+04_experiments/runs/20261108T112815Z_toy_baseline_d334cf7/artifacts/git_diff.txt
+04_experiments/runs/20261108T112815Z_toy_baseline_d334cf7/config.json
+04_experiments/runs/20261108T112815Z_toy_baseline_d334cf7/git-diff.patch
+04_experiments/runs/20261108T112815Z_toy_baseline_d334cf7/git-diff.txt
+04_experiments/runs/20261108T112815Z_toy_baseline_d334cf7/git_diff.patch
+04_experiments/runs/20261108T112815Z_toy_baseline_d334cf7/git_diff.txt
+04_experiments/runs/20261108T112815Z_toy_baseline_d334cf7/meta.json
+04_experiments/runs/20261108T112815Z_toy_baseline_d334cf7/results.json
+04_experiments/runs/20261108T112816Z_toy_baseline_d334cf7/artifacts/git-diff.patch
+04_experiments/runs/20261108T112816Z_toy_baseline_d334cf7/artifacts/git-diff.txt
+04_experiments/runs/20261108T112816Z_toy_baseline_d334cf7/artifacts/git_diff.patch
+04_experiments/runs/20261108T112816Z_toy_baseline_d334cf7/artifacts/git_diff.txt
+04_experiments/runs/20261108T112816Z_toy_baseline_d334cf7/config.json
+04_experiments/runs/20261108T112816Z_toy_baseline_d334cf7/git-diff.patch
+04_experiments/runs/20261108T112816Z_toy_baseline_d334cf7/git-diff.txt
+04_experiments/runs/20261108T112816Z_toy_baseline_d334cf7/git_diff.patch
+04_experiments/runs/20261108T112816Z_toy_baseline_d334cf7/git_diff.txt
+04_experiments/runs/20261108T112816Z_toy_baseline_d334cf7/meta.json
+04_experiments/runs/20261108T112816Z_toy_baseline_d334cf7/results.json
+04_experiments/runs/20261108T112816Z_toy_ours_d334cf7-2/artifacts/git-diff.patch
+04_experiments/runs/20261108T112816Z_toy_ours_d334cf7-2/artifacts/git-diff.txt
+04_experiments/runs/20261108T112816Z_toy_ours_d334cf7-2/artifacts/git_diff.patch
+04_experiments/runs/20261108T112816Z_toy_ours_d334cf7-2/artifacts/git_diff.txt
+04_experiments/runs/20261108T112816Z_toy_ours_d334cf7-2/config.json
+04_experiments/runs/20261108T112816Z_toy_ours_d334cf7-2/git-diff.patch
+04_experiments/runs/20261108T112816Z_toy_ours_d334cf7-2/git-diff.txt
+04_experiments/runs/20261108T112816Z_toy_ours_d334cf7-2/git_diff.patch
+04_experiments/runs/20261108T112816Z_toy_ours_d334cf7-2/git_diff.txt
+04_experiments/runs/20261108T112816Z_toy_ours_d334cf7-2/meta.json
+04_experiments/runs/20261108T112816Z_toy_ours_d334cf7-2/results.json
+04_experiments/runs/20261108T112816Z_toy_ours_d334cf7-3/artifacts/git-diff.patch
+04_experiments/runs/20261108T112816Z_toy_ours_d334cf7-3/artifacts/git-diff.txt
+04_experiments/runs/20261108T112816Z_toy_ours_d334cf7-3/artifacts/git_diff.patch
+04_experiments/runs/20261108T112816Z_toy_ours_d334cf7-3/artifacts/git_diff.txt
+04_experiments/runs/20261108T112816Z_toy_ours_d334cf7-3/config.json
+04_experiments/runs/20261108T112816Z_toy_ours_d334cf7-3/git-diff.patch
+04_experiments/runs/20261108T112816Z_toy_ours_d334cf7-3/git-diff.txt
+04_experiments/runs/20261108T112816Z_toy_ours_d334cf7-3/git_diff.patch
+04_experiments/runs/20261108T112816Z_toy_ours_d334cf7-3/git_diff.txt
+04_experiments/runs/20261108T112816Z_toy_ours_d334cf7-3/meta.json
+04_experiments/runs/20261108T112816Z_toy_ours_d334cf7-3/results.json
+04_experiments/runs/20261108T112816Z_toy_ours_d334cf7/artifacts/git-diff.patch
+04_experiments/runs/20261108T112816Z_toy_ours_d334cf7/artifacts/git-diff.txt
+04_experiments/runs/20261108T112816Z_toy_ours_d334cf7/artifacts/git_diff.patch
+04_experiments/runs/20261108T112816Z_toy_ours_d334cf7/artifacts/git_diff.txt
+04_experiments/runs/20261108T112816Z_toy_ours_d334cf7/config.json
+04_experiments/runs/20261108T112816Z_toy_ours_d334cf7/git-diff.patch
+04_experiments/runs/20261108T112816Z_toy_ours_d334cf7/git-diff.txt
+04_experiments/runs/20261108T112816Z_toy_ours_d334cf7/git_diff.patch
+04_experiments/runs/20261108T112816Z_toy_ours_d334cf7/git_diff.txt
+04_experiments/runs/20261108T112816Z_toy_ours_d334cf7/meta.json
+04_experiments/runs/20261108T112816Z_toy_ours_d334cf7/results.json
+05_paper/latex-build/paper-acl.blg

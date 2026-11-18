@@ -1,0 +1,18 @@
+===== git diff HEAD =====
+diff --git a/06_review/audits/numbers-audit.md b/06_review/audits/numbers-audit.md
+index aae07da..58c5fea 100644
+--- a/06_review/audits/numbers-audit.md
++++ b/06_review/audits/numbers-audit.md
+@@ -5,7 +5,7 @@
+ 
+ Draft: `05_paper/draft/paper.md`  
+ Index: `04_experiments/RESULTS-INDEX.json`  
+-Generated: 2026-11-08T09:09:02Z  
++Generated: 2026-11-08T11:27:59Z  
+ Toy numbers allowed: False
+ 
+ **PASS** — 0 finding(s) over 1 file(s).
+===== git diff --cached =====
+
+===== untracked files =====
+05_paper/latex-build/paper-acl.blg
