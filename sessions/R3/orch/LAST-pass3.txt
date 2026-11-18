@@ -1,0 +1,10 @@
+## Pass 3 complete
+
+Created and launched **R3-4d-verify-fold** on res-s4 with budget 10800. Confirmed Hermes PID **29420**; the prompt contains no double quotes. res-s1 and the other Claude session were left untouched.
+
+- [TASK.md](C:/Users/shubh/research-lab/sessions/R3-4d-verify-fold/TASK.md) requires independent, exact-draft quotations for every resolved response-letter item, an MF‑14 correction using existing result keys, and wording-only work on partials. It also sets the per-batch gates: zero number findings, identical draft output across two builds, and `check_all.py` at 4/4 PASS.
+- [PROMPT-R3.txt](C:/Users/shubh/research-lab/sessions/R3-4d-verify-fold/PROMPT-R3.txt) and Checkpoint 8 in [HEAD-REVIEW.md](C:/Users/shubh/research-lab/orchestration/HEAD-REVIEW.md) are written.
+- The response letter’s tally says 86 items, while the expected inventory is 44 round‑2 plus 41 round‑3 items. The lane must reconcile this discrepancy.
+- **Next-wave recommendation:** after R3‑4d and R3‑7c finish and pass independent checks, run a fresh simulated review round 4 against the verified final draft SHA. It was not launched.
+
+Report: [REPORT-pass3.md](C:/Users/shubh/research-lab/sessions/R3-4d-verify-fold/REPORT-pass3.md).

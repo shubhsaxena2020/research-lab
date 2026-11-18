@@ -14,7 +14,7 @@ An abstention gate for retrieval-augmented question answering decides whether th
 supports an answer. How hard such a gate looks depends on the negatives it is measured against, and we
 tested that dependence with a pre-registered four-rung ladder over the SQuAD development set, fitting the gate and
 both of its thresholds on a disjoint half. The result is negative and specific. The registered rule —
-maximise abstain recall (the refusal rate, P(refused | negative)) subject to a dev abstain precision of
+maximise the refusal rate P(refused | negative) subject to a dev abstain precision of
 <!-- num:c1.const.target_precision -->0.80<!-- /num --> — produced a gate that refuses
 <!-- num:c1.band.over_refusal.run -->75.50%<!-- /num --> of answerable questions, so it answers only
 <!-- num:c1.pm.band.answer_rate -->24.50%<!-- /num --> of the questions it is asked, and the precision of
@@ -44,8 +44,11 @@ precision is
 concrete: an overlap-matched rung (R5, exploratory) is still refused at
 <!-- num:c1.r5.precision.expl -->89.25%<!-- /num -->, while the rung that changes what the passage *says*
 rather than how much of it overlaps (R4, one answer span replaced inside the gold passage) breaks the gate
-once the dense features are implemented as specified — refusal on R4 falls to
-<!-- num:c1.expl.precision.r4.corr -->12.53%<!-- /num --> and discrimination from
+once the dense features are implemented as specified — on R4, refusal is
+<!-- num:c1.band.precision.r4.run -->100.00%<!-- /num --> in the registered band (frozen, D1) run and
+<!-- num:c1.expl.precision.r4.run -->84.71%<!-- /num --> in the frozen exploratory (as-run, D1) run, and falls to
+<!-- num:c1.expl.precision.r4.corr -->12.53%<!-- /num --> in the spec-corrected exploratory (post-hoc, D4) run —
+an exploratory/post-hoc figure that does not replace the registered result — with discrimination from
 <!-- num:c1.auroc.test.run -->0.982<!-- /num --> to <!-- num:c1.auroc.test.corr -->0.874<!-- /num --> AUROC.
 We report this as a negative result for this gate and a positive one for the audit: on this corpus, feature stack and gate family, an abstention precision
 is not interpretable without its coverage, and a negative-ladder result is not interpretable without an
@@ -73,9 +76,9 @@ in how they were constructed. Three hypotheses were frozen before any result-pro
 - **H1 (hardness monotonicity).** Abstain precision is non-increasing across the rungs and falls by at
   least fifteen points from R1 to R3.
 - **H2 (operating-point transfer).** The dev-fitted operating point loses at least ten points of abstain
-  precision at equal abstain recall when applied to a disjoint held-out half and to a second corpus.
+  precision at equal refusal rate when applied to a disjoint held-out half and to a second corpus.
 - **H3 (two-sided beats one-sided).** A two-threshold band beats the best single threshold on the same
-  score, by at least five points, at matched abstain recall.
+  score, by at least five points, at matched refusal rate.
 
 The pre-registered analysis refutes H1 and H3 and leaves H2 degenerate, and we say so in the abstract
 rather than in a footnote. That is the negative contribution, and it is the main one: at a precision
@@ -126,7 +129,7 @@ beside this one on data, negatives, metric and reported operating point.
 
 **Table 1.** The closest work, compared on data, negative construction, metric and the operating point it reports. Literature comparison only: no experimental n, split or units beyond those each source reports.
 
-{{TABLE:T7_prior_work}}
+{{TABLE:T1_prior_work}}
 
 ## 3 Method
 
@@ -172,7 +175,7 @@ document, so it inherits its source paragraph's rank and is flagged.
 A logistic regression on standardised features, fitted on dev only, gives a score that is meant to read
 as the probability that the presented passage answers the question. Two operating points are fitted on
 dev, both constrained to the observed dev score range: a band that admits only inside two thresholds, and
-a single threshold that admits above one. Both maximise dev abstain recall (the refusal rate, P(refused | negative)) subject to a dev abstain
+a single threshold that admits above one. Both maximise the dev refusal rate P(refused | negative) subject to a dev abstain
 precision of <!-- num:c1.const.target_precision -->0.80<!-- /num -->. The fitted band is
 [<!-- num:c1.thr.lo -->0.9072<!-- /num -->, <!-- num:c1.thr.hi -->0.9478<!-- /num -->], width
 <!-- num:c1.band.width -->0.0406<!-- /num -->; the fitted single threshold is
@@ -196,7 +199,9 @@ sensitivity variant, not a surface check, because overlap is a retrieval signal 
 would measure whether retrieval works rather than whether a rung leaks its identity through formatting.
 
 The audit is one-sided by design: it flags a rung when surface features separate it from answerable items
-in the expected direction, not when they separate it inverted. R4 comes out at
+in the expected direction, not when they separate it inverted. A two-sided reading of |AUROC − chance|
+would flag both directions, inverted separation included, so an inverted value is treated as reverse
+separation rather than a clean pass, and we keep the pre-registered one-sided rule. R4 comes out at
 <!-- num:c1.audit.surface.r4 -->0.415<!-- /num -->, which is separation of the same magnitude with the
 sign flipped, and is reported as that rather than as a clean pass.
 
@@ -211,7 +216,7 @@ contradiction, and it matters: at the registered operating point the per-rung re
 <!-- num:c1.pm.band.precision.r1 -->56.98%<!-- /num -->, because three quarters of the answerable questions
 are refused alongside the negatives. We therefore report both, always labelled: **refusal rate** for
 P(refused | negative), which is the quantity H1 and H3 are stated over and the one the pre-registration
-called abstain precision (its 'abstain recall' is the same refusal rate), and **precision** for P(negative | refused), computed over the rung's items and
+called abstain precision (the same quantity as the refusal rate defined above), and **precision** for P(negative | refused), computed over the rung's items and
 the answerable items together. Pooled precision is
 <!-- num:c1.pm.band.pooled_precision -->83.03%<!-- /num --> at the registered point and
 <!-- num:c1.pm.expl.pooled_precision -->97.29%<!-- /num --> at the exploratory point. No hypothesis is
@@ -236,7 +241,7 @@ difference between two analyses rather than as a tested contrast.
 
 **Table 2.** Separability audit on the dev half (<!-- num:c1.items.dev -->1873<!-- /num --> items): AUROC (unitless) of a logistic regression on six surface features, and the same features plus question–passage overlap, separating each rung's negatives from answerable items; gate <!-- num:c1.const.audit_gate -->0.750<!-- /num -->; n per rung as listed in Table 3.
 
-{{TABLE:T3_audit}}
+{{TABLE:T2_audit}}
 
 On the six pre-registered surface features no rung is separable from answerable items, so the ladder is
 not a formatting artefact and the run is allowed to proceed. Add question–passage overlap to the same six
@@ -251,11 +256,11 @@ fitted. R4 is the exception: overlap does not identify it
 
 **Table 3.** Held-out results per rung (held-out half, <!-- num:c1.items.test -->1879<!-- /num --> items; n per rung as listed): refusal rate P(refused | negative) and precision P(negative | refused), percent; both the band and exploratory operating points.
 
-{{TABLE:T1_per_rung}}
+{{TABLE:T3_per_rung}}
 
 **Table 4.** The three pre-registered hypotheses, their criteria, observed values and verdicts (held-out half; percentages).
 
-{{TABLE:T2_hypotheses}}
+{{TABLE:T4_hypotheses}}
 
 Table 3 reports the refusal rate and the precision of those refusals per rung, for both operating points.
 The band refuses <!-- num:c1.band.precision.r1.run -->100.00%<!-- /num -->,
@@ -409,11 +414,11 @@ two side by side, and Table 7 reports leave-one-group-out ablations on the corre
 
 **Table 6.** The pre-registered (frozen, D1) run versus the spec-corrected re-implementation (D4), side by side (dev and held-out halves; AUROC unitless, rates percent). The two runs refit their thresholds on different dev score distributions, so precision and coverage rows compare two operating points; AUROC rows are threshold-free.
 
-{{TABLE:T4_frozen_vs_corrected}}
+{{TABLE:T6_frozen_vs_corrected}}
 
 **Table 7.** Leave-one-group-out ablations on the spec-corrected features, with the same threshold rule refitted for each subset (dev and held-out halves; n = features retained; AUROC unitless; rates percent).
 
-{{TABLE:T6_ablations_corrected}}
+{{TABLE:T7_ablations_corrected}}
 
 Three things change and one does not. Held-out AUROC falls from
 <!-- num:c1.auroc.test.run -->0.982<!-- /num --> to <!-- num:c1.auroc.test.corr -->0.874<!-- /num -->: the
@@ -422,7 +427,10 @@ passage answers the question. The exploratory ladder changes shape: R1 to R3 sta
 (<!-- num:c1.expl.precision.r1.corr -->99.75%<!-- /num -->,
 <!-- num:c1.expl.precision.r2.corr -->92.86%<!-- /num -->,
 <!-- num:c1.expl.precision.r3.corr -->95.50%<!-- /num -->) and R4 collapses to
-<!-- num:c1.expl.precision.r4.corr -->12.53%<!-- /num -->. R4 is the rung whose passage is the gold
+<!-- num:c1.expl.precision.r4.corr -->12.53%<!-- /num --> in the spec-corrected exploratory (post-hoc, D4) run —
+an exploratory/post-hoc figure that does not replace the registered result — beside
+<!-- num:c1.band.precision.r4.run -->100.00%<!-- /num --> in the registered band (frozen, D1) run and
+<!-- num:c1.expl.precision.r4.run -->84.71%<!-- /num --> in the frozen exploratory (as-run, D1) run. R4 is the rung whose passage is the gold
 passage with one span swapped, so a feature set that scores how well a passage matches a question has
 nothing to work with: the passage matches perfectly and the answer is wrong. That is the failure mode the
 gate should have, and the frozen run hid it because the degenerate dense column was in effect a
@@ -473,8 +481,9 @@ zero-width at both levels because every item in them is refused.
 
 **Is the matched-recall comparison fair?** The recall-matched single threshold is chosen on dev, never on
 test. On the held-out negatives the band and the matched single refuse the same items to within
-<!-- num:c1.st.match.maxdiff -->0.00<!-- /num --> points, with zero discordant pairs, so H3's zero is not a
-binning artefact.
+<!-- num:c1.st.match.maxdiff -->0.00<!-- /num --> points: the recall-matched single threshold is the band's own
+lower threshold (to five decimal places), so the upper threshold never binds and the zero difference is
+degenerate by construction.
 
 **Does the reader-confidence baseline work?** No, and for an inspectable reason. On the
 <!-- num:c1.reader.n -->553<!-- /num --> dev items where it was run (a small instruction-tuned reader,
@@ -522,12 +531,14 @@ precision figure interpretable, and it belongs first, not in a limitations parag
 
 ### 5.2 What a retrieval-feature gate measures
 
-The audit, the overlap-matched rung and the top-1 variant agree on one description: these features
+The claim in this section is scoped to the corpus, feature stack and gate family measured here; it is not
+a claim about abstention gates in general. The audit, the overlap-matched rung and the top-1 variant agree on one description: these features
 measure how well the presented passage matches the question and how likely it is to be the document
 retrieval wanted. On negatives constructed by substituting paragraphs, those quantities and answerability
 move together, which is why the ladder looks like a hardness ladder. When they come apart — R4, where the
 passage matches perfectly and one span is wrong — the gate has nothing to work with, and the corrected run
-shows it. The practical implication is not that abstention gates are useless. It is that a ladder of
+shows it; the corrected R4 result is an exploratory/post-hoc re-implementation (deviation D4), reported
+beside the registered and frozen results and not in place of them. The practical implication is not that abstention gates are useless. It is that a ladder of
 substituted paragraphs measures overlap, and that the rung which changes what the passage says must be in
 the ladder or the ladder is measuring the wrong thing.
 

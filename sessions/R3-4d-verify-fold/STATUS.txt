@@ -1,0 +1,2 @@
+﻿started 2026-11-18T22:19:07.9471783+05:30 wt=C:\Users\shubh\research-lab profile=res-s4 provider=default
+exited 0 2026-11-18T23:17:02.8374112+05:30 attempts=0

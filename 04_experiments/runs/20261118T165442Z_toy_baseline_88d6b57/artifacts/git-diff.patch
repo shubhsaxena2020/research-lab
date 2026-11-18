@@ -1,0 +1,58 @@
+===== git diff HEAD =====
+diff --git a/06_review/audits/numbers-audit.md b/06_review/audits/numbers-audit.md
+index af33ead..a86fee4 100644
+--- a/06_review/audits/numbers-audit.md
++++ b/06_review/audits/numbers-audit.md
+@@ -5,7 +5,7 @@
+ 
+ Draft: `05_paper/draft/paper.md`  
+ Index: `04_experiments/RESULTS-INDEX.json`  
+-Generated: 2026-11-18T16:31:11Z  
++Generated: 2026-11-18T16:50:14Z  
+ Toy numbers allowed: False
+ 
+ **PASS** — 0 finding(s) over 1 file(s).
+diff --git a/orchestration/HEAD-REVIEW.md b/orchestration/HEAD-REVIEW.md
+index 8d8875f..81a9042 100644
+--- a/orchestration/HEAD-REVIEW.md
++++ b/orchestration/HEAD-REVIEW.md
+@@ -64,3 +64,9 @@ R3-4c-fold plan: res-s4 will use existing evidence to fold the 26 remaining roun
+ ## Checkpoint 7 — R3-7c LaTeX citations — 2026-11-18
+ 
+ R3-7b is complete. Claude Code verified the main-laptop Tectonic build, but identified transient Windows file-mapping failures, no emitted citations despite a populated `refs.bib`, and three duplicate `fig:main-accuracy` labels. R3-7c-latex-citations is assigned to the now-idle res-s1, owning only `05_paper/latex-build/**` and its lane folder. It will add bounded transient-error handling / safe output promotion, map explicit draft DOI/arXiv markers only to existing BibTeX keys, preserve and report unmatched markers, make figure labels unique, rebuild both PDFs, run converter/PDF checks, and update BUILD-REPORT. It must not edit the draft/template owned by res-s4. Do not restart the shared gateway or touch the separate InMobi research project; research-lab remains capped at res-s1 and res-s4. Updated round-3 compute policy is GPU first for model jobs; no model work is planned in this TeX lane.
++
++## Checkpoint 8 — R3-4d independent fold verification — 2026-11-18
++
++R3-4c completed and was committed as `533998b`; Claude Code verified draft SHA `89e92e79`, zero number findings, reproducible build, and unchanged preregistration/frozen results. R3-4d is assigned to res-s4 to independently quote draft evidence for every resolved response-letter item, reconcile the reported 86 verdicts against 44 round-2 plus 41 round-3 IDs, fix MF-14 in the template using existing result keys, and fold only wording/structure partials with existing evidence. Per-batch gates: zero number findings, byte-identical draft across two builds, and check_all 4/4 PASS. R3-4d must not touch `05_paper/latex-build/**`; res-s1 is running R3-7c. No new experiments or review round in this lane.
++
++After R3-4d and R3-7c finish and are independently checked, the proposed next wave is a fresh simulated review round 4 packed against the verified final draft SHA. This is a recommendation only, not launched here.
+diff --git a/sessions/R3-7c-latex-citations/STATUS.txt b/sessions/R3-7c-latex-citations/STATUS.txt
+index 718cb9d..5886363 100644
+--- a/sessions/R3-7c-latex-citations/STATUS.txt
++++ b/sessions/R3-7c-latex-citations/STATUS.txt
+@@ -1 +1,2 @@
+ ﻿started 2026-11-18T21:49:03.5102658+05:30 wt=C:\Users\shubh\research-lab profile=res-s1 provider=default
++exited 0 2026-11-18T22:24:21.2408323+05:30 attempts=0
+===== git diff --cached =====
+
+===== untracked files =====
+.serena/.gitignore
+.serena/project.yml
+04_experiments/runs/20261118T165311Z_toy_baseline_533998b/artifacts/git-diff.patch
+04_experiments/runs/20261118T165311Z_toy_baseline_533998b/artifacts/git-diff.txt
+04_experiments/runs/20261118T165311Z_toy_baseline_533998b/artifacts/git_diff.patch
+04_experiments/runs/20261118T165311Z_toy_baseline_533998b/artifacts/git_diff.txt
+04_experiments/runs/20261118T165311Z_toy_baseline_533998b/config.json
+04_experiments/runs/20261118T165311Z_toy_baseline_533998b/git-diff.patch
+04_experiments/runs/20261118T165311Z_toy_baseline_533998b/git-diff.txt
+04_experiments/runs/20261118T165311Z_toy_baseline_533998b/git_diff.patch
+04_experiments/runs/20261118T165311Z_toy_baseline_533998b/git_diff.txt
+04_experiments/runs/20261118T165311Z_toy_baseline_533998b/meta.json
+04_experiments/runs/20261118T165311Z_toy_baseline_533998b/results.json
+sessions/R3-4d-verify-fold/PROMPT-R3.txt
+sessions/R3-4d-verify-fold/REPORT-pass3.md
+sessions/R3-4d-verify-fold/STATUS.txt
+sessions/R3-4d-verify-fold/TASK.md
+sessions/R3/orch/BRIEF-pass3.md
+sessions/R3/orch/BRIEF-pass4.md
+sessions/R3/orch/LAST-pass3.txt
