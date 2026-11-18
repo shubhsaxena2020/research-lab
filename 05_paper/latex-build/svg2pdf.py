@@ -5,7 +5,11 @@ Handles the subset of SVG used by 05_paper/figures/generated/*.svg:
 rect, line, polyline, circle, text (with rotate transform), basic colors.
 """
 import argparse
+import io
+import os
 import re
+import tempfile
+import time
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
@@ -41,6 +45,60 @@ def _f(v, default=0.0):
 
 
 NS = "{http://www.w3.org/2000/svg}"
+
+
+def _is_transient_write_error(exc):
+    if not isinstance(exc, OSError):
+        return False
+    if getattr(exc, "winerror", None) in (1224, 32, 5):
+        return True
+    if exc.errno in (22, 13):
+        return True
+    msg = str(exc).lower()
+    return ("1224" in msg or "errno 22" in msg or "user-mapped" in msg
+            or "mapped section" in msg or "being used by another process" in msg
+            or "sharing violation" in msg)
+
+
+def _atomic_write_bytes(target, data, retries=5, delay=1.0):
+    """Write bytes to target via a same-dir temp file promoted with os.replace.
+
+    Retries bounded on transient Windows file-mapping/locking errors. Prior
+    target content is preserved until the replace succeeds; on total failure the
+    temp file is removed and the original exception is re-raised.
+    """
+    target = Path(target)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    fd, tmp_name = tempfile.mkstemp(prefix=f".{target.name}.", suffix=".tmp",
+                                    dir=str(target.parent))
+    tmp_path = Path(tmp_name)
+    try:
+        with os.fdopen(fd, "wb") as fh:
+            fh.write(data)
+            fh.flush()
+            try:
+                os.fsync(fh.fileno())
+            except OSError:
+                pass
+        last_exc = None
+        for attempt in range(1, retries + 1):
+            try:
+                os.replace(tmp_path, target)
+                return
+            except OSError as exc:
+                last_exc = exc
+                if attempt < retries and _is_transient_write_error(exc):
+                    time.sleep(delay)
+                    continue
+                raise
+        if last_exc is not None:
+            raise last_exc
+    finally:
+        try:
+            if tmp_path.exists():
+                tmp_path.unlink()
+        except OSError:
+            pass
 
 
 def convert(svg_path, pdf_path):
@@ -252,24 +310,25 @@ def convert(svg_path, pdf_path):
     objects[pages_placeholder - 1] = f"<< /Type /Pages /Kids [{page_obj} 0 R] /Count 1 >>".encode()
     catalog_obj = add(f"<< /Type /Catalog /Pages {pages_placeholder} 0 R >>".encode())
 
-    # Write file
-    out = Path(pdf_path)
-    out.parent.mkdir(parents=True, exist_ok=True)
-    with out.open("wb") as fh:
-        fh.write(b"%PDF-1.4\n")
-        offsets = [0]
-        for i, obj in enumerate(objects, start=1):
-            offsets.append(fh.tell())
-            fh.write(f"{i} 0 obj\n".encode())
-            fh.write(obj)
-            fh.write(b"\nendobj\n")
-        xref_pos = fh.tell()
-        fh.write(f"xref\n0 {len(objects) + 1}\n".encode())
-        fh.write(b"0000000000 65535 f \n")
-        for i in range(1, len(objects) + 1):
-            fh.write(f"{offsets[i]:010d} 00000 n \n".encode())
-        fh.write(f"trailer\n<< /Size {len(objects) + 1} /Root {catalog_obj} 0 R >>\n".encode())
-        fh.write(f"startxref\n{xref_pos}\n%%EOF\n".encode())
+    # Build PDF bytes in memory, then promote via a same-directory temp file
+    # and os.replace with bounded retry. The prior PDF stays intact until the
+    # replace succeeds, so a failed conversion never truncates a good output.
+    buf = io.BytesIO()
+    buf.write(b"%PDF-1.4\n")
+    offsets = [0]
+    for i, obj in enumerate(objects, start=1):
+        offsets.append(buf.tell())
+        buf.write(f"{i} 0 obj\n".encode())
+        buf.write(obj)
+        buf.write(b"\nendobj\n")
+    xref_pos = buf.tell()
+    buf.write(f"xref\n0 {len(objects) + 1}\n".encode())
+    buf.write(b"0000000000 65535 f \n")
+    for i in range(1, len(objects) + 1):
+        buf.write(f"{offsets[i]:010d} 00000 n \n".encode())
+    buf.write(f"trailer\n<< /Size {len(objects) + 1} /Root {catalog_obj} 0 R >>\n".encode())
+    buf.write(f"startxref\n{xref_pos}\n%%EOF\n".encode())
+    _atomic_write_bytes(pdf_path, buf.getvalue())
 
 
 def main():

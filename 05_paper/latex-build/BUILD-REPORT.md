@@ -1,35 +1,57 @@
-# Build report
+# Build report (main laptop, res-s1, 2026-11-18)
 
-Engine: Tectonic 0.17.0 (see ENGINE.md)
+Engine: Tectonic 0.17.0 (see ENGINE.md, "Current install — main laptop").
 
-## Build commands
+## Build command (one command, re-runnable on any later draft)
 
-    python md2tex.py
-    python ../template/tools/citations_to_bib.py --csv ../../../02_literature/verified_citations.csv --out refs.bib
-    python svg2pdf.py --in ../figures/generated/F1_abstain_precision_by_rung.svg --out figures/F1_abstain_precision_by_rung.pdf
-    tectonic paper-acl.tex
-    tectonic paper-article.tex
+    powershell -ExecutionPolicy Bypass -File 05_paper/latex-build/build.ps1
 
-or one command:
+Steps performed by build.ps1:
+1. `python md2tex.py` (regenerates `body.tex` from `05_paper/draft/paper.md`)
+2. `citations_to_bib.py` (regenerates `refs.bib` from `02_literature/verified_citations.csv`)
+3. `svg2pdf.py` for every SVG in `05_paper/figures/generated/`
+4. `tectonic paper-acl.tex --keep-logs`
+5. `tectonic paper-article.tex --keep-logs`
+6. Copy PDFs to `out/`.
 
-    powershell -ExecutionPolicy Bypass -File build.ps1
+Engine resolution: `$env:TECTONIC` -> `tools/tectonic/tectonic.exe` (repo-relative) -> `tectonic` on PATH. Fails loudly if none. Fails loudly if any log contains `undefined` (case-insensitive) or a build exits non-zero or a PDF is missing.
 
 ## Output
 
-- out/paper-acl.pdf
-- out/paper-article.pdf
+- `out/paper-acl.pdf` (20 pages)
+- `out/paper-article.pdf` (19 pages)
 
-## Checks
+## Checks (all pass)
 
-- Page count: see log (tectonic: 4 pages acl, 5 pages article)
-- Overfull boxes >10pt: one ~10.9pt paragraph (acl), one ~16.7pt in article italic front-matter; both below the 10pt threshold summary for our gate? No -- 10.9pt exceeds 10pt. Reported honestly: one marginal overfull box in acl build remains.
-- Undefined references: none (no "??" text in extracted PDF text)
-- Tables: 7 tables present (booktabs, tabularx)
-- Numbers: tests/test_md2tex.py PASS (296 numbers byte-identical between paper.md and body.tex)
-- Reproducibility: refs.bib generated deterministically from verified_citations.csv (342 entries)
+- `python 05_paper/latex-build/tests/test_md2tex.py`: PASS — 4/4 tests (number preservation, known citation, unknown citation, unique figure labels); 317 numbers preserved byte-identical between `paper.md` and `body.tex`.
+- Undefined references/citations: none (`grep -i undefined` on both `.log` files returns no matches).
+- `??` in extracted PDF text: 0 in both PDFs (`pdftotext`).
+- Tables: 7 numbered tables (Table 1..7) present in both PDFs; 8 `\\begin{table}` environments in `body.tex`.
+- Overfull boxes > 10pt: none. Previously 10.95pt (ACL) and 16.68pt (article front-matter); both resolved (see below).
+- Figures: `F1_abstain_precision_by_rung.pdf` and `F2_precision_overrefusal_vs_coverage.pdf` generated. Labels are unique: `fig:F1_abstain_precision_by_rung`, `fig:F2_precision_overrefusal_vs_coverage`; no duplicated `fig:main-accuracy`.
+- Bibliography: non-empty in both PDFs (7 entries); no "no \citation commands" warning.
 
-## Known limitations
+## Bounded retry / atomic promotion
 
-- References section in paper.md is replaced by BibTeX bibliography (plainnat); numbers in Section 9 list are stripped.
-- Bold markers spanning lines (e.g. **H1 is refuted.**) may leave stray asterisks -- md2tex handles single-line bold only. Full line-joining for paragraph bold is a known gap.
-- Figure converted with pure-Python svg2pdf.py (no external deps).
+- `md2tex.py` writes `body.tex` to a same-directory temp file and promotes with `os.replace`, retrying only OSError errno 22 / Windows error 1224 (up to 5 attempts); real errors propagate and prior output is preserved.
+- `svg2pdf.py` writes PDFs the same way.
+- `build.ps1` retries `citations_to_bib.py` (5 attempts) and Tectonic (4 attempts) only when output contains `os error 1224`/`Errno 22`; real TeX errors exit non-zero. Final `Copy-Item` to `out/` is retried.
+
+## Overfull-box fix (no wording or number changed)
+
+Resolved in the LaTeX preambles (`paper-acl.tex`, `paper-article.tex`) only:
+- `\\setlength{\\emergencystretch}{3em}` -> `5em`
+- `\\tolerance=2000` -> `5000`
+No text in `paper.md` was changed. Rebuild shows 0 `Overfull` lines in both logs.
+
+## Known limitations (carried)
+
+- References section in `paper.md` is replaced by the BibTeX bibliography; Section 9 list numbers are stripped.
+- Bold markers spanning lines may leave stray asterisks (md2tex handles single-line bold only).
+- Figure converted with pure-Python `svg2pdf.py` (no external deps).
+- Bibliography is now populated via natbib `\\citep{}` commands emitted from explicit draft arXiv/DOI markers. Citation coverage: 11 matched marker occurrences -> 7 unique keys; 1 unmatched marker (`arXiv:2309.07597`, C-Pack, absent from `refs.bib`), left visible and reported. No BibTeX entry invented.
+- Non-fatal `Fontconfig error: Cannot load default config file` appears on this host; PDFs are written successfully.
+
+## Historical note
+
+Laptop-2 build (2026-11-08) recorded the original 10.9pt overfull box and older draft. This report supersedes it for the current draft; the old PDFs were rebuilt from the current draft by this laptop.

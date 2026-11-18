@@ -4,15 +4,15 @@
 \maketitle
 \textit{Student author: Shubh (PSIT, BCA, first semester). Analysis and code: agent-assisted, human-directed (§7).}
 
-\textit{Draft generated from \texttt{05\_paper/template/draft\_template.md} by \texttt{05\_paper/build\_draft.py}; every table}
+\textit{Draft generated from \texttt{05\_paper/\allowbreak{}template/\allowbreak{}draft\_template.md} by \texttt{05\_paper/\allowbreak{}build\_draft.py}; every table}
 
-\textit{below is written by \texttt{04\_experiments/src/make\_paper\_assets.py} from a results file, and every numeral is}
+\textit{below is written by \texttt{04\_experiments/\allowbreak{}src/\allowbreak{}make\_paper\_assets.py} from a results file, and every numeral is}
 
-\textit{bound to \texttt{04\_experiments/RESULTS-INDEX.json}.}
+\textit{bound to \texttt{04\_experiments/\allowbreak{}RESULTS-INDEX.json}.}
 
-\textit{Pre-registration: the pre-registration file in the experiments directory, whose three recorded hashes}
+\textit{Pre-registration: the pre-registration file in the experiments directory, whose six recorded hashes}
 
-\textit{(frozen, then two amendments) cover the declared deviations D1--D3.}
+\textit{(frozen, then five amendments) cover the declared deviations D1--D6.}
 
 \section{Abstract}
 An abstention gate for retrieval-augmented question answering decides whether the retrieved passage
@@ -23,7 +23,7 @@ tested that dependence with a pre-registered four-rung ladder over the SQuAD dev
 
 both of its thresholds on a disjoint half. The result is negative and specific. The registered rule ---
 
-maximise abstain recall subject to a dev abstain precision of
+maximise abstain recall (the refusal rate, P(refused | negative)) subject to a dev abstain precision of
 
 0.80 --- produced a gate that refuses
 
@@ -55,25 +55,27 @@ transfer is trivial rather than informative (H2 degenerate, loss
 
 0.07\%). The audit that produced that verdict is the useful part. Six
 
-surface features separate no rung from answerable items (AUROC
+surface features separate no rung from answerable items in the expected direction (AUROC
 
 0.506, 0.539,
 
-0.488, 0.415);
+0.488, 0.415; R4 is
+
+inverted separation of equal magnitude);
 
 adding question--passage overlap to the same six features separates the first three almost perfectly
 
 (0.977, 0.889,
 
-0.923). The refusals are mostly answerable questions, which
+0.923). An over-refusal of
 
-is what an over-refusal of 75.50\% means: the band's
+75.50\% means that many answerable questions are refused, while the band's
 
 precision is
 
 56.98\% on R1 and
 
-48.02\% on R2. Overlap separates each rung from answerable items, and the exploratory refusal rates invert between R2 (91.07\%) and R3 (92.75\%), with the overlap-matched R5 (89.25\%) between them. Two control arms make that
+48.02\% on R2. Overlap separates each rung from answerable items, and the exploratory refusal rates invert between R2 (91.07\%) and R3 (92.75\%); the overlap-matched R5 (89.25\%) sits below R2 (§4.4). Two control arms make that
 
 concrete: an overlap-matched rung (R5, exploratory) is still refused at
 
@@ -87,7 +89,7 @@ once the dense features are implemented as specified --- refusal on R4 falls to
 
 0.982 to 0.874 AUROC.
 
-We report this as a negative result for the gate and a positive one for the audit: an abstention precision
+We report this as a negative result for this gate and a positive one for the audit: on this corpus, feature stack and gate family, an abstention precision
 
 is not interpretable without its coverage, and a negative-ladder result is not interpretable without an
 
@@ -104,7 +106,7 @@ cosine, reranker scores --- and they are evaluated against a set of negatives th
 
 one sentence.
 
-That sentence matters. Abdumalikov et al. (arXiv:2403.01461) train on random negative excerpts, then
+That sentence matters. Abdumalikov et al. (\citep{answerability-in-retrieval-augmented-open-domain-question-an}) train on random negative excerpts, then
 
 evaluate on excerpts with high semantic overlap, and report accuracy falling from
 
@@ -116,7 +118,7 @@ gates are bad; it is that the negative sampler, not the gate, was doing most of 
 
 numbers.
 
-So we designed a measurement rather than a method. One corpus (the SQuAD development set, arXiv:1806.03822), one
+So we designed a measurement rather than a method. One corpus (the SQuAD development set, \citep{know-what-you-don-t-know-unanswerable-questions-for-squad}), one
 
 question set, one feature extractor, one fitting procedure, and four rungs of negatives that differ only
 
@@ -191,7 +193,7 @@ We claim neither priority nor generality beyond one corpus family, one feature s
 English passage-level question answering.
 
 \section{2 Related work}
-\textit{*Abstention and selective prediction.** Surveys of abstention in language models (arXiv:2407.18418)}
+\textit{*Abstention and selective prediction.** Surveys of abstention in language models (\citep{know-your-limits-a-survey-of-abstention-in-large-language-mo})}
 
 \textit{organise the space by what the model is uncertain about --- the query's answerability, the model's own}
 
@@ -199,11 +201,11 @@ English passage-level question answering.
 
 \textit{answerability.** The collapse from near-perfect to near-zero accuracy when random-negative training is}
 
-\textit{tested on high-overlap excerpts (arXiv:2403.01461) is the observation this paper is built on; our ladder}
+\textit{tested on high-overlap excerpts (\citep{answerability-in-retrieval-augmented-open-domain-question-an}) is the observation this paper is built on; our ladder}
 
 \textit{is a systematic version of its two conditions. **Benchmarks that join retrieval and generation}
 
-\textit{abstention.** DeclineCraft (arXiv:2610.28340) measures retrieval-side and parametric abstention jointly;}
+\textit{abstention.** DeclineCraft (\citep{declinecraft-a-rag-abstention-benchmark-for-jointly-measurin}) measures retrieval-side and parametric abstention jointly;}
 
 \textit{our ladder varies only the presented passage and never asks the model to rely on memory, so the two}
 
@@ -211,11 +213,11 @@ English passage-level question answering.
 
 \textit{implementation; dense retrieval with a small BGE English model (arXiv:2309.07597); cross-encoder}
 
-\textit{reranking in the passage-reranking tradition (arXiv:1901.04085) with the \texttt{ms-marco-MiniLM-L-6-v2}}
+\textit{reranking in the passage-reranking tradition (\citep{passage-re-ranking-with-bert}) with the \texttt{ms-marco-MiniLM-L-6-v2}}
 
-\textit{weights; dense passage retrieval as a baseline reference (arXiv:2004.04906). **Model confidence as a}
+\textit{weights; dense passage retrieval as a baseline reference (\citep{dense-passage-retrieval-for-open-domain-question-answering}). **Model confidence as a}
 
-\textit{gate.** Eliciting a model's probability that a proposed answer is true (arXiv:2207.05221) is the}
+\textit{gate.** Eliciting a model's probability that a proposed answer is true (\citep{language-models-mostly-know-what-they-know}) is the}
 
 \textit{strongest cheap reader-side baseline a reviewer expects; we ran a weaker reader signal --- mean}
 
@@ -232,15 +234,15 @@ English passage-level question answering.
     \toprule
     Work & Data & Negatives & Metric & Operating point reported \\
 \midrule
-    Abdumalikov et al., arXiv:2403.01461 & ODQA corpora, SQuAD v2.0 pairs for repair & random text excerpts versus excerpts with high semantic overlap & answerability accuracy & one accuracy figure per sampler; coverage not reported \\
-    DeclineCraft, arXiv:2610.28340 & retrieval and parametric abstention suite & several unanswerable classes & joint abstention metrics & per category, retrieval and memory reported separately \\
+    Abdumalikov et al., \citep{answerability-in-retrieval-augmented-open-domain-question-an} & ODQA corpora, SQuAD v2.0 pairs for repair & random text excerpts versus excerpts with high semantic overlap & answerability accuracy & one accuracy figure per sampler; coverage not reported \\
+    DeclineCraft, \citep{declinecraft-a-rag-abstention-benchmark-for-jointly-measurin} & retrieval and parametric abstention suite & several unanswerable classes & joint abstention metrics & per category, retrieval and memory reported separately \\
     This paper & SQuAD v2.0 dev, article-disjoint split & four constructed rungs, plus overlap-matched and top-1-presented variants & abstain precision, over-refusal, coverage & every precision reported with over-refusal and coverage beside it \\
     \bottomrule
   \end{tabularx}
 \end{table}
 \section{3 Method}
 \subsection{3.1 Items}
-SQuAD v2.0 dev (arXiv:1806.03822) contains
+SQuAD v2.0 dev (\citep{know-what-you-don-t-know-unanswerable-questions-for-squad}) contains
 
 35 articles,
 
@@ -307,7 +309,7 @@ as the probability that the presented passage answers the question. Two operatin
 
 dev, both constrained to the observed dev score range: a band that admits only inside two thresholds, and
 
-a single threshold that admits above one. Both maximise dev abstain recall subject to a dev abstain
+a single threshold that admits above one. Both maximise dev abstain recall (the refusal rate, P(refused | negative)) subject to a dev abstain
 
 precision of 0.80. The fitted band is
 
@@ -373,7 +375,7 @@ are refused alongside the negatives. We therefore report both, always labelled: 
 
 P(refused | negative), which is the quantity H1 and H3 are stated over and the one the pre-registration
 
-called abstain precision, and \textbf{precision} for P(negative | refused), computed over the rung's items and
+called abstain precision (its 'abstain recall' is the same refusal rate), and \textbf{precision} for P(negative | refused), computed over the rung's items and
 
 the answerable items together. Pooled precision is
 
@@ -467,9 +469,9 @@ Refusal rate is P(refused | a negative of that rung) --- a recall on the rung, a
     \toprule
     Hypothesis & Pre-registered criterion & Observed & Verdict \\
 \midrule
-    H1 hardness monotonicity & R1 - R3 at least 15 points, non-increasing & difference 0.00\%, 95\% CI [0.00\%, 0.00\%]; sequence is not non-increasing & REFUTED \\
+    H1 hardness monotonicity & R1 - R3 at least 15 points, non-increasing & difference 0.00\%, 95\% CI [0.00\%, 0.00\%]; sequence is not non-increasing & criterion not exercisable (see §4.2) \\
     H2 transfer & loss at least 10 points; refuted if within 5 points & dev-to-test loss 0.07\% & REFUTED (it transfers, degenerately) \\
-    H3 two-sided vs one-sided & band at least 5 points ahead at matched recall & difference 0.00\%, 95\% CI [0.00\%, 0.00\%] & REFUTED \\
+    H3 two-sided vs one-sided & band at least 5 points ahead at matched recall & difference 0.00\%, 95\% CI [0.00\%, 0.00\%] & criterion not exercisable (see §4.2) \\
     \bottomrule
   \end{tabularx}
 \end{table}
@@ -489,11 +491,8 @@ The band refuses 100.00\%,
 
 and none of them is the one the design was hoping for.
 
-\begin{figure}[t]
-  \includegraphics[width=0.85\linewidth]{figures/F1_abstain_precision_by_rung.pdf}
-  \caption{Held-out results across the four rungs for both runs.}
-  \label{fig:main-accuracy}
-\end{figure}
+Figure 1 inlines the generated SVG at \texttt{05\_paper/\allowbreak{}figures/\allowbreak{}generated/\allowbreak{}F1\_abstain\_precision\_by\_rung.svg}
+
 and plots the same quantities across the four rungs for both runs; the flat as-run curves and the collapsed
 
 corrected R4 are visible in it directly.
@@ -501,18 +500,14 @@ corrected R4 are visible in it directly.
 \begin{figure}[t]
   \includegraphics[width=0.85\linewidth]{figures/F1_abstain_precision_by_rung.pdf}
   \caption{Held-out results across the four rungs for both runs.}
-  \label{fig:main-accuracy}
+  \label{fig:F1_abstain_precision_by_rung}
 \end{figure}
-\textit{Figure 1. Abstain precision (\%) by rung (R1--R4) for the as-run confirmatory and exploratory bands and the}
-
-\textit{spec-corrected confirmatory and exploratory bands, on the held-out half (1879 items); flat as-run curves}
-
-\textit{and the collapsed corrected R4 are visible directly.}
+\textit{Figure 1. Abstain precision (\%) by rung (R1--R4) for the as-run confirmatory and exploratory bands on the held-out half (1879 items); flat as-run curves are visible directly. Spec-corrected bands are introduced in §4.6.}
 
 \begin{figure}[t]
   \includegraphics[width=0.85\linewidth]{figures/F2_precision_overrefusal_vs_coverage.pdf}
   \caption{Held-out results across the four rungs for both runs.}
-  \label{fig:main-accuracy}
+  \label{fig:F2_precision_overrefusal_vs_coverage}
 \end{figure}
 \textit{Figure 2. Pooled abstain precision (\%) and over-refusal (\%) against coverage (questions answered / questions asked,}
 
@@ -650,7 +645,7 @@ exact --- the mean absolute overlap difference is
 
 paragraph's overlap than any other rung.
 
-\textit{*Table 5.** Control arms (all exploratory): refusal rates, 95\% CI, over-refusal and discrimination (held-out half; percentages; AUROC unitless). Precision is reported for the main ladder only (Table 3).}
+\textit{*Table 5.** Control arms (all exploratory): refusal rates, 95\% CI, over-refusal and discrimination (held-out half; percentages; AUROC unitless). The column headed 'Abstain precision' reports refusal rates P(refused | negative) and P(miss | refused), not precision; precision is reported for the main ladder only (Table 3).}
 
 \begin{table}[t]
 \centering
@@ -743,7 +738,7 @@ We did not refit the registered analysis: the frozen run is reported exactly as 
 
 we implemented the feature as §3.2 specifies --- a question-to-passage cosine --- and re-ran the whole
 
-analysis through the same code path as a declared sensitivity analysis (deviation D4). Table 6 puts the
+analysis through the same code path as a declared, post-hoc sensitivity analysis (deviation D4). Table 6 puts the
 
 two side by side, and Table 7 reports leave-one-group-out ablations on the corrected features.
 
@@ -873,7 +868,7 @@ Four checks a reviewer asked for, all of them cheap and all of them reported as 
 
 \textit{273 kept an R2 item and}
 
-\textit{127 did not. Comparing the two groups on question length,}
+\textit{127 did not on dev; on the held-out half 280 kept an item and the rest did not. Comparing the two groups on question length,}
 
 \textit{answer surface type, gold paragraph length and article size, no variable differs at the five-percent level in}
 
@@ -1061,11 +1056,11 @@ Public data only: SQuAD v2.0 dev (share-alike licence) and the multi-hop corpus 
 
 the authors' repository), with every request logged with URL, status, size and checksum in
 
-\texttt{04\_experiments/data/TRANSFER-DATA.md} and the per-request log files beside it. No private data, no scraped data, no login-walled source. The student is the
+\texttt{04\_experiments/\allowbreak{}data/\allowbreak{}TRANSFER-DATA.md} and the per-request log files beside it. No private data, no scraped data, no login-walled source. The student is the
 
 responsible author; code, seeds and raw outputs are committed beside the scripts that produced them (for example
 
-\texttt{04\_experiments/src/gate.py}), and the pre-registration hash is recorded before the first
+\texttt{04\_experiments/\allowbreak{}src/\allowbreak{}gate.py}), and the pre-registration hash is recorded before the first
 
 result-producing run.
 
@@ -1075,9 +1070,9 @@ ran the experiments, drafted sections and performed the simulated review; the si
 
 labelled as a simulation and is not a venue decision. The student directed the work, holds the author
 
-position, and is expected to be able to explain every section --- \texttt{06\_review/STUDENT-DIGEST-S3.md} exists to
+position, and is expected to be able to explain every section --- \texttt{06\_review/\allowbreak{}STUDENT-DIGEST-S3.md} exists to
 
-make that possible, and \texttt{06\_review/CLAIMS-AUDIT.md} maps each claim to the file that supports it.
+make that possible, and \texttt{06\_review/\allowbreak{}CLAIMS-AUDIT.md} maps each claim to the file that supports it.
 
 \section{8 Reproduction}
 \begin{footnotesize}
@@ -1106,13 +1101,15 @@ The frozen run records its pre-registration hash as a single \texttt{\#} charact
 
 file splits on whitespace and takes the first token of a comment line. The four real hashes are intact in
 
-\texttt{PREREGISTRATION.sha256}, and this is a defect in the reporting line, not in the freeze.
+\texttt{PREREGISTRATION.sha256}, and this is a defect in the reporting line, not in the freeze. The hash in force
 
-There is no lockfile. The interpreter and library versions used for every number above are recorded in the
+at run time is recorded as D4; the harness now records the sha256 of \texttt{PREREGISTRATION.md} directly. The
 
-session status file beside the results, and the model versions are pinned in the pre-registration; a
+frozen run was produced from a dirty working tree with no stored diff; later runs store
 
-requirements file with exact pins is the obvious next step and is not in this draft.
+\texttt{artifacts/\allowbreak{}git\_diff.patch} and its sha256 in \texttt{meta.json}.
+
+The environment is pinned in \texttt{04\_experiments/\allowbreak{}requirements-lock.txt} and \texttt{04\_experiments/\allowbreak{}ENVIRONMENT.md}.
 
 
 \bibliographystyle{plainnat}
