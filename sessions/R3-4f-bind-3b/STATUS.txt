@@ -1,0 +1,3 @@
+﻿started 2026-11-19T01:36:59.3428414+05:30 wt=C:\Users\shubh\research-lab profile=res-s4 provider=default
+ended turn without CARD COMPLETE (continue 1/8) 2026-11-19T03:22:14.4221922+05:30; resuming local-8b8863bd5884a0fcab00fe7474a5b2923ac03f34dedc8d45dd366536d6fc9ab8
+rate-limited (attempt 1, exit 1) 2026-11-19T04:03:14.4002430+05:30; waiting 300 s then resuming local-8b8863bd5884a0fcab00fe7474a5b2923ac03f34dedc8d45dd366536d6fc9ab8

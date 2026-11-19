@@ -86,3 +86,20 @@ R3-4d was verified complete and pushed as `ea82291`; its current evidence is rec
 R3-4e-consistency is assigned to res-s4. It will audit the whole current draft for consistency across all repeated claims, headline numbers, and H1/H2/H3 verdicts; the first batch has exactly three read-only auditors splitting the paper into thirds. Later batches include an independent re-review. Only the template may be edited for draft corrections, with existing result keys and number markers; the response letter may change where a verdict changes. Outputs include `sessions/R3-4e-consistency/CONSISTENCY.md`; required gates are zero number findings, byte-identical repeated builds, and `check_all.py` 4/4 PASS. `05_paper/latex-build/**`, frozen results, preregistration, and R3-3b-owned paths remain out of scope.
 
 Launched via the existing `ops/hermes_runner.ps1` on profile res-s4 with budget 7200. Runner PowerShell PID 32556; immediate launch check found Hermes res-s4 PID 17272. The prompt contains zero double-quote characters. res-s1 was not queried or touched; no lead was polled or waited on. No commit was made.
+
+## Checkpoint 11 — R3-6b student pack launched; R3-4f handoff prepared — 2026-11-19
+
+res-s1 was assigned `R3-6b-student-pack`, writing only the new `07_student/**` folder and its own lane folder. The pack covers the current Round 3 state, the three R3-3b post-hoc findings, MF-14, H1 not exercisable, and explicit claim limits; it requires a second batch with an independent reviewer checking every number against source files. The lead was launched through the existing `ops/hermes_runner.ps1` with budget 5400. PowerShell runner Start-Process ID 22284; the prompt has no double-quote characters. No Hermes process check was made.
+
+Prepared but did not launch `sessions/R3-4f-bind-3b/`. It is gated on R3-4e completion and independent head verification, owns only the integrator paths needed to bind MF-17/MF-10/MF-7, and requires the R3-4d number/build/check-all gates. R3-3b values remain explicitly post-hoc and are not yet bound into the draft. No lead was polled or waited on. No commit was made.
+
+## Checkpoint 12 — PAUSED by owner — 2026-11-19 17:40 IST
+Shubh paused the research paper to prepare a conference paper (PSIT-CHE national conference on GST 2.0, full paper
+due 13 Dec 2026). research-lab/STOP created; res-s1/res-s4 runners and clients stopped by PID. Lanes were already stalled
+since ~09:20 (Nilabh provider down; runners looping on rate-limit retries).
+State at pause, NOT verified by head:
+- R3-4f-bind-3b (res-s4): binding R3-3b results; no draft change landed (draft still d81cc90f).
+- R3-6b-student-pack (res-s1): 07_student/ written (VIVA-QA, ROUND3-DIGEST, SOURCE-MAP); its own last PROGRESS line lists
+  three open defects in VIVA-QA.md. Do not use 07_student/ before those are fixed and checked.
+- R3-4e-consistency was stopped at 01:32 with nothing written; the H1 wording contradiction (Table 4 / 4.2 vs 4.6) is open.
+To resume: delete STOP, check the provider, relaunch R3-4f and R3-6b from their PROGRESS.md, then review round 4.

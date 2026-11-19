@@ -1,0 +1,83 @@
+===== git diff HEAD =====
+diff --git a/06_review/audits/numbers-audit.md b/06_review/audits/numbers-audit.md
+index d649a3d..bb9e1ae 100644
+--- a/06_review/audits/numbers-audit.md
++++ b/06_review/audits/numbers-audit.md
+@@ -5,7 +5,7 @@
+ 
+ Draft: `05_paper/draft/paper.md`  
+ Index: `04_experiments/RESULTS-INDEX.json`  
+-Generated: 2026-11-18T17:44:22Z  
++Generated: 2026-11-18T20:10:51Z  
+ Toy numbers allowed: False
+ 
+ **PASS** — 0 finding(s) over 1 file(s).
+diff --git a/orchestration/HEAD-REVIEW.md b/orchestration/HEAD-REVIEW.md
+index 635cc8c..c9e8852 100644
+--- a/orchestration/HEAD-REVIEW.md
++++ b/orchestration/HEAD-REVIEW.md
+@@ -86,3 +86,9 @@ R3-4d was verified complete and pushed as `ea82291`; its current evidence is rec
+ R3-4e-consistency is assigned to res-s4. It will audit the whole current draft for consistency across all repeated claims, headline numbers, and H1/H2/H3 verdicts; the first batch has exactly three read-only auditors splitting the paper into thirds. Later batches include an independent re-review. Only the template may be edited for draft corrections, with existing result keys and number markers; the response letter may change where a verdict changes. Outputs include `sessions/R3-4e-consistency/CONSISTENCY.md`; required gates are zero number findings, byte-identical repeated builds, and `check_all.py` 4/4 PASS. `05_paper/latex-build/**`, frozen results, preregistration, and R3-3b-owned paths remain out of scope.
+ 
+ Launched via the existing `ops/hermes_runner.ps1` on profile res-s4 with budget 7200. Runner PowerShell PID 32556; immediate launch check found Hermes res-s4 PID 17272. The prompt contains zero double-quote characters. res-s1 was not queried or touched; no lead was polled or waited on. No commit was made.
++
++## Checkpoint 11 — R3-6b student pack launched; R3-4f handoff prepared — 2026-11-19
++
++res-s1 was assigned `R3-6b-student-pack`, writing only the new `07_student/**` folder and its own lane folder. The pack covers the current Round 3 state, the three R3-3b post-hoc findings, MF-14, H1 not exercisable, and explicit claim limits; it requires a second batch with an independent reviewer checking every number against source files. The lead was launched through the existing `ops/hermes_runner.ps1` with budget 5400. PowerShell runner Start-Process ID 22284; the prompt has no double-quote characters. No Hermes process check was made.
++
++Prepared but did not launch `sessions/R3-4f-bind-3b/`. It is gated on R3-4e completion and independent head verification, owns only the integrator paths needed to bind MF-17/MF-10/MF-7, and requires the R3-4d number/build/check-all gates. R3-3b values remain explicitly post-hoc and are not yet bound into the draft. No lead was polled or waited on. No commit was made.
+===== git diff --cached =====
+
+===== untracked files =====
+04_experiments/runs/20261118T202642Z_toy_baseline_17239f6-2/artifacts/git-diff.patch
+04_experiments/runs/20261118T202642Z_toy_baseline_17239f6-2/artifacts/git-diff.txt
+04_experiments/runs/20261118T202642Z_toy_baseline_17239f6-2/artifacts/git_diff.patch
+04_experiments/runs/20261118T202642Z_toy_baseline_17239f6-2/artifacts/git_diff.txt
+04_experiments/runs/20261118T202642Z_toy_baseline_17239f6-2/config.json
+04_experiments/runs/20261118T202642Z_toy_baseline_17239f6-2/git-diff.patch
+04_experiments/runs/20261118T202642Z_toy_baseline_17239f6-2/git-diff.txt
+04_experiments/runs/20261118T202642Z_toy_baseline_17239f6-2/git_diff.patch
+04_experiments/runs/20261118T202642Z_toy_baseline_17239f6-2/git_diff.txt
+04_experiments/runs/20261118T202642Z_toy_baseline_17239f6-2/meta.json
+04_experiments/runs/20261118T202642Z_toy_baseline_17239f6-2/results.json
+04_experiments/runs/20261118T202642Z_toy_baseline_17239f6/artifacts/git-diff.patch
+04_experiments/runs/20261118T202642Z_toy_baseline_17239f6/artifacts/git-diff.txt
+04_experiments/runs/20261118T202642Z_toy_baseline_17239f6/artifacts/git_diff.patch
+04_experiments/runs/20261118T202642Z_toy_baseline_17239f6/artifacts/git_diff.txt
+04_experiments/runs/20261118T202642Z_toy_baseline_17239f6/config.json
+04_experiments/runs/20261118T202642Z_toy_baseline_17239f6/git-diff.patch
+04_experiments/runs/20261118T202642Z_toy_baseline_17239f6/git-diff.txt
+04_experiments/runs/20261118T202642Z_toy_baseline_17239f6/git_diff.patch
+04_experiments/runs/20261118T202642Z_toy_baseline_17239f6/git_diff.txt
+04_experiments/runs/20261118T202642Z_toy_baseline_17239f6/meta.json
+04_experiments/runs/20261118T202642Z_toy_baseline_17239f6/results.json
+04_experiments/runs/20261118T202643Z_toy_baseline_17239f6/artifacts/git-diff.patch
+04_experiments/runs/20261118T202643Z_toy_baseline_17239f6/artifacts/git-diff.txt
+04_experiments/runs/20261118T202643Z_toy_baseline_17239f6/artifacts/git_diff.patch
+04_experiments/runs/20261118T202643Z_toy_baseline_17239f6/artifacts/git_diff.txt
+04_experiments/runs/20261118T202643Z_toy_baseline_17239f6/config.json
+04_experiments/runs/20261118T202643Z_toy_baseline_17239f6/git-diff.patch
+04_experiments/runs/20261118T202643Z_toy_baseline_17239f6/git-diff.txt
+04_experiments/runs/20261118T202643Z_toy_baseline_17239f6/git_diff.patch
+04_experiments/runs/20261118T202643Z_toy_baseline_17239f6/git_diff.txt
+04_experiments/runs/20261118T202643Z_toy_baseline_17239f6/meta.json
+04_experiments/runs/20261118T202643Z_toy_baseline_17239f6/results.json
+07_student/ROUND3-DIGEST.md
+07_student/SOURCE-MAP.md
+07_student/VIVA-QA.md
+sessions/R3-4e-consistency/PROMPT-R3.txt
+sessions/R3-4e-consistency/STATUS.txt
+sessions/R3-4e-consistency/TASK.md
+sessions/R3-4f-bind-3b/PROMPT-R3.txt
+sessions/R3-4f-bind-3b/STATUS.txt
+sessions/R3-4f-bind-3b/TASK.md
+sessions/R3-6b-student-pack/PROGRESS.md
+sessions/R3-6b-student-pack/PROMPT-R3.txt
+sessions/R3-6b-student-pack/STATUS.txt
+sessions/R3-6b-student-pack/TASK.md
+sessions/R3-6b-student-pack/reports/writer-digest.md
+sessions/R3-6b-student-pack/reports/writer-source-map.md
+sessions/R3-6b-student-pack/reports/writer-viva.md
+sessions/R3/orch/BRIEF-pass6.md
+sessions/R3/orch/LAST-pass6.txt
+sessions/R3/orch/REPORT-pass6.md
